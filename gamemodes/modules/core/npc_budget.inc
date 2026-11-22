@@ -15,6 +15,7 @@
 */
 
 #define NPC_SLOT_RESERVE 8
+#define NPC_FAIL_COOLDOWN_MS 10000
 #define NPC_BUDGET_WARN_MS 10000
 
 static NpcBudgetLastWarnTick = 0;
@@ -29,6 +30,30 @@ static NpcBudgetLastWarnTick = 0;
    Karena itu NPC dihitung dari counter sendiri, bukan dari API pemain. */
 forward Zombie_NpcCountForBudget();
 
+/* Setiap FCNPC_Create yang gagal tetap memakan satu id pemain di server:
+   poolsize naik ke 399 walau pemain+NPC baru 369 (soak 22-11 11:22, 79 kali
+   gagal). Karena itu kegagalan dicatat sebagai slot hilang dan pembuatan NPC
+   dihentikan sementara, bukan dicoba ulang tiap tick. */
+static NpcLostSlots = 0;
+static NpcCreateBlockedUntil = 0;
+
+stock Npc_NoteCreateFailure()
+{
+    if (NpcLostSlots < 200) NpcLostSlots++;
+    NpcCreateBlockedUntil = GetTickCount() + NPC_FAIL_COOLDOWN_MS;
+    return 1;
+}
+
+stock Npc_LostSlots()
+{
+    return NpcLostSlots;
+}
+
+stock bool:Npc_CreatePaused()
+{
+    return (GetTickCount() < NpcCreateBlockedUntil);
+}
+
 stock Npc_OccupiedSlots()
 {
     new players = 0;
@@ -37,7 +62,7 @@ stock Npc_OccupiedSlots()
     {
         if (IsPlayerConnected(slot)) players++;
     }
-    return players + Zombie_NpcCountForBudget();
+    return players + Zombie_NpcCountForBudget() + NpcLostSlots;
 }
 
 stock Npc_SlotsFree()

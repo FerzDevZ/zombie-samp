@@ -176,7 +176,7 @@ stock Zombie_Create(E_ZOMBIE_TYPE:type, Float:x, Float:y, Float:z, lobbyId = 0)
     {
         /* Slot pemain dan NPC berbagi pool yang sama: membuat NPC tanpa slot bebas
            membuat FCNPC setengah jadi dan RakNet abort (assertion objectExists). */
-        if (!Npc_SlotAvailable())
+        if (Npc_CreatePaused() || !Npc_SlotAvailable())
         {
             Npc_BudgetWarn("zombie");
             return INVALID_ZOMBIE;
@@ -188,8 +188,9 @@ stock Zombie_Create(E_ZOMBIE_TYPE:type, Float:x, Float:y, Float:z, lobbyId = 0)
         zombieid = FCNPC_Create(name);
         if (zombieid == INVALID_PLAYER_ID || zombieid < 0 || zombieid >= MAX_ZOMBIE_SLOTS)
         {
-            Log_Format(LOG_ERROR, "[ZOMBIE] FCNPC_Create gagal untuk tipe %d (max=%d poolsize=%d pakai=%d parkir=%d nama='%s')",
-                _:type, GetMaxPlayers(), GetPlayerPoolSize(), Npc_OccupiedSlots(), ZombieParkedCount, name);
+            Log_Format(LOG_ERROR, "[ZOMBIE] FCNPC_Create gagal untuk tipe %d (max=%d poolsize=%d pakai=%d parkir=%d hilang=%d nama='%s')",
+                _:type, GetMaxPlayers(), GetPlayerPoolSize(), Npc_OccupiedSlots(), ZombieParkedCount, Npc_LostSlots(), name);
+            Npc_NoteCreateFailure();
             return INVALID_ZOMBIE;
         }
     }
