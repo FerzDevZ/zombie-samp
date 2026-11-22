@@ -25,3 +25,14 @@ Instans 's1' start (pid 145341), log: /home/boxd/zombie-samp/runtime/s1/server_l
 Instans 's1' start (pid 152376), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
 [2026-11-19 19:56:05] supervisor s1: proses mati, restart #4
 Instans 's1' start (pid 155925), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 04:50:09] supervisor s1: mulai (interval 10s, pid supervisor 126643)
+[2026-11-22 04:50:39] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 126745), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 05:06:02] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 128704), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 05:16:25] supervisor s1: proses mati, restart #3
+Instans 's1' start (pid 129993), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 05:47:01] supervisor s1: proses mati, restart #4
+Instans 's1' start (pid 134059), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 05:52:23] supervisor s1: proses mati, restart #5
+Instans 's1' start (pid 135180), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt

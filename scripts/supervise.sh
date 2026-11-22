@@ -30,11 +30,16 @@ mkdir -p "$ROOT/backups"
 # crash, restart terencana lebih dulu supaya pemain tersimpan rapi.
 MEM_LIMIT_MB="${MEM_LIMIT_MB:-1200}"
 
+# Cek pid saja tidak cukup: pid bisa dipakai ulang proses lain setelah server
+# mati, sehingga supervisor mengira server hidup dan berhenti menyalakan ulang
+# (kejadian 19-22 Nov: server mati 2 hari, supervisor diam karena pid 121587
+# sudah dipakai proses lain). Jadi verifikasi juga nama prosesnya.
 alive() {
   local pid
   pid="$(cat "$DIR/server.pid" 2>/dev/null || echo 0)"
-  [[ -n "$pid" && "$pid" != "0" ]] || return 1
-  kill -0 "$pid" 2>/dev/null
+  [[ "$pid" =~ ^[0-9]+$ && "$pid" != "0" ]] || return 1
+  [[ -d "/proc/$pid" ]] || return 1
+  tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null | grep -q 'samp03svr'
 }
 
 note() { printf '[%s] supervisor %s: %s\n' "$(date '+%F %T')" "$NAME" "$1" >> "$LOG"; }

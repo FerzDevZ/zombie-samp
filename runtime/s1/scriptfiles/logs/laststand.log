@@ -29118,4 +29118,1621 @@
 [2026-11-22 04:24:58][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
 [2026-11-22 04:24:58][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
 [2026-11-22 04:24:58][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
-[2026-11-22 04:24:58][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 04:24:58][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 04:24:58][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 04:24:58][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=16 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=487 o
+[2026-11-22 04:24:58][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 04:24:58][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 04:25:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:25:51][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:26:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/1 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:26:53][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:27:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:27:55][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:28:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:28:56][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:29:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/1 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:29:58][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:30:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:31:00][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:31:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:32:02][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:32:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:33:03][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:33:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=1/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:34:05][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 04:34:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:49:32][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 04:49:32][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 04:49:32][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 04:49:32][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 04:49:32][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 04:49:32][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 04:49:32][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 182 ms.
+[2026-11-22 04:49:33][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 04:49:33][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 04:49:36][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 04:49:37][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 04:49:41][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00[2026-11-22 04:50:44][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 04:50:44][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 04:50:45][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 04:50:45][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 04:50:45][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 04:50:45][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 04:50:45][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 155 ms.
+[2026-11-22 04:50:45][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 04:50:45][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 04:50:48][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 04:50:49][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=16 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=487 o
+[2026-11-22 04:50:53][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 04:50:53][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 04:51:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:51:46][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:52:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:52:48][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:53:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:53:49][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:54:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:54:51][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:55:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:55:52][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:56:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:56:54][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:57:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:57:56][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:58:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:58:57][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 04:59:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 04:59:59][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:00:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:01:01][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:01:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:02:02][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:02:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:03:04][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:03:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:04:05][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:04:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/1 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:05:07][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:05:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=1/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/1 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:06:08][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 05:06:08][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 05:06:08][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 05:06:08][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 05:06:08][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 05:06:08][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 05:06:08][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 201 ms.
+[2026-11-22 05:06:09][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 05:06:09][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 05:06:11][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 05:06:12][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=16 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=487 o
+[2026-11-22 05:06:17][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 05:06:17][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 05:07:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=1/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:07:10][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:08:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:08:12][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:09:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:09:13][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:10:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:10:15][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:11:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:11:17][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:12:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:12:18][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:13:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:13:20][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:14:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:14:21][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:15:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/1 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:15:23][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:16:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:16:31][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 05:16:31][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 05:16:31][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 05:16:31][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 05:16:31][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 05:16:31][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 05:16:31][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 166 ms.
+[2026-11-22 05:16:31][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 05:16:32][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 05:16:34][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 05:16:35][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=16 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=487 o
+[2026-11-22 05:16:39][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 05:16:39][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 05:17:31][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:17:33][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:18:31][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:18:35][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:19:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:19:36][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:20:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:20:38][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:21:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:21:40][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:22:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:22:41][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:23:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:23:43][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:24:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:24:45][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:25:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:25:47][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:26:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:26:48][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:27:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:27:50][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:28:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:28:52][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:29:32][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:29:53][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:30:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:30:55][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:31:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:31:57][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:32:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:32:58][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:33:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:34:00][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:34:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/1 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:35:02][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:35:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/1 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:36:04][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:36:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:37:05][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:37:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:38:07][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:38:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:39:09][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:39:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:40:10][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:40:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:41:12][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:41:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:42:14][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:42:33][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:43:15][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:43:34][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:44:17][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:44:34][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:45:19][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:45:34][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:46:21][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-22 05:46:34][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:47:06][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 05:47:06][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 05:47:06][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 05:47:06][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 05:47:06][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 05:47:06][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 05:47:06][INFO] [JOIN] id 0 nick 'Jawara_Indonesia' ip 100.125.76.102
+[2026-11-22 05:47:06][INFO] [AUTH] cek akun nick 'Jawara_Indonesia'
+[2026-11-22 05:47:06][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 153 ms.
+[2026-11-22 05:47:07][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 05:47:07][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 05:47:09][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 05:47:10][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 05:47:12][INFO] [JOIN] id 299 nick 'ls_zm_11003_6063' ip 127.0.0.1
+[2026-11-22 05:47:12][INFO] [JOIN] id 298 nick 'ls_zm_11004_63776' ip 127.0.0.1
+[2026-11-22 05:47:12][INFO] [JOIN] id 297 nick 'ls_zm_11004_32841' ip 127.0.0.1
+[2026-11-22 05:47:12][INFO] [JOIN] id 296 nick 'ls_zm_11005_63210' ip 127.0.0.1
+[2026-11-22 05:47:12][INFO] [JOIN] id 295 nick 'ls_zm_11005_72174' ip 127.0.0.1
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=6/300, bebas=294, jatah spawn=286, cadangan=8
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=16 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=487 o
+[2026-11-22 05:47:15][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 05:47:15][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 05:47:17][INFO] [JOIN] id 294 nick 'ls_zm_16278_40599' ip 127.0.0.1
+[2026-11-22 05:47:17][INFO] [JOIN] id 293 nick 'ls_zm_16279_73950' ip 127.0.0.1
+[2026-11-22 05:47:17][INFO] [JOIN] id 292 nick 'ls_zm_16280_72631' ip 127.0.0.1
+[2026-11-22 05:47:17][INFO] [JOIN] id 291 nick 'ls_zm_16280_50906' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 290 nick 'ls_zm_21200_40763' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 289 nick 'ls_zm_21201_85889' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 288 nick 'ls_zm_21201_97838' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 287 nick 'ls_zm_21557_46344' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 286 nick 'ls_zm_21558_405' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 285 nick 'ls_zm_21558_84101' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 284 nick 'ls_zm_21559_28604' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 283 nick 'ls_zm_21559_33991' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 282 nick 'ls_zm_21559_45129' ip 127.0.0.1
+[2026-11-22 05:47:22][INFO] [JOIN] id 281 nick 'ls_zm_21560_19734' ip 127.0.0.1
+[2026-11-22 05:47:27][INFO] [LOOT] peti lobby=0 zona=3 item=15 jumlah=9
+[2026-11-22 05:47:27][INFO] [LOOT] peti lobby=0 zona=6 item=9 jumlah=2
+[2026-11-22 05:47:27][INFO] [LOOT] peti lobby=0 zona=3 item=9 jumlah=1
+[2026-11-22 05:47:27][INFO] [LOOT] peti lobby=0 zona=6 item=2 jumlah=1
+[2026-11-22 05:47:27][INFO] [JOIN] id 280 nick 'ls_zm_26869_9620' ip 127.0.0.1
+[2026-11-22 05:47:27][INFO] [JOIN] id 279 nick 'ls_zm_26869_68095' ip 127.0.0.1
+[2026-11-22 05:47:27][INFO] [JOIN] id 278 nick 'ls_zm_26870_53598' ip 127.0.0.1
+[2026-11-22 05:47:27][INFO] [JOIN] id 277 nick 'ls_zm_26870_77761' ip 127.0.0.1
+[2026-11-22 05:47:27][INFO] [JOIN] id 276 nick 'ls_zm_26870_30737' ip 127.0.0.1
+[2026-11-22 05:47:33][INFO] [JOIN] id 275 nick 'ls_zm_32194_2024' ip 127.0.0.1
+[2026-11-22 05:47:33][INFO] [JOIN] id 274 nick 'ls_zm_32195_38008' ip 127.0.0.1
+[2026-11-22 05:47:33][INFO] [JOIN] id 273 nick 'ls_zm_32195_26474' ip 127.0.0.1
+[2026-11-22 05:47:33][INFO] [JOIN] id 272 nick 'ls_zm_32196_38016' ip 127.0.0.1
+[2026-11-22 05:47:38][INFO] [JOIN] id 271 nick 'ls_zm_37497_24537' ip 127.0.0.1
+[2026-11-22 05:47:38][INFO] [JOIN] id 270 nick 'ls_zm_37498_96527' ip 127.0.0.1
+[2026-11-22 05:47:38][INFO] [JOIN] id 269 nick 'ls_zm_37498_57212' ip 127.0.0.1
+[2026-11-22 05:47:38][INFO] [JOIN] id 268 nick 'ls_zm_37499_90810' ip 127.0.0.1
+[2026-11-22 05:47:38][INFO] [JOIN] id 267 nick 'ls_zm_37499_59288' ip 127.0.0.1
+[2026-11-22 05:47:43][INFO] [JOIN] id 266 nick 'ls_zm_41964_65237' ip 127.0.0.1
+[2026-11-22 05:47:43][INFO] [JOIN] id 265 nick 'ls_zm_41965_7758' ip 127.0.0.1
+[2026-11-22 05:47:43][INFO] [JOIN] id 264 nick 'ls_zm_41965_68187' ip 127.0.0.1
+[2026-11-22 05:47:43][INFO] [JOIN] id 263 nick 'ls_zm_42813_6007' ip 127.0.0.1
+[2026-11-22 05:47:43][INFO] [JOIN] id 262 nick 'ls_zm_42814_12577' ip 127.0.0.1
+[2026-11-22 05:47:48][INFO] [LOOT] peti lobby=0 zona=1 item=2 jumlah=2
+[2026-11-22 05:47:49][INFO] [JOIN] id 261 nick 'ls_zm_48165_81219' ip 127.0.0.1
+[2026-11-22 05:47:49][INFO] [JOIN] id 260 nick 'ls_zm_48166_71486' ip 127.0.0.1
+[2026-11-22 05:47:54][INFO] [JOIN] id 259 nick 'ls_zm_53512_83352' ip 127.0.0.1
+[2026-11-22 05:47:54][INFO] [JOIN] id 258 nick 'ls_zm_53512_52044' ip 127.0.0.1
+[2026-11-22 05:47:54][INFO] [JOIN] id 257 nick 'ls_zm_53513_6721' ip 127.0.0.1
+[2026-11-22 05:47:59][INFO] [JOIN] id 256 nick 'ls_zm_58855_91450' ip 127.0.0.1
+[2026-11-22 05:47:59][INFO] [JOIN] id 255 nick 'ls_zm_58855_89268' ip 127.0.0.1
+[2026-11-22 05:48:03][INFO] [JOIN] id 254 nick 'ls_zm_62864_39632' ip 127.0.0.1
+[2026-11-22 05:48:03][INFO] [JOIN] id 253 nick 'ls_zm_62865_45018' ip 127.0.0.1
+[2026-11-22 05:48:03][INFO] [JOIN] id 252 nick 'ls_zm_62865_32587' ip 127.0.0.1
+[2026-11-22 05:48:05][INFO] [JOIN] id 251 nick 'ls_zm_64194_42146' ip 127.0.0.1
+[2026-11-22 05:48:05][INFO] [JOIN] id 250 nick 'ls_zm_64195_42816' ip 127.0.0.1
+[2026-11-22 05:48:05][INFO] [JOIN] id 249 nick 'ls_zm_64195_31440' ip 127.0.0.1
+[2026-11-22 05:48:07][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=2/3 base=0/0 hud=0/1 player=1/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=1/2 save=0/0 | zombie: alive=51 lahir=51 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=1551 target=0 dekat=9999.0
+[2026-11-22 05:48:09][INFO] [LOOT] peti lobby=0 zona=8 item=6 jumlah=1
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Idlewood: 7 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Ganton: 5 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Downtown LS: 13 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Angel Pine: 4 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 4 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 8 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 9 zombie
+[2026-11-22 05:48:09][INFO] [DIRECTOR] total aktif 51/190 | malam 0
+[2026-11-22 05:48:10][INFO] [DIRECTOR] budget 0: 51 zombie jauh dibuang
+[2026-11-22 05:48:10][INFO] [DIRECTOR] server kosong: 51 zombie diparkir
+[2026-11-22 05:49:07][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=1/1 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=51 mati=51 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=173 target=0 dekat=9999.0
+[2026-11-22 05:49:11][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:50:07][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=1/2 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=51 mati=51 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:50:14][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:50:47][INFO] [JOIN] id 0 nick 'Jawara_Indonesia' ip 100.125.76.102
+[2026-11-22 05:50:47][INFO] [AUTH] cek akun nick 'Jawara_Indonesia'
+[2026-11-22 05:50:55][INFO] [WILDVEH] lobby=0 model=401 fuel=7.7/60 L locked=1 broken=0
+[2026-11-22 05:50:55][INFO] [LOOT] peti lobby=0 zona=2 item=8 jumlah=1
+[2026-11-22 05:50:55][INFO] [LOOT] peti lobby=0 zona=3 item=15 jumlah=9
+[2026-11-22 05:51:07][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=0/1 player=0/1 loot=1/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/1 | zombie: alive=22 lahir=73 mati=51 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=215 target=0 dekat=9999.0
+[2026-11-22 05:51:11][INFO] [JOIN] id 248 nick 'ls_comp_0_250344' ip 127.0.0.1
+[2026-11-22 05:51:11][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=11 jumlah=1
+[2026-11-22 05:51:11][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=6 jumlah=1
+[2026-11-22 05:51:11][INFO] [WILDVEH] lobby=0 model=518 fuel=22.3/70 L locked=0 broken=0
+[2026-11-22 05:51:11][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 05:51:16][INFO] [WILDVEH] lobby=0 model=542 fuel=26.3/60 L locked=1 broken=0
+[2026-11-22 05:51:16][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 05:51:16][INFO] [WILDVEH] lobby=0 model=543 fuel=33.0/150 L locked=1 broken=0
+[2026-11-22 05:51:16][INFO] [LOOT] peti lobby=0 zona=6 item=8 jumlah=2
+[2026-11-22 05:51:16][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=10 jumlah=1
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Idlewood: 4 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Ganton: 7 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Downtown LS: 5 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Angel Pine: 2 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 1 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 6 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 1 zombie
+[2026-11-22 05:51:17][INFO] [DIRECTOR] total aktif 28/190 | malam 0
+[2026-11-22 05:51:37][INFO] [WILDVEH] lobby=0 model=526 fuel=8.3/60 L locked=1 broken=0
+[2026-11-22 05:51:37][INFO] [LOOT] peti lobby=0 zona=1 item=9 jumlah=1
+[2026-11-22 05:51:37][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=1 jumlah=2
+[2026-11-22 05:51:50][INFO] [JOIN] id 247 nick 'ls_zm_288941_48852' ip 127.0.0.1
+[2026-11-22 05:51:50][INFO] [JOIN] id 246 nick 'ls_zm_288942_3641' ip 127.0.0.1
+[2026-11-22 05:51:50][INFO] [JOIN] id 245 nick 'ls_zm_288942_89916' ip 127.0.0.1
+[2026-11-22 05:51:54][INFO] [JOIN] id 244 nick 'ls_zm_293030_89260' ip 127.0.0.1
+[2026-11-22 05:51:54][INFO] [JOIN] id 243 nick 'ls_zm_293030_56134' ip 127.0.0.1
+[2026-11-22 05:51:54][INFO] [JOIN] id 242 nick 'ls_zm_293031_9166' ip 127.0.0.1
+[2026-11-22 05:51:58][INFO] [WILDVEH] lobby=0 model=552 fuel=0.0/150 L locked=1 broken=1
+[2026-11-22 05:51:58][INFO] [LOOT] peti lobby=0 zona=7 item=1 jumlah=1
+[2026-11-22 05:51:58][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=9 jumlah=1
+[2026-11-22 05:52:07][INFO] [PERF] tick ms (akhir/puncak): zombie=1/1 director=0/3 base=0/1 hud=0/1 player=0/1 loot=0/1 veh=0/1 needs=0/0 event=0/0 horde=0/2 save=0/0 | zombie: alive=57 lahir=108 mati=51 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=2475 target=109 dekat=12.0
+[2026-11-22 05:52:29][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 05:52:29][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 05:52:29][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 05:52:29][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 05:52:29][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 05:52:29][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 05:52:29][INFO] [JOIN] id 0 nick 'Idong' ip 100.125.76.102
+[2026-11-22 05:52:29][INFO] [AUTH] cek akun nick 'Idong'
+[2026-11-22 05:52:29][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 151 ms.
+[2026-11-22 05:52:29][INFO] [AUTH] nick 'Idong' belum ada, arahkan ke /daftar.
+[2026-11-22 05:52:29][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 05:52:29][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 05:52:32][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 05:52:33][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 05:52:34][INFO] [JOIN] id 299 nick 'ls_zm_10950_59039' ip 127.0.0.1
+[2026-11-22 05:52:34][INFO] [JOIN] id 298 nick 'ls_zm_10950_43277' ip 127.0.0.1
+[2026-11-22 05:52:34][INFO] [JOIN] id 297 nick 'ls_zm_10951_11887' ip 127.0.0.1
+[2026-11-22 05:52:34][INFO] [JOIN] id 296 nick 'ls_zm_10951_84746' ip 127.0.0.1
+[2026-11-22 05:52:34][INFO] [JOIN] id 295 nick 'ls_zm_10951_82252' ip 127.0.0.1
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=6/300, bebas=294, jatah spawn=286, cadangan=8
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=491 o
+[2026-11-22 05:52:37][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 05:52:37][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 05:52:39][INFO] [JOIN] id 294 nick 'ls_zm_16227_3119' ip 127.0.0.1
+[2026-11-22 05:52:39][INFO] [JOIN] id 293 nick 'ls_zm_16228_71041' ip 127.0.0.1
+[2026-11-22 05:52:39][INFO] [JOIN] id 292 nick 'ls_zm_16228_99899' ip 127.0.0.1
+[2026-11-22 05:52:39][INFO] [JOIN] id 291 nick 'ls_zm_16228_55162' ip 127.0.0.1
+[2026-11-22 05:52:39][INFO] [JOIN] id 290 nick 'ls_zm_16229_77873' ip 127.0.0.1
+[2026-11-22 05:52:39][INFO] [JOIN] id 289 nick 'ls_zm_16229_8948' ip 127.0.0.1
+[2026-11-22 05:52:44][INFO] [JOIN] id 288 nick 'ls_zm_21158_97526' ip 127.0.0.1
+[2026-11-22 05:52:44][INFO] [JOIN] id 287 nick 'ls_zm_21159_79179' ip 127.0.0.1
+[2026-11-22 05:52:44][INFO] [JOIN] id 286 nick 'ls_zm_21159_77746' ip 127.0.0.1
+[2026-11-22 05:52:45][INFO] [DIRECTOR] budget 0: 14 zombie jauh dibuang
+[2026-11-22 05:52:45][INFO] [DIRECTOR] server kosong: 14 zombie diparkir
+[2026-11-22 05:53:29][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/2 base=0/0 hud=0/1 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/2 save=0/0 | zombie: alive=0 lahir=14 mati=14 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=81 target=0 dekat=9999.0
+[2026-11-22 05:53:31][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:54:29][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=14 mati=14 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:54:33][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:55:29][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=14 mati=14 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:55:35][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:55:45][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 05:55:58][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 05:55:58][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 05:55:58][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 05:55:58][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 05:55:58][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 05:55:58][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 05:55:58][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 147 ms.
+[2026-11-22 05:55:58][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 05:55:58][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 05:56:01][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 05:56:02][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=491 o
+[2026-11-22 05:56:06][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 05:56:06][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 05:56:58][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-22 05:57:00][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 05:57:23][INFO] [JOIN] id 0 nick 'FuelProbe' ip 127.0.0.1
+[2026-11-22 05:57:23][INFO] [AUTH] cek akun nick 'FuelProbe'
+[2026-11-22 05:57:23][INFO] [AUTH] nick 'FuelProbe' belum ada, arahkan ke /daftar.
+[2026-11-22 05:57:27][INFO] [JOIN] id 299 nick 'ls_zm_96113_53855' ip 127.0.0.1
+[2026-11-22 05:57:27][INFO] [JOIN] id 298 nick 'ls_zm_96114_20164' ip 127.0.0.1
+[2026-11-22 05:57:27][INFO] [JOIN] id 297 nick 'ls_zm_96114_9110' ip 127.0.0.1
+[2026-11-22 05:57:27][INFO] [JOIN] id 296 nick 'ls_zm_96115_982' ip 127.0.0.1
+[2026-11-22 05:57:30][INFO] [JOIN] id 295 nick 'ls_zm_99258_87772' ip 127.0.0.1
+[2026-11-22 05:57:30][INFO] [JOIN] id 294 nick 'ls_zm_99259_39240' ip 127.0.0.1
+[2026-11-22 05:57:30][INFO] [JOIN] id 293 nick 'ls_zm_99259_39750' ip 127.0.0.1
+[2026-11-22 05:57:33][INFO] [JOIN] id 292 nick 'ls_zm_101403_11422' ip 127.0.0.1
+[2026-11-22 05:57:33][INFO] [JOIN] id 291 nick 'ls_zm_101403_9255' ip 127.0.0.1
+[2026-11-22 05:57:33][INFO] [JOIN] id 290 nick 'ls_zm_101404_17529' ip 127.0.0.1
+[2026-11-22 05:57:33][INFO] [JOIN] id 289 nick 'ls_zm_101404_68499' ip 127.0.0.1
+[2026-11-22 05:57:33][INFO] [JOIN] id 288 nick 'ls_zm_101405_5629' ip 127.0.0.1
+[2026-11-22 05:57:38][INFO] [JOIN] id 287 nick 'ls_zm_106697_9845' ip 127.0.0.1
+[2026-11-22 05:57:38][INFO] [JOIN] id 286 nick 'ls_zm_106698_76219' ip 127.0.0.1
+[2026-11-22 05:57:38][INFO] [JOIN] id 285 nick 'ls_zm_106698_19570' ip 127.0.0.1
+[2026-11-22 05:57:38][INFO] [JOIN] id 284 nick 'ls_zm_106699_78064' ip 127.0.0.1
+[2026-11-22 05:57:41][INFO] [LOOT] peti lobby=0 zona=6 item=32 jumlah=1
+[2026-11-22 05:57:41][INFO] [LOOT] peti lobby=0 zona=1 item=25 jumlah=1
+[2026-11-22 05:57:41][INFO] [LOOT] peti lobby=0 zona=7 item=2 jumlah=1
+[2026-11-22 05:57:41][INFO] [LOOT] peti lobby=0 zona=8 item=23 jumlah=1
+[2026-11-22 05:57:43][INFO] [JOIN] id 283 nick 'ls_zm_111997_80458' ip 127.0.0.1
+[2026-11-22 05:57:43][INFO] [JOIN] id 282 nick 'ls_zm_111998_83084' ip 127.0.0.1
+[2026-11-22 05:57:43][INFO] [JOIN] id 281 nick 'ls_zm_111998_99743' ip 127.0.0.1
+[2026-11-22 05:57:43][INFO] [JOIN] id 280 nick 'ls_zm_111999_68749' ip 127.0.0.1
+[2026-11-22 05:57:43][INFO] [JOIN] id 279 nick 'ls_zm_111999_82076' ip 127.0.0.1
+[2026-11-22 05:57:43][INFO] [JOIN] id 278 nick 'ls_zm_111999_66587' ip 127.0.0.1
+[2026-11-22 05:57:48][INFO] [JOIN] id 277 nick 'ls_zm_117307_2324' ip 127.0.0.1
+[2026-11-22 05:57:48][INFO] [JOIN] id 276 nick 'ls_zm_117307_47430' ip 127.0.0.1
+[2026-11-22 05:57:48][INFO] [JOIN] id 275 nick 'ls_zm_117308_43944' ip 127.0.0.1
+[2026-11-22 05:57:48][INFO] [JOIN] id 274 nick 'ls_zm_117308_25824' ip 127.0.0.1
+[2026-11-22 05:57:51][INFO] [JOIN] id 273 nick 'ls_zm_119990_41679' ip 127.0.0.1
+[2026-11-22 05:57:51][INFO] [JOIN] id 272 nick 'ls_zm_119991_59310' ip 127.0.0.1
+[2026-11-22 05:57:51][INFO] [JOIN] id 271 nick 'ls_zm_119992_34951' ip 127.0.0.1
+[2026-11-22 05:57:54][INFO] [JOIN] id 270 nick 'ls_zm_122635_93030' ip 127.0.0.1
+[2026-11-22 05:57:54][INFO] [JOIN] id 269 nick 'ls_zm_122636_81875' ip 127.0.0.1
+[2026-11-22 05:57:54][INFO] [JOIN] id 268 nick 'ls_zm_122636_15239' ip 127.0.0.1
+[2026-11-22 05:57:54][INFO] [JOIN] id 267 nick 'ls_zm_122636_90863' ip 127.0.0.1
+[2026-11-22 05:57:58][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=2/3 base=0/1 hud=0/1 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/2 save=0/0 | zombie: alive=33 lahir=33 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=565 target=0 dekat=9999.0
+[2026-11-22 05:57:59][INFO] [JOIN] id 266 nick 'ls_zm_127963_20179' ip 127.0.0.1
+[2026-11-22 05:57:59][INFO] [JOIN] id 265 nick 'ls_zm_127963_48784' ip 127.0.0.1
+[2026-11-22 05:57:59][INFO] [JOIN] id 264 nick 'ls_zm_127964_69793' ip 127.0.0.1
+[2026-11-22 05:57:59][INFO] [JOIN] id 263 nick 'ls_zm_127964_20061' ip 127.0.0.1
+[2026-11-22 05:57:59][INFO] [JOIN] id 262 nick 'ls_zm_127965_18199' ip 127.0.0.1
+[2026-11-22 05:58:01][INFO] [LOOT] peti lobby=0 zona=1 item=8 jumlah=1
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Idlewood: 8 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Ganton: 5 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Downtown LS: 4 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Angel Pine: 7 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 3 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 6 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 2 zombie
+[2026-11-22 05:58:02][INFO] [DIRECTOR] total aktif 38/190 | malam 0
+[2026-11-22 05:58:04][INFO] [JOIN] id 261 nick 'ls_zm_133305_57882' ip 127.0.0.1
+[2026-11-22 05:58:04][INFO] [JOIN] id 260 nick 'ls_zm_133306_79130' ip 127.0.0.1
+[2026-11-22 05:58:04][INFO] [JOIN] id 259 nick 'ls_zm_133307_78813' ip 127.0.0.1
+[2026-11-22 05:58:04][INFO] [JOIN] id 258 nick 'ls_zm_133307_78245' ip 127.0.0.1
+[2026-11-22 05:58:04][INFO] [JOIN] id 257 nick 'ls_zm_133308_55327' ip 127.0.0.1
+[2026-11-22 05:58:10][INFO] [JOIN] id 256 nick 'ls_zm_138654_54920' ip 127.0.0.1
+[2026-11-22 05:58:10][INFO] [JOIN] id 255 nick 'ls_zm_138655_60046' ip 127.0.0.1
+[2026-11-22 05:58:10][INFO] [JOIN] id 254 nick 'ls_zm_138655_18463' ip 127.0.0.1
+[2026-11-22 05:58:12][INFO] [JOIN] id 253 nick 'ls_zm_140867_86994' ip 127.0.0.1
+[2026-11-22 05:58:12][INFO] [JOIN] id 252 nick 'ls_zm_140868_7537' ip 127.0.0.1
+[2026-11-22 05:58:12][INFO] [JOIN] id 251 nick 'ls_zm_140868_24888' ip 127.0.0.1
+[2026-11-22 05:58:15][INFO] [JOIN] id 250 nick 'ls_zm_144014_12056' ip 127.0.0.1
+[2026-11-22 05:58:15][INFO] [JOIN] id 249 nick 'ls_zm_144014_44878' ip 127.0.0.1
+[2026-11-22 05:58:15][INFO] [JOIN] id 248 nick 'ls_zm_144015_2962' ip 127.0.0.1
+[2026-11-22 05:58:15][INFO] [JOIN] id 247 nick 'ls_zm_144015_82059' ip 127.0.0.1
+[2026-11-22 05:58:15][INFO] [JOIN] id 246 nick 'ls_zm_144016_21626' ip 127.0.0.1
+[2026-11-22 05:58:22][INFO] [WILDVEH] lobby=0 model=576 fuel=1.1/80 L locked=1 broken=1
+[2026-11-22 05:58:22][INFO] [LOOT] peti lobby=0 zona=2 item=6 jumlah=1
+[2026-11-22 05:58:31][INFO] [DIRECTOR] budget 0: 54 zombie jauh dibuang
+[2026-11-22 05:58:31][INFO] [DIRECTOR] server kosong: 54 zombie diparkir
+[2026-11-22 05:58:35][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 05:58:47][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 05:58:47][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 05:58:47][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 05:58:47][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 05:58:47][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 05:58:47][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 05:58:47][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 168 ms.
+[2026-11-22 05:58:48][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 05:58:48][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 05:58:50][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 05:58:51][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=491 o
+[2026-11-22 05:58:56][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 05:58:56][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 05:59:21][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 05:59:21][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 05:59:23][INFO] [JOIN] id 299 nick 'ls_comp_0_41243' ip 127.0.0.1
+[2026-11-22 05:59:23][INFO] [LOOT] peti lobby=0 zona=5 item=22 jumlah=1
+[2026-11-22 05:59:23][INFO] [LOOT] peti lobby=0 zona=7 item=1 jumlah=2
+[2026-11-22 05:59:23][INFO] [LOOT] peti lobby=0 zona=3 item=1 jumlah=1
+[2026-11-22 05:59:23][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=8 jumlah=2
+[2026-11-22 05:59:23][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=20 jumlah=1
+[2026-11-22 05:59:23][INFO] [WILDVEH] lobby=0 model=547 fuel=27.2/70 L locked=0 broken=0
+[2026-11-22 05:59:23][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 05:59:24][INFO] [JOIN] id 298 nick 'ls_zm_42570_13847' ip 127.0.0.1
+[2026-11-22 05:59:24][INFO] [JOIN] id 297 nick 'ls_zm_42571_97687' ip 127.0.0.1
+[2026-11-22 05:59:24][INFO] [JOIN] id 296 nick 'ls_zm_42571_43878' ip 127.0.0.1
+[2026-11-22 05:59:24][INFO] [JOIN] id 295 nick 'ls_zm_42571_40815' ip 127.0.0.1
+[2026-11-22 05:59:24][INFO] [JOIN] id 294 nick 'ls_zm_42571_25078' ip 127.0.0.1
+[2026-11-22 05:59:28][INFO] [WILDVEH] lobby=0 model=474 fuel=38.3/60 L locked=0 broken=0
+[2026-11-22 05:59:28][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 05:59:28][INFO] [WILDVEH] lobby=0 model=500 fuel=19.2/80 L locked=1 broken=0
+[2026-11-22 05:59:28][INFO] [LOOT] peti lobby=0 zona=2 item=20 jumlah=1
+[2026-11-22 05:59:28][INFO] [JOIN] id 293 nick 'ls_zm_46876_82898' ip 127.0.0.1
+[2026-11-22 05:59:28][INFO] [JOIN] id 292 nick 'ls_zm_46877_18683' ip 127.0.0.1
+[2026-11-22 05:59:28][INFO] [JOIN] id 291 nick 'ls_zm_46877_73107' ip 127.0.0.1
+[2026-11-22 05:59:29][INFO] [JOIN] id 290 nick 'ls_zm_47831_95546' ip 127.0.0.1
+[2026-11-22 05:59:29][INFO] [JOIN] id 289 nick 'ls_zm_47831_88451' ip 127.0.0.1
+[2026-11-22 05:59:29][INFO] [JOIN] id 288 nick 'ls_zm_47832_12949' ip 127.0.0.1
+[2026-11-22 05:59:29][INFO] [JOIN] id 287 nick 'ls_zm_47832_81945' ip 127.0.0.1
+[2026-11-22 05:59:29][INFO] [JOIN] id 286 nick 'ls_zm_47832_43223' ip 127.0.0.1
+[2026-11-22 05:59:35][INFO] [JOIN] id 285 nick 'ls_zm_53092_20546' ip 127.0.0.1
+[2026-11-22 05:59:35][INFO] [JOIN] id 284 nick 'ls_zm_53092_41726' ip 127.0.0.1
+[2026-11-22 05:59:35][INFO] [JOIN] id 283 nick 'ls_zm_53093_331' ip 127.0.0.1
+[2026-11-22 05:59:35][INFO] [JOIN] id 282 nick 'ls_zm_53093_6745' ip 127.0.0.1
+[2026-11-22 05:59:35][INFO] [JOIN] id 281 nick 'ls_zm_53093_69132' ip 127.0.0.1
+[2026-11-22 05:59:35][INFO] [JOIN] id 280 nick 'ls_zm_53094_23185' ip 127.0.0.1
+[2026-11-22 05:59:40][INFO] [JOIN] id 279 nick 'ls_zm_58368_93787' ip 127.0.0.1
+[2026-11-22 05:59:40][INFO] [JOIN] id 278 nick 'ls_zm_58369_54156' ip 127.0.0.1
+[2026-11-22 05:59:40][INFO] [JOIN] id 277 nick 'ls_zm_58369_8196' ip 127.0.0.1
+[2026-11-22 05:59:40][INFO] [JOIN] id 276 nick 'ls_zm_58369_74173' ip 127.0.0.1
+[2026-11-22 05:59:40][INFO] [JOIN] id 275 nick 'ls_zm_58370_52709' ip 127.0.0.1
+[2026-11-22 05:59:40][INFO] [JOIN] id 274 nick 'ls_zm_58370_69166' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 273 nick 'ls_zm_63662_4042' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 272 nick 'ls_zm_63663_38050' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 271 nick 'ls_zm_63663_95061' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 270 nick 'ls_zm_63663_26756' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 269 nick 'ls_zm_63664_73631' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 268 nick 'ls_zm_63664_99503' ip 127.0.0.1
+[2026-11-22 05:59:45][INFO] [JOIN] id 267 nick 'ls_zm_63664_11009' ip 127.0.0.1
+[2026-11-22 05:59:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=2/2 base=0/0 hud=1/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=32 lahir=32 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=401 target=0 dekat=9999.0
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Idlewood: 3 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Ganton: 4 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Downtown LS: 6 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Angel Pine: 4 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 4 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 4 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 5 zombie
+[2026-11-22 05:59:49][INFO] [DIRECTOR] total aktif 32/190 | malam 0
+[2026-11-22 05:59:49][INFO] [JOIN] id 299 nick 'ls_zm_67516_16426' ip 127.0.0.1
+[2026-11-22 05:59:49][INFO] [JOIN] id 266 nick 'ls_zm_67517_70390' ip 127.0.0.1
+[2026-11-22 05:59:49][INFO] [JOIN] id 265 nick 'ls_zm_67517_9648' ip 127.0.0.1
+[2026-11-22 05:59:50][INFO] [DIRECTOR] budget 0: 35 zombie jauh dibuang
+[2026-11-22 05:59:50][INFO] [DIRECTOR] server kosong: 35 zombie diparkir
+[2026-11-22 05:59:51][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 05:59:51][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 05:59:53][INFO] [JOIN] id 264 nick 'ls_comp_0_71393' ip 127.0.0.1
+[2026-11-22 06:00:09][INFO] [WILDVEH] lobby=0 model=422 fuel=1.2/150 L locked=1 broken=1
+[2026-11-22 06:00:10][INFO] [LOOT] peti lobby=0 zona=1 item=11 jumlah=1
+[2026-11-22 06:00:10][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=6 jumlah=1
+[2026-11-22 06:00:14][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 06:00:26][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 06:00:26][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 06:00:26][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 06:00:26][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 06:00:26][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 06:00:26][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 06:00:26][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 145 ms.
+[2026-11-22 06:00:26][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 06:00:26][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 06:00:29][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 06:00:30][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=495 o
+[2026-11-22 06:00:34][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 06:00:34][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 06:00:58][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:00:58][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:00:59][INFO] [JOIN] id 299 nick 'ls_comp_0_39148' ip 127.0.0.1
+[2026-11-22 06:01:00][INFO] [LOOT] peti lobby=0 zona=1 item=8 jumlah=1
+[2026-11-22 06:01:00][INFO] [LOOT] peti lobby=0 zona=1 item=8 jumlah=2
+[2026-11-22 06:01:00][INFO] [LOOT] peti lobby=0 zona=1 item=9 jumlah=1
+[2026-11-22 06:01:00][INFO] [WILDVEH] lobby=0 model=579 fuel=21.6/80 L locked=0 broken=0
+[2026-11-22 06:01:00][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:01:02][INFO] [JOIN] id 298 nick 'ls_zm_42211_74654' ip 127.0.0.1
+[2026-11-22 06:01:02][INFO] [JOIN] id 297 nick 'ls_zm_42211_7436' ip 127.0.0.1
+[2026-11-22 06:01:02][INFO] [JOIN] id 296 nick 'ls_zm_42211_43275' ip 127.0.0.1
+[2026-11-22 06:01:02][INFO] [JOIN] id 295 nick 'ls_zm_42212_9194' ip 127.0.0.1
+[2026-11-22 06:01:02][INFO] [JOIN] id 294 nick 'ls_zm_42212_194' ip 127.0.0.1
+[2026-11-22 06:01:06][INFO] [BBMDBG] cmd=bensin params=[] playing=1 pump=0 vehicleNear=65535
+[2026-11-22 06:01:07][INFO] [WILDVEH] lobby=0 model=604 fuel=21.6/80 L locked=0 broken=0
+[2026-11-22 06:01:07][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:01:07][INFO] [LOOT] peti lobby=0 zona=3 item=1 jumlah=2
+[2026-11-22 06:01:08][INFO] [JOIN] id 293 nick 'ls_zm_47472_57528' ip 127.0.0.1
+[2026-11-22 06:01:08][INFO] [JOIN] id 292 nick 'ls_zm_47473_74497' ip 127.0.0.1
+[2026-11-22 06:01:08][INFO] [JOIN] id 291 nick 'ls_zm_47473_6738' ip 127.0.0.1
+[2026-11-22 06:01:09][INFO] [BBMDBG] cmd=isi params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:01:13][INFO] [JOIN] id 290 nick 'ls_zm_52728_43785' ip 127.0.0.1
+[2026-11-22 06:01:13][INFO] [JOIN] id 289 nick 'ls_zm_52729_34006' ip 127.0.0.1
+[2026-11-22 06:01:13][INFO] [JOIN] id 288 nick 'ls_zm_52729_29925' ip 127.0.0.1
+[2026-11-22 06:01:17][INFO] [JOIN] id 287 nick 'ls_zm_56806_21817' ip 127.0.0.1
+[2026-11-22 06:01:17][INFO] [JOIN] id 286 nick 'ls_zm_56806_73884' ip 127.0.0.1
+[2026-11-22 06:01:17][INFO] [JOIN] id 285 nick 'ls_zm_56806_29898' ip 127.0.0.1
+[2026-11-22 06:01:18][INFO] [JOIN] id 284 nick 'ls_zm_58000_26919' ip 127.0.0.1
+[2026-11-22 06:01:18][INFO] [JOIN] id 283 nick 'ls_zm_58000_91014' ip 127.0.0.1
+[2026-11-22 06:01:18][INFO] [JOIN] id 282 nick 'ls_zm_58000_55300' ip 127.0.0.1
+[2026-11-22 06:01:18][INFO] [JOIN] id 281 nick 'ls_zm_58000_67438' ip 127.0.0.1
+[2026-11-22 06:01:23][INFO] [DIRECTOR] budget 0: 18 zombie jauh dibuang
+[2026-11-22 06:01:23][INFO] [DIRECTOR] server kosong: 18 zombie diparkir
+[2026-11-22 06:01:26][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=1/2 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/2 save=0/0 | zombie: alive=0 lahir=18 mati=18 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=221 target=0 dekat=9999.0
+[2026-11-22 06:01:27][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-22 06:01:30][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:01:30][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:01:32][INFO] [JOIN] id 299 nick 'ls_comp_0_71377' ip 127.0.0.1
+[2026-11-22 06:01:32][INFO] [WILDVEH] lobby=0 model=546 fuel=25.8/70 L locked=0 broken=0
+[2026-11-22 06:01:32][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:01:37][INFO] [BBMDBG] cmd=bensin params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:01:43][INFO] [BBMDBG] cmd=isi params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:01:45][INFO] [BBMDBG] cmd=bensin params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:01:48][INFO] [LOOT] peti lobby=0 zona=6 item=10 jumlah=1
+[2026-11-22 06:01:55][INFO] [JOIN] id 280 nick 'ls_zm_94898_20617' ip 127.0.0.1
+[2026-11-22 06:01:55][INFO] [JOIN] id 279 nick 'ls_zm_94899_72157' ip 127.0.0.1
+[2026-11-22 06:01:55][INFO] [JOIN] id 278 nick 'ls_zm_94899_93315' ip 127.0.0.1
+[2026-11-22 06:01:55][INFO] [JOIN] id 277 nick 'ls_zm_94899_9005' ip 127.0.0.1
+[2026-11-22 06:01:56][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 06:02:08][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 06:02:08][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 06:02:08][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 06:02:08][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 06:02:08][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 06:02:08][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 06:02:08][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 144 ms.
+[2026-11-22 06:02:08][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 06:02:09][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 06:02:11][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 06:02:12][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=495 o
+[2026-11-22 06:02:16][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 06:02:16][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 06:02:40][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:02:40][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:02:41][INFO] [JOIN] id 299 nick 'ls_comp_0_39143' ip 127.0.0.1
+[2026-11-22 06:02:42][INFO] [LOOT] peti lobby=0 zona=8 item=2 jumlah=1
+[2026-11-22 06:02:42][INFO] [LOOT] peti lobby=0 zona=3 item=32 jumlah=1
+[2026-11-22 06:02:42][INFO] [LOOT] peti lobby=0 zona=8 item=23 jumlah=2
+[2026-11-22 06:02:42][INFO] [WILDVEH] lobby=0 model=534 fuel=29.3/70 L locked=0 broken=0
+[2026-11-22 06:02:42][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:02:45][INFO] [JOIN] id 298 nick 'ls_zm_42308_37449' ip 127.0.0.1
+[2026-11-22 06:02:45][INFO] [JOIN] id 297 nick 'ls_zm_42308_98230' ip 127.0.0.1
+[2026-11-22 06:02:45][INFO] [JOIN] id 296 nick 'ls_zm_42308_73054' ip 127.0.0.1
+[2026-11-22 06:02:45][INFO] [JOIN] id 295 nick 'ls_zm_42309_57574' ip 127.0.0.1
+[2026-11-22 06:02:45][INFO] [JOIN] id 294 nick 'ls_zm_42309_25313' ip 127.0.0.1
+[2026-11-22 06:02:45][INFO] [JOIN] id 293 nick 'ls_zm_42309_16785' ip 127.0.0.1
+[2026-11-22 06:02:47][INFO] [BBMDBG] cmd=bensin params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:02:47][INFO] [BBMDBG] cabang jerrycan dipilih
+[2026-11-22 06:02:49][INFO] [WILDVEH] lobby=0 model=467 fuel=29.6/80 L locked=0 broken=0
+[2026-11-22 06:02:49][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:02:49][INFO] [LOOT] peti lobby=0 zona=8 item=1 jumlah=1
+[2026-11-22 06:02:50][INFO] [JOIN] id 292 nick 'ls_zm_47570_47154' ip 127.0.0.1
+[2026-11-22 06:02:50][INFO] [JOIN] id 291 nick 'ls_zm_47571_25467' ip 127.0.0.1
+[2026-11-22 06:02:50][INFO] [JOIN] id 290 nick 'ls_zm_47571_60269' ip 127.0.0.1
+[2026-11-22 06:02:50][INFO] [JOIN] id 289 nick 'ls_zm_47571_69040' ip 127.0.0.1
+[2026-11-22 06:02:52][INFO] [BBMDBG] cmd=isi params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:02:52][INFO] [BBMDBG] cabang jerrycan dipilih
+[2026-11-22 06:02:54][INFO] [JOIN] id 288 nick 'ls_zm_51766_1540' ip 127.0.0.1
+[2026-11-22 06:02:54][INFO] [JOIN] id 287 nick 'ls_zm_51767_72821' ip 127.0.0.1
+[2026-11-22 06:02:54][INFO] [JOIN] id 286 nick 'ls_zm_51767_59683' ip 127.0.0.1
+[2026-11-22 06:02:55][INFO] [BBMDBG] cmd=bensin params=[] playing=1 pump=1 vehicleNear=65535
+[2026-11-22 06:02:55][INFO] [BBMDBG] cabang jerrycan dipilih
+[2026-11-22 06:02:55][INFO] [JOIN] id 285 nick 'ls_zm_52836_45709' ip 127.0.0.1
+[2026-11-22 06:02:55][INFO] [JOIN] id 284 nick 'ls_zm_52836_73068' ip 127.0.0.1
+[2026-11-22 06:02:55][INFO] [JOIN] id 283 nick 'ls_zm_52836_68948' ip 127.0.0.1
+[2026-11-22 06:02:55][INFO] [JOIN] id 282 nick 'ls_zm_52837_5223' ip 127.0.0.1
+[2026-11-22 06:03:00][INFO] [JOIN] id 281 nick 'ls_zm_58112_5575' ip 127.0.0.1
+[2026-11-22 06:03:00][INFO] [JOIN] id 280 nick 'ls_zm_58112_86447' ip 127.0.0.1
+[2026-11-22 06:03:00][INFO] [JOIN] id 279 nick 'ls_zm_58113_83222' ip 127.0.0.1
+[2026-11-22 06:03:06][INFO] [JOIN] id 278 nick 'ls_zm_63392_21924' ip 127.0.0.1
+[2026-11-22 06:03:06][INFO] [JOIN] id 277 nick 'ls_zm_63393_65560' ip 127.0.0.1
+[2026-11-22 06:03:06][INFO] [JOIN] id 276 nick 'ls_zm_63393_7498' ip 127.0.0.1
+[2026-11-22 06:03:06][INFO] [JOIN] id 275 nick 'ls_zm_63393_85110' ip 127.0.0.1
+[2026-11-22 06:03:08][INFO] [PERF] tick ms (akhir/puncak): zombie=1/1 director=1/2 base=0/0 hud=0/2 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=24 lahir=24 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=335 target=0 dekat=9999.0
+[2026-11-22 06:03:09][INFO] [WILDVEH] lobby=0 model=535 fuel=20.2/70 L locked=0 broken=0
+[2026-11-22 06:03:09][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:03:09][INFO] [WILDVEH] lobby=0 model=589 fuel=13.6/80 L locked=0 broken=0
+[2026-11-22 06:03:09][INFO] [LOOT] peti lobby=0 zona=2 item=9 jumlah=1
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Idlewood: 2 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Ganton: 1 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Downtown LS: 6 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Angel Pine: 3 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 4 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 2 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 2 zombie
+[2026-11-22 06:03:10][INFO] [DIRECTOR] total aktif 24/190 | malam 0
+[2026-11-22 06:03:11][INFO] [DIRECTOR] budget 0: 24 zombie jauh dibuang
+[2026-11-22 06:03:11][INFO] [DIRECTOR] server kosong: 24 zombie diparkir
+[2026-11-22 06:03:16][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 06:03:28][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 06:03:28][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 06:03:28][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 06:03:28][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 06:03:28][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 06:03:28][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 06:03:28][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 153 ms.
+[2026-11-22 06:03:28][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 06:03:29][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 06:03:31][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 06:03:32][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=495 o
+[2026-11-22 06:03:36][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 06:03:36][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 06:04:00][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:04:00][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:04:02][INFO] [JOIN] id 299 nick 'ls_comp_0_39151' ip 127.0.0.1
+[2026-11-22 06:04:02][INFO] [LOOT] peti lobby=0 zona=3 item=10 jumlah=1
+[2026-11-22 06:04:02][INFO] [LOOT] peti lobby=0 zona=1 item=1 jumlah=2
+[2026-11-22 06:04:02][INFO] [LOOT] peti lobby=0 zona=1 item=1 jumlah=3
+[2026-11-22 06:04:02][INFO] [WILDVEH] lobby=0 model=566 fuel=33.5/80 L locked=1 broken=0
+[2026-11-22 06:04:02][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:04:05][INFO] [JOIN] id 298 nick 'ls_zm_42255_11009' ip 127.0.0.1
+[2026-11-22 06:04:05][INFO] [JOIN] id 297 nick 'ls_zm_42255_30919' ip 127.0.0.1
+[2026-11-22 06:04:05][INFO] [JOIN] id 296 nick 'ls_zm_42255_3801' ip 127.0.0.1
+[2026-11-22 06:04:05][INFO] [JOIN] id 295 nick 'ls_zm_42256_74023' ip 127.0.0.1
+[2026-11-22 06:04:07][INFO] [BBMDBG] cmd=bensin params=[] len=0 cmpKan=0 cmpJerry=0 cmpEmpty=0
+[2026-11-22 06:04:07][INFO] [BBMDBG] cabang jerrycan dipilih
+[2026-11-22 06:04:09][INFO] [WILDVEH] lobby=0 model=466 fuel=18.6/60 L locked=0 broken=0
+[2026-11-22 06:04:09][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:04:09][INFO] [WILDVEH] lobby=0 model=560 fuel=14.4/80 L locked=0 broken=0
+[2026-11-22 06:04:09][INFO] [LOOT] peti lobby=0 zona=6 item=15 jumlah=5
+[2026-11-22 06:04:10][INFO] [JOIN] id 294 nick 'ls_zm_47519_82860' ip 127.0.0.1
+[2026-11-22 06:04:10][INFO] [JOIN] id 293 nick 'ls_zm_47520_42165' ip 127.0.0.1
+[2026-11-22 06:04:10][INFO] [JOIN] id 292 nick 'ls_zm_47520_47006' ip 127.0.0.1
+[2026-11-22 06:04:10][INFO] [JOIN] id 291 nick 'ls_zm_47521_64858' ip 127.0.0.1
+[2026-11-22 06:04:13][INFO] [BBMDBG] cmd=isi params=[] len=0 cmpKan=0 cmpJerry=0 cmpEmpty=0
+[2026-11-22 06:04:13][INFO] [BBMDBG] cabang jerrycan dipilih
+[2026-11-22 06:04:14][INFO] [JOIN] id 290 nick 'ls_zm_51716_25395' ip 127.0.0.1
+[2026-11-22 06:04:14][INFO] [JOIN] id 289 nick 'ls_zm_51717_17364' ip 127.0.0.1
+[2026-11-22 06:04:14][INFO] [JOIN] id 288 nick 'ls_zm_51717_10073' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [BBMDBG] cmd=bensin params=[] len=0 cmpKan=0 cmpJerry=0 cmpEmpty=0
+[2026-11-22 06:04:15][INFO] [BBMDBG] cabang jerrycan dipilih
+[2026-11-22 06:04:15][INFO] [JOIN] id 287 nick 'ls_zm_52785_75497' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [JOIN] id 286 nick 'ls_zm_52786_7117' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [JOIN] id 285 nick 'ls_zm_52786_96456' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [JOIN] id 284 nick 'ls_zm_52787_13533' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [JOIN] id 283 nick 'ls_zm_52787_77685' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [JOIN] id 282 nick 'ls_zm_52787_85989' ip 127.0.0.1
+[2026-11-22 06:04:15][INFO] [JOIN] id 281 nick 'ls_zm_52787_560' ip 127.0.0.1
+[2026-11-22 06:04:20][INFO] [JOIN] id 280 nick 'ls_zm_58071_44088' ip 127.0.0.1
+[2026-11-22 06:04:20][INFO] [JOIN] id 279 nick 'ls_zm_58072_37944' ip 127.0.0.1
+[2026-11-22 06:04:20][INFO] [JOIN] id 278 nick 'ls_zm_58072_44947' ip 127.0.0.1
+[2026-11-22 06:04:21][INFO] [JOIN] id 277 nick 'ls_zm_58073_48264' ip 127.0.0.1
+[2026-11-22 06:04:21][INFO] [JOIN] id 276 nick 'ls_zm_58073_83455' ip 127.0.0.1
+[2026-11-22 06:04:21][INFO] [JOIN] id 275 nick 'ls_zm_58073_27458' ip 127.0.0.1
+[2026-11-22 06:04:26][INFO] [JOIN] id 274 nick 'ls_zm_63362_42675' ip 127.0.0.1
+[2026-11-22 06:04:26][INFO] [JOIN] id 273 nick 'ls_zm_63362_81319' ip 127.0.0.1
+[2026-11-22 06:04:26][INFO] [JOIN] id 272 nick 'ls_zm_63363_4204' ip 127.0.0.1
+[2026-11-22 06:04:28][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=1/3 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=27 lahir=27 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=347 target=0 dekat=9999.0
+[2026-11-22 06:04:30][INFO] [LOOT] peti lobby=0 zona=3 item=22 jumlah=1
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Idlewood: 3 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Ganton: 6 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Downtown LS: 5 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Angel Pine: 3 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 3 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 4 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 1 zombie
+[2026-11-22 06:04:30][INFO] [DIRECTOR] total aktif 27/190 | malam 0
+[2026-11-22 06:04:31][INFO] [DIRECTOR] budget 0: 27 zombie jauh dibuang
+[2026-11-22 06:04:31][INFO] [DIRECTOR] server kosong: 27 zombie diparkir
+[2026-11-22 06:04:47][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 06:04:59][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 06:04:59][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 06:04:59][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 06:04:59][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 06:04:59][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 06:04:59][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 06:04:59][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 143 ms.
+[2026-11-22 06:04:59][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 06:04:59][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 06:05:02][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 06:05:03][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=495 o
+[2026-11-22 06:05:07][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 06:05:07][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 06:05:31][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:05:31][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:05:32][INFO] [JOIN] id 299 nick 'ls_comp_0_39166' ip 127.0.0.1
+[2026-11-22 06:05:33][INFO] [LOOT] peti lobby=0 zona=3 item=23 jumlah=1
+[2026-11-22 06:05:33][INFO] [LOOT] peti lobby=0 zona=1 item=15 jumlah=8
+[2026-11-22 06:05:33][INFO] [LOOT] peti lobby=0 zona=3 item=1 jumlah=1
+[2026-11-22 06:05:33][INFO] [WILDVEH] lobby=0 model=543 fuel=67.5/150 L locked=1 broken=0
+[2026-11-22 06:05:33][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:05:35][INFO] [JOIN] id 298 nick 'ls_zm_42203_64564' ip 127.0.0.1
+[2026-11-22 06:05:35][INFO] [JOIN] id 297 nick 'ls_zm_42204_55270' ip 127.0.0.1
+[2026-11-22 06:05:35][INFO] [JOIN] id 296 nick 'ls_zm_42204_75147' ip 127.0.0.1
+[2026-11-22 06:05:35][INFO] [JOIN] id 295 nick 'ls_zm_42204_22339' ip 127.0.0.1
+[2026-11-22 06:05:40][INFO] [WILDVEH] lobby=0 model=561 fuel=20.7/80 L locked=0 broken=0
+[2026-11-22 06:05:40][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:05:40][INFO] [WILDVEH] lobby=0 model=542 fuel=25.1/60 L locked=1 broken=0
+[2026-11-22 06:05:40][INFO] [LOOT] peti lobby=0 zona=8 item=8 jumlah=2
+[2026-11-22 06:05:41][INFO] [JOIN] id 294 nick 'ls_zm_47460_82129' ip 127.0.0.1
+[2026-11-22 06:05:41][INFO] [JOIN] id 293 nick 'ls_zm_47461_99408' ip 127.0.0.1
+[2026-11-22 06:05:41][INFO] [JOIN] id 292 nick 'ls_zm_47461_33490' ip 127.0.0.1
+[2026-11-22 06:05:41][INFO] [JOIN] id 291 nick 'ls_zm_47462_5945' ip 127.0.0.1
+[2026-11-22 06:05:41][INFO] [JOIN] id 290 nick 'ls_zm_47462_96699' ip 127.0.0.1
+[2026-11-22 06:05:46][INFO] [JOIN] id 289 nick 'ls_zm_52729_46216' ip 127.0.0.1
+[2026-11-22 06:05:46][INFO] [JOIN] id 288 nick 'ls_zm_52729_85602' ip 127.0.0.1
+[2026-11-22 06:05:46][INFO] [JOIN] id 287 nick 'ls_zm_52729_10195' ip 127.0.0.1
+[2026-11-22 06:05:46][INFO] [JOIN] id 286 nick 'ls_zm_52730_45526' ip 127.0.0.1
+[2026-11-22 06:05:51][INFO] [JOIN] id 285 nick 'ls_zm_58003_49188' ip 127.0.0.1
+[2026-11-22 06:05:51][INFO] [JOIN] id 284 nick 'ls_zm_58004_15814' ip 127.0.0.1
+[2026-11-22 06:05:51][INFO] [JOIN] id 283 nick 'ls_zm_58004_41219' ip 127.0.0.1
+[2026-11-22 06:05:51][INFO] [JOIN] id 282 nick 'ls_zm_58004_44761' ip 127.0.0.1
+[2026-11-22 06:05:56][INFO] [JOIN] id 281 nick 'ls_zm_63287_20794' ip 127.0.0.1
+[2026-11-22 06:05:56][INFO] [JOIN] id 280 nick 'ls_zm_63288_19160' ip 127.0.0.1
+[2026-11-22 06:05:56][INFO] [JOIN] id 279 nick 'ls_zm_63288_33775' ip 127.0.0.1
+[2026-11-22 06:05:59][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=1/2 base=0/0 hud=0/1 player=1/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=20 lahir=20 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=272 target=0 dekat=9999.0
+[2026-11-22 06:06:00][INFO] [WILDVEH] lobby=0 model=517 fuel=1.1/70 L locked=1 broken=1
+[2026-11-22 06:06:00][INFO] [LOOT] peti lobby=0 zona=1 item=9 jumlah=1
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Idlewood: 3 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Ganton: 3 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Downtown LS: 3 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Angel Pine: 1 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 3 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 4 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 1 zombie
+[2026-11-22 06:06:00][INFO] [DIRECTOR] total aktif 20/190 | malam 0
+[2026-11-22 06:06:02][INFO] [DIRECTOR] budget 0: 20 zombie jauh dibuang
+[2026-11-22 06:06:02][INFO] [DIRECTOR] server kosong: 20 zombie diparkir
+[2026-11-22 06:06:05][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:06:05][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:06:07][INFO] [JOIN] id 299 nick 'ls_comp_0_73383' ip 127.0.0.1
+[2026-11-22 06:06:21][INFO] [WILDVEH] lobby=0 model=491 fuel=0.1/80 L locked=1 broken=1
+[2026-11-22 06:06:21][INFO] [LOOT] peti lobby=0 zona=1 item=8 jumlah=1
+[2026-11-22 06:06:23][INFO] [JOIN] id 278 nick 'ls_zm_89682_93697' ip 127.0.0.1
+[2026-11-22 06:06:28][INFO] [JOIN] id 277 nick 'ls_zm_94966_92253' ip 127.0.0.1
+[2026-11-22 06:06:28][INFO] [JOIN] id 276 nick 'ls_zm_94966_96844' ip 127.0.0.1
+[2026-11-22 06:06:31][INFO] [JOIN] id 275 nick 'ls_zm_98105_51200' ip 127.0.0.1
+[2026-11-22 06:06:31][INFO] [JOIN] id 274 nick 'ls_zm_98106_1303' ip 127.0.0.1
+[2026-11-22 06:06:31][INFO] [JOIN] id 273 nick 'ls_zm_98106_29157' ip 127.0.0.1
+[2026-11-22 06:06:33][INFO] [DIRECTOR] budget 0: 26 zombie jauh dibuang
+[2026-11-22 06:06:33][INFO] [DIRECTOR] server kosong: 26 zombie diparkir
+[2026-11-22 06:06:53][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 06:07:05][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 06:07:05][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 06:07:05][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 06:07:05][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 06:07:05][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 06:07:05][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 06:07:05][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 141 ms.
+[2026-11-22 06:07:05][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 06:07:06][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 06:07:08][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 06:07:09][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=495 o
+[2026-11-22 06:07:13][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 06:07:13][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 06:07:37][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:07:37][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:07:39][INFO] [JOIN] id 299 nick 'ls_comp_0_39147' ip 127.0.0.1
+[2026-11-22 06:07:39][INFO] [LOOT] peti lobby=0 zona=5 item=15 jumlah=3
+[2026-11-22 06:07:39][INFO] [LOOT] peti lobby=0 zona=8 item=9 jumlah=1
+[2026-11-22 06:07:39][INFO] [LOOT] peti lobby=0 zona=6 item=10 jumlah=1
+[2026-11-22 06:07:39][INFO] [WILDVEH] lobby=0 model=600 fuel=32.0/80 L locked=1 broken=0
+[2026-11-22 06:07:39][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:07:42][INFO] [JOIN] id 298 nick 'ls_zm_42175_70695' ip 127.0.0.1
+[2026-11-22 06:07:42][INFO] [JOIN] id 297 nick 'ls_zm_42176_31301' ip 127.0.0.1
+[2026-11-22 06:07:42][INFO] [JOIN] id 296 nick 'ls_zm_42176_42579' ip 127.0.0.1
+[2026-11-22 06:07:42][INFO] [JOIN] id 295 nick 'ls_zm_42177_95519' ip 127.0.0.1
+[2026-11-22 06:07:46][INFO] [WILDVEH] lobby=0 model=548 fuel=18.9/70 L locked=0 broken=0
+[2026-11-22 06:07:46][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:07:46][INFO] [WILDVEH] lobby=0 model=489 fuel=14.4/80 L locked=0 broken=0
+[2026-11-22 06:07:46][INFO] [LOOT] peti lobby=0 zona=1 item=11 jumlah=1
+[2026-11-22 06:07:47][INFO] [JOIN] id 294 nick 'ls_zm_47426_83534' ip 127.0.0.1
+[2026-11-22 06:07:47][INFO] [JOIN] id 293 nick 'ls_zm_47427_25306' ip 127.0.0.1
+[2026-11-22 06:07:47][INFO] [JOIN] id 292 nick 'ls_zm_47427_29965' ip 127.0.0.1
+[2026-11-22 06:07:47][INFO] [JOIN] id 291 nick 'ls_zm_47427_77957' ip 127.0.0.1
+[2026-11-22 06:07:47][INFO] [JOIN] id 290 nick 'ls_zm_47427_91606' ip 127.0.0.1
+[2026-11-22 06:07:51][INFO] [JOIN] id 289 nick 'ls_zm_51612_83833' ip 127.0.0.1
+[2026-11-22 06:07:51][INFO] [JOIN] id 288 nick 'ls_zm_51612_28035' ip 127.0.0.1
+[2026-11-22 06:07:51][INFO] [JOIN] id 287 nick 'ls_zm_51612_9003' ip 127.0.0.1
+[2026-11-22 06:07:52][INFO] [JOIN] id 286 nick 'ls_zm_52679_5874' ip 127.0.0.1
+[2026-11-22 06:07:52][INFO] [JOIN] id 285 nick 'ls_zm_52679_16272' ip 127.0.0.1
+[2026-11-22 06:07:52][INFO] [JOIN] id 284 nick 'ls_zm_52680_48441' ip 127.0.0.1
+[2026-11-22 06:07:52][INFO] [JOIN] id 283 nick 'ls_zm_52680_88209' ip 127.0.0.1
+[2026-11-22 06:07:52][INFO] [JOIN] id 282 nick 'ls_zm_52680_52677' ip 127.0.0.1
+[2026-11-22 06:07:57][INFO] [JOIN] id 281 nick 'ls_zm_57957_73279' ip 127.0.0.1
+[2026-11-22 06:07:57][INFO] [JOIN] id 280 nick 'ls_zm_57957_99910' ip 127.0.0.1
+[2026-11-22 06:07:57][INFO] [JOIN] id 279 nick 'ls_zm_57958_91312' ip 127.0.0.1
+[2026-11-22 06:07:57][INFO] [JOIN] id 278 nick 'ls_zm_57958_69239' ip 127.0.0.1
+[2026-11-22 06:07:57][INFO] [JOIN] id 277 nick 'ls_zm_57958_14443' ip 127.0.0.1
+[2026-11-22 06:08:03][INFO] [JOIN] id 276 nick 'ls_zm_63236_90821' ip 127.0.0.1
+[2026-11-22 06:08:03][INFO] [JOIN] id 275 nick 'ls_zm_63237_39021' ip 127.0.0.1
+[2026-11-22 06:08:03][INFO] [JOIN] id 274 nick 'ls_zm_63237_3941' ip 127.0.0.1
+[2026-11-22 06:08:03][INFO] [JOIN] id 273 nick 'ls_zm_63237_39923' ip 127.0.0.1
+[2026-11-22 06:08:03][INFO] [JOIN] id 272 nick 'ls_zm_63238_76863' ip 127.0.0.1
+[2026-11-22 06:08:05][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=2/2 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/2 save=0/0 | zombie: alive=27 lahir=27 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=341 target=0 dekat=9999.0
+[2026-11-22 06:08:06][INFO] [LOOT] peti lobby=0 zona=3 item=15 jumlah=6
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Idlewood: 3 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Ganton: 2 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Downtown LS: 7 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Angel Pine: 3 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 3 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 8 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 1 zombie
+[2026-11-22 06:08:07][INFO] [DIRECTOR] total aktif 27/190 | malam 0
+[2026-11-22 06:08:08][INFO] [JOIN] id 271 nick 'ls_zm_68515_72888' ip 127.0.0.1
+[2026-11-22 06:08:08][INFO] [JOIN] id 270 nick 'ls_zm_68516_61763' ip 127.0.0.1
+[2026-11-22 06:08:08][INFO] [JOIN] id 269 nick 'ls_zm_68516_12534' ip 127.0.0.1
+[2026-11-22 06:08:08][INFO] [JOIN] id 268 nick 'ls_zm_68516_53726' ip 127.0.0.1
+[2026-11-22 06:08:12][INFO] [JOIN] id 267 nick 'ls_zm_72251_75444' ip 127.0.0.1
+[2026-11-22 06:08:12][INFO] [JOIN] id 266 nick 'ls_zm_72251_88267' ip 127.0.0.1
+[2026-11-22 06:08:12][INFO] [JOIN] id 265 nick 'ls_zm_72251_5783' ip 127.0.0.1
+[2026-11-22 06:08:13][INFO] [DIRECTOR] budget 0: 34 zombie jauh dibuang
+[2026-11-22 06:08:13][INFO] [DIRECTOR] server kosong: 34 zombie diparkir
+[2026-11-22 06:08:34][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-22 06:08:46][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-22 06:08:46][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-22 06:08:46][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-22 06:08:46][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-22 06:08:46][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-22 06:08:46][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+[2026-11-22 06:08:46][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 135 ms.
+[2026-11-22 06:08:46][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-22 06:08:47][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-22 06:08:49][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-22 06:08:50][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS tabel database | accounts=122 characters=121 bases=1 base_structures=0 inventory=2400 stash=0 item_ledger=19 kill_log=6 anticheat_flags=2 barricades=0 graves=0 contracts=495 o
+[2026-11-22 06:08:54][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-22 06:08:54][INFO] [SELFTEST] 36/36 PASS, 0 FAIL
+[2026-11-22 06:09:22][INFO] [JOIN] id 0 nick 'loadbot_001' ip 127.0.0.1
+[2026-11-22 06:09:22][INFO] [AUTH] cek akun nick 'loadbot_001'
+[2026-11-22 06:09:23][INFO] [JOIN] id 299 nick 'ls_zm_42170_13636' ip 127.0.0.1
+[2026-11-22 06:09:23][INFO] [JOIN] id 298 nick 'ls_zm_42170_2099' ip 127.0.0.1
+[2026-11-22 06:09:23][INFO] [JOIN] id 297 nick 'ls_zm_42171_76188' ip 127.0.0.1
+[2026-11-22 06:09:23][INFO] [JOIN] id 296 nick 'ls_zm_42171_98029' ip 127.0.0.1
+[2026-11-22 06:09:23][INFO] [JOIN] id 295 nick 'ls_zm_42171_66831' ip 127.0.0.1
+[2026-11-22 06:09:23][INFO] [JOIN] id 294 nick 'ls_zm_42171_82042' ip 127.0.0.1
+[2026-11-22 06:09:23][INFO] [JOIN] id 293 nick 'ls_comp_0_42874' ip 127.0.0.1
+[2026-11-22 06:09:24][INFO] [LOOT] peti lobby=0 zona=1 item=15 jumlah=3
+[2026-11-22 06:09:24][INFO] [LOOT] peti lobby=0 zona=3 item=22 jumlah=1
+[2026-11-22 06:09:24][INFO] [LOOT] peti lobby=0 zona=7 item=8 jumlah=1
+[2026-11-22 06:09:24][INFO] [WILDVEH] lobby=0 model=400 fuel=40.7/80 L locked=0 broken=0
+[2026-11-22 06:09:24][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:09:27][INFO] [WILDVEH] lobby=0 model=547 fuel=31.5/70 L locked=0 broken=0
+[2026-11-22 06:09:27][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:09:27][INFO] [LOOT] peti lobby=0 zona=0 item=1 jumlah=3
+[2026-11-22 06:09:28][INFO] [JOIN] id 292 nick 'ls_zm_47425_72259' ip 127.0.0.1
+[2026-11-22 06:09:28][INFO] [JOIN] id 291 nick 'ls_zm_47426_81362' ip 127.0.0.1
+[2026-11-22 06:09:28][INFO] [JOIN] id 290 nick 'ls_zm_47426_33578' ip 127.0.0.1
+[2026-11-22 06:09:28][INFO] [JOIN] id 289 nick 'ls_zm_47426_34609' ip 127.0.0.1
+[2026-11-22 06:09:28][INFO] [JOIN] id 288 nick 'ls_zm_47427_8205' ip 127.0.0.1
+[2026-11-22 06:09:32][INFO] [JOIN] id 287 nick 'ls_zm_51629_56762' ip 127.0.0.1
+[2026-11-22 06:09:32][INFO] [JOIN] id 286 nick 'ls_zm_51629_27538' ip 127.0.0.1
+[2026-11-22 06:09:32][INFO] [JOIN] id 285 nick 'ls_zm_51629_96468' ip 127.0.0.1
+[2026-11-22 06:09:33][INFO] [JOIN] id 284 nick 'ls_zm_52700_27488' ip 127.0.0.1
+[2026-11-22 06:09:33][INFO] [JOIN] id 283 nick 'ls_zm_52701_13523' ip 127.0.0.1
+[2026-11-22 06:09:33][INFO] [JOIN] id 282 nick 'ls_zm_52701_76119' ip 127.0.0.1
+[2026-11-22 06:09:33][INFO] [JOIN] id 281 nick 'ls_zm_52702_20946' ip 127.0.0.1
+[2026-11-22 06:09:33][INFO] [JOIN] id 280 nick 'ls_zm_52702_2218' ip 127.0.0.1
+[2026-11-22 06:09:33][INFO] [JOIN] id 279 nick 'ls_zm_52702_89476' ip 127.0.0.1
+[2026-11-22 06:09:38][INFO] [JOIN] id 278 nick 'ls_zm_57989_12515' ip 127.0.0.1
+[2026-11-22 06:09:38][INFO] [JOIN] id 277 nick 'ls_zm_57990_7325' ip 127.0.0.1
+[2026-11-22 06:09:38][INFO] [JOIN] id 276 nick 'ls_zm_57990_61141' ip 127.0.0.1
+[2026-11-22 06:09:38][INFO] [JOIN] id 275 nick 'ls_zm_57990_24228' ip 127.0.0.1
+[2026-11-22 06:09:38][INFO] [JOIN] id 274 nick 'ls_zm_57991_44951' ip 127.0.0.1
+[2026-11-22 06:09:44][INFO] [JOIN] id 273 nick 'ls_zm_63284_31982' ip 127.0.0.1
+[2026-11-22 06:09:44][INFO] [JOIN] id 272 nick 'ls_zm_63284_51882' ip 127.0.0.1
+[2026-11-22 06:09:44][INFO] [JOIN] id 271 nick 'ls_zm_63284_84871' ip 127.0.0.1
+[2026-11-22 06:09:44][INFO] [JOIN] id 270 nick 'ls_zm_63285_90278' ip 127.0.0.1
+[2026-11-22 06:09:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=2/2 base=0/0 hud=0/1 player=0/1 loot=0/1 veh=1/1 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=29 lahir=29 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=399 target=0 dekat=9999.0
+[2026-11-22 06:09:47][INFO] [WILDVEH] lobby=0 model=479 fuel=35.4/60 L locked=0 broken=0
+[2026-11-22 06:09:47][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+[2026-11-22 06:09:47][INFO] [LOOT] peti lobby=0 zona=0 item=9 jumlah=2
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Idlewood: 3 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Ganton: 2 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Downtown LS: 6 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Angel Pine: 3 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 4 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 7 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 2 zombie
+[2026-11-22 06:09:48][INFO] [DIRECTOR] total aktif 29/190 | malam 0
+[2026-11-22 06:09:49][INFO] [JOIN] id 269 nick 'ls_zm_68579_78324' ip 127.0.0.1
+[2026-11-22 06:09:49][INFO] [JOIN] id 268 nick 'ls_zm_68580_91508' ip 127.0.0.1
+[2026-11-22 06:09:49][INFO] [JOIN] id 267 nick 'ls_zm_68580_2486' ip 127.0.0.1
+[2026-11-22 06:09:49][INFO] [JOIN] id 266 nick 'ls_zm_68581_89036' ip 127.0.0.1
+[2026-11-22 06:09:53][INFO] [JOIN] id 265 nick 'ls_zm_72328_71425' ip 127.0.0.1
+[2026-11-22 06:09:53][INFO] [JOIN] id 264 nick 'ls_zm_72329_92910' ip 127.0.0.1
+[2026-11-22 06:09:53][INFO] [JOIN] id 263 nick 'ls_zm_72329_20248' ip 127.0.0.1
+[2026-11-22 06:09:54][INFO] [DIRECTOR] budget 0: 36 zombie jauh dibuang
+[2026-11-22 06:09:54][INFO] [DIRECTOR] server kosong: 36 zombie diparkir
+[2026-11-22 06:09:55][INFO] [JOIN] id 1 nick 'LoadBot_001' ip 127.0.0.1
+[2026-11-22 06:09:55][INFO] [AUTH] cek akun nick 'LoadBot_001'
+[2026-11-22 06:09:56][INFO] [JOIN] id 2 nick 'LoadBot_002' ip 127.0.0.1
+[2026-11-22 06:09:56][INFO] [AUTH] cek akun nick 'LoadBot_002'
+[2026-11-22 06:09:56][INFO] [JOIN] id 0 nick 'LoadBot_003' ip 127.0.0.1
+[2026-11-22 06:09:56][INFO] [AUTH] cek akun nick 'LoadBot_003'
+[2026-11-22 06:09:57][INFO] [JOIN] id 3 nick 'LoadBot_004' ip 127.0.0.1
+[2026-11-22 06:09:57][INFO] [AUTH] cek akun nick 'LoadBot_004'
+[2026-11-22 06:09:57][INFO] [JOIN] id 293 nick 'ls_comp_1_76394' ip 127.0.0.1
+[2026-11-22 06:09:57][INFO] [JOIN] id 4 nick 'LoadBot_005' ip 127.0.0.1
+[2026-11-22 06:09:57][INFO] [AUTH] cek akun nick 'LoadBot_005'
+[2026-11-22 06:09:57][INFO] [JOIN] id 262 nick 'ls_comp_2_76899' ip 127.0.0.1
+[2026-11-22 06:09:58][INFO] [JOIN] id 5 nick 'LoadBot_006' ip 127.0.0.1
+[2026-11-22 06:09:58][INFO] [AUTH] cek akun nick 'LoadBot_006'
+[2026-11-22 06:09:58][INFO] [JOIN] id 261 nick 'ls_comp_0_77393' ip 127.0.0.1
+[2026-11-22 06:09:58][INFO] [LOOT] peti dekat pemain lobby=0 anchor=2 item=9 jumlah=2
+[2026-11-22 06:09:58][INFO] [LOOT] peti dekat pemain lobby=0 anchor=2 item=1 jumlah=1
+[2026-11-22 06:09:58][INFO] [JOIN] id 6 nick 'LoadBot_007' ip 127.0.0.1
+[2026-11-22 06:09:58][INFO] [AUTH] cek akun nick 'LoadBot_007'
+[2026-11-22 06:09:58][INFO] [LOOT] peti dekat pemain lobby=0 anchor=0 item=9 jumlah=1
+[2026-11-22 06:09:58][INFO] [JOIN] id 260 nick 'ls_comp_3_77896' ip 127.0.0.1
+[2026-11-22 06:09:59][INFO] [JOIN] id 7 nick 'LoadBot_008' ip 127.0.0.1
+[2026-11-22 06:09:59][INFO] [AUTH] cek akun nick 'LoadBot_008'
+[2026-11-22 06:09:59][INFO] [JOIN] id 259 nick 'ls_comp_4_78400' ip 127.0.0.1
+[2026-11-22 06:09:59][INFO] [JOIN] id 8 nick 'LoadBot_009' ip 127.0.0.1
+[2026-11-22 06:09:59][INFO] [AUTH] cek akun nick 'LoadBot_009'
+[2026-11-22 06:09:59][INFO] [JOIN] id 258 nick 'ls_comp_5_78896' ip 127.0.0.1
+[2026-11-22 06:10:00][INFO] [JOIN] id 9 nick 'LoadBot_010' ip 127.0.0.1
+[2026-11-22 06:10:00][INFO] [AUTH] cek akun nick 'LoadBot_010'
+[2026-11-22 06:10:00][INFO] [JOIN] id 257 nick 'ls_comp_6_79397' ip 127.0.0.1
+[2026-11-22 06:10:00][INFO] [JOIN] id 10 nick 'LoadBot_011' ip 127.0.0.1
+[2026-11-22 06:10:00][INFO] [AUTH] cek akun nick 'LoadBot_011'
+[2026-11-22 06:10:00][INFO] [JOIN] id 256 nick 'ls_comp_7_79906' ip 127.0.0.1
+[2026-11-22 06:10:01][INFO] [JOIN] id 11 nick 'LoadBot_012' ip 127.0.0.1
+[2026-11-22 06:10:01][INFO] [AUTH] cek akun nick 'LoadBot_012'
+[2026-11-22 06:10:01][INFO] [JOIN] id 255 nick 'ls_comp_8_80402' ip 127.0.0.1
+[2026-11-22 06:10:01][INFO] [JOIN] id 12 nick 'LoadBot_013' ip 127.0.0.1
+[2026-11-22 06:10:01][INFO] [AUTH] cek akun nick 'LoadBot_013'
+[2026-11-22 06:10:01][INFO] [JOIN] id 254 nick 'ls_comp_9_80898' ip 127.0.0.1
+[2026-11-22 06:10:02][INFO] [JOIN] id 13 nick 'LoadBot_014' ip 127.0.0.1
+[2026-11-22 06:10:02][INFO] [AUTH] cek akun nick 'LoadBot_014'
+[2026-11-22 06:10:02][INFO] [JOIN] id 253 nick 'ls_comp_10_81397' ip 127.0.0.1
+[2026-11-22 06:10:02][INFO] [JOIN] id 14 nick 'LoadBot_015' ip 127.0.0.1
+[2026-11-22 06:10:02][INFO] [AUTH] cek akun nick 'LoadBot_015'
+[2026-11-22 06:10:02][INFO] [JOIN] id 252 nick 'ls_comp_11_81902' ip 127.0.0.1
+[2026-11-22 06:10:03][INFO] [JOIN] id 15 nick 'LoadBot_016' ip 127.0.0.1
+[2026-11-22 06:10:03][INFO] [AUTH] cek akun nick 'LoadBot_016'
+[2026-11-22 06:10:03][INFO] [JOIN] id 251 nick 'ls_comp_12_82406' ip 127.0.0.1
+[2026-11-22 06:10:03][INFO] [JOIN] id 16 nick 'LoadBot_017' ip 127.0.0.1
+[2026-11-22 06:10:03][INFO] [AUTH] cek akun nick 'LoadBot_017'
+[2026-11-22 06:10:03][INFO] [JOIN] id 250 nick 'ls_comp_13_82905' ip 127.0.0.1
+[2026-11-22 06:10:04][INFO] [JOIN] id 17 nick 'LoadBot_018' ip 127.0.0.1
+[2026-11-22 06:10:04][INFO] [AUTH] cek akun nick 'LoadBot_018'
+[2026-11-22 06:10:04][INFO] [JOIN] id 249 nick 'ls_comp_14_83402' ip 127.0.0.1
+[2026-11-22 06:10:04][INFO] [JOIN] id 18 nick 'LoadBot_019' ip 127.0.0.1
+[2026-11-22 06:10:04][INFO] [AUTH] cek akun nick 'LoadBot_019'
+[2026-11-22 06:10:04][INFO] [JOIN] id 248 nick 'ls_comp_15_83904' ip 127.0.0.1
+[2026-11-22 06:10:05][INFO] [JOIN] id 19 nick 'LoadBot_020' ip 127.0.0.1
+[2026-11-22 06:10:05][INFO] [AUTH] cek akun nick 'LoadBot_020'
+[2026-11-22 06:10:05][INFO] [JOIN] id 247 nick 'ls_comp_16_84405' ip 127.0.0.1
+[2026-11-22 06:10:05][INFO] [JOIN] id 20 nick 'LoadBot_021' ip 127.0.0.1
+[2026-11-22 06:10:05][INFO] [AUTH] cek akun nick 'LoadBot_021'
+[2026-11-22 06:10:05][INFO] [JOIN] id 246 nick 'ls_comp_17_84903' ip 127.0.0.1
+[2026-11-22 06:10:06][INFO] [JOIN] id 21 nick 'LoadBot_022' ip 127.0.0.1
+[2026-11-22 06:10:06][INFO] [AUTH] cek akun nick 'LoadBot_022'
+[2026-11-22 06:10:06][INFO] [JOIN] id 245 nick 'ls_comp_18_85406' ip 127.0.0.1
+[2026-11-22 06:10:06][INFO] [JOIN] id 22 nick 'LoadBot_023' ip 127.0.0.1
+[2026-11-22 06:10:06][INFO] [AUTH] cek akun nick 'LoadBot_023'
+[2026-11-22 06:10:06][INFO] [JOIN] id 244 nick 'ls_comp_19_85908' ip 127.0.0.1
+[2026-11-22 06:10:07][INFO] [JOIN] id 23 nick 'LoadBot_024' ip 127.0.0.1
+[2026-11-22 06:10:07][INFO] [AUTH] cek akun nick 'LoadBot_024'
+[2026-11-22 06:10:07][INFO] [JOIN] id 243 nick 'ls_comp_20_86402' ip 127.0.0.1
+[2026-11-22 06:10:07][INFO] [JOIN] id 24 nick 'LoadBot_025' ip 127.0.0.1
+[2026-11-22 06:10:07][INFO] [AUTH] cek akun nick 'LoadBot_025'
+[2026-11-22 06:10:07][INFO] [JOIN] id 242 nick 'ls_comp_21_86903' ip 127.0.0.1
+[2026-11-22 06:10:08][INFO] [JOIN] id 25 nick 'LoadBot_026' ip 127.0.0.1
+[2026-11-22 06:10:08][INFO] [AUTH] cek akun nick 'LoadBot_026'
+[2026-11-22 06:10:08][INFO] [JOIN] id 241 nick 'ls_comp_22_87409' ip 127.0.0.1
+[2026-11-22 06:10:08][INFO] [JOIN] id 26 nick 'LoadBot_027' ip 127.0.0.1
+[2026-11-22 06:10:08][INFO] [AUTH] cek akun nick 'LoadBot_027'
+[2026-11-22 06:10:08][INFO] [WILDVEH] lobby=0 model=558 fuel=2.0/65 L locked=1 broken=1
+[2026-11-22 06:10:08][INFO] [JOIN] id 240 nick 'ls_comp_23_87905' ip 127.0.0.1
+[2026-11-22 06:10:09][INFO] [JOIN] id 27 nick 'LoadBot_028' ip 127.0.0.1
+[2026-11-22 06:10:09][INFO] [AUTH] cek akun nick 'LoadBot_028'
+[2026-11-22 06:10:09][INFO] [JOIN] id 239 nick 'ls_comp_24_88408' ip 127.0.0.1
+[2026-11-22 06:10:09][INFO] [JOIN] id 28 nick 'LoadBot_029' ip 127.0.0.1
+[2026-11-22 06:10:09][INFO] [AUTH] cek akun nick 'LoadBot_029'
+[2026-11-22 06:10:09][INFO] [JOIN] id 238 nick 'ls_comp_25_88912' ip 127.0.0.1
+[2026-11-22 06:10:10][INFO] [JOIN] id 29 nick 'LoadBot_030' ip 127.0.0.1
+[2026-11-22 06:10:10][INFO] [AUTH] cek akun nick 'LoadBot_030'
+[2026-11-22 06:10:10][INFO] [JOIN] id 237 nick 'ls_comp_26_89412' ip 127.0.0.1
+[2026-11-22 06:10:10][INFO] [JOIN] id 30 nick 'LoadBot_031' ip 127.0.0.1
+[2026-11-22 06:10:10][INFO] [AUTH] cek akun nick 'LoadBot_031'
+[2026-11-22 06:10:10][INFO] [JOIN] id 236 nick 'ls_comp_27_89933' ip 127.0.0.1
+[2026-11-22 06:10:11][INFO] [JOIN] id 31 nick 'LoadBot_032' ip 127.0.0.1
+[2026-11-22 06:10:11][INFO] [AUTH] cek akun nick 'LoadBot_032'
+[2026-11-22 06:10:11][INFO] [JOIN] id 235 nick 'ls_comp_28_90418' ip 127.0.0.1
+[2026-11-22 06:10:11][INFO] [JOIN] id 32 nick 'LoadBot_033' ip 127.0.0.1
+[2026-11-22 06:10:11][INFO] [AUTH] cek akun nick 'LoadBot_033'
+[2026-11-22 06:10:11][INFO] [JOIN] id 234 nick 'ls_comp_29_90922' ip 127.0.0.1
+[2026-11-22 06:10:12][INFO] [JOIN] id 33 nick 'LoadBot_034' ip 127.0.0.1
+[2026-11-22 06:10:12][INFO] [AUTH] cek akun nick 'LoadBot_034'
+[2026-11-22 06:10:12][INFO] [JOIN] id 233 nick 'ls_comp_30_91442' ip 127.0.0.1
+[2026-11-22 06:10:12][INFO] [JOIN] id 34 nick 'LoadBot_035' ip 127.0.0.1
+[2026-11-22 06:10:12][INFO] [AUTH] cek akun nick 'LoadBot_035'
+[2026-11-22 06:10:12][INFO] [JOIN] id 232 nick 'ls_comp_31_91934' ip 127.0.0.1
+[2026-11-22 06:10:13][INFO] [JOIN] id 35 nick 'LoadBot_036' ip 127.0.0.1
+[2026-11-22 06:10:13][INFO] [AUTH] cek akun nick 'LoadBot_036'
+[2026-11-22 06:10:13][INFO] [JOIN] id 231 nick 'ls_comp_32_92447' ip 127.0.0.1
+[2026-11-22 06:10:13][INFO] [JOIN] id 36 nick 'LoadBot_037' ip 127.0.0.1
+[2026-11-22 06:10:13][INFO] [AUTH] cek akun nick 'LoadBot_037'
+[2026-11-22 06:10:13][INFO] [JOIN] id 230 nick 'ls_comp_33_92965' ip 127.0.0.1
+[2026-11-22 06:10:14][INFO] [JOIN] id 37 nick 'LoadBot_038' ip 127.0.0.1
+[2026-11-22 06:10:14][INFO] [AUTH] cek akun nick 'LoadBot_038'
+[2026-11-22 06:10:14][INFO] [JOIN] id 229 nick 'ls_comp_34_93477' ip 127.0.0.1
+[2026-11-22 06:10:14][INFO] [JOIN] id 38 nick 'LoadBot_039' ip 127.0.0.1
+[2026-11-22 06:10:14][INFO] [AUTH] cek akun nick 'LoadBot_039'
+[2026-11-22 06:10:14][INFO] [JOIN] id 228 nick 'ls_comp_35_93985' ip 127.0.0.1
+[2026-11-22 06:10:15][INFO] [JOIN] id 39 nick 'LoadBot_040' ip 127.0.0.1
+[2026-11-22 06:10:15][INFO] [AUTH] cek akun nick 'LoadBot_040'
+[2026-11-22 06:10:15][INFO] [JOIN] id 227 nick 'ls_comp_36_94496' ip 127.0.0.1
+[2026-11-22 06:10:15][INFO] [PERF] sync NPC disesuaikan ke 250 ms.
+[2026-11-22 06:10:15][INFO] [JOIN] id 226 nick 'ls_comp_37_94968' ip 127.0.0.1
+[2026-11-22 06:10:16][INFO] [JOIN] id 225 nick 'ls_comp_38_95609' ip 127.0.0.1
+[2026-11-22 06:10:16][INFO] [JOIN] id 224 nick 'ls_comp_39_96029' ip 127.0.0.1
+[2026-11-22 06:10:30][INFO] [WILDVEH] lobby=0 model=458 fuel=24.7/80 L locked=1 broken=0
+[2026-11-22 06:10:32][INFO] [PERF] sync NPC disesuaikan ke 100 ms.
+[2026-11-22 06:10:38][INFO] [JOIN] id 223 nick 'ls_zm_117706_75240' ip 127.0.0.1
+[2026-11-22 06:10:38][INFO] [JOIN] id 222 nick 'ls_zm_117707_79072' ip 127.0.0.1
+[2026-11-22 06:10:41][INFO] [JOIN] id 221 nick 'ls_zm_120479_15641' ip 127.0.0.1
+[2026-11-22 06:10:41][INFO] [JOIN] id 220 nick 'ls_zm_120480_20424' ip 127.0.0.1
+[2026-11-22 06:10:41][INFO] [JOIN] id 219 nick 'ls_zm_120480_32065' ip 127.0.0.1
+[2026-11-22 06:10:44][INFO] [JOIN] id 218 nick 'ls_zm_123215_45304' ip 127.0.0.1
+[2026-11-22 06:10:44][INFO] [JOIN] id 217 nick 'ls_zm_123216_94305' ip 127.0.0.1
+[2026-11-22 06:10:44][INFO] [JOIN] id 216 nick 'ls_zm_123216_24493' ip 127.0.0.1
+[2026-11-22 06:10:47][INFO] [PERF] tick ms (akhir/puncak): zombie=1/1 director=2/2 base=0/1 hud=1/2 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=44 lahir=80 mati=36 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=1206 target=182 dekat=2.7
+[2026-11-22 06:10:49][INFO] [JOIN] id 215 nick 'ls_zm_128713_32418' ip 127.0.0.1
+[2026-11-22 06:10:49][INFO] [JOIN] id 214 nick 'ls_zm_128713_25049' ip 127.0.0.1
+[2026-11-22 06:10:49][INFO] [JOIN] id 213 nick 'ls_zm_128714_48418' ip 127.0.0.1
+[2026-11-22 06:10:51][INFO] [WILDVEH] lobby=0 model=529 fuel=0.4/70 L locked=1 broken=1
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Idlewood: 7 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Ganton: 5 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Downtown LS: 8 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Angel Pine: 9 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 6 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 3 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 4 zombie
+[2026-11-22 06:10:52][INFO] [DIRECTOR] total aktif 47/190 | malam 0
+[2026-11-22 06:10:55][INFO] [JOIN] id 212 nick 'ls_zm_134211_46533' ip 127.0.0.1
+[2026-11-22 06:10:55][INFO] [JOIN] id 211 nick 'ls_zm_134212_29770' ip 127.0.0.1
+[2026-11-22 06:10:55][INFO] [JOIN] id 210 nick 'ls_zm_134212_81326' ip 127.0.0.1
+[2026-11-22 06:10:55][INFO] [JOIN] id 209 nick 'ls_zm_134213_1672' ip 127.0.0.1
+[2026-11-22 06:11:00][INFO] [JOIN] id 208 nick 'ls_zm_139699_64407' ip 127.0.0.1
+[2026-11-22 06:11:00][INFO] [JOIN] id 207 nick 'ls_zm_139700_19858' ip 127.0.0.1
+[2026-11-22 06:11:00][INFO] [JOIN] id 206 nick 'ls_zm_139701_39962' ip 127.0.0.1
+[2026-11-22 06:11:00][INFO] [JOIN] id 205 nick 'ls_zm_139701_4012' ip 127.0.0.1
+[2026-11-22 06:11:02][INFO] [JOIN] id 204 nick 'ls_zm_141958_98781' ip 127.0.0.1
+[2026-11-22 06:11:02][INFO] [JOIN] id 203 nick 'ls_zm_141958_2380' ip 127.0.0.1
+[2026-11-22 06:11:02][INFO] [JOIN] id 202 nick 'ls_zm_141958_60223' ip 127.0.0.1
+[2026-11-22 06:11:06][INFO] [JOIN] id 201 nick 'ls_zm_145191_81724' ip 127.0.0.1
+[2026-11-22 06:11:06][INFO] [JOIN] id 200 nick 'ls_zm_145192_73696' ip 127.0.0.1
+[2026-11-22 06:11:06][INFO] [JOIN] id 199 nick 'ls_zm_145192_20379' ip 127.0.0.1
+[2026-11-22 06:11:11][INFO] [JOIN] id 198 nick 'ls_zm_150684_74766' ip 127.0.0.1
+[2026-11-22 06:11:11][INFO] [JOIN] id 197 nick 'ls_zm_150684_87463' ip 127.0.0.1
+[2026-11-22 06:11:13][INFO] [WILDVEH] lobby=0 model=504 fuel=6.5/60 L locked=0 broken=0
+[2026-11-22 06:11:17][INFO] [JOIN] id 196 nick 'ls_zm_156163_96079' ip 127.0.0.1
+[2026-11-22 06:11:17][INFO] [JOIN] id 195 nick 'ls_zm_156164_76402' ip 127.0.0.1
+[2026-11-22 06:11:17][INFO] [JOIN] id 194 nick 'ls_zm_156164_16106' ip 127.0.0.1
+[2026-11-22 06:11:22][INFO] [JOIN] id 193 nick 'ls_zm_161640_58708' ip 127.0.0.1
+[2026-11-22 06:11:24][INFO] [JOIN] id 192 nick 'ls_zm_163374_56060' ip 127.0.0.1
+[2026-11-22 06:11:24][INFO] [JOIN] id 191 nick 'ls_zm_163374_57890' ip 127.0.0.1
+[2026-11-22 06:11:24][INFO] [JOIN] id 190 nick 'ls_zm_163374_60828' ip 127.0.0.1
+[2026-11-22 06:11:28][INFO] [JOIN] id 189 nick 'ls_zm_167104_72479' ip 127.0.0.1
+[2026-11-22 06:11:28][INFO] [JOIN] id 188 nick 'ls_zm_167104_22742' ip 127.0.0.1
+[2026-11-22 06:11:29][WARN] [ZOMBIE] npc 265 stuck 3x, didaur ulang
+[2026-11-22 06:11:32][WARN] [ZOMBIE] npc 289 stuck 3x, didaur ulang
+[2026-11-22 06:11:33][INFO] [JOIN] id 187 nick 'ls_zm_172569_6884' ip 127.0.0.1
+[2026-11-22 06:11:34][INFO] [WILDVEH] lobby=0 model=411 fuel=18.0/60 L locked=0 broken=0
+[2026-11-22 06:11:38][INFO] [JOIN] id 186 nick 'ls_zm_178026_16355' ip 127.0.0.1
+[2026-11-22 06:11:39][WARN] [ZOMBIE] npc 299 stuck 3x, didaur ulang
+[2026-11-22 06:11:43][WARN] [ZOMBIE] npc 295 stuck 3x, didaur ulang
+[2026-11-22 06:11:45][INFO] [JOIN] id 185 nick 'ls_zm_184713_54561' ip 127.0.0.1
+[2026-11-22 06:11:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=1/3 base=0/1 hud=1/2 player=0/1 loot=0/1 veh=0/1 needs=0/0 event=0/0 horde=1/2 save=0/0 | zombie: alive=75 lahir=115 mati=40 atk=32 macet=4 jangkau=40 los_gagal=8 sampel=3490 target=818 dekat=0.6
+[2026-11-22 06:11:49][INFO] [JOIN] id 184 nick 'ls_zm_188954_34755' ip 127.0.0.1
+[2026-11-22 06:11:52][WARN] [ZOMBIE] npc 210 stuck 3x, didaur ulang
+[2026-11-22 06:11:55][INFO] [WILDVEH] lobby=0 model=609 fuel=21.0/150 L locked=0 broken=0
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Idlewood: 8 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Ganton: 8 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Downtown LS: 13 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Angel Pine: 9 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 16 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 8 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 6 zombie
+[2026-11-22 06:11:56][INFO] [DIRECTOR] total aktif 76/190 | malam 0
+[2026

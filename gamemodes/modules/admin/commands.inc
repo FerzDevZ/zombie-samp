@@ -70,6 +70,10 @@ stock bool:IsNumericToken(const token[])
     return true;
 }
 
+/* Deklarasi maju: /setbbm memanggil gerbang DEV sebelum definisinya di bawah
+   (tanpa ini compiler memaksa reparse ⇒ warning 208). */
+forward bool:Command_DevAllowed(playerid);
+
 stock Command_Process(playerid, const cmdtext[])
 {
     new cmd[32], params[192];
@@ -861,15 +865,34 @@ stock Command_Process(playerid, const cmdtext[])
 
     if (!strcmp(cmd, "isi", true) || !strcmp(cmd, "refuel", true) || !strcmp(cmd, "bensin", true))
     {
-        if (!strcmp(params, "kan", true) || !strcmp(params, "jerrycan", true))
+        /* strcmp bawaan SA-MP mengembalikan 0 untuk string pertama KOSONG saat
+           ignorecase=true — jadi /isi tanpa argumen dianggap "/isi kan".
+           isnull() wajib jadi penjaga sebelum membandingkan apa pun. */
+        if (!isnull(params) && (!strcmp(params, "kan", true) || !strcmp(params, "jerrycan", true)))
         {
             Garage_RefillJerrycan(playerid);
             return 1;
         }
 
+        /* Tanpa angka: di pom buka menu, di luar pom tampilkan status BBM.
+           Pemain tidak perlu menghitung liter sendiri, dan tetap ada jalur
+           angka untuk yang mau isi cepat (/isi 20). */
+        if (params[0] == EOS)
+        {
+            if (Garage_IsAtPump(playerid))
+            {
+                Garage_PumpMenu(playerid);
+            }
+            else
+            {
+                Garage_FuelReport(playerid);
+            }
+            return 1;
+        }
+
         if (!Garage_IsAtPump(playerid))
         {
-            SendClientMessage(playerid, UI_TEXT_MUTED, "[BENSIN] Hanya bisa di pom bensin kamp. Jerrycan bisa dipakai di mana saja.");
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[BENSIN] Isi hanya bisa di pom bensin kamp. Jerrycan bisa dipakai di mana saja: /isi jerrycan.");
             return 1;
         }
 
@@ -881,9 +904,9 @@ stock Command_Process(playerid, const cmdtext[])
         }
 
         new requested = -1;
-        if (params[0] != EOS && sscanf(params, "d", requested))
+        if (sscanf(params, "d", requested))
         {
-            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /isi [liter] (kosong = penuh). Harga $5/liter.");
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /isi [liter] (kosong = menu pom). Harga $5/liter.");
             return 1;
         }
         if (requested < 1) requested = -1;
@@ -1465,6 +1488,38 @@ stock Command_Process(playerid, const cmdtext[])
     if (!strcmp(cmd, "infect", true))
     {
         return Command_DevInfect(playerid);
+    }
+
+    if (!strcmp(cmd, "setbbm", true))
+    {
+        if (!Command_DevAllowed(playerid)) return Command_DevDenied(playerid);
+
+        new Float:liters;
+        if (isnull(params) || sscanf(params, "f", liters))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /setbbm [liter]");
+            return 1;
+        }
+
+        new vehicleid = (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+            ? GetPlayerVehicleID(playerid)
+            : Vehicle_NearestToPlayer(playerid, 12.0);
+        if (vehicleid == INVALID_VEHICLE_ID)
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[DEV] Tidak ada kendaraan dalam 12 meter.");
+            return 1;
+        }
+        if (!Vehicle_SetFuel(vehicleid, liters))
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[DEV] Kendaraan ini tidak memakai bahan bakar.");
+            return 1;
+        }
+
+        new line[128];
+        format(line, sizeof(line), "[DEV] BBM kendaraan %d = %.1f/%.0f L (~%.0f km).",
+            vehicleid, Vehicle_GetFuel(vehicleid), Vehicle_GetTank(vehicleid), Vehicle_RangeKm(vehicleid));
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
+        return 1;
     }
 
     if (!strcmp(cmd, "heal", true))

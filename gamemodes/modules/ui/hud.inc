@@ -27,6 +27,8 @@ new HudLastBoss[MAX_PLAYERS][64];
 new HudLastNeedColor[MAX_PLAYERS];
 new HudLastInfectColor[MAX_PLAYERS];
 new bool:HudVehicleShown[MAX_PLAYERS];
+new HudFuelColor[MAX_PLAYERS];
+new HudFuelWarnStage[MAX_PLAYERS];
 new bool:HudBossShown[MAX_PLAYERS];
 
 stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSize)
@@ -111,6 +113,8 @@ stock HUD_Create(playerid)
     HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     HudLastVehicle[playerid][0] = EOS;
+    HudFuelColor[playerid] = 0;
+    HudFuelWarnStage[playerid] = 0;
     HudLastBoss[playerid][0] = EOS;
     HudLastNeedColor[playerid] = 0;
     HudLastInfectColor[playerid] = 0;
@@ -173,9 +177,73 @@ stock HUD_Update(playerid)
     if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
     {
         new vehicleid = GetPlayerVehicleID(playerid);
-        new fuelLine[64];
-        Vehicle_FuelStatus(vehicleid, fuelLine, sizeof(fuelLine));
+        new Float:fuel = Vehicle_GetFuel(vehicleid);
+        new Float:tank = Vehicle_GetTank(vehicleid);
+        new Float:percent = Vehicle_FuelPercent(vehicleid);
+
+        /* Gauge blok 10 karakter: terbaca di layar HP tanpa perlu font khusus. */
+        new bar[12];
+        new filled = floatround(percent * 10.0);
+        if (filled < 0) filled = 0;
+        if (filled > 10) filled = 10;
+
+        new index = 0;
+        bar[index++] = '[';
+        for (new cell = 0; cell < 10; cell++)
+        {
+            bar[index++] = (cell < filled) ? '#' : '-';
+        }
+        bar[index++] = ']';
+        bar[index] = EOS;
+
+        new fuelLine[80];
+        if (fuel < 0.0)
+        {
+            format(fuelLine, sizeof(fuelLine), "TANPA BBM  [----------]");
+        }
+        else
+        {
+            format(fuelLine, sizeof(fuelLine), "BBM %s %.0f/%.0f L  ~%.0f km",
+                bar, fuel, tank, Vehicle_RangeKm(vehicleid));
+        }
+
         HUD_SetIfChanged(playerid, HudVehicle[playerid], fuelLine, HudLastVehicle[playerid], sizeof(HudLastVehicle[]));
+
+        new fuelColor = UI_ACCENT_PRIMARY;
+        if (fuel < 0.0 || percent <= 0.08) fuelColor = UI_ACCENT_DANGER;
+        else if (percent <= 0.25) fuelColor = UI_ACCENT_WARN;
+        if (fuelColor != HudFuelColor[playerid])
+        {
+            HudFuelColor[playerid] = fuelColor;
+            PlayerTextDrawColor(playerid, HudVehicle[playerid], fuelColor);
+            PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+        }
+
+        /* Peringatan sekali per ambang: bunyi + pesan pendek. Tanpa ini pemain
+           baru tahu tangki habis setelah mesin mati di tengah horde. */
+        new warnStage = 0;
+        if (fuel < 0.0) warnStage = 0;
+        else if (percent <= 0.08) warnStage = 2;
+        else if (percent <= 0.25) warnStage = 1;
+
+        if (warnStage > HudFuelWarnStage[playerid])
+        {
+            HudFuelWarnStage[playerid] = warnStage;
+            PlayerPlaySound(playerid, 1054, 0.0, 0.0, 0.0);
+            if (warnStage == 1)
+            {
+                SendClientMessage(playerid, UI_ACCENT_WARN, "[BBM] Tangki tinggal seperempat. Isi di pom kamp (/isi) atau pakai jerrycan.");
+            }
+            else
+            {
+                SendClientMessage(playerid, UI_ACCENT_DANGER, "[BBM] Hampir kering! /isi sekarang, mesin bisa mati kapan saja.");
+            }
+        }
+        else if (percent > 0.30)
+        {
+            HudFuelWarnStage[playerid] = 0;
+        }
+
         if (!HudVehicleShown[playerid])
         {
             HudVehicleShown[playerid] = true;
@@ -185,6 +253,7 @@ stock HUD_Update(playerid)
     else if (HudVehicleShown[playerid])
     {
         HudVehicleShown[playerid] = false;
+        HudFuelWarnStage[playerid] = 0;
         PlayerTextDrawHide(playerid, HudVehicle[playerid]);
     }
 

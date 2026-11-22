@@ -25,8 +25,12 @@
 #define WILD_MIN_VEHICLE_DIST 7.0
 #define VEHICLE_REFUEL_RANGE 4.5
 #define VEHICLE_LOCKPICK_RANGE 4.5
-#define VEHICLE_FUEL_PRICE 5
-#define VEHICLE_FUEL_GAME_SCALE 80.0
+#define VEHICLE_FUEL_PRICE 3
+/* Skala liter terhadap km. Konsumsi tabel 4,5–28 L/100 km adalah angka dunia
+   nyata; tanpa skala satu tangki 80 L hanya bertahan ~7 km, jadi pemain
+   mengisi BBM tiap 4 menit dan ekonomi hancur. Skala 40 memberi sedan ±15 km
+   per tangki (±15 menit mengemudi jarak jauh), sesuai docs/SURVIVAL.md. */
+#define VEHICLE_FUEL_GAME_SCALE 40.0
 #define VEHICLE_JERRYCAN_LITERS 20.0
 #define VEHICLE_TOW_RANGE 6.0
 
@@ -249,6 +253,18 @@ stock Vehicle_AddFuel(vehicleid, Float:amount)
     if (TrackedVehicle[slot][tvFuel] > TrackedVehicle[slot][tvTank])
         TrackedVehicle[slot][tvFuel] = TrackedVehicle[slot][tvTank];
 
+    return 1;
+}
+
+/* Setter untuk admin/uji: menaruh tangki pada liter tertentu (dijepit 0..tank). */
+stock Vehicle_SetFuel(vehicleid, Float:liters)
+{
+    new slot = Vehicle_TrackedSlot(vehicleid);
+    if (slot < 0) return 0;
+
+    if (liters < 0.0) liters = 0.0;
+    if (liters > TrackedVehicle[slot][tvTank]) liters = TrackedVehicle[slot][tvTank];
+    TrackedVehicle[slot][tvFuel] = liters;
     return 1;
 }
 
@@ -875,6 +891,35 @@ stock VehicleFuel_TickBody()
         }
     }
     return 1;
+}
+
+/* Status mesin untuk laporan BBM (HUD/pom). */
+stock bool:Vehicle_IsEngineOn(vehicleid)
+{
+    new engine, lights, alarm, doors, bonnet, boot, objective;
+    GetVehicleParamsEx(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
+    return engine == VEHICLE_PARAMS_ON;
+}
+
+/* Persentase tangki (0.0–1.0) untuk gauge HUD & warna peringatan. */
+stock Float:Vehicle_FuelPercent(vehicleid)
+{
+    new slot = Vehicle_TrackedSlot(vehicleid);
+    if (slot < 0) return 0.0;
+    if (TrackedVehicle[slot][tvTank] <= 0.0) return 0.0;
+    return TrackedVehicle[slot][tvFuel] / TrackedVehicle[slot][tvTank];
+}
+
+/* Jarak tempuh sisa dalam km. Konsumsi memakai rumus tick yang sama dengan
+   VehicleFuel_TickBody, jadi angka di HUD bukan tebakan terpisah. */
+stock Float:Vehicle_RangeKm(vehicleid)
+{
+    new slot = Vehicle_TrackedSlot(vehicleid);
+    if (slot < 0) return 0.0;
+
+    new Float:per100 = Vehicle_ConsumptionPer100Km(TrackedVehicle[slot][tvModel]) * VEHICLE_FUEL_GAME_SCALE;
+    if (per100 < 0.01) return 0.0;
+    return TrackedVehicle[slot][tvFuel] / per100 * 100.0;
 }
 
 stock Vehicle_FuelStatus(vehicleid, dest[], size)

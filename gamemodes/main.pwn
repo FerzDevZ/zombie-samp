@@ -254,6 +254,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     if (Grave_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Contracts_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Lobby_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
+    if (Garage_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Menu_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     return 0;
 }

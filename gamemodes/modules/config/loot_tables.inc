@@ -170,8 +170,13 @@ new const gNodeLoot[LOOT_NODE_SLOTS][E_LOOT_ENTRY] =
 #define LOOT_KIND_ITEM   0
 #define LOOT_KIND_CRATE  1
 
-#define LOOT_CRATE_OBJECT_MODEL  1225   // peti kayu GTA SA (sama dengan wall/turret base)
-#define LOOT_CRATE_PICKUP_MODEL  1210   // ikon koper: terlihat dari jauh, aman untuk mobile
+/* Model drop: JANGAN pakai 1225 (itu tong minyak) atau model item mentah
+   (2045/2905/2906 = tong sampah/kontainer gudang). Semua drop memakai satu
+   ikon koper lapangan 1210 supaya jelas terbaca sebagai loot, termasuk di
+   layar HP. */
+#define LOOT_CRATE_OBJECT_MODEL  1210   // peti darurat: koper lapangan
+#define LOOT_CRATE_PICKUP_MODEL  1210
+#define LOOT_ITEM_PICKUP_MODEL   1210   // ikon drop item (bukan model asli item)
 #define LOOT_CORPSE_PICKUP_MODEL 1210
 #define LOOT_NODE_LABEL_DIST     60.0
 

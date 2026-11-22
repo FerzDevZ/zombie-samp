@@ -66,6 +66,34 @@ stock bool:Loot_HasFreeSlot()
     return false;
 }
 
+/* Warna & tag kategori: drop di tanah harus bisa dibaca sekilas, tanpa
+   membuka inventory. Kategori menentukan warna label 3D dan teks tag. */
+stock Loot_VisualColor(itemid)
+{
+    switch (Item_GetCategory(itemid))
+    {
+        case ITEM_CONSUMABLE: return 0x7CFC00FF;
+        case ITEM_WEAPON:     return UI_ACCENT_DANGER;
+        case ITEM_TOOL:       return UI_ACCENT_INFO;
+        case ITEM_BLUEPRINT:  return 0xA78BFAFF;
+        case ITEM_MATERIAL:   return 0xCBD5E1FF;
+    }
+    return UI_TEXT_PRIMARY;
+}
+
+stock Loot_VisualTag(itemid, dest[], size)
+{
+    switch (Item_GetCategory(itemid))
+    {
+        case ITEM_CONSUMABLE: return format(dest, size, "OBAT");
+        case ITEM_WEAPON:     return format(dest, size, "AMMO");
+        case ITEM_TOOL:       return format(dest, size, "ALAT");
+        case ITEM_BLUEPRINT:  return format(dest, size, "PLAN");
+        case ITEM_MATERIAL:   return format(dest, size, "BAHAN");
+    }
+    return format(dest, size, "ITEM");
+}
+
 stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALID_PLAYER_ID, lobbyId = -1, kind = LOOT_KIND_ITEM, durability = WEAPON_CONDITION_MAX)
 {
     if (!Item_IsValid(itemid) || amount <= 0) return -1;
@@ -109,6 +137,7 @@ stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALI
     LootDrop[slot][ldKind] = kind;
     LootDrop[slot][ldDurability] = durability;
     LootDrop[slot][ldMapIcon] = INVALID_STREAMER_ID;
+    LootDrop[slot][ldObject] = INVALID_STREAMER_ID;
 
     new worldId = Lobby_WorldById(lobbyId);
     LootDrop[slot][ldWorld] = worldId;
@@ -116,11 +145,12 @@ stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALI
 
     if (kind == LOOT_KIND_CRATE)
     {
-        // Peti dunia: objek kayu + ikon koper supaya kelihatan dari jauh di layar HP.
+        /* Peti darurat: koper lapangan + ikon peta. Sebelumnya model 1225 yang
+           di GTA SA adalah tong minyak, jadi peti terlihat seperti drum. */
         LootDrop[slot][ldObject] = CreateDynamicObject(LOOT_CRATE_OBJECT_MODEL,
-            x, y, z - 0.55, 0.0, 0.0, 0.0, .worldid = worldId);
+            x, y, z - 0.55, 0.0, 0.0, 18.0, .worldid = worldId);
 
-        format(label, sizeof(label), "{FFD24A}PETI DARURAT\n%s (%dx)\n/take  (Y di PC)", itemLabel, amount);
+        format(label, sizeof(label), "{FFD24A}[PETI] %s x%d\n/ambil  (Y)", itemLabel, amount);
 
         LootDrop[slot][ldLabel] = CreateDynamic3DTextLabel(label, UI_ACCENT_WARN,
             x, y, z + 0.45, LOOT_NODE_LABEL_DIST, .worldid = worldId);
@@ -134,17 +164,32 @@ stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALI
     }
     else
     {
-        LootDrop[slot][ldObject] = CreateDynamicObject(gItemRegistry[itemid][itemModel],
-            x, y, z - 0.85, 0.0, 0.0, 0.0, .worldid = worldId);
+        /* Drop item tidak memakai objek 3D sendiri: model asli item (tong sampah,
+           kontainer gudang, botol) membuat drop terlihat seperti drum/tong.
+           Satu pickup koper 1210 + label kategori berwarna jauh lebih terbaca,
+           dan memangkas 1 objek dinamis per drop (maks 300). */
+        LootDrop[slot][ldObject] = INVALID_STREAMER_ID;
 
-        format(label, sizeof(label), "%s (%dx)\n/take  (Y di PC)", itemLabel, amount);
+        new tag[8], tagColor[8];
+        Loot_VisualTag(itemid, tag, sizeof(tag));
+        format(tagColor, sizeof(tagColor), "{%06X}", (Loot_VisualColor(itemid) >> 8) & 0xFFFFFF);
 
-        LootDrop[slot][ldLabel] = CreateDynamic3DTextLabel(label, UI_TEXT_PRIMARY,
-            x, y, z, 8.0, .worldid = worldId);
+        if (ownerPlayer != INVALID_PLAYER_ID)
+        {
+            format(label, sizeof(label), "%s[%s] {FFFFFF}%s x%d\n{FFD24A}milikmu 60s{FFFFFF}  /ambil",
+                tagColor, tag, itemLabel, amount);
+        }
+        else
+        {
+            format(label, sizeof(label), "%s[%s] {FFFFFF}%s x%d\n{94A3B8}/ambil  (Y)", tagColor, tag, itemLabel, amount);
+        }
 
-        // Player-specific pickup: no global pickup means no map-wide loot ESP.
-        // Tipe 2 = pickup yang diambil saat pemain berjalan melewatinya.
-        LootDrop[slot][ldPickup] = CreateDynamicPickup(gItemRegistry[itemid][itemModel], 2,
+        LootDrop[slot][ldLabel] = CreateDynamic3DTextLabel(label, Loot_VisualColor(itemid),
+            x, y, z + 0.35, 10.0, .worldid = worldId);
+
+        // Pickup khusus pemain pemilik: tidak bocor sebagai ESP loot global.
+        // Tipe 2 = terambil saat pemain berjalan melewatinya.
+        LootDrop[slot][ldPickup] = CreateDynamicPickup(LOOT_ITEM_PICKUP_MODEL, 2,
             x, y, z, .worldid = worldId, .playerid = ownerPlayer);
     }
 
@@ -157,7 +202,11 @@ stock Loot_RemoveDrop(slot)
     if (slot < 0 || slot >= MAX_LOOT_DROPS) return 0;
     if (!LootDrop[slot][ldActive]) return 0;
 
-    DestroyDynamicObject(LootDrop[slot][ldObject]);
+    if (LootDrop[slot][ldObject] != INVALID_STREAMER_ID)
+    {
+        DestroyDynamicObject(LootDrop[slot][ldObject]);
+        LootDrop[slot][ldObject] = INVALID_STREAMER_ID;
+    }
     DestroyDynamic3DTextLabel(LootDrop[slot][ldLabel]);
     DestroyDynamicPickup(LootDrop[slot][ldPickup]);
     if (LootDrop[slot][ldMapIcon] != INVALID_STREAMER_ID)
@@ -379,7 +428,7 @@ stock Loot_ExpireTickBody()
         {
             new pickupModel = (LootDrop[slot][ldKind] == LOOT_KIND_CRATE)
                 ? LOOT_CRATE_PICKUP_MODEL
-                : gItemRegistry[LootDrop[slot][ldItemId]][itemModel];
+                : LOOT_ITEM_PICKUP_MODEL;
             DestroyDynamicPickup(LootDrop[slot][ldPickup]);
             LootDrop[slot][ldPickup] = CreateDynamicPickup(pickupModel, 2,
                 LootDrop[slot][ldX], LootDrop[slot][ldY], LootDrop[slot][ldZ],

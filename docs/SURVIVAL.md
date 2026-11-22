@@ -26,8 +26,8 @@ HUD kiri menampilkan `LAP`, `HAUS`, `PIPIS`.
 - Nomor plat `ABANDON`, model acak dari daftar kendaraan jalan.
 - Bensin awal 10–45% tangki, **45% terkunci**.
 - Bensin dihitung dari jarak, bukan odometer client:
-  `liter = km × L/100km ÷ 100 × 80`. Skala 80 membuat satu tangki bertahan
-  ±10–20 menit mengemudi, bukan berjam-jam.
+  `liter = km × L/100km ÷ 100 × 40`. Skala 40 membuat satu tangki sedan
+  (±80 L) bertahan ±15 km / ±15 menit mengemudi, bukan berjam-jam.
 - Tangki 0 → mesin mati, tidak bisa dinyalakan sampai diisi.
 - Kendaraan hancur langsung dihapus dan slot pool dibebaskan.
 
@@ -41,14 +41,17 @@ HUD kiri menampilkan `LAP`, `HAUS`, `PIPIS`.
 | Van/bus | Burrito, Boxville | 80 L | 13.5 L/100 km |
 | Truk/industri | Benson, DFT-30 | 150 L | 28 L/100 km |
 
-HUD kanan bawah: `FUEL 34.2/60 L` dan `LOCKED` hanya saat mengemudi.
+HUD kanan bawah saat mengemudi: `BBM [####------] 34/60 L  ~8 km` dengan warna
+hijau → kuning (≤25%) → merah (≤8%). Peringatan bunyi + pesan muncul sekali per
+ambang; `/bensin` kapan saja menampilkan liter, persen, sisa km, dan jarak pom.
 
 ## 4. Isi bensin
 
 | Aksi | Lokasi | Biaya |
 |---|---|---|
-| `/isi [liter]` atau Y di pom | hanya di **Pom Bensin** kamp | $5/liter |
-| `/isi kan` | pom, mengisi jerrycan kosong | $5/liter |
+| `/isi` di pom | menu: isi penuh, 10/25/50 L, atau isi jerrycan | $3/liter |
+| `/isi [liter]` | isi cepat sejumlah liter di pom | $3/liter |
+| `/isi kan` | pom, mengisi jerrycan kosong | $3/liter |
 | Jerrycan dari tas | di mana saja, kendaraan ≤4.5 m | 1 jerrycan (20 L penuh) |
 | `/sedot` | kendaraan terbengkalai ≤4.5 m | gratis, 25% memicu panas zona |
 

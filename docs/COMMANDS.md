@@ -106,7 +106,8 @@ Format: `/nama [argumen]` — argumen dalam `<>` wajib, `[]` opsional.
 | `/veh` (alias `/garasi`, `/garage`) | Buka garasi |
 | `/kunci` | Kunci/buka kendaraan |
 | `/lockpick` | Bobol kendaraan (butuh Lockpick) |
-| `/bensin` (alias `/refuel`) | Isi bahan bakar dari jerrycan/pom |
+| `/isi` (alias `/bensin`, `/refuel`) | Di pom: buka menu isi (penuh / 10 / 25 / 50 L / jerrycan). Di luar pom: laporan BBM (liter, persen, sisa km, jarak pom) |
+| `/isi [liter]` | Isi cepat sejumlah liter di pom ($3/L) |
 | `/siphon` (alias `/sedot`) | Sedot BBM kendaraan lain |
 | `/engine` | Hidupkan/matikan mesin |
 | `/fix` (alias `/repair`) | Perbaiki kendaraan dengan kit |

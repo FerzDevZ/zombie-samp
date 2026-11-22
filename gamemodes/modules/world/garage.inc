@@ -16,6 +16,7 @@
 
 #define DIALOG_GARAGE     2971
 #define DIALOG_GARAGE_BUY 2972
+#define DIALOG_PUMP_MENU  2973   // menu pom bensin (mobile-safe: satu list, tanpa input teks)
 
 #define GARAGE_X 1674.0
 #define GARAGE_Y -2322.0
@@ -829,6 +830,206 @@ stock Garage_RepairNearestEx(playerid, bool:fullToolbox)
     return 1;
 }
 
+/* ---------- Pom bensin: menu & laporan ---------- */
+
+stock Garage_PumpMenu(playerid)
+{
+    if (!Garage_IsAtPump(playerid))
+    {
+        Garage_FuelReport(playerid);
+        return 0;
+    }
+
+    new vehicleid = Vehicle_NearestToPlayer(playerid, VEHICLE_REFUEL_RANGE);
+    if (vehicleid == INVALID_VEHICLE_ID)
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[POM] Tidak ada kendaraan dalam 4 meter. Dekatkan kendaraan ke pom.");
+        return 0;
+    }
+
+    new Float:fuel = Vehicle_GetFuel(vehicleid);
+    if (fuel < 0.0)
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[POM] Kendaraan ini tidak memakai bahan bakar.");
+        return 0;
+    }
+
+    new Float:tank = Vehicle_GetTank(vehicleid);
+    new Float:room = tank - fuel;
+
+    new cash = PlayerSurvival[playerid][psCash];
+    new affordable = cash / VEHICLE_FUEL_PRICE;
+    new maxLiters = floatround(room);
+    if (maxLiters > affordable) maxLiters = affordable;
+
+    new canSlot = Garage_FindJerrycanSlot(playerid, true);
+
+    /* Tangki penuh bukan jalan buntu: pemain tetap bisa mengisi jerrycan di
+       pom. Menu hanya menyembunyikan baris isi tangki yang tidak mungkin. */
+    if (maxLiters < 1 && canSlot < 0)
+    {
+        if (room < 1.0) SendClientMessage(playerid, UI_TEXT_MUTED, "[POM] Tangki penuh dan tidak ada jerrycan kosong di tas.");
+        else SendClientMessage(playerid, UI_ACCENT_DANGER, "[POM] Uang tidak cukup. Harga $5 per liter.");
+        return 0;
+    }
+
+    new body[512];
+    new line[128];
+
+    format(body, sizeof(body), "Aksi\tHarga\tKeterangan\n");
+
+    if (maxLiters >= 1)
+    {
+        format(line, sizeof(line), "Isi penuh (%d L)\t$%d\tTangki jadi %.0f L\n",
+            maxLiters, maxLiters * VEHICLE_FUEL_PRICE, fuel + float(maxLiters));
+        strcat(body, line, sizeof(body));
+
+        new preset[3] = {10, 25, 50};
+        for (new i = 0; i < 3; i++)
+        {
+            if (preset[i] > maxLiters) continue;
+            format(line, sizeof(line), "Isi %d L\t$%d\tSisa uang $%d\n",
+                preset[i], preset[i] * VEHICLE_FUEL_PRICE, cash - preset[i] * VEHICLE_FUEL_PRICE);
+            strcat(body, line, sizeof(body));
+        }
+    }
+    else
+    {
+        format(line, sizeof(line), "Tangki penuh\t-\t%.0f/%.0f L\n", fuel, tank);
+        strcat(body, line, sizeof(body));
+    }
+
+    if (canSlot >= 0)
+    {
+        format(line, sizeof(line), "Isi jerrycan\t$%d\tKaleng 20 L di tas\n", floatround(VEHICLE_JERRYCAN_LITERS) * VEHICLE_FUEL_PRICE);
+        strcat(body, line, sizeof(body));
+    }
+
+    format(line, sizeof(line), "Tutup\t-\tBatal\n");
+    strcat(body, line, sizeof(body));
+
+    format(line, sizeof(line), "Pom Kamp  |  BBM %.0f/%.0f L  (%.0f%%)  |  Uang $%d",
+        fuel, tank, Vehicle_FuelPercent(vehicleid) * 100.0, cash);
+    ShowPlayerDialog(playerid, DIALOG_PUMP_MENU, DIALOG_STYLE_TABLIST_HEADERS,
+        line, body, "Pilih", "Tutup");
+    return 1;
+}
+
+stock Garage_PumpMenuSelect(playerid, listitem)
+{
+    new vehicleid = Vehicle_NearestToPlayer(playerid, VEHICLE_REFUEL_RANGE);
+    if (vehicleid == INVALID_VEHICLE_ID)
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[POM] Kendaraan sudah tidak di dekat pom.");
+        return 0;
+    }
+
+    new Float:tank = Vehicle_GetTank(vehicleid);
+    new Float:room = tank - Vehicle_GetFuel(vehicleid);
+    new maxLiters = floatround(room);
+    new affordable = PlayerSurvival[playerid][psCash] / VEHICLE_FUEL_PRICE;
+    if (maxLiters > affordable) maxLiters = affordable;
+
+    new canSlot = Garage_FindJerrycanSlot(playerid, true);
+
+    /* Urutan baris HARUS sama dengan Garage_PumpMenu: isi penuh, preset yang
+       muat, jerrycan, tutup. Baris info "tangki penuh" tidak melakukan apa pun. */
+    new row = 0;
+
+    if (maxLiters >= 1)
+    {
+        if (listitem == row)
+        {
+            Garage_RefuelVehicle(playerid, vehicleid, maxLiters);
+            return 1;
+        }
+        row++;
+
+        new preset[3] = {10, 25, 50};
+        for (new i = 0; i < 3; i++)
+        {
+            if (preset[i] > maxLiters) continue;
+            if (listitem == row)
+            {
+                Garage_RefuelVehicle(playerid, vehicleid, preset[i]);
+                return 1;
+            }
+            row++;
+        }
+    }
+    else
+    {
+        row++;
+    }
+
+    if (canSlot >= 0)
+    {
+        if (listitem == row)
+        {
+            Garage_RefillJerrycan(playerid);
+            return 1;
+        }
+        row++;
+    }
+
+    /* Tutup atau indeks di luar daftar: keluarkan tanpa pesan. */
+    return 1;
+}
+
+/* Status BBM yang bisa dipanggil kapan saja: di kendaraan, di dekat kendaraan,
+   atau jalan kaki (menampilkan lokasi pom terdekat). */
+stock Garage_FuelReport(playerid)
+{
+    if (!Account_IsPlaying(playerid)) return 0;
+
+    new vehicleid = GetPlayerState(playerid) == PLAYER_STATE_DRIVER
+        ? GetPlayerVehicleID(playerid)
+        : Vehicle_NearestToPlayer(playerid, 12.0);
+
+    if (vehicleid != INVALID_VEHICLE_ID && Vehicle_IsTracked(vehicleid))
+    {
+        new Float:fuel = Vehicle_GetFuel(vehicleid);
+        new Float:tank = Vehicle_GetTank(vehicleid);
+        new line[144];
+
+        if (fuel < 0.0)
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[BBM] Kendaraan ini tidak memakai bahan bakar.");
+        }
+        else
+        {
+            format(line, sizeof(line), "[BBM] %.1f/%.0f L (%.0f%%)  ~%.0f km  %s",
+                fuel, tank, Vehicle_FuelPercent(vehicleid) * 100.0, Vehicle_RangeKm(vehicleid),
+                Vehicle_IsEngineOn(vehicleid) ? "mesin hidup" : "mesin mati");
+            SendClientMessage(playerid, UI_ACCENT_INFO, line);
+
+            if (Vehicle_FuelPercent(vehicleid) <= 0.25)
+            {
+                SendClientMessage(playerid, UI_ACCENT_WARN, "[BBM] Rendah. /isi di pom kamp atau tuang jerrycan: /isi jerrycan.");
+            }
+        }
+    }
+    else
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BBM] Tidak ada kendaraan dalam 12 meter.");
+    }
+
+    new Float:px, Float:py, Float:pz;
+    GetPlayerPos(playerid, px, py, pz);
+    new Float:pumpDistance = VectorSize(px - FUEL_PUMP_X, py - FUEL_PUMP_Y, pz - FUEL_PUMP_Z);
+
+    new line2[144];
+    format(line2, sizeof(line2), "[BBM] Pom kamp %.0f m dari posisimu. Harga $%d/liter. Uang $%d.",
+        pumpDistance, VEHICLE_FUEL_PRICE, PlayerSurvival[playerid][psCash]);
+    SendClientMessage(playerid, UI_TEXT_SECONDARY, line2);
+
+    if (pumpDistance <= FUEL_PUMP_RANGE)
+    {
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[BBM] Kamu di pom. Ketik /isi untuk membuka menu pengisian.");
+    }
+    return 1;
+}
+
 stock Garage_OnDialogResponse(playerid, dialogid, response, listitem)
 {
     if (dialogid == DIALOG_GARAGE)
@@ -848,6 +1049,13 @@ stock Garage_OnDialogResponse(playerid, dialogid, response, listitem)
     {
         if (!response) return 1;
         Garage_Buy(playerid, listitem);
+        return 1;
+    }
+
+    if (dialogid == DIALOG_PUMP_MENU)
+    {
+        if (!response) return 1;
+        Garage_PumpMenuSelect(playerid, listitem);
         return 1;
     }
     return 0;
