@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mariadb:10.11
+    container_name: laststand-mysql
+    restart: unless-stopped
+    environment:
+      # Ganti lewat .env produksi: MYSQL_ROOT_PASSWORD / MYSQL_PASSWORD
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_root_me}
+      MARIADB_DATABASE: laststand
+      MARIADB_USER: laststand
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD:-change_me}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./database/migrations:/docker-entrypoint-initdb.d:ro
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+volumes:
+  mysql-data:

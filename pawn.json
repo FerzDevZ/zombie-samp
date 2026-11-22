@@ -1,0 +1,38 @@
+{
+  "user": "laststand",
+  "repo": "zombie-samp",
+  "entry": "gamemodes/main.pwn",
+  "output": "gamemodes/main.amx",
+  "dependencies": [
+    "sampctl/samp-stdlib",
+    "pawn-lang/YSI-Includes:v5.10.0006",
+    "samp-incognito/samp-streamer-plugin:v2.9.6",
+    "pBlueG/SA-MP-MySQL:R41",
+    "Southclaws/sscanf:v2.8.2",
+    "Sreyas-Sreelal/samp-bcrypt:0.4.1",
+    "ziggi/FCNPC:v2.0.11"
+  ],
+  "runtime": {
+    "mode": "server",
+    "version": "0.3.7",
+    "port": 7777,
+    "hostname": "LAST STAND: San Andreas Quarantine",
+    "gamemodetext": "LAST STAND 0.1",
+    "maxplayers": 300,
+    "maxnpc": 200,
+    "lanmode": false,
+    "announce": false,
+    "rcon_password": "localdev-only-change-me",
+    "plugins": [
+      "mysql.so",
+      "sscanf.so",
+      "ColAndreas.so"
+    ],
+    "sleep": 5,
+    "stream_rate": 1000,
+    "stream_distance": 300.0,
+    "onfoot_rate": 40,
+    "incar_rate": 40,
+    "weapon_rate": 40
+  }
+}

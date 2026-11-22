@@ -1,0 +1,95 @@
+name: Runtime Selftest Gate
+
+# Gate runtime nyata: boot server + selftest gamemode harus PASS 0 FAIL.
+# Melengkapi build.yml (compile). Butuh scriptfiles/colandreas/ColAndreas.cadb
+# ter-commit (52 MB, di bawah limit GitHub) untuk cek raycast ColAndreas.
+
+on: [push, pull_request]
+
+jobs:
+  selftest:
+    name: Boot server and assert selftest
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root_ci
+          MARIADB_DATABASE: laststand
+          MARIADB_USER: laststand
+          MARIADB_PASSWORD: ci_test_pass
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s --health-timeout=5s --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install sampctl
+        run: |
+          curl -sL https://github.com/Southclaws/sampctl/releases/download/1.16.0/sampctl_1.16.0_linux_amd64.tar.gz -o sampctl.tar.gz
+          tar xzf sampctl.tar.gz
+          sudo mv sampctl /usr/local/bin/sampctl
+          sampctl version
+
+      - name: Install mysql client
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq mariadb-client unzip
+
+      - name: Fetch dependencies and compile
+        run: |
+          sampctl ensure
+          sampctl build
+
+      - name: Fetch linux plugins (gitignored)
+        run: bash scripts/ci-fetch-plugins.sh
+
+      - name: Apply migrations
+        run: |
+          for f in $(ls database/migrations/*.sql | sort); do
+            echo "apply $f"
+            mysql -h127.0.0.1 -ulaststand -pci_test_pass laststand < "$f"
+          done
+
+      - name: Write runtime config (CI values, bukan rahasia produksi)
+        run: |
+          printf 'hostname = 127.0.0.1\nusername = laststand\npassword = ci_test_pass\ndatabase = laststand\npool_size = 4\n' > mysql.ini
+          cp mysql.ini scriptfiles/mysql.ini
+          printf 'super=ci_super_key\nadmin=ci_admin_key\n' > scriptfiles/admin_keys.cfg
+
+      - name: Boot server
+        run: |
+          export LD_LIBRARY_PATH="$PWD/plugins"
+          nohup sampctl run > ci_run.log 2>&1 &
+          echo $! > ci_server.pid
+
+      - name: Wait for selftest and assert
+        run: |
+          ok=0
+          for i in $(seq 1 45); do
+            sleep 2
+            if grep -qE "SELFTEST\] [0-9]+/[0-9]+ PASS, 0 FAIL" server_log.txt 2>/dev/null; then
+              ok=1; break
+            fi
+            if grep -qE "SELFTEST\] .*FAIL" server_log.txt 2>/dev/null; then
+              break
+            fi
+          done
+          echo "--- boot log tail ---"
+          tail -30 server_log.txt || tail -30 ci_run.log
+          if [ "$ok" -ne 1 ]; then
+            echo "GAGAL: selftest tidak PASS 0 FAIL dalam 90 detik"
+            exit 1
+          fi
+          grep -E "SELFTEST\] [0-9]+/" server_log.txt | tail -1
+          grep -q "handle terpisah" server_log.txt || { echo "GAGAL: TX handle tidak terpisah"; exit 1; }
+          if [ -s logs/errors.log ]; then
+            echo "GAGAL: logs/errors.log tidak kosong:"; cat logs/errors.log; exit 1
+          fi
+          echo "SELFTEST GATE LULUS"
+
+      - name: Stop server
+        if: always()
+        run: |
+          pkill -x samp03svr || true
+          kill "$(cat ci_server.pid)" 2>/dev/null || true

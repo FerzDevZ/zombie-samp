@@ -1,0 +1,25 @@
+{
+  "version": "0.3.7",
+  "platform": "linux",
+  "runtime_type": "samp",
+  "files": [
+    {
+      "path": "announce",
+      "size": 10936,
+      "hash": "cd8783c98d5211b6a0edd0ce22d3ee601d1326cfa18facd3a82cd955ba88c9f8",
+      "mode": 448
+    },
+    {
+      "path": "samp-npc",
+      "size": 591652,
+      "hash": "c4826bc9cf2d469cd8aace81609e9fa0e9abe0a02edcb272306206f82ab911d0",
+      "mode": 448
+    },
+    {
+      "path": "samp03svr",
+      "size": 1416856,
+      "hash": "0cdfa430392986b3a60f0b3bf6a641175679c3285fb452e1bdcf63321cfd9873",
+      "mode": 448
+    }
+  ]
+}

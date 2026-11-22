@@ -1,0 +1,23 @@
+name: Gamemode Compile Validation
+
+on: [push, pull_request]
+
+jobs:
+  pawn-build:
+    name: Ensure dependencies and compile
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install sampctl
+        run: |
+          curl -sL https://github.com/Southclaws/sampctl/releases/download/1.16.0/sampctl_1.16.0_linux_amd64.tar.gz -o sampctl.tar.gz
+          tar xzf sampctl.tar.gz
+          sudo mv sampctl /usr/local/bin/sampctl
+          sampctl version
+
+      - name: Fetch dependencies
+        run: sampctl ensure
+
+      - name: Compile gamemode
+        run: sampctl build

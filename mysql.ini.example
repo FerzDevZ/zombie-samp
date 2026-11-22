@@ -1,0 +1,5 @@
+; Copy to mysql.ini (never commit real credentials)
+hostname = 127.0.0.1
+username = laststand
+password = CHANGE_ME
+database = laststand
