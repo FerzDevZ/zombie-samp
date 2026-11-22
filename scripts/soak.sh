@@ -53,6 +53,8 @@ printf 'detik,rss_mb,zombie,npc_fail,maxplayers_err,assert,errlog,perf_zombie,pe
     > "$OUT/samples.csv"
 
 elapsed=0
+zero_zombie_samples=0
+
 while :; do
   alive=0
   kill -0 "$PID" 2>/dev/null && alive=1
@@ -78,6 +80,12 @@ while :; do
       "$elapsed" "$rss_mb" "${zombie:-0}" "${npc_fail:-0}" "${mp_err:-0}" "${assert:-0}" "$errlog" \
       "${p_zombie:-0}" "${p_director:-0}" "${p_horde:-0}" "${p_player:-0}" "${p_hud:-0}" >> "$OUT/samples.csv"
 
+  # Server tanpa zombie berarti bot tidak pernah login (mis. instans memakai DB
+  # lain tanpa akun LoadBot_*). Hasil seperti itu tidak boleh dianggap LULUS.
+  if [[ "${zombie:-0}" -eq 0 && "$elapsed" -ge 120 ]]; then
+    zero_zombie_samples=$((zero_zombie_samples + 1))
+  fi
+
   if [[ "$alive" -eq 0 ]]; then
     echo "[$(date '+%T')] SERVER MATI pada detik $elapsed" | tee -a "$OUT/summary.txt"
     break
@@ -96,10 +104,11 @@ kill "$BOT_PID" 2>/dev/null || true
 wait "$BOT_PID" 2>/dev/null || true
 cp -f "$ROOT/logs/errors.log" "$OUT/errors.log" 2>/dev/null || true
 
-python3 - "$OUT" "$NAME" "$BOTS" "$MINUTES" "$PID" <<'PY'
+python3 - "$OUT" "$NAME" "$BOTS" "$MINUTES" "$PID" "$zero_zombie_samples" <<'PY'
 import csv, json, os, statistics, sys
 
 out, name, bots, minutes, pid = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4], sys.argv[5]
+zero_samples = int(sys.argv[6])
 rows = list(csv.DictReader(open(os.path.join(out, "samples.csv"))))
 report = {}
 try:
@@ -166,6 +175,9 @@ gates = [
     (f"spawn bot >= 90% ({spawned}/{bots})", bots > 0 and spawned >= 0.9 * bots),
     ("tick p95 semua sistem < 20 ms", worst_p95 < 20.0),
     ("pertumbuhan RSS < 15% RSS awal", (rss and (rss[-1] - rss[0]) <= 0.15 * max(rss[0], 1)) or False),
+    # Beban kosong selalu "stabil". Tanpa gate ini, instans tanpa akun bot bisa
+    # dilaporkan LULUS padahal tidak ada zombie sama sekali.
+    ("beban nyata: zombie pernah aktif", (max(col('zombie')) if col('zombie') else 0) > 0 and zero_samples <= 3),
 ]
 lines.append("\n## Gate\n")
 lines.append("| Gate | Hasil |")
