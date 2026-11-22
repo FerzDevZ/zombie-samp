@@ -125,6 +125,52 @@ stock HUD_Create(playerid)
     return 1;
 }
 
+/* Client (terutama SA-MP Mobile) membuang PlayerTextDraw setelah respawn atau
+   setelah pemain ganti karakter, sehingga HUD hilang permanen walau server
+   mengira masih terpasang. Setiap spawn kita tampilkan ulang + reset cache teks
+   supaya tick berikutnya langsung menulis nilai baru. */
+stock HUD_Reshow(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+
+    PlayerTextDrawShow(playerid, HudBrand[playerid]);
+    PlayerTextDrawShow(playerid, HudVitals[playerid]);
+    PlayerTextDrawShow(playerid, HudNeeds[playerid]);
+    PlayerTextDrawShow(playerid, HudInfection[playerid]);
+    PlayerTextDrawShow(playerid, HudZone[playerid]);
+    PlayerTextDrawShow(playerid, HudLoadout[playerid]);
+    PlayerTextDrawShow(playerid, HudProgress[playerid]);
+
+    PlayerHudVisible[playerid] = true;
+    HudLastVitals[playerid][0] = EOS;
+    HudLastNeeds[playerid][0] = EOS;
+    HudLastInfect[playerid][0] = EOS;
+    HudLastZone[playerid][0] = EOS;
+    HudLastLoadout[playerid][0] = EOS;
+    HudLastProgress[playerid][0] = EOS;
+    return 1;
+}
+
+stock HUD_Hide(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+
+    PlayerTextDrawHide(playerid, HudBrand[playerid]);
+    PlayerTextDrawHide(playerid, HudVitals[playerid]);
+    PlayerTextDrawHide(playerid, HudNeeds[playerid]);
+    PlayerTextDrawHide(playerid, HudInfection[playerid]);
+    PlayerTextDrawHide(playerid, HudZone[playerid]);
+    PlayerTextDrawHide(playerid, HudLoadout[playerid]);
+    PlayerTextDrawHide(playerid, HudProgress[playerid]);
+    PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+    PlayerTextDrawHide(playerid, HudBoss[playerid]);
+
+    PlayerHudVisible[playerid] = false;
+    HudVehicleShown[playerid] = false;
+    HudBossShown[playerid] = false;
+    return 1;
+}
+
 stock HUD_Destroy(playerid)
 {
     PlayerTextDrawDestroy(playerid, HudBrand[playerid]);

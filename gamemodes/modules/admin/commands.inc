@@ -1420,6 +1420,44 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "hud", true))
+    {
+        if (!Account_IsPlaying(playerid)) return 1;
+
+        if (PlayerHudVisible[playerid])
+        {
+            HUD_Hide(playerid);
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[HUD] disembunyikan. Ketik /hud untuk menampilkan lagi.");
+        }
+        else
+        {
+            HUD_Reshow(playerid);
+            SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[HUD] ditampilkan ulang (HP, kebutuhan, zona, BBM, progres).");
+        }
+        return 1;
+    }
+
+    if (!strcmp(cmd, "mobil", true) || !strcmp(cmd, "car", true))
+    {
+        if (!Account_IsPlaying(playerid)) return 1;
+
+        if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[MOBIL] Kamu sedang menyetir. Keluar dulu kalau mau mobil lain.");
+            return 1;
+        }
+
+        if (WildVeh_EnsureOneNear(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[MOBIL] Satu mobil diletakkan 7 meter di depanmu. Masuk lewat pintu pengemudi.");
+        }
+        else
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[MOBIL] Sudah ada mobil dalam 40 meter. Ketik /uicheck untuk melihat jaraknya.");
+        }
+        return 1;
+    }
+
     if (!strcmp(cmd, "rapikan", true) || !strcmp(cmd, "compact", true))
     {
         if (!Account_IsPlaying(playerid)) return 1;
@@ -1527,7 +1565,60 @@ stock Command_Process(playerid, const cmdtext[])
         return Command_DevHeal(playerid);
     }
 
+    if (!strcmp(cmd, "uicheck", true))
+    {
+        return Command_DevUiCheck(playerid);
+    }
+
     return 0;
+}
+
+/* Diagnostik UI: pemain melaporkan "HUD tidak muncul / tidak ada mobil".
+   Perintah ini mencetak apa yang SEHARUSNYA tampil di client (status HUD,
+   lobi, dunia virtual, jumlah mobil liar di lobi, jarak mobil terdekat) dan
+   menyalinnya ke log supaya bisa dibaca tanpa screenshot. */
+stock Command_DevUiCheck(playerid)
+{
+    /* Sengaja tidak digerbang DEV: pemain yang melaporkan "HUD tidak muncul"
+       harus bisa membaca kondisi render di client-nya sendiri. */
+    if (!Account_IsPlaying(playerid))
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[UIC] Masuk dulu dengan /masuk.");
+        return 1;
+    }
+
+    new lobbyId = Lobby_Of(playerid);
+    new world = GetPlayerVirtualWorld(playerid);
+    new interior = GetPlayerInterior(playerid);
+    new nearest = Vehicle_NearestToPlayer(playerid, 400.0);
+    new Float:px, Float:py, Float:pz;
+    GetPlayerPos(playerid, px, py, pz);
+
+    new Float:vehDist = -1.0;
+    new vehModel = 0;
+    if (nearest != INVALID_VEHICLE_ID)
+    {
+        new Float:vx, Float:vy, Float:vz;
+        GetVehiclePos(nearest, vx, vy, vz);
+        vehDist = VectorSize(px - vx, py - vy, pz - vz);
+        vehModel = GetVehicleModel(nearest);
+    }
+
+    new line[144];
+    format(line, sizeof(line), "[UIC] HUD tampil=%d lobi=%d vw=%d interior=%d mobil_lobi=%d terdekat=%d jarak=%.1f m model=%d",
+        PlayerHudVisible[playerid] ? 1 : 0, lobbyId, world, interior,
+        WildVeh_CountForLobby(lobbyId), nearest, vehDist, vehModel);
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
+    Log_Info(line);
+
+    format(line, sizeof(line), "[UIC] pos=%.1f,%.1f,%.1f hidup=%d akun=%d peti_dalam_50m=%d",
+        px, py, pz, Player_IsAlive(playerid) ? 1 : 0, Account_IsPlaying(playerid) ? 1 : 0,
+        LootDrop_CountNear(px, py, 50.0));
+    SendClientMessage(playerid, UI_TEXT_SECONDARY, line);
+    Log_Info(line);
+
+    SendClientMessage(playerid, UI_TEXT_MUTED, "[UIC] Coba juga /veh 411 (mobil langsung di samping) dan /isi (pom).");
+    return 1;
 }
 
 /* Harness uji manual: dipakai untuk memvalidasi chase, attack, dan infeksi

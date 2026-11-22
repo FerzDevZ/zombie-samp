@@ -20,8 +20,8 @@
 #define WILD_BROKEN_CHANCE 35   // mobil mati total: mesin mati, BBM nyaris habis, bodi rusak
 #define WILD_MIN_PLAYER_DIST 22.0
 #define WILD_NEAR_TARGET 3          // mobil yang dijamin muncul dekat pemain, bukan di zona jauh
-#define WILD_NEAR_MIN_DIST 28.0
-#define WILD_NEAR_MAX_DIST 85.0
+#define WILD_NEAR_MIN_DIST 8.0
+#define WILD_NEAR_MAX_DIST 24.0
 #define WILD_MIN_VEHICLE_DIST 7.0
 #define VEHICLE_REFUEL_RANGE 4.5
 #define VEHICLE_LOCKPICK_RANGE 4.5
@@ -613,6 +613,38 @@ stock WildVeh_SpawnAt(lobbyId, Float:x, Float:y, Float:z, bool:forceUsable)
     return 1;
 }
 
+/* Mobil pertama harus benar-benar terlihat: bukan undian 8-24 m di balik
+   dinding. Kalau belum ada mobil dalam 30 m, taruh satu 7 m di depan pemain,
+   tanpa kunci, mesin siap, tangki minimal setengah. */
+stock WildVeh_GuaranteeSpawnCar(playerid)
+{
+    new nearest = Vehicle_NearestToPlayer(playerid, 30.0);
+    if (nearest != INVALID_VEHICLE_ID) return 0;
+
+    new Float:px, Float:py, Float:pz, Float:angle;
+    GetPlayerPos(playerid, px, py, pz);
+    GetPlayerFacingAngle(playerid, angle);
+
+    new Float:spotX = px + floatsin(-angle, degrees) * 7.0;
+    new Float:spotY = py + floatcos(-angle, degrees) * 7.0;
+    new Float:spotZ = pz;
+
+    new lobbyId = Lobby_Of(playerid);
+    if (!WildVeh_SpawnAt(lobbyId, spotX, spotY, spotZ, true)) return 0;
+
+    Log_Format(LOG_INFO, "[WILDVEH] mobil jaminan spawn untuk pemain %d di %.1f,%.1f,%.1f",
+        playerid, spotX, spotY, spotZ);
+    return 1;
+}
+
+stock WildVeh_EnsureOneNear(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+    if (!Account_IsPlaying(playerid)) return 0;
+    if (Vehicle_NearestToPlayer(playerid, 40.0) != INVALID_VEHICLE_ID) return 0;
+    return WildVeh_GuaranteeSpawnCar(playerid);
+}
+
 stock WildVeh_Spawn(lobbyId)
 {
     new Float:x, Float:y, Float:z;
@@ -693,6 +725,9 @@ stock World_CompassName(Float:deltaX, Float:deltaY, dest[], size)
     return format(dest, size, "timur laut");
 }
 
+/* Penghitung percobaan petunjuk sebelum posisi pemain valid (lihat guard 0,0,0). */
+new WorldHintRetry[MAX_PLAYERS];
+
 /* Petunjuk arah setelah spawn: pemain tidak perlu menebak apakah server punya
    mobil atau peti. Kalau belum ada, server menjamin spawn dulu lalu memberi tahu. */
 stock World_NearbyHint(playerid)
@@ -702,6 +737,17 @@ stock World_NearbyHint(playerid)
 
     new Float:px, Float:py, Float:pz;
     GetPlayerPos(playerid, px, py, pz);
+
+    /* Pemain yang baru join masih di posisi default (0,0,0) selama beberapa
+       ratus ms. Petunjuk yang dihitung di titik itu melaporkan "peti 2250 m",
+       pemain mengira server kosong. Tunda dan ulangi, maksimal 3 kali. */
+    if (VectorSize(px, py, pz) < 60.0 && WorldHintRetry[playerid] < 3)
+    {
+        WorldHintRetry[playerid]++;
+        SetTimerEx("World_NearbyHint_Tick", 1500, false, "i", playerid);
+        return 0;
+    }
+    WorldHintRetry[playerid] = 0;
 
     new lobbyId = Lobby_Of(playerid);
 
@@ -795,7 +841,7 @@ stock World_NearbyHint(playerid)
     format(fuelLine, sizeof(fuelLine), "[SEKITAR] BBM: %s  isi $3/L dengan /isi di pom", pumpPart);
     SendClientMessage(playerid, UI_TEXT_SECONDARY, fuelLine);
 
-    SendClientMessage(playerid, UI_TEXT_MUTED, "[SEKITAR] Ambil peti: jalan mendekat lalu /ambil   Masuk mobil: /lockpick kalau terkunci.");
+    SendClientMessage(playerid, UI_TEXT_MUTED, "[SEKITAR] Ambil peti: /ambil   Mobil: /mobil (spawn 7 m) atau /lockpick kalau terkunci. Cek tampilan: /uicheck");
     return 1;
 }
 

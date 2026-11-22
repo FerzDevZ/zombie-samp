@@ -35,6 +35,20 @@ enum E_LOOT_DROP
 };
 
 new LootDrop[MAX_LOOT_DROPS][E_LOOT_DROP];
+
+/* Dipakai /uicheck: pemain melaporkan "cuma ada lootingan" dan kita butuh
+   angka nyata berapa peti yang benar-benar hidup di sekitar posisi itu. */
+stock LootDrop_CountNear(Float:x, Float:y, Float:radius)
+{
+    new found = 0;
+    for (new slot = 0; slot < MAX_LOOT_DROPS; slot++)
+    {
+        if (!LootDrop[slot][ldActive]) continue;
+        if (VectorSize(x - LootDrop[slot][ldX], y - LootDrop[slot][ldY], 0.0) > radius) continue;
+        found++;
+    }
+    return found;
+}
 new LootDropCount = 0;
 
 /* Kalau meja loot penuh, buang drop paling tua supaya drop baru tidak hilang diam-diam

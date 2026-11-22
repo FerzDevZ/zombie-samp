@@ -459,8 +459,14 @@ public OnPlayerSpawn(playerid)
     // Tas di punggung harus ikut tersinkron setiap spawn (model hilang saat mati).
     Bag_UpdateVisual(playerid);
 
+    // HUD harus tampil lagi setelah respawn: sebagian client membuang
+    // PlayerTextDraw saat pemain mati/ganti karakter.
+    HUD_Reshow(playerid);
+    WorldHintRetry[playerid] = 0;
+
     // Kendaraan pertama dijamin ada di dekat pemain, bukan menunggu undian tick.
     WildVeh_EnsureNearLobby(Lobby_Of(playerid));
+    WildVeh_GuaranteeSpawnCar(playerid);
     SetTimerEx("World_NearbyHint_Tick", 2500, false, "i", playerid);
 
     Menu_Onboarding(playerid);

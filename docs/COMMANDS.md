@@ -112,6 +112,8 @@ Format: `/nama [argumen]` — argumen dalam `<>` wajib, `[]` opsional.
 | `/engine` | Hidupkan/matikan mesin |
 | `/fix` (alias `/repair`) | Perbaiki kendaraan dengan kit |
 | `/tarik` / `/angkut` | Derek / angkut kendaraan |
+| `/mobil` (alias `/car`) | Panggil satu mobil liar 7 meter di depan kalau belum ada kendaraan dalam 40 m |
+| `/hud` | Sembunyikan / tampilkan ulang HUD (HP, kebutuhan, zona, BBM, progres) |
 
 ---
 
@@ -125,6 +127,7 @@ Format: `/nama [argumen]` — argumen dalam `<>` wajib, `[]` opsional.
 | `/compact` | Ringkas tampilan HUD |
 | `/jam` | Waktu server (malam menaikkan spawn zombie) |
 | `/diag` | Diagnostik klien: versi, mapping, build |
+| `/uicheck` | Diagnostik tampilan: HUD aktif/tidak, lobi, virtual world, jumlah mobil di lobi, jarak mobil terdekat, jumlah peti dalam 50 m |
 | `/selftest` | Jalankan selftest internal (36 cek) |
 
 ---
