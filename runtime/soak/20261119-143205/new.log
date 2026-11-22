@@ -1,0 +1,1388 @@
+[14:32:05] [connection] incoming connection: 127.0.0.1:49861 id: 0
+[14:32:06] [connection] incoming connection: 127.0.0.1:56900 id: 1
+[14:32:06] [connection] incoming connection: 127.0.0.1:41230 id: 2
+[14:32:07] [connection] incoming connection: 127.0.0.1:34175 id: 3
+[14:32:07] [connection] incoming connection: 127.0.0.1:58578 id: 4
+[14:32:07] [connection] incoming connection: 127.0.0.1:33558 id: 5
+[14:32:08] [join] LoadBot_001 has joined the server (0:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 0 nick 'LoadBot_001' ip 127.0.0.1
+
+[14:32:08] [2026-11-19 14:32:08][INFO] [AUTH] cek akun nick 'LoadBot_001'
+
+[14:32:08] [connection] incoming connection: 127.0.0.1:42763 id: 6
+[14:32:08] [join] LoadBot_002 has joined the server (1:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 1 nick 'LoadBot_002' ip 127.0.0.1
+
+[14:32:08] [2026-11-19 14:32:08][INFO] [AUTH] cek akun nick 'LoadBot_002'
+
+[14:32:08] [connection] incoming connection: 127.0.0.1:56507 id: 7
+[14:32:08] [npc:join] ls_zm_89071_64734 has joined the server (299:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 299 nick 'ls_zm_89071_64734' ip 127.0.0.1
+
+[14:32:08] [npc:join] ls_zm_89071_29683 has joined the server (298:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 298 nick 'ls_zm_89071_29683' ip 127.0.0.1
+
+[14:32:08] [npc:join] ls_zm_89071_18306 has joined the server (297:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 297 nick 'ls_zm_89071_18306' ip 127.0.0.1
+
+[14:32:08] [npc:join] ls_zm_89072_65327 has joined the server (296:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 296 nick 'ls_zm_89072_65327' ip 127.0.0.1
+
+[14:32:08] [npc:join] ls_zm_89072_62465 has joined the server (295:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 295 nick 'ls_zm_89072_62465' ip 127.0.0.1
+
+[14:32:08] [join] LoadBot_003 has joined the server (2:127.0.0.1)
+[14:32:08] [2026-11-19 14:32:08][INFO] [JOIN] id 2 nick 'LoadBot_003' ip 127.0.0.1
+
+[14:32:08] [2026-11-19 14:32:08][INFO] [AUTH] cek akun nick 'LoadBot_003'
+
+[14:32:09] [connection] incoming connection: 127.0.0.1:48981 id: 8
+[14:32:09] [join] LoadBot_004 has joined the server (3:127.0.0.1)
+[14:32:09] [2026-11-19 14:32:09][INFO] [JOIN] id 3 nick 'LoadBot_004' ip 127.0.0.1
+
+[14:32:09] [2026-11-19 14:32:09][INFO] [AUTH] cek akun nick 'LoadBot_004'
+
+[14:32:09] [connection] incoming connection: 127.0.0.1:59780 id: 9
+[14:32:09] [npc:join] ls_comp_0_89990 has joined the server (294:127.0.0.1)
+[14:32:09] [2026-11-19 14:32:09][INFO] [JOIN] id 294 nick 'ls_comp_0_89990' ip 127.0.0.1
+
+[14:32:09] [join] LoadBot_005 has joined the server (4:127.0.0.1)
+[14:32:09] [2026-11-19 14:32:09][INFO] [JOIN] id 4 nick 'LoadBot_005' ip 127.0.0.1
+
+[14:32:09] [2026-11-19 14:32:09][INFO] [AUTH] cek akun nick 'LoadBot_005'
+
+[14:32:09] [connection] incoming connection: 127.0.0.1:53929 id: 10
+[14:32:10] [npc:join] ls_comp_1_90397 has joined the server (293:127.0.0.1)
+[14:32:10] [2026-11-19 14:32:10][INFO] [JOIN] id 293 nick 'ls_comp_1_90397' ip 127.0.0.1
+
+[14:32:10] [join] LoadBot_006 has joined the server (5:127.0.0.1)
+[14:32:10] [2026-11-19 14:32:10][INFO] [JOIN] id 5 nick 'LoadBot_006' ip 127.0.0.1
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [AUTH] cek akun nick 'LoadBot_006'
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [LOOT] peti lobby=0 zona=1 item=25 jumlah=1
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [LOOT] peti lobby=0 zona=5 item=23 jumlah=1
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [LOOT] peti lobby=0 zona=0 item=1 jumlah=2
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [WILDVEH] lobby=0 model=466 fuel=26.3/60 L locked=0 broken=0
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=0
+
+[14:32:10] [connection] incoming connection: 127.0.0.1:57921 id: 11
+[14:32:10] [npc:join] ls_comp_2_90795 has joined the server (292:127.0.0.1)
+[14:32:10] [2026-11-19 14:32:10][INFO] [JOIN] id 292 nick 'ls_comp_2_90795' ip 127.0.0.1
+
+[14:32:10] [join] LoadBot_007 has joined the server (6:127.0.0.1)
+[14:32:10] [2026-11-19 14:32:10][INFO] [JOIN] id 6 nick 'LoadBot_007' ip 127.0.0.1
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [AUTH] cek akun nick 'LoadBot_007'
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [WILDVEH] lobby=0 model=559 fuel=26.6/70 L locked=1 broken=0
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=1
+
+[14:32:10] [connection] incoming connection: 127.0.0.1:51843 id: 12
+[14:32:10] [npc:join] ls_comp_3_91191 has joined the server (291:127.0.0.1)
+[14:32:10] [2026-11-19 14:32:10][INFO] [JOIN] id 291 nick 'ls_comp_3_91191' ip 127.0.0.1
+
+[14:32:10] [join] LoadBot_008 has joined the server (7:127.0.0.1)
+[14:32:10] [2026-11-19 14:32:10][INFO] [JOIN] id 7 nick 'LoadBot_008' ip 127.0.0.1
+
+[14:32:10] [2026-11-19 14:32:10][INFO] [AUTH] cek akun nick 'LoadBot_008'
+
+[14:32:11] [2026-11-19 14:32:11][INFO] [WILDVEH] lobby=0 model=534 fuel=28.0/70 L locked=0 broken=0
+
+[14:32:11] [2026-11-19 14:32:11][INFO] [WILDVEH] mobil dekat pemain lobby=0 anchor=3
+
+[14:32:11] [connection] incoming connection: 127.0.0.1:57327 id: 13
+[14:32:11] [npc:join] ls_comp_4_91595 has joined the server (290:127.0.0.1)
+[14:32:11] [2026-11-19 14:32:11][INFO] [JOIN] id 290 nick 'ls_comp_4_91595' ip 127.0.0.1
+
+[14:32:11] [join] LoadBot_009 has joined the server (8:127.0.0.1)
+[14:32:11] [2026-11-19 14:32:11][INFO] [JOIN] id 8 nick 'LoadBot_009' ip 127.0.0.1
+
+[14:32:11] [2026-11-19 14:32:11][INFO] [AUTH] cek akun nick 'LoadBot_009'
+
+[14:32:11] [connection] incoming connection: 127.0.0.1:58704 id: 14
+[14:32:11] [npc:join] ls_comp_5_91997 has joined the server (289:127.0.0.1)
+[14:32:11] [2026-11-19 14:32:11][INFO] [JOIN] id 289 nick 'ls_comp_5_91997' ip 127.0.0.1
+
+[14:32:11] [join] LoadBot_010 has joined the server (9:127.0.0.1)
+[14:32:11] [2026-11-19 14:32:11][INFO] [JOIN] id 9 nick 'LoadBot_010' ip 127.0.0.1
+
+[14:32:11] [2026-11-19 14:32:11][INFO] [AUTH] cek akun nick 'LoadBot_010'
+
+[14:32:11] [connection] incoming connection: 127.0.0.1:33421 id: 15
+[14:32:12] [npc:join] ls_comp_6_92399 has joined the server (288:127.0.0.1)
+[14:32:12] [2026-11-19 14:32:12][INFO] [JOIN] id 288 nick 'ls_comp_6_92399' ip 127.0.0.1
+
+[14:32:12] [join] LoadBot_011 has joined the server (10:127.0.0.1)
+[14:32:12] [2026-11-19 14:32:12][INFO] [JOIN] id 10 nick 'LoadBot_011' ip 127.0.0.1
+
+[14:32:12] [2026-11-19 14:32:12][INFO] [AUTH] cek akun nick 'LoadBot_011'
+
+[14:32:12] [connection] incoming connection: 127.0.0.1:33308 id: 16
+[14:32:12] [npc:join] ls_comp_7_92796 has joined the server (287:127.0.0.1)
+[14:32:12] [2026-11-19 14:32:12][INFO] [JOIN] id 287 nick 'ls_comp_7_92796' ip 127.0.0.1
+
+[14:32:12] [join] LoadBot_012 has joined the server (11:127.0.0.1)
+[14:32:12] [2026-11-19 14:32:12][INFO] [JOIN] id 11 nick 'LoadBot_012' ip 127.0.0.1
+
+[14:32:12] [2026-11-19 14:32:12][INFO] [AUTH] cek akun nick 'LoadBot_012'
+
+[14:32:12] [connection] incoming connection: 127.0.0.1:49698 id: 17
+[14:32:12] [npc:join] ls_comp_8_93198 has joined the server (286:127.0.0.1)
+[14:32:12] [2026-11-19 14:32:12][INFO] [JOIN] id 286 nick 'ls_comp_8_93198' ip 127.0.0.1
+
+[14:32:12] [join] LoadBot_013 has joined the server (12:127.0.0.1)
+[14:32:12] [2026-11-19 14:32:12][INFO] [JOIN] id 12 nick 'LoadBot_013' ip 127.0.0.1
+
+[14:32:12] [2026-11-19 14:32:12][INFO] [AUTH] cek akun nick 'LoadBot_013'
+
+[14:32:13] [connection] incoming connection: 127.0.0.1:45781 id: 18
+[14:32:13] [2026-11-19 14:32:13][INFO] [PERF] sync NPC disesuaikan ke 100 ms.
+
+[14:32:13] [npc:join] ls_comp_9_93596 has joined the server (285:127.0.0.1)
+[14:32:13] [2026-11-19 14:32:13][INFO] [JOIN] id 285 nick 'ls_comp_9_93596' ip 127.0.0.1
+
+[14:32:13] [join] LoadBot_014 has joined the server (13:127.0.0.1)
+[14:32:13] [2026-11-19 14:32:13][INFO] [JOIN] id 13 nick 'LoadBot_014' ip 127.0.0.1
+
+[14:32:13] [2026-11-19 14:32:13][INFO] [AUTH] cek akun nick 'LoadBot_014'
+
+[14:32:13] [connection] incoming connection: 127.0.0.1:54419 id: 19
+[14:32:13] [npc:join] ls_comp_10_93995 has joined the server (284:127.0.0.1)
+[14:32:13] [2026-11-19 14:32:13][INFO] [JOIN] id 284 nick 'ls_comp_10_93995' ip 127.0.0.1
+
+[14:32:13] [join] LoadBot_015 has joined the server (14:127.0.0.1)
+[14:32:13] [2026-11-19 14:32:13][INFO] [JOIN] id 14 nick 'LoadBot_015' ip 127.0.0.1
+
+[14:32:13] [2026-11-19 14:32:13][INFO] [AUTH] cek akun nick 'LoadBot_015'
+
+[14:32:13] [connection] incoming connection: 127.0.0.1:57397 id: 20
+[14:32:14] [npc:join] ls_zm_94357_74052 has joined the server (283:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 283 nick 'ls_zm_94357_74052' ip 127.0.0.1
+
+[14:32:14] [npc:join] ls_zm_94358_94269 has joined the server (282:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 282 nick 'ls_zm_94358_94269' ip 127.0.0.1
+
+[14:32:14] [npc:join] ls_zm_94358_7571 has joined the server (281:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 281 nick 'ls_zm_94358_7571' ip 127.0.0.1
+
+[14:32:14] [npc:join] ls_zm_94358_27254 has joined the server (280:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 280 nick 'ls_zm_94358_27254' ip 127.0.0.1
+
+[14:32:14] [npc:join] ls_zm_94359_22969 has joined the server (279:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 279 nick 'ls_zm_94359_22969' ip 127.0.0.1
+
+[14:32:14] [npc:join] ls_comp_11_94396 has joined the server (278:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 278 nick 'ls_comp_11_94396' ip 127.0.0.1
+
+[14:32:14] [join] LoadBot_016 has joined the server (15:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 15 nick 'LoadBot_016' ip 127.0.0.1
+
+[14:32:14] [2026-11-19 14:32:14][INFO] [AUTH] cek akun nick 'LoadBot_016'
+
+[14:32:14] [connection] incoming connection: 127.0.0.1:58115 id: 21
+[14:32:14] [npc:join] ls_comp_12_94801 has joined the server (277:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 277 nick 'ls_comp_12_94801' ip 127.0.0.1
+
+[14:32:14] [join] LoadBot_017 has joined the server (16:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 16 nick 'LoadBot_017' ip 127.0.0.1
+
+[14:32:14] [2026-11-19 14:32:14][INFO] [AUTH] cek akun nick 'LoadBot_017'
+
+[14:32:14] [connection] incoming connection: 127.0.0.1:44501 id: 22
+[14:32:14] [npc:join] ls_comp_13_95198 has joined the server (276:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 276 nick 'ls_comp_13_95198' ip 127.0.0.1
+
+[14:32:14] [join] LoadBot_018 has joined the server (17:127.0.0.1)
+[14:32:14] [2026-11-19 14:32:14][INFO] [JOIN] id 17 nick 'LoadBot_018' ip 127.0.0.1
+
+[14:32:14] [2026-11-19 14:32:14][INFO] [AUTH] cek akun nick 'LoadBot_018'
+
+[14:32:15] [connection] incoming connection: 127.0.0.1:34452 id: 23
+[14:32:15] [npc:join] ls_comp_14_95604 has joined the server (275:127.0.0.1)
+[14:32:15] [2026-11-19 14:32:15][INFO] [JOIN] id 275 nick 'ls_comp_14_95604' ip 127.0.0.1
+
+[14:32:15] [join] LoadBot_019 has joined the server (18:127.0.0.1)
+[14:32:15] [2026-11-19 14:32:15][INFO] [JOIN] id 18 nick 'LoadBot_019' ip 127.0.0.1
+
+[14:32:15] [2026-11-19 14:32:15][INFO] [AUTH] cek akun nick 'LoadBot_019'
+
+[14:32:15] [connection] incoming connection: 127.0.0.1:37706 id: 24
+[14:32:15] [npc:join] ls_comp_15_95999 has joined the server (274:127.0.0.1)
+[14:32:15] [2026-11-19 14:32:15][INFO] [JOIN] id 274 nick 'ls_comp_15_95999' ip 127.0.0.1
+
+[14:32:15] [connection] incoming connection: 127.0.0.1:52568 id: 25
+[14:32:16] [npc:join] ls_comp_16_96399 has joined the server (273:127.0.0.1)
+[14:32:16] [2026-11-19 14:32:16][INFO] [JOIN] id 273 nick 'ls_comp_16_96399' ip 127.0.0.1
+
+[14:32:16] [join] LoadBot_021 has joined the server (20:127.0.0.1)
+[14:32:16] [2026-11-19 14:32:16][INFO] [JOIN] id 20 nick 'LoadBot_021' ip 127.0.0.1
+
+[14:32:16] [2026-11-19 14:32:16][INFO] [AUTH] cek akun nick 'LoadBot_021'
+
+[14:32:16] [connection] incoming connection: 127.0.0.1:33673 id: 26
+[14:32:16] [npc:join] ls_comp_17_96797 has joined the server (272:127.0.0.1)
+[14:32:16] [2026-11-19 14:32:16][INFO] [JOIN] id 272 nick 'ls_comp_17_96797' ip 127.0.0.1
+
+[14:32:16] [join] LoadBot_022 has joined the server (21:127.0.0.1)
+[14:32:16] [2026-11-19 14:32:16][INFO] [JOIN] id 21 nick 'LoadBot_022' ip 127.0.0.1
+
+[14:32:16] [2026-11-19 14:32:16][INFO] [AUTH] cek akun nick 'LoadBot_022'
+
+[14:32:16] [connection] incoming connection: 127.0.0.1:38652 id: 27
+[14:32:16] [npc:join] ls_comp_18_97202 has joined the server (271:127.0.0.1)
+[14:32:16] [2026-11-19 14:32:16][INFO] [JOIN] id 271 nick 'ls_comp_18_97202' ip 127.0.0.1
+
+[14:32:16] [join] LoadBot_023 has joined the server (22:127.0.0.1)
+[14:32:16] [2026-11-19 14:32:16][INFO] [JOIN] id 22 nick 'LoadBot_023' ip 127.0.0.1
+
+[14:32:16] [2026-11-19 14:32:16][INFO] [AUTH] cek akun nick 'LoadBot_023'
+
+[14:32:17] [connection] incoming connection: 127.0.0.1:35453 id: 28
+[14:32:17] [join] LoadBot_024 has joined the server (23:127.0.0.1)
+[14:32:17] [2026-11-19 14:32:17][INFO] [JOIN] id 23 nick 'LoadBot_024' ip 127.0.0.1
+
+[14:32:17] [2026-11-19 14:32:17][INFO] [AUTH] cek akun nick 'LoadBot_024'
+
+[14:32:17] [connection] incoming connection: 127.0.0.1:53277 id: 29
+[14:32:17] [npc:join] ls_comp_20_98000 has joined the server (270:127.0.0.1)
+[14:32:17] [2026-11-19 14:32:17][INFO] [JOIN] id 270 nick 'ls_comp_20_98000' ip 127.0.0.1
+
+[14:32:17] [join] LoadBot_025 has joined the server (24:127.0.0.1)
+[14:32:17] [2026-11-19 14:32:17][INFO] [JOIN] id 24 nick 'LoadBot_025' ip 127.0.0.1
+
+[14:32:17] [2026-11-19 14:32:17][INFO] [AUTH] cek akun nick 'LoadBot_025'
+
+[14:32:17] [connection] incoming connection: 127.0.0.1:54055 id: 30
+[14:32:18] [join] LoadBot_026 has joined the server (25:127.0.0.1)
+[14:32:18] [2026-11-19 14:32:18][INFO] [JOIN] id 25 nick 'LoadBot_026' ip 127.0.0.1
+
+[14:32:18] [2026-11-19 14:32:18][INFO] [AUTH] cek akun nick 'LoadBot_026'
+
+[14:32:18] [npc:join] ls_comp_21_98433 has joined the server (269:127.0.0.1)
+[14:32:18] [2026-11-19 14:32:18][INFO] [JOIN] id 269 nick 'ls_comp_21_98433' ip 127.0.0.1
+
+[14:32:18] [connection] incoming connection: 127.0.0.1:51890 id: 31
+[14:32:18] [join] LoadBot_027 has joined the server (26:127.0.0.1)
+[14:32:18] [2026-11-19 14:32:18][INFO] [JOIN] id 26 nick 'LoadBot_027' ip 127.0.0.1
+
+[14:32:18] [2026-11-19 14:32:18][INFO] [AUTH] cek akun nick 'LoadBot_027'
+
+[14:32:18] [npc:join] ls_comp_22_98835 has joined the server (268:127.0.0.1)
+[14:32:18] [2026-11-19 14:32:18][INFO] [JOIN] id 268 nick 'ls_comp_22_98835' ip 127.0.0.1
+
+[14:32:18] [connection] incoming connection: 127.0.0.1:38377 id: 32
+[14:32:18] [join] LoadBot_028 has joined the server (27:127.0.0.1)
+[14:32:18] [2026-11-19 14:32:18][INFO] [JOIN] id 27 nick 'LoadBot_028' ip 127.0.0.1
+
+[14:32:18] [2026-11-19 14:32:18][INFO] [AUTH] cek akun nick 'LoadBot_028'
+
+[14:32:18] [npc:join] ls_comp_23_99231 has joined the server (267:127.0.0.1)
+[14:32:18] [2026-11-19 14:32:18][INFO] [JOIN] id 267 nick 'ls_comp_23_99231' ip 127.0.0.1
+
+[14:32:19] [connection] incoming connection: 127.0.0.1:42998 id: 33
+[14:32:19] [join] LoadBot_029 has joined the server (28:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 28 nick 'LoadBot_029' ip 127.0.0.1
+
+[14:32:19] [2026-11-19 14:32:19][INFO] [AUTH] cek akun nick 'LoadBot_029'
+
+[14:32:19] [npc:join] ls_comp_24_99639 has joined the server (266:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 266 nick 'ls_comp_24_99639' ip 127.0.0.1
+
+[14:32:19] [npc:join] ls_zm_99697_27319 has joined the server (265:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 265 nick 'ls_zm_99697_27319' ip 127.0.0.1
+
+[14:32:19] [npc:join] ls_zm_99698_17436 has joined the server (264:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 264 nick 'ls_zm_99698_17436' ip 127.0.0.1
+
+[14:32:19] [npc:join] ls_zm_99698_1422 has joined the server (263:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 263 nick 'ls_zm_99698_1422' ip 127.0.0.1
+
+[14:32:19] [npc:join] ls_zm_99698_33238 has joined the server (262:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 262 nick 'ls_zm_99698_33238' ip 127.0.0.1
+
+[14:32:19] [npc:join] ls_zm_99699_36264 has joined the server (261:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 261 nick 'ls_zm_99699_36264' ip 127.0.0.1
+
+[14:32:19] [connection] incoming connection: 127.0.0.1:43168 id: 34
+[14:32:19] [join] LoadBot_030 has joined the server (29:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 29 nick 'LoadBot_030' ip 127.0.0.1
+
+[14:32:19] [2026-11-19 14:32:19][INFO] [AUTH] cek akun nick 'LoadBot_030'
+
+[14:32:19] [npc:join] ls_comp_25_100034 has joined the server (260:127.0.0.1)
+[14:32:19] [2026-11-19 14:32:19][INFO] [JOIN] id 260 nick 'ls_comp_25_100034' ip 127.0.0.1
+
+[14:32:19] [connection] incoming connection: 127.0.0.1:59527 id: 35
+[14:32:20] [join] LoadBot_031 has joined the server (30:127.0.0.1)
+[14:32:20] [2026-11-19 14:32:20][INFO] [JOIN] id 30 nick 'LoadBot_031' ip 127.0.0.1
+
+[14:32:20] [2026-11-19 14:32:20][INFO] [AUTH] cek akun nick 'LoadBot_031'
+
+[14:32:20] [npc:join] ls_comp_26_100436 has joined the server (259:127.0.0.1)
+[14:32:20] [2026-11-19 14:32:20][INFO] [JOIN] id 259 nick 'ls_comp_26_100436' ip 127.0.0.1
+
+[14:32:20] [connection] incoming connection: 127.0.0.1:37673 id: 36
+[14:32:20] [npc:join] ls_comp_27_100810 has joined the server (258:127.0.0.1)
+[14:32:20] [2026-11-19 14:32:20][INFO] [JOIN] id 258 nick 'ls_comp_27_100810' ip 127.0.0.1
+
+[14:32:20] [join] LoadBot_032 has joined the server (31:127.0.0.1)
+[14:32:20] [2026-11-19 14:32:20][INFO] [JOIN] id 31 nick 'LoadBot_032' ip 127.0.0.1
+
+[14:32:20] [2026-11-19 14:32:20][INFO] [AUTH] cek akun nick 'LoadBot_032'
+
+[14:32:20] [connection] incoming connection: 127.0.0.1:37904 id: 37
+[14:32:20] [npc:join] ls_comp_28_101207 has joined the server (257:127.0.0.1)
+[14:32:20] [2026-11-19 14:32:20][INFO] [JOIN] id 257 nick 'ls_comp_28_101207' ip 127.0.0.1
+
+[14:32:20] [join] LoadBot_033 has joined the server (32:127.0.0.1)
+[14:32:20] [2026-11-19 14:32:20][INFO] [JOIN] id 32 nick 'LoadBot_033' ip 127.0.0.1
+
+[14:32:20] [2026-11-19 14:32:20][INFO] [AUTH] cek akun nick 'LoadBot_033'
+
+[14:32:21] [connection] incoming connection: 127.0.0.1:56312 id: 38
+[14:32:21] [npc:join] ls_comp_29_101626 has joined the server (256:127.0.0.1)
+[14:32:21] [2026-11-19 14:32:21][INFO] [JOIN] id 256 nick 'ls_comp_29_101626' ip 127.0.0.1
+
+[14:32:21] [join] LoadBot_034 has joined the server (33:127.0.0.1)
+[14:32:21] [2026-11-19 14:32:21][INFO] [JOIN] id 33 nick 'LoadBot_034' ip 127.0.0.1
+
+[14:32:21] [2026-11-19 14:32:21][INFO] [AUTH] cek akun nick 'LoadBot_034'
+
+[14:32:21] [connection] incoming connection: 127.0.0.1:59766 id: 39
+[14:32:21] [npc:join] ls_comp_30_102019 has joined the server (255:127.0.0.1)
+[14:32:21] [2026-11-19 14:32:21][INFO] [JOIN] id 255 nick 'ls_comp_30_102019' ip 127.0.0.1
+
+[14:32:21] [join] LoadBot_035 has joined the server (34:127.0.0.1)
+[14:32:21] [2026-11-19 14:32:21][INFO] [JOIN] id 34 nick 'LoadBot_035' ip 127.0.0.1
+
+[14:32:21] [2026-11-19 14:32:21][INFO] [AUTH] cek akun nick 'LoadBot_035'
+
+[14:32:21] [connection] incoming connection: 127.0.0.1:48510 id: 40
+[14:32:22] [npc:join] ls_comp_31_102439 has joined the server (254:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 254 nick 'ls_comp_31_102439' ip 127.0.0.1
+
+[14:32:22] [join] LoadBot_036 has joined the server (35:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 35 nick 'LoadBot_036' ip 127.0.0.1
+
+[14:32:22] [2026-11-19 14:32:22][INFO] [AUTH] cek akun nick 'LoadBot_036'
+
+[14:32:22] [connection] incoming connection: 127.0.0.1:33532 id: 41
+[14:32:22] [npc:join] ls_zm_102771_7953 has joined the server (253:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 253 nick 'ls_zm_102771_7953' ip 127.0.0.1
+
+[14:32:22] [npc:join] ls_zm_102771_3866 has joined the server (252:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 252 nick 'ls_zm_102771_3866' ip 127.0.0.1
+
+[14:32:22] [npc:join] ls_zm_102772_57017 has joined the server (251:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 251 nick 'ls_zm_102772_57017' ip 127.0.0.1
+
+[14:32:22] [npc:join] ls_comp_32_102831 has joined the server (250:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 250 nick 'ls_comp_32_102831' ip 127.0.0.1
+
+[14:32:22] [join] LoadBot_037 has joined the server (36:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 36 nick 'LoadBot_037' ip 127.0.0.1
+
+[14:32:22] [2026-11-19 14:32:22][INFO] [AUTH] cek akun nick 'LoadBot_037'
+
+[14:32:22] [connection] incoming connection: 127.0.0.1:58842 id: 42
+[14:32:22] [join] LoadBot_038 has joined the server (37:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 37 nick 'LoadBot_038' ip 127.0.0.1
+
+[14:32:22] [2026-11-19 14:32:22][INFO] [AUTH] cek akun nick 'LoadBot_038'
+
+[14:32:22] [npc:join] ls_comp_33_103257 has joined the server (249:127.0.0.1)
+[14:32:22] [2026-11-19 14:32:22][INFO] [JOIN] id 249 nick 'ls_comp_33_103257' ip 127.0.0.1
+
+[14:32:23] [connection] incoming connection: 127.0.0.1:38897 id: 43
+[14:32:23] [2026-11-19 14:32:23][INFO] [LOOT] peti dekat pemain lobby=0 anchor=32 item=9 jumlah=2
+
+[14:32:23] [npc:join] ls_comp_34_103661 has joined the server (248:127.0.0.1)
+[14:32:23] [2026-11-19 14:32:23][INFO] [JOIN] id 248 nick 'ls_comp_34_103661' ip 127.0.0.1
+
+[14:32:23] [join] LoadBot_039 has joined the server (38:127.0.0.1)
+[14:32:23] [2026-11-19 14:32:23][INFO] [JOIN] id 38 nick 'LoadBot_039' ip 127.0.0.1
+
+[14:32:23] [2026-11-19 14:32:23][INFO] [AUTH] cek akun nick 'LoadBot_039'
+
+[14:32:23] [connection] incoming connection: 127.0.0.1:36917 id: 19
+[14:32:23] [join] LoadBot_040 has joined the server (39:127.0.0.1)
+[14:32:23] [2026-11-19 14:32:23][INFO] [JOIN] id 39 nick 'LoadBot_040' ip 127.0.0.1
+
+[14:32:23] [2026-11-19 14:32:23][INFO] [AUTH] cek akun nick 'LoadBot_040'
+
+[14:32:24] [npc:join] ls_comp_35_104267 has joined the server (247:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 247 nick 'ls_comp_35_104267' ip 127.0.0.1
+
+[14:32:24] [connection] incoming connection: 127.0.0.1:41401 id: 44
+[14:32:24] [npc:join] ls_comp_36_104541 has joined the server (246:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 246 nick 'ls_comp_36_104541' ip 127.0.0.1
+
+[14:32:24] [join] LoadBot_041 has joined the server (40:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 40 nick 'LoadBot_041' ip 127.0.0.1
+
+[14:32:24] [2026-11-19 14:32:24][INFO] [AUTH] cek akun nick 'LoadBot_041'
+
+[14:32:24] [join] LoadBot_042 has joined the server (41:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 41 nick 'LoadBot_042' ip 127.0.0.1
+
+[14:32:24] [2026-11-19 14:32:24][INFO] [AUTH] cek akun nick 'LoadBot_042'
+
+[14:32:24] [npc:join] ls_comp_37_104942 has joined the server (245:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 245 nick 'ls_comp_37_104942' ip 127.0.0.1
+
+[14:32:24] [connection] incoming connection: 127.0.0.1:50171 id: 45
+[14:32:24] [npc:join] ls_zm_105090_84562 has joined the server (244:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 244 nick 'ls_zm_105090_84562' ip 127.0.0.1
+
+[14:32:24] [npc:join] ls_zm_105090_47512 has joined the server (243:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 243 nick 'ls_zm_105090_47512' ip 127.0.0.1
+
+[14:32:24] [npc:join] ls_zm_105091_88341 has joined the server (242:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 242 nick 'ls_zm_105091_88341' ip 127.0.0.1
+
+[14:32:24] [npc:join] ls_zm_105091_19520 has joined the server (241:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 241 nick 'ls_zm_105091_19520' ip 127.0.0.1
+
+[14:32:24] [npc:join] ls_zm_105091_85259 has joined the server (240:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 240 nick 'ls_zm_105091_85259' ip 127.0.0.1
+
+[14:32:24] [npc:join] ls_zm_105092_14443 has joined the server (239:127.0.0.1)
+[14:32:24] [2026-11-19 14:32:24][INFO] [JOIN] id 239 nick 'ls_zm_105092_14443' ip 127.0.0.1
+
+[14:32:25] [join] LoadBot_043 has joined the server (42:127.0.0.1)
+[14:32:25] [2026-11-19 14:32:25][INFO] [JOIN] id 42 nick 'LoadBot_043' ip 127.0.0.1
+
+[14:32:25] [2026-11-19 14:32:25][INFO] [AUTH] cek akun nick 'LoadBot_043'
+
+[14:32:25] [npc:join] ls_comp_38_105465 has joined the server (238:127.0.0.1)
+[14:32:25] [2026-11-19 14:32:25][INFO] [JOIN] id 238 nick 'ls_comp_38_105465' ip 127.0.0.1
+
+[14:32:25] [connection] incoming connection: 127.0.0.1:40812 id: 46
+[14:32:25] [join] LoadBot_044 has joined the server (43:127.0.0.1)
+[14:32:25] [2026-11-19 14:32:25][INFO] [JOIN] id 43 nick 'LoadBot_044' ip 127.0.0.1
+
+[14:32:25] [2026-11-19 14:32:25][INFO] [AUTH] cek akun nick 'LoadBot_044'
+
+[14:32:25] [npc:join] ls_comp_39_105874 has joined the server (237:127.0.0.1)
+[14:32:25] [2026-11-19 14:32:25][INFO] [JOIN] id 237 nick 'ls_comp_39_105874' ip 127.0.0.1
+
+[14:32:25] [connection] incoming connection: 127.0.0.1:38431 id: 47
+[14:32:26] [npc:join] ls_comp_40_106338 has joined the server (236:127.0.0.1)
+[14:32:26] [2026-11-19 14:32:26][INFO] [JOIN] id 236 nick 'ls_comp_40_106338' ip 127.0.0.1
+
+[14:32:26] [join] LoadBot_045 has joined the server (19:127.0.0.1)
+[14:32:26] [2026-11-19 14:32:26][INFO] [JOIN] id 19 nick 'LoadBot_045' ip 127.0.0.1
+
+[14:32:26] [2026-11-19 14:32:26][INFO] [AUTH] cek akun nick 'LoadBot_045'
+
+[14:32:26] [connection] incoming connection: 127.0.0.1:44040 id: 48
+[14:32:26] [join] LoadBot_046 has joined the server (44:127.0.0.1)
+[14:32:26] [2026-11-19 14:32:26][INFO] [JOIN] id 44 nick 'LoadBot_046' ip 127.0.0.1
+
+[14:32:26] [2026-11-19 14:32:26][INFO] [AUTH] cek akun nick 'LoadBot_046'
+
+[14:32:26] [npc:join] ls_comp_41_106699 has joined the server (235:127.0.0.1)
+[14:32:26] [2026-11-19 14:32:26][INFO] [JOIN] id 235 nick 'ls_comp_41_106699' ip 127.0.0.1
+
+[14:32:26] [connection] incoming connection: 127.0.0.1:51686 id: 49
+[14:32:26] [npc:join] ls_comp_42_107125 has joined the server (234:127.0.0.1)
+[14:32:26] [2026-11-19 14:32:26][INFO] [JOIN] id 234 nick 'ls_comp_42_107125' ip 127.0.0.1
+
+[14:32:27] [connection] incoming connection: 127.0.0.1:48836 id: 50
+[14:32:27] [join] LoadBot_047 has joined the server (45:127.0.0.1)
+[14:32:27] [2026-11-19 14:32:27][INFO] [JOIN] id 45 nick 'LoadBot_047' ip 127.0.0.1
+
+[14:32:27] [2026-11-19 14:32:27][INFO] [AUTH] cek akun nick 'LoadBot_047'
+
+[14:32:27] [npc:join] ls_comp_43_107613 has joined the server (233:127.0.0.1)
+[14:32:27] [2026-11-19 14:32:27][INFO] [JOIN] id 233 nick 'ls_comp_43_107613' ip 127.0.0.1
+
+[14:32:27] [2026-11-19 14:32:27][INFO] [WILDVEH] lobby=0 model=540 fuel=14.4/80 L locked=1 broken=0
+
+[14:32:27] [2026-11-19 14:32:27][INFO] [LOOT] peti lobby=0 zona=3 item=1 jumlah=2
+
+[14:32:27] [2026-11-19 14:32:27][INFO] [LOOT] peti dekat pemain lobby=0 anchor=16 item=2 jumlah=2
+
+[14:32:27] [connection] incoming connection: 127.0.0.1:35982 id: 51
+[14:32:27] [join] LoadBot_048 has joined the server (46:127.0.0.1)
+[14:32:27] [2026-11-19 14:32:27][INFO] [JOIN] id 46 nick 'LoadBot_048' ip 127.0.0.1
+
+[14:32:27] [2026-11-19 14:32:27][INFO] [AUTH] cek akun nick 'LoadBot_048'
+
+[14:32:28] [npc:join] ls_comp_19_108346 has joined the server (232:127.0.0.1)
+[14:32:28] [2026-11-19 14:32:28][INFO] [JOIN] id 232 nick 'ls_comp_19_108346' ip 127.0.0.1
+
+[14:32:28] [connection] incoming connection: 127.0.0.1:58796 id: 52
+[14:32:28] [npc:join] ls_comp_44_108672 has joined the server (231:127.0.0.1)
+[14:32:28] [2026-11-19 14:32:28][INFO] [JOIN] id 231 nick 'ls_comp_44_108672' ip 127.0.0.1
+
+[14:32:28] [join] LoadBot_049 has joined the server (47:127.0.0.1)
+[14:32:28] [2026-11-19 14:32:28][INFO] [JOIN] id 47 nick 'LoadBot_049' ip 127.0.0.1
+
+[14:32:28] [2026-11-19 14:32:28][INFO] [AUTH] cek akun nick 'LoadBot_049'
+
+[14:32:28] [connection] incoming connection: 127.0.0.1:41479 id: 53
+[14:32:29] [connection] incoming connection: 127.0.0.1:48756 id: 54
+[14:32:29] [npc:join] ls_comp_45_109398 has joined the server (230:127.0.0.1)
+[14:32:29] [2026-11-19 14:32:29][INFO] [JOIN] id 230 nick 'ls_comp_45_109398' ip 127.0.0.1
+
+[14:32:29] [join] LoadBot_050 has joined the server (48:127.0.0.1)
+[14:32:29] [2026-11-19 14:32:29][INFO] [JOIN] id 48 nick 'LoadBot_050' ip 127.0.0.1
+
+[14:32:29] [2026-11-19 14:32:29][INFO] [AUTH] cek akun nick 'LoadBot_050'
+
+[14:32:29] [npc:join] ls_comp_46_109913 has joined the server (229:127.0.0.1)
+[14:32:29] [2026-11-19 14:32:29][INFO] [JOIN] id 229 nick 'ls_comp_46_109913' ip 127.0.0.1
+
+[14:32:29] [join] LoadBot_052 has joined the server (50:127.0.0.1)
+[14:32:29] [2026-11-19 14:32:29][INFO] [JOIN] id 50 nick 'LoadBot_052' ip 127.0.0.1
+
+[14:32:29] [2026-11-19 14:32:29][INFO] [AUTH] cek akun nick 'LoadBot_052'
+
+[14:32:29] [join] LoadBot_051 has joined the server (49:127.0.0.1)
+[14:32:29] [2026-11-19 14:32:29][INFO] [JOIN] id 49 nick 'LoadBot_051' ip 127.0.0.1
+
+[14:32:29] [2026-11-19 14:32:29][INFO] [AUTH] cek akun nick 'LoadBot_051'
+
+[14:32:29] [connection] incoming connection: 127.0.0.1:42124 id: 55
+[14:32:30] [npc:join] ls_zm_110530_46757 has joined the server (228:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 228 nick 'ls_zm_110530_46757' ip 127.0.0.1
+
+[14:32:30] [npc:join] ls_zm_110531_40961 has joined the server (227:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 227 nick 'ls_zm_110531_40961' ip 127.0.0.1
+
+[14:32:30] [npc:join] ls_zm_110531_28797 has joined the server (226:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 226 nick 'ls_zm_110531_28797' ip 127.0.0.1
+
+[14:32:30] [npc:join] ls_zm_110531_2108 has joined the server (225:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 225 nick 'ls_zm_110531_2108' ip 127.0.0.1
+
+[14:32:30] [npc:join] ls_zm_110532_57366 has joined the server (224:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 224 nick 'ls_zm_110532_57366' ip 127.0.0.1
+
+[14:32:30] [connection] incoming connection: 127.0.0.1:37414 id: 56
+[14:32:30] [join] LoadBot_053 has joined the server (51:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 51 nick 'LoadBot_053' ip 127.0.0.1
+
+[14:32:30] [2026-11-19 14:32:30][INFO] [AUTH] cek akun nick 'LoadBot_053'
+
+[14:32:30] [npc:join] ls_comp_47_110931 has joined the server (223:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 223 nick 'ls_comp_47_110931' ip 127.0.0.1
+
+[14:32:30] [join] LoadBot_054 has joined the server (52:127.0.0.1)
+[14:32:30] [2026-11-19 14:32:30][INFO] [JOIN] id 52 nick 'LoadBot_054' ip 127.0.0.1
+
+[14:32:30] [2026-11-19 14:32:30][INFO] [AUTH] cek akun nick 'LoadBot_054'
+
+[14:32:31] [npc:join] ls_comp_48_111435 has joined the server (222:127.0.0.1)
+[14:32:31] [2026-11-19 14:32:31][INFO] [JOIN] id 222 nick 'ls_comp_48_111435' ip 127.0.0.1
+
+[14:32:31] [join] LoadBot_055 has joined the server (53:127.0.0.1)
+[14:32:31] [2026-11-19 14:32:31][INFO] [JOIN] id 53 nick 'LoadBot_055' ip 127.0.0.1
+
+[14:32:31] [2026-11-19 14:32:31][INFO] [AUTH] cek akun nick 'LoadBot_055'
+
+[14:32:31] [npc:join] ls_comp_49_111922 has joined the server (221:127.0.0.1)
+[14:32:31] [2026-11-19 14:32:31][INFO] [JOIN] id 221 nick 'ls_comp_49_111922' ip 127.0.0.1
+
+[14:32:31] [connection] incoming connection: 127.0.0.1:44247 id: 57
+[14:32:31] [npc:join] ls_comp_50_112044 has joined the server (220:127.0.0.1)
+[14:32:31] [2026-11-19 14:32:31][INFO] [JOIN] id 220 nick 'ls_comp_50_112044' ip 127.0.0.1
+
+[14:32:31] [join] LoadBot_056 has joined the server (54:127.0.0.1)
+[14:32:31] [2026-11-19 14:32:31][INFO] [JOIN] id 54 nick 'LoadBot_056' ip 127.0.0.1
+
+[14:32:31] [2026-11-19 14:32:31][INFO] [AUTH] cek akun nick 'LoadBot_056'
+
+[14:32:31] [connection] incoming connection: 127.0.0.1:45515 id: 58
+[14:32:32] [npc:join] ls_comp_51_112785 has joined the server (219:127.0.0.1)
+[14:32:32] [2026-11-19 14:32:32][INFO] [JOIN] id 219 nick 'ls_comp_51_112785' ip 127.0.0.1
+
+[14:32:32] [join] LoadBot_057 has joined the server (55:127.0.0.1)
+[14:32:32] [2026-11-19 14:32:32][INFO] [JOIN] id 55 nick 'LoadBot_057' ip 127.0.0.1
+
+[14:32:32] [2026-11-19 14:32:32][INFO] [AUTH] cek akun nick 'LoadBot_057'
+
+[14:32:32] [connection] incoming connection: 127.0.0.1:45187 id: 59
+[14:32:33] [npc:join] ls_comp_52_113409 has joined the server (218:127.0.0.1)
+[14:32:33] [2026-11-19 14:32:33][INFO] [JOIN] id 218 nick 'ls_comp_52_113409' ip 127.0.0.1
+
+[14:32:33] [npc:join] ls_comp_53_113506 has joined the server (217:127.0.0.1)
+[14:32:33] [2026-11-19 14:32:33][INFO] [JOIN] id 217 nick 'ls_comp_53_113506' ip 127.0.0.1
+
+[14:32:33] [connection] incoming connection: 127.0.0.1:48522 id: 60
+[14:32:33] [connection] incoming connection: 127.0.0.1:40027 id: 61
+[14:32:33] [join] LoadBot_058 has joined the server (56:127.0.0.1)
+[14:32:33] [2026-11-19 14:32:33][INFO] [JOIN] id 56 nick 'LoadBot_058' ip 127.0.0.1
+
+[14:32:33] [2026-11-19 14:32:33][INFO] [AUTH] cek akun nick 'LoadBot_058'
+
+[14:32:33] [connection] incoming connection: 127.0.0.1:33595 id: 62
+[14:32:34] [npc:join] ls_comp_55_114676 has joined the server (216:127.0.0.1)
+[14:32:34] [2026-11-19 14:32:34][INFO] [JOIN] id 216 nick 'ls_comp_55_114676' ip 127.0.0.1
+
+[14:32:34] [npc:join] ls_comp_54_114704 has joined the server (215:127.0.0.1)
+[14:32:34] [2026-11-19 14:32:34][INFO] [JOIN] id 215 nick 'ls_comp_54_114704' ip 127.0.0.1
+
+[14:32:34] [join] LoadBot_059 has joined the server (57:127.0.0.1)
+[14:32:34] [2026-11-19 14:32:34][INFO] [JOIN] id 57 nick 'LoadBot_059' ip 127.0.0.1
+
+[14:32:34] [2026-11-19 14:32:34][INFO] [AUTH] cek akun nick 'LoadBot_059'
+
+[14:32:35] [connection] incoming connection: 127.0.0.1:39868 id: 63
+[14:32:35] [join] LoadBot_060 has joined the server (58:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 58 nick 'LoadBot_060' ip 127.0.0.1
+
+[14:32:35] [2026-11-19 14:32:35][INFO] [AUTH] cek akun nick 'LoadBot_060'
+
+[14:32:35] [npc:join] ls_comp_56_115613 has joined the server (214:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 214 nick 'ls_comp_56_115613' ip 127.0.0.1
+
+[14:32:35] [connection] incoming connection: 127.0.0.1:47120 id: 64
+[14:32:35] [npc:join] ls_zm_116013_26749 has joined the server (213:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 213 nick 'ls_zm_116013_26749' ip 127.0.0.1
+
+[14:32:35] [npc:join] ls_zm_116014_31765 has joined the server (212:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 212 nick 'ls_zm_116014_31765' ip 127.0.0.1
+
+[14:32:35] [npc:join] ls_zm_116014_66552 has joined the server (211:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 211 nick 'ls_zm_116014_66552' ip 127.0.0.1
+
+[14:32:35] [npc:join] ls_zm_116014_54263 has joined the server (210:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 210 nick 'ls_zm_116014_54263' ip 127.0.0.1
+
+[14:32:35] [npc:join] ls_zm_116015_61555 has joined the server (209:127.0.0.1)
+[14:32:35] [2026-11-19 14:32:35][INFO] [JOIN] id 209 nick 'ls_zm_116015_61555' ip 127.0.0.1
+
+[14:32:35] [connection] incoming connection: 127.0.0.1:51454 id: 65
+[14:32:36] [join] LoadBot_061 has joined the server (59:127.0.0.1)
+[14:32:36] [2026-11-19 14:32:36][INFO] [JOIN] id 59 nick 'LoadBot_061' ip 127.0.0.1
+
+[14:32:36] [2026-11-19 14:32:36][INFO] [AUTH] cek akun nick 'LoadBot_061'
+
+[14:32:36] [join] LoadBot_063 has joined the server (61:127.0.0.1)
+[14:32:36] [2026-11-19 14:32:36][INFO] [JOIN] id 61 nick 'LoadBot_063' ip 127.0.0.1
+
+[14:32:36] [2026-11-19 14:32:36][INFO] [AUTH] cek akun nick 'LoadBot_063'
+
+[14:32:36] [join] LoadBot_062 has joined the server (60:127.0.0.1)
+[14:32:36] [2026-11-19 14:32:36][INFO] [JOIN] id 60 nick 'LoadBot_062' ip 127.0.0.1
+
+[14:32:36] [2026-11-19 14:32:36][INFO] [AUTH] cek akun nick 'LoadBot_062'
+
+[14:32:36] [npc:join] ls_comp_57_117050 has joined the server (208:127.0.0.1)
+[14:32:36] [2026-11-19 14:32:36][INFO] [JOIN] id 208 nick 'ls_comp_57_117050' ip 127.0.0.1
+
+[14:32:36] [join] LoadBot_064 has joined the server (62:127.0.0.1)
+[14:32:36] [2026-11-19 14:32:36][INFO] [JOIN] id 62 nick 'LoadBot_064' ip 127.0.0.1
+
+[14:32:36] [2026-11-19 14:32:36][INFO] [AUTH] cek akun nick 'LoadBot_064'
+
+[14:32:37] [connection] incoming connection: 127.0.0.1:47184 id: 66
+[14:32:37] [connection] incoming connection: 127.0.0.1:52192 id: 67
+[14:32:37] [npc:join] ls_comp_58_118137 has joined the server (207:127.0.0.1)
+[14:32:37] [2026-11-19 14:32:37][INFO] [JOIN] id 207 nick 'ls_comp_58_118137' ip 127.0.0.1
+
+[14:32:37] [join] LoadBot_065 has joined the server (63:127.0.0.1)
+[14:32:37] [2026-11-19 14:32:37][INFO] [JOIN] id 63 nick 'LoadBot_065' ip 127.0.0.1
+
+[14:32:37] [2026-11-19 14:32:37][INFO] [AUTH] cek akun nick 'LoadBot_065'
+
+[14:32:38] [npc:join] ls_comp_60_118539 has joined the server (206:127.0.0.1)
+[14:32:38] [2026-11-19 14:32:38][INFO] [JOIN] id 206 nick 'ls_comp_60_118539' ip 127.0.0.1
+
+[14:32:38] [join] LoadBot_066 has joined the server (65:127.0.0.1)
+[14:32:38] [2026-11-19 14:32:38][INFO] [JOIN] id 65 nick 'LoadBot_066' ip 127.0.0.1
+
+[14:32:38] [2026-11-19 14:32:38][INFO] [AUTH] cek akun nick 'LoadBot_066'
+
+[14:32:38] [npc:join] ls_comp_59_119068 has joined the server (205:127.0.0.1)
+[14:32:38] [2026-11-19 14:32:38][INFO] [JOIN] id 205 nick 'ls_comp_59_119068' ip 127.0.0.1
+
+[14:32:38] [connection] incoming connection: 127.0.0.1:52191 id: 68
+[14:32:39] [join] LoadBot_067 has joined the server (64:127.0.0.1)
+[14:32:39] [2026-11-19 14:32:39][INFO] [JOIN] id 64 nick 'LoadBot_067' ip 127.0.0.1
+
+[14:32:39] [2026-11-19 14:32:39][INFO] [AUTH] cek akun nick 'LoadBot_067'
+
+[14:32:39] [npc:join] ls_comp_61_119280 has joined the server (204:127.0.0.1)
+[14:32:39] [2026-11-19 14:32:39][INFO] [JOIN] id 204 nick 'ls_comp_61_119280' ip 127.0.0.1
+
+[14:32:39] [connection] incoming connection: 127.0.0.1:55214 id: 69
+[14:32:39] [connection] incoming connection: 127.0.0.1:41293 id: 70
+[14:32:40] [npc:join] ls_comp_63_120472 has joined the server (203:127.0.0.1)
+[14:32:40] [2026-11-19 14:32:40][INFO] [JOIN] id 203 nick 'ls_comp_63_120472' ip 127.0.0.1
+
+[14:32:40] [connection] incoming connection: 127.0.0.1:51865 id: 71
+[14:32:40] [join] LoadBot_068 has joined the server (66:127.0.0.1)
+[14:32:40] [2026-11-19 14:32:40][INFO] [JOIN] id 66 nick 'LoadBot_068' ip 127.0.0.1
+
+[14:32:40] [2026-11-19 14:32:40][INFO] [AUTH] cek akun nick 'LoadBot_068'
+
+[14:32:40] [join] LoadBot_069 has joined the server (67:127.0.0.1)
+[14:32:40] [2026-11-19 14:32:40][INFO] [JOIN] id 67 nick 'LoadBot_069' ip 127.0.0.1
+
+[14:32:40] [2026-11-19 14:32:40][INFO] [AUTH] cek akun nick 'LoadBot_069'
+
+[14:32:41] [npc:join] ls_zm_121533_44754 has joined the server (202:127.0.0.1)
+[14:32:41] [2026-11-19 14:32:41][INFO] [JOIN] id 202 nick 'ls_zm_121533_44754' ip 127.0.0.1
+
+[14:32:41] [npc:join] ls_zm_121533_49478 has joined the server (201:127.0.0.1)
+[14:32:41] [2026-11-19 14:32:41][INFO] [JOIN] id 201 nick 'ls_zm_121533_49478' ip 127.0.0.1
+
+[14:32:41] [npc:join] ls_zm_121534_69899 has joined the server (200:127.0.0.1)
+[14:32:41] [2026-11-19 14:32:41][INFO] [JOIN] id 200 nick 'ls_zm_121534_69899' ip 127.0.0.1
+
+[14:32:41] [npc:join] ls_comp_62_121920 has joined the server (199:127.0.0.1)
+[14:32:41] [2026-11-19 14:32:41][INFO] [JOIN] id 199 nick 'ls_comp_62_121920' ip 127.0.0.1
+
+[14:32:42] [connection] incoming connection: 127.0.0.1:60867 id: 72
+[14:32:42] [connection] incoming connection: 127.0.0.1:52682 id: 73
+[14:32:42] [join] LoadBot_071 has joined the server (68:127.0.0.1)
+[14:32:42] [2026-11-19 14:32:42][INFO] [JOIN] id 68 nick 'LoadBot_071' ip 127.0.0.1
+
+[14:32:42] [2026-11-19 14:32:42][INFO] [AUTH] cek akun nick 'LoadBot_071'
+
+[14:32:42] [connection] incoming connection: 127.0.0.1:54530 id: 74
+[14:32:42] [join] LoadBot_070 has joined the server (70:127.0.0.1)
+[14:32:42] [2026-11-19 14:32:42][INFO] [JOIN] id 70 nick 'LoadBot_070' ip 127.0.0.1
+
+[14:32:42] [2026-11-19 14:32:42][INFO] [AUTH] cek akun nick 'LoadBot_070'
+
+[14:32:42] [connection] incoming connection: 127.0.0.1:34697 id: 75
+[14:32:42] [connection] incoming connection: 127.0.0.1:49634 id: 76
+[14:32:43] [join] LoadBot_072 has joined the server (69:127.0.0.1)
+[14:32:43] [2026-11-19 14:32:43][INFO] [JOIN] id 69 nick 'LoadBot_072' ip 127.0.0.1
+
+[14:32:43] [2026-11-19 14:32:43][INFO] [AUTH] cek akun nick 'LoadBot_072'
+
+[14:32:43] [join] LoadBot_073 has joined the server (71:127.0.0.1)
+[14:32:43] [2026-11-19 14:32:43][INFO] [JOIN] id 71 nick 'LoadBot_073' ip 127.0.0.1
+
+[14:32:43] [2026-11-19 14:32:43][INFO] [AUTH] cek akun nick 'LoadBot_073'
+
+[14:32:43] [connection] incoming connection: 127.0.0.1:44796 id: 77
+[14:32:43] [npc:join] ls_zm_124188_66812 has joined the server (198:127.0.0.1)
+[14:32:43] [2026-11-19 14:32:43][INFO] [JOIN] id 198 nick 'ls_zm_124188_66812' ip 127.0.0.1
+
+[14:32:43] [npc:join] ls_zm_124189_49362 has joined the server (197:127.0.0.1)
+[14:32:43] [2026-11-19 14:32:43][INFO] [JOIN] id 197 nick 'ls_zm_124189_49362' ip 127.0.0.1
+
+[14:32:43] [npc:join] ls_zm_124190_15252 has joined the server (196:127.0.0.1)
+[14:32:43] [2026-11-19 14:32:43][INFO] [JOIN] id 196 nick 'ls_zm_124190_15252' ip 127.0.0.1
+
+[14:32:44] [connection] incoming connection: 127.0.0.1:57370 id: 78
+[14:32:45] [connection] incoming connection: 127.0.0.1:38250 id: 79
+[14:32:45] [2026-11-19 14:32:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=2/3 base=0/0 hud=2/2 player=1/1 loot=0/1 veh=0/1 needs=0/0 event=0/0 horde=2/2 save=0/0
+
+[14:32:45] [join] LoadBot_078 has joined the server (76:127.0.0.1)
+[14:32:45] [2026-11-19 14:32:45][INFO] [JOIN] id 76 nick 'LoadBot_078' ip 127.0.0.1
+
+[14:32:45] [2026-11-19 14:32:45][INFO] [AUTH] cek akun nick 'LoadBot_078'
+
+[14:32:45] [join] LoadBot_075 has joined the server (72:127.0.0.1)
+[14:32:45] [2026-11-19 14:32:45][INFO] [JOIN] id 72 nick 'LoadBot_075' ip 127.0.0.1
+
+[14:32:45] [2026-11-19 14:32:45][INFO] [AUTH] cek akun nick 'LoadBot_075'
+
+[14:32:45] [connection] incoming connection: 127.0.0.1:38133 id: 80
+[14:32:46] [join] LoadBot_074 has joined the server (74:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 74 nick 'LoadBot_074' ip 127.0.0.1
+
+[14:32:46] [2026-11-19 14:32:46][INFO] [AUTH] cek akun nick 'LoadBot_074'
+
+[14:32:46] [join] LoadBot_077 has joined the server (75:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 75 nick 'LoadBot_077' ip 127.0.0.1
+
+[14:32:46] [2026-11-19 14:32:46][INFO] [AUTH] cek akun nick 'LoadBot_077'
+
+[14:32:46] [connection] incoming connection: 127.0.0.1:43230 id: 81
+[14:32:46] [join] LoadBot_076 has joined the server (73:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 73 nick 'LoadBot_076' ip 127.0.0.1
+
+[14:32:46] [2026-11-19 14:32:46][INFO] [AUTH] cek akun nick 'LoadBot_076'
+
+[14:32:46] [npc:join] ls_zm_127078_12144 has joined the server (195:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 195 nick 'ls_zm_127078_12144' ip 127.0.0.1
+
+[14:32:46] [npc:join] ls_zm_127079_38665 has joined the server (194:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 194 nick 'ls_zm_127079_38665' ip 127.0.0.1
+
+[14:32:46] [npc:join] ls_zm_127079_23067 has joined the server (193:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 193 nick 'ls_zm_127079_23067' ip 127.0.0.1
+
+[14:32:46] [npc:join] ls_zm_127080_53009 has joined the server (192:127.0.0.1)
+[14:32:46] [2026-11-19 14:32:46][INFO] [JOIN] id 192 nick 'ls_zm_127080_53009' ip 127.0.0.1
+
+[14:32:47] [join] LoadBot_079 has joined the server (77:127.0.0.1)
+[14:32:47] [2026-11-19 14:32:47][INFO] [JOIN] id 77 nick 'LoadBot_079' ip 127.0.0.1
+
+[14:32:47] [2026-11-19 14:32:47][INFO] [AUTH] cek akun nick 'LoadBot_079'
+
+[14:32:47] [connection] incoming connection: 127.0.0.1:33058 id: 82
+[14:32:47] [join] LoadBot_080 has joined the server (78:127.0.0.1)
+[14:32:47] [2026-11-19 14:32:47][INFO] [JOIN] id 78 nick 'LoadBot_080' ip 127.0.0.1
+
+[14:32:47] [2026-11-19 14:32:47][INFO] [AUTH] cek akun nick 'LoadBot_080'
+
+[14:32:47] [connection] incoming connection: 127.0.0.1:33693 id: 83
+[14:32:48] [2026-11-19 14:32:48][INFO] [LOOT] peti dekat pemain lobby=0 anchor=70 item=8 jumlah=2
+
+[14:32:48] [2026-11-19 14:32:48][INFO] [LOOT] peti dekat pemain lobby=0 anchor=70 item=20 jumlah=1
+
+[14:32:48] [join] LoadBot_081 has joined the server (79:127.0.0.1)
+[14:32:48] [2026-11-19 14:32:48][INFO] [JOIN] id 79 nick 'LoadBot_081' ip 127.0.0.1
+
+[14:32:48] [2026-11-19 14:32:48][INFO] [AUTH] cek akun nick 'LoadBot_081'
+
+[14:32:48] [connection] incoming connection: 127.0.0.1:41214 id: 84
+[14:32:49] [2026-11-19 14:32:49][INFO] [WILDVEH] lobby=0 model=525 fuel=39.0/150 L locked=1 broken=0
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Idlewood: 5 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Ganton: 4 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Downtown LS: 9 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Angel Pine: 6 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 4 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 8 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 6 zombie
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [DIRECTOR] total aktif 44/190 | malam 0
+
+[14:32:49] [connection] incoming connection: 127.0.0.1:49226 id: 85
+[14:32:49] [join] LoadBot_082 has joined the server (80:127.0.0.1)
+[14:32:49] [2026-11-19 14:32:49][INFO] [JOIN] id 80 nick 'LoadBot_082' ip 127.0.0.1
+
+[14:32:49] [2026-11-19 14:32:49][INFO] [AUTH] cek akun nick 'LoadBot_082'
+
+[14:32:49] [npc:join] ls_comp_77_130070 has joined the server (191:127.0.0.1)
+[14:32:49] [2026-11-19 14:32:49][INFO] [JOIN] id 191 nick 'ls_comp_77_130070' ip 127.0.0.1
+
+[14:32:49] [connection] incoming connection: 127.0.0.1:41022 id: 86
+[14:32:50] [join] LoadBot_083 has joined the server (81:127.0.0.1)
+[14:32:50] [2026-11-19 14:32:50][INFO] [JOIN] id 81 nick 'LoadBot_083' ip 127.0.0.1
+
+[14:32:50] [2026-11-19 14:32:50][INFO] [AUTH] cek akun nick 'LoadBot_083'
+
+[14:32:50] [join] LoadBot_085 has joined the server (83:127.0.0.1)
+[14:32:50] [2026-11-19 14:32:50][INFO] [JOIN] id 83 nick 'LoadBot_085' ip 127.0.0.1
+
+[14:32:50] [2026-11-19 14:32:50][INFO] [AUTH] cek akun nick 'LoadBot_085'
+
+[14:32:50] [join] LoadBot_084 has joined the server (82:127.0.0.1)
+[14:32:50] [2026-11-19 14:32:50][INFO] [JOIN] id 82 nick 'LoadBot_084' ip 127.0.0.1
+
+[14:32:50] [2026-11-19 14:32:50][INFO] [AUTH] cek akun nick 'LoadBot_084'
+
+[14:32:51] [connection] incoming connection: 127.0.0.1:38341 id: 87
+[14:32:51] [connection] incoming connection: 127.0.0.1:38446 id: 88
+[14:32:52] [join] LoadBot_086 has joined the server (84:127.0.0.1)
+[14:32:52] [2026-11-19 14:32:52][INFO] [JOIN] id 84 nick 'LoadBot_086' ip 127.0.0.1
+
+[14:32:52] [2026-11-19 14:32:52][INFO] [AUTH] cek akun nick 'LoadBot_086'
+
+[14:32:52] [npc:join] ls_zm_132654_82682 has joined the server (190:127.0.0.1)
+[14:32:52] [2026-11-19 14:32:52][INFO] [JOIN] id 190 nick 'ls_zm_132654_82682' ip 127.0.0.1
+
+[14:32:52] [npc:join] ls_zm_132655_64392 has joined the server (189:127.0.0.1)
+[14:32:52] [2026-11-19 14:32:52][INFO] [JOIN] id 189 nick 'ls_zm_132655_64392' ip 127.0.0.1
+
+[14:32:52] [connection] incoming connection: 127.0.0.1:52251 id: 89
+[14:32:52] [connection] incoming connection: 127.0.0.1:56383 id: 90
+[14:32:53] [join] LoadBot_088 has joined the server (86:127.0.0.1)
+[14:32:53] [2026-11-19 14:32:53][INFO] [JOIN] id 86 nick 'LoadBot_088' ip 127.0.0.1
+
+[14:32:53] [2026-11-19 14:32:53][INFO] [AUTH] cek akun nick 'LoadBot_088'
+
+[14:32:53] [join] LoadBot_087 has joined the server (85:127.0.0.1)
+[14:32:53] [2026-11-19 14:32:53][INFO] [JOIN] id 85 nick 'LoadBot_087' ip 127.0.0.1
+
+[14:32:53] [2026-11-19 14:32:53][INFO] [AUTH] cek akun nick 'LoadBot_087'
+
+[14:32:53] [connection] incoming connection: 127.0.0.1:44438 id: 91
+[14:32:54] [connection] incoming connection: 127.0.0.1:35469 id: 92
+[14:32:54] [join] LoadBot_089 has joined the server (87:127.0.0.1)
+[14:32:54] [2026-11-19 14:32:54][INFO] [JOIN] id 87 nick 'LoadBot_089' ip 127.0.0.1
+
+[14:32:54] [2026-11-19 14:32:54][INFO] [AUTH] cek akun nick 'LoadBot_089'
+
+[14:32:54] [connection] incoming connection: 127.0.0.1:50179 id: 93
+[14:32:55] [join] LoadBot_092 has joined the server (89:127.0.0.1)
+[14:32:55] [2026-11-19 14:32:55][INFO] [JOIN] id 89 nick 'LoadBot_092' ip 127.0.0.1
+
+[14:32:55] [2026-11-19 14:32:55][INFO] [AUTH] cek akun nick 'LoadBot_092'
+
+[14:32:55] [join] LoadBot_090 has joined the server (88:127.0.0.1)
+[14:32:55] [2026-11-19 14:32:55][INFO] [JOIN] id 88 nick 'LoadBot_090' ip 127.0.0.1
+
+[14:32:55] [2026-11-19 14:32:55][INFO] [AUTH] cek akun nick 'LoadBot_090'
+
+[14:32:56] [connection] incoming connection: 127.0.0.1:49210 id: 94
+[14:32:56] [join] LoadBot_091 has joined the server (90:127.0.0.1)
+[14:32:56] [2026-11-19 14:32:56][INFO] [JOIN] id 90 nick 'LoadBot_091' ip 127.0.0.1
+
+[14:32:56] [2026-11-19 14:32:56][INFO] [AUTH] cek akun nick 'LoadBot_091'
+
+[14:32:56] [join] LoadBot_093 has joined the server (91:127.0.0.1)
+[14:32:56] [2026-11-19 14:32:56][INFO] [JOIN] id 91 nick 'LoadBot_093' ip 127.0.0.1
+
+[14:32:56] [2026-11-19 14:32:56][INFO] [AUTH] cek akun nick 'LoadBot_093'
+
+[14:32:57] [connection] incoming connection: 127.0.0.1:60691 id: 95
+[14:32:57] [npc:join] ls_zm_138220_83229 has joined the server (188:127.0.0.1)
+[14:32:57] [2026-11-19 14:32:57][INFO] [JOIN] id 188 nick 'ls_zm_138220_83229' ip 127.0.0.1
+
+[14:32:57] [npc:join] ls_zm_138221_21824 has joined the server (187:127.0.0.1)
+[14:32:57] [2026-11-19 14:32:57][INFO] [JOIN] id 187 nick 'ls_zm_138221_21824' ip 127.0.0.1
+
+[14:32:58] [connection] incoming connection: 127.0.0.1:56074 id: 96
+[14:32:58] [join] LoadBot_095 has joined the server (93:127.0.0.1)
+[14:32:58] [2026-11-19 14:32:58][INFO] [JOIN] id 93 nick 'LoadBot_095' ip 127.0.0.1
+
+[14:32:58] [2026-11-19 14:32:58][INFO] [AUTH] cek akun nick 'LoadBot_095'
+
+[14:32:58] [connection] incoming connection: 127.0.0.1:48535 id: 97
+[14:32:58] [join] LoadBot_094 has joined the server (92:127.0.0.1)
+[14:32:58] [2026-11-19 14:32:58][INFO] [JOIN] id 92 nick 'LoadBot_094' ip 127.0.0.1
+
+[14:32:58] [2026-11-19 14:32:58][INFO] [AUTH] cek akun nick 'LoadBot_094'
+
+[14:32:59] [connection] incoming connection: 127.0.0.1:41493 id: 98
+[14:33:00] [join] LoadBot_096 has joined the server (94:127.0.0.1)
+[14:33:00] [2026-11-19 14:33:00][INFO] [JOIN] id 94 nick 'LoadBot_096' ip 127.0.0.1
+
+[14:33:00] [2026-11-19 14:33:00][INFO] [AUTH] cek akun nick 'LoadBot_096'
+
+[14:33:01] [join] LoadBot_097 has joined the server (95:127.0.0.1)
+[14:33:01] [2026-11-19 14:33:01][INFO] [JOIN] id 95 nick 'LoadBot_097' ip 127.0.0.1
+
+[14:33:01] [2026-11-19 14:33:01][INFO] [AUTH] cek akun nick 'LoadBot_097'
+
+[14:33:01] [join] LoadBot_098 has joined the server (96:127.0.0.1)
+[14:33:01] [2026-11-19 14:33:01][INFO] [JOIN] id 96 nick 'LoadBot_098' ip 127.0.0.1
+
+[14:33:01] [2026-11-19 14:33:01][INFO] [AUTH] cek akun nick 'LoadBot_098'
+
+[14:33:03] [npc:join] ls_zm_143804_72332 has joined the server (186:127.0.0.1)
+[14:33:03] [2026-11-19 14:33:03][INFO] [JOIN] id 186 nick 'ls_zm_143804_72332' ip 127.0.0.1
+
+[14:33:03] [join] LoadBot_100 has joined the server (98:127.0.0.1)
+[14:33:03] [2026-11-19 14:33:03][INFO] [JOIN] id 98 nick 'LoadBot_100' ip 127.0.0.1
+
+[14:33:03] [2026-11-19 14:33:03][INFO] [AUTH] cek akun nick 'LoadBot_100'
+
+[14:33:04] [join] LoadBot_099 has joined the server (97:127.0.0.1)
+[14:33:04] [2026-11-19 14:33:04][INFO] [JOIN] id 97 nick 'LoadBot_099' ip 127.0.0.1
+
+[14:33:04] [2026-11-19 14:33:04][INFO] [AUTH] cek akun nick 'LoadBot_099'
+
+[14:33:05] [npc:join] ls_zm_145969_90513 has joined the server (185:127.0.0.1)
+[14:33:05] [2026-11-19 14:33:05][INFO] [JOIN] id 185 nick 'ls_zm_145969_90513' ip 127.0.0.1
+
+[14:33:05] [npc:join] ls_zm_145970_54822 has joined the server (184:127.0.0.1)
+[14:33:05] [2026-11-19 14:33:05][INFO] [JOIN] id 184 nick 'ls_zm_145970_54822' ip 127.0.0.1
+
+[14:33:05] [npc:join] ls_zm_145970_42835 has joined the server (183:127.0.0.1)
+[14:33:05] [2026-11-19 14:33:05][INFO] [JOIN] id 183 nick 'ls_zm_145970_42835' ip 127.0.0.1
+
+[14:33:09] [npc:join] ls_zm_149374_81924 has joined the server (182:127.0.0.1)
+[14:33:09] [2026-11-19 14:33:09][INFO] [JOIN] id 182 nick 'ls_zm_149374_81924' ip 127.0.0.1
+
+[14:33:09] [npc:join] ls_zm_149375_53507 has joined the server (181:127.0.0.1)
+[14:33:09] [2026-11-19 14:33:09][INFO] [JOIN] id 181 nick 'ls_zm_149375_53507' ip 127.0.0.1
+
+[14:33:09] [npc:join] ls_zm_149375_27666 has joined the server (180:127.0.0.1)
+[14:33:09] [2026-11-19 14:33:09][INFO] [JOIN] id 180 nick 'ls_zm_149375_27666' ip 127.0.0.1
+
+[14:33:10] [2026-11-19 14:33:10][INFO] [WILDVEH] lobby=0 model=589 fuel=1.3/80 L locked=1 broken=1
+
+[14:33:14] [npc:join] ls_zm_154952_27066 has joined the server (179:127.0.0.1)
+[14:33:14] [2026-11-19 14:33:14][INFO] [JOIN] id 179 nick 'ls_zm_154952_27066' ip 127.0.0.1
+
+[14:33:14] [npc:join] ls_zm_154953_66702 has joined the server (178:127.0.0.1)
+[14:33:14] [2026-11-19 14:33:14][INFO] [JOIN] id 178 nick 'ls_zm_154953_66702' ip 127.0.0.1
+
+[14:33:14] [npc:join] ls_zm_154953_10400 has joined the server (177:127.0.0.1)
+[14:33:14] [2026-11-19 14:33:14][INFO] [JOIN] id 177 nick 'ls_zm_154953_10400' ip 127.0.0.1
+
+[14:33:14] [npc:join] ls_zm_154954_67026 has joined the server (176:127.0.0.1)
+[14:33:14] [2026-11-19 14:33:14][INFO] [JOIN] id 176 nick 'ls_zm_154954_67026' ip 127.0.0.1
+
+[14:33:20] [npc:join] ls_zm_160525_5070 has joined the server (175:127.0.0.1)
+[14:33:20] [2026-11-19 14:33:20][INFO] [JOIN] id 175 nick 'ls_zm_160525_5070' ip 127.0.0.1
+
+[14:33:20] [npc:join] ls_zm_160526_88195 has joined the server (174:127.0.0.1)
+[14:33:20] [2026-11-19 14:33:20][INFO] [JOIN] id 174 nick 'ls_zm_160526_88195' ip 127.0.0.1
+
+[14:33:25] [npc:join] ls_zm_166091_44266 has joined the server (173:127.0.0.1)
+[14:33:25] [2026-11-19 14:33:25][INFO] [JOIN] id 173 nick 'ls_zm_166091_44266' ip 127.0.0.1
+
+[14:33:25] [npc:join] ls_zm_166092_24397 has joined the server (172:127.0.0.1)
+[14:33:25] [2026-11-19 14:33:25][INFO] [JOIN] id 172 nick 'ls_zm_166092_24397' ip 127.0.0.1
+
+[14:33:27] [npc:join] ls_zm_167759_59735 has joined the server (171:127.0.0.1)
+[14:33:27] [2026-11-19 14:33:27][INFO] [JOIN] id 171 nick 'ls_zm_167759_59735' ip 127.0.0.1
+
+[14:33:27] [npc:join] ls_zm_167759_6805 has joined the server (170:127.0.0.1)
+[14:33:27] [2026-11-19 14:33:27][INFO] [JOIN] id 170 nick 'ls_zm_167759_6805' ip 127.0.0.1
+
+[14:33:27] [npc:join] ls_zm_167760_76211 has joined the server (169:127.0.0.1)
+[14:33:27] [2026-11-19 14:33:27][INFO] [JOIN] id 169 nick 'ls_zm_167760_76211' ip 127.0.0.1
+
+[14:33:31] [npc:join] ls_zm_171678_65917 has joined the server (168:127.0.0.1)
+[14:33:31] [2026-11-19 14:33:31][INFO] [JOIN] id 168 nick 'ls_zm_171678_65917' ip 127.0.0.1
+
+[14:33:32] [2026-11-19 14:33:32][INFO] [WILDVEH] lobby=0 model=479 fuel=21.0/60 L locked=0 broken=0
+
+[14:33:37] [npc:join] ls_zm_177258_53515 has joined the server (167:127.0.0.1)
+[14:33:37] [2026-11-19 14:33:37][INFO] [JOIN] id 167 nick 'ls_zm_177258_53515' ip 127.0.0.1
+
+[14:33:45] [2026-11-19 14:33:45][INFO] [PERF] tick ms (akhir/puncak): zombie=1/1 director=0/3 base=0/1 hud=1/2 player=2/2 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=1/3 save=1/1
+
+[14:33:48] [npc:join] ls_zm_188415_18642 has joined the server (166:127.0.0.1)
+[14:33:48] [2026-11-19 14:33:48][INFO] [JOIN] id 166 nick 'ls_zm_188415_18642' ip 127.0.0.1
+
+[14:33:48] [npc:join] ls_zm_188416_56025 has joined the server (165:127.0.0.1)
+[14:33:48] [2026-11-19 14:33:48][INFO] [JOIN] id 165 nick 'ls_zm_188416_56025' ip 127.0.0.1
+
+[14:33:49] [npc:join] ls_zm_189571_96325 has joined the server (164:127.0.0.1)
+[14:33:49] [2026-11-19 14:33:49][INFO] [JOIN] id 164 nick 'ls_zm_189571_96325' ip 127.0.0.1
+
+[14:33:49] [npc:join] ls_zm_189572_2366 has joined the server (163:127.0.0.1)
+[14:33:49] [2026-11-19 14:33:49][INFO] [JOIN] id 163 nick 'ls_zm_189572_2366' ip 127.0.0.1
+
+[14:33:49] [npc:join] ls_zm_189572_10950 has joined the server (162:127.0.0.1)
+[14:33:49] [2026-11-19 14:33:49][INFO] [JOIN] id 162 nick 'ls_zm_189572_10950' ip 127.0.0.1
+
+[14:33:49] [npc:part] ls_comp_20_98000 has left the server (270:0)
+[14:33:49] [part] LoadBot_021 has left the server (20:0)
+[14:33:52] [npc:part] ls_comp_12_94801 has left the server (277:0)
+[14:33:52] [part] LoadBot_013 has left the server (12:0)
+[14:33:53] [npc:join] ls_zm_194005_98586 has joined the server (277:127.0.0.1)
+[14:33:53] [2026-11-19 14:33:53][INFO] [JOIN] id 277 nick 'ls_zm_194005_98586' ip 127.0.0.1
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [WILDVEH] lobby=0 model=413 fuel=1.1/150 L locked=1 broken=1
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Idlewood: 8 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Ganton: 11 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Downtown LS: 19 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Angel Pine: 8 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 8 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 8 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 8 zombie
+
+[14:33:54] [2026-11-19 14:33:54][INFO] [DIRECTOR] total aktif 74/190 | malam 0
+
+[14:33:59] [npc:join] ls_zm_199592_18701 has joined the server (270:127.0.0.1)
+[14:33:59] [2026-11-19 14:33:59][INFO] [JOIN] id 270 nick 'ls_zm_199592_18701' ip 127.0.0.1
+
+[14:34:10] [npc:join] ls_zm_210761_61446 has joined the server (161:127.0.0.1)
+[14:34:10] [2026-11-19 14:34:10][INFO] [JOIN] id 161 nick 'ls_zm_210761_61446' ip 127.0.0.1
+
+[14:34:11] [npc:join] ls_zm_211408_51262 has joined the server (160:127.0.0.1)
+[14:34:11] [2026-11-19 14:34:11][INFO] [JOIN] id 160 nick 'ls_zm_211408_51262' ip 127.0.0.1
+
+[14:34:11] [npc:join] ls_zm_211409_98846 has joined the server (159:127.0.0.1)
+[14:34:11] [2026-11-19 14:34:11][INFO] [JOIN] id 159 nick 'ls_zm_211409_98846' ip 127.0.0.1
+
+[14:34:11] [npc:join] ls_zm_211409_10103 has joined the server (158:127.0.0.1)
+[14:34:11] [2026-11-19 14:34:11][INFO] [JOIN] id 158 nick 'ls_zm_211409_10103' ip 127.0.0.1
+
+[14:34:14] [npc:part] ls_comp_39_105874 has left the server (237:0)
+[14:34:14] [part] LoadBot_040 has left the server (39:0)
+[14:34:15] [part] LoadBot_069 has left the server (67:0)
+[14:34:16] [2026-11-19 14:34:16][INFO] [WILDVEH] lobby=0 model=533 fuel=0.6/65 L locked=1 broken=1
+
+[14:34:16] [2026-11-19 14:34:16][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:34:16] [npc:join] ls_zm_216331_20188 has joined the server (237:127.0.0.1)
+[14:34:16] [2026-11-19 14:34:16][INFO] [JOIN] id 237 nick 'ls_zm_216331_20188' ip 127.0.0.1
+
+[14:34:16] [part] LoadBot_078 has left the server (76:0)
+[14:34:17] [part] LoadBot_093 has left the server (91:0)
+[14:34:19] [part] LoadBot_089 has left the server (87:0)
+[14:34:21] [npc:join] ls_zm_221917_71511 has joined the server (157:127.0.0.1)
+[14:34:21] [2026-11-19 14:34:21][INFO] [JOIN] id 157 nick 'ls_zm_221917_71511' ip 127.0.0.1
+
+[14:34:22] [npc:part] ls_comp_58_118137 has left the server (207:0)
+[14:34:22] [part] LoadBot_060 has left the server (58:0)
+[14:34:25] [connection] incoming connection: 127.0.0.1:47725 id: 12
+[14:34:25] [connection] incoming connection: 127.0.0.1:50776 id: 20
+[14:34:26] [npc:part] ls_comp_57_117050 has left the server (208:0)
+[14:34:26] [part] LoadBot_059 has left the server (57:0)
+[14:34:26] [2026-11-19 14:34:26][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:34:29] [join] LoadBot_021 has joined the server (20:127.0.0.1)
+[14:34:29] [2026-11-19 14:34:29][INFO] [JOIN] id 20 nick 'LoadBot_021' ip 127.0.0.1
+
+[14:34:29] [2026-11-19 14:34:29][INFO] [AUTH] cek akun nick 'LoadBot_021'
+
+[14:34:30] [join] LoadBot_013 has joined the server (12:127.0.0.1)
+[14:34:30] [2026-11-19 14:34:30][INFO] [JOIN] id 12 nick 'LoadBot_013' ip 127.0.0.1
+
+[14:34:30] [2026-11-19 14:34:30][INFO] [AUTH] cek akun nick 'LoadBot_013'
+
+[14:34:32] [npc:part] ls_comp_40_106338 has left the server (236:0)
+[14:34:32] [part] LoadBot_041 has left the server (40:0)
+[14:34:32] [npc:join] ls_zm_233051_80762 has joined the server (236:127.0.0.1)
+[14:34:32] [2026-11-19 14:34:32][INFO] [JOIN] id 236 nick 'ls_zm_233051_80762' ip 127.0.0.1
+
+[14:34:32] [npc:join] ls_zm_233177_34679 has joined the server (208:127.0.0.1)
+[14:34:32] [2026-11-19 14:34:32][INFO] [JOIN] id 208 nick 'ls_zm_233177_34679' ip 127.0.0.1
+
+[14:34:32] [npc:join] ls_zm_233178_77194 has joined the server (207:127.0.0.1)
+[14:34:32] [2026-11-19 14:34:32][INFO] [JOIN] id 207 nick 'ls_zm_233178_77194' ip 127.0.0.1
+
+[14:34:32] [npc:join] ls_zm_233179_22078 has joined the server (156:127.0.0.1)
+[14:34:32] [2026-11-19 14:34:32][INFO] [JOIN] id 156 nick 'ls_zm_233179_22078' ip 127.0.0.1
+
+[14:34:37] [2026-11-19 14:34:37][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:34:39] [npc:part] ls_comp_14_95604 has left the server (275:0)
+[14:34:39] [part] LoadBot_015 has left the server (14:0)
+[14:34:45] [2026-11-19 14:34:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=1/14 base=0/1 hud=2/4 player=2/2 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/3 save=1/2
+
+[14:34:47] [connection] incoming connection: 127.0.0.1:40151 id: 14
+[14:34:48] [2026-11-19 14:34:48][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:34:49] [connection] incoming connection: 127.0.0.1:34565 id: 39
+[14:34:49] [connection] incoming connection: 127.0.0.1:43774 id: 40
+[14:34:49] [npc:join] ls_zm_249722_60841 has joined the server (275:127.0.0.1)
+[14:34:49] [2026-11-19 14:34:49][INFO] [JOIN] id 275 nick 'ls_zm_249722_60841' ip 127.0.0.1
+
+[14:34:49] [connection] incoming connection: 127.0.0.1:43941 id: 57
+[14:34:51] [join] LoadBot_069 has joined the server (14:127.0.0.1)
+[14:34:51] [2026-11-19 14:34:51][INFO] [JOIN] id 14 nick 'LoadBot_069' ip 127.0.0.1
+
+[14:34:51] [2026-11-19 14:34:51][INFO] [AUTH] cek akun nick 'LoadBot_069'
+
+[14:34:52] [connection] incoming connection: 127.0.0.1:60496 id: 58
+[14:34:53] [join] LoadBot_078 has joined the server (40:127.0.0.1)
+[14:34:53] [2026-11-19 14:34:53][INFO] [JOIN] id 40 nick 'LoadBot_078' ip 127.0.0.1
+
+[14:34:53] [2026-11-19 14:34:53][INFO] [AUTH] cek akun nick 'LoadBot_078'
+
+[14:34:53] [join] LoadBot_040 has joined the server (39:127.0.0.1)
+[14:34:53] [2026-11-19 14:34:53][INFO] [JOIN] id 39 nick 'LoadBot_040' ip 127.0.0.1
+
+[14:34:53] [2026-11-19 14:34:53][INFO] [AUTH] cek akun nick 'LoadBot_040'
+
+[14:34:54] [join] LoadBot_093 has joined the server (57:127.0.0.1)
+[14:34:54] [2026-11-19 14:34:54][INFO] [JOIN] id 57 nick 'LoadBot_093' ip 127.0.0.1
+
+[14:34:54] [2026-11-19 14:34:54][INFO] [AUTH] cek akun nick 'LoadBot_093'
+
+[14:34:54] [npc:join] ls_zm_254906_94336 has joined the server (155:127.0.0.1)
+[14:34:54] [2026-11-19 14:34:54][INFO] [JOIN] id 155 nick 'ls_zm_254906_94336' ip 127.0.0.1
+
+[14:34:54] [npc:join] ls_zm_254907_50204 has joined the server (154:127.0.0.1)
+[14:34:54] [2026-11-19 14:34:54][INFO] [JOIN] id 154 nick 'ls_zm_254907_50204' ip 127.0.0.1
+
+[14:34:54] [npc:join] ls_zm_254907_97701 has joined the server (153:127.0.0.1)
+[14:34:54] [2026-11-19 14:34:54][INFO] [JOIN] id 153 nick 'ls_zm_254907_97701' ip 127.0.0.1
+
+[14:34:56] [join] LoadBot_089 has joined the server (58:127.0.0.1)
+[14:34:56] [2026-11-19 14:34:56][INFO] [JOIN] id 58 nick 'LoadBot_089' ip 127.0.0.1
+
+[14:34:56] [2026-11-19 14:34:56][INFO] [AUTH] cek akun nick 'LoadBot_089'
+
+[14:34:57] [connection] incoming connection: 127.0.0.1:46912 id: 67
+[14:34:59] [2026-11-19 14:34:59][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:35:00] [connection] incoming connection: 127.0.0.1:52335 id: 76
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Idlewood: 8 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Ganton: 11 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Downtown LS: 34 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Angel Pine: 8 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Abandoned Airfield: 8 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Bone County Quarry: 8 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] Quarantine/Camp Outskirts: 8 zombie
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [DIRECTOR] total aktif 89/190 | malam 0
+
+[14:35:00] [npc:join] ls_zm_260887_99907 has joined the server (152:127.0.0.1)
+[14:35:00] [2026-11-19 14:35:00][INFO] [JOIN] id 152 nick 'ls_zm_260887_99907' ip 127.0.0.1
+
+[14:35:00] [join] LoadBot_060 has joined the server (67:127.0.0.1)
+[14:35:00] [2026-11-19 14:35:00][INFO] [JOIN] id 67 nick 'LoadBot_060' ip 127.0.0.1
+
+[14:35:00] [2026-11-19 14:35:00][INFO] [AUTH] cek akun nick 'LoadBot_060'
+
+[14:35:03] [join] LoadBot_059 has joined the server (76:127.0.0.1)
+[14:35:03] [2026-11-19 14:35:03][INFO] [JOIN] id 76 nick 'LoadBot_059' ip 127.0.0.1
+
+[14:35:03] [2026-11-19 14:35:03][INFO] [AUTH] cek akun nick 'LoadBot_059'
+
+[14:35:07] [connection] incoming connection: 127.0.0.1:47894 id: 87
+[14:35:10] [2026-11-19 14:35:10][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:35:11] [npc:part] ls_comp_38_105465 has left the server (238:0)
+[14:35:11] [part] LoadBot_039 has left the server (38:0)
+[14:35:11] [npc:join] ls_zm_272040_19080 has joined the server (238:127.0.0.1)
+[14:35:11] [2026-11-19 14:35:11][INFO] [JOIN] id 238 nick 'ls_zm_272040_19080' ip 127.0.0.1
+
+[14:35:12] [join] LoadBot_041 has joined the server (87:127.0.0.1)
+[14:35:12] [2026-11-19 14:35:12][INFO] [JOIN] id 87 nick 'LoadBot_041' ip 127.0.0.1
+
+[14:35:12] [2026-11-19 14:35:12][INFO] [AUTH] cek akun nick 'LoadBot_041'
+
+[14:35:15] [connection] incoming connection: 127.0.0.1:57844 id: 38
+[14:35:16] [npc:join] ls_zm_276699_52512 has joined the server (151:127.0.0.1)
+[14:35:16] [2026-11-19 14:35:16][INFO] [JOIN] id 151 nick 'ls_zm_276699_52512' ip 127.0.0.1
+
+[14:35:16] [npc:join] ls_zm_276700_89191 has joined the server (150:127.0.0.1)
+[14:35:16] [2026-11-19 14:35:16][INFO] [JOIN] id 150 nick 'ls_zm_276700_89191' ip 127.0.0.1
+
+[14:35:16] [npc:join] ls_zm_276700_89779 has joined the server (149:127.0.0.1)
+[14:35:16] [2026-11-19 14:35:16][INFO] [JOIN] id 149 nick 'ls_zm_276700_89779' ip 127.0.0.1
+
+[14:35:19] [join] LoadBot_015 has joined the server (38:127.0.0.1)
+[14:35:19] [2026-11-19 14:35:19][INFO] [JOIN] id 38 nick 'LoadBot_015' ip 127.0.0.1
+
+[14:35:19] [2026-11-19 14:35:19][INFO] [AUTH] cek akun nick 'LoadBot_015'
+
+[14:35:21] [2026-11-19 14:35:21][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:35:21] [2026-11-19 14:35:21][INFO] [LOOT] peti lobby=0 zona=8 item=8 jumlah=1
+
+[14:35:21] [2026-11-19 14:35:21][INFO] [LOOT] peti dekat pemain lobby=0 anchor=70 item=15 jumlah=3
+
+[14:35:28] [npc:join] ls_zm_288770_71115 has joined the server (148:127.0.0.1)
+[14:35:28] [2026-11-19 14:35:28][INFO] [JOIN] id 148 nick 'ls_zm_288770_71115' ip 127.0.0.1
+
+[14:35:32] [2026-11-19 14:35:32][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:35:34] [npc:join] ls_zm_294375_12349 has joined the server (147:127.0.0.1)
+[14:35:34] [2026-11-19 14:35:34][INFO] [JOIN] id 147 nick 'ls_zm_294375_12349' ip 127.0.0.1
+
+[14:35:38] [npc:join] ls_zm_298546_1947 has joined the server (146:127.0.0.1)
+[14:35:38] [2026-11-19 14:35:38][INFO] [JOIN] id 146 nick 'ls_zm_298546_1947' ip 127.0.0.1
+
+[14:35:38] [npc:join] ls_zm_298547_30607 has joined the server (145:127.0.0.1)
+[14:35:38] [2026-11-19 14:35:38][INFO] [JOIN] id 145 nick 'ls_zm_298547_30607' ip 127.0.0.1
+
+[14:35:38] [npc:join] ls_zm_298548_93005 has joined the server (144:127.0.0.1)
+[14:35:38] [2026-11-19 14:35:38][INFO] [JOIN] id 144 nick 'ls_zm_298548_93005' ip 127.0.0.1
+
+[14:35:39] [npc:join] ls_zm_299977_15619 has joined the server (143:127.0.0.1)
+[14:35:39] [2026-11-19 14:35:39][INFO] [JOIN] id 143 nick 'ls_zm_299977_15619' ip 127.0.0.1
+
+[14:35:41] [npc:part] ls_comp_37_104942 has left the server (245:0)
+[14:35:41] [part] LoadBot_038 has left the server (37:0)
+[14:35:42] [2026-11-19 14:35:42][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+[14:35:43] [2026-11-19 14:35:43][INFO] [LOOT] peti lobby=0 zona=1 item=1 jumlah=1
+
+[14:35:43] [2026-11-19 14:35:43][INFO] [LOOT] peti dekat pemain lobby=0 anchor=64 item=2 jumlah=1
+
+[14:35:43] [part] LoadBot_074 has left the server (74:0)
+[14:35:45] [npc:join] ls_zm_305538_25907 has joined the server (245:127.0.0.1)
+[14:35:45] [2026-11-19 14:35:45][INFO] [JOIN] id 245 nick 'ls_zm_305538_25907' ip 127.0.0.1
+
+[14:35:45] [2026-11-19 14:35:45][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=16/16 base=1/1 hud=2/3 player=1/4 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/3 save=1/2
+
+[14:35:47] [connection] incoming connection: 127.0.0.1:53887 id: 37
+[14:35:51] [join] LoadBot_039 has joined the server (37:127.0.0.1)
+[14:35:51] [2026-11-19 14:35:51][INFO] [JOIN] id 37 nick 'LoadBot_039' ip 127.0.0.1
+
+[14:35:51] [2026-11-19 14:35:51][INFO] [AUTH] cek akun nick 'LoadBot_039'
+
+[14:35:53] [2026-11-19 14:35:53][INFO] [AUTOSAVE] 5 karakter disimpan (stagger).
+
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[14:36:03] 
+[14:36:03] Server Plugins
+[14:36:03] --------------
+[14:36:03]  Loading plugin: mysql.so
+[14:36:03]  >> plugin.mysql: R41-4 successfully loaded.
+[14:36:03]   Loaded.
+[14:36:03]  Loading plugin: sscanf.so
+[14:36:03] 
+[14:36:03]  ===============================
+[14:36:03] 
+[14:36:03]       sscanf plugin loaded.     
+[14:36:03] 
+[14:36:03]          Version: 2.13.8
+[14:36:03] 
+[14:36:03]    (c) 2022 Alex "Y_Less" Cole  
+[14:36:03] 
+[14:36:03]  ===============================
+[14:36:03] 
+[14:36:03]   Loaded.
+[14:36:03]  Loading plugin: ColAndreas.so
+[14:36:03]   Plugin does not conform to architecture.
+[14:36:03]   Failed.
+[14:36:03]  Loading plugin: streamer.so
+[14:36:03] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[14:36:03]   Loaded.
+[14:36:03]  Loading plugin: samp_bcrypt.so
+[14:36:03] [SampBcrypt] [info]: Version: 0.4.1
+[14:36:03]   Loaded.
+[14:36:03]  Loading plugin: FCNPC.so
+[14:36:03] 
+[14:36:03] -------------------------------------------------
+[14:36:03]      FCNPC - Fully Controllable NPC v2.0.11
+[14:36:03]             GNU/Linux SA-MP 0.3.7 R2
+[14:36:03]            Aug 23 2024 at 16:35:48
+[14:36:03] 
+[14:36:03]   Author:       OrMisicL (2013 - 2015)
+[14:36:03]   Continued by: ziggi    (2016 - present)
+[14:36:03] 
+[14:36:03]   See full credits in the README.md file
+[14:36:03] -------------------------------------------------
+[14:36:03] 
+[14:36:03] Loading...
+[14:36:03] 
+[14:36:03] -------------------------------------------------
+[14:36:03]    ColAndreasv1.4.0
+[14:36:03] 
+[14:36:03]    Created By:
+[14:36:03]      [uL]Chris42O
+[14:36:03]      [uL]Slice
+[14:36:03]      [uL]Pottus
+[14:36:03] -------------------------------------------------
+[14:36:03] 
+[14:36:03] Loading...
+[14:36:03] ColAndreas v1.4.0 Loaded.
+[14:36:03]   Loaded.
+[14:36:03]  Loaded 5 plugins.
+
+[14:36:03] 
+[14:36:03] Filterscripts
+[14:36:03] ---------------
+[14:36:03]   Loaded 0 filterscripts.
+

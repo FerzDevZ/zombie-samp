@@ -1,0 +1,173 @@
+{
+	"version": 1,
+	"generated": "2026-11-22T04:23:31.296066028Z",
+	"sampctl_version": "1.16.0",
+	"dependencies": {
+		"github.com/Southclaws/sscanf": {
+			"constraint": ":v2.8.2",
+			"resolved": "v2.8.2",
+			"commit": "f39126e0ec8b875ce29399d30075c02c9396fcb0",
+			"integrity": "commit:f39126e0ec8b875ce29399d30075c02c9396fcb0",
+			"site": "github.com",
+			"user": "Southclaws",
+			"repo": "sscanf"
+		},
+		"github.com/Sreyas-Sreelal/samp-bcrypt": {
+			"constraint": ":0.4.1",
+			"resolved": "0.4.1",
+			"commit": "c60e68d483a95d109855fdd7517425c0363fd10c",
+			"integrity": "commit:c60e68d483a95d109855fdd7517425c0363fd10c",
+			"site": "github.com",
+			"user": "Sreyas-Sreelal",
+			"repo": "samp-bcrypt"
+		},
+		"github.com/Y-Less/code-parse.inc": {
+			"constraint": "",
+			"resolved": "HEAD",
+			"commit": "c37e249e17ee6618e0c8004da7763ae555fbfeaa",
+			"integrity": "commit:c37e249e17ee6618e0c8004da7763ae555fbfeaa",
+			"site": "github.com",
+			"user": "Y-Less",
+			"repo": "code-parse.inc",
+			"transitive": true,
+			"required_by": [
+				"github.com/pawn-lang/YSI-Includes"
+			]
+		},
+		"github.com/Y-Less/indirection": {
+			"constraint": "",
+			"resolved": "HEAD",
+			"commit": "06f39798230056372fde0c7392a0d2456e5b150c",
+			"integrity": "commit:06f39798230056372fde0c7392a0d2456e5b150c",
+			"site": "github.com",
+			"user": "Y-Less",
+			"repo": "indirection",
+			"transitive": true,
+			"required_by": [
+				"github.com/pawn-lang/YSI-Includes"
+			]
+		},
+		"github.com/Zeex/amx_assembly": {
+			"constraint": "",
+			"resolved": "HEAD",
+			"commit": "66ca1f13ffb83923cdba3e6ad2855a516d484ee6",
+			"integrity": "commit:66ca1f13ffb83923cdba3e6ad2855a516d484ee6",
+			"site": "github.com",
+			"user": "Zeex",
+			"repo": "amx_assembly",
+			"transitive": true,
+			"required_by": [
+				"github.com/Y-Less/indirection",
+				"github.com/pawn-lang/YSI-Includes"
+			]
+		},
+		"github.com/oscar-broman/md-sort": {
+			"constraint": "",
+			"resolved": "HEAD",
+			"commit": "65c72b6685576ee7e5a6102406970c2f9ef04980",
+			"integrity": "commit:65c72b6685576ee7e5a6102406970c2f9ef04980",
+			"site": "github.com",
+			"user": "oscar-broman",
+			"repo": "md-sort",
+			"transitive": true,
+			"required_by": [
+				"github.com/pawn-lang/YSI-Includes"
+			]
+		},
+		"github.com/pBlueG/SA-MP-MySQL": {
+			"constraint": ":R41",
+			"resolved": "R41",
+			"commit": "d0a9b3de4c87c4269777a271ad4f7680730f98d8",
+			"integrity": "commit:d0a9b3de4c87c4269777a271ad4f7680730f98d8",
+			"site": "github.com",
+			"user": "pBlueG",
+			"repo": "SA-MP-MySQL"
+		},
+		"github.com/pawn-lang/YSI-Includes": {
+			"constraint": ":v5.10.0006",
+			"resolved": "v5.10.0006",
+			"commit": "93a5e330815a8d4fd97bfeb9ed594c1f9a5db62f",
+			"integrity": "commit:93a5e330815a8d4fd97bfeb9ed594c1f9a5db62f",
+			"site": "github.com",
+			"user": "pawn-lang",
+			"repo": "YSI-Includes"
+		},
+		"github.com/pawn-lang/pawn-stdlib": {
+			"constraint": "",
+			"resolved": "HEAD",
+			"commit": "e96507d9a6ddaae5bb0f3ec31479ba805aeff964",
+			"integrity": "commit:e96507d9a6ddaae5bb0f3ec31479ba805aeff964",
+			"site": "github.com",
+			"user": "pawn-lang",
+			"repo": "pawn-stdlib",
+			"transitive": true,
+			"required_by": [
+				"github.com/Sreyas-Sreelal/samp-bcrypt",
+				"github.com/pawn-lang/samp-stdlib"
+			]
+		},
+		"github.com/pawn-lang/samp-stdlib": {
+			"constraint": "",
+			"resolved": "HEAD",
+			"commit": "8ffb055624308b25521665b60e78b5e6e6b3717f",
+			"integrity": "commit:8ffb055624308b25521665b60e78b5e6e6b3717f",
+			"site": "github.com",
+			"user": "pawn-lang",
+			"repo": "samp-stdlib",
+			"required_by": [
+				"github.com/Y-Less/indirection",
+				"github.com/oscar-broman/md-sort",
+				"github.com/pawn-lang/YSI-Includes"
+			]
+		},
+		"github.com/samp-incognito/samp-streamer-plugin": {
+			"constraint": ":v2.9.6",
+			"resolved": "v2.9.6",
+			"commit": "afca207b148da6e0dea03693042a1e9665457403",
+			"integrity": "commit:afca207b148da6e0dea03693042a1e9665457403",
+			"site": "github.com",
+			"user": "samp-incognito",
+			"repo": "samp-streamer-plugin"
+		},
+		"github.com/ziggi/FCNPC": {
+			"constraint": ":v2.0.11",
+			"resolved": "v2.0.11",
+			"commit": "368e78e0be231c8e905b1a8195fbcea2b18fe6a7",
+			"integrity": "commit:368e78e0be231c8e905b1a8195fbcea2b18fe6a7",
+			"site": "github.com",
+			"user": "ziggi",
+			"repo": "FCNPC"
+		}
+	},
+	"runtime": {
+		"version": "0.3.7",
+		"platform": "linux",
+		"runtime_type": "",
+		"files": [
+			{
+				"path": "announce",
+				"size": 10936,
+				"hash": "cd8783c98d5211b6a0edd0ce22d3ee601d1326cfa18facd3a82cd955ba88c9f8",
+				"mode": 448
+			},
+			{
+				"path": "samp-npc",
+				"size": 591652,
+				"hash": "c4826bc9cf2d469cd8aace81609e9fa0e9abe0a02edcb272306206f82ab911d0",
+				"mode": 448
+			},
+			{
+				"path": "samp03svr",
+				"size": 1416856,
+				"hash": "0cdfa430392986b3a60f0b3bf6a641175679c3285fb452e1bdcf63321cfd9873",
+				"mode": 448
+			}
+		]
+	},
+	"build": {
+		"compiler_preset": "samp",
+		"entry": "gamemodes/main.pwn",
+		"output": "gamemodes/main.amx",
+		"output_hash": "sha256:4c5e4b9fdd44582260088ca34682a70ff8547c2387609cfe84bd2dd1024ca9ee"
+	}
+}

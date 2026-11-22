@@ -1,0 +1,1602 @@
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[08:21:09] 
+[08:21:09] Server Plugins
+[08:21:09] --------------
+[08:21:09]  Loading plugin: mysql.so
+[08:21:09]  >> plugin.mysql: R41-4 successfully loaded.
+[08:21:09]   Loaded.
+[08:21:09]  Loading plugin: sscanf.so
+[08:21:09] 
+[08:21:09]  ===============================
+[08:21:09] 
+[08:21:09]       sscanf plugin loaded.     
+[08:21:09] 
+[08:21:09]          Version: 2.13.8
+[08:21:09] 
+[08:21:09]    (c) 2022 Alex "Y_Less" Cole  
+[08:21:09] 
+[08:21:09]  ===============================
+[08:21:09] 
+[08:21:09]   Loaded.
+[08:21:09]  Loading plugin: ColAndreas.so
+[08:21:09]   Plugin does not conform to architecture.
+[08:21:09]   Failed.
+[08:21:09]  Loading plugin: streamer.so
+[08:21:09] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[08:21:09]   Loaded.
+[08:21:09]  Loading plugin: samp_bcrypt.so
+[08:21:09] [SampBcrypt] [info]: Version: 0.4.1
+[08:21:09]   Loaded.
+[08:21:09]  Loading plugin: FCNPC.so
+[08:21:09] 
+[08:21:09] -------------------------------------------------
+[08:21:09]      FCNPC - Fully Controllable NPC v2.0.11
+[08:21:09]             GNU/Linux SA-MP 0.3.7 R2
+[08:21:09]            Aug 23 2024 at 16:35:48
+[08:21:09] 
+[08:21:09]   Author:       OrMisicL (2013 - 2015)
+[08:21:09]   Continued by: ziggi    (2016 - present)
+[08:21:09] 
+[08:21:09]   See full credits in the README.md file
+[08:21:09] -------------------------------------------------
+[08:21:09] 
+[08:21:09] Loading...
+[08:21:09] 
+[08:21:09] -------------------------------------------------
+[08:21:09]    ColAndreasv1.4.0
+[08:21:09] 
+[08:21:09]    Created By:
+[08:21:09]      [uL]Chris42O
+[08:21:09]      [uL]Slice
+[08:21:09]      [uL]Pottus
+[08:21:09] -------------------------------------------------
+[08:21:09] 
+[08:21:09] Loading...
+[08:21:09] ColAndreas v1.4.0 Loaded.
+[08:21:09]   Loaded.
+[08:21:09]  Loaded 5 plugins.
+
+[08:21:09] 
+[08:21:09] Filterscripts
+[08:21:09] ---------------
+[08:21:09]   Loaded 0 filterscripts.
+
+[08:21:14] Loaded collision data.
+[08:21:14]  
+[08:21:14]  
+[08:21:14]          ==============================================================
+[08:21:14]          |                                                            |
+[08:21:14]          |                                                            |
+[08:21:14]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[08:21:14]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[08:21:14]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[08:21:14]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[08:21:14]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[08:21:14]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[08:21:14]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[08:21:14]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[08:21:14]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[08:21:14]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[08:21:14]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:21:14]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:21:14]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[08:21:14]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[08:21:14]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[08:21:14]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[08:21:14]          |                                                            |
+[08:21:14]          |                                                            |
+[08:21:14]          |                      (c) 2021 MPL v1.1                     |
+[08:21:14]          |            Alex "Y_Less" Cole and contributors.            |
+[08:21:14]          |                                                            |
+[08:21:14]          |                                                            |
+[08:21:14]          ==============================================================
+[08:21:14]  
+[08:21:14]  
+[08:21:14]  ========================================== 
+[08:21:14]  |                                        | 
+[08:21:14]  |  Missing YSI scriptfiles directories:  | 
+[08:21:14]  |                                        | 
+[08:21:14]  |      /scriptfiles/YSI/fixes/           | 
+[08:21:14]  |      /scriptfiles/YSI/temp/            | 
+[08:21:14]  |                                        | 
+[08:21:14]  ========================================== 
+[08:21:14]  |                                        | 
+[08:21:14]  |   Generating code, this may take a     | 
+[08:21:14]  |  little bit of time.  Note that this   | 
+[08:21:14]  |  code generation works best with the   | 
+[08:21:14]  |     JIT plugin, which you are not      | 
+[08:21:14]  |     currently using.  Get it here:     | 
+[08:21:14]  |                                        | 
+[08:21:14]  |       https://git.io/jit-plugin        | 
+[08:21:14]  |                                        | 
+[08:21:14]  |             Please wait...             | 
+[08:21:14]  |                                        | 
+[08:21:14]  |             Done in 27ms!              | 
+[08:21:14]  |                                        | 
+[08:21:14]  ========================================== 
+[08:21:14]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[08:21:14]  |                                        | 
+[08:21:14]  | Server:      0.3.7-R2 (L)              | 
+[08:21:14]  | Started:     18 Nov 2026 - 08:21:14    | 
+[08:21:14]  |                                        | 
+[08:21:14]  | Compiler:    3.10.10 (Linux)           | 
+[08:21:14]  | Includes:    0.3DL                     | 
+[08:21:14]  | Codepage:    <none>                    | 
+[08:21:14]  | Built:       18 Nov 2026 - 08:20:34    | 
+[08:21:14]  |                                        | 
+[08:21:14]  | YSI:         v05.10.0006               | 
+[08:21:14]  | Master:      -1                        | 
+[08:21:14]  |                                        | 
+[08:21:14]  | JIT:         <none>                    | 
+[08:21:14]  | Crashdetect: <none>                    | 
+[08:21:14]  |                                        | 
+[08:21:14]  ========================================== 
+[08:21:14]  
+[08:21:14]  
+[08:21:14] Loading Map.
+[08:21:14] Loaded Map.                             
+[08:21:14] [2026-11-18 08:21:14][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[08:21:14] [2026-11-18 08:21:14][INFO] [BOOT] LAST STAND siap. Zombie budget 190, zone 10.
+[08:21:14] [2026-11-18 08:21:14][INFO] [BOOT] instans: LAST STAND
+[08:21:14] Number of vehicle models: 0
+[08:21:14] [2026-11-18 08:21:14][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 147 ms.
+[08:21:17] [2026-11-18 08:21:17][INFO] [BASE] 0 barricade dimuat dari database.
+[08:21:19] [npc:join] ls_zm_10705_75520 has joined the server (199:127.0.0.1)
+[08:21:19] [npc:join] ls_zm_10705_23019 has joined the server (198:127.0.0.1)
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS registry item | 18 item diperiksa, 0 cacat
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS registry resep | 9 resep diperiksa, 0 cacat
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS registry struktur | 6 struktur, 0 cacat, wall tier2 limit=16
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0
+[08:21:22] [2026-11-18 08:21:22][INFO] [SELFTEST] 19/19 PASS, 0 FAIL
+[08:21:24] [npc:join] ls_zm_15943_66096 has joined the server (197:127.0.0.1)
+[08:21:24] [npc:join] ls_zm_15943_75804 has joined the server (196:127.0.0.1)
+[08:21:24] [npc:join] ls_zm_15944_17842 has joined the server (195:127.0.0.1)
+[08:21:24] [npc:join] ls_zm_15944_39023 has joined the server (194:127.0.0.1)
+[08:21:24] [npc:join] ls_zm_15944_59971 has joined the server (193:127.0.0.1)
+[08:21:29] [npc:join] ls_zm_20832_37152 has joined the server (192:127.0.0.1)
+[08:21:29] [npc:join] ls_zm_20832_58950 has joined the server (191:127.0.0.1)
+[08:21:29] [npc:join] ls_zm_20832_89975 has joined the server (190:127.0.0.1)
+[08:21:30] [npc:join] ls_zm_21188_28631 has joined the server (189:127.0.0.1)
+[08:21:30] [npc:join] ls_zm_21189_15688 has joined the server (188:127.0.0.1)
+[08:21:30] [npc:join] ls_zm_21189_12471 has joined the server (187:127.0.0.1)
+[08:21:30] [npc:join] ls_zm_21189_61686 has joined the server (186:127.0.0.1)
+[08:21:30] [npc:join] ls_zm_21190_8438 has joined the server (185:127.0.0.1)
+[08:21:35] [npc:join] ls_zm_26451_66620 has joined the server (184:127.0.0.1)
+[08:21:35] [npc:join] ls_zm_26452_76482 has joined the server (183:127.0.0.1)
+[08:21:35] [npc:join] ls_zm_26452_72203 has joined the server (182:127.0.0.1)
+[08:21:40] [npc:join] ls_zm_31712_18209 has joined the server (181:127.0.0.1)
+[08:21:40] [npc:join] ls_zm_31713_6781 has joined the server (180:127.0.0.1)
+[08:21:40] [npc:join] ls_zm_31713_868 has joined the server (179:127.0.0.1)
+[08:21:40] [npc:join] ls_zm_31713_54101 has joined the server (178:127.0.0.1)
+[08:21:45] [npc:join] ls_zm_36972_57428 has joined the server (177:127.0.0.1)
+[08:21:45] [npc:join] ls_zm_36972_17845 has joined the server (176:127.0.0.1)
+[08:21:45] [npc:join] ls_zm_36973_55578 has joined the server (175:127.0.0.1)
+[08:21:50] [npc:join] ls_zm_41404_73014 has joined the server (174:127.0.0.1)
+[08:21:50] [npc:join] ls_zm_41405_28167 has joined the server (173:127.0.0.1)
+[08:21:50] [npc:join] ls_zm_41405_37650 has joined the server (172:127.0.0.1)
+[08:21:51] [npc:join] ls_zm_42241_19179 has joined the server (171:127.0.0.1)
+[08:21:51] [npc:join] ls_zm_42241_34516 has joined the server (170:127.0.0.1)
+[08:21:51] [npc:join] ls_zm_42241_4645 has joined the server (169:127.0.0.1)
+[08:21:51] [npc:join] ls_zm_42242_51156 has joined the server (168:127.0.0.1)
+[08:21:51] [npc:join] ls_zm_42242_44953 has joined the server (167:127.0.0.1)
+[08:21:56] [npc:join] ls_zm_47515_63659 has joined the server (166:127.0.0.1)
+[08:21:56] [npc:join] ls_zm_47515_85691 has joined the server (165:127.0.0.1)
+[08:22:01] [npc:join] ls_zm_52796_2529 has joined the server (164:127.0.0.1)
+[08:22:01] [npc:join] ls_zm_52796_12500 has joined the server (163:127.0.0.1)
+[08:22:01] [npc:join] ls_zm_52797_86335 has joined the server (162:127.0.0.1)
+[08:22:07] [npc:join] ls_zm_58075_28638 has joined the server (161:127.0.0.1)
+[08:22:07] [npc:join] ls_zm_58076_23435 has joined the server (160:127.0.0.1)
+[08:22:07] [npc:join] ls_zm_58076_79407 has joined the server (159:127.0.0.1)
+[08:22:11] [npc:join] ls_zm_62040_60603 has joined the server (158:127.0.0.1)
+[08:22:11] [npc:join] ls_zm_62040_93417 has joined the server (157:127.0.0.1)
+[08:22:11] [npc:join] ls_zm_62041_33793 has joined the server (156:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63356_42595 has joined the server (155:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63356_71465 has joined the server (154:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63356_61111 has joined the server (153:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63357_93189 has joined the server (152:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63357_27922 has joined the server (151:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63357_98552 has joined the server (150:127.0.0.1)
+[08:22:12] [npc:join] ls_zm_63357_80511 has joined the server (149:127.0.0.1)
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Idlewood: 8 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Ganton: 6 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Downtown LS: 7 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Angel Pine: 4 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Abandoned Airfield: 6 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Bone County Quarry: 5 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] Camp Outskirts: 5 zombie
+[08:22:16] [2026-11-18 08:22:16][INFO] [DIRECTOR] total aktif 51/190 | malam 0
+[08:22:17] [npc:join] ls_zm_68654_34075 has joined the server (148:127.0.0.1)
+[08:22:17] [npc:join] ls_zm_68654_61204 has joined the server (147:127.0.0.1)
+[08:22:17] [npc:join] ls_zm_68655_35545 has joined the server (146:127.0.0.1)
+[08:22:17] [npc:join] ls_zm_68655_95522 has joined the server (145:127.0.0.1)
+[08:22:17] [npc:join] ls_zm_68655_8093 has joined the server (144:127.0.0.1)
+[08:22:22] [npc:join] ls_zm_73946_25272 has joined the server (143:127.0.0.1)
+[08:22:22] [npc:join] ls_zm_73946_9544 has joined the server (142:127.0.0.1)
+[08:22:22] [npc:join] ls_zm_73946_82148 has joined the server (141:127.0.0.1)
+[08:22:28] [npc:join] ls_zm_79261_34004 has joined the server (140:127.0.0.1)
+[08:22:28] [npc:join] ls_zm_79262_33269 has joined the server (139:127.0.0.1)
+[08:22:31] [npc:join] ls_zm_82757_88612 has joined the server (138:127.0.0.1)
+[08:22:31] [npc:join] ls_zm_82758_17201 has joined the server (137:127.0.0.1)
+[08:22:31] [npc:join] ls_zm_82758_24999 has joined the server (136:127.0.0.1)
+[08:22:33] [npc:join] ls_zm_84574_97818 has joined the server (135:127.0.0.1)
+[08:22:33] [npc:join] ls_zm_84575_60561 has joined the server (134:127.0.0.1)
+[08:22:33] [npc:join] ls_zm_84575_42815 has joined the server (133:127.0.0.1)
+[08:22:38] [npc:join] ls_zm_89895_22540 has joined the server (132:127.0.0.1)
+[08:22:44] [npc:join] ls_zm_95224_47060 has joined the server (131:127.0.0.1)
+[08:22:44] [npc:join] ls_zm_95225_61958 has joined the server (130:127.0.0.1)
+[08:22:44] [npc:join] ls_zm_95225_12124 has joined the server (129:127.0.0.1)
+[08:22:49] [npc:join] ls_zm_100583_19285 has joined the server (128:127.0.0.1)
+[08:22:49] [npc:join] ls_zm_100583_81655 has joined the server (127:127.0.0.1)
+[08:22:49] [npc:join] ls_zm_100584_65162 has joined the server (126:127.0.0.1)
+[08:22:52] [npc:join] ls_zm_103617_27818 has joined the server (125:127.0.0.1)
+[08:22:52] [npc:join] ls_zm_103617_16684 has joined the server (124:127.0.0.1)
+[08:22:52] [npc:join] ls_zm_103618_56768 has joined the server (123:127.0.0.1)
+[08:22:54] [npc:join] ls_zm_105915_50301 has joined the server (122:127.0.0.1)
+[08:22:54] [npc:join] ls_zm_105916_59722 has joined the server (121:127.0.0.1)
+[08:22:54] [npc:join] ls_zm_105916_47349 has joined the server (120:127.0.0.1)
+[08:23:00] [npc:join] ls_zm_111261_22881 has joined the server (119:127.0.0.1)
+[08:23:00] [npc:join] ls_zm_111261_55956 has joined the server (118:127.0.0.1)
+[08:23:05] [npc:join] ls_zm_116602_20264 has joined the server (117:127.0.0.1)
+[08:23:05] [npc:join] ls_zm_116602_15014 has joined the server (116:127.0.0.1)
+[08:23:05] [npc:join] ls_zm_116603_70552 has joined the server (115:127.0.0.1)
+[08:23:10] [npc:join] ls_zm_121939_7984 has joined the server (114:127.0.0.1)
+[08:23:13] [npc:join] ls_zm_124492_43758 has joined the server (113:127.0.0.1)
+[08:23:13] [npc:join] ls_zm_124492_17472 has joined the server (112:127.0.0.1)
+[08:23:13] [npc:join] ls_zm_124492_47473 has joined the server (111:127.0.0.1)
+[08:23:16] [npc:join] ls_zm_127273_25203 has joined the server (110:127.0.0.1)
+[08:23:16] [npc:join] ls_zm_127273_39445 has joined the server (109:127.0.0.1)
+[08:23:16] [npc:join] ls_zm_127273_42073 has joined the server (108:127.0.0.1)
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Idlewood: 10 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Ganton: 8 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Downtown LS: 16 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Angel Pine: 8 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Abandoned Airfield: 9 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Bone County Quarry: 12 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] Camp Outskirts: 14 zombie
+[08:23:18] [2026-11-18 08:23:18][INFO] [DIRECTOR] total aktif 92/190 | malam 0
+[08:23:26] [npc:join] ls_zm_137973_83200 has joined the server (107:127.0.0.1)
+[08:23:34] [npc:join] ls_zm_145386_90521 has joined the server (106:127.0.0.1)
+[08:23:34] [npc:join] ls_zm_145387_41023 has joined the server (105:127.0.0.1)
+[08:23:34] [npc:join] ls_zm_145387_91417 has joined the server (104:127.0.0.1)
+[08:23:37] [npc:join] ls_zm_148657_79657 has joined the server (103:127.0.0.1)
+[08:23:43] [npc:join] ls_zm_153998_6762 has joined the server (102:127.0.0.1)
+[08:23:43] [npc:join] ls_zm_153999_12214 has joined the server (101:127.0.0.1)
+[08:23:53] [npc:join] ls_zm_164698_89570 has joined the server (100:127.0.0.1)
+[08:23:55] [npc:join] ls_zm_166298_36238 has joined the server (99:127.0.0.1)
+[08:23:55] [npc:join] ls_zm_166298_95689 has joined the server (98:127.0.0.1)
+[08:23:55] [npc:join] ls_zm_166299_1362 has joined the server (97:127.0.0.1)
+[08:23:59] [npc:join] ls_zm_170057_73104 has joined the server (96:127.0.0.1)
+[08:24:02] --- Server Shutting Down.
+[08:24:02] [npc:part] ls_zm_170057_73104 has left the server (96:0)
+[08:24:02] [npc:part] ls_zm_166299_1362 has left the server (97:0)
+[08:24:02] [npc:part] ls_zm_166298_95689 has left the server (98:0)
+[08:24:02] [npc:part] ls_zm_166298_36238 has left the server (99:0)
+[08:24:02] [npc:part] ls_zm_164698_89570 has left the server (100:0)
+[08:24:02] [npc:part] ls_zm_153999_12214 has left the server (101:0)
+[08:24:02] [npc:part] ls_zm_153998_6762 has left the server (102:0)
+[08:24:02] [npc:part] ls_zm_148657_79657 has left the server (103:0)
+[08:24:02] [npc:part] ls_zm_145387_91417 has left the server (104:0)
+[08:24:02] [npc:part] ls_zm_145387_41023 has left the server (105:0)
+[08:24:02] [npc:part] ls_zm_145386_90521 has left the server (106:0)
+[08:24:02] [npc:part] ls_zm_137973_83200 has left the server (107:0)
+[08:24:02] [npc:part] ls_zm_127273_42073 has left the server (108:0)
+[08:24:02] [npc:part] ls_zm_127273_39445 has left the server (109:0)
+[08:24:02] [npc:part] ls_zm_127273_25203 has left the server (110:0)
+[08:24:02] [npc:part] ls_zm_124492_47473 has left the server (111:0)
+[08:24:02] [npc:part] ls_zm_124492_17472 has left the server (112:0)
+[08:24:02] [npc:part] ls_zm_124492_43758 has left the server (113:0)
+[08:24:02] [npc:part] ls_zm_121939_7984 has left the server (114:0)
+[08:24:02] [npc:part] ls_zm_116603_70552 has left the server (115:0)
+[08:24:02] [npc:part] ls_zm_116602_15014 has left the server (116:0)
+[08:24:02] [npc:part] ls_zm_116602_20264 has left the server (117:0)
+[08:24:02] [npc:part] ls_zm_111261_55956 has left the server (118:0)
+[08:24:02] [npc:part] ls_zm_111261_22881 has left the server (119:0)
+[08:24:02] [npc:part] ls_zm_105916_47349 has left the server (120:0)
+[08:24:02] [npc:part] ls_zm_105916_59722 has left the server (121:0)
+[08:24:02] [npc:part] ls_zm_105915_50301 has left the server (122:0)
+[08:24:02] [npc:part] ls_zm_103618_56768 has left the server (123:0)
+[08:24:02] [npc:part] ls_zm_103617_16684 has left the server (124:0)
+[08:24:02] [npc:part] ls_zm_103617_27818 has left the server (125:0)
+[08:24:02] [npc:part] ls_zm_100584_65162 has left the server (126:0)
+[08:24:02] [npc:part] ls_zm_100583_81655 has left the server (127:0)
+[08:24:02] [npc:part] ls_zm_100583_19285 has left the server (128:0)
+[08:24:02] [npc:part] ls_zm_95225_12124 has left the server (129:0)
+[08:24:02] [npc:part] ls_zm_95225_61958 has left the server (130:0)
+[08:24:02] [npc:part] ls_zm_95224_47060 has left the server (131:0)
+[08:24:02] [npc:part] ls_zm_89895_22540 has left the server (132:0)
+[08:24:02] [npc:part] ls_zm_84575_42815 has left the server (133:0)
+[08:24:02] [npc:part] ls_zm_84575_60561 has left the server (134:0)
+[08:24:02] [npc:part] ls_zm_84574_97818 has left the server (135:0)
+[08:24:02] [npc:part] ls_zm_82758_24999 has left the server (136:0)
+[08:24:02] [npc:part] ls_zm_82758_17201 has left the server (137:0)
+[08:24:02] [npc:part] ls_zm_82757_88612 has left the server (138:0)
+[08:24:02] [npc:part] ls_zm_79262_33269 has left the server (139:0)
+[08:24:02] [npc:part] ls_zm_79261_34004 has left the server (140:0)
+[08:24:02] [npc:part] ls_zm_73946_82148 has left the server (141:0)
+[08:24:02] [npc:part] ls_zm_73946_9544 has left the server (142:0)
+[08:24:02] [npc:part] ls_zm_73946_25272 has left the server (143:0)
+[08:24:02] [npc:part] ls_zm_68655_8093 has left the server (144:0)
+[08:24:02] [npc:part] ls_zm_68655_95522 has left the server (145:0)
+[08:24:02] [npc:part] ls_zm_68655_35545 has left the server (146:0)
+[08:24:02] [npc:part] ls_zm_68654_61204 has left the server (147:0)
+[08:24:02] [npc:part] ls_zm_68654_34075 has left the server (148:0)
+[08:24:02] [npc:part] ls_zm_63357_80511 has left the server (149:0)
+[08:24:02] [npc:part] ls_zm_63357_98552 has left the server (150:0)
+[08:24:02] [npc:part] ls_zm_63357_27922 has left the server (151:0)
+[08:24:02] [npc:part] ls_zm_63357_93189 has left the server (152:0)
+[08:24:02] [npc:part] ls_zm_63356_61111 has left the server (153:0)
+[08:24:02] [npc:part] ls_zm_63356_71465 has left the server (154:0)
+[08:24:02] [npc:part] ls_zm_63356_42595 has left the server (155:0)
+[08:24:02] [npc:part] ls_zm_62041_33793 has left the server (156:0)
+[08:24:02] [npc:part] ls_zm_62040_93417 has left the server (157:0)
+[08:24:02] [npc:part] ls_zm_62040_60603 has left the server (158:0)
+[08:24:02] [npc:part] ls_zm_58076_79407 has left the server (159:0)
+[08:24:02] [npc:part] ls_zm_58076_23435 has left the server (160:0)
+[08:24:02] [npc:part] ls_zm_58075_28638 has left the server (161:0)
+[08:24:02] [npc:part] ls_zm_52797_86335 has left the server (162:0)
+[08:24:02] [npc:part] ls_zm_52796_12500 has left the server (163:0)
+[08:24:02] [npc:part] ls_zm_52796_2529 has left the server (164:0)
+[08:24:02] [npc:part] ls_zm_47515_85691 has left the server (165:0)
+[08:24:02] [npc:part] ls_zm_47515_63659 has left the server (166:0)
+[08:24:02] [npc:part] ls_zm_42242_44953 has left the server (167:0)
+[08:24:02] [npc:part] ls_zm_42242_51156 has left the server (168:0)
+[08:24:02] [npc:part] ls_zm_42241_4645 has left the server (169:0)
+[08:24:02] [npc:part] ls_zm_42241_34516 has left the server (170:0)
+[08:24:02] [npc:part] ls_zm_42241_19179 has left the server (171:0)
+[08:24:02] [npc:part] ls_zm_41405_37650 has left the server (172:0)
+[08:24:02] [npc:part] ls_zm_41405_28167 has left the server (173:0)
+[08:24:02] [npc:part] ls_zm_41404_73014 has left the server (174:0)
+[08:24:02] [npc:part] ls_zm_36973_55578 has left the server (175:0)
+[08:24:02] [npc:part] ls_zm_36972_17845 has left the server (176:0)
+[08:24:02] [npc:part] ls_zm_36972_57428 has left the server (177:0)
+[08:24:02] [npc:part] ls_zm_31713_54101 has left the server (178:0)
+[08:24:02] [npc:part] ls_zm_31713_868 has left the server (179:0)
+[08:24:02] [npc:part] ls_zm_31713_6781 has left the server (180:0)
+[08:24:02] [npc:part] ls_zm_31712_18209 has left the server (181:0)
+[08:24:02] [npc:part] ls_zm_26452_72203 has left the server (182:0)
+[08:24:02] [npc:part] ls_zm_26452_76482 has left the server (183:0)
+[08:24:02] [npc:part] ls_zm_26451_66620 has left the server (184:0)
+[08:24:02] [npc:part] ls_zm_21190_8438 has left the server (185:0)
+[08:24:02] [npc:part] ls_zm_21189_61686 has left the server (186:0)
+[08:24:02] [npc:part] ls_zm_21189_12471 has left the server (187:0)
+[08:24:02] [npc:part] ls_zm_21189_15688 has left the server (188:0)
+[08:24:02] [npc:part] ls_zm_21188_28631 has left the server (189:0)
+[08:24:02] [npc:part] ls_zm_20832_89975 has left the server (190:0)
+[08:24:02] [npc:part] ls_zm_20832_58950 has left the server (191:0)
+[08:24:02] [npc:part] ls_zm_20832_37152 has left the server (192:0)
+[08:24:02] [npc:part] ls_zm_15944_59971 has left the server (193:0)
+[08:24:02] [npc:part] ls_zm_15944_39023 has left the server (194:0)
+[08:24:02] [npc:part] ls_zm_15944_17842 has left the server (195:0)
+[08:24:02] [npc:part] ls_zm_15943_75804 has left the server (196:0)
+[08:24:02] [npc:part] ls_zm_15943_66096 has left the server (197:0)
+[08:24:02] [npc:part] ls_zm_10705_23019 has left the server (198:0)
+[08:24:02] [npc:part] ls_zm_10705_75520 has left the server (199:0)
+[08:24:02] [2026-11-18 08:24:02][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[08:24:02] plugin.mysql: Unloading plugin...
+[08:24:02] plugin.mysql: Plugin unloaded.
+[08:24:02] 
+[08:24:02]  ===============================
+[08:24:02] 
+[08:24:02]      sscanf plugin unloaded.    
+[08:24:02] 
+[08:24:02]  ===============================
+[08:24:02] 
+[08:24:02] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[08:24:02] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[08:24:08] 
+[08:24:08] Server Plugins
+[08:24:08] --------------
+[08:24:08]  Loading plugin: mysql.so
+[08:24:08]  >> plugin.mysql: R41-4 successfully loaded.
+[08:24:08]   Loaded.
+[08:24:08]  Loading plugin: sscanf.so
+[08:24:08] 
+[08:24:08]  ===============================
+[08:24:08] 
+[08:24:08]       sscanf plugin loaded.     
+[08:24:08] 
+[08:24:08]          Version: 2.13.8
+[08:24:08] 
+[08:24:08]    (c) 2022 Alex "Y_Less" Cole  
+[08:24:08] 
+[08:24:08]  ===============================
+[08:24:08] 
+[08:24:08]   Loaded.
+[08:24:08]  Loading plugin: ColAndreas.so
+[08:24:08]   Plugin does not conform to architecture.
+[08:24:08]   Failed.
+[08:24:08]  Loading plugin: streamer.so
+[08:24:08] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[08:24:08]   Loaded.
+[08:24:08]  Loading plugin: samp_bcrypt.so
+[08:24:08] [SampBcrypt] [info]: Version: 0.4.1
+[08:24:08]   Loaded.
+[08:24:08]  Loading plugin: FCNPC.so
+[08:24:08] 
+[08:24:08] -------------------------------------------------
+[08:24:08]      FCNPC - Fully Controllable NPC v2.0.11
+[08:24:08]             GNU/Linux SA-MP 0.3.7 R2
+[08:24:08]            Aug 23 2024 at 16:35:48
+[08:24:08] 
+[08:24:08]   Author:       OrMisicL (2013 - 2015)
+[08:24:08]   Continued by: ziggi    (2016 - present)
+[08:24:08] 
+[08:24:08]   See full credits in the README.md file
+[08:24:08] -------------------------------------------------
+[08:24:08] 
+[08:24:08] Loading...
+[08:24:08] 
+[08:24:08] -------------------------------------------------
+[08:24:08]    ColAndreasv1.4.0
+[08:24:08] 
+[08:24:08]    Created By:
+[08:24:08]      [uL]Chris42O
+[08:24:08]      [uL]Slice
+[08:24:08]      [uL]Pottus
+[08:24:08] -------------------------------------------------
+[08:24:08] 
+[08:24:08] Loading...
+[08:24:08] ColAndreas v1.4.0 Loaded.
+[08:24:08]   Loaded.
+[08:24:08]  Loaded 5 plugins.
+
+[08:24:08] 
+[08:24:08] Filterscripts
+[08:24:08] ---------------
+[08:24:08]   Loaded 0 filterscripts.
+
+[08:24:13] Loaded collision data.
+[08:24:13]  
+[08:24:13]  
+[08:24:13]          ==============================================================
+[08:24:13]          |                                                            |
+[08:24:13]          |                                                            |
+[08:24:13]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[08:24:13]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[08:24:13]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[08:24:13]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[08:24:13]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[08:24:13]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[08:24:13]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[08:24:13]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[08:24:13]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[08:24:13]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[08:24:13]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:24:13]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:24:13]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[08:24:13]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[08:24:13]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[08:24:13]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[08:24:13]          |                                                            |
+[08:24:13]          |                                                            |
+[08:24:13]          |                      (c) 2021 MPL v1.1                     |
+[08:24:13]          |            Alex "Y_Less" Cole and contributors.            |
+[08:24:13]          |                                                            |
+[08:24:13]          |                                                            |
+[08:24:13]          ==============================================================
+[08:24:13]  
+[08:24:13]  
+[08:24:13]  ========================================== 
+[08:24:13]  |                                        | 
+[08:24:13]  |  Missing YSI scriptfiles directories:  | 
+[08:24:13]  |                                        | 
+[08:24:13]  |      /scriptfiles/YSI/fixes/           | 
+[08:24:13]  |      /scriptfiles/YSI/temp/            | 
+[08:24:13]  |                                        | 
+[08:24:13]  ========================================== 
+[08:24:13]  |                                        | 
+[08:24:13]  |   Generating code, this may take a     | 
+[08:24:13]  |  little bit of time.  Note that this   | 
+[08:24:13]  |  code generation works best with the   | 
+[08:24:13]  |     JIT plugin, which you are not      | 
+[08:24:13]  |     currently using.  Get it here:     | 
+[08:24:13]  |                                        | 
+[08:24:13]  |       https://git.io/jit-plugin        | 
+[08:24:13]  |                                        | 
+[08:24:13]  |             Please wait...             | 
+[08:24:13]  |                                        | 
+[08:24:13]  |             Done in 25ms!              | 
+[08:24:13]  |                                        | 
+[08:24:13]  ========================================== 
+[08:24:13]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[08:24:13]  |                                        | 
+[08:24:13]  | Server:      0.3.7-R2 (L)              | 
+[08:24:13]  | Started:     18 Nov 2026 - 08:24:13    | 
+[08:24:13]  |                                        | 
+[08:24:13]  | Compiler:    3.10.10 (Linux)           | 
+[08:24:13]  | Includes:    0.3DL                     | 
+[08:24:13]  | Codepage:    <none>                    | 
+[08:24:13]  | Built:       18 Nov 2026 - 08:23:56    | 
+[08:24:13]  |                                        | 
+[08:24:13]  | YSI:         v05.10.0006               | 
+[08:24:13]  | Master:      -1                        | 
+[08:24:13]  |                                        | 
+[08:24:13]  | JIT:         <none>                    | 
+[08:24:13]  | Crashdetect: <none>                    | 
+[08:24:13]  |                                        | 
+[08:24:13]  ========================================== 
+[08:24:13]  
+[08:24:13]  
+[08:24:13] Loading Map.
+[08:24:13] Loaded Map.                             
+[08:24:13] [2026-11-18 08:24:13][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[08:24:13] [2026-11-18 08:24:13][INFO] [BOOT] LAST STAND siap. Zombie budget 190, zone 10.
+[08:24:13] [2026-11-18 08:24:13][INFO] [BOOT] instans: LAST STAND | port 7778
+[08:24:13] Number of vehicle models: 0
+[08:24:13] [2026-11-18 08:24:13][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 159 ms.
+[08:24:16] [2026-11-18 08:24:16][INFO] [BASE] 0 barricade dimuat dari database.
+[08:24:18] [npc:join] ls_zm_10567_43452 has joined the server (199:127.0.0.1)
+[08:24:18] [npc:join] ls_zm_10567_90943 has joined the server (198:127.0.0.1)
+[08:24:18] [npc:join] ls_zm_10568_25444 has joined the server (197:127.0.0.1)
+[08:24:18] [npc:join] ls_zm_10568_94670 has joined the server (196:127.0.0.1)
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS registry item | 18 item diperiksa, 0 cacat
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS registry resep | 9 resep diperiksa, 0 cacat
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS registry struktur | 6 struktur, 0 cacat, wall tier2 limit=16
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0
+[08:24:21] [2026-11-18 08:24:21][INFO] [SELFTEST] 19/19 PASS, 0 FAIL
+[08:24:24] [npc:join] ls_zm_15806_99569 has joined the server (195:127.0.0.1)
+[08:24:24] [npc:join] ls_zm_15807_29382 has joined the server (194:127.0.0.1)
+[08:24:24] [npc:join] ls_zm_15807_17486 has joined the server (193:127.0.0.1)
+[08:24:29] [npc:join] ls_zm_21042_28074 has joined the server (192:127.0.0.1)
+[08:24:29] [npc:join] ls_zm_21042_7307 has joined the server (191:127.0.0.1)
+[08:24:29] [npc:join] ls_zm_21043_52245 has joined the server (190:127.0.0.1)
+[08:24:29] [npc:join] ls_zm_21043_55532 has joined the server (189:127.0.0.1)
+[08:24:29] [npc:join] ls_zm_21043_89505 has joined the server (188:127.0.0.1)
+[08:24:34] [npc:join] ls_zm_26301_26389 has joined the server (187:127.0.0.1)
+[08:24:34] [npc:join] ls_zm_26302_89804 has joined the server (186:127.0.0.1)
+[08:24:34] [npc:join] ls_zm_26302_8256 has joined the server (185:127.0.0.1)
+[08:24:34] [npc:join] ls_zm_26303_23528 has joined the server (184:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31555_58290 has joined the server (183:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31556_21968 has joined the server (182:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31556_59043 has joined the server (181:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31556_9515 has joined the server (180:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31556_74524 has joined the server (179:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31557_14016 has joined the server (178:127.0.0.1)
+[08:24:39] [npc:join] ls_zm_31557_86328 has joined the server (177:127.0.0.1)
+[08:24:45] [npc:join] ls_zm_36817_57325 has joined the server (176:127.0.0.1)
+[08:24:45] [npc:join] ls_zm_36817_36073 has joined the server (175:127.0.0.1)
+[08:24:45] [npc:join] ls_zm_36818_77985 has joined the server (174:127.0.0.1)
+[08:24:50] [npc:join] ls_zm_42088_79814 has joined the server (173:127.0.0.1)
+[08:24:50] [npc:join] ls_zm_42088_94866 has joined the server (172:127.0.0.1)
+[08:24:50] [npc:join] ls_zm_42089_89622 has joined the server (171:127.0.0.1)
+[08:24:50] [npc:join] ls_zm_42089_78282 has joined the server (170:127.0.0.1)
+[08:24:50] [npc:join] ls_zm_42089_45083 has joined the server (169:127.0.0.1)
+[08:24:55] [npc:join] ls_zm_47352_10205 has joined the server (168:127.0.0.1)
+[08:24:55] [npc:join] ls_zm_47353_85713 has joined the server (167:127.0.0.1)
+[08:24:55] [npc:join] ls_zm_47353_54010 has joined the server (166:127.0.0.1)
+[08:24:55] [npc:join] ls_zm_47353_27443 has joined the server (165:127.0.0.1)
+[08:24:55] [npc:join] ls_zm_47353_16213 has joined the server (164:127.0.0.1)
+[08:25:00] [npc:join] ls_zm_52623_19435 has joined the server (163:127.0.0.1)
+[08:25:00] [npc:join] ls_zm_52624_37300 has joined the server (162:127.0.0.1)
+[08:25:00] [npc:join] ls_zm_52624_5646 has joined the server (161:127.0.0.1)
+[08:25:00] [npc:join] ls_zm_52624_15523 has joined the server (160:127.0.0.1)
+[08:25:00] [npc:join] ls_zm_52625_96993 has joined the server (159:127.0.0.1)
+[08:25:00] [npc:join] ls_zm_52625_770 has joined the server (158:127.0.0.1)
+[08:25:04] [npc:join] ls_zm_56720_50467 has joined the server (157:127.0.0.1)
+[08:25:04] [npc:join] ls_zm_56721_63439 has joined the server (156:127.0.0.1)
+[08:25:04] [npc:join] ls_zm_56721_27451 has joined the server (155:127.0.0.1)
+[08:25:06] [npc:join] ls_zm_57907_71487 has joined the server (154:127.0.0.1)
+[08:25:06] [npc:join] ls_zm_57907_72821 has joined the server (153:127.0.0.1)
+[08:25:06] [npc:join] ls_zm_57908_88522 has joined the server (152:127.0.0.1)
+[08:25:06] [npc:join] ls_zm_57908_11183 has joined the server (151:127.0.0.1)
+[08:25:06] [npc:join] ls_zm_57908_95003 has joined the server (150:127.0.0.1)
+[08:25:06] [npc:join] ls_zm_57908_78295 has joined the server (149:127.0.0.1)
+[08:25:06] --- Server Shutting Down.
+[08:25:06] [npc:part] ls_zm_57908_78295 has left the server (149:0)
+[08:25:06] [npc:part] ls_zm_57908_95003 has left the server (150:0)
+[08:25:06] [npc:part] ls_zm_57908_11183 has left the server (151:0)
+[08:25:06] [npc:part] ls_zm_57908_88522 has left the server (152:0)
+[08:25:06] [npc:part] ls_zm_57907_72821 has left the server (153:0)
+[08:25:06] [npc:part] ls_zm_57907_71487 has left the server (154:0)
+[08:25:06] [npc:part] ls_zm_56721_27451 has left the server (155:0)
+[08:25:06] [npc:part] ls_zm_56721_63439 has left the server (156:0)
+[08:25:06] [npc:part] ls_zm_56720_50467 has left the server (157:0)
+[08:25:06] [npc:part] ls_zm_52625_770 has left the server (158:0)
+[08:25:06] [npc:part] ls_zm_52625_96993 has left the server (159:0)
+[08:25:06] [npc:part] ls_zm_52624_15523 has left the server (160:0)
+[08:25:06] [npc:part] ls_zm_52624_5646 has left the server (161:0)
+[08:25:06] [npc:part] ls_zm_52624_37300 has left the server (162:0)
+[08:25:06] [npc:part] ls_zm_52623_19435 has left the server (163:0)
+[08:25:06] [npc:part] ls_zm_47353_16213 has left the server (164:0)
+[08:25:06] [npc:part] ls_zm_47353_27443 has left the server (165:0)
+[08:25:06] [npc:part] ls_zm_47353_54010 has left the server (166:0)
+[08:25:06] [npc:part] ls_zm_47353_85713 has left the server (167:0)
+[08:25:06] [npc:part] ls_zm_47352_10205 has left the server (168:0)
+[08:25:06] [npc:part] ls_zm_42089_45083 has left the server (169:0)
+[08:25:06] [npc:part] ls_zm_42089_78282 has left the server (170:0)
+[08:25:06] [npc:part] ls_zm_42089_89622 has left the server (171:0)
+[08:25:06] [npc:part] ls_zm_42088_94866 has left the server (172:0)
+[08:25:06] [npc:part] ls_zm_42088_79814 has left the server (173:0)
+[08:25:06] [npc:part] ls_zm_36818_77985 has left the server (174:0)
+[08:25:06] [npc:part] ls_zm_36817_36073 has left the server (175:0)
+[08:25:06] [npc:part] ls_zm_36817_57325 has left the server (176:0)
+[08:25:06] [npc:part] ls_zm_31557_86328 has left the server (177:0)
+[08:25:06] [npc:part] ls_zm_31557_14016 has left the server (178:0)
+[08:25:06] [npc:part] ls_zm_31556_74524 has left the server (179:0)
+[08:25:06] [npc:part] ls_zm_31556_9515 has left the server (180:0)
+[08:25:06] [npc:part] ls_zm_31556_59043 has left the server (181:0)
+[08:25:06] [npc:part] ls_zm_31556_21968 has left the server (182:0)
+[08:25:06] [npc:part] ls_zm_31555_58290 has left the server (183:0)
+[08:25:06] [npc:part] ls_zm_26303_23528 has left the server (184:0)
+[08:25:06] [npc:part] ls_zm_26302_8256 has left the server (185:0)
+[08:25:06] [npc:part] ls_zm_26302_89804 has left the server (186:0)
+[08:25:06] [npc:part] ls_zm_26301_26389 has left the server (187:0)
+[08:25:06] [npc:part] ls_zm_21043_89505 has left the server (188:0)
+[08:25:06] [npc:part] ls_zm_21043_55532 has left the server (189:0)
+[08:25:06] [npc:part] ls_zm_21043_52245 has left the server (190:0)
+[08:25:06] [npc:part] ls_zm_21042_7307 has left the server (191:0)
+[08:25:06] [npc:part] ls_zm_21042_28074 has left the server (192:0)
+[08:25:06] [npc:part] ls_zm_15807_17486 has left the server (193:0)
+[08:25:06] [npc:part] ls_zm_15807_29382 has left the server (194:0)
+[08:25:06] [npc:part] ls_zm_15806_99569 has left the server (195:0)
+[08:25:06] [npc:part] ls_zm_10568_94670 has left the server (196:0)
+[08:25:06] [npc:part] ls_zm_10568_25444 has left the server (197:0)
+[08:25:06] [npc:part] ls_zm_10567_90943 has left the server (198:0)
+[08:25:06] [npc:part] ls_zm_10567_43452 has left the server (199:0)
+[08:25:06] [2026-11-18 08:25:06][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[08:25:06] plugin.mysql: Unloading plugin...
+[08:25:06] plugin.mysql: Plugin unloaded.
+[08:25:06] 
+[08:25:06]  ===============================
+[08:25:06] 
+[08:25:06]      sscanf plugin unloaded.    
+[08:25:06] 
+[08:25:06]  ===============================
+[08:25:06] 
+[08:25:06] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[08:25:06] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[08:25:07] 
+[08:25:07] Server Plugins
+[08:25:07] --------------
+[08:25:07]  Loading plugin: mysql.so
+[08:25:07]  >> plugin.mysql: R41-4 successfully loaded.
+[08:25:07]   Loaded.
+[08:25:07]  Loading plugin: sscanf.so
+[08:25:07] 
+[08:25:07]  ===============================
+[08:25:07] 
+[08:25:07]       sscanf plugin loaded.     
+[08:25:07] 
+[08:25:07]          Version: 2.13.8
+[08:25:07] 
+[08:25:07]    (c) 2022 Alex "Y_Less" Cole  
+[08:25:07] 
+[08:25:07]  ===============================
+[08:25:07] 
+[08:25:07]   Loaded.
+[08:25:07]  Loading plugin: ColAndreas.so
+[08:25:07]   Plugin does not conform to architecture.
+[08:25:07]   Failed.
+[08:25:07]  Loading plugin: streamer.so
+[08:25:07] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[08:25:07]   Loaded.
+[08:25:07]  Loading plugin: samp_bcrypt.so
+[08:25:07] [SampBcrypt] [info]: Version: 0.4.1
+[08:25:07]   Loaded.
+[08:25:07]  Loading plugin: FCNPC.so
+[08:25:07] 
+[08:25:07] -------------------------------------------------
+[08:25:07]      FCNPC - Fully Controllable NPC v2.0.11
+[08:25:07]             GNU/Linux SA-MP 0.3.7 R2
+[08:25:07]            Aug 23 2024 at 16:35:48
+[08:25:07] 
+[08:25:07]   Author:       OrMisicL (2013 - 2015)
+[08:25:07]   Continued by: ziggi    (2016 - present)
+[08:25:07] 
+[08:25:07]   See full credits in the README.md file
+[08:25:07] -------------------------------------------------
+[08:25:07] 
+[08:25:07] Loading...
+[08:25:07] 
+[08:25:07] -------------------------------------------------
+[08:25:07]    ColAndreasv1.4.0
+[08:25:07] 
+[08:25:07]    Created By:
+[08:25:07]      [uL]Chris42O
+[08:25:07]      [uL]Slice
+[08:25:07]      [uL]Pottus
+[08:25:07] -------------------------------------------------
+[08:25:07] 
+[08:25:07] Loading...
+[08:25:07] ColAndreas v1.4.0 Loaded.
+[08:25:07]   Loaded.
+[08:25:07]  Loaded 5 plugins.
+
+[08:25:07] 
+[08:25:07] Filterscripts
+[08:25:07] ---------------
+[08:25:07]   Loaded 0 filterscripts.
+
+[08:25:12] Loaded collision data.
+[08:25:12]  
+[08:25:12]  
+[08:25:12]          ==============================================================
+[08:25:12]          |                                                            |
+[08:25:12]          |                                                            |
+[08:25:12]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[08:25:12]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[08:25:12]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[08:25:12]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[08:25:12]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[08:25:12]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[08:25:12]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[08:25:12]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[08:25:12]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[08:25:12]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[08:25:12]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:25:12]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:25:12]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[08:25:12]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[08:25:12]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[08:25:12]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[08:25:12]          |                                                            |
+[08:25:12]          |                                                            |
+[08:25:12]          |                      (c) 2021 MPL v1.1                     |
+[08:25:12]          |            Alex "Y_Less" Cole and contributors.            |
+[08:25:12]          |                                                            |
+[08:25:12]          |                                                            |
+[08:25:12]          ==============================================================
+[08:25:12]  
+[08:25:12]  
+[08:25:12]  ========================================== 
+[08:25:12]  |                                        | 
+[08:25:12]  |  Missing YSI scriptfiles directories:  | 
+[08:25:12]  |                                        | 
+[08:25:12]  |      /scriptfiles/YSI/fixes/           | 
+[08:25:12]  |      /scriptfiles/YSI/temp/            | 
+[08:25:12]  |                                        | 
+[08:25:12]  ========================================== 
+[08:25:12]  |                                        | 
+[08:25:12]  |   Generating code, this may take a     | 
+[08:25:12]  |  little bit of time.  Note that this   | 
+[08:25:12]  |  code generation works best with the   | 
+[08:25:12]  |     JIT plugin, which you are not      | 
+[08:25:12]  |     currently using.  Get it here:     | 
+[08:25:12]  |                                        | 
+[08:25:12]  |       https://git.io/jit-plugin        | 
+[08:25:12]  |                                        | 
+[08:25:12]  |             Please wait...             | 
+[08:25:12]  |                                        | 
+[08:25:12]  |             Done in 26ms!              | 
+[08:25:12]  |                                        | 
+[08:25:12]  ========================================== 
+[08:25:12]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[08:25:12]  |                                        | 
+[08:25:12]  | Server:      0.3.7-R2 (L)              | 
+[08:25:12]  | Started:     18 Nov 2026 - 08:25:12    | 
+[08:25:12]  |                                        | 
+[08:25:12]  | Compiler:    3.10.10 (Linux)           | 
+[08:25:12]  | Includes:    0.3DL                     | 
+[08:25:12]  | Codepage:    <none>                    | 
+[08:25:12]  | Built:       18 Nov 2026 - 08:23:56    | 
+[08:25:12]  |                                        | 
+[08:25:12]  | YSI:         v05.10.0006               | 
+[08:25:12]  | Master:      -1                        | 
+[08:25:12]  |                                        | 
+[08:25:12]  | JIT:         <none>                    | 
+[08:25:12]  | Crashdetect: <none>                    | 
+[08:25:12]  |                                        | 
+[08:25:12]  ========================================== 
+[08:25:12]  
+[08:25:12]  
+[08:25:12] Loading Map.
+[08:25:13] Loaded Map.                             
+[08:25:13] [2026-11-18 08:25:13][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[08:25:13] [2026-11-18 08:25:13][INFO] [BOOT] LAST STAND siap. Zombie budget 190, zone 10.
+[08:25:13] [2026-11-18 08:25:13][INFO] [BOOT] instans: "LAST STAND | port 7778
+[08:25:13] Number of vehicle models: 0
+[08:25:13] [2026-11-18 08:25:13][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 132 ms.
+[08:25:16] [2026-11-18 08:25:16][INFO] [BASE] 0 barricade dimuat dari database.
+[08:25:18] [npc:join] ls_zm_10527_13196 has joined the server (199:127.0.0.1)
+[08:25:18] [npc:join] ls_zm_10528_58292 has joined the server (198:127.0.0.1)
+[08:25:18] [npc:join] ls_zm_10528_85818 has joined the server (197:127.0.0.1)
+[08:25:18] [npc:join] ls_zm_10528_74047 has joined the server (196:127.0.0.1)
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS registry item | 18 item diperiksa, 0 cacat
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS registry resep | 9 resep diperiksa, 0 cacat
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS registry struktur | 6 struktur, 0 cacat, wall tier2 limit=16
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0
+[08:25:21] [2026-11-18 08:25:21][INFO] [SELFTEST] 19/19 PASS, 0 FAIL
+[08:25:23] [npc:join] ls_zm_15770_9323 has joined the server (195:127.0.0.1)
+[08:25:23] [npc:join] ls_zm_15770_22077 has joined the server (194:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21000_95659 has joined the server (193:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21000_32684 has joined the server (192:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21000_60322 has joined the server (191:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21000_50935 has joined the server (190:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21001_23106 has joined the server (189:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21001_29429 has joined the server (188:127.0.0.1)
+[08:25:28] [npc:join] ls_zm_21001_54444 has joined the server (187:127.0.0.1)
+[08:25:34] [npc:join] ls_zm_26253_41464 has joined the server (186:127.0.0.1)
+[08:25:34] [npc:join] ls_zm_26254_11666 has joined the server (185:127.0.0.1)
+[08:25:34] [npc:join] ls_zm_26254_14004 has joined the server (184:127.0.0.1)
+[08:25:34] [npc:join] ls_zm_26254_35166 has joined the server (183:127.0.0.1)
+[08:25:34] [npc:join] ls_zm_26254_39818 has joined the server (182:127.0.0.1)
+[08:25:39] [npc:join] ls_zm_31503_8379 has joined the server (181:127.0.0.1)
+[08:25:39] [npc:join] ls_zm_31503_16450 has joined the server (180:127.0.0.1)
+[08:25:39] [npc:join] ls_zm_31503_18904 has joined the server (179:127.0.0.1)
+[08:25:39] [npc:join] ls_zm_31503_34860 has joined the server (178:127.0.0.1)
+[08:25:43] [npc:join] ls_zm_36044_85125 has joined the server (177:127.0.0.1)
+[08:25:43] [npc:join] ls_zm_36045_12664 has joined the server (176:127.0.0.1)
+[08:25:43] [npc:join] ls_zm_36045_76139 has joined the server (175:127.0.0.1)
+[08:25:44] [npc:join] ls_zm_36762_93753 has joined the server (174:127.0.0.1)
+[08:25:44] [npc:join] ls_zm_36763_30577 has joined the server (173:127.0.0.1)
+[08:25:44] [npc:join] ls_zm_36763_89449 has joined the server (172:127.0.0.1)
+[08:25:44] [npc:join] ls_zm_36763_91085 has joined the server (171:127.0.0.1)
+[08:25:48] --- Server Shutting Down.
+[08:25:48] [npc:part] ls_zm_36763_91085 has left the server (171:0)
+[08:25:48] [npc:part] ls_zm_36763_89449 has left the server (172:0)
+[08:25:48] [npc:part] ls_zm_36763_30577 has left the server (173:0)
+[08:25:48] [npc:part] ls_zm_36762_93753 has left the server (174:0)
+[08:25:48] [npc:part] ls_zm_36045_76139 has left the server (175:0)
+[08:25:48] [npc:part] ls_zm_36045_12664 has left the server (176:0)
+[08:25:48] [npc:part] ls_zm_36044_85125 has left the server (177:0)
+[08:25:48] [npc:part] ls_zm_31503_34860 has left the server (178:0)
+[08:25:48] [npc:part] ls_zm_31503_18904 has left the server (179:0)
+[08:25:48] [npc:part] ls_zm_31503_16450 has left the server (180:0)
+[08:25:48] [npc:part] ls_zm_31503_8379 has left the server (181:0)
+[08:25:48] [npc:part] ls_zm_26254_39818 has left the server (182:0)
+[08:25:48] [npc:part] ls_zm_26254_35166 has left the server (183:0)
+[08:25:48] [npc:part] ls_zm_26254_14004 has left the server (184:0)
+[08:25:48] [npc:part] ls_zm_26254_11666 has left the server (185:0)
+[08:25:48] [npc:part] ls_zm_26253_41464 has left the server (186:0)
+[08:25:48] [npc:part] ls_zm_21001_54444 has left the server (187:0)
+[08:25:48] [npc:part] ls_zm_21001_29429 has left the server (188:0)
+[08:25:48] [npc:part] ls_zm_21001_23106 has left the server (189:0)
+[08:25:48] [npc:part] ls_zm_21000_50935 has left the server (190:0)
+[08:25:48] [npc:part] ls_zm_21000_60322 has left the server (191:0)
+[08:25:48] [npc:part] ls_zm_21000_32684 has left the server (192:0)
+[08:25:48] [npc:part] ls_zm_21000_95659 has left the server (193:0)
+[08:25:48] [npc:part] ls_zm_15770_22077 has left the server (194:0)
+[08:25:48] [npc:part] ls_zm_15770_9323 has left the server (195:0)
+[08:25:48] [npc:part] ls_zm_10528_74047 has left the server (196:0)
+[08:25:48] [npc:part] ls_zm_10528_85818 has left the server (197:0)
+[08:25:48] [npc:part] ls_zm_10528_58292 has left the server (198:0)
+[08:25:48] [npc:part] ls_zm_10527_13196 has left the server (199:0)
+[08:25:48] [2026-11-18 08:25:48][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[08:25:48] plugin.mysql: Unloading plugin...
+[08:25:48] plugin.mysql: Plugin unloaded.
+[08:25:48] 
+[08:25:48]  ===============================
+[08:25:48] 
+[08:25:48]      sscanf plugin unloaded.    
+[08:25:48] 
+[08:25:48]  ===============================
+[08:25:48] 
+[08:25:48] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[08:25:48] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[08:25:49] 
+[08:25:49] Server Plugins
+[08:25:49] --------------
+[08:25:49]  Loading plugin: mysql.so
+[08:25:49]  >> plugin.mysql: R41-4 successfully loaded.
+[08:25:49]   Loaded.
+[08:25:49]  Loading plugin: sscanf.so
+[08:25:49] 
+[08:25:49]  ===============================
+[08:25:49] 
+[08:25:49]       sscanf plugin loaded.     
+[08:25:49] 
+[08:25:49]          Version: 2.13.8
+[08:25:49] 
+[08:25:49]    (c) 2022 Alex "Y_Less" Cole  
+[08:25:49] 
+[08:25:49]  ===============================
+[08:25:49] 
+[08:25:49]   Loaded.
+[08:25:49]  Loading plugin: ColAndreas.so
+[08:25:49]   Plugin does not conform to architecture.
+[08:25:49]   Failed.
+[08:25:49]  Loading plugin: streamer.so
+[08:25:49] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[08:25:49]   Loaded.
+[08:25:49]  Loading plugin: samp_bcrypt.so
+[08:25:49] [SampBcrypt] [info]: Version: 0.4.1
+[08:25:49]   Loaded.
+[08:25:49]  Loading plugin: FCNPC.so
+[08:25:49] 
+[08:25:49] -------------------------------------------------
+[08:25:49]      FCNPC - Fully Controllable NPC v2.0.11
+[08:25:49]             GNU/Linux SA-MP 0.3.7 R2
+[08:25:49]            Aug 23 2024 at 16:35:48
+[08:25:49] 
+[08:25:49]   Author:       OrMisicL (2013 - 2015)
+[08:25:49]   Continued by: ziggi    (2016 - present)
+[08:25:49] 
+[08:25:49]   See full credits in the README.md file
+[08:25:49] -------------------------------------------------
+[08:25:49] 
+[08:25:49] Loading...
+[08:25:49] 
+[08:25:49] -------------------------------------------------
+[08:25:49]    ColAndreasv1.4.0
+[08:25:49] 
+[08:25:49]    Created By:
+[08:25:49]      [uL]Chris42O
+[08:25:49]      [uL]Slice
+[08:25:49]      [uL]Pottus
+[08:25:49] -------------------------------------------------
+[08:25:49] 
+[08:25:49] Loading...
+[08:25:49] ColAndreas v1.4.0 Loaded.
+[08:25:49]   Loaded.
+[08:25:49]  Loaded 5 plugins.
+
+[08:25:49] 
+[08:25:49] Filterscripts
+[08:25:49] ---------------
+[08:25:49]   Loaded 0 filterscripts.
+
+[08:25:54] Loaded collision data.
+[08:25:54]  
+[08:25:54]  
+[08:25:54]          ==============================================================
+[08:25:54]          |                                                            |
+[08:25:54]          |                                                            |
+[08:25:54]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[08:25:54]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[08:25:54]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[08:25:54]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[08:25:54]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[08:25:54]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[08:25:54]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[08:25:54]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[08:25:54]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[08:25:54]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[08:25:54]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:25:54]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:25:54]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[08:25:54]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[08:25:54]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[08:25:54]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[08:25:54]          |                                                            |
+[08:25:54]          |                                                            |
+[08:25:54]          |                      (c) 2021 MPL v1.1                     |
+[08:25:54]          |            Alex "Y_Less" Cole and contributors.            |
+[08:25:54]          |                                                            |
+[08:25:54]          |                                                            |
+[08:25:54]          ==============================================================
+[08:25:54]  
+[08:25:54]  
+[08:25:54]  ========================================== 
+[08:25:54]  |                                        | 
+[08:25:54]  |  Missing YSI scriptfiles directories:  | 
+[08:25:54]  |                                        | 
+[08:25:54]  |      /scriptfiles/YSI/fixes/           | 
+[08:25:54]  |      /scriptfiles/YSI/temp/            | 
+[08:25:54]  |                                        | 
+[08:25:54]  ========================================== 
+[08:25:54]  |                                        | 
+[08:25:54]  |   Generating code, this may take a     | 
+[08:25:54]  |  little bit of time.  Note that this   | 
+[08:25:54]  |  code generation works best with the   | 
+[08:25:54]  |     JIT plugin, which you are not      | 
+[08:25:54]  |     currently using.  Get it here:     | 
+[08:25:54]  |                                        | 
+[08:25:54]  |       https://git.io/jit-plugin        | 
+[08:25:54]  |                                        | 
+[08:25:54]  |             Please wait...             | 
+[08:25:54]  |                                        | 
+[08:25:54]  |             Done in 26ms!              | 
+[08:25:54]  |                                        | 
+[08:25:54]  ========================================== 
+[08:25:54]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[08:25:54]  |                                        | 
+[08:25:54]  | Server:      0.3.7-R2 (L)              | 
+[08:25:54]  | Started:     18 Nov 2026 - 08:25:54    | 
+[08:25:54]  |                                        | 
+[08:25:54]  | Compiler:    3.10.10 (Linux)           | 
+[08:25:54]  | Includes:    0.3DL                     | 
+[08:25:54]  | Codepage:    <none>                    | 
+[08:25:54]  | Built:       18 Nov 2026 - 08:23:56    | 
+[08:25:54]  |                                        | 
+[08:25:54]  | YSI:         v05.10.0006               | 
+[08:25:54]  | Master:      -1                        | 
+[08:25:54]  |                                        | 
+[08:25:54]  | JIT:         <none>                    | 
+[08:25:54]  | Crashdetect: <none>                    | 
+[08:25:54]  |                                        | 
+[08:25:54]  ========================================== 
+[08:25:54]  
+[08:25:54]  
+[08:25:54] Loading Map.
+[08:25:54] Loaded Map.                             
+[08:25:54] [2026-11-18 08:25:54][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[08:25:54] [2026-11-18 08:25:54][INFO] [BOOT] LAST STAND siap. Zombie budget 190, zone 10.
+[08:25:54] [2026-11-18 08:25:54][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[08:25:54] Number of vehicle models: 0
+[08:25:54] [2026-11-18 08:25:54][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 134 ms.
+[08:25:57] [2026-11-18 08:25:57][INFO] [BASE] 0 barricade dimuat dari database.
+[08:25:59] [npc:join] ls_zm_10601_37525 has joined the server (199:127.0.0.1)
+[08:25:59] [npc:join] ls_zm_10601_2930 has joined the server (198:127.0.0.1)
+[08:25:59] [npc:join] ls_zm_10601_21018 has joined the server (197:127.0.0.1)
+[08:25:59] [npc:join] ls_zm_10602_65235 has joined the server (196:127.0.0.1)
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS registry item | 18 item diperiksa, 0 cacat
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS registry resep | 9 resep diperiksa, 0 cacat
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS registry struktur | 6 struktur, 0 cacat, wall tier2 limit=16
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0
+[08:26:02] [2026-11-18 08:26:02][INFO] [SELFTEST] 19/19 PASS, 0 FAIL
+[08:26:04] [npc:join] ls_zm_15842_47147 has joined the server (195:127.0.0.1)
+[08:26:04] [npc:join] ls_zm_15842_22688 has joined the server (194:127.0.0.1)
+[08:26:04] [npc:join] ls_zm_15843_45184 has joined the server (193:127.0.0.1)
+[08:26:04] [npc:join] ls_zm_15843_45154 has joined the server (192:127.0.0.1)
+[08:26:04] [npc:join] ls_zm_15843_74598 has joined the server (191:127.0.0.1)
+[08:26:04] [npc:join] ls_zm_15843_59591 has joined the server (190:127.0.0.1)
+[08:26:09] [npc:join] ls_zm_20723_65084 has joined the server (189:127.0.0.1)
+[08:26:09] [npc:join] ls_zm_20724_71902 has joined the server (188:127.0.0.1)
+[08:26:09] [npc:join] ls_zm_20724_15987 has joined the server (187:127.0.0.1)
+[08:26:10] [npc:join] ls_zm_21081_33187 has joined the server (186:127.0.0.1)
+[08:26:10] [npc:join] ls_zm_21082_21542 has joined the server (185:127.0.0.1)
+[08:26:10] [npc:join] ls_zm_21082_24140 has joined the server (184:127.0.0.1)
+[08:26:15] [npc:join] ls_zm_26343_13265 has joined the server (183:127.0.0.1)
+[08:26:15] [npc:join] ls_zm_26343_14694 has joined the server (182:127.0.0.1)
+[08:26:15] [npc:join] ls_zm_26344_38065 has joined the server (181:127.0.0.1)
+[08:26:15] [npc:join] ls_zm_26344_51219 has joined the server (180:127.0.0.1)
+[08:26:20] [npc:join] ls_zm_31605_35409 has joined the server (179:127.0.0.1)
+[08:26:20] [npc:join] ls_zm_31606_24354 has joined the server (178:127.0.0.1)
+[08:26:20] [npc:join] ls_zm_31606_59714 has joined the server (177:127.0.0.1)
+[08:26:20] [npc:join] ls_zm_31606_80233 has joined the server (176:127.0.0.1)
+[08:26:20] [npc:join] ls_zm_31606_58053 has joined the server (175:127.0.0.1)
+[08:26:25] [npc:join] ls_zm_36863_85706 has joined the server (174:127.0.0.1)
+[08:26:25] [npc:join] ls_zm_36863_71704 has joined the server (173:127.0.0.1)
+[08:26:25] [npc:join] ls_zm_36863_59949 has joined the server (172:127.0.0.1)
+[08:26:25] [npc:join] ls_zm_36864_91149 has joined the server (171:127.0.0.1)
+[08:26:30] [npc:join] ls_zm_41302_67549 has joined the server (170:127.0.0.1)
+[08:26:30] [npc:join] ls_zm_41302_11254 has joined the server (169:127.0.0.1)
+[08:26:30] [npc:join] ls_zm_41303_3878 has joined the server (168:127.0.0.1)
+[08:26:31] [npc:join] ls_zm_42139_75670 has joined the server (167:127.0.0.1)
+[08:26:31] [npc:join] ls_zm_42139_51983 has joined the server (166:127.0.0.1)
+[08:26:31] [npc:join] ls_zm_42139_2780 has joined the server (165:127.0.0.1)
+[08:26:36] [npc:join] ls_zm_47411_52901 has joined the server (164:127.0.0.1)
+[08:26:36] [npc:join] ls_zm_47412_47887 has joined the server (163:127.0.0.1)
+[08:26:36] [npc:join] ls_zm_47412_88952 has joined the server (162:127.0.0.1)
+[08:26:36] [npc:join] ls_zm_47412_36476 has joined the server (161:127.0.0.1)
+[08:26:36] [npc:join] ls_zm_47413_58915 has joined the server (160:127.0.0.1)
+[08:26:41] [npc:join] ls_zm_52700_12033 has joined the server (159:127.0.0.1)
+[08:26:41] [npc:join] ls_zm_52701_41533 has joined the server (158:127.0.0.1)
+[08:26:41] [npc:join] ls_zm_52701_13372 has joined the server (157:127.0.0.1)
+[08:26:41] [npc:join] ls_zm_52701_45797 has joined the server (156:127.0.0.1)
+[08:26:44] --- Server Shutting Down.
+[08:26:44] [npc:part] ls_zm_52701_45797 has left the server (156:0)
+[08:26:44] [npc:part] ls_zm_52701_13372 has left the server (157:0)
+[08:26:44] [npc:part] ls_zm_52701_41533 has left the server (158:0)
+[08:26:44] [npc:part] ls_zm_52700_12033 has left the server (159:0)
+[08:26:44] [npc:part] ls_zm_47413_58915 has left the server (160:0)
+[08:26:44] [npc:part] ls_zm_47412_36476 has left the server (161:0)
+[08:26:44] [npc:part] ls_zm_47412_88952 has left the server (162:0)
+[08:26:44] [npc:part] ls_zm_47412_47887 has left the server (163:0)
+[08:26:44] [npc:part] ls_zm_47411_52901 has left the server (164:0)
+[08:26:44] [npc:part] ls_zm_42139_2780 has left the server (165:0)
+[08:26:44] [npc:part] ls_zm_42139_51983 has left the server (166:0)
+[08:26:44] [npc:part] ls_zm_42139_75670 has left the server (167:0)
+[08:26:44] [npc:part] ls_zm_41303_3878 has left the server (168:0)
+[08:26:44] [npc:part] ls_zm_41302_11254 has left the server (169:0)
+[08:26:44] [npc:part] ls_zm_41302_67549 has left the server (170:0)
+[08:26:44] [npc:part] ls_zm_36864_91149 has left the server (171:0)
+[08:26:44] [npc:part] ls_zm_36863_59949 has left the server (172:0)
+[08:26:44] [npc:part] ls_zm_36863_71704 has left the server (173:0)
+[08:26:44] [npc:part] ls_zm_36863_85706 has left the server (174:0)
+[08:26:44] [npc:part] ls_zm_31606_58053 has left the server (175:0)
+[08:26:44] [npc:part] ls_zm_31606_80233 has left the server (176:0)
+[08:26:44] [npc:part] ls_zm_31606_59714 has left the server (177:0)
+[08:26:44] [npc:part] ls_zm_31606_24354 has left the server (178:0)
+[08:26:44] [npc:part] ls_zm_31605_35409 has left the server (179:0)
+[08:26:44] [npc:part] ls_zm_26344_51219 has left the server (180:0)
+[08:26:44] [npc:part] ls_zm_26344_38065 has left the server (181:0)
+[08:26:44] [npc:part] ls_zm_26343_14694 has left the server (182:0)
+[08:26:44] [npc:part] ls_zm_26343_13265 has left the server (183:0)
+[08:26:44] [npc:part] ls_zm_21082_24140 has left the server (184:0)
+[08:26:44] [npc:part] ls_zm_21082_21542 has left the server (185:0)
+[08:26:44] [npc:part] ls_zm_21081_33187 has left the server (186:0)
+[08:26:44] [npc:part] ls_zm_20724_15987 has left the server (187:0)
+[08:26:44] [npc:part] ls_zm_20724_71902 has left the server (188:0)
+[08:26:44] [npc:part] ls_zm_20723_65084 has left the server (189:0)
+[08:26:44] [npc:part] ls_zm_15843_59591 has left the server (190:0)
+[08:26:44] [npc:part] ls_zm_15843_74598 has left the server (191:0)
+[08:26:44] [npc:part] ls_zm_15843_45154 has left the server (192:0)
+[08:26:44] [npc:part] ls_zm_15843_45184 has left the server (193:0)
+[08:26:44] [npc:part] ls_zm_15842_22688 has left the server (194:0)
+[08:26:44] [npc:part] ls_zm_15842_47147 has left the server (195:0)
+[08:26:44] [npc:part] ls_zm_10602_65235 has left the server (196:0)
+[08:26:44] [npc:part] ls_zm_10601_21018 has left the server (197:0)
+[08:26:44] [npc:part] ls_zm_10601_2930 has left the server (198:0)
+[08:26:44] [npc:part] ls_zm_10601_37525 has left the server (199:0)
+[08:26:44] [2026-11-18 08:26:44][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[08:26:44] plugin.mysql: Unloading plugin...
+[08:26:44] plugin.mysql: Plugin unloaded.
+[08:26:44] 
+[08:26:44]  ===============================
+[08:26:44] 
+[08:26:44]      sscanf plugin unloaded.    
+[08:26:44] 
+[08:26:44]  ===============================
+[08:26:44] 
+[08:26:44] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[08:26:44] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[08:26:47] 
+[08:26:47] Server Plugins
+[08:26:47] --------------
+[08:26:47]  Loading plugin: mysql.so
+[08:26:47]  >> plugin.mysql: R41-4 successfully loaded.
+[08:26:47]   Loaded.
+[08:26:47]  Loading plugin: sscanf.so
+[08:26:47] 
+[08:26:47]  ===============================
+[08:26:47] 
+[08:26:47]       sscanf plugin loaded.     
+[08:26:47] 
+[08:26:47]          Version: 2.13.8
+[08:26:47] 
+[08:26:47]    (c) 2022 Alex "Y_Less" Cole  
+[08:26:47] 
+[08:26:47]  ===============================
+[08:26:47] 
+[08:26:47]   Loaded.
+[08:26:47]  Loading plugin: ColAndreas.so
+[08:26:47]   Plugin does not conform to architecture.
+[08:26:47]   Failed.
+[08:26:47]  Loading plugin: streamer.so
+[08:26:47] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[08:26:47]   Loaded.
+[08:26:47]  Loading plugin: samp_bcrypt.so
+[08:26:47] [SampBcrypt] [info]: Version: 0.4.1
+[08:26:47]   Loaded.
+[08:26:47]  Loading plugin: FCNPC.so
+[08:26:47] 
+[08:26:47] -------------------------------------------------
+[08:26:47]      FCNPC - Fully Controllable NPC v2.0.11
+[08:26:47]             GNU/Linux SA-MP 0.3.7 R2
+[08:26:47]            Aug 23 2024 at 16:35:48
+[08:26:47] 
+[08:26:47]   Author:       OrMisicL (2013 - 2015)
+[08:26:47]   Continued by: ziggi    (2016 - present)
+[08:26:47] 
+[08:26:47]   See full credits in the README.md file
+[08:26:47] -------------------------------------------------
+[08:26:47] 
+[08:26:47] Loading...
+[08:26:47] 
+[08:26:47] -------------------------------------------------
+[08:26:47]    ColAndreasv1.4.0
+[08:26:47] 
+[08:26:47]    Created By:
+[08:26:47]      [uL]Chris42O
+[08:26:47]      [uL]Slice
+[08:26:47]      [uL]Pottus
+[08:26:47] -------------------------------------------------
+[08:26:47] 
+[08:26:47] Loading...
+[08:26:47] ColAndreas v1.4.0 Loaded.
+[08:26:47]   Loaded.
+[08:26:47]  Loaded 5 plugins.
+
+[08:26:47] 
+[08:26:47] Filterscripts
+[08:26:47] ---------------
+[08:26:47]   Loaded 0 filterscripts.
+
+[08:26:53] Loaded collision data.
+[08:26:53]  
+[08:26:53]  
+[08:26:53]          ==============================================================
+[08:26:53]          |                                                            |
+[08:26:53]          |                                                            |
+[08:26:53]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[08:26:53]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[08:26:53]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[08:26:53]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[08:26:53]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[08:26:53]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[08:26:53]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[08:26:53]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[08:26:53]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[08:26:53]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[08:26:53]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:26:53]          |           Y:::::Y                    S:::::S   I::::I      |
+[08:26:53]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[08:26:53]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[08:26:53]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[08:26:53]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[08:26:53]          |                                                            |
+[08:26:53]          |                                                            |
+[08:26:53]          |                      (c) 2021 MPL v1.1                     |
+[08:26:53]          |            Alex "Y_Less" Cole and contributors.            |
+[08:26:53]          |                                                            |
+[08:26:53]          |                                                            |
+[08:26:53]          ==============================================================
+[08:26:53]  
+[08:26:53]  
+[08:26:53]  ========================================== 
+[08:26:53]  |                                        | 
+[08:26:53]  |  Missing YSI scriptfiles directories:  | 
+[08:26:53]  |                                        | 
+[08:26:53]  |      /scriptfiles/YSI/fixes/           | 
+[08:26:53]  |      /scriptfiles/YSI/temp/            | 
+[08:26:53]  |                                        | 
+[08:26:53]  ========================================== 
+[08:26:53]  |                                        | 
+[08:26:53]  |   Generating code, this may take a     | 
+[08:26:53]  |  little bit of time.  Note that this   | 
+[08:26:53]  |  code generation works best with the   | 
+[08:26:53]  |     JIT plugin, which you are not      | 
+[08:26:53]  |     currently using.  Get it here:     | 
+[08:26:53]  |                                        | 
+[08:26:53]  |       https://git.io/jit-plugin        | 
+[08:26:53]  |                                        | 
+[08:26:53]  |             Please wait...             | 
+[08:26:53]  |                                        | 
+[08:26:53]  |             Done in 25ms!              | 
+[08:26:53]  |                                        | 
+[08:26:53]  ========================================== 
+[08:26:53]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[08:26:53]  |                                        | 
+[08:26:53]  | Server:      0.3.7-R2 (L)              | 
+[08:26:53]  | Started:     18 Nov 2026 - 08:26:53    | 
+[08:26:53]  |                                        | 
+[08:26:53]  | Compiler:    3.10.10 (Linux)           | 
+[08:26:53]  | Includes:    0.3DL                     | 
+[08:26:53]  | Codepage:    <none>                    | 
+[08:26:53]  | Built:       18 Nov 2026 - 08:26:41    | 
+[08:26:53]  |                                        | 
+[08:26:53]  | YSI:         v05.10.0006               | 
+[08:26:53]  | Master:      -1                        | 
+[08:26:53]  |                                        | 
+[08:26:53]  | JIT:         <none>                    | 
+[08:26:53]  | Crashdetect: <none>                    | 
+[08:26:53]  |                                        | 
+[08:26:53]  ========================================== 
+[08:26:53]  
+[08:26:53]  
+[08:26:53] Loading Map.
+[08:26:53] Loaded Map.                             
+[08:26:53] [2026-11-18 08:26:53][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[08:26:53] [2026-11-18 08:26:53][INFO] [BOOT] LAST STAND siap. Zombie budget 190, zone 10.
+[08:26:53] [2026-11-18 08:26:53][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[08:26:53] Number of vehicle models: 0
+[08:26:53] [2026-11-18 08:26:53][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 162 ms.
+[08:26:56] [2026-11-18 08:26:56][INFO] [BASE] 0 barricade dimuat dari database.
+[08:26:58] [npc:join] ls_zm_10681_50944 has joined the server (199:127.0.0.1)
+[08:26:58] [npc:join] ls_zm_10682_60378 has joined the server (198:127.0.0.1)
+[08:26:58] [npc:join] ls_zm_10682_58164 has joined the server (197:127.0.0.1)
+[08:26:58] [npc:join] ls_zm_10682_3643 has joined the server (196:127.0.0.1)
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS registry item | 18 item diperiksa, 0 cacat
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS registry resep | 9 resep diperiksa, 0 cacat
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS registry struktur | 6 struktur, 0 cacat, wall tier2 limit=16
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0
+[08:27:01] [2026-11-18 08:27:01][INFO] [SELFTEST] 19/19 PASS, 0 FAIL
+[08:27:03] [npc:join] ls_zm_15920_1372 has joined the server (195:127.0.0.1)
+[08:27:03] [npc:join] ls_zm_15920_2775 has joined the server (194:127.0.0.1)
+[08:27:03] [npc:join] ls_zm_15920_16947 has joined the server (193:127.0.0.1)
+[08:27:03] [npc:join] ls_zm_15921_1810 has joined the server (192:127.0.0.1)
+[08:27:08] [npc:join] ls_zm_20810_45013 has joined the server (191:127.0.0.1)
+[08:27:08] [npc:join] ls_zm_20810_72228 has joined the server (190:127.0.0.1)
+[08:27:08] [npc:join] ls_zm_20811_18051 has joined the server (189:127.0.0.1)
+[08:27:08] [npc:join] ls_zm_21162_58749 has joined the server (188:127.0.0.1)
+[08:27:08] [npc:join] ls_zm_21163_2836 has joined the server (187:127.0.0.1)
+[08:27:08] [npc:join] ls_zm_21163_39635 has joined the server (186:127.0.0.1)
+[08:27:14] [npc:join] ls_zm_26413_42014 has joined the server (185:127.0.0.1)
+[08:27:14] [npc:join] ls_zm_26413_18237 has joined the server (184:127.0.0.1)
+[08:27:19] [npc:join] ls_zm_31671_93061 has joined the server (183:127.0.0.1)
+[08:27:19] [npc:join] ls_zm_31671_15316 has joined the server (182:127.0.0.1)
+[08:27:19] [npc:join] ls_zm_31671_26549 has joined the server (181:127.0.0.1)
+[08:27:19] [npc:join] ls_zm_31672_79905 has joined the server (180:127.0.0.1)
+[08:27:19] [npc:join] ls_zm_31672_15830 has joined the server (179:127.0.0.1)
+[08:27:29] [npc:join] ls_zm_41380_78787 has joined the server (178:127.0.0.1)
+[08:27:29] [npc:join] ls_zm_41381_82269 has joined the server (177:127.0.0.1)
+[08:27:29] [npc:join] ls_zm_41381_82198 has joined the server (176:127.0.0.1)
+[08:27:49] [npc:join] ls_zm_61947_50916 has joined the server (175:127.0.0.1)
+[08:27:49] [npc:join] ls_zm_61947_65441 has joined the server (174:127.0.0.1)
+[08:27:49] [npc:join] ls_zm_61947_8715 has joined the server (173:127.0.0.1)
+[08:28:10] [npc:join] ls_zm_82535_97282 has joined the server (172:127.0.0.1)
+[08:28:10] [npc:join] ls_zm_82535_27742 has joined the server (171:127.0.0.1)
+[08:28:10] [npc:join] ls_zm_82536_83396 has joined the server (170:127.0.0.1)
+[08:28:30] [npc:join] ls_zm_103132_84176 has joined the server (169:127.0.0.1)
+[08:28:30] [npc:join] ls_zm_103133_75986 has joined the server (168:127.0.0.1)
+[08:28:30] [npc:join] ls_zm_103133_60178 has joined the server (167:127.0.0.1)
+[08:28:51] [npc:join] ls_zm_123756_26064 has joined the server (166:127.0.0.1)
+[08:28:51] [npc:join] ls_zm_123757_33687 has joined the server (165:127.0.0.1)
+[08:28:51] [npc:join] ls_zm_123757_6370 has joined the server (164:127.0.0.1)
+[08:29:12] [npc:join] ls_zm_144373_78233 has joined the server (163:127.0.0.1)
+[08:29:12] [npc:join] ls_zm_144373_23209 has joined the server (162:127.0.0.1)
+[08:29:12] [npc:join] ls_zm_144373_40689 has joined the server (161:127.0.0.1)
+[08:29:32] [npc:join] ls_zm_165034_81222 has joined the server (160:127.0.0.1)
+[08:29:32] [npc:join] ls_zm_165035_51764 has joined the server (159:127.0.0.1)
+[08:29:32] [npc:join] ls_zm_165035_95921 has joined the server (158:127.0.0.1)
+[08:29:53] [npc:join] ls_zm_185720_73978 has joined the server (157:127.0.0.1)
+[08:29:53] [npc:join] ls_zm_185721_20372 has joined the server (156:127.0.0.1)
+[08:29:53] [npc:join] ls_zm_185721_4894 has joined the server (155:127.0.0.1)
+[08:30:14] [npc:join] ls_zm_206452_9821 has joined the server (154:127.0.0.1)
+[08:30:14] [npc:join] ls_zm_206452_97404 has joined the server (153:127.0.0.1)
+[08:30:14] [npc:join] ls_zm_206452_13139 has joined the server (152:127.0.0.1)
+[08:30:34] [npc:join] ls_zm_227181_71482 has joined the server (151:127.0.0.1)
+[08:30:34] [npc:join] ls_zm_227182_27754 has joined the server (150:127.0.0.1)
+[08:30:34] [npc:join] ls_zm_227182_73543 has joined the server (149:127.0.0.1)
+[08:30:55] [npc:join] ls_zm_247903_45688 has joined the server (148:127.0.0.1)
+[08:30:55] [npc:join] ls_zm_247903_4341 has joined the server (147:127.0.0.1)
+[08:30:55] [npc:join] ls_zm_247904_52602 has joined the server (146:127.0.0.1)
+[08:31:16] [npc:join] ls_zm_268601_40163 has joined the server (145:127.0.0.1)
+[08:31:16] [npc:join] ls_zm_268601_84705 has joined the server (144:127.0.0.1)
+[08:31:16] [npc:join] ls_zm_268602_76963 has joined the server (143:127.0.0.1)
+[08:31:37] [npc:join] ls_zm_289350_38912 has joined the server (142:127.0.0.1)
+[08:31:37] [npc:join] ls_zm_289351_44704 has joined the server (141:127.0.0.1)
+[08:31:37] [npc:join] ls_zm_289351_22470 has joined the server (140:127.0.0.1)
+[08:31:57] [npc:join] ls_zm_310090_46562 has joined the server (139:127.0.0.1)
+[08:31:57] [npc:join] ls_zm_310090_25457 has joined the server (138:127.0.0.1)
+[08:31:57] [npc:join] ls_zm_310090_12851 has joined the server (137:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314807_44132 has joined the server (136:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314807_24516 has joined the server (135:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314807_58282 has joined the server (134:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314807_67251 has joined the server (133:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314808_691 has joined the server (132:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314808_84113 has joined the server (131:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314808_20067 has joined the server (130:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314808_11006 has joined the server (129:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314808_50669 has joined the server (128:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314809_32076 has joined the server (127:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314809_12220 has joined the server (126:127.0.0.1)
+[08:32:02] [npc:join] ls_zm_314809_43188 has joined the server (125:127.0.0.1)
+[08:32:18] [npc:join] ls_zm_330903_20947 has joined the server (124:127.0.0.1)
+[08:32:18] [npc:join] ls_zm_330904_2090 has joined the server (123:127.0.0.1)
+[08:32:18] [npc:join] ls_zm_330904_67322 has joined the server (122:127.0.0.1)
+[08:32:39] [npc:join] ls_zm_351750_51908 has joined the server (121:127.0.0.1)
+[08:32:39] [npc:join] ls_zm_351751_73608 has joined the server (120:127.0.0.1)
+[08:32:39] [npc:join] ls_zm_351751_15555 has joined the server (119:127.0.0.1)
+[08:33:00] [npc:join] ls_zm_372601_3154 has joined the server (118:127.0.0.1)
+[08:33:00] [npc:join] ls_zm_372601_40025 has joined the server (117:127.0.0.1)
+[08:33:00] [npc:join] ls_zm_372602_11051 has joined the server (116:127.0.0.1)
+[08:33:21] [npc:join] ls_zm_393469_74099 has joined the server (115:127.0.0.1)
+[08:33:21] [npc:join] ls_zm_393469_79529 has joined the server (114:127.0.0.1)
+[08:33:21] [npc:join] ls_zm_393470_35879 has joined the server (113:127.0.0.1)
+[08:33:42] [npc:join] ls_zm_414367_33252 has joined the server (112:127.0.0.1)
+[08:33:42] [npc:join] ls_zm_414368_60334 has joined the server (111:127.0.0.1)
+[08:33:42] [npc:join] ls_zm_414368_26760 has joined the server (110:127.0.0.1)
+[08:33:49] --- Server Shutting Down.
+[08:33:49] [npc:part] ls_zm_414368_26760 has left the server (110:0)
+[08:33:49] [npc:part] ls_zm_414368_60334 has left the server (111:0)
+[08:33:49] [npc:part] ls_zm_414367_33252 has left the server (112:0)
+[08:33:49] [npc:part] ls_zm_393470_35879 has left the server (113:0)
+[08:33:49] [npc:part] ls_zm_393469_79529 has left the server (114:0)
+[08:33:49] [npc:part] ls_zm_393469_74099 has left the server (115:0)
+[08:33:49] [npc:part] ls_zm_372602_11051 has left the server (116:0)
+[08:33:49] [npc:part] ls_zm_372601_40025 has left the server (117:0)
+[08:33:49] [npc:part] ls_zm_372601_3154 has left the server (118:0)
+[08:33:49] [npc:part] ls_zm_351751_15555 has left the server (119:0)
+[08:33:49] [npc:part] ls_zm_351751_73608 has left the server (120:0)
+[08:33:49] [npc:part] ls_zm_351750_51908 has left the server (121:0)
+[08:33:49] [npc:part] ls_zm_330904_67322 has left the server (122:0)
+[08:33:49] [npc:part] ls_zm_330904_2090 has left the server (123:0)
+[08:33:49] [npc:part] ls_zm_330903_20947 has left the server (124:0)
+[08:33:49] [npc:part] ls_zm_314809_43188 has left the server (125:0)
+[08:33:49] [npc:part] ls_zm_314809_12220 has left the server (126:0)
+[08:33:49] [npc:part] ls_zm_314809_32076 has left the server (127:0)
+[08:33:49] [npc:part] ls_zm_314808_50669 has left the server (128:0)
+[08:33:49] [npc:part] ls_zm_314808_11006 has left the server (129:0)
+[08:33:49] [npc:part] ls_zm_314808_20067 has left the server (130:0)
+[08:33:49] [npc:part] ls_zm_314808_84113 has left the server (131:0)
+[08:33:49] [npc:part] ls_zm_314808_691 has left the server (132:0)
+[08:33:49] [npc:part] ls_zm_314807_67251 has left the server (133:0)
+[08:33:49] [npc:part] ls_zm_314807_58282 has left the server (134:0)
+[08:33:49] [npc:part] ls_zm_314807_24516 has left the server (135:0)
+[08:33:49] [npc:part] ls_zm_314807_44132 has left the server (136:0)
+[08:33:49] [npc:part] ls_zm_310090_12851 has left the server (137:0)
+[08:33:49] [npc:part] ls_zm_310090_25457 has left the server (138:0)
+[08:33:49] [npc:part] ls_zm_310090_46562 has left the server (139:0)
+[08:33:49] [npc:part] ls_zm_289351_22470 has left the server (140:0)
+[08:33:49] [npc:part] ls_zm_289351_44704 has left the server (141:0)
+[08:33:49] [npc:part] ls_zm_289350_38912 has left the server (142:0)
+[08:33:49] [npc:part] ls_zm_268602_76963 has left the server (143:0)
+[08:33:49] [npc:part] ls_zm_268601_84705 has left the server (144:0)
+[08:33:49] [npc:part] ls_zm_268601_40163 has left the server (145:0)
+[08:33:49] [npc:part] ls_zm_247904_52602 has left the server (146:0)
+[08:33:49] [npc:part] ls_zm_247903_4341 has left the server (147:0)
+[08:33:49] [npc:part] ls_zm_247903_45688 has left the server (148:0)
+[08:33:49] [npc:part] ls_zm_227182_73543 has left the server (149:0)
+[08:33:49] [npc:part] ls_zm_227182_27754 has left the server (150:0)
+[08:33:49] [npc:part] ls_zm_227181_71482 has left the server (151:0)
+[08:33:49] [npc:part] ls_zm_206452_13139 has left the server (152:0)
+[08:33:49] [npc:part] ls_zm_206452_97404 has left the server (153:0)
+[08:33:49] [npc:part] ls_zm_206452_9821 has left the server (154:0)
+[08:33:49] [npc:part] ls_zm_185721_4894 has left the server (155:0)
+[08:33:49] [npc:part] ls_zm_185721_20372 has left the server (156:0)
+[08:33:49] [npc:part] ls_zm_185720_73978 has left the server (157:0)
+[08:33:49] [npc:part] ls_zm_165035_95921 has left the server (158:0)
+[08:33:49] [npc:part] ls_zm_165035_51764 has left the server (159:0)
+[08:33:49] [npc:part] ls_zm_165034_81222 has left the server (160:0)
+[08:33:49] [npc:part] ls_zm_144373_40689 has left the server (161:0)
+[08:33:49] [npc:part] ls_zm_144373_23209 has left the server (162:0)
+[08:33:49] [npc:part] ls_zm_144373_78233 has left the server (163:0)
+[08:33:49] [npc:part] ls_zm_123757_6370 has left the server (164:0)
+[08:33:49] [npc:part] ls_zm_123757_33687 has left the server (165:0)
+[08:33:49] [npc:part] ls_zm_123756_26064 has left the server (166:0)
+[08:33:49] [npc:part] ls_zm_103133_60178 has left the server (167:0)
+[08:33:49] [npc:part] ls_zm_103133_75986 has left the server (168:0)
+[08:33:49] [npc:part] ls_zm_103132_84176 has left the server (169:0)
+[08:33:49] [npc:part] ls_zm_82536_83396 has left the server (170:0)
+[08:33:49] [npc:part] ls_zm_82535_27742 has left the server (171:0)
+[08:33:49] [npc:part] ls_zm_82535_97282 has left the server (172:0)
+[08:33:49] [npc:part] ls_zm_61947_8715 has left the server (173:0)
+[08:33:49] [npc:part] ls_zm_61947_65441 has left the server (174:0)
+[08:33:49] [npc:part] ls_zm_61947_50916 has left the server (175:0)
+[08:33:49] [npc:part] ls_zm_41381_82198 has left the server (176:0)
+[08:33:49] [npc:part] ls_zm_41381_82269 has left the server (177:0)
+[08:33:49] [npc:part] ls_zm_41380_78787 has left the server (178:0)
+[08:33:49] [npc:part] ls_zm_31672_15830 has left the server (179:0)
+[08:33:49] [npc:part] ls_zm_31672_79905 has left the server (180:0)
+[08:33:49] [npc:part] ls_zm_31671_26549 has left the server (181:0)
+[08:33:49] [npc:part] ls_zm_31671_15316 has left the server (182:0)
+[08:33:49] [npc:part] ls_zm_31671_93061 has left the server (183:0)
+[08:33:49] [npc:part] ls_zm_26413_18237 has left the server (184:0)
+[08:33:49] [npc:part] ls_zm_26413_42014 has left the server (185:0)
+[08:33:49] [npc:part] ls_zm_21163_39635 has left the server (186:0)
+[08:33:49] [npc:part] ls_zm_21163_2836 has left the server (187:0)
+[08:33:49] [npc:part] ls_zm_21162_58749 has left the server (188:0)
+[08:33:49] [npc:part] ls_zm_20811_18051 has left the server (189:0)
+[08:33:49] [npc:part] ls_zm_20810_72228 has left the server (190:0)
+[08:33:49] [npc:part] ls_zm_20810_45013 has left the server (191:0)
+[08:33:49] [npc:part] ls_zm_15921_1810 has left the server (192:0)
+[08:33:49] [npc:part] ls_zm_15920_16947 has left the server (193:0)
+[08:33:49] [npc:part] ls_zm_15920_2775 has left the server (194:0)
+[08:33:49] [npc:part] ls_zm_15920_1372 has left the server (195:0)
+[08:33:49] [npc:part] ls_zm_10682_3643 has left the server (196:0)
+[08:33:49] [npc:part] ls_zm_10682_58164 has left the server (197:0)
+[08:33:49] [npc:part] ls_zm_10682_60378 has left the server (198:0)
+[08:33:49] [npc:part] ls_zm_10681_50944 has left the server (199:0)
+[08:33:49] [2026-11-18 08:33:49][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[08:33:49] plugin.mysql: Unloading plugin...
+[08:33:49] plugin.mysql: Plugin unloaded.
+[08:33:49] 
+[08:33:49]  ===============================
+[08:33:49] 
+[08:33:49]      sscanf plugin unloaded.    
+[08:33:49] 
+[08:33:49]  ===============================
+[08:33:49] 
+[08:33:49] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[08:33:49] [FCNPC] Info: Plugin unloaded.

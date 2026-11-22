@@ -1,54 +1,8 @@
-dependencies/
-pawn.lock
-*.amx
-server/
-scriptfiles/logs/
-scriptfiles/players/
-mysql.ini
-*.log
-samp03svr
-samp-npc
-announce
-npcmodes/
-plugins/
-filterscripts/
-server.cfg
-
-# plugin runtime artifacts
-plugins/*.so
-log-core.so
-mysql.ini
-
-# Data collision ColAndreas (54 MB, hasil generate, tidak ikut repo)
-scriptfiles/colandreas/*.cadb
-scriptfiles/ColAndreas/*.cadb
-
-# Kunci admin runtime (rotasi tanpa compile, jangan masuk repo)
-scriptfiles/admin_keys.cfg
-runtime/*/scriptfiles/admin_keys.cfg
-
-# instance runtime (server.cfg, pid, log per server)
-runtime/
-
-# salinan kredensial untuk Tx_Boot (sandbox fopen PAWN)
-scriptfiles/mysql.ini
-
-# load test bot password (runtime-generated)
-tools/loadtest/.bot_password
-tools/loadtest/last_report.json
-.ltvenv/
-
-# Artefak lokal / sesi agen
-.freebuff/
-fcnpc-crash_*.txt
-server_log.txt
-logs/
-backups/
-announce
+# Repo ini sengaja menyimpan SELURUH artefak proyek (plugin, dependency,
+# data ColAndreas, runtime, log, backup) supaya bisa dijalankan tanpa langkah
+# tambahan. Tidak ada pengecualian besar di sini.
+#
+# Yang tetap diabaikan hanya sampah proses yang berubah tiap detik dan bukan
+# bagian dari hasil kerja:
 *.pid
-
-# Vendor docs besar untuk load test
-tools/loadtest/vendor/
-
-# Tooling agen (vendor, 16 MB) — bukan sumber proyek
-.agents/
+*.core

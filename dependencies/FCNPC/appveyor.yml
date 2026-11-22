@@ -1,0 +1,28 @@
+version: '{build}'
+image:
+- Visual Studio 2015
+
+clone_folder: c:\projects\FCNPC
+clone_script:
+- cmd: git clone -q --recursive --branch=%APPVEYOR_REPO_BRANCH% https://github.com/%APPVEYOR_REPO_NAME%.git %APPVEYOR_BUILD_FOLDER%
+- cmd: git checkout -qf %APPVEYOR_REPO_COMMIT%
+
+configuration:
+  - RelWithDebInfo
+  - Release
+
+before_build:
+- cmd: |-
+    mkdir build
+    cd build
+    cmake --version
+    cmake .. -A Win32
+
+build:
+  project: build\FCNPC.sln
+  verbosity: minimal
+  parallel: true
+
+artifacts:
+  - path: build\lib\$(configuration)\*.dll
+    name: Binary package

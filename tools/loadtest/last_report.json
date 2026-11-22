@@ -1,0 +1,512 @@
+{
+  "count": 100,
+  "states": {
+    "disconnected": 95,
+    "connect_failed": 5
+  },
+  "spawned": 0,
+  "errors": [
+    {
+      "nick": "LoadBot_001",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_002",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_003",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_004",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_005",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_006",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_007",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_008",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_009",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_010",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_011",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_012",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_013",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_014",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_015",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_016",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_017",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_018",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_019",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_020",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_021",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_022",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_023",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_024",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_025",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_026",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_027",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_028",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_029",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_030",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_031",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_032",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_033",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_034",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_035",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_036",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_037",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_038",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_039",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_040",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_041",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_042",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_043",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_044",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_045",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_046",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_047",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_048",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_049",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_050",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_051",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_052",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_053",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_054",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_055",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_056",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_057",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_058",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_059",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_060",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_061",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_062",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_063",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_064",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_065",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_066",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_067",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_068",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_069",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_070",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_071",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_072",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_073",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_074",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_075",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_076",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_077",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_078",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_079",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_080",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_081",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_082",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_083",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_084",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_085",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_086",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_087",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_088",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_089",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_090",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_091",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_092",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_093",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_094",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_095",
+      "state": "disconnected",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_096",
+      "state": "connect_failed",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_097",
+      "state": "connect_failed",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_098",
+      "state": "connect_failed",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_099",
+      "state": "connect_failed",
+      "error": null
+    },
+    {
+      "nick": "LoadBot_100",
+      "state": "connect_failed",
+      "error": null
+    }
+  ],
+  "spawn_seconds_avg": 13.33,
+  "timestamp": "2026-11-19 13:15:32"
+}
