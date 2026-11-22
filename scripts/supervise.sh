@@ -30,6 +30,11 @@ mkdir -p "$ROOT/backups"
 # crash, restart terencana lebih dulu supaya pemain tersimpan rapi.
 MEM_LIMIT_MB="${MEM_LIMIT_MB:-1200}"
 
+# Core dump: server 32-bit bisa mati tanpa jejak di server_log (crashdetect
+# hanya menangkap exception AMX, bukan segfault plugin native). Tanpa core,
+# penyebab kematian 06:42 tadi tidak bisa dibuktikan.
+ulimit -c unlimited 2>/dev/null || true
+
 # Cek pid saja tidak cukup: pid bisa dipakai ulang proses lain setelah server
 # mati, sehingga supervisor mengira server hidup dan berhenti menyalakan ulang
 # (kejadian 19-22 Nov: server mati 2 hari, supervisor diam karena pid 121587

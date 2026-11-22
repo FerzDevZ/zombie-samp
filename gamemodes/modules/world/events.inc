@@ -85,7 +85,7 @@ stock Event_BloodMoon()
 stock Event_QuietHour()
 {
     EventQuietUntil = gettime() + EVENT_QUIET_S;
-    Toast_NotifyAll("JAM TENANG", "Radius noise -50% selama 2 menit. Waktu untuk bergerak.", UI_ACCENT_PRIMARY);
+    Toast_NotifyAll("JAM TENANG", "Radius noise -50 persen selama 2 menit. Waktu untuk bergerak.", UI_ACCENT_PRIMARY);
     return 1;
 }
 

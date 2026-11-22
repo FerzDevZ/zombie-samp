@@ -19,17 +19,25 @@
 
 static NpcBudgetLastWarnTick = 0;
 
-/* Sensus slot: hanya menghitung slot terpakai, bukan logika pemain.
-   Batas loop = GetPlayerPoolSize() (slot tertinggi yang terpakai), bukan MAX_PLAYERS. */
+/* Sensus slot = pemain nyata + NPC milik kita.
+   Dua hitungan sebelumnya sama-sama salah:
+   - IsPlayerConnected saja: NPC FCNPC tidak selalu connected, jadi guard
+     meloloskan create saat pool penuh (`FCNPC_Create gagal ... poolsize=399
+     pakai=300`, 22-11 07:51).
+   - GetPlayerPoolSize()+1 saja: FCNPC memakai id tinggi, poolsize langsung
+     399 walau pemain 1, sehingga semua zombie ditolak (soak 08:11, zombie 0).
+   Karena itu NPC dihitung dari counter sendiri, bukan dari API pemain. */
+forward Zombie_NpcCountForBudget();
+
 stock Npc_OccupiedSlots()
 {
+    new players = 0;
     new highestSlot = GetPlayerPoolSize();
-    new occupied = 0;
     for (new slot = 0; slot <= highestSlot; slot++)
     {
-        if (IsPlayerConnected(slot)) occupied++;
+        if (IsPlayerConnected(slot)) players++;
     }
-    return occupied;
+    return players + Zombie_NpcCountForBudget();
 }
 
 stock Npc_SlotsFree()

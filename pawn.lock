@@ -1,6 +1,6 @@
 {
 	"version": 1,
-	"generated": "2026-11-22T06:21:20.434640024Z",
+	"generated": "2026-11-22T10:51:17.569796751Z",
 	"sampctl_version": "1.16.0",
 	"dependencies": {
 		"github.com/Southclaws/sscanf": {
@@ -168,6 +168,6 @@
 		"compiler_preset": "samp",
 		"entry": "gamemodes/main.pwn",
 		"output": "gamemodes/main.amx",
-		"output_hash": "sha256:b0ffcf1f059f57af251b0107f0091935e38314ea1163324adb672351861ccb9e"
+		"output_hash": "sha256:46aad1ba68762a63bfe855efbc7fd504e1a010bfb5afa5844f1e5d28d278544f"
 	}
 }

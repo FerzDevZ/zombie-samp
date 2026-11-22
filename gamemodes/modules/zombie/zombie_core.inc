@@ -111,15 +111,23 @@ stock Zombie_UpdateSyncRate()
    siklus, terukur di soak 8 menit: 130 siklus = 163 MB), jadi NPC zombie
    diparkir di dunia terpisah dan dihidupkan lagi saat spawn berikutnya. */
 #define ZOMBIE_POOL_PARKED_WORLD   (60000)
+/* Pool parkir berbagi slot pemain dengan bot/actor. Tanpa batas, 91 NPC parkir
+   pernah memakan 293/300 slot (soak 22-11 07:12) dan server mati saat slot
+   habis. 48 cukup untuk menutup churn director tanpa mengunci slot pemain. */
+#define ZOMBIE_PARK_LIMIT          48
 
 new ZombieParkedIds[MAX_ZOMBIE_SLOTS];
 new ZombieParkedCount = 0;
 
+forward Zombie_QueueDestroy(zombieid);
+
 stock Zombie_Park(zombieid)
 {
-    if (ZombieParkedCount >= MAX_ZOMBIE_SLOTS)
+    if (ZombieParkedCount >= ZOMBIE_PARK_LIMIT)
     {
-        FCNPC_Destroy(zombieid);
+        /* Buang lewat antrean, bukan FCNPC_Destroy langsung: destroy dari dalam
+           callback/timer trim memicu SIGSEGV _IO_vsprintf (invariant Destroy/Deferred). */
+        Zombie_QueueDestroy(zombieid);
         return 0;
     }
 
@@ -134,6 +142,13 @@ stock Zombie_Park(zombieid)
     FCNPC_SetPosition(zombieid, 0.0, 0.0, -200.0);
     ZombieParkedIds[ZombieParkedCount++] = zombieid;
     return 1;
+}
+
+/* Jumlah NPC zombie yang memegang slot pemain: aktif + parkir.
+   Dipakai npc_budget.inc untuk menghitung slot bebas tanpa API pemain. */
+stock Zombie_NpcCountForBudget()
+{
+    return ZombieActiveCount + ZombieParkedCount;
 }
 
 stock Zombie_TakeParked()
@@ -173,7 +188,8 @@ stock Zombie_Create(E_ZOMBIE_TYPE:type, Float:x, Float:y, Float:z, lobbyId = 0)
         zombieid = FCNPC_Create(name);
         if (zombieid == INVALID_PLAYER_ID || zombieid < 0 || zombieid >= MAX_ZOMBIE_SLOTS)
         {
-            Log_Format(LOG_ERROR, "[ZOMBIE] FCNPC_Create gagal untuk tipe %d", _:type);
+            Log_Format(LOG_ERROR, "[ZOMBIE] FCNPC_Create gagal untuk tipe %d (max=%d poolsize=%d pakai=%d parkir=%d nama='%s')",
+                _:type, GetMaxPlayers(), GetPlayerPoolSize(), Npc_OccupiedSlots(), ZombieParkedCount, name);
             return INVALID_ZOMBIE;
         }
     }

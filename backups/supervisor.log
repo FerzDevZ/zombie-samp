@@ -38,3 +38,73 @@ Instans 's1' start (pid 134059), log: /home/boxd/zombie-samp/runtime/s1/server_l
 Instans 's1' start (pid 135180), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
 [2026-11-22 06:20:18] supervisor s1: proses mati, restart #6
 Instans 's1' start (pid 141493), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 06:26:40] supervisor s1: proses mati, restart #7
+Instans 's1' start (pid 143477), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 06:42:03] supervisor s1: proses mati, restart #8
+Instans 's1' start (pid 146965), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 06:47:26] supervisor s1: proses mati, restart #9
+Instans 's1' start (pid 147992), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 07:01:39] supervisor s1: mulai (interval 10s, pid supervisor 149834)
+[2026-11-22 07:01:39] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 149862), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 07:12:01] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 152157), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 07:24:04] supervisor s1: proses mati, restart #3
+Instans 's1' start (pid 155102), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 08:10:22] supervisor s1: mulai (interval 10s, pid supervisor 160423)
+[2026-11-22 08:10:22] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 160450), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 08:25:45] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 164000), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 08:29:09] supervisor s1: mulai (interval 10s, pid supervisor 164746)
+[2026-11-22 08:29:17] supervisor s1: proses mati, restart #3
+Instans 's1' start (pid 164785), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 08:39:40] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 167803), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 08:41:50] supervisor s1: proses mati, restart #4
+Instans 's1' start (pid 168518), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 09:01:02] supervisor s1: mulai (interval 10s, pid supervisor 173185)
+[2026-11-22 09:01:02] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 173212), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 09:17:35] supervisor s1: proses mati, restart #2
+[2026-11-22 09:17:35] supervisor s1: mulai (interval 10s, pid supervisor 178501)
+[2026-11-22 09:17:35] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 178543), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+Instans 's1' start (pid 178557), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 09:27:48] supervisor s1: proses mati, restart #2
+[2026-11-22 09:27:48] supervisor s1: proses mati, restart #3
+Instans 's1' start (pid 183363), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+Instans 's1' start (pid 183365), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 09:30:13] supervisor s1: mulai (interval 10s, pid supervisor 184483)
+[2026-11-22 09:30:13] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 184511), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 09:45:26] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 191967), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 09:45:39] supervisor s1: mulai (interval 10s, pid supervisor 192176)
+[2026-11-22 09:45:39] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 192204), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:01:02] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 195521), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:01:58] supervisor s1: mulai (interval 10s, pid supervisor 195929)
+[2026-11-22 10:01:58] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 195956), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:07:20] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 197354), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:09:54] supervisor s1: mulai (interval 10s, pid supervisor 198144)
+[2026-11-22 10:09:54] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 198171), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:20:17] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 200505), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:22:35] supervisor s1: mulai (interval 10s, pid supervisor 201234)
+[2026-11-22 10:22:35] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 201261), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:27:47] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 202883), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:30:19] supervisor s1: mulai (interval 10s, pid supervisor 203629)
+[2026-11-22 10:30:19] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 203656), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:35:41] supervisor s1: proses mati, restart #2
+Instans 's1' start (pid 204997), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt
+[2026-11-22 10:51:23] supervisor s1: mulai (interval 10s, pid supervisor 208151)
+[2026-11-22 10:51:23] supervisor s1: proses mati, restart #1
+Instans 's1' start (pid 208178), log: /home/boxd/zombie-samp/runtime/s1/server_log.txt

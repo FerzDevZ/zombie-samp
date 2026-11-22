@@ -38,7 +38,7 @@ plugins mysql.so sscanf.so ColAndreas.so streamer.so samp_bcrypt.so FCNPC.so
 rcon_password $rcon
 port $port
 hostname $hostname
-maxplayers 300
+maxplayers 400
 language -
 mapname San Andreas
 weburl www.sa-mp.com
