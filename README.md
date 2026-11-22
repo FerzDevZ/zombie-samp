@@ -33,7 +33,7 @@ Bukan zombie deathmatch. Bukan roleplay. Loop-nya survival ekstraksi 20 menit ya
 
 ```bash
 git clone https://github.com/FerzDevZ/zombie-samp.git && cd zombie-samp
-sampctl package ensure && bash scripts/ci-fetch-plugins.sh
+# dependency, plugin .so, samp03svr, dan data ColAndreas sudah ikut di repo
 docker compose up -d                        # MariaDB 10.11, migrasi otomatis
 cp mysql.ini.example mysql.ini && cp mysql.ini scriptfiles/mysql.ini
 sampctl build                               # 0 error (1 warning bawaan ColAndreas)

@@ -36,21 +36,17 @@ curl -sSL https://raw.githubusercontent.com/Southclaws/sampctl/master/install.sh
 ```bash
 git clone https://github.com/FerzDevZ/zombie-samp.git
 cd zombie-samp
-sampctl package ensure      # tarik pawn-stdlib, YSI 5, streamer, MySQL, sscanf, bcrypt, FCNPC
-bash scripts/ci-fetch-plugins.sh   # taruh .so yang dipatok ke plugins/
 ```
 
-`dependencies/`, `plugins/*.so`, `samp03svr`, `scriptfiles/colandreas/*.cadb`
-**tidak** ikut repo (lihat `.gitignore`): ukurannya ratusan MB dan bisa
-di-generate ulang. `sampctl package ensure` + `ci-fetch-plugins.sh` mencukupi.
+Clone sudah lengkap: `dependencies/`, `plugins/*.so`, `samp03svr`,
+`scriptfiles/colandreas/ColAndreas.cadb`, dan `tools/loadtest/vendor` ikut
+tersimpan di repo supaya bisa langsung dijalankan tanpa unduhan tambahan.
 
-Data collision ColAndreas (54 MB) diunduh terpisah:
+Kalau ingin menyegarkan dependency/plugin dari sumber resmi:
 
 ```bash
-mkdir -p scriptfiles/colandreas
-curl -L -o cadb.zip https://github.com/Southclaws/ColAndreas/releases/download/v1.5.0/colandreas.zip
-unzip -o cadb.zip -d scriptfiles/colandreas/
-ln -sfn colandreas scriptfiles/ColAndreas   # FCNPC membaca scriptfiles/colandreas/ColAndreas.cadb
+sampctl package ensure             # pawn-stdlib, YSI 5, streamer, MySQL, sscanf, bcrypt, FCNPC
+bash scripts/ci-fetch-plugins.sh   # taruh ulang .so yang dipatok ke plugins/
 ```
 
 ---
