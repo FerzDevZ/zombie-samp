@@ -84,8 +84,10 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudLoadout[playerid], 1);
     PlayerTextDrawFont(playerid, HudLoadout[playerid], 1);
 
-    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 560.0, 346.0, "FUEL --");
-    PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], 0.19, 0.75);
+    /* x=440 (bukan 560): baris BBM butuh ~33 karakter. Di 560 teks terpotong
+       keluar layar 640 — gauge lama 30 karakter pun sudah melewati batas. */
+    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 440.0, 346.0, "BBM");
+    PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], 0.17, 0.72);
     PlayerTextDrawColor(playerid, HudVehicle[playerid], UI_ACCENT_INFO);
     PlayerTextDrawSetOutline(playerid, HudVehicle[playerid], 1);
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
@@ -196,14 +198,22 @@ stock HUD_Update(playerid)
         bar[index++] = ']';
         bar[index] = EOS;
 
-        new fuelLine[80];
+        /* Baris sempit (±33 karakter). Saat BBM rendah, angka km diganti arah
+           pom: informasi yang benar-benar dibutuhkan saat itu. */
+        new fuelLine[96];
         if (fuel < 0.0)
         {
-            format(fuelLine, sizeof(fuelLine), "TANPA BBM  [----------]");
+            format(fuelLine, sizeof(fuelLine), "TANPA BBM [----------]");
+        }
+        else if (percent <= 0.25)
+        {
+            new pumpPart[40];
+            Garage_FuelCompass(playerid, pumpPart, sizeof(pumpPart), true);
+            format(fuelLine, sizeof(fuelLine), "BBM %s %.0f/%.0fL %s", bar, fuel, tank, pumpPart);
         }
         else
         {
-            format(fuelLine, sizeof(fuelLine), "BBM %s %.0f/%.0f L  ~%.0f km",
+            format(fuelLine, sizeof(fuelLine), "BBM %s %.0f/%.0fL %.0fkm",
                 bar, fuel, tank, Vehicle_RangeKm(vehicleid));
         }
 

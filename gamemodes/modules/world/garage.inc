@@ -832,6 +832,37 @@ stock Garage_RepairNearestEx(playerid, bool:fullToolbox)
 
 /* ---------- Pom bensin: menu & laporan ---------- */
 
+stock Float:Garage_DistanceToPump(playerid)
+{
+    new Float:px, Float:py, Float:pz;
+    GetPlayerPos(playerid, px, py, pz);
+    return VectorSize(px - FUEL_PUMP_X, py - FUEL_PUMP_Y, pz - FUEL_PUMP_Z);
+}
+
+/* Arah + jarak pom. short=true menghasilkan "pom 240 m BD" untuk baris HUD;
+   short=false menghasilkan kalimat panjang untuk /bensin dan [SEKITAR]. */
+stock Garage_FuelCompass(playerid, dest[], size, bool:short)
+{
+    new Float:px, Float:py, Float:pz;
+    GetPlayerPos(playerid, px, py, pz);
+
+    new Float:distance = Garage_DistanceToPump(playerid);
+    new direction[16];
+
+    if (distance <= FUEL_PUMP_RANGE) return format(dest, size, "di pom");
+    if (distance < 1.0) return format(dest, size, "di pom");
+
+    if (short)
+    {
+        /* Tanpa spasi sebelum "m": HUD hanya punya ~33 karakter. */
+        World_CompassShort(FUEL_PUMP_X - px, FUEL_PUMP_Y - py, direction, sizeof(direction));
+        return format(dest, size, "pom %.0fm %s", distance, direction);
+    }
+
+    World_CompassName(FUEL_PUMP_X - px, FUEL_PUMP_Y - py, direction, sizeof(direction));
+    return format(dest, size, "pom %.0f m %s", distance, direction);
+}
+
 stock Garage_PumpMenu(playerid)
 {
     if (!Garage_IsAtPump(playerid))
@@ -1014,13 +1045,12 @@ stock Garage_FuelReport(playerid)
         SendClientMessage(playerid, UI_TEXT_MUTED, "[BBM] Tidak ada kendaraan dalam 12 meter.");
     }
 
-    new Float:px, Float:py, Float:pz;
-    GetPlayerPos(playerid, px, py, pz);
-    new Float:pumpDistance = VectorSize(px - FUEL_PUMP_X, py - FUEL_PUMP_Y, pz - FUEL_PUMP_Z);
+    new Float:pumpDistance = Garage_DistanceToPump(playerid);
+    new pumpPart[64], line2[160];
+    Garage_FuelCompass(playerid, pumpPart, sizeof(pumpPart), false);
 
-    new line2[144];
-    format(line2, sizeof(line2), "[BBM] Pom kamp %.0f m dari posisimu. Harga $%d/liter. Uang $%d.",
-        pumpDistance, VEHICLE_FUEL_PRICE, PlayerSurvival[playerid][psCash]);
+    format(line2, sizeof(line2), "[BBM] %s. Harga $%d/liter. Uang $%d.",
+        pumpPart, VEHICLE_FUEL_PRICE, PlayerSurvival[playerid][psCash]);
     SendClientMessage(playerid, UI_TEXT_SECONDARY, line2);
 
     if (pumpDistance <= FUEL_PUMP_RANGE)

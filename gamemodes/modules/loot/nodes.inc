@@ -18,6 +18,21 @@
 
 new LootNodeLastTick = 0;
 
+/* Tingkat peti ditentukan saat spawn, bukan saat diambil: label, warna map, dan
+   isi harus konsisten sejak peti muncul di dunia. */
+stock LootNode_RollTier()
+{
+    new chance = World_IsNight() ? LOOT_NODE_RARE_CHANCE_NIGHT : LOOT_NODE_RARE_CHANCE;
+    return (random(100) < chance) ? LOOT_TIER_RARE : LOOT_TIER_NORMAL;
+}
+
+stock bool:LootNode_RollCrateLoot(tier, &itemid, &amount)
+{
+    if (tier == LOOT_TIER_RARE) return Loot_RollTable(gRareLoot, LOOT_RARE_SLOTS, itemid, amount);
+    return Loot_RollTable(gNodeLoot, LOOT_NODE_SLOTS, itemid, amount);
+}
+
+
 forward LootNode_Tick();
 
 stock LootNode_ActiveCount(lobbyId)
@@ -85,14 +100,16 @@ stock LootNode_SpawnOne(lobbyId)
     new Float:spotX, Float:spotY, Float:spotZ;
     if (!LootNode_FindSpot(lobbyId, spotX, spotY, spotZ)) return -1;
 
+    new tier = LootNode_RollTier();
     new rolledItem = ITEM_NONE_ID, rolledAmount = 1;
-    if (!Loot_RollTable(gNodeLoot, LOOT_NODE_SLOTS, rolledItem, rolledAmount)) return -1;
+    if (!LootNode_RollCrateLoot(tier, rolledItem, rolledAmount)) return -1;
 
-    new slot = Loot_Spawn(spotX, spotY, spotZ, rolledItem, rolledAmount, INVALID_PLAYER_ID, lobbyId, LOOT_KIND_CRATE);
+    new slot = Loot_Spawn(spotX, spotY, spotZ, rolledItem, rolledAmount, INVALID_PLAYER_ID, lobbyId,
+        LOOT_KIND_CRATE, WEAPON_CONDITION_MAX, tier);
     if (slot == -1) return -1;
 
-    Log_Format(LOG_INFO, "[LOOT] peti lobby=%d zona=%d item=%d jumlah=%d",
-        lobbyId, Zone_GetIdAt(spotX, spotY, spotZ), rolledItem, rolledAmount);
+    Log_Format(LOG_INFO, "[LOOT] peti lobby=%d zona=%d item=%d jumlah=%d tier=%d",
+        lobbyId, Zone_GetIdAt(spotX, spotY, spotZ), rolledItem, rolledAmount, tier);
     return slot;
 }
 
@@ -153,14 +170,16 @@ stock LootNode_SpawnNearPlayer(lobbyId, playerid)
     new Float:spotX, Float:spotY, Float:spotZ;
     if (!LootNode_FindSpotNear(px, py, pz, spotX, spotY, spotZ)) return -1;
 
+    new tier = LootNode_RollTier();
     new rolledItem = ITEM_NONE_ID, rolledAmount = 1;
-    if (!Loot_RollTable(gNodeLoot, LOOT_NODE_SLOTS, rolledItem, rolledAmount)) return -1;
+    if (!LootNode_RollCrateLoot(tier, rolledItem, rolledAmount)) return -1;
 
-    new slot = Loot_Spawn(spotX, spotY, spotZ, rolledItem, rolledAmount, INVALID_PLAYER_ID, lobbyId, LOOT_KIND_CRATE);
+    new slot = Loot_Spawn(spotX, spotY, spotZ, rolledItem, rolledAmount, INVALID_PLAYER_ID, lobbyId,
+        LOOT_KIND_CRATE, WEAPON_CONDITION_MAX, tier);
     if (slot == -1) return -1;
 
-    Log_Format(LOG_INFO, "[LOOT] peti dekat pemain lobby=%d anchor=%d item=%d jumlah=%d",
-        lobbyId, playerid, rolledItem, rolledAmount);
+    Log_Format(LOG_INFO, "[LOOT] peti dekat pemain lobby=%d anchor=%d item=%d jumlah=%d tier=%d",
+        lobbyId, playerid, rolledItem, rolledAmount, tier);
     return slot;
 }
 

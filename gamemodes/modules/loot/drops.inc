@@ -30,7 +30,8 @@ enum E_LOOT_DROP
     ldLobby,
     ldWorld,
     ldDurability,
-    ldKind
+    ldKind,
+    ldTier          // LOOT_TIER_*: peti biasa vs langka
 };
 
 new LootDrop[MAX_LOOT_DROPS][E_LOOT_DROP];
@@ -94,7 +95,7 @@ stock Loot_VisualTag(itemid, dest[], size)
     return format(dest, size, "ITEM");
 }
 
-stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALID_PLAYER_ID, lobbyId = -1, kind = LOOT_KIND_ITEM, durability = WEAPON_CONDITION_MAX)
+stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALID_PLAYER_ID, lobbyId = -1, kind = LOOT_KIND_ITEM, durability = WEAPON_CONDITION_MAX, tier = LOOT_TIER_NORMAL)
 {
     if (!Item_IsValid(itemid) || amount <= 0) return -1;
 
@@ -136,6 +137,7 @@ stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALI
     LootDrop[slot][ldLobby] = lobbyId;
     LootDrop[slot][ldKind] = kind;
     LootDrop[slot][ldDurability] = durability;
+    LootDrop[slot][ldTier] = tier;
     LootDrop[slot][ldMapIcon] = INVALID_STREAMER_ID;
     LootDrop[slot][ldObject] = INVALID_STREAMER_ID;
 
@@ -147,20 +149,33 @@ stock Loot_Spawn(Float:x, Float:y, Float:z, itemid, amount, ownerPlayer = INVALI
     {
         /* Peti darurat: koper lapangan + ikon peta. Sebelumnya model 1225 yang
            di GTA SA adalah tong minyak, jadi peti terlihat seperti drum. */
+        new Float:crateZ = (tier == LOOT_TIER_RARE) ? (z - 0.35) : (z - 0.55);
         LootDrop[slot][ldObject] = CreateDynamicObject(LOOT_CRATE_OBJECT_MODEL,
-            x, y, z - 0.55, 0.0, 0.0, 18.0, .worldid = worldId);
+            x, y, crateZ, 0.0, 0.0, (tier == LOOT_TIER_RARE) ? 45.0 : 18.0, .worldid = worldId);
 
-        format(label, sizeof(label), "{FFD24A}[PETI] %s x%d\n/ambil  (Y)", itemLabel, amount);
+        if (tier == LOOT_TIER_RARE)
+        {
+            /* Emas + tanda LANGKA: satu-satunya peti yang boleh memakai warna emas
+               di dunia, jadi dari jauh pun langsung terbaca sebagai hadiah. */
+            format(label, sizeof(label), "{FFD24A}[PETI LANGKA] {FFFFFF}%s x%d\n{FFD24A}/ambil  (Y)", itemLabel, amount);
+        }
+        else
+        {
+            format(label, sizeof(label), "{38BDF8}[PETI] {FFFFFF}%s x%d\n{94A3B8}/ambil  (Y)", itemLabel, amount);
+        }
 
-        LootDrop[slot][ldLabel] = CreateDynamic3DTextLabel(label, UI_ACCENT_WARN,
-            x, y, z + 0.45, LOOT_NODE_LABEL_DIST, .worldid = worldId);
+        new labelColor = (tier == LOOT_TIER_RARE) ? LOOT_CRATE_COLOR_RARE : LOOT_CRATE_COLOR_NORMAL;
+        new Float:labelDist = (tier == LOOT_TIER_RARE) ? LOOT_CRATE_LABEL_DIST_RARE : LOOT_CRATE_LABEL_DIST;
+        LootDrop[slot][ldLabel] = CreateDynamic3DTextLabel(label, labelColor,
+            x, y, z + 0.45, labelDist, .worldid = worldId);
 
         LootDrop[slot][ldPickup] = CreateDynamicPickup(LOOT_CRATE_PICKUP_MODEL, 2,
             x, y, z, .worldid = worldId, .playerid = ownerPlayer);
 
-        // Ikon peta: pemain tidak perlu menebak di zona mana peti menunggu.
-        LootDrop[slot][ldMapIcon] = CreateDynamicMapIcon(x, y, z - 0.8, 1239, 0xFFD24AFF,
-            worldId, 0, -1, 250.0, MAPICON_LOCAL);
+        // Ikon peta: biru = peti biasa, emas = peti langka.
+        LootDrop[slot][ldMapIcon] = CreateDynamicMapIcon(x, y, z - 0.8,
+            (tier == LOOT_TIER_RARE) ? LOOT_CRATE_ICON_RARE : LOOT_CRATE_ICON_NORMAL,
+            labelColor, worldId, 0, -1, 300.0, MAPICON_LOCAL);
     }
     else
     {

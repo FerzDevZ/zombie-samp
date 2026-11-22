@@ -41,9 +41,18 @@ HUD kiri menampilkan `LAP`, `HAUS`, `PIPIS`.
 | Van/bus | Burrito, Boxville | 80 L | 13.5 L/100 km |
 | Truk/industri | Benson, DFT-30 | 150 L | 28 L/100 km |
 
-HUD kanan bawah saat mengemudi: `BBM [####------] 34/60 L  ~8 km` dengan warna
+HUD kanan bawah saat mengemudi: `BBM [####------] 34/60L 8km` dengan warna
 hijau → kuning (≤25%) → merah (≤8%). Peringatan bunyi + pesan muncul sekali per
 ambang; `/bensin` kapan saja menampilkan liter, persen, sisa km, dan jarak pom.
+
+Begitu BBM ≤25%, angka km di baris HUD diganti arah pom, mis.
+`BBM [##--------] 12/80L pom 240m BD` (BD = barat daya). Tujuannya satu: pemain
+yang kehabisan bensin tidak perlu menebak harus ke mana. Baris ini dibatasi
+±33 karakter karena ditaruh di x=440 dari layar 640 — lebih dari itu terpotong.
+
+Setiap spawn, `[SEKITAR]` juga menyebut arah pom, jadi pemain baru tahu harus
+kemana sebelum bensin habis:
+`[SEKITAR] BBM: pom 2866 m timur laut  isi $3/L dengan /isi di pom`
 
 ## 4. Isi bensin
 
@@ -80,6 +89,19 @@ menyalakan mesin; pemain memakai `/mesin`.
   turret berhenti sampai pagi atau sampai BBM diisi.
 - BBM disimpan di `base_structures.fuel`, jadi tidak hilang saat relog/restart.
   Bila BBM habis, pemilik base mendapat toast `GENSET MATI`.
+
+## 4b. Peti langka
+
+Peti yang muncul sendiri di zona punya dua tingkat. Tingkat ditentukan saat peti
+lahir, bukan saat diambil, supaya label dan isinya selalu cocok.
+
+| Tingkat | Peluang | Isi | Tanda di dunia |
+|---|---|---|---|
+| Biasa | 86% (siang) | tabel `gNodeLoot`: makanan, scrap, amunisi | label biru `[PETI]`, ikon map biru |
+| Langka | 14% siang / 22% malam | tabel `gRareLoot`: blueprint, medkit, vaccine, bag hiking | label emas `[PETI LANGKA]`, ikon map emas, rotasi 45° |
+
+`[SEKITAR]` memprioritaskan peti langka bila jaraknya tidak lebih dari 2x peti
+biasa terdekat, contoh: `[SEKITAR] PETI LANGKA 2247 m timur laut | kendaraan 2945 m timur laut`.
 
 ## 5. Garasi dan kepemilikan
 

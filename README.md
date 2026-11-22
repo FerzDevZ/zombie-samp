@@ -85,7 +85,7 @@ Playable, bukan scaffold. Yang sudah jalan dan terverifikasi:
 | Transfer stash | Ambil/Simpan 1 / 5 / semua, header kolom + `>> Rapikan` |
 | Anti-dupe container | kunci satu-editor (`Lock_*`) + "act then verify" `cache_affected_rows()` + rollback otomatis |
 | Drop milik sendiri | eksklusif 60 detik, lalu publik agar item tidak jadi sampah |
-| Loot zombie + peti dunia + ikon peta | pickup tipe 2 + `Loot_TakeNearest`; 3 peti langsung saat spawn, maks 8/lobby |
+| Loot zombie + peti dunia + ikon peta | pickup tipe 2 + `Loot_TakeNearest`; 3 peti langsung saat spawn, maks 8/lobby; 2 tingkat: peti biasa (biru) & **peti langka** (emas, 14% siang / 22% malam, isi `gRareLoot`) |
 | Budget NPC dinamis (FCNPC 80/100 ms) | 1 pemain ±52 zombie, bukan 190; sync 80 ms solo, 100 ms saat ≥3 pemain; pathfinding raycast hanya jika garis terhalang |
 | Crafting 17 resep + perbaikan alat/senjata | `/craft`, refund otomatis kalau gagal; item baru: Energy Drink, Radio, Decoy, Adrenaline, Vaksin, Toolbox |
 | Kendaraan liar 9/lobby (35% rusak berat) | plat `WRECK` = mesin mati + BBM kosong + bodi rusak; perbaiki dengan Toolbox/Repair Kit + BBM jerrycan/pom |

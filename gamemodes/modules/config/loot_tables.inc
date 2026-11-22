@@ -180,6 +180,21 @@ new const gNodeLoot[LOOT_NODE_SLOTS][E_LOOT_ENTRY] =
 #define LOOT_CORPSE_PICKUP_MODEL 1210
 #define LOOT_NODE_LABEL_DIST     60.0
 
+/* ---------- Tingkat peti ----------
+   Peti biasa = loot harian. Peti LANGKA memakai tabel gRareLoot (blueprint,
+   vaccine, bag hiking) dan ditandai emas di dunia + map supaya pemain tahu
+   ada alasan untuk menyeberang zona. */
+#define LOOT_TIER_NORMAL         0
+#define LOOT_TIER_RARE           1
+#define LOOT_NODE_RARE_CHANCE    14      // persen peti baru yang jadi langka
+#define LOOT_NODE_RARE_CHANCE_NIGHT 22   // malam: hadiah lebih besar
+#define LOOT_CRATE_ICON_NORMAL   1239
+#define LOOT_CRATE_ICON_RARE     1240
+#define LOOT_CRATE_COLOR_NORMAL  0x38BDF8FF
+#define LOOT_CRATE_COLOR_RARE    0xFFD24AFF
+#define LOOT_CRATE_LABEL_DIST    60.0
+#define LOOT_CRATE_LABEL_DIST_RARE 90.0
+
 #define LOOT_CORPSE_SLOTS        3
 #define LOOT_MAX_CORPSES         24
 #define LOOT_CORPSE_EXPIRE_MS    300000

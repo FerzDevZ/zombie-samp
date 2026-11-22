@@ -658,6 +658,26 @@ stock WildVeh_EnsureNearLobby(lobbyId)
     return 1;
 }
 
+/* Definisi ada di garage.inc (pemilik konstanta pom). Deklarasi maju supaya
+   petunjuk "SEKITAR" bisa menyebut arah pom tanpa memindahkan konstanta. */
+forward Garage_FuelCompass(playerid, dest[], size, bool:short);
+
+/* Kode 2 huruf untuk HUD sempit: 8 arah penuh tidak muat di baris BBM. */
+stock World_CompassShort(Float:deltaX, Float:deltaY, dest[], size)
+{
+    new Float:angle = atan2(deltaY, deltaX);
+    if (angle < 0.0) angle += 360.0;
+
+    if (angle < 22.5 || angle >= 337.5) return format(dest, size, "T");
+    if (angle < 67.5) return format(dest, size, "TG");
+    if (angle < 112.5) return format(dest, size, "S");
+    if (angle < 157.5) return format(dest, size, "BD");
+    if (angle < 202.5) return format(dest, size, "B");
+    if (angle < 247.5) return format(dest, size, "BL");
+    if (angle < 292.5) return format(dest, size, "U");
+    return format(dest, size, "TL");
+}
+
 stock World_CompassName(Float:deltaX, Float:deltaY, dest[], size)
 {
     new Float:angle = atan2(deltaY, deltaX);
@@ -685,8 +705,15 @@ stock World_NearbyHint(playerid)
 
     new lobbyId = Lobby_Of(playerid);
 
+    /* Dua kandidat: peti biasa terdekat dan peti langka terdekat. Peti langka
+       diprioritaskan bila jaraknya tidak lebih dari 2x peti biasa — hadiah
+       blueprint/vaccine lebih layak dikejar daripada peti scrap di sebelah. */
     new crateSlot = -1;
+    new crateTier = LOOT_TIER_NORMAL;
     new Float:crateBest = 9999.0;
+
+    new rareSlot = -1;
+    new Float:rareBest = 9999.0;
 
     for (new slot = 0; slot < MAX_LOOT_DROPS; slot++)
     {
@@ -695,10 +722,29 @@ stock World_NearbyHint(playerid)
         if (LootDrop[slot][ldLobby] != lobbyId) continue;
 
         new Float:distance = VectorSize(LootDrop[slot][ldX] - px, LootDrop[slot][ldY] - py, LootDrop[slot][ldZ] - pz);
-        if (distance >= crateBest) continue;
 
+        if (LootDrop[slot][ldTier] == LOOT_TIER_RARE)
+        {
+            if (distance >= rareBest) continue;
+            rareBest = distance;
+            rareSlot = slot;
+            continue;
+        }
+
+        if (distance >= crateBest) continue;
         crateBest = distance;
         crateSlot = slot;
+    }
+
+    if (rareSlot >= 0 && (crateSlot < 0 || rareBest <= crateBest * 2.0))
+    {
+        crateSlot = rareSlot;
+        crateBest = rareBest;
+        crateTier = LOOT_TIER_RARE;
+    }
+    else
+    {
+        crateTier = LOOT_TIER_NORMAL;
     }
 
     new vehicleid = INVALID_VEHICLE_ID;
@@ -724,7 +770,8 @@ stock World_NearbyHint(playerid)
     if (crateSlot >= 0)
     {
         World_CompassName(LootDrop[crateSlot][ldX] - px, LootDrop[crateSlot][ldY] - py, direction, sizeof(direction));
-        format(cratePart, sizeof(cratePart), "Peti darurat %.0f m %s", crateBest, direction);
+        format(cratePart, sizeof(cratePart), "%s %.0f m %s",
+            (crateTier == LOOT_TIER_RARE) ? "PETI LANGKA" : "Peti darurat", crateBest, direction);
     }
     else format(cratePart, sizeof(cratePart), "Peti darurat: cari di zona berbahaya");
 
@@ -739,8 +786,16 @@ stock World_NearbyHint(playerid)
 
     new line[160];
     format(line, sizeof(line), "[SEKITAR] %s | %s", cratePart, vehiclePart);
-    SendClientMessage(playerid, UI_TEXT_MUTED, line);
-    SendClientMessage(playerid, UI_TEXT_MUTED, "[SEKITAR] Ambil peti: jalan mendekat lalu /take   Masuk mobil: /lockpick kalau terkunci.");
+    SendClientMessage(playerid, (crateTier == LOOT_TIER_RARE) ? UI_ACCENT_WARN : UI_TEXT_MUTED, line);
+
+    /* Petunjuk pom: tanpa ini pemain baru tahu arah pom setelah BBM habis di
+       tengah zona. Warna kuning saat BBM rendah supaya terbaca. */
+    new pumpPart[64], fuelLine[160];
+    Garage_FuelCompass(playerid, pumpPart, sizeof(pumpPart), false);
+    format(fuelLine, sizeof(fuelLine), "[SEKITAR] BBM: %s  isi $3/L dengan /isi di pom", pumpPart);
+    SendClientMessage(playerid, UI_TEXT_SECONDARY, fuelLine);
+
+    SendClientMessage(playerid, UI_TEXT_MUTED, "[SEKITAR] Ambil peti: jalan mendekat lalu /ambil   Masuk mobil: /lockpick kalau terkunci.");
     return 1;
 }
 

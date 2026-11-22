@@ -38,8 +38,13 @@ echo "== output: $OUT"
 # Bot berjalan di latar; sampling di loop utama.
 SPREAD="${SPREAD:-1}"
 STAGGER="${STAGGER:-0.4}"
+# Port dibaca dari server.cfg instans: soak di s2 (7778) tidak boleh mengirim
+# 100 bot ke s1, kalau tidak hasilnya mengukur server yang salah.
+PORT="$(awk '/^port /{print $2}' "$DIR/server.cfg" 2>/dev/null || echo 7777)"
+PORT="${PORT:-7777}"
+
 python3 "$ROOT/tools/loadtest/bot_run.py" --count "$BOTS" --duration "$((DURATION > 90 ? DURATION - 60 : DURATION))" \
-    --spread-zones "$SPREAD" --stagger "$STAGGER" \
+    --port "$PORT" --spread-zones "$SPREAD" --stagger "$STAGGER" \
     --report "$OUT/bots.json" > "$OUT/bots.log" 2>&1 &
 BOT_PID=$!
 trap 'kill "$BOT_PID" 2>/dev/null || true' EXIT
