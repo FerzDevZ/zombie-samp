@@ -107161,3 +107161,7 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 
 [04:26:53] [2026-11-22 04:26:53][INFO] [DIRECTOR] total aktif 0/190 | malam 0
 
+[04:27:50] [2026-11-22 04:27:50][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[04:27:55] [2026-11-22 04:27:55][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+

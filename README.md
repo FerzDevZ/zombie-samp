@@ -1,5 +1,9 @@
 # LAST STAND: San Andreas Quarantine
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build](https://github.com/FerzDevZ/zombie-samp/actions/workflows/build.yml/badge.svg)](https://github.com/FerzDevZ/zombie-samp/actions/workflows/build.yml)
+[![Platform](https://img.shields.io/badge/platform-SA--MP%200.3.7%20%2B%20Android-blue.svg)](#stack-yang-dipilih-dan-alasannya)
+
 Server SA-MP / open.mp **zombie survival co-op** — ekstraksi loot, horde director, infeksi, dan base defense.
 Bukan zombie deathmatch. Bukan roleplay. Loop-nya survival ekstraksi 20 menit yang bisa dimainkan solo atau party 4 orang.
 
@@ -256,3 +260,16 @@ Backup harian via cron (opsional, jalankan di host):
 ```bash
 0 4 * * * cd /home/boxd/zombie-samp && ./scripts/backup.sh >> backups/cron.log 2>&1
 ```
+
+## Open source
+
+Repo ini **memang** menyimpan semuanya: source, plugin `.so`, `samp03svr`,
+dependency, data ColAndreas 51 MB, tooling agen, contoh runtime, dan kredensial
+development. Clone → jalan, tanpa unduhan tambahan. Kredensial di repo
+dianggap publik — lihat [SECURITY.md](SECURITY.md) untuk daftar rotasi wajib
+sebelum dipakai produksi.
+
+* Lisensi: [MIT](LICENSE) — bebas dipakai, dimodifikasi, dan dijual.
+* Cara berkontribusi + gate wajib (build, selftest, soak, memori):
+  [CONTRIBUTING.md](CONTRIBUTING.md).
+* Pertanyaan arsitektur: buka issue dengan label `design`.
