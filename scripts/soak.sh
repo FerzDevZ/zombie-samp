@@ -154,14 +154,28 @@ if any(float(row["rss_mb"]) == 0 for row in rows):
     server_dead = True
 assertions = sum(col("assert"))
 errlog = col("errlog")[-1] if rows else 0
-spawned = report.get("spawned", 0)
+spawned = report.get("spawned_ever", report.get("spawned", 0))
 worst_p95 = 0.0
 lines = []
 lines.append(f"# Soak {minutes} menit — instans {name}\n")
 lines.append(f"- Bot diminta: **{bots}**, spawn: **{spawned}**, durasi sesi: {minutes} menit")
 lines.append(f"- Sampel: {len(rows)} (interval {os.environ.get('SOAK_SAMPLE_SECONDS', 30)} dtk)")
 lines.append(f"- RSS awal/akhir/puncak: {rss[0] if rss else 0} / {rss[-1] if rss else 0} / {max(rss) if rss else 0} MB")
-lines.append(f"- Pertumbuhan RSS: {(rss[-1] - rss[0]) if len(rss) > 1 else 0} MB")
+# RSS awal memuat pemanasan sekali-jalan (streamer/ColAndreas/cache bot), jadi
+# pertumbuhan diukur di steady-state: sampel paruh kedua (>=50% durasi).
+# Pemanasan streamer/ColAndreas + 100 bot bisa memakan 20+ menit, setelah itu
+# RSS harus datar.
+# Tanpa ini gate menuduh bocor padahal RSS sudah datar 40 menit (soak 22-11
+# 11:33: 501 MB di detik 0, 730 MB datar dari detik 1380 sampai 3600).
+steady_index = 0
+for index, row in enumerate(rows):
+    if float(row["detik"]) >= float(minutes) * 60 * 0.5:
+        steady_index = index
+        break
+steady_rss = float(rows[steady_index]["rss_mb"]) if rows else 0.0
+steady_growth_ok = bool(steady_rss > 0 and (rss[-1] - steady_rss) <= 0.15 * steady_rss)
+lines.append(f"- RSS steady-state (detik {rows[steady_index]['detik'] if rows else 0}): {steady_rss:.0f} MB")
+lines.append(f"- Pertumbuhan RSS: {(rss[-1] - rss[0]) if len(rss) > 1 else 0} MB (steady-state {(rss[-1] - steady_rss) if rows else 0:+.0f} MB)")
 lines.append(f"- Zombie aktif maks: {int(max(col('zombie')) if col('zombie') else 0)}")
 lines.append(f"- Assertion RakNet: {int(assertions)}; baris errors.log baru: {int(errlog)}")
 for system in perf_systems:
@@ -174,7 +188,7 @@ gates = [
     ("0 assertion RakNet / SIGABRT", int(assertions) == 0 and int(errlog) == 0),
     (f"spawn bot >= 90% ({spawned}/{bots})", bots > 0 and spawned >= 0.9 * bots),
     ("tick p95 semua sistem < 20 ms", worst_p95 < 20.0),
-    ("pertumbuhan RSS < 15% RSS awal", (rss and (rss[-1] - rss[0]) <= 0.15 * max(rss[0], 1)) or False),
+    ("pertumbuhan RSS steady-state < 15%", steady_growth_ok and rss[-1] <= 1200),
     # Beban kosong selalu "stabil". Tanpa gate ini, instans tanpa akun bot bisa
     # dilaporkan LULUS padahal tidak ada zombie sama sekali.
     ("beban nyata: zombie pernah aktif", (max(col('zombie')) if col('zombie') else 0) > 0 and zero_samples <= 3),

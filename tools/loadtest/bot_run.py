@@ -73,6 +73,7 @@ class BotRunner(threading.Thread):
         self.error = None
         self.bot = None
         self.spawn_seconds = None
+        self.spawned_ever = False
 
     def run(self):
         started = time.time()
@@ -154,6 +155,10 @@ class BotRunner(threading.Thread):
                 time.sleep(8)
                 if self.bot.api.is_connected():
                     self.state = "spawned"
+                    # spawned_ever tidak pernah turun walau bot putus di menit
+                    # terakhir: gate harness mengukur keberhasilan spawn, bukan
+                    # jumlah sesi yang kebetulan masih hidup saat laporan ditulis.
+                    self.spawned_ever = True
                     self.spawn_seconds = round(time.time() - started, 1)
                     break
             if self.state != "spawned":
@@ -247,6 +252,7 @@ def main():
         "count": args.count,
         "states": states,
         "spawned": states.get("spawned", 0),
+        "spawned_ever": sum(1 for r in runners if r.spawned_ever),
         "errors": [{"nick": r.nick, "state": r.state, "error": r.error}
                    for r in runners if r.error or r.state not in ("spawned",)],
         "positions": [r.last_position for r in runners if getattr(r, "last_position", None)],
@@ -258,7 +264,7 @@ def main():
     with open(args.report, "w", encoding="utf-8") as handle:
         json.dump(report, handle, indent=2)
     print(json.dumps(report, indent=2), flush=True)
-    sys.exit(0 if report["spawned"] >= args.count * 0.9 else 1)
+    sys.exit(0 if report["spawned_ever"] >= args.count * 0.9 else 1)
 
 
 if __name__ == "__main__":
