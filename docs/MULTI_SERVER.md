@@ -246,3 +246,22 @@ Ambang waspada, dicek dengan `./scripts/instance.sh list` dan `ps -o pcpu=`:
 
 Mematikan server kedua saat tidak dipakai: `./scripts/instance.sh stop s2`
 (menghemat ±520 MB dan satu core; data di database tetap utuh).
+
+## Batasan yang masih berlaku (per 26-11-23)
+
+Dua unique key di `characters` belum mengenal instance:
+
+```
+uq_characters_name  (name)              <- global
+uq_characters_slot  (account_id, slot)  <- global
+```
+
+Akibatnya, walaupun baris karakter punya `server_id`, satu akun **tidak bisa**
+membuat karakter dengan nama yang sama di dua instance, dan tidak bisa memakai
+slot yang sama di dua instance. Bukti: `INSERT ... server_id=2, name='FerzDevZ'`
+ditolak `ERROR 1062 Duplicate entry 'FerzDevZ' for key 'uq_characters_name'`.
+
+Perbaikan yang benar (belum dikerjakan): ubah keduanya menjadi
+`(server_id, name)` dan `(server_id, account_id, slot)`. Sampai itu dilakukan,
+karakter di instance kedua harus memakai nama dan slot berbeda.
+
