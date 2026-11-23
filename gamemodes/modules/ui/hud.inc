@@ -538,6 +538,24 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudPipVal[playerid], 1);
     PlayerTextDrawFont(playerid, HudPipVal[playerid], 1);
 
+    /* Kartu latar baris BBM berdiri sendiri: teks dan angka tidak lagi
+       bergantung pada kotak milik textdraw teks (kotak itu dulu melintasi bar
+       sehingga tertutup). Kartu = 352..628, y 330..350. */
+    if (Settings_TdMobileSafe(playerid))
+    {
+        HudVehCard[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0),
+            HUD_F(playerid, 276.0), HUD_F(playerid, 20.0), 0x0B0F14B4);
+    }
+    else
+    {
+        HudVehCard[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0), "LD_SPAC:white");
+        PlayerTextDrawFont(playerid, HudVehCard[playerid], 4);
+        PlayerTextDrawTextSize(playerid, HudVehCard[playerid], HUD_F(playerid, 276.0), HUD_F(playerid, 20.0));
+        PlayerTextDrawColor(playerid, HudVehCard[playerid], 0x0B0F14B4);
+        PlayerTextDrawSetOutline(playerid, HudVehCard[playerid], 0);
+        PlayerTextDrawBackgroundColor(playerid, HudVehCard[playerid], 0x00000000);
+    }
+
     HUD_CreateBar(playerid, HUD_BAR_HP, HUD_X(playerid, 52.0), HUD_Y(playerid, 312.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK, 0);
     HUD_CreateBar(playerid, HUD_BAR_ARM, HUD_X(playerid, 52.0), HUD_Y(playerid, 324.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK, 1);
     HUD_CreateBar(playerid, HUD_BAR_INF, HUD_X(playerid, 52.0), HUD_Y(playerid, 336.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK, 2);
@@ -564,24 +582,6 @@ stock HUD_Create(playerid)
     /* Baris kanan hanya BBM. Baris SCRAP/SAMPEL dihapus total (permintaan
        pemain: angkanya kacau di semua gaya HUD); jumlah scrap dan sampel
        tetap bisa dilihat di dialog tas dan /inv. */
-    /* Kartu latar baris BBM berdiri sendiri: teks dan angka tidak lagi
-       bergantung pada kotak milik textdraw teks (kotak itu dulu melintasi bar
-       sehingga tertutup). Kartu = 352..628, y 330..350. */
-    if (Settings_TdMobileSafe(playerid))
-    {
-        HudVehCard[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0),
-            HUD_F(playerid, 276.0), HUD_F(playerid, 20.0), 0x0B0F14B4);
-    }
-    else
-    {
-        HudVehCard[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0), "LD_SPAC:white");
-        PlayerTextDrawFont(playerid, HudVehCard[playerid], 4);
-        PlayerTextDrawTextSize(playerid, HudVehCard[playerid], HUD_F(playerid, 276.0), HUD_F(playerid, 20.0));
-        PlayerTextDrawColor(playerid, HudVehCard[playerid], 0x0B0F14B4);
-        PlayerTextDrawSetOutline(playerid, HudVehCard[playerid], 0);
-        PlayerTextDrawBackgroundColor(playerid, HudVehCard[playerid], 0x00000000);
-    }
-
     HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X), HUD_Y(playerid, 334.0), "BBM");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_F(playerid, HUD_VEH_LETTER_X), HUD_F(playerid, 0.72));
     PlayerTextDrawTextSize(playerid, HudVehicle[playerid], HUD_F(playerid, HUD_VEH_TEXT_W), HUD_F(playerid, 12.0));
