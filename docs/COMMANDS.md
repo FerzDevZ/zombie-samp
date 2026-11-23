@@ -44,6 +44,13 @@ Format: `/nama [argumen]` — argumen dalam `<>` wajib, `[]` opsional.
 | `/kapasitas` | Sisa kapasitas berat |
 | `/itemlist` | Daftar item yang kamu bawa |
 | `/stash` (alias `/peti`) | Buka stash pribadi (60 slot → 120 slot setelah upgrade) |
+| `/peti` | Buka peti party (40 slot, 240 kg, dibagi seluruh anggota) |
+| `/gudang` | Riwayat 10 terakhir peti party (petugas gudang / pemimpin) |
+| `/gudang <id>` | Tunjuk/cabut *petugas gudang* (hanya pemimpin party) |
+| `/dokumen` (alias `/lore`) | Baca dokumen yang dipegang; 12 teks cerita, indeks per karakter + jam |
+| `/kematian` (alias `/deaths`) | 3 kematian terakhir karakter ini: penyebab, senjata, waktu |
+| `/decor` | (admin) daftar 9 dekorasi kamp + koordinat untuk verifikasi visual |
+| `/decor tp <n>` | (admin) pindah ke dekorasi #n untuk melihatnya di client |
 | `/partystash` | Peti party (40 slot, 240 kg) — hanya anggota party |
 
 ---

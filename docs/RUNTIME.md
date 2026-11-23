@@ -93,3 +93,25 @@ menjalankannya ulang secara manual:
 ```
 docker exec -i laststand-mysql mariadb -ulaststand -p change_me laststand < database/migrations/001_init.sql
 ```
+
+## Supervisor systemd & cek kesehatan
+
+```
+sudo ./scripts/install-systemd.sh          # pasang unit s1 + s2 + laststand.target
+systemctl status laststand.target          # semua instance
+systemctl restart laststand.target         # restart serentak
+./scripts/healthcheck.sh                   # tabel: port, pemain, mode, hostname
+./scripts/healthcheck.sh --json            # untuk cron/monitoring
+```
+
+- Unit: `scripts/systemd/laststand-s{1,2}.service` + `laststand.target`.
+  Unit lama menunjuk `/home/boxd/zombie-samp` (host lain) dan hanya ada s1 —
+  diganti unit per instance dengan path `/home/aegisx/zombie-samp`.
+- `Restart=always`, `RestartSec=5`, `StartLimitIntervalSec=300` (di `[Unit]`;
+  di `[Service]` systemd mengabaikannya — sudah dibuktikan `systemd-analyze verify`).
+- Uji: `kill -9` pada MainPID → `NRestarts` naik 1 dan `healthcheck.sh` tetap exit 0.
+- Cek kesehatan memakai protokol query SA-MP (UDP), bukan ping: ping hanya
+  membuktikan host hidup, bukan gamemode menjawab. Parser memakai panjang
+  4-byte sebelum tiap string — memotong per NUL menghasilkan hostname kosong.
+- `rcon 0` tetap dipertahankan: monitoring cukup lewat query, membuka RCON di
+  VPS publik hanya menambah permukaan serang.

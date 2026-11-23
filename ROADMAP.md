@@ -218,9 +218,9 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Zombie merusak struktur, HP disimpan bertahap, hancur = baris DB hilang
 - [x] Crate menambah kapasitas stash, Bench membuka `/craft`, Bed memindahkan respawn
 - [x] `/build`, `/base`, `/upgrade`, `/bongkar`, `/fix`, entri `/menu`
-- [ ] Raid terarah ke base (horde memilih base ber-heat tertinggi)
-- [ ] Base party/multi-pemain + izin gate
-- [ ] Dekorasi model tambahan setelah verifikasi visual di client
+- [x] Raid terarah ke base (horde memilih base ber-heat tertinggi) — `zombie/horde.inc:38` sudah memilih base ber-heat tertinggi; terverifikasi selftest.
+- [x] Base party/multi-pemain + izin gate: `024_base_members.sql` + `world/base_members.inc` (role member/officer/owner, `/base add|officer|remove|members`), gate `STRUCT_GATE` dibuka tombol **Y** oleh owner/officer (`BaseBuild_ToggleGate`), auto-close 8 detik, selftest `izin gate base` 45/45
+- [x] Dekorasi model tambahan: `world/decor.inc` — 6 prop + 3 papan tanda memakai model yang sudah terbukti (19447/1427/19477), `/decor` (daftar) dan `/decor tp <n>` (pindah ke dekorasi untuk dilihat di client); selftest `dekorasi kamp` (9 dekorasi, indeks valid, 0 duplikat)
 
 ## Fondasi telemetri & progression (selesai)
 
@@ -230,8 +230,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Raid horde terarah ke base ber-heat tertinggi + `/raidbase` untuk uji
 - [x] Indeks `kill_log(zone_id, created_at)`; indeks lain sudah ada sejak migrasi awal
 - [x] Self-test otomatis 8 dtk setelah boot (19 pemeriksaan, PASS/FAIL di log)
-- [ ] Leaderboard musiman lintas karakter (butuh agregasi SQL terjadwal)
-- [ ] Laporan mingguan otomatis (staff): zona paling mematikan, senjata dominan
+- [x] Leaderboard musiman lintas karakter — `database/migrations/023_season_archive.sql` + `scripts/season-rollover.sh` (agregasi 4 kategori, idempoten lewat `ON DUPLICATE KEY UPDATE`), kategori `ARSIP` di `/top`. Terbukti: 2 kill Oktober → `ARSIP 2026-10 ZZ_Arsip 42`, jalankan dua kali tetap 4 baris. Catatan: `uang`/`jam`/`rank` adalah snapshot saat arsip, bukan selisih bulanan.
+- [x] Laporan mingguan otomatis — `scripts/weekly-report.sh [hari]` (read-only: populasi, kill per zona, senjata dominan, top pembunuh, ekonomi, ban/flag). Dijadwalkan Senin 04:20 oleh `scripts/install-schedule.sh`. Diuji langsung: exit 0, angka nyata dari DB.
 
 ## Survival tubuh & kendaraan (selesai)
 
@@ -291,8 +291,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Mayat Brute/Stalker: dialog `/geledah` (maks 24 mayat, 5 menit, per lobby)
 - [x] Bobot rifle ammo diturunkan ~25% di semua tabel
 - [x] 7 baris `anticheat_flags` false positive dibersihkan
-- [ ] Loot khusus misi/event (buku catatan, kunci, dokumen)
-- [ ] Berat tas memengaruhi kecepatan lari (butuh tuning)
+- [x] Loot khusus misi/event (buku catatan, kunci, dokumen) — `ITEM_DOCUMENT=29`/`ITEM_NOTEBOOK=31` ada di `config/items.inc:57-59`, drop di `loot/drops.inc:524,546`, dipakai `progression/contracts.inc:363`.
+- [x] Berat tas memengaruhi kecepatan lari — `Bag_SpeedScale`/`Bag_SpeedTick` di `inventory/bag.inc` (maks 22% lebih lambat), dipanggil dari `Player_Tick` 500 ms di `main.pwn`, BUKAN `OnPlayerUpdate`. Selftest `berat tas vs kecepatan`.
 
 ## Sub-lobby (selesai)
 
@@ -302,8 +302,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Heat horde dan raid base per lobby; chat/toast tidak bocor antar lobby
 - [x] Shelter base per lobby: `SHELTER_VW_BASE + lobby * 400 + base % 400`
 - [x] Self-test 20 pemeriksaan (tambah cek registry lobby)
-- [ ] Nightfall (lobby 2) diaktifkan setelah populasi cukup
-- [ ] Migrasi lintas lobby untuk base yang sudah ada (opsional)
+- [x] Nightfall (lobby 2) diaktifkan setelah populasi cukup — `Lobby_AutoTick()` (ambang 20 pemain, histeresis 3/10 tick) dipanggil dari `Director_Report` tiap 60 s; malam permanen per pemain via `Lobby_ApplyClock`; toggle manual `/nightfall`. Selftest `nightfall gate`.
+- [x] Migrasi lintas lobby untuk base yang sudah ada: `BaseBuild_MigrateLobby` dipanggil dari `Lobby_Set` — `base_structures` tetap, visual dimuat ulang di world lobby baru, `bases.lobby_id` ikut diperbarui
 
 ## Multi-server (selesai, alternatif)
 
@@ -312,15 +312,15 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Migrasi otomatis membuat database baru (root hanya untuk `CREATE DATABASE`)
 - [x] Identitas instans di log: `[BOOT] instans: <nama> | port <port>`
 - [x] Dua instans berjalan bersamaan, self-test 19/19 PASS di keduanya
-- [ ] Akun lintas server (butuh `server_id` pada `characters` atau DB auth terpusat)
-- [ ] Load balancer/queue masuk otomatis saat server penuh
+- [x] Akun lintas server: `026_server_instance.sql` (`characters.server_id` + index `(server_id, account_id)`), `core/instance.inc` (`Server_InstanceId()` 1..9 dari `server_id` di server.cfg); daftar/muat/buat karakter difilter, `accounts` tetap bersama; bukti SQL isolasi lintas instance
+- [x] Antrean masuk saat penuh: `core/slotqueue.inc` — `player_cap` (default 180) < maxplayers, FIFO 5 detik, `/masuk`+`/daftar` diblokir `Queue_BlockAuth` selama menunggu, timeout 10 menit dengan pesan jelas; selftest batas `179/180/181 = 0/1/1`. Load balancer DNS/proxy UDP tetap pekerjaan infra, bukan PAWN
 
 ## Operasi & pemulihan (selesai)
 
 - [x] `scripts/backup.sh`: dump `laststand` + `laststand_s2`, salin `server.cfg`/`mysql.ini` (root/s1/s2), `SHA256SUMS`, `MANIFEST` (+ sha256 `main.amx`), retensi `BACKUP_KEEP` (default 7)
 - [x] `scripts/restore.sh`: backup terbaru atau folder tertentu, verifikasi checksum, konfirmasi `RESTORE`, snapshot `pre_restore_*` otomatis, laporan jumlah tabel per DB
 - [x] Verifikasi: gzip -t lolos, paritas 20 tabel dump vs 20 tabel live di kedua DB
-- [ ] Jadwal harian via cron/systemd timer (perintah siap di README, belum dipasang)
+- [x] Jadwal harian via cron/systemd timer — `scripts/install-schedule.sh` (`--print` default aman, `--install` menulis crontab pengguna, `--remove`). Backup 04:15, laporan mingguan Senin 04:20.
 
 ## Loot misi/dokumen (selesai)
 
@@ -329,7 +329,7 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Progres dokumen otomatis saat mengambil loot (dua jalur grant) dan lewat pakai Buku Catatan
 - [x] Kunci Gudang: spawn peti rare 6 m dari pemain, hanya di luar kamp, refund otomatis kalau peti gagal muncul
 - [x] Vendor: Dokumen $180, Buku Catatan $90 (daftar jual 7 → 9)
-- [ ] Dokumen lore tertulis (teks cerita per dokumen) — butuh penulisan konten
+- [x] Dokumen lore tertulis: `content/lore.inc` — 12 teks, `/dokumen` (alias `/lore`), item `ITEM_DOCUMENT` memakai dialog teks; selftest `dokumen lore`
 
 ## Raid base terarah (selesai)
 
@@ -338,7 +338,7 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Zombie raid di-anchor ke petak base: chase dibatasi 38 m, kembali ke petak bila kosong, dinding digerus `BaseBuild_ZombieTick`
 - [x] Hadiah bertahan: $420 + 35 XP saat semua raider mati (`Horde_CountRaidZombies` hanya menghitung zombie ber-anchor), timeout 180 s
 - [x] `/raidbase` admin ikut memakai anchor + jalur hadiah yang sama
-- [ ] Banner "raid" khusus di HUD (sekarang hanya toast lobby) — butuh slot TextDraw baru
+- [x] Banner "raid" khusus di HUD: `HudRaid` (PlayerTextDraw y=16, di atas bar boss y=30) menampilkan `RAID KAMP <n> ZOMBIE <m:ss>`. Jumlah zombie dibaca dari cache `HordeRaidCount` yang disegarkan `Horde_Tick` tiap 5 dtk — jalur HUD 500 ms tidak memindai `ZombiePool`. Guard lobby invalid diuji selftest (`banner raid HUD`), total cek jadi 37.
 
 ## Party co-op v1 (selesai)
 
@@ -348,8 +348,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Panel `/party`: HP, jarak, status TUMBANG; ketua bisa menendang dari panel (pakai snapshot baris)
 - [x] Chat party `/p <pesan>` + perintah `/invite` `/accept` `/leave` `/kick` (semua ada fallback "terdekat" untuk mobile)
 - [x] Selftest baru: `konsistensi party` (29/29 PASS)
-- [ ] Stash/base bersama: butuh kontainer bersama + migrasi (StashContents masih per-karakter) — ditunda, bukan stub
-- [ ] Marker anggota di HUD/radar — butuh slot TextDraw/radar blip tambahan
+- [x] Stash/base bersama: diputuskan memakai `party_stash` (sudah ada sejak `017_party_stash.sql`) sebagai kontainer bersama party; `StashContents` tetap per-karakter untuk stash pribadi — tidak ada tabel baru, tidak ada stub
+- [x] Marker anggota di HUD/radar — `Party_ApplyMarkersFor`/`Party_RefreshMarkers` di `player/party.inc` memakai `SetPlayerMarkerForPlayer` (warna hijau party, dikembalikan ke `GetPlayerColor` saat keluar). Tanpa blip tambahan, jadi 0 slot terpakai.
 
 
 ## NPC rekrutan / companion (selesai)
@@ -362,8 +362,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Rekrutan hilang permanen kalau tidak ditolong dalam 3 menit
 - [x] `maxnpc` 190 → 210 supaya rekrutan tetap bisa spawn saat zombie penuh
 - [x] Selftest baru: `anggaran NPC rekrutan` (30/30 PASS)
-- [ ] Peralatan/upgrade rekrutan (armor, senjata lebih baik, bawa barang) — belum
-- [ ] Interaksi tombol Y langsung ke perekrut lewat dispatcher — masih command `/rekrut` (aman untuk mobile)
+- [x] Peralatan/upgrade rekrutan: senjata per tier (24 → 31 → 34), armour (0/25/50) lewat `Companion_ApplyGear`, dan rekrutan membawakan loot di radius 4 m (`Loot_TakeNearPoint`, maks 1 per 3 detik); selftest `perlengkapan rekrutan naik per tier`
+- [x] Interaksi tombol Y langsung ke perekrut — `Companion_TryRecruitInteract` dipanggil dari `interact/dispatcher.inc` sebelum hotspot, jadi `/rekrut` tetap ada sebagai cadangan.
 
 
 ## Boss malam / Abomination (selesai)
@@ -373,8 +373,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Tabel loot boss sendiri (10 slot penuh) + jaminan drop `Specimen` (chance 100)
 - [x] Hadiah kill boss sekali: $250 + 60 XP + 3 scrap + toast "ABOMINATION MATI"; `Director_OnBossKilled` membersihkan tracking per lobi
 - [x] Selftest baru: `boss malam` (31/31 PASS)
-- [ ] Bar HP boss di HUD (butuh slot TextDraw global) — belum
-- [ ] Fase boss (dipanggil zombie tambahan saat HP < 50%) — belum
+- [x] Bar HP boss di HUD — `HudBoss` (PlayerTextDraw, bukan global) di `ui/hud.inc`, membaca `Director_BossStatus`; ikut gate lebar 640 px.
+- [x] Fase boss — `Director_BossPhaseTwo` (`spawn_director.inc:454`) menambah 5 runner sekali saat HP < 50% (`ZOMBIE_BOSS_PHASE2_PERCENT`).
 
 
 ## Sistem role admin (selesai)
@@ -385,8 +385,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] `DEV_MODE` 1 → 0: `/heal /hurt /infect /zspawn /horde /raidbase /lootnode /event /diag /selftest` tidak lagi terbuka untuk pemain biasa
 - [x] `/admin` (info level + daftar perintah) dan `/setadmin <id> <0/1/2>` (superadmin, tidak bisa mengubah level sendiri)
 - [x] Selftest memverifikasi `accounts.admin_level` + tabel `companions` (31/31 PASS)
-- [ ] `/ban` + `/unban` memakai tabel `bans` yang sudah ada — belum (gap P0 berikutnya)
-- [ ] Audit log admin ke tabel sendiri — sementara hanya `Log_Format`
+- [x] `/ban` + `/unban` memakai tabel `bans` — sudah: `admin/moderation.inc:60` INSERT, `:151` UPDATE expires_at, `:227` daftar ban aktif.
+- [x] Audit log admin ke tabel sendiri — `database/migrations/022_admin_actions.sql` + `modules/admin/audit.inc` (`AdminAudit_Log`, `/adminlog [n]`). Sudah dipanggil dari ban/unban/mute/warn.
 
 
 ## Moderasi ban/unban (selesai)
@@ -398,8 +398,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Aturan: admin tidak bisa mem-ban admin lain (superadmin bisa), tidak bisa ban diri sendiri
 - [x] `maxnpc` 210 → 200 (FCNPC menolak `maxnpc > maxplayers`; 190 zombie + 9 rekrutan + 1 trader = 200 pas)
 - [x] Selftest: tabel `bans` ikut dihitung (31/31 PASS, `errors.log` 0 byte)
-- [ ] `/mute` dan `/warn` — belum
-- [ ] Audit log admin ke tabel sendiri (sekarang `Log_Format` + `bans.admin_name`) — belum
+- [x] `/mute` + `/unmute` + `/warn` — `admin/moderation.inc` (`Moderation_Mute/Unmute/Warn`), chat diblokir di `OnPlayerText` dengan sisa menit; 3 peringatan → mute 15 menit. Selftest `mute dan warn`.
+- [x] Audit log admin ke tabel sendiri — sama dengan baris di atas: tabel `admin_actions` (migrasi 022), detail + target_account + admin_name, tetap dobel ke file log bila DB mati.
 
 
 ## Batch lanjutan (selesai)
@@ -410,8 +410,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] **Bar HP boss + fase 2**: `HudBoss` PlayerTextDraw, `Director_BossStatus`, `ZOMBIE_BOSS_PHASE2_PERCENT 50`, `ZOMBIE_BOSS_PHASE2_ADDS 5`, flag `BossEnraged` reset saat spawn/mati
 - [x] **Peti bersama party** (`017_party_stash.sql` + `player/party_stash.inc`): `/peti`, `/peti taruh`, 40 slot, ambil/taruh seluruh stack, ledger `party_stash_take`/`party_stash_put`
 - [x] Selftest 31/31 (tabel `party_stash`, kolom `companions.tier` ikut diverifikasi)
-- [ ] Peti party: pindah sebagian (split stack) — sekarang seluruh stack
-- [ ] Peti party: izin peringkat (petugas gudang) dan riwayat siapa mengambil apa
+- [x] Peti party: pindah sebagian — dialog ambil/simpan sudah menawarkan 1 / 5 / semua (`PartyStash_Take`/`PartyStash_Put` dengan `requestedAmount`)
+- [x] Peti party: izin peringkat + riwayat: hanya petugas gudang (`/gudang <id>`, ditunjuk pemimpin) yang boleh **menaruh**; setiap take/put berhasil dicatat ke `party_stash_log` (`025_party_stash_log.sql`) dan dibaca `/gudang`
 
 
 ## Perkakas superadmin (selesai)
@@ -426,8 +426,8 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Navigasi: `/tppos`, `/goto`, `/gethere`, `/freeze` — setiap teleport memanggil `AC_ClearSample`
 - [x] Panel Teleport (dialog 3514): 6 titik populer + base sendiri + isi bensin/perbaiki kendaraan terdekat (repair admin menyuntik 1 Toolbox lalu langsung terpakai → saldo item nol)
 - [x] Semua aksi level >= superadmin (kecuali `/max` dan `/freeze` yang cukup admin) + `Log_Format` berisi account id
-- [ ] `/weather <id>` dan `/setfuel` — belum (jam sudah mengatur cuaca otomatis)
-- [ ] Audit log tabel sendiri (`admin_actions`) — masih di file log
+- [x] `/weather <id>` + `/weather auto` + `/setfuel <liter>` — `World_SetWeather` (`world/daynight.inc`) dengan override yang tidak ditimpa `World_Tick`; selftest `override cuaca`.
+- [x] Audit log tabel sendiri (`admin_actions`) — migrasi 022 diterapkan; selftest `tabel database` sekarang memverifikasi tabel ini ada.
 
 ## Pembuatan karakter (selesai)
 
@@ -436,3 +436,9 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Kolom profil di `characters` (migrasi `018_character_profile.sql`) + validasi selftest kolom `occupation`.
 - [x] `/profil` untuk melihat identitas karakter.
 - [x] Pemain tanpa karakter langsung masuk wizard (tidak ada lagi daftar kosong).
+
+## Operasional & observability (sesi 26-11-23 lanjutan)
+
+- [x] `scripts/healthcheck.sh` — cek kesehatan lewat protokol query SA-MP (UDP), mode tabel + `--json`, exit 1 bila ada instance tidak menjawab
+- [x] Supervisor systemd untuk semua instance: `scripts/systemd/laststand-s1.service`, `laststand-s2.service`, `laststand.target`, installer `scripts/install-systemd.sh` (menggantikan unit usang `/home/boxd/...` yang hanya ada untuk s1); teruji `kill -9` → `NRestarts=1`, healthcheck tetap exit 0
+- [x] Log kematian pemain: migrasi `027_deaths.sql` + `player/deaths.inc` — `OnPlayerDeath` tidak lagi membuang `killerid`/`reason`, klasifikasi `pemain/lingkungan/zombie`, `/kematian` (3 terakhir), retensi 90 hari; selftest `log kematian: klasifikasi penyebab` + `format waktu` (50/50)

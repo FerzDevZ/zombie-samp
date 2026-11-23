@@ -110,6 +110,11 @@ base_structures(id, base_id, struct_id, pos_x, pos_y, pos_z, rot_z, health, crea
 |---|---|
 | `/build` | daftar struktur: biaya, tier, sisa limit, status material |
 | `/base` | tier, jumlah struktur, integritas rata-rata, hint perintah |
+| `/base add <id>` | tambah anggota party jadi *member* base (owner/officer saja) |
+| `/base officer <id>` | jadikan anggota *officer* (boleh buka gate + bangun) |
+| `/base remove <id>` | keluarkan anggota (owner tidak bisa dikeluarkan) |
+| `/base members` | daftar anggota base + peringkatnya |
+| tombol **Y** di gate | buka/tutup gate, hanya owner/officer; menutup otomatis 8 detik |
 | `/upgrade` | naik tier base |
 | `/bongkar` | bongkar struktur terdekat (refund 50% material) |
 | `/fix` | perbaiki barricade **atau** struktur terdekat |
@@ -117,6 +122,26 @@ base_structures(id, base_id, struct_id, pos_x, pos_y, pos_z, rot_z, health, crea
 
 Semua dialog memakai satu modal aktif dan diperiksa ulang saat response
 (material bisa habis di antara membuka dialog dan menekan tombol).
+
+### 8.1 Base milik party (migrasi `024_base_members.sql`)
+
+`bases.char_id` tetap satu-satunya pemilik (role 2). Anggota disimpan di
+`base_members (base_id, char_id, role, added_by, added_at)`:
+
+| Role | Nilai | Boleh |
+|---|---|---|
+| member | 0 | masuk base, pakai peti/fasilitas, **tidak** buka gate |
+| officer | 1 | + buka gate, bangun, bongkar, perbaiki |
+| owner | 2 | + atur anggota (dari `bases.char_id`, tidak bisa dikeluarkan) |
+
+- Keanggotaan dimuat sekali saat `Base_Load` (`BaseMembers_Load`), bukan per tick.
+- Gate adalah struktur `STRUCT_GATE`; saat dibuka object naik 3.2 unit dan object
+  ColAndreas dihancurkan, saat tertutup dibuat ulang — tanpa itu pemain tetap
+  tertahan secara fisik meski model sudah naik.
+- Auto-close 8 detik lewat `BaseBuild_GateTick()` di `Base_TickBody` (500 ms).
+- Pindah lobby (`/lobby`) memindahkan base ikut: baris `base_structures` tidak
+  dihapus, visual dibuang lalu dimuat ulang dengan world id lobby baru
+  (`BaseBuild_MigrateLobby`, ROADMAP 306).
 
 ## 9. Anti-abuse (wajib, bukan opsional)
 

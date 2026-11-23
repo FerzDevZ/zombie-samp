@@ -150,7 +150,7 @@ VPS tanpa sandbox seccomp (atau systemd system-level, bukan `--user`).
 
 | Jalur | Langkah | Gate |
 |---|---|---|
-| Tailscale (utama, privat) | pastikan `tailscale status` online, server `100.122.225.77` | client Tailscale bisa connect 7777 |
+| Tailscale (utama, privat) | pastikan `tailscale status` online, server `laststand-vps` = `100.85.253.77` | client Tailscale bisa connect 7777 |
 | playit.gg (publik, opsional) | tunnel UDP aktif, IP:port dicatat | query server via `samp-query` dari luar |
 | Firewall | hanya 7777/UDP + SSH yang terbuka | `ss -lunp` tidak ada port tak perlu |
 

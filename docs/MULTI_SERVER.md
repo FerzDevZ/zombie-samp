@@ -11,7 +11,13 @@ Yang dipakai bersama: **satu** `main.amx`, plugin, dan data collision `ColAndrea
 | `s1` | 7777 | `laststand` | LAST STAND 1 - Quarantine |
 | `s2` | 7778 | `laststand_s2` | LAST STAND 2 - Outbreak |
 
-Akses dari Tailscale: `100.122.225.77:7777` dan `100.122.225.77:7778`.
+Akses dari Tailscale (jalur utama untuk HP): **`100.85.253.77:7777`** dan
+**`100.85.253.77:7778`**. IP lama `100.122.225.77` milik host `samp-server`
+yang sekarang offline — jangan dipakai lagi.
+
+Tailscale di VPS ini dipasang `tailscale up --accept-dns=false
+--hostname=laststand-vps`. Query protokol SA-MP ke IP tailnet sudah diuji
+menjawab di kedua port, jadi tidak perlu membuka UDP di AWS Security Group.
 Tidak ada port TCP yang dibuka — SA-MP hanya UDP.
 
 ## Struktur direktori
@@ -32,6 +38,114 @@ runtime/s2/ ...
 
 State pemain, base, dan ledger **tidak** di runtime: semuanya di database masing-masing.
 Karena itu `runtime/` boleh dihapus dan dibuat ulang tanpa kehilangan progres.
+
+## Akun lintas server (`server_id`) — migrasi `026_server_instance.sql`
+
+Dua model yang mungkin:
+
+| Model | Database | Karakter | Kelebihan | Kekurangan |
+|---|---|---|---|---|
+| DB terpisah (dipakai sekarang) | `laststand`, `laststand_s2` | per DB | isolasi penuh, backup terpisah | pemain harus daftar ulang, progres tidak pindah |
+| **DB bersama + `server_id`** | satu `laststand` | satu tabel, kolom `server_id` | satu akun/login/ban berlaku semua server | butuh filter di setiap query karakter |
+
+Sekarang keduanya didukung: `characters.server_id` (default 1) plus `instance.inc`.
+
+```ini
+# runtime/s1/scriptfiles/instance.ini   (bukan server.cfg!)
+server_id = 1
+# runtime/s2/scriptfiles/instance.ini
+server_id = 2
+```
+
+- `Server_InstanceId()` membaca `instance.ini`, lalu turunan port listen
+  (`port 7777` → instance 1, `7778` → 2), lalu 1. Dijepit ke 1..9.
+- **Kenapa bukan server.cfg**: SA-MP membuang direktif yang tidak dikenalnya,
+  jadi `server_id 2` di `server.cfg` tidak bisa dibaca gamemode —
+  terbukti dari s2 yang tetap melaporkan `server_id=1` sampai nilainya
+  dipindah ke `instance.ini`. `scripts/instance.sh` menulis file ini otomatis
+  untuk instance baru.
+- Path file di Pawn relatif terhadap folder `scriptfiles/` (fungsi file
+  dikurung di sana): tulis `instance.ini`, **bukan** `scriptfiles/instance.ini`.
+- Filter diterapkan di tiga tempat: daftar karakter, muat karakter (`/pilih`),
+  dan INSERT pembuatan karakter. `/pilih <id>` milik instance lain = 0 baris.
+- `accounts` sengaja **tidak** diberi `server_id`: login, password, dan ban
+  berlaku lintas instance (itu inti "akun lintas server").
+- Bukti isolasi (fixture 1 akun, 2 karakter):
+
+```
+--- instance 1        id 6  ZZ_S1_Char  server_id 1
+--- instance 2        id 7  ZZ_S2_Char  server_id 2
+--- pilih lintas instance              rows = 0
+fixture bersih: chars=0 accounts=0
+```
+
+## Antrean saat penuh (`core/slotqueue.inc`)
+
+SA-MP memakai slot saat koneksi masuk, jadi tidak ada cara menolak koneksi
+sebelum slot terpakai. Antrean karena itu bekerja di tingkat gamemode:
+
+```cfg
+player_cap 90      # batas pemain bermain; maxplayers 300 - maxnpc 200 = 100 slot
+```
+
+- `OnPlayerConnect` menandai pemain sebagai menunggu bila `Server_PlayingCount() >= player_cap`.
+- Saat menunggu, `/masuk` dan `/daftar` ditolak dengan pesan posisi antrean
+  (`Queue_BlockAuth`) — tidak ada jalur auth yang lolos.
+- `Queue_Tick` (5 detik) mengizinkan satu pemain terdepan (FIFO) begitu ada slot,
+  lalu mengirim pesan + toast "slot terbuka".
+- Menunggu > 10 menit = keluar dengan pesan jelas (`KickQueuedPlayer`), bukan
+  ditendang diam-diam.
+- Selftest batas: `cap=90, tahan di 89/90/91 = 0/1/1`.
+
+Yang **tidak** bisa dikerjakan dari dalam gamemode: load balancer DNS/health-check
+yang mengarahkan pemain ke server kosong. Itu pekerjaan infrastruktur (proxy UDP /
+launcher), bukan PAWN; yang tersedia di sini adalah antrean per instance.
+
+## Dekorasi kamp (`/decor`, ROADMAP 223)
+
+Dekorasi memakai model yang sudah terbukti tampil di server ini (19447 dinding,
+1427 barikade, 19477 papan tanda). Verifikasi visual dilakukan di client:
+
+```
+/decor              # daftar 9 dekorasi + koordinat
+/decor tp 3         # pindahkan diri 6 m dari dekorasi #3
+```
+
+Kalau ada prop yang tidak muncul di client, lapor nomor indeksnya — tabel
+`DecorProp`/`DecorSign` di `world/decor.inc` adalah satu-satunya tempat yang perlu diubah.
+
+## Masuk dari HP (jaringan berbeda)
+
+VPS ini di balik NAT: `ens5` memegang IP privat `172.31.4.237`, IP publiknya
+`3.147.85.241`. Dari HP **jangan** pakai IP privat.
+
+| Instance | Alamat di client HP |
+|---|---|
+| s1 | `3.147.85.241:7777` |
+| s2 | `3.147.85.241:7778` |
+
+1. Client SA-MP Mobile → **Add server** → isi alamat di atas → Connect.
+2. Server sudah listen di `0.0.0.0:7777` dan `0.0.0.0:7778`, bukan `127.0.0.1`.
+3. Di host, `ufw` nonaktif dan `iptables INPUT` = `ACCEPT` — host tidak memblokir.
+   Yang wajib dibuka: **AWS Security Group** instance EC2, inbound
+   `UDP 7777-7778` dari `0.0.0.0/0` (atau IP HP `/32`). Tanpa itu client
+   berhenti di "Retrieving info..." walau server sehat.
+4. `announce 0` = server tidak muncul di daftar Internet SA-MP; koneksi langsung
+   lewat IP tetap bekerja. `announce 1` hanya untuk masuk masterlist.
+
+Alternatif tanpa membuka port game: host sudah punya tunnel WireGuard
+(`wg0`, `10.77.156.1`, listen UDP 51820). Daftarkan HP sebagai peer, lalu pakai
+`10.77.156.1:7777` / `:7778`.
+
+Bukti server menjawab (query protokol SA-MP, paket `SAMP`+opcode `i`):
+
+```
+7777: RESPON
+7778: RESPON
+```
+
+Kalau HP masih gagal padahal query lokal menjawab, masalahnya jalur jaringan
+(Security Group / NAT), bukan gamemode.
 
 ## Perintah
 
@@ -85,18 +199,16 @@ boot + self-test 19/19 PASS di kedua instans, tanpa runtime error.
 Batas praktis lebih ditentukan CPU (AI zombie) daripada RAM: satu instans dengan 190 NPC
 memakai sekitar 1 core; di 8 core, 4–5 instans masih aman.
 
-## Akun lintas server (belum)
+## Akun lintas server: keputusan yang sudah diambil
 
-Saat ini akun dan karakter terpisah per database: pemain harus daftar di masing-masing server.
-Kalau nanti ingin satu akun untuk semua server, pilihannya:
+Dua model dibahas sebelum `server_id` ada. Yang dipakai sekarang: **DB bersama +
+`characters.server_id`** untuk karakter, sementara `accounts` tetap bersama dalam
+satu database (lihat bagian di atas). Model "sinkronisasi offline antar DB"
+ditolak karena pemain tidak bisa langsung main di server baru dengan akun lama.
 
-1. **Tabel akun terpusat** (`laststand_auth`) + kolom `server_id` pada `characters`, dan
-   login membaca kredensial dari DB terpusat. Perlu migrasi + perubahan `account_auth.inc`.
-2. **Sinkronisasi offline**: ekspor/impor `accounts` antar DB secara berkala. Murah, tapi
-   pemain tidak bisa langsung main di server baru dengan akun lama.
-
-Jangan arahkan dua instans ke DB yang sama sebelum `server_id` ada — itu bukan multi-server,
-itu dua server yang saling merusak state.
+Peringatan yang tetap berlaku: **jangan** mengarahkan dua instance ke database
+yang sama tanpa filter `server_id` di setiap query karakter — itu bukan
+multi-server, itu dua server yang saling merusak state.
 
 ## Kapan sebaiknya 2 server, kapan 1 server?
 
