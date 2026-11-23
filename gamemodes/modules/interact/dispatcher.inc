@@ -171,7 +171,9 @@ stock Interact_HandlePlayer(playerid)
 
 public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
-    #pragma unused oldkeys
+    /* Pratinjau struktur menelan semua tombol: saat mode bangun aktif, Y harus
+       memasang struktur, bukan membuka pintu/pickup yang kebetulan di depan. */
+    if (BuildEdit_OnKeyState(playerid, newkeys, oldkeys)) return 1;
 
     if ((newkeys & KEY_YES) && !(oldkeys & KEY_YES))
     {

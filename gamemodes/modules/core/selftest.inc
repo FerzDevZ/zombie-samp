@@ -560,6 +560,76 @@ stock Selftest_CheckNightfall()
     return 1;
 }
 
+stock Selftest_CheckBuildLoad()
+{
+    /* Regresi "struktur bergeser": penanda muat dulu per pemain, sehingga anggota
+       kedua dari base yang sama memuat ulang dan MENGGANDAKAN setiap struktur.
+       Yang diuji di sini adalah sifat penandanya: idempoten, bisa dilupakan, dan
+       tidak menumpuk saat base yang sama diminta dua kali. */
+    new baseId = 90001;
+    new before = BaseBuildLoadedCount;
+
+    new bool:first = (BaseBuild_MarkLoaded(baseId) == 1);
+    new bool:idempotent = (BaseBuild_MarkLoaded(baseId) == 0) && (BaseBuildLoadedCount == before + 1);
+    new bool:visible = BaseBuild_IsLoaded(baseId);
+
+    new bool:loadedOnce = (BaseBuild_SetLoading(baseId, true) == 1);
+    new bool:loadingVisible = BaseBuild_IsLoading(baseId);
+    new bool:loadingOnce = (BaseBuild_SetLoading(baseId, true) == 0);
+    BaseBuild_SetLoading(baseId, false);
+
+    new bool:forgotten = (BaseBuild_ForgetLoaded(baseId) == 1) && !BaseBuild_IsLoaded(baseId);
+    new bool:cleanAfter = (BaseBuildLoadedCount == before) && (BaseBuildLoadingCount == 0);
+
+    new detail[160];
+    format(detail, sizeof(detail),
+        "tandai=%d idempoten=%d terlihat=%d, loading=%d/%d/%d, lupa=%d bersih=%d",
+        first, idempotent, visible, loadedOnce, loadingVisible, loadingOnce, forgotten, cleanAfter);
+
+    Selftest_Record(first && idempotent && visible && loadedOnce && loadingVisible
+        && loadingOnce && forgotten && cleanAfter, "muat struktur per base", detail);
+    return 1;
+}
+
+stock Selftest_CheckBuildEdit()
+{
+    /* Dua fungsi murni yang menentukan hasil akhir pratinjau. Kalau clamp atau
+       normalisasi salah, pemain melihat "ARAH -15" atau struktur terpasang
+       8 meter di depan padahal panel bilang 2,5. */
+    new bool:clampOk = (floatround(BuildEdit_ClampDistance(0.0) * 100.0) == 100
+        && floatround(BuildEdit_ClampDistance(2.5) * 100.0) == 250
+        && floatround(BuildEdit_ClampDistance(99.0) * 100.0) == 600);
+
+    new bool:rotOk = (floatround(BuildEdit_NormalizeRot(-15.0)) == 345
+        && floatround(BuildEdit_NormalizeRot(370.0)) == 10
+        && floatround(BuildEdit_NormalizeRot(360.0)) == 0
+        && floatround(BuildEdit_NormalizeRot(90.0)) == 90);
+
+    /* Panel: LetterSize X 0.19 * HUD_CHAR_RATIO px per karakter, kotak 320 px
+       dikurangi padding 16 px. Baris terburuk yang benar-benar bisa tercetak. */
+    new worst[64], widthPx, limitPx = floatround(BUILD_EDIT_PANEL_W - 16.0);
+    new bool:panelOk = true;
+    new const panelRows[][] = {
+        "BANGUN Generator (12/12, t3)",
+        "POS 1676.5 -2325.1 13.9",
+        "ARAH 359 deg  JARAK 6.0m  NAIK +3.00m",
+        "ALT maju  C putar  Y pasang  H batal"
+    };
+    for (new row = 0; row < sizeof(panelRows); row++)
+    {
+        format(worst, sizeof(worst), "%s", panelRows[row]);
+        widthPx = floatround(strlen(worst) * 0.19 * HUD_CHAR_RATIO);
+        if (widthPx > limitPx) panelOk = false;
+    }
+
+    new detail[128];
+    format(detail, sizeof(detail), "jarak 1.0-6.0=%d, arah 0-359=%d, panel %d/%d px=%d",
+        clampOk, rotOk, widthPx, limitPx, panelOk);
+
+    Selftest_Record(clampOk && rotOk && panelOk, "pratinjau struktur", detail);
+    return 1;
+}
+
 stock Selftest_CheckHudLayout()
 {
     new offender[16], detail[96];
@@ -611,6 +681,8 @@ stock Selftest_RunStatic()
     Selftest_CheckBagSpeed();
     Selftest_CheckWeather();
     Selftest_CheckNightfall();
+    Selftest_CheckBuildEdit();
+    Selftest_CheckBuildLoad();
     Selftest_CheckHudLayout();
 
     Selftest_GroundCheck("spawn kamp", SPAWN_X, SPAWN_Y, SPAWN_Z);

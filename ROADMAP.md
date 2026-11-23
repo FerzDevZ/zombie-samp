@@ -443,4 +443,7 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Supervisor systemd untuk semua instance: `scripts/systemd/laststand-s1.service`, `laststand-s2.service`, `laststand.target`, installer `scripts/install-systemd.sh` (menggantikan unit usang `/home/boxd/...` yang hanya ada untuk s1); teruji `kill -9` → `NRestarts=1`, healthcheck tetap exit 0
 - [x] Log kematian pemain: migrasi `027_deaths.sql` + `player/deaths.inc` — `OnPlayerDeath` tidak lagi membuang `killerid`/`reason`, klasifikasi `pemain/lingkungan/zombie`, `/kematian` (3 terakhir), retensi 90 hari; selftest `log kematian: klasifikasi penyebab` + `format waktu` (50/50)
 - [x] Kunci unik karakter per instance: `028_character_keys_per_server.sql` (`uq_characters_server_name`, `uq_characters_server_slot`) + `029_drop_redundant_server_index.sql`; bukti nama+slot 0 kini boleh sama di s1 dan s2, EXPLAIN daftar karakter tetap `rows: 1`
+- [x] Pratinjau pembangunan (`world/build_edit.inc`): ghost object + panel POSISI/ARAH/JARAK/NAIK, material dipotong saat `/pasang`, tombol ALT/C/Y/H + `/geser` `/putar` `/tinggi` `/pasang` `/batal` untuk Android
+- [x] Perbaikan "struktur bergeser": penanda muat per **base** (`BaseBuild_IsLoaded`/`MarkLoaded`/`ForgetLoaded`) + pagar duplikat di `BaseBuild_OnRowsLoaded`; selftest `muat struktur per base` (52/52)
+- [x] HUD: nominal uang dihapus, SCRAP/SAMPEL diberi kotak latar gelap, BBM tampil untuk pengemudi **dan** penumpang, plus baris GENSET saat berdiri <= 12 m dari generator sendiri
 

@@ -100,7 +100,8 @@ Format: `/nama [argumen]` — argumen dalam `<>` wajib, `[]` opsional.
 | `/lootnode` | Ambil peti dunia terdekat |
 | `/klinik` | Rawat luka di klinik hub |
 | `/shelter` (alias `/rumah`) | Masuk shelter pribadi |
-| `/base` / `/bangun` / `/dismantle` | Base building: lihat, bangun, bongkar |
+| `/base` / `/bangun` / `/dismantle` | Base building: lihat, bangun (pratinjau), bongkar |
+| `/edit` `/geser` `/putar` `/tinggi` `/pasang` `/batal` | Pratinjau & edit posisi/arah struktur base (PC: ALT/C/Y/H) |
 | `/generator` (alias `/genset`) | Nyalakan/matikan generator base |
 | `/raidbase` | Serang base pemain lain (raid window) |
 

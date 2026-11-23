@@ -116,12 +116,48 @@ base_structures(id, base_id, struct_id, pos_x, pos_y, pos_z, rot_z, health, crea
 | `/base members` | daftar anggota base + peringkatnya |
 | tombol **Y** di gate | buka/tutup gate, hanya owner/officer; menutup otomatis 8 detik |
 | `/upgrade` | naik tier base |
+| `/edit` | geser/putar struktur **milik base sendiri** yang paling dekat (<= 8 m), tanpa biaya material |
+| `/geser [m]` | majukan/mundurkan target pratinjau (default 0,5 m; negatif = mundur) |
+| `/putar [deg]` | putar arah struktur (default 15°, kumulatif 0-359) |
+| `/tinggi [m]` | naik/turunkan target saat memasang struktur baru (default 0,25 m) |
+| `/pasang` | konfirmasi: material dipotong **di sini**, bukan saat memilih menu |
+| `/batal` | batalkan pratinjau; tidak ada material terpakai |
 | `/bongkar` | bongkar struktur terdekat (refund 50% material) |
 | `/fix` | perbaiki barricade **atau** struktur terdekat |
 | `/menu` | baris "Base: bangun / info" |
 
 Semua dialog memakai satu modal aktif dan diperiksa ulang saat response
 (material bisa habis di antara membuka dialog dan menekan tombol).
+
+### 8.0 Pratinjau & edit posisi (laporan "struktur bergeser")
+
+`/build` **tidak** lagi menaruh struktur seketika. Memilih tipe hanya memulai
+**pratinjau**: satu *ghost object* + panel TextDraw yang menampilkan POSISI,
+ARAH, JARAK, dan NAIK. Material baru dipotong saat `/pasang`.
+
+| Tombol | Aksi |
+|---|---|
+| `ALT` | target maju 0,5 m (maks 6 m) |
+| `C` | putar arah +15° |
+| `Y` | pasang / simpan |
+| `H` | batal |
+
+Tombol di atas hanya untuk PC; Android memakai `/geser`, `/putar`, `/tinggi`,
+`/pasang`, `/batal` — jalur kode yang sama (`BuildEdit_*`), bukan implementasi
+kedua.
+
+Dua cacat nyata yang diperbaiki di sini:
+
+1. **Penempatan buta.** Dulu struktur langsung berdiri 2,5 m di depan pemain
+   mengikuti sudut hadap *saat itu*, tanpa pratinjau dan tanpa cara memutar.
+   Benda yang muncul tidak sama dengan yang dibayangkan pemain — inilah yang
+   dilaporkan sebagai "item yang dibangun bergerak".
+2. **Struktur berganda.** Penanda "sudah dimuat" disimpan **per pemain**, jadi
+   setiap anggota baru dari base yang sama menjalankan `SELECT` lagi dan
+   `OnRowsLoaded` mengisi slot kosong berikutnya: dua salinan setiap struktur di
+   titik yang sama (`ssDbId` berbeda). Penanda sekarang per **base**
+   (`BaseBuild_IsLoaded`/`MarkLoaded`/`ForgetLoaded`) dan `OnRowsLoaded`
+   membuang slot lama lebih dulu bila base itu ternyata sudah termuat.
 
 ### 8.1 Base milik party (migrasi `024_base_members.sql`)
 

@@ -68,7 +68,7 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudInfection",  24.0, 0.20, 11 },
     { "HudZone",       24.0, 0.18, 22 },
     { "HudProgress",   24.0, 0.20, 41 },
-    { "HudLoadout",   496.0, 0.20, 19 },
+    { "HudLoadout",   452.0, 0.20, 22 },
     { "HudVehicle",   400.0, 0.17, 38 },
     { "HudBoss",      210.0, 0.26, 28 },
     { "HudRaid",      190.0, 0.24, 25 }
@@ -126,11 +126,17 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudProgress[playerid], 1);
     PlayerTextDrawFont(playerid, HudProgress[playerid], 1);
 
-    /* x=496 (bukan 560): "$999999  SCRAP 999" = 17 karakter ~120 px, di 560
-       melewati tepi 640 dan terpotong (terlihat di tools/hud_preview). Sama
-       kelas dengan bug gauge BBM yang dulu dipindah 560 -> 440. */
-    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, 496.0, 330.0, "$0  SCRAP 0");
+    /* x=452: "SCRAP 9999  SAMPEL 999" = 22 karakter ~155 px -> 607.
+       Uang dihapus dari HUD (permintaan pemain: nominal cash terus berubah dan
+       tidak dipakai saat bertahan hidup); scrap + sampel yang menentukan.
+       Kotak gelap ditambahkan karena teks ini dulu hilang di latar terang —
+       dilaporkan sebagai "textdraw scrap di latar". */
+    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, 452.0, 330.0, "SCRAP 0  SAMPEL 0");
     PlayerTextDrawLetterSize(playerid, HudLoadout[playerid], 0.2, 0.8);
+    PlayerTextDrawTextSize(playerid, HudLoadout[playerid], 176.0, 12.0);
+    PlayerTextDrawUseBox(playerid, HudLoadout[playerid], 1);
+    PlayerTextDrawBoxColor(playerid, HudLoadout[playerid], 0x0B0F14B4);
+    PlayerTextDrawBackgroundColor(playerid, HudLoadout[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudLoadout[playerid], UI_TEXT_PRIMARY);
     PlayerTextDrawSetOutline(playerid, HudLoadout[playerid], 1);
     PlayerTextDrawFont(playerid, HudLoadout[playerid], 1);
@@ -140,6 +146,10 @@ stock HUD_Create(playerid)
        Di 440 itu meluber 28 px keluar layar. 400 + 228 px = 628, sisa 12 px. */
     HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 400.0, 346.0, "BBM");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], 0.17, 0.72);
+    PlayerTextDrawTextSize(playerid, HudVehicle[playerid], 232.0, 12.0);
+    PlayerTextDrawUseBox(playerid, HudVehicle[playerid], 1);
+    PlayerTextDrawBoxColor(playerid, HudVehicle[playerid], 0x0B0F14B4);
+    PlayerTextDrawBackgroundColor(playerid, HudVehicle[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudVehicle[playerid], UI_ACCENT_INFO);
     PlayerTextDrawSetOutline(playerid, HudVehicle[playerid], 1);
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
@@ -300,7 +310,10 @@ stock HUD_Update(playerid)
         PlayerTextDrawShow(playerid, HudNeeds[playerid]);
     }
 
-    if (GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
+    /* Dulu hanya PLAYER_STATE_DRIVER, jadi penumpang tidak pernah melihat BBM
+       sama sekali (dilaporkan "tidak ada textdraw bensin"). Sekarang semua
+       penghuni kendaraan melihat tangki yang sama. */
+    if (IsPlayerInAnyVehicle(playerid))
     {
         new vehicleid = GetPlayerVehicleID(playerid);
         new Float:fuel = Vehicle_GetFuel(vehicleid);
@@ -384,11 +397,76 @@ stock HUD_Update(playerid)
             PlayerTextDrawShow(playerid, HudVehicle[playerid]);
         }
     }
-    else if (HudVehicleShown[playerid])
+    else
     {
-        HudVehicleShown[playerid] = false;
-        HudFuelWarnStage[playerid] = 0;
-        PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+        /* Di luar kendaraan: satu-satunya bahan bakar yang relevan adalah
+           generator base sendiri. Tanpa ini pemain hanya tahu isi tangki genset
+           lewat label 3D, padahal kehabisan BBM mematikan turret. */
+        new generatorSlot = BaseBuild_GeneratorSlot(Base_Id(playerid));
+        new bool:showGenerator = false;
+
+        if (generatorSlot >= 0 && BaseStructure[generatorSlot][ssActive])
+        {
+            new Float:px, Float:py, Float:pz;
+            GetPlayerPos(playerid, px, py, pz);
+            if (VectorSize(px - BaseStructure[generatorSlot][ssX],
+                py - BaseStructure[generatorSlot][ssY],
+                pz - BaseStructure[generatorSlot][ssZ]) <= 12.0)
+            {
+                showGenerator = true;
+
+                new Float:gensetFuel = BaseStructure[generatorSlot][ssFuel];
+                new gensetLine[96];
+                if (gensetFuel <= 0.0)
+                {
+                    format(gensetLine, sizeof(gensetLine), "GENSET MATI [----------] 0/%.0fL", BASE_GENERATOR_FUEL_MAX);
+                }
+                else
+                {
+                    new filled = floatround((gensetFuel / BASE_GENERATOR_FUEL_MAX) * 10.0);
+                    if (filled < 0) filled = 0;
+                    if (filled > 10) filled = 10;
+
+                    new gensetBar[14];
+                    gensetBar[0] = EOS;
+                    for (new cell = 0; cell < 10; cell++)
+                    {
+                        strcat(gensetBar, (cell < filled) ? "#" : "-", sizeof(gensetBar));
+                    }
+                    /* Baris terburuk: "GENSET [##########] 20/20L" = 28 karakter. */
+                    format(gensetLine, sizeof(gensetLine), "GENSET [%s] %.0f/%.0fL",
+                        gensetBar, gensetFuel, BASE_GENERATOR_FUEL_MAX);
+                }
+
+                HUD_SetIfChanged(playerid, HudVehicle[playerid], gensetLine,
+                    HudLastVehicle[playerid], sizeof(HudLastVehicle[]));
+
+                new gensetColor = UI_ACCENT_PRIMARY;
+                if (gensetFuel <= 0.0) gensetColor = UI_ACCENT_DANGER;
+                else if (gensetFuel <= BASE_GENERATOR_FUEL_MAX * 0.25) gensetColor = UI_ACCENT_WARN;
+
+                if (gensetColor != HudFuelColor[playerid])
+                {
+                    HudFuelColor[playerid] = gensetColor;
+                    PlayerTextDrawColor(playerid, HudVehicle[playerid], gensetColor);
+                }
+            }
+        }
+
+        if (showGenerator)
+        {
+            if (!HudVehicleShown[playerid])
+            {
+                HudVehicleShown[playerid] = true;
+                PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+            }
+        }
+        else if (HudVehicleShown[playerid])
+        {
+            HudVehicleShown[playerid] = false;
+            HudFuelWarnStage[playerid] = 0;
+            PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+        }
     }
 
     new Float:infection = Player_GetInfection(playerid);
@@ -416,8 +494,10 @@ stock HUD_Update(playerid)
     else format(zoneLine, sizeof(zoneLine), "%s [BAHAYA]", zoneLabel);
     HUD_SetIfChanged(playerid, HudZone[playerid], zoneLine, HudLastZone[playerid], sizeof(HudLastZone[]));
 
-    format(hudLine, sizeof(hudLine), "$%d  SCRAP %d",
-        PlayerSurvival[playerid][psCash], Inventory_CountItem(playerid, ITEM_SCRAP));
+    /* Uang sengaja tidak ditampilkan (permintaan pemain). Yang tersisa adalah
+       dua angka yang benar-benar dipakai saat membangun dan bertahan. */
+    format(hudLine, sizeof(hudLine), "SCRAP %d  SAMPEL %d",
+        Inventory_CountItem(playerid, ITEM_SCRAP), Inventory_CountItem(playerid, ITEM_SPECIMEN));
     HUD_SetIfChanged(playerid, HudLoadout[playerid], hudLine, HudLastLoadout[playerid], sizeof(HudLastLoadout[]));
 
     // Progres skill harus terlihat tanpa membuka dialog: ini satu-satunya petunjuk

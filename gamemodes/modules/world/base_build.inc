@@ -48,6 +48,13 @@ enum E_STRUCT_SLOT
 
 new BaseStructure[BASE_MAX_STRUCTURES][E_STRUCT_SLOT];
 new BaseBuildLoadedBase[MAX_PLAYERS];
+
+/* Penanda muat per BASE (bukan per pemain). Lihat BaseBuild_EnsureLoaded. */
+#define BASE_BUILD_TRACK_MAX 64
+new BaseBuildLoadedIds[BASE_BUILD_TRACK_MAX];
+new BaseBuildLoadedCount = 0;
+new BaseBuildLoadingIds[BASE_BUILD_TRACK_MAX];
+new BaseBuildLoadingCount = 0;
 new BaseBuildLastBuildTick[MAX_PLAYERS];
 /* Pending per pemain: slot global tunggal membuat dua INSERT bersamaan
    (dua pemain build di tick sama) saling menimpa assignment dbId. */
@@ -313,6 +320,79 @@ stock BaseBuild_DestroySlot(slot, bool:deleteFromDb)
     return 1;
 }
 
+stock bool:BaseBuild_IsLoaded(baseId)
+{
+    for (new i = 0; i < BaseBuildLoadedCount; i++)
+    {
+        if (BaseBuildLoadedIds[i] == baseId) return true;
+    }
+    return false;
+}
+
+stock BaseBuild_MarkLoaded(baseId)
+{
+    if (baseId <= 0 || BaseBuild_IsLoaded(baseId)) return 0;
+    if (BaseBuildLoadedCount >= BASE_BUILD_TRACK_MAX) return 0;
+
+    BaseBuildLoadedIds[BaseBuildLoadedCount] = baseId;
+    BaseBuildLoadedCount++;
+    return 1;
+}
+
+stock BaseBuild_ForgetLoaded(baseId)
+{
+    for (new i = 0; i < BaseBuildLoadedCount; i++)
+    {
+        if (BaseBuildLoadedIds[i] != baseId) continue;
+
+        for (new move = i; move < BaseBuildLoadedCount - 1; move++)
+        {
+            BaseBuildLoadedIds[move] = BaseBuildLoadedIds[move + 1];
+        }
+        BaseBuildLoadedCount--;
+        BaseBuildLoadedIds[BaseBuildLoadedCount] = 0;
+        return 1;
+    }
+    return 0;
+}
+
+stock bool:BaseBuild_IsLoading(baseId)
+{
+    for (new i = 0; i < BaseBuildLoadingCount; i++)
+    {
+        if (BaseBuildLoadingIds[i] == baseId) return true;
+    }
+    return false;
+}
+
+stock BaseBuild_SetLoading(baseId, bool:loading)
+{
+    if (baseId <= 0) return 0;
+
+    if (!loading)
+    {
+        for (new i = 0; i < BaseBuildLoadingCount; i++)
+        {
+            if (BaseBuildLoadingIds[i] != baseId) continue;
+
+            for (new move = i; move < BaseBuildLoadingCount - 1; move++)
+            {
+                BaseBuildLoadingIds[move] = BaseBuildLoadingIds[move + 1];
+            }
+            BaseBuildLoadingCount--;
+            BaseBuildLoadingIds[BaseBuildLoadingCount] = 0;
+            return 1;
+        }
+        return 0;
+    }
+
+    if (BaseBuild_IsLoading(baseId) || BaseBuildLoadingCount >= BASE_BUILD_TRACK_MAX) return 0;
+
+    BaseBuildLoadingIds[BaseBuildLoadingCount] = baseId;
+    BaseBuildLoadingCount++;
+    return 1;
+}
+
 /* Struktur dimuat hanya saat pemain menyentuh sistemnya: 40 object per base x 200
    pemain tidak boleh dibuat saat boot. */
 stock BaseBuild_EnsureLoaded(playerid)
@@ -324,10 +404,22 @@ stock BaseBuild_EnsureLoaded(playerid)
         return 0;
     }
 
+    /* BUG LAMA: penanda "sudah dimuat" disimpan PER PEMAIN. Setiap anggota baru
+       dari base yang sama memicu SELECT lagi, lalu OnRowsLoaded mengisi slot
+       kosong berikutnya — hasilnya dua salinan setiap struktur di posisi yang
+       sama. Pemain melihat bendanya "bergeser/bergetar" saat anggota lain masuk,
+       dan /bongkar menghancurkan salinan yang salah. Penanda sekarang per base. */
     new baseId = Base_Id(playerid);
-    if (BaseBuildLoadedBase[playerid] == baseId) return 1;
+    if (BaseBuild_IsLoaded(baseId)) return 1;
+
+    if (BaseBuild_IsLoading(baseId))
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Struktur base sedang dimuat, coba lagi.");
+        return 0;
+    }
 
     BaseBuildLoadedBase[playerid] = baseId;
+    BaseBuild_SetLoading(baseId, true);
 
     SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Memuat struktur base, coba lagi dalam 1 detik.");
     new query[160];
@@ -342,9 +434,22 @@ public BaseBuild_OnRowsLoaded(playerid)
     if (!IsPlayerConnected(playerid)) return 0;
 
     new baseId = Base_Id(playerid);
+    BaseBuild_SetLoading(baseId, false);
     if (baseId == 0) return 0;
 
     new rows = cache_num_rows();
+
+    /* Pagar duplikat: kalau base ini ternyata sudah punya slot aktif (mis. SELECT
+       balapan dari dua pemain yang login bersamaan), buang sisanya lebih dulu.
+       Tanpa ini satu tabel berisi 2 baris = 2 objek menumpuk di titik sama. */
+    if (BaseBuild_IsLoaded(baseId))
+    {
+        for (new slot = 0; slot < BASE_MAX_STRUCTURES; slot++)
+        {
+            if (!BaseStructure[slot][ssActive] || BaseStructure[slot][ssBaseId] != baseId) continue;
+            BaseBuild_DestroySlot(slot, false);
+        }
+    }
 
     for (new row = 0; row < rows; row++)
     {
@@ -379,6 +484,8 @@ public BaseBuild_OnRowsLoaded(playerid)
         BaseBuild_CreateVisuals(slot);
     }
 
+    BaseBuild_MarkLoaded(baseId);
+
     new line[128];
     format(line, sizeof(line), "[BUILD] %d struktur dimuat untuk base #%d.", rows, baseId);
     SendClientMessage(playerid, UI_TEXT_SECONDARY, line);
@@ -401,6 +508,8 @@ stock BaseBuild_MigrateLobby(baseId, lobbyId)
         BaseBuild_DestroySlot(slot, false);
     }
 
+    BaseBuild_ForgetLoaded(baseId);
+
     for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
     {
         if (Base_Id(playerid) != baseId) continue;
@@ -411,7 +520,9 @@ stock BaseBuild_MigrateLobby(baseId, lobbyId)
 }
 
 /* Validasi titik build. Menolak dengan alasan spesifik, tidak pernah diam. */
-stock bool:BaseBuild_IsSpotValid(playerid, Float:x, Float:y, Float:z)
+/* ignoreSlot: saat struktur yang SAMA sedang digeser, jarak ke dirinya sendiri
+   tidak boleh dihitung — tanpa ini setiap edit ditolak "terlalu dekat". */
+stock bool:BaseBuild_IsSpotValid(playerid, Float:x, Float:y, Float:z, ignoreSlot = -1)
 {
     if (Zone_IsHub(Zone_GetIdAt(x, y, z)))
     {
@@ -437,6 +548,7 @@ stock bool:BaseBuild_IsSpotValid(playerid, Float:x, Float:y, Float:z)
     for (new slot = 0; slot < BASE_MAX_STRUCTURES; slot++)
     {
         if (!BaseStructure[slot][ssActive]) continue;
+        if (slot == ignoreSlot) continue;
 
         new Float:gap = VectorSize(x - BaseStructure[slot][ssX], y - BaseStructure[slot][ssY], 0.0);
         if (gap < BASE_STRUCT_MIN_GAP)
@@ -479,14 +591,32 @@ stock BaseBuild_Place(playerid, type)
         return 0;
     }
 
-    if (!BaseBuild_EnsureLoaded(playerid))
+    if (!BaseBuild_EnsureLoaded(playerid)) return 0;
+
+    new Float:x, Float:y, Float:z, Float:angle;
+    GetPlayerPos(playerid, x, y, z);
+    GetPlayerFacingAngle(playerid, angle);
+
+    new Float:buildX = x + floatsin(-angle, degrees) * 2.5;
+    new Float:buildY = y + floatcos(-angle, degrees) * 2.5;
+
+    return BaseBuild_PlaceAt(playerid, type, buildX, buildY, z, angle);
+}
+
+stock BaseBuild_PlaceAt(playerid, type, Float:buildX, Float:buildY, Float:buildZ, Float:angle)
+{
+    if (!Account_IsPlaying(playerid)) return 0;
+    if (type < 0 || type >= STRUCTURE_COUNT) return 0;
+
+    if (GetTickCount() - BaseBuildLastBuildTick[playerid] < BASE_BUILD_COOLDOWN_MS)
     {
-        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Memuat struktur base, coba lagi.");
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Terlalu cepat, tunggu sebentar.");
         return 0;
     }
 
     new baseId = Base_Id(playerid);
     new tier = Base_GetTier(playerid);
+    if (baseId == 0) return 0;
     if (tier < gStructures[type][stTier])
     {
         new message[112];
@@ -509,22 +639,9 @@ stock BaseBuild_Place(playerid, type)
         return 0;
     }
 
-    if (!BaseBuild_MaterialsOk(playerid, type))
-    {
-        new message[144];
-        format(message, sizeof(message), "[BUILD] Butuh %d material A dan %d material B.",
-            gStructures[type][stAmtA], gStructures[type][stAmtB]);
-        SendClientMessage(playerid, UI_ACCENT_WARN, message);
-        return 0;
-    }
+    if (!BaseBuild_MaterialsOk(playerid, type)) return 0;
 
-    new Float:x, Float:y, Float:z, Float:angle;
-    GetPlayerPos(playerid, x, y, z);
-    GetPlayerFacingAngle(playerid, angle);
-
-    new Float:buildX = x + floatsin(-angle, degrees) * 2.5;
-    new Float:buildY = y + floatcos(-angle, degrees) * 2.5;
-
+    new Float:z = buildZ;
     if (!BaseBuild_IsSpotValid(playerid, buildX, buildY, z)) return 0;
 
     new Float:plotX, Float:plotY, Float:plotZ;
@@ -1086,6 +1203,88 @@ stock BaseBuild_TurretTick(const zombieIds[], const Float:zombieX[], const Float
     return 1;
 }
 
+/* Struktur milik base pemain yang paling dekat — titik masuk /edit.
+   Range sengaja lebih longgar dari /bongkar (4 m): menggeser sering dilakukan
+   sambil berdiri agak jauh agar seluruh benda terlihat. */
+stock BaseBuild_LabelForSlot(slot, dest[], size)
+{
+    if (slot < 0 || slot >= BASE_MAX_STRUCTURES || !BaseStructure[slot][ssActive])
+    {
+        format(dest, size, "?");
+        return 0;
+    }
+    format(dest, size, "%s", gStructures[BaseStructure[slot][ssType]][stLabel]);
+    return 1;
+}
+
+stock BaseBuild_NearestOwnSlot(playerid, Float:range, &Float:distance)
+{
+    distance = range;
+    if (!Account_IsPlaying(playerid)) return -1;
+
+    new baseId = Base_Id(playerid);
+    if (baseId == 0) return -1;
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+
+    new best = -1;
+    for (new slot = 0; slot < BASE_MAX_STRUCTURES; slot++)
+    {
+        if (!BaseStructure[slot][ssActive] || BaseStructure[slot][ssBaseId] != baseId) continue;
+
+        new Float:delta = VectorSize(x - BaseStructure[slot][ssX],
+            y - BaseStructure[slot][ssY], z - BaseStructure[slot][ssZ]);
+        if (delta > distance) continue;
+
+        distance = delta;
+        best = slot;
+    }
+    return best;
+}
+
+/* Pindahkan struktur yang SUDAH ADA tanpa biaya material.
+   Visual, tabrakan ColAndreas, dan baris DB harus bergerak bersama: objek
+   dinamis lama dihancurkan lebih dulu, karena membiarkannya hidup membuat
+   pemain melihat dua salinan di dua tempat. */
+stock BaseBuild_MoveSlotTo(slot, Float:x, Float:y, Float:z, Float:rotZ)
+{
+    if (slot < 0 || slot >= BASE_MAX_STRUCTURES) return 0;
+    if (!BaseStructure[slot][ssActive]) return 0;
+
+    if (BaseStructure[slot][ssGateOpen]) BaseBuild_CloseGate(slot);
+
+    if (BaseStructure[slot][ssObject] != STREAMER_TAG_OBJECT:0) DestroyDynamicObject(BaseStructure[slot][ssObject]);
+    if (BaseStructure[slot][ssCollision] != -1) CA_DestroyObject(BaseStructure[slot][ssCollision]);
+    if (BaseStructure[slot][ssPickup] != STREAMER_TAG_PICKUP:0) DestroyDynamicPickup(BaseStructure[slot][ssPickup]);
+    if (BaseStructure[slot][ssLabel] != STREAMER_TAG_3D_TEXT_LABEL:0) DestroyDynamic3DTextLabel(BaseStructure[slot][ssLabel]);
+
+    BaseStructure[slot][ssObject] = STREAMER_TAG_OBJECT:0;
+    BaseStructure[slot][ssCollision] = -1;
+    BaseStructure[slot][ssPickup] = STREAMER_TAG_PICKUP:0;
+    BaseStructure[slot][ssLabel] = STREAMER_TAG_3D_TEXT_LABEL:0;
+
+    BaseStructure[slot][ssX] = x;
+    BaseStructure[slot][ssY] = y;
+    BaseStructure[slot][ssZ] = z;
+    BaseStructure[slot][ssRotZ] = rotZ;
+
+    BaseBuild_CreateVisuals(slot);
+
+    if (SQL_IsReady() && BaseStructure[slot][ssDbId] > 0)
+    {
+        new query[176];
+        mysql_format(gSQL, query, sizeof(query),
+            "UPDATE base_structures SET pos_x = %f, pos_y = %f, pos_z = %f, rot_z = %f WHERE id = %d",
+            x, y, z, rotZ, BaseStructure[slot][ssDbId]);
+        mysql_tquery(gSQL, query, "", "");
+    }
+
+    Log_Format(LOG_INFO, "[BUILD] geser slot=%d base=%d -> %.1f %.1f %.1f rot %.1f",
+        slot, BaseStructure[slot][ssBaseId], x, y, z, rotZ);
+    return 1;
+}
+
 stock BaseBuild_ShowMenu(playerid)
 {
     if (!Account_IsPlaying(playerid)) return 0;
@@ -1136,7 +1335,9 @@ stock BaseBuild_OnDialogResponse(playerid, dialogid, response, listitem, const i
     if (!response) return 1;
     if (listitem < 0 || listitem >= STRUCTURE_COUNT) return 1;
 
-    BaseBuild_Place(playerid, listitem);
-    BaseBuild_ShowMenu(playerid);
+    /* Dulu langsung menaruh struktur 2,5 m di depan tanpa pratinjau: pemain
+       melaporkannya sebagai "item yang dibangun bergerak". Sekarang memilih
+       tipe hanya MEMULAI pratinjau; material baru dipotong saat /pasang. */
+    BuildEdit_BeginPlace(playerid, listitem);
     return 1;
 }

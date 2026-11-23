@@ -1509,6 +1509,92 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "edit", true) || !strcmp(cmd, "pindah", true))
+    {
+        BuildEdit_BeginMove(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "geser", true) || !strcmp(cmd, "dorong", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "Pemakaian: /edit dulu, lalu /geser 0.5 (boleh negatif)");
+            return 1;
+        }
+
+        new Float:meters = BUILD_EDIT_STEP;
+        if (!isnull(params) && sscanf(params, "f", meters))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /geser [meter]  contoh /geser -0.5");
+            return 1;
+        }
+
+        BuildEdit_AdjustDistance(playerid, meters);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "putar", true) || !strcmp(cmd, "rotasi", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "Pemakaian: /edit atau /bangun dulu, lalu /putar 15");
+            return 1;
+        }
+
+        new Float:rotStep = BUILD_EDIT_ROT_STEP;
+        if (!isnull(params) && sscanf(params, "f", rotStep))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /putar [derajat]  contoh /putar 45");
+            return 1;
+        }
+
+        BuildEdit_Rotate(playerid, rotStep);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "tinggi", true) || !strcmp(cmd, "naik", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "Pemakaian: /bangun dulu, lalu /tinggi 0.25");
+            return 1;
+        }
+        if (BuildEdit[playerid][beMode] != BUILD_EDIT_PLACE)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Tinggi hanya bisa diatur saat memasang struktur baru.");
+            return 1;
+        }
+
+        new Float:meters = BUILD_EDIT_RAISE_STEP;
+        if (!isnull(params) && sscanf(params, "f", meters))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /tinggi [meter]  contoh /tinggi -0.25");
+            return 1;
+        }
+
+        BuildEdit_Raise(playerid, meters);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "pasang", true) || !strcmp(cmd, "konfirmasi", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "Tidak ada pratinjau aktif. Mulai dengan /bangun atau /edit.");
+            return 1;
+        }
+
+        BuildEdit_Confirm(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "batal", true) || !strcmp(cmd, "cancelbuild", true))
+    {
+        BuildEdit_Cancel(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "upgrade", true))
     {
         BaseBuild_Upgrade(playerid);

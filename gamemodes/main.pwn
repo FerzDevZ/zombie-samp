@@ -99,6 +99,7 @@
 #include "modules/world/base_members.inc"
 #include "modules/world/bases.inc"
 #include "modules/world/base_build.inc"
+#include "modules/world/build_edit.inc"
 #include "modules/zombie/horde.inc"
 #include "modules/world/escort.inc"
 #include "modules/world/companion.inc"
@@ -393,6 +394,10 @@ public OnPlayerDisconnect(playerid, reason)
         Account_SaveCharacter(playerid);
     }
 
+    /* Pratinjau struktur: ghost object + panel TextDraw harus mati bersama
+       pemain, kalau tidak objek hantu tertinggal di world base. */
+    BuildEdit_ResetState(playerid);
+
     /* State pembuatan karakter selalu dibersihkan, termasuk pemain yang keluar di tengah wizard. */
     CharCreate_Reset(playerid);
 
@@ -658,6 +663,7 @@ public Player_Tick()
 
         if (PlayerSurvival[playerid][psInShelter]) ShelterDoor_Tick(playerid);
         Bag_SpeedTick(playerid);   // berat tas: jalur 500 ms, bukan OnPlayerUpdate
+        BuildEdit_TickPlayer(playerid);   // pratinjau/edit struktur ikut pemain
         Player_ReviveChannelTick(playerid);
 
         new Float:engineHealth;

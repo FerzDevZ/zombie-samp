@@ -35,7 +35,7 @@ WORST_TEXT = {
     "HudInfection": "INFECT 100%",
     "HudZone": "Bandara Lama [WASPADA]",
     "HudProgress": "LVL 99  SP 99  SAMPEL 999  LUKA 9  /skill",
-    "HudLoadout": "$999999  SCRAP 9999",
+    "HudLoadout": "SCRAP 9999  SAMPEL 999",
     "HudVehicle": "BBM [##########] 100/100L pom 8000m TG",
     "HudBoss": "ABOMINATION 100%  ##########",
     "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
