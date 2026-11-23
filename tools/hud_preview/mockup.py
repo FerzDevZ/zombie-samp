@@ -114,9 +114,8 @@ def render(path, design, comp=1.0, stretch=1.0):
     v = design["vehicle"]
     if v:
         rr(d, (v["x"], v["y"], v["x"] + v["w"], v["y"] + v["h"]), 2, (10, 14, 20, 205))
-        text(d, v["text_x"], v["text_y"], "BBM 54%  43/80L 120km", 0.17, 0.70,
-             (16, 185, 129))
-        bar(d, v["bar_x"], v["bar_y"], v["bar_w"], 5, 0.54)
+        text(d, v["text_x"], v["text_y"], v["label"], 0.17, 0.70, (16, 185, 129))
+        bar(d, v["bar_x"], v["bar_y"], v["bar_w"], 5, v["ratio"])
 
     # Simulasi klien HP: kanvas 640x480 diregangkan ke layar 20:9 (x 1.52x).
     if stretch != 1.0:
@@ -134,31 +133,32 @@ if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else "mockup.png"
     DESIGN = {
         "panel": {
-            "x": 12, "y": 300, "w": 284, "h": 84,
-            "brand": (22, 303), "zone": (150, 305), "progress": (22, 368),
+            "x": 16, "y": 288, "w": 288, "h": 88,
+            "brand": (26, 294), "zone": (150, 296), "progress": (26, 360),
         },
         "rows": [
-            {"label": "HP", "name": (22, 316), "bar": (56, 318), "bar_w": 100,
+            {"label": "HP", "name": (26, 310), "bar": (52, 312), "bar_w": 104,
              "bar_h": 5, "ratio": 1.0, "color": (16, 185, 129),
-             "value": (162, 316), "text": "100/100"},
-            {"label": "ARM", "name": (22, 328), "bar": (56, 330), "bar_w": 100,
+             "value": (162, 310), "text": "100/100"},
+            {"label": "ARM", "name": (26, 322), "bar": (52, 324), "bar_w": 104,
              "bar_h": 5, "ratio": 0.0, "color": (56, 132, 255),
-             "value": (162, 328), "text": "0/100"},
-            {"label": "INF", "name": (22, 340), "bar": (56, 342), "bar_w": 100,
+             "value": (162, 322), "text": "0/100"},
+            {"label": "INF", "name": (26, 334), "bar": (52, 336), "bar_w": 104,
              "bar_h": 5, "ratio": 0.0, "color": (16, 185, 129),
-             "value": (162, 340), "text": "0%"},
+             "value": (162, 334), "text": "0%"},
         ],
         "minis": [
-            {"label": "LAP", "name": (22, 354), "bar": (48, 356), "bar_w": 40,
-             "bar_h": 4, "ratio": 0.82, "value": (92, 354), "text": "82"},
-            {"label": "HAUS", "name": (108, 354), "bar": (134, 356), "bar_w": 40,
-             "bar_h": 4, "ratio": 0.76, "value": (178, 354), "text": "76"},
-            {"label": "PIP", "name": (196, 354), "bar": (222, 356), "bar_w": 40,
-             "bar_h": 4, "ratio": 0.12, "value": (266, 354), "text": "12"},
+            {"label": "LAP", "name": (26, 348), "bar": (48, 348), "bar_w": 40,
+             "bar_h": 4, "ratio": 0.82, "value": (92, 348), "text": "82"},
+            {"label": "HAUS", "name": (112, 348), "bar": (134, 348), "bar_w": 40,
+             "bar_h": 4, "ratio": 0.76, "value": (178, 348), "text": "76"},
+            {"label": "PIP", "name": (198, 348), "bar": (220, 348), "bar_w": 40,
+             "bar_h": 4, "ratio": 0.12, "value": (264, 348), "text": "12"},
         ],
-        "vehicle": {"x": 336, "y": 330, "w": 292, "h": 20,
-                    "text_x": 342, "text_y": 334,
-                    "bar_x": 500, "bar_y": 338, "bar_w": 100},
+        "vehicle": {"x": 352, "y": 327, "w": 276, "h": 28,
+                    "text_x": 356, "text_y": 330,
+                    "label": "BBM 54%  43/80L 120km",
+                    "bar_x": 356, "bar_y": 345, "bar_w": 264, "ratio": 0.54},
     }
     comp = float(sys.argv[2]) if len(sys.argv) > 2 else 1.0
     stretch = float(sys.argv[3]) if len(sys.argv) > 3 else 1.0

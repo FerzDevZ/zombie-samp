@@ -65,7 +65,7 @@ new HudBarLastColor[MAX_PLAYERS][HUD_BAR_COUNT];
 
 /* Lebar/tinggi bar harus sama dengan angka di HUD_CreateBar — generate.py dan
    gallery.py membaca literal yang sama, jadi jangan ubah satu sisi saja. */
-new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 118.0, 258.0};
+new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 264.0, 258.0};
 new const Float:gHudBarH[HUD_BAR_COUNT] = {5.0, 5.0, 5.0, 4.0, 4.0, 4.0, 5.0, 6.0};
 
 /* Bar bersegmen gaya game modern: fill kontinu dipotong strip warna latar.
@@ -127,11 +127,21 @@ stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSi
 
 /* Geometri baris kendaraan (BBM). Angka ini dipakai HUD_Create, HUD_Update,
    dan audit /tddebug — satu sumber kebenaran, tidak boleh diduplikasi. */
+/* Baris kendaraan DUA TINGKAT: teks di atas (satu baris penuh), bar di
+   bawahnya selebar kartu. Tata letak satu baris (teks kiri + bar kanan)
+   menyisakan separuh kartu kosong saat BBM rendah (teks pom panjang) dan
+   membuat bar terlihat "hilang" — dilaporkan sebagai "box BBM kacau". */
+#define HUD_VEH_CARD_X      352.0
+#define HUD_VEH_CARD_W      276.0
+#define HUD_VEH_CARD_Y      327.0
+#define HUD_VEH_CARD_H      28.0
 #define HUD_VEH_TEXT_X      356.0
-#define HUD_VEH_TEXT_W      140.0
+#define HUD_VEH_TEXT_Y      330.0
+#define HUD_VEH_TEXT_W      264.0
 #define HUD_VEH_LETTER_X    0.17
-#define HUD_VEH_BAR_X       500.0
-#define HUD_VEH_BAR_W       118.0
+#define HUD_VEH_BAR_X       356.0
+#define HUD_VEH_BAR_Y       345.0
+#define HUD_VEH_BAR_W       264.0
 
 /* Tiga gaya HUD (docs/UIUX_PLAN.md). Mobile terdeteksi otomatis dari versi
    klien; pemain tetap bisa override lewat /hudgaya 1|2|3. Skala menyusutkan
@@ -497,7 +507,7 @@ stock HUD_Create(playerid)
     if (HUD_GayaHasCard(playerid))
     {
         HUD_CreateCard(playerid, HUD_X(playerid, 16.0), HUD_Y(playerid, 288.0),
-            HUD_FX(playerid, 288.0), HUD_F(playerid, 100.0), HUD_F(playerid, 2.0));
+            HUD_FX(playerid, 288.0), HUD_F(playerid, 88.0), HUD_F(playerid, 2.0));
     }
 
     if (HUD_GayaHasCard(playerid))
@@ -604,14 +614,17 @@ stock HUD_Create(playerid)
        sehingga tertutup). Kartu = 352..628, y 330..350. */
     if (Settings_TdMobileSafe(playerid))
     {
-        HudVehCard[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0),
-            HUD_F(playerid, 276.0), HUD_F(playerid, 20.0), 0x0B0F14B4);
+        HudVehCard[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, HUD_VEH_CARD_X),
+            HUD_Y(playerid, HUD_VEH_CARD_Y), HUD_FX(playerid, HUD_VEH_CARD_W),
+            HUD_F(playerid, HUD_VEH_CARD_H), 0x0B0F14B4);
     }
     else
     {
-        HudVehCard[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0), "LD_SPAC:white");
+        HudVehCard[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_CARD_X),
+            HUD_Y(playerid, HUD_VEH_CARD_Y), "LD_SPAC:white");
         PlayerTextDrawFont(playerid, HudVehCard[playerid], 4);
-        PlayerTextDrawTextSize(playerid, HudVehCard[playerid], HUD_FX(playerid, 276.0), HUD_F(playerid, 20.0));
+        PlayerTextDrawTextSize(playerid, HudVehCard[playerid], HUD_FX(playerid, HUD_VEH_CARD_W),
+            HUD_F(playerid, HUD_VEH_CARD_H));
         PlayerTextDrawColor(playerid, HudVehCard[playerid], 0x0B0F14B4);
         PlayerTextDrawSetOutline(playerid, HudVehCard[playerid], 0);
         PlayerTextDrawBackgroundColor(playerid, HudVehCard[playerid], 0x00000000);
@@ -623,13 +636,13 @@ stock HUD_Create(playerid)
     HUD_CreateBar(playerid, HUD_BAR_LAP, HUD_X(playerid, 48.0), HUD_Y(playerid, 348.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK);
     HUD_CreateBar(playerid, HUD_BAR_HAUS, HUD_X(playerid, 134.0), HUD_Y(playerid, 348.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK);
     HUD_CreateBar(playerid, HUD_BAR_PIP, HUD_X(playerid, 220.0), HUD_Y(playerid, 348.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK);
-    /* Baris kendaraan dibagi dua wilayah yang TIDAK boleh bertumpuk:
-         teks  : x 356 .. 496  (140 satuan, tanpa box)
-         bar   : x 500 .. 618  (118 satuan)
-       Dulu teks memakai box selebar 276 (352..628) sehingga bar tergambar di
-       atas teks — laporan "tulisan BBM di tengah bar, persen kotak di kanan". */
+    /* Baris kendaraan dua tingkat di dalam kartu 352..628 (y 328..354):
+         teks : x 356 .. 620 pada y 331
+         bar  : x 356 .. 620 pada y 344 (lebar penuh, tidak pernah bertumpuk
+                dengan teks karena beda baris) */
     if (HUD_BarVisible(playerid, HUD_BAR_VEH))
-        HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, 500.0), HUD_Y(playerid, 338.0), UI_BG_ELEVATED, 0x0B0F14B4, 3);
+        HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, HUD_VEH_BAR_X),
+            HUD_Y(playerid, HUD_VEH_BAR_Y), UI_BG_ELEVATED, 0x0B0F14B4, 3);
     /* Bar boss di bawah teks ABOMINATION (y=30): celah gelap di atas dunia. */
     if (HUD_BarVisible(playerid, HUD_BAR_BOSS))
         HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_Y(playerid, 46.0), UI_BG_ELEVATED, 0x0B0F1499, 4);
@@ -643,7 +656,8 @@ stock HUD_Create(playerid)
     /* Baris kanan hanya BBM. Baris SCRAP/SAMPEL dihapus total (permintaan
        pemain: angkanya kacau di semua gaya HUD); jumlah scrap dan sampel
        tetap bisa dilihat di dialog tas dan /inv. */
-    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X), HUD_Y(playerid, 334.0), "BBM");
+    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X),
+        HUD_Y(playerid, HUD_VEH_TEXT_Y), "BBM");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_LETTER_X), HUD_F(playerid, 0.72));
     PlayerTextDrawTextSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_TEXT_W), HUD_F(playerid, 12.0));
     PlayerTextDrawUseBox(playerid, HudVehicle[playerid], 0);
@@ -654,9 +668,11 @@ stock HUD_Create(playerid)
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
 
     /* Bar HP boss: teks blok, gaya sama dengan HUD lain (tanpa box tambahan). */
-    Log_Format(LOG_INFO, "hud %d baris BBM: kartu 352..628 y330..350, teks x=%.0f batas=%.0f, bar %.0f..%.0f",
-        playerid, HUD_VEH_TEXT_X, HUD_VEH_TEXT_X + HUD_VEH_TEXT_W,
-        HUD_VEH_BAR_X, HUD_VEH_BAR_X + HUD_VEH_BAR_W);
+    Log_Format(LOG_INFO, "hud %d baris BBM: kartu %.0f..%.0f y%.0f..%.0f, teks x%.0f..%.0f y%.0f, bar x%.0f..%.0f y%.0f",
+        playerid, HUD_VEH_CARD_X, HUD_VEH_CARD_X + HUD_VEH_CARD_W,
+        HUD_VEH_CARD_Y, HUD_VEH_CARD_Y + HUD_VEH_CARD_H,
+        HUD_VEH_TEXT_X, HUD_VEH_TEXT_X + HUD_VEH_TEXT_W, HUD_VEH_TEXT_Y,
+        HUD_VEH_BAR_X, HUD_VEH_BAR_X + HUD_VEH_BAR_W, HUD_VEH_BAR_Y);
 
     HudBoss[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 30.0), "ABOMINATION");
     PlayerTextDrawLetterSize(playerid, HudBoss[playerid], HUD_FX(playerid, 0.26), HUD_F(playerid, 1.0));
@@ -802,15 +818,16 @@ stock HUD_AuditRows(playerid)
     HUD_AuditRow(playerid, "BBM-teks", HUD_VEH_TEXT_X * HUD_XComp(playerid),
         HUD_VEH_LETTER_X * HUD_XComp(playerid),
         "BBM 12%  12/80L pom 240m BD",
-        (HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0) * HUD_XComp(playerid));
+        (HUD_VEH_TEXT_W - 8.0) * HUD_XComp(playerid));
     HUD_AuditRow(playerid, "Progress", 26.0, 0.18, "LVL 99  SP 999  LUKA 9  /skill", 300.0);
     HUD_AuditRow(playerid, "Boss", 210.0, 0.26, "ABOMINATION 100%", 0.0);
     HUD_AuditRow(playerid, "Raid", 190.0, 0.24, "RAID KAMP 14 ZOMBIE  3:00", 0.0);
     HUD_AuditRow(playerid, "Prompt", 320.0, 0.18, "Y  Ekstraksi sampel air", 0.0);
 
     new line[128];
-    format(line, sizeof(line), "[TDD] bar kendaraan: x=%.0f lebar=%.0f (teks batas %.0f)",
-        HUD_VEH_BAR_X, HUD_VEH_BAR_W, HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0);
+    format(line, sizeof(line), "[TDD] BBM: kartu %.0f..%.0f, teks y%.0f batas %.0f, bar x%.0f..%.0f y%.0f",
+        HUD_VEH_CARD_X, HUD_VEH_CARD_X + HUD_VEH_CARD_W, HUD_VEH_TEXT_Y,
+        HUD_VEH_TEXT_W - 8.0, HUD_VEH_BAR_X, HUD_VEH_BAR_X + HUD_VEH_BAR_W, HUD_VEH_BAR_Y);
     SendClientMessage(playerid, UI_ACCENT_INFO, line);
     return 1;
 }
@@ -873,7 +890,7 @@ stock HUD_Diag(playerid)
         format(fuelLine, sizeof(fuelLine), "BBM %d%%  %.0f/%.0fL %.0fkm",
             floatround(percent * 100.0), fuel, Vehicle_GetTank(vehicleid), Vehicle_RangeKm(vehicleid));
         new Float:diagLetterX = HUD_VEH_LETTER_X * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
-        new Float:textBudget = (HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0)
+        new Float:textBudget = (HUD_VEH_TEXT_W - 8.0)
             * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
         TD_FitText(fuelLine, sizeof(fuelLine), fuelLine, diagLetterX, textBudget);
         format(line, sizeof(line), "[DIAG] bbm %.1fL (%.0f%%) lebar=%d%% baris=\"%s\" (%.0f/%.0f satuan)",
@@ -898,7 +915,7 @@ stock HUD_MeasureSelftest()
 
     /* Teks BBM wajib muat sebelum bar mulai. */
     new Float:textWidth = TD_TextWidth("BBM 12%  12/80L pom 240m BD", HUD_VEH_LETTER_X);
-    ok = ok && textWidth <= (HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0);
+    ok = ok && textWidth <= (HUD_VEH_TEXT_W - 8.0);
 
     new detail[144];
     /* REGRESI nyata: TD_FitText dipanggil dengan dest == text. YSI mendefinisikan
@@ -916,8 +933,8 @@ stock HUD_MeasureSelftest()
     new bool:trimOk = (strlen(shortLine) > 0) && (TD_TextWidth(shortLine, HUD_VEH_LETTER_X) <= 40.0);
     ok = ok && aliasOk && trimOk;
 
-    format(detail, sizeof(detail), "fonts.dat '0'=23 'A'=22 'B'=19 spasi=15; BBM %.0f/%.0f satuan (teks<bar)",
-        textWidth, HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0);
+    format(detail, sizeof(detail), "fonts.dat '0'=23 'A'=22 'B'=19 spasi=15; BBM %.0f/%.0f satuan (teks<batas baris)",
+        textWidth, HUD_VEH_TEXT_W - 8.0);
     Selftest_Record(ok, "pengukur lebar textdraw", detail);
     return 1;
 }
@@ -1260,9 +1277,7 @@ stock HUD_Update(playerid)
            saat bar disembunyikan, wilayah teks memakai seluruh lebar kotak.
            Diukur dengan tabel fonts.dat, bukan perkiraan jumlah karakter. */
         new Float:vehLetterX = HUD_VEH_LETTER_X * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
-        new Float:textBudget = ((fuel >= 0.0 && percent > 0.25)
-            ? (HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0)
-            : (276.0 - 8.0)) * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
+        new Float:textBudget = (HUD_VEH_TEXT_W - 8.0) * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
         TD_FitText(fuelLine, sizeof(fuelLine), fuelLine, vehLetterX, textBudget);
 
         HUD_SetIfChanged(playerid, HudVehicle[playerid], fuelLine, HudLastVehicle[playerid], sizeof(HudLastVehicle[]));

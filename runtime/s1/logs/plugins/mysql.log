@@ -11,3 +11,5 @@
 [11/23/26 09:38:24] [ERROR] cache_get_value_name_int: field 'pref_td_mode' not found (modules/ui/settings.inc:85)
 [11/23/26 09:47:19] [ERROR] cache_get_value_name_int: field 'pref_td_mode' not found (modules/ui/settings.inc:85)
 [11/23/26 09:52:40] [ERROR] cache_get_value_name_int: field 'pref_td_mode' not found (modules/ui/settings.inc:85)
+[11/23/26 10:16:18] [ERROR] cache_get_value_name_int: field 'pref_td_mode' not found (modules/ui/settings.inc:85)
+[11/23/26 10:17:52] [ERROR] cache_get_value_name_int: field 'pref_td_mode' not found (modules/ui/settings.inc:85)
