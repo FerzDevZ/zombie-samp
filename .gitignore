@@ -41,3 +41,5 @@ runtime/*/scriptfiles/logs/
 
 # Preview HUD dihasilkan tools/hud_preview/generate.py untuk dilihat mata, bukan sumber.
 tools/hud_preview/generate.html
+tools/hud_preview/build_panel.html
+backups/preview/

@@ -560,6 +560,32 @@ stock Selftest_CheckNightfall()
     return 1;
 }
 
+stock Selftest_CheckBuildPanel()
+{
+    /* Tata letak panel diuji dengan angka, bukan dengan mata: hitbox yang
+       meleset 1 px sudah cukup membuat pemain menekan tombol yang salah. */
+    new Float:panelRight = BUILD_EDIT_PANEL_X + BUILD_EDIT_PANEL_W;
+    new Float:panelBottom = BUILD_EDIT_PANEL_Y + BUILD_EDIT_PANEL_H;
+
+    /* Layar acuan SA-MP selalu 640x480; HUD_SCREEN_HEIGHT tidak ada di hud.inc. */
+    new bool:insideScreen = (panelRight <= HUD_SCREEN_WIDTH) && (panelBottom <= 480.0);
+    /* HudLoadout mulai y=330 dan HudVehicle y=346: panel tidak boleh turun ke situ. */
+    new bool:clearHud = (panelBottom <= 330.0);
+
+    new Float:buttonRight = BUILD_EDIT_PANEL_X + 228.0 + 40.0;
+    new bool:buttonsInside = (buttonRight <= panelRight - 20.0);
+
+    /* Baris 16 px, tombol 12 px -> tidak ada dua hitbox yang bertumpuk. */
+    new bool:noOverlap = (12.0 < 16.0) && (BUILD_EDIT_PANEL_H >= 210.0);
+
+    new detail[160];
+    format(detail, sizeof(detail), "kanan %.0f/%.0f, bawah %.0f, lepas HUD=%d, tombol<=%.0f=%d",
+        panelRight, HUD_SCREEN_WIDTH, panelBottom, clearHud, panelRight - 20.0, buttonsInside);
+
+    Selftest_Record(insideScreen && clearHud && buttonsInside && noOverlap, "tata letak panel bangun", detail);
+    return 1;
+}
+
 stock Selftest_CheckBuildLoad()
 {
     /* Regresi "struktur bergeser": penanda muat dulu per pemain, sehingga anggota
@@ -600,6 +626,12 @@ stock Selftest_CheckBuildEdit()
         && floatround(BuildEdit_ClampDistance(2.5) * 100.0) == 250
         && floatround(BuildEdit_ClampDistance(99.0) * 100.0) == 600);
 
+    /* Samping & naik punya batas sendiri: tanpa clamp, tombol Z bisa menembus
+       tanah atau menggantung 20 m di udara. */
+    new bool:limitOk = (floatround(BuildEdit_ClampValue(-99.0, -6.0, 6.0) * 100.0) == -600
+        && floatround(BuildEdit_ClampValue(99.0, -6.0, 6.0) * 100.0) == 600
+        && floatround(BuildEdit_ClampValue(1.5, -1.0, 3.0) * 100.0) == 150);
+
     new bool:rotOk = (floatround(BuildEdit_NormalizeRot(-15.0)) == 345
         && floatround(BuildEdit_NormalizeRot(370.0)) == 10
         && floatround(BuildEdit_NormalizeRot(360.0)) == 0
@@ -607,13 +639,13 @@ stock Selftest_CheckBuildEdit()
 
     /* Panel: LetterSize X 0.19 * HUD_CHAR_RATIO px per karakter, kotak 320 px
        dikurangi padding 16 px. Baris terburuk yang benar-benar bisa tercetak. */
-    new worst[64], widthPx, limitPx = floatround(BUILD_EDIT_PANEL_W - 16.0);
+    new worst[64], widthPx, limitPx = floatround(BUILD_EDIT_PANEL_W - 24.0);
     new bool:panelOk = true;
     new const panelRows[][] = {
-        "BANGUN Generator (12/12, t3)",
-        "POS 1676.5 -2325.1 13.9",
-        "ARAH 359 deg  JARAK 6.0m  NAIK +3.00m",
-        "ALT maju  C putar  Y pasang  H batal"
+        "GENERATOR | TIER 3 | 12/12",
+        "SAMPING +6.00 m",
+        "LANGKAH 1.00 m / 45 deg",
+        "ALT maju | C putar | Y pasang"
     };
     for (new row = 0; row < sizeof(panelRows); row++)
     {
@@ -623,10 +655,10 @@ stock Selftest_CheckBuildEdit()
     }
 
     new detail[128];
-    format(detail, sizeof(detail), "jarak 1.0-6.0=%d, arah 0-359=%d, panel %d/%d px=%d",
-        clampOk, rotOk, widthPx, limitPx, panelOk);
+    format(detail, sizeof(detail), "jarak 1.0-6.0=%d, batas samping/naik=%d, arah 0-359=%d, panel %d/%d px=%d",
+        clampOk, limitOk, rotOk, widthPx, limitPx, panelOk);
 
-    Selftest_Record(clampOk && rotOk && panelOk, "pratinjau struktur", detail);
+    Selftest_Record(clampOk && limitOk && rotOk && panelOk, "pratinjau struktur", detail);
     return 1;
 }
 
@@ -683,6 +715,7 @@ stock Selftest_RunStatic()
     Selftest_CheckNightfall();
     Selftest_CheckBuildEdit();
     Selftest_CheckBuildLoad();
+    Selftest_CheckBuildPanel();
     Selftest_CheckHudLayout();
 
     Selftest_GroundCheck("spawn kamp", SPAWN_X, SPAWN_Y, SPAWN_Z);

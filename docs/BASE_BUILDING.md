@@ -120,6 +120,7 @@ base_structures(id, base_id, struct_id, pos_x, pos_y, pos_z, rot_z, health, crea
 | `/geser [m]` | majukan/mundurkan target pratinjau (default 0,5 m; negatif = mundur) |
 | `/putar [deg]` | putar arah struktur (default 15°, kumulatif 0-359) |
 | `/tinggi [m]` | naik/turunkan target saat memasang struktur baru (default 0,25 m) |
+| `/panel` (`/kursor`) | panggil/lepas kursor panel bangun tanpa mengubah posisi |
 | `/pasang` | konfirmasi: material dipotong **di sini**, bukan saat memilih menu |
 | `/batal` | batalkan pratinjau; tidak ada material terpakai |
 | `/bongkar` | bongkar struktur terdekat (refund 50% material) |
@@ -132,19 +133,53 @@ Semua dialog memakai satu modal aktif dan diperiksa ulang saat response
 ### 8.0 Pratinjau & edit posisi (laporan "struktur bergeser")
 
 `/build` **tidak** lagi menaruh struktur seketika. Memilih tipe hanya memulai
-**pratinjau**: satu *ghost object* + panel TextDraw yang menampilkan POSISI,
-ARAH, JARAK, dan NAIK. Material baru dipotong saat `/pasang`.
+**pratinjau**: satu *ghost object* + panel TextDraw. Material baru dipotong
+saat `/pasang`.
+
+Panel (kanan atas, 294x210 px) menampilkan enam baris angka yang **identik
+dengan angka yang dipakai saat menyimpan**: SAMPING, MAJU, NAIK, ARAH, JARAK,
+LANGKAH. Di mode geser, tiga baris pertama berubah menjadi koordinat dunia
+X/Y/Z.
+
+| Kontrol panel | Aksi |
+|---|---|
+| `-` / `+` baris SAMPING (X) | geser target ke kiri/kanan (maks ±6 m) |
+| `-` / `+` baris MAJU (Y) | maju/mundur (1-6 m) |
+| `-` / `+` baris NAIK (Z) | naik/turun (-1 m .. +3 m) |
+| `<` / `>` | putar arah sesuai langkah |
+| `-` / `+` baris JARAK | ubah jarak di mode bangun / dorong struktur di mode geser |
+| `LANGKAH` | siklus 0,25 m / 5° -> 0,5 m / 15° -> 1,0 m / 45° |
+| `PASANG` | konfirmasi (hijau = material cukup, merah = kurang) |
+| `BATAL` | keluar tanpa biaya |
+| `X` | lepas kursor, pratinjau tetap hidup |
+
+Panel bisa diklik lewat `SelectTextDraw` (`/panel` memunculkan kursor lagi,
+`ESC` melepasnya). Setiap tombol = satu sprite selectable + satu label *non*
+selectable, karena label yang ikut selectable membuat kursor berebut hitbox dan
+salah-klik.
+
+Tombol fisik tetap ada untuk pemain tanpa mouse:
 
 | Tombol | Aksi |
 |---|---|
-| `ALT` | target maju 0,5 m (maks 6 m) |
-| `C` | putar arah +15° |
+| `ALT` | maju satu langkah |
+| `C` | putar satu langkah |
 | `Y` | pasang / simpan |
 | `H` | batal |
 
-Tombol di atas hanya untuk PC; Android memakai `/geser`, `/putar`, `/tinggi`,
-`/pasang`, `/batal` — jalur kode yang sama (`BuildEdit_*`), bukan implementasi
-kedua.
+Versi Android memakai `/geser`, `/putar`, `/tinggi`, `/pasang`, `/batal`,
+`/panel` — jalur kode yang sama (`BuildEdit_*`), bukan implementasi kedua.
+
+Tata letak panel dijaga dua gate, bukan mata:
+
+- `Selftest_CheckBuildPanel` — panel harus berakhir di kanan <= 640 px, dasar
+  <= 250 px (di atas baris `SCRAP`/`BBM` yang mulai 330 px), dan tombol tidak
+  boleh melewati 20 px dari tepi kartu.
+- `Selftest_CheckBuildEdit` — lebar teks baris terburuk <= lebar kartu dikurangi
+  padding (sekarang 195/270 px).
+- `tools/hud_preview/build_panel.py` merender geometri panel ke HTML 640x480;
+  skrip ini **gagal** bila koordinat di `build_edit.inc` digeser tanpa
+  memperbarui alat, jadi gambar pratinjau tidak pernah menipu.
 
 Dua cacat nyata yang diperbaiki di sini:
 

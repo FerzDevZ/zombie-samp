@@ -3,16 +3,17 @@
 #endif
 #define _ls_build_edit_included
 
-/* Mode pratinjau & edit struktur base (ROADMAP baru, laporan pemain).
+/* Editor struktur base — UI klik-able gaya FiveM/NoPixel.
 
-   Sebelum ini /bangun langsung memotong material lalu menaruh struktur 2,5 m di
-   depan pemain berdasarkan sudut hadap SAAT ITU, tanpa pratinjau. Pemain tidak
-   pernah melihat di mana bendanya akan berdiri — karena itu dilaporkan sebagai
-   "item yang dibangun bergerak": hasilnya tidak sama dengan yang dibayangkan.
+   Mode ini menggantikan jalur lama yang "menaruh struktur lalu berharap":
+   pemain melihat ghost object + kartu gelap dengan tombol yang bisa DIKLIK
+   (SelectTextDraw), berisi X/Y/Z, putar kiri/kanan, maju/mundur, naik/turun,
+   dan langkah presisi. Tombol fisik ALT/C/Y/H tetap ada untuk pemain yang
+   tidak memakai mouse.
 
-   Sekarang: pratinjau (ghost object) + panel TextDraw yang menunjukkan POSISI,
-   ARAH (kemiringan), JARAK, dan TINGGI. Material baru dipotong saat PASANG, dan
-   struktur yang sudah ada bisa digeser/diputar dengan panel yang sama. */
+   Semua tombol memakai sprite sebagai hitbox (LD_SPAC:white / LD_BEAT:chit)
+   dan label non-selectable, mengikuti aturan hitbox FiveM: satu selectable
+   per tombol, jadi kursor tidak pernah "berebut" antara label dan latar. */
 
 #define BUILD_EDIT_NONE     0
 #define BUILD_EDIT_PLACE    1
@@ -21,18 +22,39 @@
 #define BUILD_EDIT_MIN_DIST     1.0
 #define BUILD_EDIT_MAX_DIST     6.0
 #define BUILD_EDIT_DEFAULT_DIST 2.5
-#define BUILD_EDIT_STEP         0.5
-#define BUILD_EDIT_ROT_STEP     15.0
-#define BUILD_EDIT_RAISE_STEP   0.25
 #define BUILD_EDIT_PICK_RANGE   8.0
 #define BUILD_EDIT_KEY_DEBOUNCE 120
+#define BUILD_EDIT_MAX_SIDE     6.0
+#define BUILD_EDIT_MAX_RAISE    3.0
+#define BUILD_EDIT_MIN_RAISE    (-1.0)
 
-/* Panel sengaja di tengah-kanan: kolom kiri sudah dipakai HUD (x 24) dan
-   kolom kanan bawah dipakai SCRAP/BBM (y >= 330), jadi tidak ada tabrakan. */
-#define BUILD_EDIT_PANEL_X 310.0
-#define BUILD_EDIT_PANEL_Y 120.0
-#define BUILD_EDIT_PANEL_W 320.0
-#define BUILD_EDIT_PANEL_H 64.0
+/* Panel: kanan atas, tidak menabrak HUD kiri (x 24) maupun baris SCRAP/BBM
+   (y >= 330). Lebar 294 px menyisakan 10 px dari tepi 640 pada skala acuan. */
+#define BUILD_EDIT_PANEL_X 334.0
+#define BUILD_EDIT_PANEL_Y 40.0
+#define BUILD_EDIT_PANEL_W 294.0
+#define BUILD_EDIT_PANEL_H 210.0
+
+/* Tombol. Urutan ini juga urutan tampil di panel. */
+#define BE_BTN_XMINUS   0
+#define BE_BTN_XPLUS    1
+#define BE_BTN_YMINUS   2
+#define BE_BTN_YPLUS    3
+#define BE_BTN_ZMINUS   4
+#define BE_BTN_ZPLUS    5
+#define BE_BTN_ROTLEFT  6
+#define BE_BTN_ROTRIGHT 7
+#define BE_BTN_DISTMIN  8
+#define BE_BTN_DISTPLUS 9
+#define BE_BTN_STEP     10
+#define BE_BTN_CONFIRM  11
+#define BE_BTN_CANCEL   12
+#define BE_BTN_CLOSEMOUSE 13
+#define BE_BTN_COUNT    14
+
+/* Langkah presisi: 0 = halus, 1 = normal, 2 = kasar. Rotasi ikut supaya satu
+   tombol cukup untuk "geser dikit" dan "geser jauh". */
+#define BE_STEP_COUNT 3
 
 enum E_BUILD_EDIT
 {
@@ -40,21 +62,55 @@ enum E_BUILD_EDIT
     beType,
     beSlot,
     Float:beDist,
+    Float:beSide,
     Float:beX,
     Float:beY,
     Float:beZ,
     Float:beRot,
     Float:beRaise,
+    beStepStage,
     STREAMER_TAG_OBJECT:beGhost,
     beLastKeyTick,
-    bool:bePanelShown
+    bool:bePanelShown,
+    bool:beMouseOn
 };
 
 new BuildEdit[MAX_PLAYERS][E_BUILD_EDIT];
-new PlayerText:BuildEditBox[MAX_PLAYERS];
-new PlayerText:BuildEditLine[MAX_PLAYERS];
 
-/* Murni: dipakai perintah, tick, dan selftest. */
+/* Kartu rounded: 2 strip + 4 sudut (teknik sprite, bukan box tajam). */
+new PlayerText:BuildEditCard[MAX_PLAYERS][6];
+new PlayerText:BuildEditAccent[MAX_PLAYERS];
+new PlayerText:BuildEditTitle[MAX_PLAYERS];
+new PlayerText:BuildEditSub[MAX_PLAYERS];
+new PlayerText:BuildEditDivider[MAX_PLAYERS];
+new PlayerText:BuildEditRow[MAX_PLAYERS][6];
+new PlayerText:BuildEditHint[MAX_PLAYERS];
+new PlayerText:BuildEditBtn[MAX_PLAYERS][BE_BTN_COUNT];
+new PlayerText:BuildEditBtnText[MAX_PLAYERS][BE_BTN_COUNT];
+
+forward BuildEdit_HidePanel(playerid);
+forward BuildEdit_RefreshPanel(playerid);
+forward BuildEdit_Nudge(playerid, Float:meters);
+
+new const Float:gBeStepMeters[BE_STEP_COUNT] = {0.25, 0.5, 1.0};
+new const Float:gBeStepDegrees[BE_STEP_COUNT] = {5.0, 15.0, 45.0};
+
+stock Float:BuildEdit_StepMeters(playerid)
+{
+    new stage = BuildEdit[playerid][beStepStage];
+    if (stage < 0 || stage >= BE_STEP_COUNT) stage = 1;
+    return gBeStepMeters[stage];
+}
+
+stock Float:BuildEdit_StepDegrees(playerid)
+{
+    new stage = BuildEdit[playerid][beStepStage];
+    if (stage < 0 || stage >= BE_STEP_COUNT) stage = 1;
+    return gBeStepDegrees[stage];
+}
+
+/* ------------------------------------------------------------ nilai murni */
+
 stock Float:BuildEdit_ClampDistance(Float:distance)
 {
     if (distance < BUILD_EDIT_MIN_DIST) return BUILD_EDIT_MIN_DIST;
@@ -62,13 +118,22 @@ stock Float:BuildEdit_ClampDistance(Float:distance)
     return distance;
 }
 
-/* 0..360, tanpa nilai negatif: HUD menampilkan "ARAH -15" kalau tidak dijepit. */
+/* 0..360: panel menampilkan "ARAH -15" kalau tidak dijepit. */
 stock Float:BuildEdit_NormalizeRot(Float:heading)
 {
     while (heading < 0.0) heading += 360.0;
     while (heading >= 360.0) heading -= 360.0;
     return heading;
 }
+
+stock Float:BuildEdit_ClampValue(Float:value, Float:low, Float:high)
+{
+    if (value < low) return low;
+    if (value > high) return high;
+    return value;
+}
+
+/* ------------------------------------------------------------ siklus hidup */
 
 stock BuildEdit_ResetState(playerid)
 {
@@ -83,46 +148,269 @@ stock BuildEdit_ResetState(playerid)
     BuildEdit[playerid][beType] = 0;
     BuildEdit[playerid][beSlot] = -1;
     BuildEdit[playerid][beDist] = BUILD_EDIT_DEFAULT_DIST;
+    BuildEdit[playerid][beSide] = 0.0;
     BuildEdit[playerid][beRaise] = 0.0;
+    BuildEdit[playerid][beStepStage] = 1;
     BuildEdit[playerid][beGhost] = STREAMER_TAG_OBJECT:0;
     BuildEdit[playerid][beLastKeyTick] = 0;
 
-    if (BuildEdit[playerid][bePanelShown])
+    BuildEdit_HidePanel(playerid);
+    return 1;
+}
+
+stock BuildEdit_IsActive(playerid)
+{
+    return (BuildEdit[playerid][beMode] != BUILD_EDIT_NONE) ? 1 : 0;
+}
+
+/* ------------------------------------------------------------ kartu & tombol */
+
+stock BuildEdit_CreateCard(playerid, Float:x, Float:y, Float:width, Float:height, Float:radius)
+{
+    new Float:rx = radius * TD_ASPECT_16_9;
+    new Float:diamX = rx * 2.0;
+    new Float:diamY = radius * 2.0;
+
+    BuildEditCard[playerid][0] = CreatePlayerTextDraw(playerid, x, y + radius, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, BuildEditCard[playerid][0], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, BuildEditCard[playerid][0], width, height - diamY);
+    PlayerTextDrawColor(playerid, BuildEditCard[playerid][0], UI_BG_GLASS_DARK);
+    PlayerTextDrawSetSelectable(playerid, BuildEditCard[playerid][0], false);
+
+    BuildEditCard[playerid][1] = CreatePlayerTextDraw(playerid, x + rx, y, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, BuildEditCard[playerid][1], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, BuildEditCard[playerid][1], width - diamX, height);
+    PlayerTextDrawColor(playerid, BuildEditCard[playerid][1], UI_BG_GLASS_DARK);
+    PlayerTextDrawSetSelectable(playerid, BuildEditCard[playerid][1], false);
+
+    new Float:cornerX[4];
+    new Float:cornerY[4];
+    cornerX[0] = x;                      cornerY[0] = y;
+    cornerX[1] = x + width - diamX;      cornerY[1] = y;
+    cornerX[2] = x;                      cornerY[2] = y + height - diamY;
+    cornerX[3] = x + width - diamX;      cornerY[3] = y + height - diamY;
+
+    for (new corner = 0; corner < 4; corner++)
     {
-        BuildEdit[playerid][bePanelShown] = false;
-        if (BuildEditBox[playerid] != PlayerText:0)
-        {
-            PlayerTextDrawHide(playerid, BuildEditBox[playerid]);
-            PlayerTextDrawHide(playerid, BuildEditLine[playerid]);
-        }
+        BuildEditCard[playerid][2 + corner] = CreatePlayerTextDraw(playerid, cornerX[corner], cornerY[corner], "LD_BEAT:chit");
+        PlayerTextDrawFont(playerid, BuildEditCard[playerid][2 + corner], TEXT_DRAW_FONT_SPRITE_DRAW);
+        PlayerTextDrawTextSize(playerid, BuildEditCard[playerid][2 + corner], diamX, diamY);
+        PlayerTextDrawColor(playerid, BuildEditCard[playerid][2 + corner], UI_BG_GLASS_DARK);
+        PlayerTextDrawSetSelectable(playerid, BuildEditCard[playerid][2 + corner], false);
     }
     return 1;
 }
 
-stock BuildEdit_EnsurePanel(playerid)
+/* Satu tombol = satu sprite selectable + satu label non-selectable.
+   Membuat label ikut selectable adalah sumber klasik salah-klik di SA-MP. */
+stock BuildEdit_CreateButton(playerid, index, Float:x, Float:y, Float:width, Float:height,
+    const label[], background)
 {
-    if (BuildEditBox[playerid] != PlayerText:0) return 1;
+    BuildEditBtn[playerid][index] = CreatePlayerTextDraw(playerid, x, y, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, BuildEditBtn[playerid][index], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, BuildEditBtn[playerid][index], width, height);
+    PlayerTextDrawColor(playerid, BuildEditBtn[playerid][index], background);
+    PlayerTextDrawSetSelectable(playerid, BuildEditBtn[playerid][index], true);
 
-    BuildEditBox[playerid] = CreatePlayerTextDraw(playerid, BUILD_EDIT_PANEL_X, BUILD_EDIT_PANEL_Y, " ");
-    PlayerTextDrawLetterSize(playerid, BuildEditBox[playerid], 0.2, 0.8);
-    PlayerTextDrawTextSize(playerid, BuildEditBox[playerid], BUILD_EDIT_PANEL_W, BUILD_EDIT_PANEL_H);
-    PlayerTextDrawUseBox(playerid, BuildEditBox[playerid], 1);
-    /* Kotak gelap semi-transparan: teks HUD lain terbukti tenggelam di latar
-       terang (laporan "textdraw scrap di latar"). */
-    PlayerTextDrawBoxColor(playerid, BuildEditBox[playerid], 0x0B0F14D8);
-    PlayerTextDrawBackgroundColor(playerid, BuildEditBox[playerid], 0x00000000);
-    PlayerTextDrawFont(playerid, BuildEditBox[playerid], 1);
-    PlayerTextDrawSetOutline(playerid, BuildEditBox[playerid], 0);
-
-    BuildEditLine[playerid] = CreatePlayerTextDraw(playerid, BUILD_EDIT_PANEL_X + 8.0, BUILD_EDIT_PANEL_Y + 4.0,
-        "{EF4444}BANGUN{FFFFFF} WALL");
-    PlayerTextDrawLetterSize(playerid, BuildEditLine[playerid], 0.19, 0.8);
-    PlayerTextDrawColor(playerid, BuildEditLine[playerid], UI_TEXT_PRIMARY);
-    PlayerTextDrawSetOutline(playerid, BuildEditLine[playerid], 1);
-    PlayerTextDrawBackgroundColor(playerid, BuildEditLine[playerid], 0x00000000);
-    PlayerTextDrawFont(playerid, BuildEditLine[playerid], 1);
+    BuildEditBtnText[playerid][index] = CreatePlayerTextDraw(playerid,
+        x + (width / 2.0), y + (height / 2.0) - 4.6, label);
+    PlayerTextDrawFont(playerid, BuildEditBtnText[playerid][index], 1);
+    PlayerTextDrawAlignment(playerid, BuildEditBtnText[playerid][index], 2);
+    PlayerTextDrawLetterSize(playerid, BuildEditBtnText[playerid][index], 0.18, 0.8);
+    PlayerTextDrawColor(playerid, BuildEditBtnText[playerid][index], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, BuildEditBtnText[playerid][index], 0);
+    PlayerTextDrawSetShadow(playerid, BuildEditBtnText[playerid][index], 0);
+    PlayerTextDrawSetProportional(playerid, BuildEditBtnText[playerid][index], true);
+    PlayerTextDrawSetSelectable(playerid, BuildEditBtnText[playerid][index], false);
     return 1;
 }
+
+stock BuildEdit_CreateRow(playerid, index, Float:x, Float:y)
+{
+    BuildEditRow[playerid][index] = CreatePlayerTextDraw(playerid, x, y, " ");
+    PlayerTextDrawFont(playerid, BuildEditRow[playerid][index], 1);
+    PlayerTextDrawLetterSize(playerid, BuildEditRow[playerid][index], 0.19, 0.85);
+    PlayerTextDrawColor(playerid, BuildEditRow[playerid][index], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, BuildEditRow[playerid][index], 1);
+    PlayerTextDrawSetShadow(playerid, BuildEditRow[playerid][index], 0);
+    /* Monospace: angka X/Y/Z harus lurus antar-refresh, bukan bergeser. */
+    PlayerTextDrawSetProportional(playerid, BuildEditRow[playerid][index], false);
+    PlayerTextDrawSetSelectable(playerid, BuildEditRow[playerid][index], false);
+    return 1;
+}
+
+stock BuildEdit_CreatePanel(playerid)
+{
+    if (BuildEditCard[playerid][0] != PlayerText:0) return 1;
+
+    new Float:x = BUILD_EDIT_PANEL_X;
+    new Float:y = BUILD_EDIT_PANEL_Y;
+
+    BuildEdit_CreateCard(playerid, x, y, BUILD_EDIT_PANEL_W, BUILD_EDIT_PANEL_H, 2.0);
+
+    /* Garis aksen merah di tepi atas: ciri kartu FiveM, sekaligus penanda
+       "ini mode bangun", bukan sekadar info. */
+    BuildEditAccent[playerid] = CreatePlayerTextDraw(playerid, x + 2.0, y, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, BuildEditAccent[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, BuildEditAccent[playerid], BUILD_EDIT_PANEL_W - 4.0, 2.0);
+    PlayerTextDrawColor(playerid, BuildEditAccent[playerid], UI_ACCENT_DANGER);
+    PlayerTextDrawSetSelectable(playerid, BuildEditAccent[playerid], false);
+
+    BuildEditTitle[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + 7.0, "PEMBANGUNAN");
+    PlayerTextDrawFont(playerid, BuildEditTitle[playerid], 2);
+    PlayerTextDrawLetterSize(playerid, BuildEditTitle[playerid], 0.22, 0.9);
+    PlayerTextDrawColor(playerid, BuildEditTitle[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, BuildEditTitle[playerid], 1);
+    PlayerTextDrawSetProportional(playerid, BuildEditTitle[playerid], true);
+    PlayerTextDrawSetSelectable(playerid, BuildEditTitle[playerid], false);
+
+    BuildEditSub[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + 21.0, "WALL | TIER 1");
+    PlayerTextDrawFont(playerid, BuildEditSub[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, BuildEditSub[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, BuildEditSub[playerid], UI_TEXT_MUTED);
+    PlayerTextDrawSetOutline(playerid, BuildEditSub[playerid], 0);
+    PlayerTextDrawSetProportional(playerid, BuildEditSub[playerid], true);
+    PlayerTextDrawSetSelectable(playerid, BuildEditSub[playerid], false);
+
+    BuildEditDivider[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + 34.0, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, BuildEditDivider[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, BuildEditDivider[playerid], BUILD_EDIT_PANEL_W - 24.0, 1.0);
+    PlayerTextDrawColor(playerid, BuildEditDivider[playerid], UI_BG_ELEVATED);
+    PlayerTextDrawSetSelectable(playerid, BuildEditDivider[playerid], false);
+
+    for (new row = 0; row < 6; row++)
+    {
+        BuildEdit_CreateRow(playerid, row, x + 12.0, y + 40.0 + (float(row) * 16.0));
+    }
+
+    BuildEditHint[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + 168.0,
+        "ESC keluar kursor | /panel lagi");
+    PlayerTextDrawFont(playerid, BuildEditHint[playerid], 1);
+    PlayerTextDrawLetterSize(playerid, BuildEditHint[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, BuildEditHint[playerid], UI_TEXT_MUTED);
+    PlayerTextDrawSetOutline(playerid, BuildEditHint[playerid], 0);
+    PlayerTextDrawSetProportional(playerid, BuildEditHint[playerid], true);
+    PlayerTextDrawSetSelectable(playerid, BuildEditHint[playerid], false);
+
+    /* Tombol sumbu: x 520 & 562, lebar 40 -> hitbox 40x12 px, tidak bertumpuk. */
+    new Float:leftX = x + 186.0;
+    new Float:rightX = x + 228.0;
+    new Float:rowY;
+
+    for (new pair = 0; pair < 3; pair++)
+    {
+        rowY = y + 40.0 + (float(pair) * 16.0);
+        BuildEdit_CreateButton(playerid, BE_BTN_XMINUS + (pair * 2), leftX, rowY, 40.0, 12.0, "-", UI_BG_ELEVATED);
+        BuildEdit_CreateButton(playerid, BE_BTN_XPLUS + (pair * 2), rightX, rowY, 40.0, 12.0, "+", UI_BG_ELEVATED);
+    }
+
+    rowY = y + 40.0 + (3.0 * 16.0);
+    BuildEdit_CreateButton(playerid, BE_BTN_ROTLEFT, leftX, rowY, 40.0, 12.0, "<", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_ROTRIGHT, rightX, rowY, 40.0, 12.0, ">", UI_BG_ELEVATED);
+
+    rowY = y + 40.0 + (4.0 * 16.0);
+    BuildEdit_CreateButton(playerid, BE_BTN_DISTMIN, leftX, rowY, 40.0, 12.0, "-", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_DISTPLUS, rightX, rowY, 40.0, 12.0, "+", UI_BG_ELEVATED);
+
+    rowY = y + 40.0 + (5.0 * 16.0);
+    BuildEdit_CreateButton(playerid, BE_BTN_STEP, leftX, rowY, 82.0, 12.0, "LANGKAH", UI_BG_ELEVATED);
+
+    BuildEdit_CreateButton(playerid, BE_BTN_CONFIRM, x + 12.0, y + 142.0, 130.0, 20.0, "PASANG", UI_ACCENT_PRIMARY);
+    BuildEdit_CreateButton(playerid, BE_BTN_CANCEL, x + 152.0, y + 142.0, 130.0, 20.0, "BATAL", 0x7F1D1DF2);
+    BuildEdit_CreateButton(playerid, BE_BTN_CLOSEMOUSE, x + BUILD_EDIT_PANEL_W - 46.0, y + 6.0, 34.0, 13.0, "X", UI_BG_ELEVATED);
+    return 1;
+}
+
+stock BuildEdit_ShowPanel(playerid)
+{
+    for (new card = 0; card < 6; card++)
+    {
+        PlayerTextDrawShow(playerid, BuildEditCard[playerid][card]);
+    }
+
+    PlayerTextDrawShow(playerid, BuildEditAccent[playerid]);
+    PlayerTextDrawShow(playerid, BuildEditTitle[playerid]);
+    PlayerTextDrawShow(playerid, BuildEditSub[playerid]);
+    PlayerTextDrawShow(playerid, BuildEditDivider[playerid]);
+    PlayerTextDrawShow(playerid, BuildEditHint[playerid]);
+
+    for (new row = 0; row < 6; row++)
+    {
+        PlayerTextDrawShow(playerid, BuildEditRow[playerid][row]);
+    }
+
+    for (new button = 0; button < BE_BTN_COUNT; button++)
+    {
+        PlayerTextDrawShow(playerid, BuildEditBtn[playerid][button]);
+        PlayerTextDrawShow(playerid, BuildEditBtnText[playerid][button]);
+    }
+    return 1;
+}
+
+stock BuildEdit_HidePanel(playerid)
+{
+    if (playerid < 0 || playerid >= MAX_PLAYERS) return 0;
+
+    if (BuildEdit[playerid][beMouseOn])
+    {
+        BuildEdit[playerid][beMouseOn] = false;
+        CancelSelectTextDraw(playerid);
+    }
+
+    if (!BuildEdit[playerid][bePanelShown]) return 0;
+    BuildEdit[playerid][bePanelShown] = false;
+
+    for (new card = 0; card < 6; card++)
+    {
+        PlayerTextDrawHide(playerid, BuildEditCard[playerid][card]);
+    }
+
+    PlayerTextDrawHide(playerid, BuildEditAccent[playerid]);
+    PlayerTextDrawHide(playerid, BuildEditTitle[playerid]);
+    PlayerTextDrawHide(playerid, BuildEditSub[playerid]);
+    PlayerTextDrawHide(playerid, BuildEditDivider[playerid]);
+    PlayerTextDrawHide(playerid, BuildEditHint[playerid]);
+
+    for (new row = 0; row < 6; row++)
+    {
+        PlayerTextDrawHide(playerid, BuildEditRow[playerid][row]);
+    }
+
+    for (new button = 0; button < BE_BTN_COUNT; button++)
+    {
+        PlayerTextDrawHide(playerid, BuildEditBtn[playerid][button]);
+        PlayerTextDrawHide(playerid, BuildEditBtnText[playerid][button]);
+    }
+    return 1;
+}
+
+stock BuildEdit_SetMouse(playerid, bool:enabled)
+{
+    if (!BuildEdit_IsActive(playerid))
+    {
+        CancelSelectTextDraw(playerid);
+        BuildEdit[playerid][beMouseOn] = false;
+        return 0;
+    }
+
+    BuildEdit[playerid][beMouseOn] = enabled;
+
+    if (enabled)
+    {
+        /* Warna hover: merah darah, konsisten dengan aksen kartu. */
+        SelectTextDraw(playerid, 0xEF444488);
+        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "ESC keluar | /panel lagi");
+    }
+    else
+    {
+        CancelSelectTextDraw(playerid);
+        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "ALT maju | C putar | Y pasang");
+    }
+    PlayerTextDrawShow(playerid, BuildEditHint[playerid]);
+    return 1;
+}
+
+/* ------------------------------------------------------------ geometri */
 
 stock BuildEdit_LabelFor(playerid, dest[], size)
 {
@@ -136,43 +424,33 @@ stock BuildEdit_LabelFor(playerid, dest[], size)
     return 1;
 }
 
-/* Panel pratinjau. Setiap angka di sini adalah angka yang BENAR-BENAR dipakai
-   saat pasang, jadi tidak ada lagi selisih antara "yang saya lihat" dan
-   "yang berdiri". */
-stock BuildEdit_RefreshPanel(playerid)
+/* Target mode BANGUN: maju `beDist`, geser samping `beSide`, naik `beRaise`,
+   semuanya relatif terhadap badan pemain. Arah hadap dipakai apa adanya supaya
+   "putar badan = putar bangunan" tetap terasa natural, dan tombol rotasi
+   menambahkan koreksi manual di atasnya. */
+stock BuildEdit_FollowPlayer(playerid)
 {
-    if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
+    if (BuildEdit[playerid][beMode] != BUILD_EDIT_PLACE) return 0;
     if (!IsPlayerConnected(playerid)) return 0;
 
-    BuildEdit_EnsurePanel(playerid);
+    new Float:x, Float:y, Float:z, Float:angle;
+    GetPlayerPos(playerid, x, y, z);
+    GetPlayerFacingAngle(playerid, angle);
 
-    new label[24], head[64], line[300];
-    BuildEdit_LabelFor(playerid, label, sizeof(label));
+    new Float:distance = BuildEdit_ClampDistance(BuildEdit[playerid][beDist]);
+    new Float:side = BuildEdit_ClampValue(BuildEdit[playerid][beSide], -BUILD_EDIT_MAX_SIDE, BUILD_EDIT_MAX_SIDE);
+    BuildEdit[playerid][beDist] = distance;
+    BuildEdit[playerid][beSide] = side;
 
-    if (BuildEdit[playerid][beMode] == BUILD_EDIT_PLACE)
-    {
-        new tierNeed = gStructures[BuildEdit[playerid][beType]][stTier];
-        new used = BaseBuild_CountType(Base_Id(playerid), BuildEdit[playerid][beType]);
-        new limit = BaseBuild_Limit(BuildEdit[playerid][beType], Base_GetTier(playerid));
-        format(head, sizeof(head), "{EF4444}BANGUN{FFFFFF} %s {64748B}(%d/%d, t%d)", label, used, limit, tierNeed);
-    }
-    else
-    {
-        format(head, sizeof(head), "{F59E0B}GESER{FFFFFF} %s {64748B}#%d", label, BuildEdit[playerid][beSlot]);
-    }
+    new Float:forwardX = floatsin(-angle, degrees);
+    new Float:forwardY = floatcos(-angle, degrees);
+    new Float:rightX = floatcos(-angle, degrees);
+    new Float:rightY = -floatsin(-angle, degrees);
 
-    format(line, sizeof(line),
-        "%s~n~{94A3B8}POS{FFFFFF} %.1f %.1f %.1f~n~{94A3B8}ARAH{FFFFFF} %.0f deg  {94A3B8}JARAK{FFFFFF} %.1fm  {94A3B8}NAIK{FFFFFF} %+.2fm~n~{F59E0B}ALT{FFFFFF} maju  {F59E0B}C{FFFFFF} putar  {F59E0B}Y{FFFFFF} pasang  {F59E0B}H{FFFFFF} batal",
-        head,
-        BuildEdit[playerid][beX], BuildEdit[playerid][beY], BuildEdit[playerid][beZ],
-        BuildEdit[playerid][beRot],
-        BuildEdit[playerid][beDist],
-        BuildEdit[playerid][beRaise]);
-
-    PlayerTextDrawSetString(playerid, BuildEditLine[playerid], line);
-    PlayerTextDrawShow(playerid, BuildEditBox[playerid]);
-    PlayerTextDrawShow(playerid, BuildEditLine[playerid]);
-    BuildEdit[playerid][bePanelShown] = true;
+    BuildEdit[playerid][beX] = x + (forwardX * distance) + (rightX * side);
+    BuildEdit[playerid][beY] = y + (forwardY * distance) + (rightY * side);
+    BuildEdit[playerid][beZ] = z + BuildEdit[playerid][beRaise];
+    BuildEdit[playerid][beRot] = BuildEdit_NormalizeRot(angle);
     return 1;
 }
 
@@ -193,8 +471,8 @@ stock BuildEdit_RefreshGhost(playerid)
     new Float:z = BuildEdit[playerid][beZ] - 0.7;
     new Float:rot = BuildEdit[playerid][beRot];
 
-    /* Ghost selalu dibuat di world lobby pemain; objek dengan world salah
-       tidak terlihat dan pemain mengira pratinjaunya rusak. */
+    /* Ghost harus hidup di world lobby pemain: world salah = pratinjau tak
+       terlihat, pemain mengira fitur rusak. */
     new world = Lobby_WorldById(Lobby_Of(playerid));
 
     if (BuildEdit[playerid][beGhost] == STREAMER_TAG_OBJECT:0)
@@ -212,26 +490,81 @@ stock BuildEdit_RefreshGhost(playerid)
     return 1;
 }
 
-/* Titik target mode BANGUN: 2,5 m (bisa diatur) di depan pemain, memakai sudut
-   hadap saat ini. Tinggi memakai Z pemain + penyesuaian manual. */
-stock BuildEdit_FollowPlayer(playerid)
+/* Panel: setiap angka di sini adalah angka yang benar-benar dipakai saat
+   PASANG, jadi tidak ada selisih "yang saya lihat" vs "yang berdiri". */
+stock BuildEdit_RefreshPanel(playerid)
 {
-    if (BuildEdit[playerid][beMode] != BUILD_EDIT_PLACE) return 0;
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
     if (!IsPlayerConnected(playerid)) return 0;
 
-    new Float:x, Float:y, Float:z, Float:angle;
-    GetPlayerPos(playerid, x, y, z);
-    GetPlayerFacingAngle(playerid, angle);
+    BuildEdit_CreatePanel(playerid);
 
-    new Float:distance = BuildEdit_ClampDistance(BuildEdit[playerid][beDist]);
-    BuildEdit[playerid][beDist] = distance;
+    new label[24], sub[72], rowText[64];
+    BuildEdit_LabelFor(playerid, label, sizeof(label));
 
-    BuildEdit[playerid][beX] = x + floatsin(-angle, degrees) * distance;
-    BuildEdit[playerid][beY] = y + floatcos(-angle, degrees) * distance;
-    BuildEdit[playerid][beZ] = z + BuildEdit[playerid][beRaise];
-    BuildEdit[playerid][beRot] = BuildEdit_NormalizeRot(angle);
+    new Float:stepMeters = BuildEdit_StepMeters(playerid);
+    new Float:stepDegrees = BuildEdit_StepDegrees(playerid);
+
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_PLACE)
+    {
+        new tierNeed = gStructures[BuildEdit[playerid][beType]][stTier];
+        new used = BaseBuild_CountType(Base_Id(playerid), BuildEdit[playerid][beType]);
+        new limit = BaseBuild_Limit(BuildEdit[playerid][beType], Base_GetTier(playerid));
+        format(sub, sizeof(sub), "%s | TIER %d | %d/%d", label, tierNeed, used, limit);
+
+        format(rowText, sizeof(rowText), "SAMPING %s%.2f m",
+            (BuildEdit[playerid][beSide] >= 0.0) ? "+" : "", BuildEdit[playerid][beSide]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][0], rowText);
+        format(rowText, sizeof(rowText), "MAJU    %.2f m", BuildEdit[playerid][beDist]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][1], rowText);
+        format(rowText, sizeof(rowText), "NAIK    %s%.2f m",
+            (BuildEdit[playerid][beRaise] >= 0.0) ? "+" : "", BuildEdit[playerid][beRaise]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][2], rowText);
+    }
+    else
+    {
+        format(sub, sizeof(sub), "%s | MODE GESER | #%d", label, BuildEdit[playerid][beSlot]);
+
+        format(rowText, sizeof(rowText), "X       %.2f", BuildEdit[playerid][beX]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][0], rowText);
+        format(rowText, sizeof(rowText), "Y       %.2f", BuildEdit[playerid][beY]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][1], rowText);
+        format(rowText, sizeof(rowText), "Z       %.2f", BuildEdit[playerid][beZ]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][2], rowText);
+    }
+
+    format(rowText, sizeof(rowText), "ARAH    %.0f deg", BuildEdit[playerid][beRot]);
+    PlayerTextDrawSetString(playerid, BuildEditRow[playerid][3], rowText);
+
+    format(rowText, sizeof(rowText), "JARAK   %.2f m", BuildEdit[playerid][beDist]);
+    PlayerTextDrawSetString(playerid, BuildEditRow[playerid][4], rowText);
+
+    format(rowText, sizeof(rowText), "LANGKAH %.2f m / %.0f deg", stepMeters, stepDegrees);
+    PlayerTextDrawSetString(playerid, BuildEditRow[playerid][5], rowText);
+
+    PlayerTextDrawSetString(playerid, BuildEditSub[playerid], sub);
+    PlayerTextDrawSetString(playerid, BuildEditTitle[playerid], "PEMBANGUNAN");
+
+    /* Warna tombol PASANG mengikuti kelayakan: hijau saat material cukup,
+       merah saat tidak — pemain tahu sebelum menekan. */
+    new confirmColor = UI_ACCENT_PRIMARY;
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_PLACE)
+    {
+        if (!BaseBuild_MaterialsOk(playerid, BuildEdit[playerid][beType])) confirmColor = UI_ACCENT_DANGER;
+    }
+    else
+    {
+        confirmColor = UI_ACCENT_WARN;
+    }
+    PlayerTextDrawColor(playerid, BuildEditBtn[playerid][BE_BTN_CONFIRM], confirmColor);
+    PlayerTextDrawShow(playerid, BuildEditBtn[playerid][BE_BTN_CONFIRM]);
+
+    BuildEdit_ShowPanel(playerid);
+    BuildEdit[playerid][bePanelShown] = true;
     return 1;
 }
+
+/* ------------------------------------------------------------ aksi */
 
 stock BuildEdit_BeginPlace(playerid, type)
 {
@@ -250,13 +583,16 @@ stock BuildEdit_BeginPlace(playerid, type)
     BuildEdit[playerid][beType] = type;
     BuildEdit[playerid][beSlot] = -1;
     BuildEdit[playerid][beDist] = BUILD_EDIT_DEFAULT_DIST;
+    BuildEdit[playerid][beSide] = 0.0;
     BuildEdit[playerid][beRaise] = 0.0;
+    BuildEdit[playerid][beStepStage] = 1;
 
     BuildEdit_FollowPlayer(playerid);
     BuildEdit_RefreshGhost(playerid);
+    BuildEdit_SetMouse(playerid, true);
 
-    SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] Pratinjau aktif. Arahkan badan, lalu Y untuk pasang (ALT maju, C putar, H batal).");
-    SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Android tanpa tombol? /geser 0.5  /putar 15  /tinggi 0.25  /pasang  /batal");
+    SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] Kursor aktif: klik tombol di panel. PASANG memotong material.");
+    SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Tanpa mouse: ALT maju, C putar, Y pasang, H batal. /panel panggil kursor.");
     return 1;
 }
 
@@ -289,13 +625,16 @@ stock BuildEdit_BeginMove(playerid)
     BuildEdit[playerid][beZ] = BaseStructure[slot][ssZ];
     BuildEdit[playerid][beRot] = BaseStructure[slot][ssRotZ];
     BuildEdit[playerid][beDist] = distance;
+    BuildEdit[playerid][beSide] = 0.0;
     BuildEdit[playerid][beRaise] = 0.0;
+    BuildEdit[playerid][beStepStage] = 1;
 
     BuildEdit_RefreshGhost(playerid);
+    BuildEdit_SetMouse(playerid, true);
 
     new label[24], line[144];
     BuildEdit_LabelFor(playerid, label, sizeof(label));
-    format(line, sizeof(line), "[BUILD] Menggeser %s. Y simpan, H batal, ALT maju, C putar.", label);
+    format(line, sizeof(line), "[BUILD] Menggeser %s. PASANG menyimpan, BATAL membatalkan.", label);
     SendClientMessage(playerid, UI_ACCENT_INFO, line);
     return 1;
 }
@@ -303,7 +642,11 @@ stock BuildEdit_BeginMove(playerid)
 stock BuildEdit_AdjustDistance(playerid, Float:delta)
 {
     if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
-    if (BuildEdit[playerid][beMode] == BUILD_EDIT_MOVE) return BuildEdit_Nudge(playerid, delta);
+
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_MOVE)
+    {
+        return BuildEdit_Nudge(playerid, delta);
+    }
 
     BuildEdit[playerid][beDist] = BuildEdit_ClampDistance(BuildEdit[playerid][beDist] + delta);
     BuildEdit_FollowPlayer(playerid);
@@ -311,8 +654,7 @@ stock BuildEdit_AdjustDistance(playerid, Float:delta)
     return 1;
 }
 
-/* Mode GESER: dorong sejauh `meters` mengikuti arah hadap pemain. Struktur
-   tidak boleh "menempel" ke pemain, jadi jarak minimum tetap dijaga. */
+/* Mode GESER: dorong struktur sejauh `meters` mengikuti arah hadap pemain. */
 stock BuildEdit_Nudge(playerid, Float:meters)
 {
     if (BuildEdit[playerid][beMode] != BUILD_EDIT_MOVE) return 0;
@@ -322,6 +664,44 @@ stock BuildEdit_Nudge(playerid, Float:meters)
 
     BuildEdit[playerid][beX] += floatsin(-angle, degrees) * meters;
     BuildEdit[playerid][beY] += floatcos(-angle, degrees) * meters;
+
+    new Float:px, Float:py, Float:pz;
+    GetPlayerPos(playerid, px, py, pz);
+    BuildEdit[playerid][beDist] = VectorSize(BuildEdit[playerid][beX] - px,
+        BuildEdit[playerid][beY] - py, 0.0);
+
+    BuildEdit_RefreshGhost(playerid);
+    return 1;
+}
+
+/* Tombol sumbu. Di mode BANGUN: X = samping, Y = maju/mundur, Z = naik/turun
+   (relatif badan). Di mode GESER: X/Y/Z = koordinat dunia, sesuai yang tertulis
+   di panel. */
+stock BuildEdit_NudgeAxis(playerid, axis, Float:delta)
+{
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
+
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_PLACE)
+    {
+        switch (axis)
+        {
+            case 0: BuildEdit[playerid][beSide] = BuildEdit_ClampValue(
+                BuildEdit[playerid][beSide] + delta, -BUILD_EDIT_MAX_SIDE, BUILD_EDIT_MAX_SIDE);
+            case 1: BuildEdit[playerid][beDist] = BuildEdit_ClampDistance(BuildEdit[playerid][beDist] + delta);
+            case 2: BuildEdit[playerid][beRaise] = BuildEdit_ClampValue(
+                BuildEdit[playerid][beRaise] + delta, BUILD_EDIT_MIN_RAISE, BUILD_EDIT_MAX_RAISE);
+        }
+        BuildEdit_FollowPlayer(playerid);
+        BuildEdit_RefreshGhost(playerid);
+        return 1;
+    }
+
+    switch (axis)
+    {
+        case 0: BuildEdit[playerid][beX] += delta;
+        case 1: BuildEdit[playerid][beY] += delta;
+        case 2: BuildEdit[playerid][beZ] += delta;
+    }
 
     new Float:px, Float:py, Float:pz;
     GetPlayerPos(playerid, px, py, pz);
@@ -345,14 +725,23 @@ stock BuildEdit_Raise(playerid, Float:meters)
 {
     if (BuildEdit[playerid][beMode] != BUILD_EDIT_PLACE) return 0;
 
-    BuildEdit[playerid][beRaise] += meters;
-    if (BuildEdit[playerid][beRaise] > 3.0) BuildEdit[playerid][beRaise] = 3.0;
-    if (BuildEdit[playerid][beRaise] < -1.0) BuildEdit[playerid][beRaise] = -1.0;
-
+    BuildEdit[playerid][beRaise] = BuildEdit_ClampValue(
+        BuildEdit[playerid][beRaise] + meters, BUILD_EDIT_MIN_RAISE, BUILD_EDIT_MAX_RAISE);
     BuildEdit_FollowPlayer(playerid);
     BuildEdit_RefreshGhost(playerid);
     return 1;
 }
+
+stock BuildEdit_CycleStep(playerid)
+{
+    if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
+
+    BuildEdit[playerid][beStepStage] = (BuildEdit[playerid][beStepStage] + 1) % BE_STEP_COUNT;
+    BuildEdit_RefreshPanel(playerid);
+    return 1;
+}
+
+/* ------------------------------------------------------------ konfirmasi */
 
 stock BuildEdit_Confirm(playerid)
 {
@@ -367,9 +756,8 @@ stock BuildEdit_Confirm(playerid)
     if (mode == BUILD_EDIT_PLACE)
     {
         new type = BuildEdit[playerid][beType];
-        /* Semua validasi + biaya material tetap di BaseBuild_PlaceAt: satu jalur
-           aturan untuk pratinjau dan jalur lama. */
         if (!BaseBuild_PlaceAt(playerid, type, x, y, z, rot)) return 0;
+
         BuildEdit_ResetState(playerid);
         return 1;
     }
@@ -400,7 +788,7 @@ stock BuildEdit_Confirm(playerid)
 
     new label[24], line[128];
     BaseBuild_LabelForSlot(slot, label, sizeof(label));
-    format(line, sizeof(line), "[BUILD] %s dipindahkan ke %.1f, %.1f (arah %.0f).", label, x, y, rot);
+    format(line, sizeof(line), "%s dipindahkan ke %.1f, %.1f (arah %.0f).", label, x, y, rot);
     SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
     Toast_Show(playerid, "EDIT BASE", line, UI_ACCENT_PRIMARY);
     return 1;
@@ -418,8 +806,73 @@ stock BuildEdit_Cancel(playerid, bool:notify = true)
     return wasActive;
 }
 
-/* Dipanggil dari Player_Tick (500 ms): mode BANGUN mengikuti pemain, mode GESER
-   tidak (posisi absolut supaya bisa digeser sambil berjalan mengelilinginya). */
+/* ------------------------------------------------------------ klik & tick */
+
+stock BuildEdit_FindButton(playerid, PlayerText:clicked)
+{
+    for (new button = 0; button < BE_BTN_COUNT; button++)
+    {
+        if (BuildEditBtn[playerid][button] == clicked) return button;
+    }
+    return -1;
+}
+
+stock BuildEdit_HandleButton(playerid, button)
+{
+    new Float:stepMeters = BuildEdit_StepMeters(playerid);
+    new Float:stepDegrees = BuildEdit_StepDegrees(playerid);
+
+    switch (button)
+    {
+        case BE_BTN_XMINUS:  BuildEdit_NudgeAxis(playerid, 0, -stepMeters);
+        case BE_BTN_XPLUS:   BuildEdit_NudgeAxis(playerid, 0, stepMeters);
+        case BE_BTN_YMINUS:  BuildEdit_NudgeAxis(playerid, 1, -stepMeters);
+        case BE_BTN_YPLUS:   BuildEdit_NudgeAxis(playerid, 1, stepMeters);
+        case BE_BTN_ZMINUS:  BuildEdit_NudgeAxis(playerid, 2, -stepMeters);
+        case BE_BTN_ZPLUS:   BuildEdit_NudgeAxis(playerid, 2, stepMeters);
+        case BE_BTN_ROTLEFT: BuildEdit_Rotate(playerid, -stepDegrees);
+        case BE_BTN_ROTRIGHT: BuildEdit_Rotate(playerid, stepDegrees);
+        case BE_BTN_DISTMIN: BuildEdit_AdjustDistance(playerid, -stepMeters);
+        case BE_BTN_DISTPLUS: BuildEdit_AdjustDistance(playerid, stepMeters);
+        case BE_BTN_STEP:    BuildEdit_CycleStep(playerid);
+        case BE_BTN_CONFIRM: BuildEdit_Confirm(playerid);
+        case BE_BTN_CANCEL:  BuildEdit_Cancel(playerid);
+        case BE_BTN_CLOSEMOUSE: BuildEdit_SetMouse(playerid, false);
+        default: return 0;
+    }
+    return 1;
+}
+
+public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid)
+{
+    if (!BuildEdit_IsActive(playerid)) return 0;
+
+    /* Hitbox yang tidak dikenal (mis. TextDraw milik UI lain) tidak ditelan,
+       supaya dialog/inventory tetap bisa menerima kliknya sendiri. */
+    new button = BuildEdit_FindButton(playerid, playertextid);
+    if (button < 0) return 0;
+
+    BuildEdit_HandleButton(playerid, button);
+    return 1;
+}
+
+public OnPlayerClickTextDraw(playerid, Text:clickedid)
+{
+    if (!BuildEdit_IsActive(playerid)) return 0;
+
+    /* ESC / klik area kosong: keluar dari mode kursor tapi pratinjau tetap
+       hidup, jadi pemain bisa berjalan mengatur posisi lalu /panel lagi. */
+    if (clickedid == INVALID_TEXT_DRAW && BuildEdit[playerid][beMouseOn])
+    {
+        BuildEdit_SetMouse(playerid, false);
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Kursor dilepas. /panel untuk memunculkannya lagi.");
+        return 1;
+    }
+    return 1;
+}
+
+/* Mode BANGUN mengikuti pemain; mode GESER memakai posisi absolut supaya bisa
+   diatur sambil berjalan mengelilingi struktur. */
 stock BuildEdit_TickPlayer(playerid)
 {
     if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
@@ -441,7 +894,7 @@ stock BuildEdit_TickPlayer(playerid)
     return BuildEdit_RefreshGhost(playerid);
 }
 
-/* Tombol fisik: ALT (maju), C (putar), Y (pasang), H (batal).
+/* Tombol fisik tetap jalan: ALT maju, C putar, Y pasang, H batal.
    Debounce 120 ms karena SA-MP mengirim key berulang selama ditahan. */
 stock BuildEdit_OnKeyState(playerid, newkeys, oldkeys)
 {
@@ -451,14 +904,14 @@ stock BuildEdit_OnKeyState(playerid, newkeys, oldkeys)
     if ((newkeys & KEY_WALK) && !(oldkeys & KEY_WALK))
     {
         BuildEdit[playerid][beLastKeyTick] = GetTickCount();
-        BuildEdit_AdjustDistance(playerid, BUILD_EDIT_STEP);
+        BuildEdit_AdjustDistance(playerid, BuildEdit_StepMeters(playerid));
         return 1;
     }
 
     if ((newkeys & KEY_CROUCH) && !(oldkeys & KEY_CROUCH))
     {
         BuildEdit[playerid][beLastKeyTick] = GetTickCount();
-        BuildEdit_Rotate(playerid, BUILD_EDIT_ROT_STEP);
+        BuildEdit_Rotate(playerid, BuildEdit_StepDegrees(playerid));
         return 1;
     }
 
@@ -481,7 +934,16 @@ stock BuildEdit_OnKeyState(playerid, newkeys, oldkeys)
     return 1;
 }
 
-stock BuildEdit_IsActive(playerid)
+/* /panel: panggil kursor tanpa mengubah posisi yang sudah diatur. */
+stock BuildEdit_ToggleMouse(playerid)
 {
-    return (BuildEdit[playerid][beMode] != BUILD_EDIT_NONE) ? 1 : 0;
+    if (!BuildEdit_IsActive(playerid))
+    {
+        SendClientMessage(playerid, UI_ACCENT_INFO, "Tidak ada pratinjau. Mulai dengan /bangun atau /edit.");
+        return 0;
+    }
+
+    BuildEdit_SetMouse(playerid, !BuildEdit[playerid][beMouseOn]);
+    BuildEdit_RefreshPanel(playerid);
+    return 1;
 }

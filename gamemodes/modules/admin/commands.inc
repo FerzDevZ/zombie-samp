@@ -1523,7 +1523,7 @@ stock Command_Process(playerid, const cmdtext[])
             return 1;
         }
 
-        new Float:meters = BUILD_EDIT_STEP;
+        new Float:meters = BuildEdit_StepMeters(playerid);
         if (!isnull(params) && sscanf(params, "f", meters))
         {
             SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /geser [meter]  contoh /geser -0.5");
@@ -1542,7 +1542,7 @@ stock Command_Process(playerid, const cmdtext[])
             return 1;
         }
 
-        new Float:rotStep = BUILD_EDIT_ROT_STEP;
+        new Float:rotStep = BuildEdit_StepDegrees(playerid);
         if (!isnull(params) && sscanf(params, "f", rotStep))
         {
             SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /putar [derajat]  contoh /putar 45");
@@ -1566,7 +1566,7 @@ stock Command_Process(playerid, const cmdtext[])
             return 1;
         }
 
-        new Float:meters = BUILD_EDIT_RAISE_STEP;
+        new Float:meters = BuildEdit_StepMeters(playerid);
         if (!isnull(params) && sscanf(params, "f", meters))
         {
             SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /tinggi [meter]  contoh /tinggi -0.25");
@@ -1574,6 +1574,12 @@ stock Command_Process(playerid, const cmdtext[])
         }
 
         BuildEdit_Raise(playerid, meters);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "panel", true) || !strcmp(cmd, "kursor", true))
+    {
+        BuildEdit_ToggleMouse(playerid);
         return 1;
     }
 
