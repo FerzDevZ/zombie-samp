@@ -5,6 +5,8 @@
 
 /* Zirah kendaraan (vehicle_mods.inc): bonus damage tabrakan ke zombie. */
 forward Float:VehicleMods_RamMultiplier(playerid);
+/* Scope senjata (weapon_attach.inc): bonus damage senapan/sniper. */
+forward Float:WeaponAttach_ScopeMultiplier(playerid, weaponid);
 
 /* Single entry point for every damage event. No module is allowed to touch
    player or zombie health directly: skipping validation here is how silent-aim,
@@ -151,6 +153,8 @@ bool:Damage_Apply(E_DAMAGE_KIND:kind, victimId, attackerId, Float:amount, weapon
                 {
                     outgoing *= VehicleMods_RamMultiplier(attackerId);
                 }
+                /* Scope terpasang: senapan/sniper 25% lebih mematikan. */
+                outgoing *= WeaponAttach_ScopeMultiplier(attackerId, weaponId);
             }
             return Zombie_ApplyDamage(victimId, attackerId, outgoing, weaponId);
         }

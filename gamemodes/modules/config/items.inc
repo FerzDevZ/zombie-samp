@@ -63,7 +63,9 @@ const ITEM_BAG_HIKING = 34;
 const ITEM_BAG_MILITARY = 35;
 const ITEM_SUPPRESSOR = 36;
 const ITEM_PAPER = 37;
-const ITEM_COUNT = 38;
+const ITEM_SCOPE = 38;
+const ITEM_EXTMAG = 39;
+const ITEM_COUNT = 40;
 
 new const gItemRegistry[ITEM_COUNT][E_ITEM_DATA] = {
     {0,      "None",             0.0, 0, 0,   ITEM_NONE},
@@ -107,7 +109,12 @@ new const gItemRegistry[ITEM_COUNT][E_ITEM_DATA] = {
     {19997,  "Suppressor",       0.3, 0, 1,   ITEM_TOOL},
     /* Kertas: bahan menulis pesan untuk papan pengumuman (fitur #34).
        Model 2894 sama dengan Dokumen — pola reuse model seperti tas 1550. */
-    {2894,   "Kertas",           0.1, 1, 20,  ITEM_MATERIAL}
+    {2894,   "Kertas",           0.1, 1, 20,  ITEM_MATERIAL},
+    /* Attachment senjata (fitur #16). Model 348/2038 hanya identitas registry;
+       semua drop memakai ikon koper 1210. Wujud terpasang = objek menempel
+       di tangan (weapon_attach.inc). */
+    {348,    "Scope",            0.3, 0, 1,   ITEM_TOOL},
+    {2038,   "Magasin Tambahan", 0.4, 0, 1,   ITEM_TOOL}
 };
 
 stock bool:Item_IsValid(itemid)

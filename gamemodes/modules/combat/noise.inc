@@ -3,6 +3,9 @@
 #endif
 #define _ls_noise_included
 
+/* Attachment senjata (weapon_attach.inc, di-include setelah file ini). */
+forward bool:WeaponAttach_EatSilencerShot(playerid);
+
 forward Horde_AddHeat(Float:x, Float:y, Float:z, Float:radius);
 forward Float:Event_NoiseMultiplier();
 
@@ -29,19 +32,28 @@ stock Noise_EmitFromPlayer(playerid, weaponid)
        bernilai (sebelumnya item mati — audit D3). */
     if (weaponid >= 22 && weaponid <= 24)
     {
-        new suppSlot = Suppressor_FindSlot(playerid);
-        if (suppSlot != -1)
+        /* Silencer TERPASANG di pistol (attachment, fitur #16) lebih dulu:
+           tidak menimbang tas, punya sisa tembakan sendiri. */
+        if (WeaponAttach_EatSilencerShot(playerid))
         {
             radius = NOISE_SUPPRESSED;
-            PlayerInventory[playerid][suppSlot][invDurability]--;
-            if (PlayerInventory[playerid][suppSlot][invDurability] <= 0)
+        }
+        else
+        {
+            new suppSlot = Suppressor_FindSlot(playerid);
+            if (suppSlot != -1)
             {
-                PlayerInventory[playerid][suppSlot][invItemId] = ITEM_NONE_ID;
-                PlayerInventory[playerid][suppSlot][invAmount] = 0;
-                SendClientMessage(playerid, UI_ACCENT_WARN, "[SUPPRESSOR] Habis terpakai. Craft ulang di meja crafting.");
+                radius = NOISE_SUPPRESSED;
+                PlayerInventory[playerid][suppSlot][invDurability]--;
+                if (PlayerInventory[playerid][suppSlot][invDurability] <= 0)
+                {
+                    PlayerInventory[playerid][suppSlot][invItemId] = ITEM_NONE_ID;
+                    PlayerInventory[playerid][suppSlot][invAmount] = 0;
+                    SendClientMessage(playerid, UI_ACCENT_WARN, "[SUPPRESSOR] Habis terpakai. Craft ulang di meja crafting.");
+                }
+                PlayerInventoryDirty[playerid] = true;
+                Bag_OnInventoryChanged(playerid);
             }
-            PlayerInventoryDirty[playerid] = true;
-            Bag_OnInventoryChanged(playerid);
         }
     }
 

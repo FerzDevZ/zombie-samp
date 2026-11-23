@@ -85,6 +85,7 @@
 #include "modules/combat/damage_contract.inc"
 #include "modules/combat/weapons.inc"
 #include "modules/combat/noise.inc"
+#include "modules/combat/weapon_attach.inc"
 #include "modules/loot/drops.inc"
 #include "modules/loot/nodes.inc"
 #include "modules/loot/corpse.inc"
@@ -118,6 +119,7 @@
 #include "modules/player/needs.inc"
 #include "modules/interact/dispatcher.inc"
 #include "modules/ui/hud.inc"
+#include "modules/ui/settings.inc"
 #include "modules/ui/inventory_ui.inc"
 #include "modules/ui/menu.inc"
 #include "modules/core/stats.inc"
@@ -285,6 +287,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     if (Garage_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (VehicleMods_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Notes_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+    if (WeaponAttach_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+    if (Settings_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Menu_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     return 0;
 }
@@ -409,6 +413,8 @@ public OnPlayerDisconnect(playerid, reason)
         Account_SaveCharacter(playerid);
     }
     Notes_ResetPlayer(playerid);
+    WeaponAttach_Reset(playerid);
+    Settings_ResetPlayer(playerid);
 
     /* Pratinjau struktur: ghost object + panel TextDraw harus mati bersama
        pemain, kalau tidak objek hantu tertinggal di world base. */
@@ -636,7 +642,11 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
     if (!AC_OnWeaponShot(playerid, weaponid)) return 0;
     Scent_Break(playerid, "Kamu menembak — suara dan bau mesiu membongkar kamuflase.");
     Noise_EmitFromPlayer(playerid, weaponid);
-    Inventory_DamageWeapon(playerid, weaponid);
+    /* Magasin ekstra (fitur #16): tembakan ke-4 tidak mengikis kondisi. */
+    if (!WeaponAttach_ShouldSkipWear(playerid, weaponid))
+    {
+        Inventory_DamageWeapon(playerid, weaponid);
+    }
     return 1;
 }
 
@@ -683,6 +693,7 @@ public Player_Tick()
         Bag_SpeedTick(playerid);   // berat tas: jalur 500 ms, bukan OnPlayerUpdate
         Scent_Tick(playerid);      // kamuflase bau: kedaluwarsa + deteksi lari
         BuildEdit_TickPlayer(playerid);   // pratinjau/edit struktur ikut pemain
+        WeaponAttach_VisualTick(playerid);   // objek attachment ikut senjata di tangan
         Player_ReviveChannelTick(playerid);
 
         new Float:engineHealth;

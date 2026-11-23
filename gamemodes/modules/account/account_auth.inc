@@ -894,6 +894,8 @@ public Account_OnCharacterLoaded(playerid)
     Contracts_Load(playerid);
     Companion_Load(playerid);
     Garage_Load(playerid);
+    WeaponAttach_Load(playerid);   /* modifikasi senjata tersimpan (fitur #16) */
+    Settings_Load(playerid);       /* preferensi /settings tersimpan */
     return 1;
 }
 

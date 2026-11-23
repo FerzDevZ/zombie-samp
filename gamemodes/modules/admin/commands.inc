@@ -1328,6 +1328,24 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "pasang", true) || !strcmp(cmd, "attach", true))
+    {
+        WeaponAttach_ShowInstall(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "lepas", true) || !strcmp(cmd, "detach", true))
+    {
+        WeaponAttach_ShowRemove(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "settings", true) || !strcmp(cmd, "setelan", true))
+    {
+        Settings_Show(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "shop", true) || !strcmp(cmd, "toko", true))
     {
         Vendor_ShowMenu(playerid);
