@@ -190,8 +190,7 @@ stock Vehicle_Register(vehicleid, modelid, lobbyId, Float:fuel, bool:locked, boo
     return -1;
 }
 
-stock Vehicle_Unregister(vehicleid)
-{
+stock Vehicle_Unregister(vehicleid){
     new slot = Vehicle_TrackedSlot(vehicleid);
     if (slot < 0) return 0;
 
@@ -205,6 +204,33 @@ stock Vehicle_Unregister(vehicleid)
 stock Vehicle_IsTracked(vehicleid)
 {
     return Vehicle_TrackedSlot(vehicleid) >= 0;
+}
+
+/* Daftarkan tangki untuk kendaraan yang belum pernah lewat Vehicle_Register,
+   supaya HUD tidak menampilkan "TANPA FUEL" palsu. Tangki diisi penuh pada
+   pendaftaran pertama — pemain menemukan mobil siap pakai, bukan mobil kosong
+   tanpa penjelasan. Kalau pool 64 slot habis atau model tidak diizinkan,
+   fungsi ini jujur mengembalikan false dan HUD menampilkan tanda "-". */
+stock bool:Vehicle_EnsureFuel(vehicleid, playerid)
+{
+    if (vehicleid == INVALID_VEHICLE_ID || vehicleid == 0) return false;
+    if (Vehicle_TrackedSlot(vehicleid) >= 0) return true;
+
+    new modelid = GetVehicleModel(vehicleid);
+    if (!Vehicle_ModelAllowed(modelid)) return false;
+
+    new Float:tank = float(Vehicle_TankCapacity(modelid));
+    new slot = Vehicle_Register(vehicleid, modelid, Lobby_Of(playerid), tank, false, false);
+    if (slot < 0)
+    {
+        Log_Format(LOG_WARN, "fuel %d: slot kendaraan penuh (%d), kendaraan %d tanpa tangki",
+            playerid, MAX_TRACKED_VEHICLES, vehicleid);
+        return false;
+    }
+
+    Log_Format(LOG_INFO, "fuel %d: kendaraan %d (model %d) didaftarkan otomatis, tangki %.0fL penuh",
+        playerid, vehicleid, modelid, tank);
+    return true;
 }
 
 stock Float:Vehicle_GetTank(vehicleid)
@@ -408,11 +434,21 @@ stock Vehicle_OnDeath(vehicleid)
 
 stock Vehicle_OnPlayerStateChange(playerid, newstate)
 {
-    if (newstate != PLAYER_STATE_DRIVER) return 0;
+    /* Penumpang pun ikut didaftarkan: tanpa ini HUD di kursi penumpang
+       menampilkan "TANPA FUEL" untuk kendaraan yang tidak pernah lewat
+       Vehicle_Register (mobil mapping, mobil event, spawn liar yang meluber
+       dari MAX_TRACKED_VEHICLES). */
+    if (newstate != PLAYER_STATE_DRIVER && newstate != PLAYER_STATE_PASSENGER) return 0;
 
     new vehicleid = GetPlayerVehicleID(playerid);
     new slot = Vehicle_TrackedSlot(vehicleid);
-    if (slot < 0) return 0;
+    if (slot < 0)
+    {
+        Vehicle_EnsureFuel(vehicleid, playerid);
+        slot = Vehicle_TrackedSlot(vehicleid);
+        if (slot < 0) return 0;   /* slot penuh atau model tanpa tangki */
+    }
+    if (newstate != PLAYER_STATE_DRIVER) return 0;
 
     if (TrackedVehicle[slot][tvFuel] <= 0.0)
     {

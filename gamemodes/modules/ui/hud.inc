@@ -1318,8 +1318,9 @@ stock HUD_Update(playerid)
 
         if (fuel < 0.0)
         {
-            format(fuelLine, sizeof(fuelLine), "FUEL 0%%  TANPA FUEL");
-            HUD_SetBar(playerid, HUD_BAR_VEH, 0.0, UI_ACCENT_DANGER);
+            /* Hanya terjadi kalau pool 64 slot tangki habis atau model memang
+               tanpa tangki (kereta/tram). "0%" menyesatkan — pakai tanda ".". */
+            format(fuelLine, sizeof(fuelLine), "FUEL -  TANPA TANGKI");
         }
         else if (percent <= 0.25)
         {
@@ -1368,9 +1369,11 @@ stock HUD_Update(playerid)
             PlayerTextDrawShow(playerid, HudVehicle[playerid]);
         }
 
-        /* Bar hanya saat BBM aman (>25%): saat rendah teks pom pakai lebar penuh
-           dan track kosong justru terlihat seperti bug — bar hilang utuh. */
-        if (fuel >= 0.0 && percent > 0.25)
+        /* Bar SELALU tampil selama kendaraan punya tangki. Dulu bar disembunyikan
+           saat sisa <= 25%, dan itu justru menghapus satu-satunya cara pemain
+           melihat sisa bensin ("ga tau sisa berapa bensinnya"). Level rendah
+           tetap terbaca jelas dari warna bahaya + bar yang memendek. */
+        if (fuel >= 0.0)
         {
             HUD_SetBar(playerid, HUD_BAR_VEH, percent, fuelColor);
             if (!HudVehBarShown[playerid])
@@ -1416,6 +1419,12 @@ stock HUD_Update(playerid)
             PlayerTextDrawShow(playerid, HudVehicle[playerid]);
             if (HudVehCard[playerid] != PlayerText:0)
                 PlayerTextDrawShow(playerid, HudVehCard[playerid]);
+            /* Satu baris per masuk kendaraan: cukup untuk membuktikan baris FUEL
+               benar-benar tampil dan berapa angka yang dipakai, tanpa membanjiri
+               log tiap 500 ms. */
+            Log_Format(LOG_INFO, "hudin %d: veh=%d model=%d fuel=%.1f/%.0fL pct=%.0f%% teks='%s' bar=%d card=%d",
+                playerid, vehicleid, GetVehicleModel(vehicleid), fuel, tank, percent * 100.0,
+                HudLastVehicle[playerid], HudVehBarShown[playerid], _:HudVehCard[playerid]);
         }
     }
     else
@@ -1581,9 +1590,14 @@ public HUD_Tick()
 {
     new perfStart = GetTickCount();
     new ticked = 0;
+    /* Pemain nyata pertama dipakai sebagai sampel log. Dulu log selalu membaca
+       slot 0, dan slot 0 biasanya NPC — akibatnya baris FUEL pemain sungguhan
+       tidak pernah tercatat walau HUD-nya bermasalah. */
+    new realPlayer = -1;
     for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
     {
         if (!IsPlayerConnected(playerid)) continue;
+        if (realPlayer < 0 && !IsPlayerNPC(playerid)) realPlayer = playerid;
         /* Pemulihan mandiri: kalau textdraw HUD jelas sudah dibuat tapi flag
            tampil mati (pernah dilaporkan "HUD beku di angka awal"), nyalakan
            kembali dan catat — supaya tick tetap menulis tanpa perlu relog. */
@@ -1604,8 +1618,10 @@ public HUD_Tick()
     gHudTickCount++;
     if ((gHudTickCount % 24) == 0)
     {
-        Log_Format(LOG_INFO, "hudtick %d: pemain=%d tulis=%d bbm='%s' hp='%s'",
-            gHudTickCount, ticked, gHudWriteCount, HudLastVehicle[0], HudLastHpVal[0]);
+        Log_Format(LOG_INFO, "hudtick %d: pemain=%d tulis=%d fuel='%s' hp='%s' sampel=%d",
+            gHudTickCount, ticked, gHudWriteCount,
+            (realPlayer >= 0) ? HudLastVehicle[realPlayer] : "",
+            (realPlayer >= 0) ? HudLastHpVal[realPlayer] : "", realPlayer);
     }
     return 1;
 }

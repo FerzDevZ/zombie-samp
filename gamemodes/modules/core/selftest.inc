@@ -232,6 +232,22 @@ stock Selftest_CheckVehicles()
     }
 
     Selftest_Record(valid, "kendaraan liar", detail);
+
+    /* Invariant HUD FUEL: persentase hanya bermakna kalau SETIAP model yang
+       boleh dikendarai punya tangki > 0. Kalau satu model mengembalikan 0,
+       baris FUEL akan menulis "0/0L" dan bar mustahil diisi — persis keluhan
+       "ga tau sisa berapa bensinnya". Ditembak langsung ke fungsi, bukan ke
+       tebakan. */
+    new brokenTank = 0;
+    for (new modelid = 400; modelid <= 611; modelid++)
+    {
+        if (!Vehicle_ModelAllowed(modelid)) continue;
+        if (Vehicle_TankCapacity(modelid) > 0) continue;
+        brokenTank++;
+    }
+    format(detail, sizeof(detail), "%d model tanpa tangki (kereta/tram dikecualikan model 537/538/569/570)",
+        brokenTank);
+    Selftest_Record(brokenTank == 0, "tangki semua model", detail);
     return 1;
 }
 
