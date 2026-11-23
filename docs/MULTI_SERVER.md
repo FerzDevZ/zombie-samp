@@ -247,21 +247,35 @@ Ambang waspada, dicek dengan `./scripts/instance.sh list` dan `ps -o pcpu=`:
 Mematikan server kedua saat tidak dipakai: `./scripts/instance.sh stop s2`
 (menghemat ±520 MB dan satu core; data di database tetap utuh).
 
-## Batasan yang masih berlaku (per 26-11-23)
+## Kunci unik karakter per instance (migrasi 028)
 
-Dua unique key di `characters` belum mengenal instance:
-
-```
-uq_characters_name  (name)              <- global
-uq_characters_slot  (account_id, slot)  <- global
-```
-
-Akibatnya, walaupun baris karakter punya `server_id`, satu akun **tidak bisa**
-membuat karakter dengan nama yang sama di dua instance, dan tidak bisa memakai
-slot yang sama di dua instance. Bukti: `INSERT ... server_id=2, name='FerzDevZ'`
+Sebelum 028, `characters` memakai `UNIQUE(name)` dan `UNIQUE(account_id, slot)`
+**global**, sisa skema single-server. Akibatnya ROADMAP 315 hanya memisahkan
+*baris*, bukan *nama* maupun *slot*: membuat karakter `FerzDevZ` di instance 2
 ditolak `ERROR 1062 Duplicate entry 'FerzDevZ' for key 'uq_characters_name'`.
 
-Perbaikan yang benar (belum dikerjakan): ubah keduanya menjadi
-`(server_id, name)` dan `(server_id, account_id, slot)`. Sampai itu dilakukan,
-karakter di instance kedua harus memakai nama dan slot berbeda.
+028 menggantinya menjadi:
 
+```
+uq_characters_server_name  (server_id, name)              -- nama unik di dalam instance
+uq_characters_server_slot  (server_id, account_id, slot)  -- slot 0 boleh dipakai di s1 dan s2
+```
+
+Bukti setelah migrasi (akun yang sama, instance berbeda, nama & slot identik):
+
+```
+server_id  slot  name
+1          0     FerzDevZ
+2          0     FerzDevZ
+```
+
+029 kemudian membuang `idx_server_slot (server_id, account_id)` karena kolomnya
+kini hanya prefiks dari `uq_characters_server_slot`. Rencana query daftar
+karakter membuktikan tidak ada regresi:
+
+```
+key: uq_characters_server_slot, key_len: 5, ref: const,const, rows: 1
+```
+
+Catatan instalasi baru: 026 tetap membuat `idx_server_slot` lalu 029
+membuangnya, jadi jalankan migrasi berurutan — jangan hanya 029.
