@@ -807,6 +807,21 @@ stock HUD_MeasureSelftest()
     ok = ok && textWidth <= (HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0);
 
     new detail[144];
+    /* REGRESI nyata: TD_FitText dipanggil dengan dest == text. YSI mendefinisikan
+       ulang strcpy sebagai strcat((dest[0]='\0', dest), src), jadi versi lama
+       mengosongkan string lalu menyalin dari dirinya sendiri -> baris BBM jadi
+       kosong dan tidak pernah tampil. Uji ini mengunci perilaku alias. */
+    new aliasLine[80];
+    format(aliasLine, sizeof(aliasLine), "BBM 54%%  43.9/80L 120km");
+    TD_FitText(aliasLine, sizeof(aliasLine), aliasLine, HUD_VEH_LETTER_X, 140.0);
+    new bool:aliasOk = (strlen(aliasLine) > 4) && !strcmp(aliasLine, "BBM 54%  43.9/80L 120km", false);
+
+    new shortLine[32];
+    format(shortLine, sizeof(shortLine), "BBM sangat panjang sekali 999km");
+    TD_FitText(shortLine, sizeof(shortLine), shortLine, HUD_VEH_LETTER_X, 40.0);
+    new bool:trimOk = (strlen(shortLine) > 0) && (TD_TextWidth(shortLine, HUD_VEH_LETTER_X) <= 40.0);
+    ok = ok && aliasOk && trimOk;
+
     format(detail, sizeof(detail), "fonts.dat '0'=23 'A'=22 'B'=19 spasi=15; BBM %.0f/%.0f satuan (teks<bar)",
         textWidth, HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0);
     Selftest_Record(ok, "pengukur lebar textdraw", detail);

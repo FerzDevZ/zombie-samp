@@ -64,10 +64,24 @@ stock Float:TD_TextWidth(const text[], Float:letterX)
    panjang tidak pernah menabrak elemen lain di baris yang sama. */
 stock TD_FitText(dest[], destSize, const text[], Float:letterX, Float:maxWidth)
 {
-    strcpy(dest, text, destSize);
+    /* Salinan manual, TIDAK memakai strcpy: YSI mendefinisikan ulang
+       `#define strcpy(%0,%1) strcat((%0[0] = '\0', %0), %1)`, sehingga saat
+       dest dan text adalah array YANG SAMA (pola TD_FitText(line, sizeof(line),
+       line, ...)) array itu dikosongkan dulu lalu menyalin dari dirinya sendiri
+       -> hasilnya string kosong. Inilah penyebab baris BBM hilang. */
+    new limit = destSize - 1;
+    if (limit < 0) limit = 0;
+
+    new length = 0;
+    while (length < limit && text[length] != EOS)
+    {
+        dest[length] = text[length];
+        length++;
+    }
+    dest[length] = EOS;
+
     if (TD_TextWidth(dest, letterX) <= maxWidth) return 1;
 
-    new length = strlen(dest);
     while (length > 0 && TD_TextWidth(dest, letterX) > maxWidth)
     {
         length--;
@@ -80,7 +94,14 @@ stock TD_FitText(dest[], destSize, const text[], Float:letterX, Float:maxWidth)
 stock TD_FitCount(const text[], Float:letterX, Float:maxWidth)
 {
     new buffer[128];
-    strcpy(buffer, text, sizeof(buffer));
+    new copyLimit = sizeof(buffer) - 1;
+    new copyIndex = 0;
+    while (copyIndex < copyLimit && text[copyIndex] != EOS)
+    {
+        buffer[copyIndex] = text[copyIndex];
+        copyIndex++;
+    }
+    buffer[copyIndex] = EOS;
     new length = strlen(buffer);
     while (length > 0 && TD_TextWidth(buffer, letterX) > maxWidth)
     {
