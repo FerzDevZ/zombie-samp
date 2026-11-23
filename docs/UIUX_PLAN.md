@@ -109,3 +109,43 @@ dibangun) nomor baris bergeser dan pilihan "base" memasang target yang salah.
 Urutan tujuan: **KAMP UTAMA (selalu ada)** → zona terdekat → base pribadi →
 airdrop aktif → rekan party → rekan satu lobby → baris "Matikan GPS".
 Kamp memakai `SPAWN_X/Y/Z` yang sama dengan lobby, jadi tidak ada salinan angka.
+
+## v7 — HUD keluar dari tengah layar + menu `/settings` yang tidak bergeser
+
+### Pengukuran nyata Android vs PC (dari screenshot 2340x1080)
+Screenshot Android diukur terhadap `#define` yang dipakai server, dan hasilnya
+konsisten untuk **semua** elemen:
+
+| Sumbu | Pemetaan kanvas 640x480 → layar Android | Bukti |
+|---|---|---|
+| X | `px = 2.56 × x` (kanvas selebar 1638 px = 70% layar), rata kiri | kartu kiri `x16..304` → `41..778`; kartu kendaraan `x352..628` → `901..1608` |
+| Y | `px = 1.70 × y` (kanvas setinggi 816 px = 75% layar), rata atas | kartu kendaraan lama `y256..320` → `431..541`; kartu kiri lama `y288..388` → `486..656` |
+
+Artinya: **koordinatnya benar, penempatannya yang salah.** Di PC kanvas 640x480
+memenuhi seluruh jendela sehingga `y=288` terasa "bawah"; di Android kanvas hanya
+menempati 75% tinggi layar (rata atas), jadi `y=288` jatuh tepat di **tengah**
+pandangan pemain dan menutupi jalan. Karena itu HUD tidak dipindah dengan
+menambal angka per elemen, tetapi **seluruh grup diturunkan ke pita bawah kanvas**:
+
+| Grup | Posisi lama | Posisi baru | Catatan |
+|---|---|---|---|
+| Kartu status kiri | `y 288..388` | `y 328..428` | semua baris +40 (HP/ARM/INF, LAP/HAUS/PIP, LVL/UANG/JAM) |
+| Kartu kendaraan A | `y 256..320` | `y 356..420` | info 359, speed 367, bar KMH 386, FUEL 393, bar FUEL 405 |
+| Kartu kendaraan B (GPS) | `y 322..344` | `y 422..444` | GPS 425, bar 436 |
+| Pil prompt | `y 414` | `y 448` | keluar dari area kartu kiri |
+
+Sisa ruang di bawah (444..480) sengaja dibiarkan kosong: di Android daerah itu
+masih di dalam kanvas tetapi tombol sentuh (mic/horn/kamera) berada di x≥631,
+di luar kartu `352..628`, sehingga tidak bertabrakan.
+
+### `/settings` — klik yang tidak cocok dengan fungsinya
+`DIALOG_STYLE_TABLIST_HEADERS` memakai **baris pertama sebagai judul kolom** dan
+baris itu tidak bisa diklik. Menu ini tidak punya baris judul, jadi seluruh
+`listitem` bergeser satu: menekan "Design HUD" mengubah "Gaya HUD", menekan
+"Mode TextDraw" mengubah "Tombol Bangun". Perbaikan dua lapis:
+
+1. Baris judul `Menu\tNilai` ditambahkan.
+2. Baris dipilih lewat **jenis** (`gSetRowKind[playerid][listitem]`), bukan nomor:
+   `Settings_RowLabel` dan `Settings_RowValue` dipakai oleh menu **dan** aksi,
+   jadi menambah/menghapus baris tidak pernah menggeser fungsi.
+3. Umpan balik menyebut baris yang benar: `[SETELAN] <label> -> <nilai>`.

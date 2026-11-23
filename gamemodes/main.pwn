@@ -591,6 +591,20 @@ public OnPlayerSpawn(playerid)
     return 1;
 }
 
+/* Klien menyalakan kembali nametag setiap kali entitas di-stream ulang — di
+   Android ini terjadi setiap kali pemain masuk kendaraan, sehingga nama NPC
+   "ls_comp_..." muncul di tengah layar dan terbaca sebagai bug HUD. Stream-in
+   adalah saat paling tepat untuk mematikannya lagi. */
+public OnPlayerStreamIn(playerid, forplayerid)
+{
+    if (IsPlayerNPC(forplayerid))
+    {
+        ShowPlayerNameTagForPlayer(playerid, forplayerid, false);
+        SetPlayerMarkerForPlayer(playerid, forplayerid, 0x00000000);
+    }
+    return 1;
+}
+
 public OnPlayerDeath(playerid, killerid, reason)
 {
     /* killerid/reason dulu dibuang di sini; sekarang dicatat supaya "kenapa

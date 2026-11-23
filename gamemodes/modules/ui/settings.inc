@@ -274,82 +274,127 @@ public Settings_HideBloodFx(playerid)
 
 /* ------------------------------------------------------------- menu */
 
+/* ------------------------------------------------------- tabel baris menu
+   DIALOG_STYLE_TABLIST_HEADERS memakai baris PERTAMA sebagai judul kolom dan
+   baris itu TIDAK bisa diklik. Menu ini dulu tidak punya baris judul, jadi
+   setiap klik bergeser satu: menekan "Design HUD" mengubah "Gaya HUD".
+   Sekarang ada baris judul DAN aksi dipilih lewat jenis baris (bukan nomor),
+   sehingga menambah/menghapus baris tidak pernah menggeser fungsi. */
+
+#define SET_ROW_GAYA        0
+#define SET_ROW_SKIN        1
+#define SET_ROW_DETAIL      2
+#define SET_ROW_SCALE       3
+#define SET_ROW_KONTRAST    4
+#define SET_ROW_BLOOD       5
+#define SET_ROW_PROMPT      6
+#define SET_ROW_LANG        7
+#define SET_ROW_BESIDE      8
+#define SET_ROW_TDMODE      9
+#define SET_ROW_MOD_VEH     10
+#define SET_ROW_MOD_SPEEDO  11
+#define SET_ROW_MOD_GPS     12
+#define SET_ROW_COUNT       13
+
+new gSetRowKind[MAX_PLAYERS][SET_ROW_COUNT];
+new gSetRowCount[MAX_PLAYERS];
+
+stock Settings_RowLabel(kind, dest[], size)
+{
+    switch (kind)
+    {
+        case SET_ROW_GAYA:        strcpy(dest, "Gaya HUD", size);
+        case SET_ROW_SKIN:        strcpy(dest, "Design HUD", size);
+        case SET_ROW_DETAIL:      strcpy(dest, "Bar Detail (Kendaraan & Boss)", size);
+        case SET_ROW_SCALE:       strcpy(dest, "Skala HUD", size);
+        case SET_ROW_KONTRAST:    strcpy(dest, "Mode Kontras", size);
+        case SET_ROW_BLOOD:       strcpy(dest, "Efek Layar Darah", size);
+        case SET_ROW_PROMPT:      strcpy(dest, "Petunjuk Interaksi", size);
+        case SET_ROW_LANG:        strcpy(dest, "Bahasa UI", size);
+        case SET_ROW_BESIDE:      strcpy(dest, "Tombol Bangun (Mobile)", size);
+        case SET_ROW_TDMODE:      strcpy(dest, "Mode TextDraw", size);
+        case SET_ROW_MOD_VEH:     strcpy(dest, "Baris MOBIL (model & kunci)", size);
+        case SET_ROW_MOD_SPEEDO:  strcpy(dest, "Speedometer (km/j)", size);
+        case SET_ROW_MOD_GPS:     strcpy(dest, "GPS / penunjuk arah", size);
+        default:                  strcpy(dest, "-", size);
+    }
+    return 1;
+}
+
+stock Settings_RowValue(playerid, kind, dest[], size)
+{
+    switch (kind)
+    {
+        case SET_ROW_GAYA:
+        {
+            switch (gPrefHudGaya[playerid])
+            {
+                case HUD_GAYA_PENUH:   strcpy(dest, "1 - Penuh", size);
+                case HUD_GAYA_MOBILE:  strcpy(dest, "2 - Mobile Kompak", size);
+                case HUD_GAYA_MINIMAL: strcpy(dest, "3 - Minimalis", size);
+                default:               strcpy(dest, "Auto (ikut klien)", size);
+            }
+        }
+        case SET_ROW_SKIN:
+        {
+            if (gPrefHudSkin[playerid] == HUD_SKIN_AUTO) strcpy(dest, "Auto (ikut klien)", size);
+            else format(dest, size, "%d - %s", gPrefHudSkin[playerid],
+                gHudSkins[gPrefHudSkin[playerid]][skinName]);
+        }
+        case SET_ROW_DETAIL:
+            strcpy(dest, (gPrefHudDetail[playerid] == SETTINGS_FLAG_OFF) ? "Sembunyi" : "Tampil", size);
+        case SET_ROW_SCALE:
+            format(dest, size, "%d%%", 80 + gPrefHudScale[playerid] * 10);
+        case SET_ROW_KONTRAST:
+            strcpy(dest, (gPrefContrast[playerid] == SETTINGS_FLAG_OFF) ? "Normal" : "Kontras Tinggi", size);
+        case SET_ROW_BLOOD:
+            strcpy(dest, (gPrefBloodFx[playerid] == SETTINGS_FLAG_OFF) ? "Mati" : "Aktif", size);
+        case SET_ROW_PROMPT:
+            strcpy(dest, (gPrefPrompt[playerid] == SETTINGS_FLAG_OFF) ? "Sembunyi" : "Tampil", size);
+        case SET_ROW_LANG:
+            strcpy(dest, (gPrefLang[playerid] == LANG_EN) ? "English" : "Indonesia", size);
+        case SET_ROW_BESIDE:
+            strcpy(dest, (gPrefBeSide[playerid] == SETTINGS_FLAG_OFF) ? "Kiri" : "Kanan", size);
+        case SET_ROW_TDMODE:
+        {
+            switch (gPrefTdMode[playerid])
+            {
+                case TD_MODE_PC:     strcpy(dest, "PC (sprite)", size);
+                case TD_MODE_MOBILE: strcpy(dest, "Mobile-safe (box)", size);
+                default:             strcpy(dest, "Auto (ikut klien)", size);
+            }
+        }
+        case SET_ROW_MOD_VEH:
+            strcpy(dest, Settings_ModulEnabled(playerid, SETTINGS_MODUL_VEH) ? "Tampil" : "Sembunyi", size);
+        case SET_ROW_MOD_SPEEDO:
+            strcpy(dest, Settings_ModulEnabled(playerid, SETTINGS_MODUL_SPEEDO) ? "Tampil" : "Sembunyi", size);
+        case SET_ROW_MOD_GPS:
+            strcpy(dest, Settings_ModulEnabled(playerid, SETTINGS_MODUL_GPS) ? "Tampil" : "Sembunyi", size);
+        default: strcpy(dest, "-", size);
+    }
+    return 1;
+}
+
 stock Settings_Show(playerid)
 {
     if (!Account_IsPlaying(playerid)) return 0;
 
-    new row[96], body[1024];
-    new gayaText[24];
-    switch (gPrefHudGaya[playerid])
+    new row[128], body[1280], label[40], value[28];
+
+    /* Baris judul wajib: tanpa ini semua listitem bergeser satu. */
+    body[0] = EOS;
+    strcat(body, "Menu\tNilai\n", sizeof(body));
+
+    gSetRowCount[playerid] = SET_ROW_COUNT;
+    for (new slot = 0; slot < SET_ROW_COUNT; slot++)
     {
-        case SETTINGS_HUD_AUTO: strcpy(gayaText, "Auto (ikut klien)", sizeof(gayaText));
-        case HUD_GAYA_PENUH:    strcpy(gayaText, "1 - Penuh", sizeof(gayaText));
-        case HUD_GAYA_MOBILE:   strcpy(gayaText, "2 - Mobile Kompak", sizeof(gayaText));
-        case HUD_GAYA_MINIMAL:  strcpy(gayaText, "3 - Minimalis", sizeof(gayaText));
-        default:                strcpy(gayaText, "Auto", sizeof(gayaText));
+        new kind = slot;
+        gSetRowKind[playerid][slot] = kind;
+        Settings_RowLabel(kind, label, sizeof(label));
+        Settings_RowValue(playerid, kind, value, sizeof(value));
+        format(row, sizeof(row), "%s\t%s\n", label, value);
+        strcat(body, row, sizeof(body));
     }
-    format(row, sizeof(row), "Gaya HUD\t%s\n", gayaText);
-    strcat(body, row, sizeof(body));
-
-    /* Baris 2: design HUD (palet kartu + bentuk bar). Ini yang diminta:
-       di bawah pilihan mode/gaya, pemain memilih rupa textdraw-nya sendiri. */
-    new skinText[20];
-    new skinIdx = (gPrefHudSkin[playerid] == HUD_SKIN_AUTO) ? 0 : gPrefHudSkin[playerid];
-    if (skinIdx == 0) strcpy(skinText, "Auto (ikut klien)", sizeof(skinText));
-    else format(skinText, sizeof(skinText), "%d - %s", skinIdx, gHudSkins[skinIdx][skinName]);
-    format(row, sizeof(row), "Design HUD\t%s\n", skinText);
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Bar Detail (Kendaraan & Boss)\t%s\n",
-        (gPrefHudDetail[playerid] == SETTINGS_FLAG_OFF) ? "Sembunyi" : "Tampil");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Skala HUD\t%d%%\n", 80 + gPrefHudScale[playerid] * 10);
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Mode Kontras\t%s\n",
-        (gPrefContrast[playerid] == SETTINGS_FLAG_OFF) ? "Normal" : "Kontras Tinggi");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Efek Layar Darah\t%s\n",
-        (gPrefBloodFx[playerid] == SETTINGS_FLAG_OFF) ? "Mati" : "Aktif");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Petunjuk Interaksi\t%s\n",
-        (gPrefPrompt[playerid] == SETTINGS_FLAG_OFF) ? "Sembunyi" : "Tampil");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Bahasa UI\t%s\n",
-        (gPrefLang[playerid] == LANG_EN) ? "English" : "Indonesia");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Tombol Bangun (Mobile)\t%s\n",
-        (gPrefBeSide[playerid] == SETTINGS_FLAG_OFF) ? "Kiri" : "Kanan");
-    strcat(body, row, sizeof(body));
-
-    new tdModeText[28];
-    switch (gPrefTdMode[playerid])
-    {
-        case TD_MODE_PC:     strcpy(tdModeText, "PC (sprite)", sizeof(tdModeText));
-        case TD_MODE_MOBILE: strcpy(tdModeText, "Mobile-safe (box)", sizeof(tdModeText));
-        default:             strcpy(tdModeText, "Auto (ikut klien)", sizeof(tdModeText));
-    }
-    format(row, sizeof(row), "Mode TextDraw\t%s\n", tdModeText);
-    strcat(body, row, sizeof(body));
-
-    /* Butir 9-11: kolom kendaraan dipisah supaya speedometer dan GPS bisa
-       dinyalakan sendiri tanpa memaksa seluruh panel tampil. */
-    format(row, sizeof(row), "Baris MOBIL (plat & kunci)\t%s\n",
-        Settings_ModulEnabled(playerid, SETTINGS_MODUL_VEH) ? "Tampil" : "Sembunyi");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "Speedometer (km/j)\t%s\n",
-        Settings_ModulEnabled(playerid, SETTINGS_MODUL_SPEEDO) ? "Tampil" : "Sembunyi");
-    strcat(body, row, sizeof(body));
-
-    format(row, sizeof(row), "GPS / penunjuk arah\t%s\n",
-        Settings_ModulEnabled(playerid, SETTINGS_MODUL_GPS) ? "Tampil" : "Sembunyi");
-    strcat(body, row, sizeof(body));
 
     ShowPlayerDialog(playerid, DIALOG_SETTINGS, DIALOG_STYLE_TABLIST_HEADERS,
         "Pengaturan", body, "Ubah", "Tutup");
@@ -358,84 +403,75 @@ stock Settings_Show(playerid)
 
 stock Settings_ToggleFromRow(playerid, row)
 {
-    /* Baris terakhir = mode renderer: 0 auto -> 1 PC -> 2 mobile-safe -> auto.
-       Perubahan langsung membangun ulang textdraw supaya bisa dibandingkan. */
-    if (row == 9)
+    if (row < 0 || row >= gSetRowCount[playerid]) return 0;
+
+    new kind = gSetRowKind[playerid][row];
+    new msg[128], label[40], value[28];
+
+    switch (kind)
     {
-        gPrefTdMode[playerid]++;
-        if (gPrefTdMode[playerid] > TD_MODE_MOBILE) gPrefTdMode[playerid] = TD_MODE_AUTO;
-        gTdMobileSafe[playerid] = Settings_TdMobileSafe(playerid);
-        HUD_Destroy(playerid);
-        HUD_Create(playerid);
-        HUD_Reshow(playerid, true);
-        Settings_Save(playerid);
-        new msg[128];
-        format(msg, sizeof(msg), "[SETELAN] Mode TextDraw: %s",
-            (gPrefTdMode[playerid] == TD_MODE_MOBILE) ? "Mobile-safe (box)" :
-            (gPrefTdMode[playerid] == TD_MODE_PC) ? "PC (sprite)" : "Auto");
-        SendClientMessage(playerid, UI_ACCENT_PRIMARY, msg);
-        return 1;
-    }
-    switch (row)
-    {
-        case 0: /* gaya HUD: auto -> 1 -> 2 -> 3 -> auto */
+        case SET_ROW_GAYA:
         {
             gPrefHudGaya[playerid]++;
             if (gPrefHudGaya[playerid] > HUD_GAYA_MINIMAL) gPrefHudGaya[playerid] = SETTINGS_HUD_AUTO;
         }
-        case 1: /* design HUD: auto -> KACA -> NEON -> TACTICAL -> TERANG -> auto */
+        case SET_ROW_SKIN:
         {
             gPrefHudSkin[playerid]++;
             if (gPrefHudSkin[playerid] > HUD_SKIN_COUNT) gPrefHudSkin[playerid] = HUD_SKIN_AUTO;
         }
-        case 2:
+        case SET_ROW_DETAIL:
         {
             gPrefHudDetail[playerid] = (gPrefHudDetail[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 3:
+        case SET_ROW_SCALE:
         {
             gPrefHudScale[playerid]++;
             if (gPrefHudScale[playerid] > SETTINGS_SCALE_MAX) gPrefHudScale[playerid] = SETTINGS_SCALE_MIN;
         }
-        case 4:
+        case SET_ROW_KONTRAST:
         {
             gPrefContrast[playerid] = (gPrefContrast[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 5:
+        case SET_ROW_BLOOD:
         {
             gPrefBloodFx[playerid] = (gPrefBloodFx[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 6:
+        case SET_ROW_PROMPT:
         {
             gPrefPrompt[playerid] = (gPrefPrompt[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 7:
+        case SET_ROW_LANG:
         {
             gPrefLang[playerid] = (gPrefLang[playerid] == LANG_EN) ? LANG_ID : LANG_EN;
         }
-        case 8:
+        case SET_ROW_BESIDE:
         {
             gPrefBeSide[playerid] = (gPrefBeSide[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 10: Settings_ModulToggle(playerid, SETTINGS_MODUL_VEH);
-        case 11: Settings_ModulToggle(playerid, SETTINGS_MODUL_SPEEDO);
-        case 12: Settings_ModulToggle(playerid, SETTINGS_MODUL_GPS);
+        case SET_ROW_TDMODE:
+        {
+            gPrefTdMode[playerid]++;
+            if (gPrefTdMode[playerid] > TD_MODE_MOBILE) gPrefTdMode[playerid] = TD_MODE_AUTO;
+        }
+        case SET_ROW_MOD_VEH:    Settings_ModulToggle(playerid, SETTINGS_MODUL_VEH);
+        case SET_ROW_MOD_SPEEDO: Settings_ModulToggle(playerid, SETTINGS_MODUL_SPEEDO);
+        case SET_ROW_MOD_GPS:    Settings_ModulToggle(playerid, SETTINGS_MODUL_GPS);
         default: return 0;
     }
 
-    if (row == 1)
-    {
-        new skinMsg[96], skinLabel[20];
-        if (gPrefHudSkin[playerid] == HUD_SKIN_AUTO) strcpy(skinLabel, "Auto (ikut klien)", sizeof(skinLabel));
-        else format(skinLabel, sizeof(skinLabel), "%s", gHudSkins[gPrefHudSkin[playerid]][skinName]);
-        format(skinMsg, sizeof(skinMsg), "[SETELAN] Design HUD: %s", skinLabel);
-        SendClientMessage(playerid, UI_ACCENT_PRIMARY, skinMsg);
-    }
+    /* Umpan balik menyebut baris yang BENAR diubah, supaya pemain bisa
+       mencocokkan klik dengan hasilnya (keluhan "dipencet beda hasilnya"). */
+    Settings_RowLabel(kind, label, sizeof(label));
+    Settings_RowValue(playerid, kind, value, sizeof(value));
+    format(msg, sizeof(msg), "[SETELAN] %s -> %s", label, value);
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, msg);
+    Log_Format(LOG_INFO, "settings %d: baris %d kind=%d -> %s", playerid, row, kind, value);
 
     Settings_Apply(playerid);
     Settings_Save(playerid);
@@ -443,6 +479,14 @@ stock Settings_ToggleFromRow(playerid, row)
     return 1;
 }
 
+/* --------------------------------------------------------- /tddebug */
+
+new PlayerText:gTdCalib[MAX_PLAYERS][6];
+new bool:gTdCalibOn[MAX_PLAYERS];
+
+/* Gambar pola kalibrasi 640x480: 4 sudut + titik tengah + label mode. Dipakai
+   untuk membuktikan apakah klien (terutama Android) memetakan koordinat
+   textdraw dengan benar, tanpa perlu menebak dari HUD yang padat. */
 forward Settings_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
 
 public Settings_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
@@ -457,16 +501,8 @@ public Settings_OnDialogResponse(playerid, dialogid, response, listitem, inputte
     return 0;
 }
 
-/* ------------------------------------------------------------ selftest */
-
 /* --------------------------------------------------------- /tddebug */
 
-new PlayerText:gTdCalib[MAX_PLAYERS][6];
-new bool:gTdCalibOn[MAX_PLAYERS];
-
-/* Gambar pola kalibrasi 640x480: 4 sudut + titik tengah + label mode. Dipakai
-   untuk membuktikan apakah klien (terutama Android) memetakan koordinat
-   textdraw dengan benar, tanpa perlu menebak dari HUD yang padat. */
 stock Settings_TdDebug(playerid)
 {
     if (!IsPlayerConnected(playerid)) return 0;
@@ -532,6 +568,21 @@ stock Settings_TdDebugReset(playerid)
 stock Settings_Selftest()
 {
     new bool:ok = true;
+
+    /* Setiap baris menu wajib punya label DAN nilai yang bisa dibaca. Dulu
+       menu memakai DIALOG_STYLE_TABLIST_HEADERS tanpa baris judul, sehingga
+       baris pertama dimakan sebagai header dan semua klik bergeser satu
+       (menekan "Design HUD" mengubah "Gaya HUD"). */
+    new rowLabel[40], rowValue[28];
+    new bool:okMenu = true;
+    for (new kind = 0; kind < SET_ROW_COUNT; kind++)
+    {
+        Settings_RowLabel(kind, rowLabel, sizeof(rowLabel));
+        Settings_RowValue(0, kind, rowValue, sizeof(rowValue));
+        okMenu = okMenu && rowLabel[0] != EOS && strcmp(rowLabel, "-") != 0;
+        okMenu = okMenu && rowValue[0] != EOS && strcmp(rowValue, "-") != 0;
+    }
+    okMenu = okMenu && SET_ROW_SKIN == 1 && SET_ROW_TDMODE == 9 && SET_ROW_COUNT == 13;
 
     /* Rentang gaya HUD konsisten dengan konstanta hud.inc. */
     ok = ok && HUD_GAYA_PENUH == 1 && HUD_GAYA_MOBILE == 2 && HUD_GAYA_MINIMAL == 3;
@@ -614,6 +665,9 @@ stock Settings_Selftest()
         okSkala ? "0.8x..1.2x konsisten" : "skala gagal");
     Selftest_Record(okLang, "menu pengaturan (bahasa)",
         okLang ? "helper bahasa konsisten" : "bahasa gagal");
+    Selftest_Record(okMenu, "menu setelan (baris)",
+        okMenu ? "13 baris + baris judul, label & nilai terisi semua"
+               : "baris menu tanpa label/nilai atau jumlah baris bergeser");
     Selftest_Record(okPanel, "menu pengaturan (panel)",
         okPanel ? "sisi panel kanan/kiri konsisten" : "panel gagal");
     return 1;

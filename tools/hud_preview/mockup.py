@@ -110,23 +110,23 @@ def render(path, design, comp=1.0, stretch=1.0):
 
     text(d, p["progress"][0], p["progress"][1], "LVL 3  SP 2  LUKA 0  /skill",
          0.18, 0.75, (190, 198, 208))
-    text(d, 26, 372, "UANG $1240", 0.16, 0.78, (245, 158, 11))
-    text(d, 190, 372, "JAM 14:32", 0.16, 0.78, (200, 208, 218))
+    text(d, 26, 412, "UANG $1240", 0.16, 0.78, (245, 158, 11))
+    text(d, 190, 412, "JAM 14:32", 0.16, 0.78, (200, 208, 218))
 
     v = design["vehicle"]
     if v:
         # Grid yang sama dengan hud.inc: kartu A 256..320, kartu B 322..344.
-        rr(d, (v["x"], 256, v["x"] + v["w"], 320), 2, v["card"])
-        text(d, v["text_x"], 259, "MOBIL 411  TERBUKA", 0.16, 0.62, v["text_pri"])
-        text(d, v["text_x"], 267, str(v["kmh"]), 0.34, 1.30, v["accent"])
-        text(d, 396, 275, "km/j", 0.16, 0.62, v["text_sec"])
-        bar(d, v["text_x"], 286, v["w"] - 12, 4, v["kmh"] / 240.0, fill=v["accent"])
-        text(d, v["text_x"], 293, v["label"], 0.16, 0.62, v["text_pri"])
-        bar(d, v["text_x"], 305, v["w"] - 12, 5, v["ratio"], fill=v["accent"])
+        rr(d, (v["x"], 356, v["x"] + v["w"], 420), 2, v["card"])
+        text(d, v["text_x"], 359, "MOBIL 411  TERBUKA", 0.16, 0.62, v["text_pri"])
+        text(d, v["text_x"], 367, str(v["kmh"]), 0.34, 1.30, v["accent"])
+        text(d, 396, 375, "km/j", 0.16, 0.62, v["text_sec"])
+        bar(d, v["text_x"], 386, v["w"] - 12, 4, v["kmh"] / 240.0, fill=v["accent"])
+        text(d, v["text_x"], 393, v["label"], 0.16, 0.62, v["text_pri"])
+        bar(d, v["text_x"], 405, v["w"] - 12, 5, v["ratio"], fill=v["accent"])
         # Kartu B: GPS 322..344
-        rr(d, (v["x"], 322, v["x"] + v["w"], 344), 2, v["card"])
-        text(d, v["text_x"], 325, v["gps"], 0.16, 0.62, v["text_sec"])
-        bar(d, v["text_x"], 336, v["w"] - 12, 4, v["gps_ratio"], fill=v["accent"])
+        rr(d, (v["x"], 422, v["x"] + v["w"], 444), 2, v["card"])
+        text(d, v["text_x"], 425, v["gps"], 0.16, 0.62, v["text_sec"])
+        bar(d, v["text_x"], 436, v["w"] - 12, 4, v["gps_ratio"], fill=v["accent"])
 
     # Simulasi klien HP: kanvas 640x480 diregangkan ke layar 20:9 (x 1.52x).
     if stretch != 1.0:
@@ -144,27 +144,27 @@ if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else "mockup.png"
     DESIGN = {
         "panel": {
-            "x": 16, "y": 288, "w": 288, "h": 100,
-            "brand": (26, 294), "zone": (150, 296), "progress": (26, 360),
+            "x": 16, "y": 328, "w": 288, "h": 100,
+            "brand": (26, 334), "zone": (150, 336), "progress": (26, 400),
         },
         "rows": [
-            {"label": "HP", "name": (26, 310), "bar": (52, 312), "bar_w": 104,
+            {"label": "HP", "name": (26, 350), "bar": (52, 352), "bar_w": 104,
              "bar_h": 5, "ratio": 1.0, "color": (16, 185, 129),
-             "value": (162, 310), "text": "100/100"},
-            {"label": "ARM", "name": (26, 322), "bar": (52, 324), "bar_w": 104,
+             "value": (162, 350), "text": "100/100"},
+            {"label": "ARM", "name": (26, 362), "bar": (52, 364), "bar_w": 104,
              "bar_h": 5, "ratio": 0.0, "color": (56, 132, 255),
-             "value": (162, 322), "text": "0/100"},
-            {"label": "INF", "name": (26, 334), "bar": (52, 336), "bar_w": 104,
+             "value": (162, 362), "text": "0/100"},
+            {"label": "INF", "name": (26, 374), "bar": (52, 376), "bar_w": 104,
              "bar_h": 5, "ratio": 0.0, "color": (16, 185, 129),
-             "value": (162, 334), "text": "0%"},
+             "value": (162, 374), "text": "0%"},
         ],
         "minis": [
-            {"label": "LAP", "name": (26, 348), "bar": (48, 348), "bar_w": 40,
-             "bar_h": 4, "ratio": 0.82, "value": (92, 348), "text": "82"},
-            {"label": "HAUS", "name": (112, 348), "bar": (134, 348), "bar_w": 40,
-             "bar_h": 4, "ratio": 0.76, "value": (178, 348), "text": "76"},
-            {"label": "PIP", "name": (198, 348), "bar": (220, 348), "bar_w": 40,
-             "bar_h": 4, "ratio": 0.12, "value": (264, 348), "text": "12"},
+            {"label": "LAP", "name": (26, 388), "bar": (48, 388), "bar_w": 40,
+             "bar_h": 4, "ratio": 0.82, "value": (92, 388), "text": "82"},
+            {"label": "HAUS", "name": (112, 388), "bar": (134, 388), "bar_w": 40,
+             "bar_h": 4, "ratio": 0.76, "value": (178, 388), "text": "76"},
+            {"label": "PIP", "name": (198, 388), "bar": (220, 388), "bar_w": 40,
+             "bar_h": 4, "ratio": 0.12, "value": (264, 388), "text": "12"},
         ],
         "vehicle": {"x": 352, "w": 276, "text_x": 356,
                     "kmh": 128,

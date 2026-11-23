@@ -748,12 +748,12 @@ def main() -> int:
 
     # Geometri kartu/bar/prompt HUD harus masih persis di hud.inc — kalau angka
     # ini berubah, galeri (dan pemahaman kita tentang layar) basi.
-    require_literal(hud_text, "HUD_CreateCard(playerid, HUD_X(playerid, 16.0), HUD_Y(playerid, 288.0),", "kartu HUD")
+    require_literal(hud_text, "HUD_CreateCard(playerid, HUD_X(playerid, 16.0), HUD_Y(playerid, 328.0),", "kartu HUD")
     require_literal(hud_text, "HUD_FX(playerid, 288.0), HUD_F(playerid, 100.0), HUD_F(playerid, 2.0),", "ukuran kartu HUD")
     require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 264.0, 258.0, 264.0, 264.0}", "lebar bar HUD v5")
-    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_HP, HUD_X(playerid, 52.0), HUD_Y(playerid, 312.0), gHudSkins[skIdx][skinTrack], gHudSkins[skIdx][skinCard]", "bar HP")
-    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_PIP, HUD_X(playerid, 220.0), HUD_Y(playerid, 348.0)", "bar PIP")
-    require_literal(hud_text, "CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 414.0)", "pil prompt")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_HP, HUD_X(playerid, 52.0), HUD_Y(playerid, 352.0), gHudSkins[skIdx][skinTrack], gHudSkins[skIdx][skinCard]", "bar HP")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_PIP, HUD_X(playerid, 220.0), HUD_Y(playerid, 388.0)", "bar PIP")
+    require_literal(hud_text, "CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 448.0)", "pil prompt")
     require_literal(hud_text, "PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], HUD_FX(playerid, 220.0), HUD_F(playerid, 18.0))", "ukuran pil prompt")
 
     require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, HUD_VEH_BAR_X),", "bar BBM")
