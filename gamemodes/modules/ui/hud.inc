@@ -191,11 +191,18 @@ stock HUD_DetectClient(playerid)
     new version[64];
     GetPlayerVersion(playerid, version, sizeof(version));
 
+    /* Klien SAMP Unity / SA-MP Mobile TIDAK mengirim string versi (kosong).
+       Terbukti dari log: "klien 237: versi '' mobile=0 lebar=1.00" — karena itu
+       kompensasi tidak pernah aktif dan HUD tetap melar 1.5x di HP. Klien PC
+       resmi selalu melaporkan "0.3.7-R5-..." sehingga versi kosong/tak dikenal
+       aman dianggap mobile. */
     new bool:mobile = false;
-    if (strfind(version, "unity", true) != -1) mobile = true;
+    if (strlen(version) == 0) mobile = true;
+    else if (strfind(version, "unity", true) != -1) mobile = true;
     else if (strfind(version, "android", true) != -1) mobile = true;
     else if (strfind(version, "ios", true) != -1) mobile = true;
     else if (strfind(version, "mobile", true) != -1) mobile = true;
+    else if (strfind(version, "0.3", true) == -1) mobile = true;
 
     gHudMobileClient[playerid] = mobile;
     if (gHudXLebar[playerid] <= 0.0)
@@ -1210,8 +1217,20 @@ stock HUD_UpdatePrompt(playerid)
     return 1;
 }
 
+new bool:gHudUpdLogged[MAX_PLAYERS];
+
 stock HUD_Update(playerid)
 {
+    /* Jejak pertama per pemain: memisahkan tiga sebab "HUD tidak pernah
+       berubah" — tidak terhubung, HUD tidak ditandai tampil, atau NPC.
+       Tanpa ini diagnosa hanya menebak (log hudtick hanya menunjukkan total). */
+    if (!gHudUpdLogged[playerid])
+    {
+        gHudUpdLogged[playerid] = true;
+        Log_Format(LOG_INFO, "hudupd %d: connected=%d hudVisible=%d npc=%d",
+            playerid, IsPlayerConnected(playerid), PlayerHudVisible[playerid],
+            IsPlayerNPC(playerid));
+    }
     if (!IsPlayerConnected(playerid)) return 0;
     if (!PlayerHudVisible[playerid]) return 0;
 
@@ -1311,6 +1330,21 @@ stock HUD_Update(playerid)
         new Float:vehLetterX = HUD_VEH_LETTER_X * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
         new Float:textBudget = (HUD_VEH_TEXT_W - 8.0) * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
         TD_FitText(fuelLine, sizeof(fuelLine), fuelLine, vehLetterX, textBudget);
+
+        /* Penjaga: kalau string tiba-tiba pendek (mis. hanya "BBM"), catat ke
+           log supaya penyebabnya terlihat dari server, bukan dari tebakan. */
+        if (strlen(fuelLine) < 6)
+        {
+            Log_Format(LOG_WARN, "bbm %d: string pendek '%s' (len=%d budget=%.0f lebar=%.0f)",
+                playerid, fuelLine, strlen(fuelLine), textBudget,
+                TD_TextWidth(fuelLine, vehLetterX));
+        }
+        else if (HudLastVehicle[playerid][0] == EOS)
+        {
+            Log_Format(LOG_INFO, "bbm %d: '%s' (len=%d budget=%.0f lebar=%.0f)",
+                playerid, fuelLine, strlen(fuelLine), textBudget,
+                TD_TextWidth(fuelLine, vehLetterX));
+        }
 
         HUD_SetIfChanged(playerid, HudVehicle[playerid], fuelLine, HudLastVehicle[playerid], sizeof(HudLastVehicle[]));
 
@@ -1540,6 +1574,15 @@ public HUD_Tick()
     for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
     {
         if (!IsPlayerConnected(playerid)) continue;
+        /* Pemulihan mandiri: kalau textdraw HUD jelas sudah dibuat tapi flag
+           tampil mati (pernah dilaporkan "HUD beku di angka awal"), nyalakan
+           kembali dan catat — supaya tick tetap menulis tanpa perlu relog. */
+        if (!PlayerHudVisible[playerid] && HudHpVal[playerid] != PlayerText:0
+            && !IsPlayerNPC(playerid))
+        {
+            PlayerHudVisible[playerid] = true;
+            Log_Format(LOG_WARN, "hudrepair %d: flag tampil dipulihkan (textdraw ada)", playerid);
+        }
         HUD_Update(playerid);
         ticked++;
     }
