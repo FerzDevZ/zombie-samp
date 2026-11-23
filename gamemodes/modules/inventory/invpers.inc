@@ -112,6 +112,15 @@ public Inventory_OnLoaded(playerid)
     PlayerInventoryDirty[playerid] = false;
     CharCreate_ApplyPending(playerid);
 
+    /* Bukti angka untuk laporan "HUD scrap 0 padahal ada": count tas dicatat
+       di log setiap kali inventory dimuat, jadi klaim bisa diverifikasi. */
+    new invLine[96];
+    format(invLine, sizeof(invLine), "[INV] char %d dimuat: scrap=%d sampel=%d",
+        ActiveCharId[playerid],
+        Inventory_CountItem(playerid, ITEM_SCRAP),
+        Inventory_CountItem(playerid, ITEM_SPECIMEN));
+    Log_Info(invLine);
+
     /* Konversi scrap legacy (kolom characters.scrap, mata uang mati) menjadi
        ITEM_SCRAP sungguhan — sekali per karakter, lalu kolom dinolkan (E1). */
     if (PendingLegacyScrap[playerid] > 0)

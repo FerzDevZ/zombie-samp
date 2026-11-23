@@ -334,86 +334,159 @@ HUD_SCENARIOS: dict[str, dict] = {
         "note": ("semua peringatan aktif - bar merah = kritis; warna bar dihitung "
                  "runtime, gambar memakai warna state yang sama"),
     },
+    "11-hud-mobile": {
+        "gaya": 2,
+        "text": {
+            "HudBrand": "LAST_STAND",
+            "HudZone": "Bandara Lama [AMAN]",
+            "HudHpVal": "87/100",
+            "HudArmVal": "45/100",
+            "HudInfVal": "12%",
+            "HudLapVal": "62",
+            "HudHausVal": "48",
+            "HudPipVal": "21",
+            "HudProgress": "LVL 7  SP 240  LUKA 1",
+            "HudLoadout": "SCRAP 34  SAMPEL 12",
+            "HudPromptText": "Y  Stash Kamp",
+        },
+        "bars": [
+            (0, 0.87, "UI_ACCENT_PRIMARY"), (1, 0.45, "UI_ACCENT_INFO"),
+            (2, 0.12, "UI_ACCENT_PRIMARY"), (3, 0.62, "UI_ACCENT_PRIMARY"),
+            (4, 0.48, "UI_ACCENT_PRIMARY"), (5, 0.79, "UI_ACCENT_PRIMARY"),
+        ],
+        "hide": ["HudVehicle", "HudBoss", "HudRaid"],
+        "note": "gaya 2 MOBILE KOMPAK (skala 0.70, Android otomatis) - kartu naik ke y=202, keluar dari zona joystick & tombol sentuh",
+    },
+    "12-hud-minimal": {
+        "gaya": 3,
+        "text": {
+            "HudBrand": "LAST_STAND",
+            "HudZone": "Bandara Lama [AMAN]",
+            "HudHpVal": "87/100",
+            "HudArmVal": "45/100",
+            "HudInfVal": "12%",
+            "HudLapVal": "62",
+            "HudHausVal": "48",
+            "HudPipVal": "21",
+            "HudProgress": "LVL 7  SP 240  LUKA 1",
+            "HudLoadout": "SCRAP 34  SAMPEL 12",
+        },
+        "bars": [
+            (0, 0.87, "UI_ACCENT_PRIMARY"), (1, 0.45, "UI_ACCENT_INFO"),
+            (2, 0.12, "UI_ACCENT_PRIMARY"), (3, 0.62, "UI_ACCENT_PRIMARY"),
+            (4, 0.48, "UI_ACCENT_PRIMARY"), (5, 0.79, "UI_ACCENT_PRIMARY"),
+        ],
+        "hide": ["HudVehicle", "HudBoss", "HudRaid", "HudPromptText"],
+        "note": "gaya 3 MINIMALIS (skala 0.85) - tanpa kartu/kotak, hanya bar + angka; /hudgaya 3",
+    },
 }
+
+
+HUD_SCALE = {1: 1.0, 2: 0.70, 3: 0.85}  # cermin HUD_ScaleOf di hud.inc
+HUD_CENTERED = {"HudBoss", "HudRaid", "HudPromptText"}  # pemakai HUD_XC
+
+
+def _hx(x: float, s: float) -> float:
+    return x * s
+
+
+def _hxc(x: float, s: float) -> float:
+    return 320.0 - (320.0 - x) * s
 
 
 def render_hud(scene: dict, draws: list[dict], colors: dict[str, str],
                fit: dict[str, tuple[float, float, int]]) -> str:
+    gaya = scene.get("gaya", 1)
+    sc = HUD_SCALE[gaya]
     hidden = set(scene["hide"])
     parts: list[str] = []
 
     # kartu kaca rounded + aksen tipis (pola 2 strip + 4 chit di hud.inc)
-    cx, cy, cw, ch = HUD_CARD
-    accent = colors["UI_ACCENT_PRIMARY"]
-    parts.append(
-        f'<div style="position:absolute;left:{cx}px;top:{cy}px;width:{cw}px;height:{ch}px;'
-        f'background:{colors["UI_BG_GLASS_DARK"]};border:1px solid rgba(148,163,184,0.18);'
-        f'border-radius:4px;"></div>')
-    ax, ay, aw, ah = HUD_ACCENT
-    parts.append(
-        f'<div style="position:absolute;left:{ax}px;top:{ay}px;width:{aw}px;height:{ah}px;'
-        f'background:{accent};border-radius:1px;"></div>')
+    if gaya != 3:  # gaya minimalis tanpa kartu (HUD_GayaHasCard)
+        cx, cy, cw, ch = HUD_CARD
+        accent = colors["UI_ACCENT_PRIMARY"]
+        parts.append(
+            f'<div style="position:absolute;left:{_hx(cx, sc):.1f}px;top:{_hx(cy, sc):.1f}px;'
+            f'width:{_hx(cw, sc):.1f}px;height:{_hx(ch, sc):.1f}px;'
+            f'background:{colors["UI_BG_GLASS_DARK"]};border:1px solid rgba(148,163,184,0.18);'
+            f'border-radius:4px;"></div>')
+        ax, ay, aw, ah = HUD_ACCENT
+        parts.append(
+            f'<div style="position:absolute;left:{_hx(ax, sc):.1f}px;top:{_hx(ay, sc):.1f}px;'
+            f'width:{_hx(aw, sc):.1f}px;height:{_hx(ah, sc):.1f}px;'
+            f'background:{accent};border-radius:1px;"></div>')
 
     # bar: track (UI_BG_ELEVATED) + fill dinamis + celah segmen
     for index, (bx, by, bw, bh) in enumerate(HUD_BARS):
         parts.append(
-            f'<div style="position:absolute;left:{bx}px;top:{by}px;width:{bw}px;height:{bh}px;'
+            f'<div style="position:absolute;left:{_hx(bx, sc):.1f}px;top:{_hx(by, sc):.1f}px;'
+            f'width:{_hx(bw, sc):.1f}px;height:{_hx(bh, sc):.1f}px;'
             f'background:{colors["UI_BG_ELEVATED"]};border-radius:1px;"></div>')
     for index, ratio, color_name in scene["bars"]:
         bx, by, bw, bh = HUD_BARS[index]
+        bw, bh = _hx(bw, sc), _hx(bh, sc)
         fill_w = max(0.0, min(1.0, ratio)) * bw
         parts.append(
-            f'<div style="position:absolute;left:{bx}px;top:{by}px;width:{fill_w:.1f}px;height:{bh}px;'
+            f'<div style="position:absolute;left:{_hx(bx, sc):.1f}px;top:{_hx(by, sc):.1f}px;'
+            f'width:{fill_w:.1f}px;height:{bh:.1f}px;'
             f'background:{colors[color_name]};border-radius:1px;"></div>')
         segments = HUD_SEG_BARS.get(index, 0)
         for cut in range(1, segments):
-            gap_x = bx + cut * (bw / segments) - HUD_SEG_GAP_W * 0.5
+            gap_x = _hx(bx, sc) + cut * (bw / segments) - HUD_SEG_GAP_W * sc * 0.5
             parts.append(
-                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{by}px;'
-                f'width:{HUD_SEG_GAP_W}px;height:{bh}px;background:{colors["UI_BG_GLASS_DARK"]};"></div>')
+                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{_hx(by, sc):.1f}px;'
+                f'width:{HUD_SEG_GAP_W * sc:.1f}px;height:{bh:.1f}px;'
+                f'background:{colors["UI_BG_GLASS_DARK"]};"></div>')
 
     # bar BBM/GENSET di dalam kotak kanan: track+fill+celah hanya saat rasio > 0
     # (sama dengan Pawn: bar hilang utuh saat BBM <= 25% / genset mati)
     vx, vy, vw, vh = HUD_VEH_BAR
     veh_ratio, veh_color = scene.get("veh_bar", (0.0, "UI_ACCENT_PRIMARY"))
     if "HudVehicle" not in hidden and veh_ratio > 0.0:
+        vw, vh = _hx(vw, sc), _hx(vh, sc)
         parts.append(
-            f'<div style="position:absolute;left:{vx}px;top:{vy}px;width:{vw}px;height:{vh}px;'
+            f'<div style="position:absolute;left:{_hx(vx, sc):.1f}px;top:{_hx(vy, sc):.1f}px;'
+            f'width:{vw:.1f}px;height:{vh:.1f}px;'
             f'background:{colors["UI_BG_ELEVATED"]};border-radius:1px;"></div>')
         fill_w = max(0.0, min(1.0, veh_ratio)) * vw
         if fill_w > 0:
             parts.append(
-                f'<div style="position:absolute;left:{vx}px;top:{vy}px;width:{fill_w:.1f}px;height:{vh}px;'
+                f'<div style="position:absolute;left:{_hx(vx, sc):.1f}px;top:{_hx(vy, sc):.1f}px;'
+                f'width:{fill_w:.1f}px;height:{vh:.1f}px;'
                 f'background:{colors[veh_color]};border-radius:1px;"></div>')
         for cut in range(1, 10):
-            gap_x = vx + cut * (vw / 10) - HUD_SEG_GAP_W * 0.5
+            gap_x = _hx(vx, sc) + cut * (vw / 10) - HUD_SEG_GAP_W * sc * 0.5
             parts.append(
-                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{vy}px;'
-                f'width:{HUD_SEG_GAP_W}px;height:{vh}px;background:rgba(11,15,20,0.71);"></div>')
+                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{_hx(vy, sc):.1f}px;'
+                f'width:{HUD_SEG_GAP_W * sc:.1f}px;height:{vh:.1f}px;background:rgba(11,15,20,0.71);"></div>')
 
     # bar boss di bawah teks (tampil bila HudBoss tidak disembunyikan)
     ox, oy, ow, oh = HUD_BOSS_BAR
     if "HudBoss" not in hidden:
+        ow, oh = _hx(ow, sc), _hx(oh, sc)
         parts.append(
-            f'<div style="position:absolute;left:{ox}px;top:{oy}px;width:{ow}px;height:{oh}px;'
+            f'<div style="position:absolute;left:{_hxc(ox, sc):.1f}px;top:{_hx(oy, sc):.1f}px;'
+            f'width:{ow:.1f}px;height:{oh:.1f}px;'
             f'background:{colors["UI_BG_ELEVATED"]};border-radius:2px;"></div>')
         boss_ratio = scene.get("boss_bar", 1.0)
         fill_w = max(0.0, min(1.0, boss_ratio)) * ow
         if fill_w > 0:
             parts.append(
-                f'<div style="position:absolute;left:{ox}px;top:{oy}px;width:{fill_w:.1f}px;height:{oh}px;'
+                f'<div style="position:absolute;left:{_hxc(ox, sc):.1f}px;top:{_hx(oy, sc):.1f}px;'
+                f'width:{fill_w:.1f}px;height:{oh:.1f}px;'
                 f'background:{colors["UI_ACCENT_DANGER"]};border-radius:2px;"></div>')
         for cut in range(1, 10):
-            gap_x = ox + cut * (ow / 10) - HUD_SEG_GAP_W * 0.5
+            gap_x = _hxc(ox, sc) + cut * (ow / 10) - HUD_SEG_GAP_W * sc * 0.5
             parts.append(
-                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{oy}px;'
-                f'width:{HUD_SEG_GAP_W}px;height:{oh}px;background:rgba(11,15,20,0.6);"></div>')
+                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{_hx(oy, sc):.1f}px;'
+                f'width:{HUD_SEG_GAP_W * sc:.1f}px;height:{oh:.1f}px;background:rgba(11,15,20,0.6);"></div>')
 
     # pil prompt interaksi
-    if "HudPromptText" not in hidden:
+    if "HudPromptText" not in hidden and gaya != 3:
         px, py, pw, ph = HUD_PROMPT
         parts.append(
-            f'<div style="position:absolute;left:{px}px;top:{py}px;width:{pw}px;height:{ph}px;'
+            f'<div style="position:absolute;left:{_hxc(px, sc):.1f}px;top:{_hx(py, sc):.1f}px;'
+            f'width:{_hx(pw, sc):.1f}px;height:{_hx(ph, sc):.1f}px;'
             f'background:rgba(11,15,20,0.9);border:1px solid rgba(148,163,184,0.25);'
             f'border-radius:9px;"></div>')
 
@@ -422,12 +495,14 @@ def render_hud(scene: dict, draws: list[dict], colors: dict[str, str],
         if name in hidden:
             continue
         text = scene["text"].get(name, draw["initial"])
-        size_x = fit[name][1] if name in fit else draw["size_x"]
+        size_x = (fit[name][1] if name in fit else draw["size_x"]) * sc
+        dx = _hxc(draw["x"], sc) if name in HUD_CENTERED else _hx(draw["x"], sc)
+        dy = _hx(draw["y"], sc)
         if name == "HudPromptText":
             # align 2 = center: x adalah titik tengah, bukan tepi kiri
             parts.append(td_center(text, size_x, draw["size_y"], colors.get(draw["color"], "#f8fafc")))
             continue
-        parts.append(td(draw["x"], draw["y"], text, size_x, draw["size_y"],
+        parts.append(td(dx, dy, text, size_x, draw["size_y"],
                         colors.get(draw["color"], "#f8fafc"),
                         weight=700 if draw["font"] == 2 else 500,
                         mono=draw["font"] != 2))
@@ -436,35 +511,62 @@ def render_hud(scene: dict, draws: list[dict], colors: dict[str, str],
 
 # ---------------------------------------------------------------- panel bangun
 
-def render_build_panel(mode: str, colors: dict[str, str], defines: dict[str, float]) -> str:
-    px = defines["BUILD_EDIT_PANEL_X"]
-    py = defines["BUILD_EDIT_PANEL_Y"]
-    pw = defines["BUILD_EDIT_PANEL_W"]
-    ph = defines["BUILD_EDIT_PANEL_H"]
+def be_layout(mobile: bool) -> dict:
+    """Cermin BuildEdit_ComputeLayout di build_edit.inc - angka HARUS sama."""
+    if mobile:
+        return {"x": 640.0 - (640.0 - 334.0) * 0.70, "y": 28.0, "w": 206.0, "h": 224.0,
+                "btn_w": 38.0, "btn_h": 16.0, "row_step": 22.0, "info_step": 13.0,
+                "col_l": 116.0, "col_r": 160.0, "pasang_x": 10.0, "pasang_w": 90.0,
+                "pasang_y": 170.0, "pasang_h": 22.0, "hint_y": 200.0, "font_row": 0.13}
+    return {"x": 334.0, "y": 40.0, "w": 294.0, "h": 210.0,
+            "btn_w": 40.0, "btn_h": 12.0, "row_step": 16.0, "info_step": 16.0,
+            "col_l": 186.0, "col_r": 228.0, "pasang_x": 12.0, "pasang_w": 130.0,
+            "pasang_y": 142.0, "pasang_h": 20.0, "hint_y": 168.0, "font_row": 0.19}
+
+
+def render_build_panel(mode: str, colors: dict[str, str], defines: dict[str, float],
+                       mobile: bool = False) -> str:
+    lay = be_layout(mobile)
+    px, py, pw, ph = lay["x"], lay["y"], lay["w"], lay["h"]
+    row_step, info_step = lay["row_step"], lay["info_step"]
 
     if mode == "place":
-        rows = [
+        rows = ([
+            "SAMPING +0.0 m",
+            "MAJU 2.5 m",
+            "NAIK +0.0 m",
+            "ARAH 90 deg",
+            "JARAK 2.5 m",
+            "LANGKAH 0.5/15",
+        ] if mobile else [
             "SAMPING +0.00 m",
             "MAJU    2.50 m",
             "NAIK    +0.00 m",
             "ARAH    90 deg",
             "JARAK   2.50 m",
             "LANGKAH 0.50 m / 15 deg",
-        ]
+        ])
         sub = "WALL | TIER 1 | 9/12"
         confirm = colors["UI_ACCENT_PRIMARY"]
         hint = "ALT maju | C putar | Y pasang"
         ghost = ghost_wall(258.0, 250.0, 128.0, 74.0,
                            "ghost object 1225 - posisi PASANG (ilustrasi)")
     else:
-        rows = [
+        rows = ([
+            "X 1676.50",
+            "Y -2325.10",
+            "Z 13.90",
+            "ARAH 45 deg",
+            "JARAK 3.2 m",
+            "LANGKAH 0.3/5",
+        ] if mobile else [
             "X       1676.50",
             "Y       -2325.10",
             "Z       13.90",
             "ARAH    45 deg",
             "JARAK   3.20 m",
             "LANGKAH 0.25 m / 5 deg",
-        ]
+        ])
         sub = "WALL | MODE GESER | #12"
         confirm = colors["UI_ACCENT_WARN"]
         hint = "ESC keluar | /panel lagi"
@@ -481,35 +583,42 @@ def render_build_panel(mode: str, colors: dict[str, str], defines: dict[str, flo
     parts.append(bar(px + 12, py + 34, pw - 24, 1, colors["UI_BG_ELEVATED"]))
 
     for index, row in enumerate(rows):
-        parts.append(td(px + 12, py + 40 + index * 16, row, 0.19, 0.85,
+        parts.append(td(px + 12, py + 40 + index * info_step, row, lay["font_row"], 0.85,
                         colors["UI_TEXT_SECONDARY"]))
 
-    parts.append(td(px + 12, py + 168, hint, 0.15, 0.75, colors["UI_TEXT_MUTED"], weight=400, mono=False))
+    parts.append(td(px + 12, py + lay["hint_y"], hint, 0.15, 0.75, colors["UI_TEXT_MUTED"], weight=400, mono=False))
 
-    buttons = [
-        (186.0, 40.0, 40.0, "-", "elev"), (228.0, 40.0, 40.0, "+", "elev"),
-        (186.0, 56.0, 40.0, "-", "elev"), (228.0, 56.0, 40.0, "+", "elev"),
-        (186.0, 72.0, 40.0, "-", "elev"), (228.0, 72.0, 40.0, "+", "elev"),
-        (186.0, 88.0, 40.0, "<", "elev"), (228.0, 88.0, 40.0, ">", "elev"),
-        (186.0, 104.0, 40.0, "-", "elev"), (228.0, 104.0, 40.0, "+", "elev"),
-        (186.0, 120.0, 82.0, "LANGKAH", "elev"),
-        (12.0, 142.0, 130.0, "PASANG", "confirm"),
-        (152.0, 142.0, 130.0, "BATAL", "danger"),
-        (248.0, 6.0, 34.0, "X", "elev"),
-    ]
+    bw, bh = lay["btn_w"], lay["btn_h"]
+    buttons = []
+    for n in range(3):  # X / Y / Z
+        ry = 40.0 + n * row_step
+        buttons.append((lay["col_l"], ry, bw, "-", "elev"))
+        buttons.append((lay["col_r"], ry, bw, "+", "elev"))
+    ry = 40.0 + 3 * row_step
+    buttons.append((lay["col_l"], ry, bw, "<", "elev"))
+    buttons.append((lay["col_r"], ry, bw, ">", "elev"))
+    ry = 40.0 + 4 * row_step
+    buttons.append((lay["col_l"], ry, bw, "-", "elev"))
+    buttons.append((lay["col_r"], ry, bw, "+", "elev"))
+    ry = 40.0 + 5 * row_step
+    buttons.append((lay["col_l"], ry, bw * 2 + 6.0, "LANGKAH", "elev"))
+    buttons.append((lay["pasang_x"], lay["pasang_y"], lay["pasang_w"], "PASANG", "confirm"))
+    buttons.append((pw - lay["pasang_w"] - lay["pasang_x"], lay["pasang_y"], lay["pasang_w"], "BATAL", "danger"))
+    buttons.append((pw - 30.0, 6.0, 24.0, "X", "elev"))
+
     fills = {
         "elev": colors["UI_BG_ELEVATED"],
         "confirm": confirm,
         "danger": "rgba(127,29,29,0.949)",
     }
     for offset_x, offset_y, width, label, tone in buttons:
-        height = 20.0 if offset_y >= 142.0 else (13.0 if offset_y < 40.0 else 12.0)
+        height = lay["pasang_h"] if offset_y >= lay["pasang_y"] else (14.0 if offset_y < 40.0 else bh)
         left = px + offset_x
         top = py + offset_y
-        parts.append(f'<div class="btn" style="left:{left}px;top:{top}px;width:{width}px;'
-                     f'height:{height}px;background:{fills[tone]};"></div>')
-        parts.append(f'<div class="btnlabel" style="left:{left}px;top:{top + height / 2 - 4.6}px;'
-                     f'width:{width}px;font-size:{0.8 * LINE_HEIGHT_RATIO * 1.3:.1f}px;">{label}</div>')
+        parts.append(f'<div class="btn" style="left:{left:.1f}px;top:{top:.1f}px;width:{width:.1f}px;'
+                     f'height:{height:.1f}px;background:{fills[tone]};"></div>')
+        parts.append(f'<div class="btnlabel" style="left:{left:.1f}px;top:{top + height / 2 - 4.6:.1f}px;'
+                     f'width:{width:.1f}px;font-size:{0.8 * LINE_HEIGHT_RATIO * 1.3:.1f}px;">{label}</div>')
 
     parts.append(ghost)
     return "".join(parts)
@@ -631,23 +740,33 @@ def main() -> int:
     if missing:
         print(f"GAGAL: define panel hilang: {sorted(missing)}", file=sys.stderr)
         return 1
-    require_literal(edit_text, "x + 186.0", "kolom tombol kiri")
-    require_literal(edit_text, "x + 228.0", "kolom tombol kanan")
-    require_literal(edit_text, "x + 12.0, y + 142.0, 130.0, 20.0, \"PASANG\"", "tombol PASANG")
+    require_literal(edit_text, "gBeLayout[playerid][blColL] = 186.0;", "kolom tombol kiri PC")
+    require_literal(edit_text, "gBeLayout[playerid][blColR] = 228.0;", "kolom tombol kanan PC")
+    require_literal(edit_text, "gBeLayout[playerid][blPasangY] = 142.0;", "baris PASANG/BATAL PC")
+    require_literal(edit_text, "gBeLayout[playerid][blW] = 206.0;", "lebar panel mobile")
+    require_literal(edit_text, "gBeLayout[playerid][blBtnH] = 16.0;", "tinggi tombol mobile")
 
     # Geometri kartu/bar/prompt HUD harus masih persis di hud.inc — kalau angka
     # ini berubah, galeri (dan pemahaman kita tentang layar) basi.
-    require_literal(hud_text, "HUD_CreateCard(playerid, 16.0, 288.0, 288.0, 100.0, 2.0)", "kartu HUD")
-    require_literal(hud_text, "284.0, 2.0", "aksen kartu HUD")
+    require_literal(hud_text, "HUD_CreateCard(playerid, HUD_X(playerid, 16.0), HUD_Y(playerid, 288.0),", "kartu HUD")
+    require_literal(hud_text, "HUD_F(playerid, 288.0), HUD_F(playerid, 100.0), HUD_F(playerid, 2.0)", "ukuran kartu HUD")
+    require_literal(hud_text, "HUD_F(playerid, 284.0), HUD_F(playerid, 2.0)", "aksen kartu HUD")
     require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 118.0, 258.0}", "lebar bar HUD v3")
-    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_HP, 52.0, 312.0", "bar HP")
-    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_PIP, 220.0, 348.0", "bar PIP")
-    require_literal(hud_text, "CreatePlayerTextDraw(playerid, 210.0, 414.0", "pil prompt")
-    require_literal(hud_text, "PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], 220.0, 18.0)", "ukuran pil prompt")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_HP, HUD_X(playerid, 52.0), HUD_Y(playerid, 312.0)", "bar HP")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_PIP, HUD_X(playerid, 220.0), HUD_Y(playerid, 348.0)", "bar PIP")
+    require_literal(hud_text, "CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 414.0)", "pil prompt")
+    require_literal(hud_text, "PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], HUD_F(playerid, 220.0), HUD_F(playerid, 18.0))", "ukuran pil prompt")
     require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 118.0, 258.0}", "lebar bar v3")
-    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_VEH, 500.0, 338.0", "bar BBM")
-    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_BOSS, 210.0, 46.0", "bar boss")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, 500.0), HUD_Y(playerid, 338.0)", "bar BBM")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_Y(playerid, 46.0)", "bar boss")
     require_literal(hud_text, "#define HUD_SEG_GAP_W    1.6", "lebar celah segmen")
+    require_literal(hud_text, "stock Float:HUD_XC(playerid, Float:x)", "helper tengah layar")
+    require_literal(CONST.read_text(encoding="utf-8"), "#define HUD_SCALE_MOBILE            0.70", "skala gaya mobile")
+    require_literal(CONST.read_text(encoding="utf-8"), "#define HUD_SCALE_MINIMAL           0.85", "skala gaya minimal")
+    require_literal(edit_text, "gBeLayout[playerid][blW] = 206.0;", "lebar panel bangun mobile")
+    require_literal(edit_text, "gBeLayout[playerid][blH] = 224.0;", "tinggi panel bangun mobile")
+    require_literal(edit_text, "gBeLayout[playerid][blBtnH] = 16.0;", "tinggi tombol bangun mobile")
+    require_literal(edit_text, "Streamer_Update(playerid, STREAMER_TYPE_OBJECT);", "ghost gerak real-time")
 
     items = parse_items(items_text)
     structures = parse_structures(structures_text, items)
@@ -671,6 +790,10 @@ def main() -> int:
     jobs.append(("06-bangun-geser", "Panel bangun - mode GESER",
                  render_build_panel("move", colors, defines)
                  + '<div class="note">mode GESER - baris berubah jadi koordinat dunia X/Y/Z</div>',
+                 BACKDROP_GAME))
+    jobs.append(("13-bangun-mobile", "Panel bangun - MOBILE KOMPAK",
+                 render_build_panel("place", colors, defines, mobile=True)
+                 + '<div class="note">gaya 2 mobile: panel 206x224 ditempel kanan-atas, tombol 38x16 tetap bisa ditumbuk jari</div>',
                  BACKDROP_GAME))
 
     used = {"Wall": 9, "Gate": 1, "Crate": 2, "Bench": 1, "Bed": 0, "Turret": 0, "Generator": 0}

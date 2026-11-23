@@ -35,6 +35,78 @@
 #define BUILD_EDIT_PANEL_W 294.0
 #define BUILD_EDIT_PANEL_H 210.0
 
+/* Layout panel per gaya (docs/UIUX_PLAN.md). PC memakai literal di atas;
+   Mobile Kompak menyusutkan panel 0.70 dan ditempelkan ke kanan-atas agar
+   keluar dari joystick (kiri-bawah) dan tombol sentuh (kanan-bawah) Android.
+   Tombol mobile TIDAK ikut menyusut penuh: jari butuh sasaran >= 16 px,
+   jadi tinggi tombol ditahan dan baris diberi jarak lebih longgar. */
+/* MARKER-A */
+/* MARKER-B */
+enum E_BE_LAYOUT {
+    blMobile,
+    Float:blX,
+    Float:blY,
+    Float:blW,
+    Float:blH,
+    Float:blBtnW,
+    Float:blBtnH,
+    Float:blRowStep,
+    Float:blInfoStep,
+    Float:blColL,
+    Float:blColR,
+    Float:blPasangX,
+    Float:blPasangW,
+    Float:blPasangY,
+    Float:blPasangH,
+    Float:blHintY,
+    Float:blFontRow
+}
+new gBeLayout[MAX_PLAYERS][E_BE_LAYOUT];
+
+stock BuildEdit_ComputeLayout(playerid)
+{
+    if (gHudGaya[playerid] == HUD_GAYA_MOBILE)
+    {
+        gBeLayout[playerid][blMobile] = 1;
+        gBeLayout[playerid][blX] = 425.8;
+        gBeLayout[playerid][blY] = 28.0;
+        gBeLayout[playerid][blW] = 206.0;
+        gBeLayout[playerid][blH] = 224.0;
+        gBeLayout[playerid][blBtnW] = 38.0;
+        gBeLayout[playerid][blBtnH] = 16.0;
+        gBeLayout[playerid][blRowStep] = 22.0;
+        gBeLayout[playerid][blInfoStep] = 13.0;
+        gBeLayout[playerid][blColL] = 116.0;
+        gBeLayout[playerid][blColR] = 160.0;
+        gBeLayout[playerid][blPasangX] = 10.0;
+        gBeLayout[playerid][blPasangW] = 90.0;
+        gBeLayout[playerid][blPasangY] = 170.0;
+        gBeLayout[playerid][blPasangH] = 22.0;
+        gBeLayout[playerid][blHintY] = 200.0;
+        gBeLayout[playerid][blFontRow] = 0.13;
+        return 1;
+    }
+
+    gBeLayout[playerid][blMobile] = false;
+    gBeLayout[playerid][blX] = BUILD_EDIT_PANEL_X;
+    gBeLayout[playerid][blY] = BUILD_EDIT_PANEL_Y;
+    gBeLayout[playerid][blW] = BUILD_EDIT_PANEL_W;
+    gBeLayout[playerid][blH] = BUILD_EDIT_PANEL_H;
+    gBeLayout[playerid][blBtnW] = 40.0;
+    gBeLayout[playerid][blBtnH] = 12.0;
+    gBeLayout[playerid][blRowStep] = 16.0;
+    gBeLayout[playerid][blInfoStep] = 16.0;
+    gBeLayout[playerid][blColL] = 186.0;
+    gBeLayout[playerid][blColR] = 228.0;
+    gBeLayout[playerid][blPasangX] = 12.0;
+    gBeLayout[playerid][blPasangW] = 130.0;
+    gBeLayout[playerid][blPasangY] = 142.0;
+    gBeLayout[playerid][blPasangH] = 20.0;
+    gBeLayout[playerid][blHintY] = 168.0;
+    gBeLayout[playerid][blFontRow] = 0.19;
+    return 1;
+}
+
 /* Tombol. Urutan ini juga urutan tampil di panel. */
 #define BE_BTN_XMINUS   0
 #define BE_BTN_XPLUS    1
@@ -229,7 +301,7 @@ stock BuildEdit_CreateRow(playerid, index, Float:x, Float:y)
 {
     BuildEditRow[playerid][index] = CreatePlayerTextDraw(playerid, x, y, " ");
     PlayerTextDrawFont(playerid, BuildEditRow[playerid][index], 1);
-    PlayerTextDrawLetterSize(playerid, BuildEditRow[playerid][index], 0.19, 0.85);
+    PlayerTextDrawLetterSize(playerid, BuildEditRow[playerid][index], gBeLayout[playerid][blFontRow], 0.85);
     PlayerTextDrawColor(playerid, BuildEditRow[playerid][index], UI_TEXT_SECONDARY);
     PlayerTextDrawSetOutline(playerid, BuildEditRow[playerid][index], 1);
     PlayerTextDrawSetShadow(playerid, BuildEditRow[playerid][index], 0);
@@ -243,16 +315,23 @@ stock BuildEdit_CreatePanel(playerid)
 {
     if (BuildEditCard[playerid][0] != PlayerText:0) return 1;
 
-    new Float:x = BUILD_EDIT_PANEL_X;
-    new Float:y = BUILD_EDIT_PANEL_Y;
+    BuildEdit_ComputeLayout(playerid);
+    new Float:x = gBeLayout[playerid][blX];
+    new Float:y = gBeLayout[playerid][blY];
+    new Float:panelW = gBeLayout[playerid][blW];
+    new Float:panelH = gBeLayout[playerid][blH];
+    new Float:btnW = gBeLayout[playerid][blBtnW];
+    new Float:btnH = gBeLayout[playerid][blBtnH];
+    new Float:rowStep = gBeLayout[playerid][blRowStep];
+    new Float:infoStep = gBeLayout[playerid][blInfoStep];
 
-    BuildEdit_CreateCard(playerid, x, y, BUILD_EDIT_PANEL_W, BUILD_EDIT_PANEL_H, 2.0);
+    BuildEdit_CreateCard(playerid, x, y, panelW, panelH, 2.0);
 
     /* Garis aksen merah di tepi atas: ciri kartu FiveM, sekaligus penanda
        "ini mode bangun", bukan sekadar info. */
     BuildEditAccent[playerid] = CreatePlayerTextDraw(playerid, x + 2.0, y, "LD_SPAC:white");
     PlayerTextDrawFont(playerid, BuildEditAccent[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
-    PlayerTextDrawTextSize(playerid, BuildEditAccent[playerid], BUILD_EDIT_PANEL_W - 4.0, 2.0);
+    PlayerTextDrawTextSize(playerid, BuildEditAccent[playerid], panelW - 4.0, 2.0);
     PlayerTextDrawColor(playerid, BuildEditAccent[playerid], UI_ACCENT_DANGER);
     PlayerTextDrawSetSelectable(playerid, BuildEditAccent[playerid], false);
 
@@ -274,16 +353,16 @@ stock BuildEdit_CreatePanel(playerid)
 
     BuildEditDivider[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + 34.0, "LD_SPAC:white");
     PlayerTextDrawFont(playerid, BuildEditDivider[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
-    PlayerTextDrawTextSize(playerid, BuildEditDivider[playerid], BUILD_EDIT_PANEL_W - 24.0, 1.0);
+    PlayerTextDrawTextSize(playerid, BuildEditDivider[playerid], panelW - 24.0, 1.0);
     PlayerTextDrawColor(playerid, BuildEditDivider[playerid], UI_BG_ELEVATED);
     PlayerTextDrawSetSelectable(playerid, BuildEditDivider[playerid], false);
 
     for (new row = 0; row < 6; row++)
     {
-        BuildEdit_CreateRow(playerid, row, x + 12.0, y + 40.0 + (float(row) * 16.0));
+        BuildEdit_CreateRow(playerid, row, x + 12.0, y + 40.0 + (float(row) * infoStep));
     }
 
-    BuildEditHint[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + 168.0,
+    BuildEditHint[playerid] = CreatePlayerTextDraw(playerid, x + 12.0, y + gBeLayout[playerid][blHintY],
         "ESC keluar kursor | /panel lagi");
     PlayerTextDrawFont(playerid, BuildEditHint[playerid], 1);
     PlayerTextDrawLetterSize(playerid, BuildEditHint[playerid], 0.15, 0.75);
@@ -292,32 +371,34 @@ stock BuildEdit_CreatePanel(playerid)
     PlayerTextDrawSetProportional(playerid, BuildEditHint[playerid], true);
     PlayerTextDrawSetSelectable(playerid, BuildEditHint[playerid], false);
 
-    /* Tombol sumbu: x 520 & 562, lebar 40 -> hitbox 40x12 px, tidak bertumpuk. */
-    new Float:leftX = x + 186.0;
-    new Float:rightX = x + 228.0;
+    /* Tombol sumbu: hitbox dari layout (PC 40x12, mobile 38x16), tidak bertumpuk. */
+    new Float:leftX = x + gBeLayout[playerid][blColL];
+    new Float:rightX = x + gBeLayout[playerid][blColR];
     new Float:rowY;
 
     for (new pair = 0; pair < 3; pair++)
     {
-        rowY = y + 40.0 + (float(pair) * 16.0);
-        BuildEdit_CreateButton(playerid, BE_BTN_XMINUS + (pair * 2), leftX, rowY, 40.0, 12.0, "-", UI_BG_ELEVATED);
-        BuildEdit_CreateButton(playerid, BE_BTN_XPLUS + (pair * 2), rightX, rowY, 40.0, 12.0, "+", UI_BG_ELEVATED);
+        rowY = y + 40.0 + (float(pair) * rowStep);
+        BuildEdit_CreateButton(playerid, BE_BTN_XMINUS + (pair * 2), leftX, rowY, btnW, btnH, "-", UI_BG_ELEVATED);
+        BuildEdit_CreateButton(playerid, BE_BTN_XPLUS + (pair * 2), rightX, rowY, btnW, btnH, "+", UI_BG_ELEVATED);
     }
 
-    rowY = y + 40.0 + (3.0 * 16.0);
-    BuildEdit_CreateButton(playerid, BE_BTN_ROTLEFT, leftX, rowY, 40.0, 12.0, "<", UI_BG_ELEVATED);
-    BuildEdit_CreateButton(playerid, BE_BTN_ROTRIGHT, rightX, rowY, 40.0, 12.0, ">", UI_BG_ELEVATED);
+    rowY = y + 40.0 + (3.0 * rowStep);
+    BuildEdit_CreateButton(playerid, BE_BTN_ROTLEFT, leftX, rowY, btnW, btnH, "<", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_ROTRIGHT, rightX, rowY, btnW, btnH, ">", UI_BG_ELEVATED);
 
-    rowY = y + 40.0 + (4.0 * 16.0);
-    BuildEdit_CreateButton(playerid, BE_BTN_DISTMIN, leftX, rowY, 40.0, 12.0, "-", UI_BG_ELEVATED);
-    BuildEdit_CreateButton(playerid, BE_BTN_DISTPLUS, rightX, rowY, 40.0, 12.0, "+", UI_BG_ELEVATED);
+    rowY = y + 40.0 + (4.0 * rowStep);
+    BuildEdit_CreateButton(playerid, BE_BTN_DISTMIN, leftX, rowY, btnW, btnH, "-", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_DISTPLUS, rightX, rowY, btnW, btnH, "+", UI_BG_ELEVATED);
 
-    rowY = y + 40.0 + (5.0 * 16.0);
-    BuildEdit_CreateButton(playerid, BE_BTN_STEP, leftX, rowY, 82.0, 12.0, "LANGKAH", UI_BG_ELEVATED);
+    rowY = y + 40.0 + (5.0 * rowStep);
+    BuildEdit_CreateButton(playerid, BE_BTN_STEP, leftX, rowY, btnW * 2.0 + 6.0, btnH, "LANGKAH", UI_BG_ELEVATED);
 
-    BuildEdit_CreateButton(playerid, BE_BTN_CONFIRM, x + 12.0, y + 142.0, 130.0, 20.0, "PASANG", UI_ACCENT_PRIMARY);
-    BuildEdit_CreateButton(playerid, BE_BTN_CANCEL, x + 152.0, y + 142.0, 130.0, 20.0, "BATAL", 0x7F1D1DF2);
-    BuildEdit_CreateButton(playerid, BE_BTN_CLOSEMOUSE, x + BUILD_EDIT_PANEL_W - 46.0, y + 6.0, 34.0, 13.0, "X", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_CONFIRM, x + gBeLayout[playerid][blPasangX], y + gBeLayout[playerid][blPasangY],
+        gBeLayout[playerid][blPasangW], gBeLayout[playerid][blPasangH], "PASANG", UI_ACCENT_PRIMARY);
+    BuildEdit_CreateButton(playerid, BE_BTN_CANCEL, x + panelW - gBeLayout[playerid][blPasangW] - gBeLayout[playerid][blPasangX],
+        y + gBeLayout[playerid][blPasangY], gBeLayout[playerid][blPasangW], gBeLayout[playerid][blPasangH], "BATAL", 0x7F1D1DF2);
+    BuildEdit_CreateButton(playerid, BE_BTN_CLOSEMOUSE, x + panelW - 30.0, y + 6.0, 24.0, 14.0, "X", UI_BG_ELEVATED);
     return 1;
 }
 
@@ -462,7 +543,7 @@ stock BuildEdit_GhostModel(type)
     return BASE_WALL_OBJECT_MODEL;
 }
 
-stock BuildEdit_RefreshGhost(playerid)
+stock BuildEdit_RefreshGhost(playerid, bool:forceStream = false)
 {
     if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
 
@@ -484,6 +565,11 @@ stock BuildEdit_RefreshGhost(playerid)
     {
         SetDynamicObjectPos(BuildEdit[playerid][beGhost], x, y, z);
         SetDynamicObjectRot(BuildEdit[playerid][beGhost], 0.0, 0.0, rot);
+        /* Tanpa ini, posisi baru baru terkirim pada tick streamer berikutnya —
+           pemain merasa object "tidak gerak real time" saat menekan tombol.
+           Streamer_Update memaksa update object pemain ini SEKARANG. Dipanggil
+           hanya saat ada input (tombol/kunci), bukan di tick 500 ms. */
+        if (forceStream) Streamer_Update(playerid, STREAMER_TYPE_OBJECT);
     }
 
     BuildEdit_RefreshPanel(playerid);
@@ -505,6 +591,10 @@ stock BuildEdit_RefreshPanel(playerid)
     new Float:stepMeters = BuildEdit_StepMeters(playerid);
     new Float:stepDegrees = BuildEdit_StepDegrees(playerid);
 
+    /* Mobile: kolom info cuma ~104px (font 0.13) - pakai label ringkas
+       supaya teks tidak meluber ke tombol < > (terbukti di galeri 13). */
+    new bool:beMobile = (gBeLayout[playerid][blMobile] != 0);
+
     if (BuildEdit[playerid][beMode] == BUILD_EDIT_PLACE)
     {
         new tierNeed = gStructures[BuildEdit[playerid][beType]][stTier];
@@ -512,6 +602,19 @@ stock BuildEdit_RefreshPanel(playerid)
         new limit = BaseBuild_Limit(BuildEdit[playerid][beType], Base_GetTier(playerid));
         format(sub, sizeof(sub), "%s | TIER %d | %d/%d", label, tierNeed, used, limit);
 
+        if (beMobile)
+        {
+            format(rowText, sizeof(rowText), "SAMPING %s%.1f m",
+                (BuildEdit[playerid][beSide] >= 0.0) ? "+" : "", BuildEdit[playerid][beSide]);
+            PlayerTextDrawSetString(playerid, BuildEditRow[playerid][0], rowText);
+            format(rowText, sizeof(rowText), "MAJU %.1f m", BuildEdit[playerid][beDist]);
+            PlayerTextDrawSetString(playerid, BuildEditRow[playerid][1], rowText);
+            format(rowText, sizeof(rowText), "NAIK %s%.1f m",
+                (BuildEdit[playerid][beRaise] >= 0.0) ? "+" : "", BuildEdit[playerid][beRaise]);
+            PlayerTextDrawSetString(playerid, BuildEditRow[playerid][2], rowText);
+        }
+        else
+        {
         format(rowText, sizeof(rowText), "SAMPING %s%.2f m",
             (BuildEdit[playerid][beSide] >= 0.0) ? "+" : "", BuildEdit[playerid][beSide]);
         PlayerTextDrawSetString(playerid, BuildEditRow[playerid][0], rowText);
@@ -520,19 +623,45 @@ stock BuildEdit_RefreshPanel(playerid)
         format(rowText, sizeof(rowText), "NAIK    %s%.2f m",
             (BuildEdit[playerid][beRaise] >= 0.0) ? "+" : "", BuildEdit[playerid][beRaise]);
         PlayerTextDrawSetString(playerid, BuildEditRow[playerid][2], rowText);
+        }
     }
     else
     {
         format(sub, sizeof(sub), "%s | MODE GESER | #%d", label, BuildEdit[playerid][beSlot]);
 
+        if (beMobile)
+        {
+            format(rowText, sizeof(rowText), "X %.2f", BuildEdit[playerid][beX]);
+            PlayerTextDrawSetString(playerid, BuildEditRow[playerid][0], rowText);
+            format(rowText, sizeof(rowText), "Y %.2f", BuildEdit[playerid][beY]);
+            PlayerTextDrawSetString(playerid, BuildEditRow[playerid][1], rowText);
+            format(rowText, sizeof(rowText), "Z %.2f", BuildEdit[playerid][beZ]);
+            PlayerTextDrawSetString(playerid, BuildEditRow[playerid][2], rowText);
+        }
+        else
+        {
         format(rowText, sizeof(rowText), "X       %.2f", BuildEdit[playerid][beX]);
         PlayerTextDrawSetString(playerid, BuildEditRow[playerid][0], rowText);
         format(rowText, sizeof(rowText), "Y       %.2f", BuildEdit[playerid][beY]);
         PlayerTextDrawSetString(playerid, BuildEditRow[playerid][1], rowText);
         format(rowText, sizeof(rowText), "Z       %.2f", BuildEdit[playerid][beZ]);
         PlayerTextDrawSetString(playerid, BuildEditRow[playerid][2], rowText);
+        }
     }
 
+    if (beMobile)
+    {
+        format(rowText, sizeof(rowText), "ARAH %.0f deg", BuildEdit[playerid][beRot]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][3], rowText);
+
+        format(rowText, sizeof(rowText), "JARAK %.1f m", BuildEdit[playerid][beDist]);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][4], rowText);
+
+        format(rowText, sizeof(rowText), "LANGKAH %.1f/%.0f", stepMeters, stepDegrees);
+        PlayerTextDrawSetString(playerid, BuildEditRow[playerid][5], rowText);
+    }
+    else
+    {
     format(rowText, sizeof(rowText), "ARAH    %.0f deg", BuildEdit[playerid][beRot]);
     PlayerTextDrawSetString(playerid, BuildEditRow[playerid][3], rowText);
 
@@ -541,6 +670,7 @@ stock BuildEdit_RefreshPanel(playerid)
 
     format(rowText, sizeof(rowText), "LANGKAH %.2f m / %.0f deg", stepMeters, stepDegrees);
     PlayerTextDrawSetString(playerid, BuildEditRow[playerid][5], rowText);
+    }
 
     PlayerTextDrawSetString(playerid, BuildEditSub[playerid], sub);
     PlayerTextDrawSetString(playerid, BuildEditTitle[playerid], "PEMBANGUNAN");
@@ -650,7 +780,7 @@ stock BuildEdit_AdjustDistance(playerid, Float:delta)
 
     BuildEdit[playerid][beDist] = BuildEdit_ClampDistance(BuildEdit[playerid][beDist] + delta);
     BuildEdit_FollowPlayer(playerid);
-    BuildEdit_RefreshGhost(playerid);
+    BuildEdit_RefreshGhost(playerid, true);
     return 1;
 }
 
@@ -670,7 +800,7 @@ stock BuildEdit_Nudge(playerid, Float:meters)
     BuildEdit[playerid][beDist] = VectorSize(BuildEdit[playerid][beX] - px,
         BuildEdit[playerid][beY] - py, 0.0);
 
-    BuildEdit_RefreshGhost(playerid);
+    BuildEdit_RefreshGhost(playerid, true);
     return 1;
 }
 
@@ -692,7 +822,7 @@ stock BuildEdit_NudgeAxis(playerid, axis, Float:delta)
                 BuildEdit[playerid][beRaise] + delta, BUILD_EDIT_MIN_RAISE, BUILD_EDIT_MAX_RAISE);
         }
         BuildEdit_FollowPlayer(playerid);
-        BuildEdit_RefreshGhost(playerid);
+        BuildEdit_RefreshGhost(playerid, true);
         return 1;
     }
 
@@ -708,7 +838,7 @@ stock BuildEdit_NudgeAxis(playerid, axis, Float:delta)
     BuildEdit[playerid][beDist] = VectorSize(BuildEdit[playerid][beX] - px,
         BuildEdit[playerid][beY] - py, 0.0);
 
-    BuildEdit_RefreshGhost(playerid);
+    BuildEdit_RefreshGhost(playerid, true);
     return 1;
 }
 
@@ -717,7 +847,7 @@ stock BuildEdit_Rotate(playerid, Float:step)
     if (BuildEdit[playerid][beMode] == BUILD_EDIT_NONE) return 0;
 
     BuildEdit[playerid][beRot] = BuildEdit_NormalizeRot(BuildEdit[playerid][beRot] + step);
-    BuildEdit_RefreshGhost(playerid);
+    BuildEdit_RefreshGhost(playerid, true);
     return 1;
 }
 
@@ -728,7 +858,7 @@ stock BuildEdit_Raise(playerid, Float:meters)
     BuildEdit[playerid][beRaise] = BuildEdit_ClampValue(
         BuildEdit[playerid][beRaise] + meters, BUILD_EDIT_MIN_RAISE, BUILD_EDIT_MAX_RAISE);
     BuildEdit_FollowPlayer(playerid);
-    BuildEdit_RefreshGhost(playerid);
+    BuildEdit_RefreshGhost(playerid, true);
     return 1;
 }
 

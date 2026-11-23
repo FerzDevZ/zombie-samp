@@ -1793,6 +1793,34 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "hudgaya", true))
+    {
+        if (!Account_IsPlaying(playerid)) return 1;
+
+        new choice[8];
+        if (sscanf(cmdtext, "s[16]s[8]", cmd, choice) != 0)
+        {
+            SendClientMessage(playerid, UI_TEXT_SECONDARY,
+                "[HUD] /hudgaya 1 (Penuh) | 2 (Mobile Kompak) | 3 (Minimalis)");
+            return 1;
+        }
+
+        new gaya = strval(choice);
+        if (gaya < HUD_GAYA_PENUH || gaya > HUD_GAYA_MINIMAL)
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[HUD] Pilih 1, 2, atau 3.");
+            return 1;
+        }
+
+        gHudGaya[playerid] = gaya;
+        HUD_Destroy(playerid);
+        HUD_Create(playerid);
+        new notice[64];
+        format(notice, sizeof(notice), "[HUD] Gaya %d dipasang.", gaya);
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, notice);
+        return 1;
+    }
+
     if (!strcmp(cmd, "hud", true))
     {
         if (!Account_IsPlaying(playerid)) return 1;

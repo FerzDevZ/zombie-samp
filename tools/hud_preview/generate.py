@@ -45,7 +45,7 @@ WORST_TEXT = {
     "HudPipVal": "100",
     "HudProgress": "LVL 99  SP 999  LUKA 9  /skill",
     "HudLoadout": "SCRAP 9999  SAMPEL 999",
-    "HudVehicle": "BBM  100/100L pom 8000m TG",
+    "HudVehicle": "BBM 12%  12/80L pom 240m BD",
     "HudBoss": "ABOMINATION 100%",
     "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
     "HudPromptText": "Y  Ekstraksi sampel air",
@@ -59,32 +59,65 @@ def parse_colors(text: str) -> dict[str, str]:
     return colors
 
 
+def _num(arg: str) -> float:
+    """Ambil angka dari argumen koordinat: literal 26.0 atau HUD_X(playerid, 26.0).
+    Pada skala 1.0 (PC) helper mengembalikan literal itu sendiri, jadi gate
+    selalu menguji layout PC yang paling lebar."""
+    found = re.findall(r"([-\d.]+)", arg)
+    return float(found[-1]) if found else 0.0
+
+
+def _split_args(call: str) -> list[str]:
+    """Pecah argumen pemanggilan pada koma tingkat atas (sadar tanda kurung).
+    Perlu karena koordinat kini dibungkus HUD_X(playerid, 26.0)."""
+    args, depth, current = [], 0, []
+    for ch in call:
+        if ch in "(\\[":
+            depth += 1
+        elif ch in ")]":
+            depth -= 1
+        if ch == "," and depth == 0:
+            args.append("".join(current).strip())
+            current = []
+        else:
+            current.append(ch)
+    if current:
+        args.append("".join(current).strip())
+    return args
+
+
 def parse_textdraws(text: str) -> list[dict]:
     draws: list[dict] = []
     create = re.compile(
-        r"(Hud\w+)\[playerid\]\s*=\s*CreatePlayerTextDraw\(playerid,\s*"
-        r"([-\d.]+),\s*([-\d.]+),\s*\"([^\"]*)\"\);",
+        r"(Hud\w+)\[playerid\]\s*=\s*CreatePlayerTextDraw\(([^;]+)\);",
         re.S,
     )
     for match in create.finditer(text):
-        var, x, y, initial = match.group(1), float(match.group(2)), float(match.group(3)), match.group(4)
+        var = match.group(1)
+        args = _split_args(match.group(2))
+        if len(args) < 4:
+            continue
+        x_arg, y_arg, initial = args[1], args[2], args[3].strip('"')
         # Sprite (LD_SPAC/LD_BEAT) dan TD berbasis array (kartu, bar) bukan teks:
         # tidak punya string terburuk, jadi di luar gate panjang.
         if initial.startswith("LD_"):
             continue
         tail = text[match.end():match.end() + 600]
         letter = re.search(
-            r"PlayerTextDrawLetterSize\(playerid,\s*" + var + r"\[playerid\],\s*([-\d.]+),\s*([-\d.]+)\)", tail
+            r"PlayerTextDrawLetterSize\(playerid,\s*" + var + r"\[playerid\],\s*([^;]+)\);", tail
         )
+        letter_args = _split_args(letter.group(1)) if letter else []
+        size_x = _num(letter_args[0]) if len(letter_args) > 0 else 0.2
+        size_y = _num(letter_args[1]) if len(letter_args) > 1 else 0.8
         color = re.search(r"PlayerTextDrawColor\(playerid,\s*" + var + r"\[playerid\],\s*(\w+)\)", tail)
         font = re.search(r"PlayerTextDrawFont\(playerid,\s*" + var + r"\[playerid\],\s*(\d+)\)", tail)
         draws.append({
             "var": var,
-            "x": x,
-            "y": y,
+            "x": _num(x_arg),
+            "y": _num(y_arg),
             "initial": initial,
-            "size_x": float(letter.group(1)) if letter else 0.2,
-            "size_y": float(letter.group(2)) if letter else 0.8,
+            "size_x": size_x,
+            "size_y": size_y,
             "color": color.group(1) if color else "UI_TEXT_PRIMARY",
             "font": int(font.group(1)) if font else 1,
         })

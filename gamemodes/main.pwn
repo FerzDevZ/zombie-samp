@@ -334,6 +334,12 @@ public OnPlayerConnect(playerid)
     Player_InitSurvival(playerid);
     Needs_ResetPlayer(playerid);
     Inventory_Clear(playerid);
+    /* Deteksi klien Android: versi klien mengandung "mobile" (tidak peka huruf).
+       Dipakai HUD untuk memilih gaya Mobile Kompak secara otomatis. */
+    new clientVersion[24];
+    GetPlayerVersion(playerid, clientVersion, sizeof(clientVersion));
+    gHudMobileClient[playerid] = (strfind(clientVersion, "mobile", true) != -1);
+    gHudGaya[playerid] = 0;
     HUD_Create(playerid);
     Account_ResetPlayer(playerid);
     Stash_Reset(playerid);

@@ -169,13 +169,16 @@ def main() -> int:
         print(f"GAGAL: define panel hilang: {sorted(missing)}", file=sys.stderr)
         return 1
 
-    # Rumus tombol hidup di kode sebagai literal; kalau berubah, skrip ini harus
-    # ikut diubah, bukan diam-diam menampilkan gambar lama.
-    require_literal(code, "x + 186.0", "kolom tombol kiri")
-    require_literal(code, "x + 228.0", "kolom tombol kanan")
-    require_literal(code, "y + 40.0 + (float(pair) * 16.0)", "jarak baris tombol")
-    require_literal(code, "x + 12.0, y + 142.0, 130.0, 20.0, \"PASANG\"", "tombol PASANG")
-    require_literal(code, "x + 152.0, y + 142.0, 130.0, 20.0, \"BATAL\"", "tombol BATAL")
+    # Layout kini hidup di BuildEdit_ComputeLayout sebagai nilai struct per gaya;
+    # kalau angka ini berubah di kode, skrip ini harus ikut diubah.
+    require_literal(code, "gBeLayout[playerid][blColL] = 186.0;", "kolom tombol kiri PC")
+    require_literal(code, "gBeLayout[playerid][blColR] = 228.0;", "kolom tombol kanan PC")
+    require_literal(code, "gBeLayout[playerid][blRowStep] = 16.0;", "jarak baris tombol PC")
+    require_literal(code, "gBeLayout[playerid][blPasangY] = 142.0;", "baris PASANG/BATAL PC")
+    require_literal(code, "gBeLayout[playerid][blW] = 206.0;", "lebar panel mobile")
+    require_literal(code, "gBeLayout[playerid][blH] = 224.0;", "tinggi panel mobile")
+    require_literal(code, "gBeLayout[playerid][blBtnH] = 16.0;", "tinggi tombol mobile (sasaran sentuh)")
+    require_literal(code, "gBeLayout[playerid][blRowStep] = 22.0;", "jarak baris tombol mobile")
 
     colors = read_colors(CONSTANTS.read_text(encoding="utf-8"))
     html = build_html(defines, colors)

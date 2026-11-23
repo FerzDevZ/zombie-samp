@@ -180,6 +180,19 @@
 #define UI_ACCENT_INFECTION         0x84CC16FF
 #define TD_ASPECT_16_9              (0.75)
 
+/* Gaya HUD (docs/UIUX_PLAN.md). Didefinisikan di sini — bukan di hud.inc —
+   karena build_edit.inc di-include lebih awal dan memakai skala yang sama.
+   Mobile terdeteksi otomatis dari versi klien; override via /hudgaya 1|2|3. */
+#define HUD_GAYA_PENUH              1
+#define HUD_GAYA_MOBILE             2
+#define HUD_GAYA_MINIMAL            3
+#define HUD_GAYA_DEFAULT            HUD_GAYA_PENUH
+#define HUD_SCALE_MOBILE            0.70
+#define HUD_SCALE_MINIMAL           0.85
+
+new gHudGaya[MAX_PLAYERS];
+new bool:gHudMobileClient[MAX_PLAYERS];
+
 /* ---------------------------------------------------------------- misc */
 #define NOISE_SHOT_PISTOL           (45.0)
 #define NOISE_SHOT_SMG              (60.0)

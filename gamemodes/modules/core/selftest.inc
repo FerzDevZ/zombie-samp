@@ -583,6 +583,22 @@ stock Selftest_CheckBuildPanel()
         panelRight, HUD_SCREEN_WIDTH, panelBottom, clearHud, panelRight - 20.0, buttonsInside);
 
     Selftest_Record(insideScreen && clearHud && buttonsInside && noOverlap, "tata letak panel bangun", detail);
+
+    /* Layout mobile: panel 206x224 ditempel kanan-atas (x = 425.8), tombol
+       38x16 dengan baris 22 px — hitbox tidak bertumpuk dan tetap di layar.
+       Angka HARUS sama dengan BuildEdit_ComputeLayout di build_edit.inc. */
+    new Float:mX = 640.0 - (640.0 - BUILD_EDIT_PANEL_X) * HUD_SCALE_MOBILE;
+    new Float:mRight = mX + 206.0;
+    new Float:mBottom = 28.0 + 224.0;
+    new bool:mInside = (mRight <= HUD_SCREEN_WIDTH) && (mBottom <= 480.0);
+    new bool:mButtons = (mX + 160.0 + 38.0 <= mRight - 4.0);
+    new bool:mRows = (16.0 < 22.0);
+    new bool:mTouch = (38.0 >= 28.0 && 16.0 >= 12.0);  /* sasaran sentuh minimum */
+
+    new mdetail[160];
+    format(mdetail, sizeof(mdetail), "mobile kanan %.0f, bawah %.0f, tombol dalam=%d, baris=%d, sentuh=%d",
+        mRight, mBottom, mButtons, mRows, mTouch);
+    Selftest_Record(mInside && mButtons && mRows && mTouch, "tata letak panel bangun mobile", mdetail);
     return 1;
 }
 
