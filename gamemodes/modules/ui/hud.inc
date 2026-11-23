@@ -742,6 +742,44 @@ stock HUD_AuditRows(playerid)
     return 1;
 }
 
+/* /huddiag — bukti isi string yang BENAR-BENAR dikirim ke klien.
+   Dipakai saat pemain melaporkan "angka tidak muncul": kalau baris di sini
+   benar, masalahnya di klien (klip/alpha), bukan di logika HUD. */
+stock HUD_Diag(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+
+    new line[160];
+    format(line, sizeof(line), "[DIAG] tampil=%d inCar=%d hudLast=\"%s\"",
+        PlayerHudVisible[playerid], IsPlayerInAnyVehicle(playerid),
+        HudLastVehicle[playerid]);
+    SendClientMessage(playerid, UI_ACCENT_INFO, line);
+    Log_Format(LOG_INFO, "huddiag %d: tampil=%d inCar=%d bbm=\"%s\" hp=\"%s\" arm=\"%s\"",
+        playerid, PlayerHudVisible[playerid], IsPlayerInAnyVehicle(playerid),
+        HudLastVehicle[playerid], HudLastHpVal[playerid], HudLastArmVal[playerid]);
+
+    format(line, sizeof(line), "[DIAG] HP=%.0f/100 ARM=%.0f/100 LAP=%.0f",
+        Player_GetHealth(playerid), PlayerSurvival[playerid][psArmour],
+        PlayerSurvival[playerid][psHunger]);
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
+
+    if (IsPlayerInAnyVehicle(playerid))
+    {
+        new vehicleid = GetPlayerVehicleID(playerid);
+        new Float:fuel = Vehicle_GetFuel(vehicleid);
+        new Float:percent = Vehicle_FuelPercent(vehicleid);
+        new fuelLine[80];
+        format(fuelLine, sizeof(fuelLine), "BBM %d%%  %.0f/%.0fL %.0fkm",
+            floatround(percent * 100.0), fuel, Vehicle_GetTank(vehicleid), Vehicle_RangeKm(vehicleid));
+        new Float:textBudget = HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0;
+        TD_FitText(fuelLine, sizeof(fuelLine), fuelLine, HUD_VEH_LETTER_X, textBudget);
+        format(line, sizeof(line), "[DIAG] bbm mentah=%.1fL (%.0f%%) baris=\"%s\" (%.0f/%.0f satuan)",
+            fuel, percent * 100.0, fuelLine, TD_TextWidth(fuelLine, HUD_VEH_LETTER_X), textBudget);
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
+    }
+    return 1;
+}
+
 stock HUD_MeasureSelftest()
 {
     /* Tabel fonts.dat: lebar '0'=23, 'B'=22, spasi=15, '%'=34.

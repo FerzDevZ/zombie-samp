@@ -1352,6 +1352,12 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "huddiag", true))
+    {
+        HUD_Diag(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "lempar", true) || !strcmp(cmd, "throw", true))
     {
         Distraction_ShowMenu(playerid);
