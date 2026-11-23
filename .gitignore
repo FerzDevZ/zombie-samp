@@ -38,3 +38,6 @@ sampctl_build_file.inc
 server_log.txt
 runtime/*/console.log
 runtime/*/scriptfiles/logs/
+
+# Preview HUD dihasilkan tools/hud_preview/generate.py untuk dilihat mata, bukan sumber.
+tools/hud_preview/generate.html
