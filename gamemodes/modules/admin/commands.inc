@@ -1358,6 +1358,18 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "hudlebar", true) || !strcmp(cmd, "hudwidth", true))
+    {
+        new rest[16];
+        if (sscanf(params, "s[16]", rest))
+        {
+            HUD_LebarShow(playerid);
+            return 1;
+        }
+        HUD_LebarApply(playerid, strval(rest));
+        return 1;
+    }
+
     if (!strcmp(cmd, "lempar", true) || !strcmp(cmd, "throw", true))
     {
         Distraction_ShowMenu(playerid);

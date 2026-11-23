@@ -384,6 +384,7 @@ public OnPlayerConnect(playerid)
     Trade_Reset(playerid);
 
     Iter_Add(PlayerPool, playerid);
+    HUD_DetectClient(playerid);
 
     /* Jejak koneksi: dipakai saat pemain bilang "tidak bisa daftar" — kita bisa
        pastikan nick-nya benar-benar sampai ke server atau tidak. */
