@@ -57,7 +57,16 @@ incar_rate 40
 weapon_rate 40
 chatlogging 1
 timestamp 1
+server_id $((port - 7776))
+player_cap 90
 CFG
+
+  # SA-MP membuang direktif server.cfg yang tidak dikenalnya, jadi `server_id`
+  # di atas tidak bisa dibaca gamemode. Sumber kebenaran: file ini.
+  if [[ ! -f "$dir/scriptfiles/instance.ini" ]]; then
+    mkdir -p "$dir/scriptfiles"
+    printf 'server_id = %s\n' "$((port - 7776))" > "$dir/scriptfiles/instance.ini"
+  fi
 }
 
 link_shared() {

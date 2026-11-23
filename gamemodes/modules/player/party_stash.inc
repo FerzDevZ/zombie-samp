@@ -44,12 +44,21 @@ new PartyStashChar[MAX_PLAYERS];
 new PartyStashSelSlot[MAX_PLAYERS];
 new PartyStashSelInv[MAX_PLAYERS];
 
+/* Petugas gudang (ROADMAP 414): hanya leader yang bisa menunjuk, dan hanya
+   petugas yang boleh MENARUH. Mengambil tetap hak semua anggota, jadi peti
+   tidak bisa dikunci total oleh satu orang yang lupa menunjuk petugas. */
+new bool:PartyStashOfficer[MAX_PLAYERS];
+
+forward PartyStash_LogEntry(stashCharId, playerid, const action[], itemid, amount);
+forward bool:PartyStash_IsQuartermaster(playerid);
+
 forward PartyStash_OnLoaded(playerid);
 forward PartyStash_OnTakeVerified(playerid, itemid, amount, slot);
 forward PartyStash_OnPutVerified(playerid, itemid, amount, stashSlot);
 
 stock PartyStash_Reset(playerid)
 {
+    PartyStashOfficer[playerid] = false;
     PartyStashChar[playerid] = 0;
     PartyStashSelSlot[playerid] = -1;
     PartyStashSelInv[playerid] = -1;
@@ -201,6 +210,42 @@ stock PartyStash_InvSlotFromRow(playerid, row)
         seen++;
     }
     return -1;
+}
+
+stock bool:PartyStash_IsQuartermaster(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return false;
+    if (!Party_InParty(playerid)) return false;
+    if (Party_IsLeader(playerid)) return true;
+    return PartyStashOfficer[playerid];
+}
+
+stock PartyStash_SetOfficer(actorId, targetId)
+{
+    if (!IsPlayerConnected(actorId) || !IsPlayerConnected(targetId)) return 0;
+    if (actorId == targetId) return 0;
+
+    if (!Party_IsLeader(actorId))
+    {
+        SendClientMessage(actorId, UI_ACCENT_WARN, "[PETI] Hanya pemimpin party yang bisa menunjuk petugas gudang.");
+        return 0;
+    }
+
+    if (Party_LeaderOf(targetId) != Party_LeaderOf(actorId) || Party_LeaderOf(actorId) == INVALID_PLAYER_ID)
+    {
+        SendClientMessage(actorId, UI_ACCENT_WARN, "[PETI] Pemain itu bukan anggota party kamu.");
+        return 0;
+    }
+
+    PartyStashOfficer[targetId] = !PartyStashOfficer[targetId];
+
+    new targetName[MAX_PLAYER_NAME + 1], line[144];
+    GetPlayerName(targetId, targetName, sizeof(targetName));
+    format(line, sizeof(line), "[PETI] %s sekarang %s petugas gudang.", targetName,
+        PartyStashOfficer[targetId] ? "" : "BUKAN lagi");
+    SendClientMessage(actorId, UI_ACCENT_PRIMARY, line);
+    SendClientMessage(targetId, UI_ACCENT_PRIMARY, line);
+    return 1;
 }
 
 stock PartyStash_CanEdit(playerid)
@@ -395,6 +440,10 @@ public PartyStash_OnTakeVerified(playerid, itemid, amount, slot)
         SendClientMessage(playerid, UI_ACCENT_WARN, line);
         Log_Format(LOG_WARN, "[PETI] rollback char=%d item=%d amount=%d", ActiveCharId[playerid], itemid, amount);
     }
+    else
+    {
+        PartyStash_LogEntry(PartyStashChar[playerid], playerid, "take", itemid, amount);
+    }
 
     /* Reload dari DB: cache kembali sinkron dengan keadaan sebenarnya. */
     PartyStash_Open(playerid);
@@ -433,6 +482,10 @@ public PartyStash_OnPutVerified(playerid, itemid, amount, stashSlot)
         }
         SendClientMessage(playerid, UI_ACCENT_WARN, "[PETI] Gagal menyimpan ke peti (DB). Item dikembalikan ke tas.");
         Log_Format(LOG_WARN, "[PETI] put rollback char=%d item=%d amount=%d", ActiveCharId[playerid], itemid, amount);
+    }
+    else
+    {
+        PartyStash_LogEntry(PartyStashChar[playerid], playerid, "put", itemid, amount);
     }
     return 1;
 }
@@ -494,6 +547,13 @@ stock PartyStash_Put(playerid, inventorySlot, requestedAmount)
     if (!PartyStash_CanEdit(playerid))
     {
         SendClientMessage(playerid, UI_ACCENT_WARN, "[PETI] Peti sedang dipegang anggota lain.");
+        return 0;
+    }
+
+    if (!PartyStash_IsQuartermaster(playerid))
+    {
+        SendClientMessage(playerid, UI_ACCENT_WARN,
+            "[PETI] Menyimpan hanya untuk petugas gudang. Minta pemimpin: /gudang [playerid].");
         return 0;
     }
 
@@ -691,3 +751,4 @@ stock PartyStash_OnDialogResponse(playerid, dialogid, response, listitem, const 
     }
     return 1;
 }
+

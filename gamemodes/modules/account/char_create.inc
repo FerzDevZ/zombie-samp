@@ -458,9 +458,9 @@ stock CharCreate_Create(playerid)
     new query[512];
     mysql_format(gSQL, query, sizeof(query),
         "INSERT INTO characters \
-         (account_id, slot, name, skin, gender, age, race, origin, occupation, trait, appearance, cash, health, xp, skill_points) \
-         VALUES (%d, %d, '%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)",
-        AccountId[playerid], slot, CCName[playerid], skin,
+         (account_id, server_id, slot, name, skin, gender, age, race, origin, occupation, trait, appearance, cash, health, xp, skill_points) \
+         VALUES (%d, %d, %d, '%e', %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d)",
+        AccountId[playerid], Server_InstanceId(), slot, CCName[playerid], skin,
         CCGender[playerid], CCAgeMin[CCAge[playerid]], CCRace[playerid], CCOrigin[playerid],
         CCJob[playerid], CCTrait[playerid], CCLook[playerid],
         cash, health, xp, points);

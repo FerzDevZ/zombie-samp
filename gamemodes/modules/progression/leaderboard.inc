@@ -4,13 +4,16 @@
    deterministik dan hanya satu round-trip ke database. Sumber data nyata:
    - kill_log jml kill zombie per karakter (victim_kind 2)
    - characters.cash, characters.playtime_sec, characters.rank_points
-   - MUSIM: kill bulan kalender berjalan (created_at epoch ms >= awal bulan). */
+   - MUSIM: kill bulan kalender berjalan (created_at epoch ms >= awal bulan).
+   - ARSIP: musim terakhir yang sudah diarsipkan `scripts/season-rollover.sh`
+     ke tabel season_archive (migrasi 023). Tanpa baris arsip, kategori ini
+     tidak muncul sama sekali — bukan menampilkan angka 0 palsu. */
 
 #define TOP_LIMIT_PER_CATEGORY 5
 
 stock Leaderboard_Show(playerid)
 {
-    new query[1536];
+    new query[2048];
 
     format(query, sizeof(query),
         "(SELECT 'KILL' AS kat, c.name AS nama, COUNT(*) AS skor \
@@ -29,9 +32,15 @@ stock Leaderboard_Show(playerid)
           FROM characters c ORDER BY c.playtime_sec DESC LIMIT %d) \
          UNION ALL \
          (SELECT 'RANK' AS kat, c.name AS nama, c.rank_points AS skor \
-          FROM characters c ORDER BY c.rank_points DESC LIMIT %d)",
+          FROM characters c ORDER BY c.rank_points DESC LIMIT %d) \
+         UNION ALL \
+         (SELECT CONCAT('ARSIP ', s.season) AS kat, s.char_name AS nama, s.score AS skor \
+          FROM season_archive s \
+          WHERE s.category = 'kill' \
+            AND s.season = (SELECT MAX(season) FROM season_archive) \
+          ORDER BY s.rank_no LIMIT %d)",
         TOP_LIMIT_PER_CATEGORY, TOP_LIMIT_PER_CATEGORY, TOP_LIMIT_PER_CATEGORY,
-        TOP_LIMIT_PER_CATEGORY, TOP_LIMIT_PER_CATEGORY);
+        TOP_LIMIT_PER_CATEGORY, TOP_LIMIT_PER_CATEGORY, TOP_LIMIT_PER_CATEGORY);
 
     /* Read-only berat (UNION ALL + GROUP BY) lewat pquery: pool paralel,
        tidak mengantre di belakang write transaksi FIFO (audit performa F5). */
@@ -57,12 +66,12 @@ public Leaderboard_OnLoaded(playerid)
         return 0;
     }
 
-    new lastCategory[8], line[160], rank = 0;
+    new lastCategory[16], line[160], rank = 0;
     lastCategory[0] = EOS;
 
     for (new row = 0; row < cache_num_rows(); row++)
     {
-        new category[8], holderName[32];
+        new category[16], holderName[32];
         cache_get_value_name(row, "kat", category, sizeof(category));
         cache_get_value_name(row, "nama", holderName, sizeof(holderName));
         new score;
@@ -82,6 +91,7 @@ public Leaderboard_OnLoaded(playerid)
             format(lastCategory, sizeof(lastCategory), "%s", category);
 
             if (strcmp(category, "KILL") == 0) SendClientMessage(playerid, UI_ACCENT_PRIMARY, "== KILL ZOMBIE (TOTAL) ==");
+            else if (category[0] == 'A') SendClientMessage(playerid, UI_ACCENT_PRIMARY, "== KILL MUSIM LALU (ARSIP) ==");
             else if (strcmp(category, "MUSIM") == 0) SendClientMessage(playerid, UI_ACCENT_PRIMARY, "== KILL MUSIM INI (BULAN INI) ==");
             else if (strcmp(category, "UANG") == 0) SendClientMessage(playerid, UI_ACCENT_PRIMARY, "== UANG ==");
             else if (strcmp(category, "JAM") == 0) SendClientMessage(playerid, UI_ACCENT_PRIMARY, "== JAM MAIN ==");

@@ -151,6 +151,18 @@ stock Interact_HandlePlayer(playerid)
     // Loot lebih dekat dan lebih sering dipakai daripada hotspot tetap.
     if (Loot_TakeNearest(playerid, 2.5)) return 1;
 
+    // Gate base: hanya pemilik/officer, dicek di BaseBuild_ToggleGate.
+    new gateSlot = BaseBuild_NearestGate(playerid, BASE_GATE_USE_RANGE);
+    if (gateSlot != -1)
+    {
+        new gateResult = BaseBuild_ToggleGate(playerid, gateSlot);
+        if (gateResult != -1) return 1;
+        return 0;
+    }
+
+    // Perekrut: tombol Y di papan rekrutmen, pengganti /rekrut (RAMAH mobile).
+    if (Companion_TryRecruitInteract(playerid)) return 1;
+
     new Float:distance;
     new slot = Interact_NearestForPlayer(playerid, distance);
     if (slot == -1 || distance > 2.0) return 0;

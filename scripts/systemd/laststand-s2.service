@@ -1,0 +1,37 @@
+# Supervisor systemd untuk LAST STAND instans s2 (Outbreak).
+#
+# Kenapa bukan cron/watchdog.sh: cron di mesin ini berjalan di sandbox seccomp
+# yang membunuh samp03svr 32-bit dengan SIGSYS ("Bad system call"). systemd
+# menjalankan proses tanpa sandbox itu.
+#
+# Pasang dengan ./scripts/install-systemd.sh (sekali per mesin, bukan per instans).
+#
+# Catatan: ExecStart menunjuk binary hasil symlink runtime/s2/samp03svr, jadi
+# satu unit per instans tetap memakai satu main.amx bersama.
+[Unit]
+Description=LAST STAND SA-MP instans s2 (Outbreak)
+After=network-online.target docker.service
+Wants=network-online.target
+PartOf=laststand.target
+# StartLimit* wajib di [Unit] pada systemd >= 230; di [Service] diabaikan
+# (dikonfirmasi systemd-analyze verify: "Unknown key name").
+StartLimitIntervalSec=300
+StartLimitBurst=10
+
+[Service]
+Type=simple
+WorkingDirectory=/home/aegisx/zombie-samp/runtime/s2
+Environment=LD_LIBRARY_PATH=/home/aegisx/zombie-samp/runtime/s2/plugins:/home/aegisx/zombie-samp
+ExecStartPre=/home/aegisx/zombie-samp/scripts/instance.sh prep s2
+ExecStart=/home/aegisx/zombie-samp/runtime/s2/samp03svr
+# instance.sh tetap pemilik server.pid untuk mode manual; systemd mengawasi
+# proses anak langsung, jadi tidak ada PIDFile yang perlu dirawat.
+Restart=always
+RestartSec=5
+TimeoutStopSec=25
+KillSignal=SIGTERM
+StandardOutput=append:/home/aegisx/zombie-samp/runtime/s2/console.log
+StandardError=append:/home/aegisx/zombie-samp/runtime/s2/console.log
+
+[Install]
+WantedBy=laststand.target

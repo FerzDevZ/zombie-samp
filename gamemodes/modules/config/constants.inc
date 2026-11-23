@@ -22,6 +22,9 @@
 #define BOSS_RESPAWN_MS         900000
 #define BOSS_SPAWN_RADIUS       55.0
 #define BOSS_MIN_PLAYER_DIST    30.0
+/* Batas detail audit log admin (tabel admin_actions, migrasi 022). */
+#define ADMIN_AUDIT_DETAIL_MAX 180
+
 #define ZOMBIE_BOSS_PHASE2_PERCENT 50
 #define ZOMBIE_BOSS_PHASE2_ADDS    5
 

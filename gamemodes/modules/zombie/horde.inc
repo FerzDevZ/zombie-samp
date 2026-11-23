@@ -27,6 +27,11 @@ new Float:BaseRaidX[MAX_LOBBIES];
 new Float:BaseRaidY[MAX_LOBBIES];
 new Float:BaseRaidZ[MAX_LOBBIES];
 new bool:BaseRaidActive[MAX_LOBBIES];
+/* Cache jumlah zombie raid per lobby. HUD_Tick jalan tiap 500 ms untuk semua
+   pemain; memanggil Horde_CountRaidZombies di sana berarti 200 pemain x 512
+   slot ZombiePool = 102k iterasi per 500 ms. Horde_Tick yang 5 detik cukup
+   memindai sekali per lobby aktif. */
+new HordeRaidCount[MAX_LOBBIES];
 
 forward Horde_Tick();
 
@@ -77,10 +82,34 @@ stock Horde_CountRaidZombies(lobbyId)
     return count;
 }
 
+/* Status raid untuk HUD. Mengembalikan false bila lobby invalid atau tidak ada
+   raid, dan selalu mengosongkan keluaran supaya pemanggil tidak membaca sisa
+   nilai lama. Waktu dihitung dari GetTickCount seperti BaseRaidStartTick; wrap
+   ~24,8 hari ditangani dengan menganggap elapsed negatif sebagai 0. */
+stock bool:Horde_GetRaidStatus(lobbyId, &zombieCount, &remainingSeconds)
+{
+    zombieCount = 0;
+    remainingSeconds = 0;
+
+    if (lobbyId < 0 || lobbyId >= MAX_LOBBIES) return false;
+    if (!BaseRaidActive[lobbyId]) return false;
+
+    zombieCount = HordeRaidCount[lobbyId];
+
+    new elapsed = GetTickCount() - BaseRaidStartTick[lobbyId];
+    if (elapsed < 0) elapsed = 0;
+    if (elapsed < BASE_RAID_TIMEOUT_MS)
+    {
+        remainingSeconds = (BASE_RAID_TIMEOUT_MS - elapsed) / 1000;
+    }
+    return true;
+}
+
 stock Horde_RewardRaidSurvived(lobbyId)
 {
     new owner = BaseRaidOwner[lobbyId];
     BaseRaidActive[lobbyId] = false;
+    HordeRaidCount[lobbyId] = 0;
     BaseRaidOwner[lobbyId] = INVALID_PLAYER_ID;
 
     if (owner == INVALID_PLAYER_ID || !IsPlayerConnected(owner)) return 0;
@@ -131,6 +160,7 @@ stock Horde_TickBaseRaid(lobbyId)
         if (elapsed > BASE_RAID_TIMEOUT_MS)
         {
             BaseRaidActive[lobbyId] = false;
+            HordeRaidCount[lobbyId] = 0;
             BaseRaidOwner[lobbyId] = INVALID_PLAYER_ID;
             BaseRaidOwnerChar[lobbyId] = 0;
             Director_NotifyLobby(lobbyId, "BASE DISERANG",
@@ -164,6 +194,7 @@ stock Horde_TickBaseRaid(lobbyId)
        membuang zombie lagi (tanpa ini raid bisa dipangkas director). */
     DirectorLastHordeTick = GetTickCount();
     BaseRaidActive[lobbyId] = true;
+    HordeRaidCount[lobbyId] = spawned;
     BaseRaidOwner[lobbyId] = ownerPlayer;
     BaseRaidOwnerChar[lobbyId] = ownerCharId;
     BaseRaidStartTick[lobbyId] = GetTickCount();
@@ -329,6 +360,10 @@ public Horde_Tick()
         }
 
         Horde_TickBaseRaid(lobbyId);
+        /* Segarkan cache sesudah tick: jumlah zombie bisa berubah karena mati,
+           despawn, atau raid baru. Satu pemindaian per lobby per 5 dtk. */
+        if (BaseRaidActive[lobbyId]) HordeRaidCount[lobbyId] = Horde_CountRaidZombies(lobbyId);
+        else HordeRaidCount[lobbyId] = 0;
     }
 
     Horde_ScreamerPulse();
@@ -370,6 +405,7 @@ stock Horde_ForceBaseRaid(playerid)
     if (spawned > 0)
     {
         BaseRaidActive[lobbyId] = true;
+        HordeRaidCount[lobbyId] = spawned;
         BaseRaidOwner[lobbyId] = playerid;
         BaseRaidOwnerChar[lobbyId] = ActiveCharId[playerid];
         BaseRaidStartTick[lobbyId] = GetTickCount();

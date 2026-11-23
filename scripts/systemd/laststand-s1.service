@@ -1,40 +1,37 @@
-# Supervisor systemd (user) untuk LAST STAND.
+# Supervisor systemd untuk LAST STAND instans s1 (Quarantine).
 #
-# Kenapa bukan cron/watchdog.sh:
-# cron di mesin ini berjalan di sandbox seccomp yang membunuh samp03svr 32-bit
-# dengan SIGSYS (bukti: backups/watchdog.log "Bad system call"). systemd --user
-# dengan Linger=yes mengawasi proses di sesi user tanpa sandbox itu.
+# Kenapa bukan cron/watchdog.sh: cron di mesin ini berjalan di sandbox seccomp
+# yang membunuh samp03svr 32-bit dengan SIGSYS ("Bad system call"). systemd
+# menjalankan proses tanpa sandbox itu.
 #
-# Pasang (sekali per instans):
-#   mkdir -p ~/.config/systemd/user
-#   cp scripts/systemd/laststand-s1.service ~/.config/systemd/user/
-#   systemctl --user daemon-reload
-#   systemctl --user enable --now laststand-s1.service
-#   systemctl --user status laststand-s1.service
+# Pasang dengan ./scripts/install-systemd.sh (sekali per mesin, bukan per instans).
 #
-# Untuk instans lain (s2): salin berkas, ganti semua "s1" -> "s2" dan WorkingDirectory.
+# Catatan: ExecStart menunjuk binary hasil symlink runtime/s1/samp03svr, jadi
+# satu unit per instans tetap memakai satu main.amx bersama.
 [Unit]
-Description=LAST STAND SA-MP instans s1 (zombie survival)
+Description=LAST STAND SA-MP instans s1 (Quarantine)
 After=network-online.target docker.service
 Wants=network-online.target
+PartOf=laststand.target
+# StartLimit* wajib di [Unit] pada systemd >= 230; di [Service] diabaikan
+# (dikonfirmasi systemd-analyze verify: "Unknown key name").
+StartLimitIntervalSec=300
+StartLimitBurst=10
 
 [Service]
 Type=simple
-WorkingDirectory=/home/boxd/zombie-samp/runtime/s1
-Environment=LD_LIBRARY_PATH=/home/boxd/zombie-samp/runtime/s1/plugins:/home/boxd/zombie-samp
-ExecStartPre=/home/boxd/zombie-samp/scripts/instance.sh prep s1
-ExecStart=/home/boxd/zombie-samp/runtime/s1/samp03svr
-# Server menulis pid sendiri? Tidak: pidfile dikelola instance.sh (manual mode).
-PIDFile=
+WorkingDirectory=/home/aegisx/zombie-samp/runtime/s1
+Environment=LD_LIBRARY_PATH=/home/aegisx/zombie-samp/runtime/s1/plugins:/home/aegisx/zombie-samp
+ExecStartPre=/home/aegisx/zombie-samp/scripts/instance.sh prep s1
+ExecStart=/home/aegisx/zombie-samp/runtime/s1/samp03svr
+# instance.sh tetap pemilik server.pid untuk mode manual; systemd mengawasi
+# proses anak langsung, jadi tidak ada PIDFile yang perlu dirawat.
 Restart=always
 RestartSec=5
-# Jangan menyerah saat crash berulang; beri jeda 30 dtk setelah 5 kegagalan cepat.
-StartLimitIntervalSec=300
-StartLimitBurst=10
 TimeoutStopSec=25
 KillSignal=SIGTERM
-StandardOutput=append:/home/boxd/zombie-samp/runtime/s1/console.log
-StandardError=append:/home/boxd/zombie-samp/runtime/s1/console.log
+StandardOutput=append:/home/aegisx/zombie-samp/runtime/s1/console.log
+StandardError=append:/home/aegisx/zombie-samp/runtime/s1/console.log
 
 [Install]
-WantedBy=default.target
+WantedBy=laststand.target

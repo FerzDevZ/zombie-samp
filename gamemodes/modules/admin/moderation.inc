@@ -14,6 +14,18 @@ forward Moderation_OnUnbanLoaded(adminId, const username[]);
 forward Moderation_OnBanResolved(playerid, accountDbId);
 forward Moderation_OnBansLoaded(adminId);
 
+/* Mute/warn (ROADMAP 401). Disimpan di memori: mute hilang saat reconnect,
+   sama seperti /freeze — cukup untuk moderasi sesi, dan tidak menambah tabel
+   yang harus dimigrasi. Setiap aksi tetap masuk `admin_actions`. */
+#define MUTE_MAX_MINUTES   10080      /* 7 hari */
+#define WARN_BEFORE_MUTE   3
+#define WARN_MUTE_MINUTES  15
+
+forward AdminAudit_Log(adminId, const action[], targetAccount, const detail[]);
+
+new PlayerMutedUntil[MAX_PLAYERS];
+new PlayerWarnCount[MAX_PLAYERS];
+
 #define BAN_MAX_REASON     100
 #define BAN_MAX_MINUTES    525600   /* 1 tahun, cukup untuk "permanen praktis" */
 
@@ -61,6 +73,10 @@ stock Moderation_Ban(actorId, targetId, minutes, const reason[])
          VALUES (%d, '%e', '%e', %d, %d)",
         targetAccount, reasonText, adminName, expiresAt, gettime());
     mysql_tquery(gSQL, query, "Moderation_OnBanSaved", "ddd", actorId, targetId, targetAccount);
+
+    new auditDetail[ADMIN_AUDIT_DETAIL_MAX + 1];
+    format(auditDetail, sizeof(auditDetail), "alasan=%s menit=%d", reasonText, minutes);
+    AdminAudit_Log(actorId, "ban", targetAccount, auditDetail);
 
     new targetName[MAX_PLAYER_NAME + 1];
     GetPlayerName(targetId, targetName, sizeof(targetName));
@@ -156,6 +172,10 @@ public Moderation_OnUnbanLoaded(adminId, const username[])
     format(line, sizeof(line), "[UNBAN] Akun %s dibuka. Riwayat ban tetap tersimpan.", username);
     SendClientMessage(adminId, UI_ACCENT_PRIMARY, line);
     Log_Format(LOG_INFO, "[UNBAN] admin=%d account=%d", adminId, accountDbId);
+
+    new auditDetail[96];
+    format(auditDetail, sizeof(auditDetail), "akun=%s", username);
+    AdminAudit_Log(adminId, "unban", accountDbId, auditDetail);
     return 1;
 }
 
@@ -260,5 +280,117 @@ public Moderation_OnBansLoaded(adminId)
         SendClientMessage(adminId, UI_TEXT_SECONDARY, line);
         #pragma unused createdAt
     }
+    return 1;
+}
+/* Mute sementara (ROADMAP 401). 0 = tidak dibisukan. */
+stock Moderation_Mute(actorId, targetId, minutes, const reason[])
+{
+    if (!IsServerAdmin(actorId)) return 0;
+    if (!IsPlayerConnected(targetId) || IsPlayerNPC(targetId)) return 0;
+    if (minutes <= 0) minutes = 10;
+    if (minutes > MUTE_MAX_MINUTES) minutes = MUTE_MAX_MINUTES;
+
+    new until = gettime() + minutes * 60;
+    if (until > PlayerMutedUntil[targetId]) PlayerMutedUntil[targetId] = until;
+
+    new reasonText[80];
+    format(reasonText, sizeof(reasonText), "%s", (reason[0] == EOS) ? "tanpa alasan" : reason);
+
+    new targetName[MAX_PLAYER_NAME + 1];
+    GetPlayerName(targetId, targetName, sizeof(targetName));
+
+    new line[176];
+    format(line, sizeof(line), "[MUTE] %s dibisukan %d menit: %s", targetName, minutes, reasonText);
+    SendClientMessage(actorId, UI_ACCENT_PRIMARY, line);
+
+    format(line, sizeof(line), "[MUTE] Kamu dibisukan %d menit oleh staff: %s", minutes, reasonText);
+    SendClientMessage(targetId, UI_ACCENT_WARN, line);
+
+    new auditDetail[ADMIN_AUDIT_DETAIL_MAX + 1];
+    format(auditDetail, sizeof(auditDetail), "menit=%d alasan=%s", minutes, reasonText);
+    AdminAudit_Log(actorId, "mute", AccountId[targetId], auditDetail);
+    return 1;
+}
+
+stock Moderation_Unmute(actorId, targetId)
+{
+    if (!IsServerAdmin(actorId)) return 0;
+    if (!IsPlayerConnected(targetId) || IsPlayerNPC(targetId)) return 0;
+    if (PlayerMutedUntil[targetId] == 0) return 0;
+
+    PlayerMutedUntil[targetId] = 0;
+
+    new targetName[MAX_PLAYER_NAME + 1];
+    GetPlayerName(targetId, targetName, sizeof(targetName));
+
+    new line[128];
+    format(line, sizeof(line), "[MUTE] %s bisa bicara lagi.", targetName);
+    SendClientMessage(actorId, UI_ACCENT_PRIMARY, line);
+    SendClientMessage(targetId, UI_ACCENT_PRIMARY, "[MUTE] Mute kamu dicabut staff.");
+
+    AdminAudit_Log(actorId, "unmute", AccountId[targetId], "dicabut manual");
+    return 1;
+}
+
+/* Peringatan bertingkat: 3 peringatan dalam satu sesi berakhir mute 15 menit.
+   Ambang disimpan sebagai konstanta supaya bisa diuji tanpa chat. */
+stock Moderation_Warn(actorId, targetId, const reason[])
+{
+    if (!IsServerAdmin(actorId)) return 0;
+    if (!IsPlayerConnected(targetId) || IsPlayerNPC(targetId)) return 0;
+
+    new reasonText[96];
+    format(reasonText, sizeof(reasonText), "%s", (reason[0] == EOS) ? "tanpa alasan" : reason);
+
+    new targetName[MAX_PLAYER_NAME + 1];
+    GetPlayerName(targetId, targetName, sizeof(targetName));
+
+    PlayerWarnCount[targetId]++;
+    new count = PlayerWarnCount[targetId];
+
+    new line[176];
+    format(line, sizeof(line), "[WARN] %s diperingatkan (%d/%d): %s",
+        targetName, count, WARN_BEFORE_MUTE, reasonText);
+    SendClientMessage(actorId, UI_ACCENT_PRIMARY, line);
+
+    format(line, sizeof(line), "[WARN] Peringatan %d/%d dari staff: %s", count, WARN_BEFORE_MUTE, reasonText);
+    SendClientMessage(targetId, UI_ACCENT_WARN, line);
+
+    new auditDetail[ADMIN_AUDIT_DETAIL_MAX + 1];
+    format(auditDetail, sizeof(auditDetail), "peringatan=%d alasan=%s", count, reasonText);
+    AdminAudit_Log(actorId, "warn", AccountId[targetId], auditDetail);
+
+    if (count >= WARN_BEFORE_MUTE)
+    {
+        PlayerWarnCount[targetId] = 0;
+        Moderation_Mute(actorId, targetId, WARN_MUTE_MINUTES, "akumulasi peringatan");
+    }
+    return 1;
+}
+
+stock bool:Moderation_IsMuted(playerid)
+{
+    if (playerid < 0 || playerid >= MAX_PLAYERS) return false;
+    if (PlayerMutedUntil[playerid] == 0) return false;
+    if (gettime() >= PlayerMutedUntil[playerid])
+    {
+        PlayerMutedUntil[playerid] = 0;
+        return false;
+    }
+    return true;
+}
+
+/* Sisa mute untuk pesan ke pemain. */
+stock Moderation_MuteSecondsLeft(playerid)
+{
+    if (!Moderation_IsMuted(playerid)) return 0;
+    return PlayerMutedUntil[playerid] - gettime();
+}
+
+stock Moderation_ResetPlayerState(playerid)
+{
+    if (playerid < 0 || playerid >= MAX_PLAYERS) return 0;
+    PlayerMutedUntil[playerid] = 0;
+    PlayerWarnCount[playerid] = 0;
     return 1;
 }

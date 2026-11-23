@@ -93,6 +93,10 @@ stock Base_Load(playerid)
     mysql_format(gSQL, query, sizeof(query),
         "SELECT id, tier, lobby_id, pos_x, pos_y, pos_z FROM bases WHERE char_id = %d LIMIT 1", ActiveCharId[playerid]);
     mysql_tquery(gSQL, query, "Base_OnRowLoaded", "i", playerid);
+
+    /* Keanggotaan party dimuat terpisah: pemilik tidak punya baris di
+       base_members, jadi dua query ini saling melengkapi. */
+    BaseMembers_Load(playerid);
     return 1;
 }
 
@@ -309,6 +313,8 @@ public Base_Tick()
 
 stock Base_TickBody()
 {
+    BaseBuild_GateTick();
+
     BaseBuild_GeneratorTick();
 
     new zombieCount = 0;

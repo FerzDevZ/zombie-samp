@@ -307,9 +307,7 @@ stock bool:InventoryUI_Use(playerid, slot)
         }
         case ITEM_DOCUMENT:
         {
-            SendClientMessage(playerid, UI_ACCENT_PRIMARY,
-                "[DOKUMEN] Bukti intel. Jual $180 di vendor, atau penuhi kontrak dokumen harian.");
-            return true;
+            return Lore_ShowDocument(playerid) != 0;
         }
         case ITEM_NOTEBOOK:
         {

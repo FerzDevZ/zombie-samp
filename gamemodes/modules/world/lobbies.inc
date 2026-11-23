@@ -43,8 +43,146 @@ stock Lobby_IsActive(lobbyId)
     return Lobby_IsValid(lobbyId) && Lobby_CountPlayers(lobbyId, false) > 0;
 }
 
-stock Lobby_ActiveList(lobbies[], maxLobbies)
+stock Lobby_CountOnline()
 {
+    new count = 0;
+    foreach (new playerid : PlayerPool)
+    {
+        if (!IsPlayerConnected(playerid)) continue;
+        if (IsPlayerNPC(playerid)) continue;
+        count++;
+    }
+    return count;
+}
+
+stock bool:Lobby_IsPermanentNight(lobbyId)
+{
+    return lobbyId >= 0 && lobbyId < MAX_LOBBIES && LobbyPermanentNight[lobbyId];
+}
+
+/* SetWorldTime berlaku untuk seluruh server, jadi lobby malam permanen memakai
+   SetPlayerTime per pemain. Pemain di lobby lain dikembalikan ke jam dunia
+   supaya tidak terjebak malam setelah pindah dari Nightfall. */
+stock Lobby_ApplyClock(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+
+    if (Lobby_IsPermanentNight(Lobby_Of(playerid)))
+    {
+        SetPlayerTime(playerid, NIGHTFALL_HOUR, 0);
+        return 1;
+    }
+
+    SetPlayerTime(playerid, World_GetHour(), 0);
+    return 0;
+}
+
+stock Lobby_ReapplyClocks()
+{
+    foreach (new playerid : PlayerPool)
+    {
+        Lobby_ApplyClock(playerid);
+    }
+    return 1;
+}
+
+stock Lobby_Unlock(lobbyId, const reason[])
+{
+    if (lobbyId < 0 || lobbyId >= MAX_LOBBIES) return 0;
+
+    if (lobbyId >= LobbyCount)
+    {
+        /* Hanya slot berikutnya yang boleh dibuka: melompati slot membuat
+           dialog /lobby menampilkan entri kosong di tengah daftar. */
+        if (lobbyId != LobbyCount) return 0;
+        LobbyCount++;
+    }
+
+    LobbyPermanentNight[lobbyId] = (lobbyId == NIGHTFALL_LOBBY_ID);
+    LobbyNightfallVotes = 0;
+    LobbyNightfallIdle = 0;
+
+    new lobbyLabel[32], message[160];
+    Lobby_GetName(lobbyId, lobbyLabel, sizeof(lobbyLabel));
+    format(message, sizeof(message), "[LOBBY] %s dibuka (%s).", lobbyLabel, reason);
+    Log_Info(message);
+
+    foreach (new playerid : PlayerPool)
+    {
+        if (!IsPlayerConnected(playerid) || IsPlayerNPC(playerid)) continue;
+        SendClientMessage(playerid, Lobby_GetAccent(lobbyId), message);
+        Toast_Show(playerid, lobbyLabel, message, Lobby_GetAccent(lobbyId));
+    }
+    return 1;
+}
+
+stock Lobby_Lock(lobbyId, const reason[])
+{
+    /* Lobby 0 adalah default: menutupnya membuat Lobby_Of jatuh ke id yang
+       tidak valid dan semua pemain kehilangan dunia. Hanya ekor daftar boleh
+       ditutup supaya tidak ada lubang di tengah. */
+    if (lobbyId <= 0 || lobbyId >= LobbyCount) return 0;
+    if (lobbyId != LobbyCount - 1) return 0;
+    if (Lobby_CountPlayers(lobbyId, false) > 0) return 0;
+
+    new lobbyLabel[32], message[160];
+    Lobby_GetName(lobbyId, lobbyLabel, sizeof(lobbyLabel));
+
+    LobbyCount--;
+    LobbyPermanentNight[lobbyId] = false;
+    LobbyNightfallVotes = 0;
+    LobbyNightfallIdle = 0;
+
+    format(message, sizeof(message), "[LOBBY] %s ditutup (%s).", lobbyLabel, reason);
+    Log_Info(message);
+
+    foreach (new playerid : PlayerPool)
+    {
+        if (!IsPlayerConnected(playerid) || IsPlayerNPC(playerid)) continue;
+        SendClientMessage(playerid, UI_TEXT_MUTED, message);
+    }
+    return 1;
+}
+
+/* Dipanggil Director_Report (60 dtk). Hysteresis dua arah: butuh beberapa
+   periode berturut-turut supaya lonjakan singkat tidak membuka/menutup lobby
+   dan pemain tidak terlempar keluar-masuk dunia. */
+stock Lobby_AutoTick()
+{
+    new online = Lobby_CountOnline();
+
+    if (!Lobby_IsValid(NIGHTFALL_LOBBY_ID))
+    {
+        if (online < NIGHTFALL_UNLOCK_PLAYERS)
+        {
+            LobbyNightfallVotes = 0;
+            return 0;
+        }
+
+        LobbyNightfallVotes++;
+        if (LobbyNightfallVotes < NIGHTFALL_CONFIRM_TICKS) return 0;
+
+        new reason[48];
+        format(reason, sizeof(reason), "%d pemain online", online);
+        return Lobby_Unlock(NIGHTFALL_LOBBY_ID, reason);
+    }
+
+    if (Lobby_CountPlayers(NIGHTFALL_LOBBY_ID, false) > 0)
+    {
+        LobbyNightfallIdle = 0;
+        return 1;
+    }
+
+    LobbyNightfallIdle++;
+    if (LobbyNightfallIdle < NIGHTFALL_IDLE_TICKS) return 1;
+    if (online >= NIGHTFALL_UNLOCK_PLAYERS) return 1;
+
+    new reason[48];
+    format(reason, sizeof(reason), "kosong %d menit", NIGHTFALL_IDLE_TICKS);
+    return Lobby_Lock(NIGHTFALL_LOBBY_ID, reason);
+}
+
+stock Lobby_ActiveList(lobbies[], maxLobbies){
     new count = 0;
     for (new lobbyId = 0; lobbyId < MAX_LOBBIES; lobbyId++)
     {
@@ -62,6 +200,10 @@ stock Lobby_ApplyWorld(playerid)
 {
     if (!IsPlayerConnected(playerid)) return 0;
 
+    /* Jam diterapkan lebih dulu: lobby Nightfall memakai SetPlayerTime sendiri,
+       termasuk saat pemain ada di shelter lobbynya. */
+    Lobby_ApplyClock(playerid);
+
     if (PlayerSurvival[playerid][psInShelter])
     {
         new baseId = Base_Id(playerid);
@@ -74,8 +216,7 @@ stock Lobby_ApplyWorld(playerid)
     return 1;
 }
 
-stock Lobby_TeleportToHub(playerid)
-{
+stock Lobby_TeleportToHub(playerid){
     SetPlayerPos(playerid, SPAWN_X, SPAWN_Y, SPAWN_Z);
     AC_ClearSample(playerid);
     SetPlayerFacingAngle(playerid, SPAWN_ANGLE);
@@ -107,6 +248,25 @@ stock Lobby_Set(playerid, lobbyId)
         mysql_format(gSQL, query, sizeof(query),
             "UPDATE characters SET lobby_id = %d WHERE id = %d", lobbyId, ActiveCharId[playerid]);
         mysql_tquery(gSQL, query, "", "");
+    }
+
+    /* Base ikut pindah lobby (ROADMAP 306): kalau tidak, struktur base tetap di
+       world lobby lama dan pemain kehilangan kampnya sendiri. */
+    if (Base_Id(playerid) > 0 && Base_GetLobby(playerid) != lobbyId)
+    {
+        new baseId = Base_Id(playerid);
+        BaseBuild_MigrateLobby(baseId, lobbyId);
+
+        if (SQL_IsReady())
+        {
+            new query[96];
+            mysql_format(gSQL, query, sizeof(query),
+                "UPDATE bases SET lobby_id = %d WHERE id = %d", lobbyId, baseId);
+            mysql_tquery(gSQL, query, "", "");
+        }
+
+        BaseBuild_EnsureLoaded(playerid);
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BASE] Base ikut pindah ke lobby ini.");
     }
 
     new lobbyLabel[32], message[144];

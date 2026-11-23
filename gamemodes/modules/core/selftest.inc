@@ -318,6 +318,269 @@ stock Selftest_CheckBoss()
     return 1;
 }
 
+/* Banner raid membaca state Horde tiap 500 ms; guard indeks lobby harus benar
+   sebelum ada yang menyentuh array. Sengaja hanya menguji jalur invalid supaya
+   hasilnya deterministik (tidak bergantung ada/tidaknya raid saat boot). */
+stock Selftest_CheckRaidBanner()
+{
+    new zombies = 99, seconds = 99;
+    new bool:rejected = !Horde_GetRaidStatus(-1, zombies, seconds)
+        && zombies == 0 && seconds == 0;
+
+    zombies = 99;
+    seconds = 99;
+    new bool:rejectedHigh = !Horde_GetRaidStatus(MAX_LOBBIES, zombies, seconds)
+        && zombies == 0 && seconds == 0;
+
+    new detail[144];
+    format(detail, sizeof(detail), "lobby -1 dan %d ditolak, keluaran dikosongkan", MAX_LOBBIES);
+    Selftest_Record(rejected && rejectedHigh, "banner raid HUD", detail);
+    return 1;
+}
+
+stock Selftest_CheckDeaths()
+{
+    /* Aturan prioritas: killer pemain menang atas reason 53/54 (pemain bisa
+       didorong jatuh oleh pemain lain); selain itu jatuh/tenggelam =
+       lingkungan, sisanya zombie. */
+    new playerByPlayer = Deaths_KindFor(true, 24);
+    new playerOverFall = Deaths_KindFor(true, DEATH_REASON_FALL);
+    new fallAlone = Deaths_KindFor(false, DEATH_REASON_FALL);
+    new drownAlone = Deaths_KindFor(false, DEATH_REASON_DROWN);
+    new zombieWeapon = Deaths_KindFor(false, 31);
+    new zombieNoWeapon = Deaths_KindFor(false, 0);
+
+    new detail[176];
+    format(detail, sizeof(detail), "pemain=%d/%d, lingkungan=%d/%d, zombie=%d/%d",
+        playerByPlayer, playerOverFall, fallAlone, drownAlone, zombieWeapon, zombieNoWeapon);
+    Selftest_Record(playerByPlayer == DEATH_KIND_PLAYER
+        && playerOverFall == DEATH_KIND_PLAYER
+        && fallAlone == DEATH_KIND_ENVIRONMENT
+        && drownAlone == DEATH_KIND_ENVIRONMENT
+        && zombieWeapon == DEATH_KIND_ZOMBIE
+        && zombieNoWeapon == DEATH_KIND_ZOMBIE,
+        "log kematian: klasifikasi penyebab", detail);
+
+    new kindName[16];
+    Deaths_KindName(DEATH_KIND_PLAYER, kindName, sizeof(kindName));
+    new bool:kindFilled = (strlen(kindName) > 0);
+
+    new ago[32];
+    Deaths_TimeAgo(gettime(), ago, sizeof(ago));
+    new bool:nowSane = (strcmp(ago, "0 detik lalu", true) == 0);
+    /* Waktu di masa depan harus dijepit ke 0, bukan jadi "-100 detik lalu". */
+    Deaths_TimeAgo(gettime() + 100, ago, sizeof(ago));
+    new bool:futureClamped = (strcmp(ago, "0 detik lalu", true) == 0);
+    Deaths_TimeAgo(gettime() - 7200, ago, sizeof(ago));
+    new bool:hoursSane = (strcmp(ago, "2 jam lalu", true) == 0);
+
+    format(detail, sizeof(detail), "nama tipe=%d, sekarang=%d, masa depan dijepit=%d, 2 jam=%d",
+        kindFilled, nowSane, futureClamped, hoursSane);
+    Selftest_Record(kindFilled && nowSane && futureClamped && hoursSane, "log kematian: format waktu", detail);
+    return 1;
+}
+
+stock Selftest_CheckInstanceQueue()
+{
+    /* Instance: nilai wajib 1..SERVER_ID_MAX walau server.cfg kosong/salah.
+       Karakter ber-server_id lain tidak boleh muncul di daftar instance ini. */
+    new instanceId = Server_InstanceId();
+    new bool:instanceValid = (instanceId >= SERVER_ID_MIN && instanceId <= SERVER_ID_MAX);
+
+    new detail[176];
+    format(detail, sizeof(detail), "server_id=%d (rentang %d..%d) sumber=%s",
+        instanceId, SERVER_ID_MIN, SERVER_ID_MAX,
+        (Server_ReadIdFile() == instanceId) ? "instance.ini" : "port");
+    Selftest_Record(instanceValid, "identitas instance server", detail);
+
+    /* Antrean: di bawah cap tidak menahan, tepat di cap menahan, cap di atas
+       MAX_PLAYERS tetap dihitung aman. */
+    new cap = Server_PlayerCap();
+    new bool:belowHold = Queue_HoldsFor(cap - 1);
+    new bool:atHold = Queue_HoldsFor(cap);
+    new bool:aboveHold = Queue_HoldsFor(cap + 1);
+    new bool:capSane = (cap >= SERVER_PLAYER_CAP_MIN && cap <= MAX_PLAYERS);
+
+    format(detail, sizeof(detail), "cap=%d, tahan di %d/%d/%d = %d/%d/%d",
+        cap, cap - 1, cap, cap + 1, belowHold, atHold, aboveHold);
+    Selftest_Record(!belowHold && atHold && aboveHold && capSane, "antrean slot server penuh", detail);
+
+    /* Dekorasi: indeks valid, jumlah konsisten, dan tidak ada prop duplikat
+       persis (model + koordinat) yang membuat objek menumpuk sia-sia. */
+    new decorCount = Decor_Count();
+    new bool:decorIndexOk = (Decor_IsValidIndex(0) && Decor_IsValidIndex(decorCount - 1));
+    new bool:decorIndexRejects = (!Decor_IsValidIndex(-1) && !Decor_IsValidIndex(decorCount));
+
+    new bool:decorDuplicate = false;
+    for (new left = 0; left < sizeof(DecorProp); left++)
+    {
+        for (new right = left + 1; right < sizeof(DecorProp); right++)
+        {
+            if (DecorProp[left][dcModel] != DecorProp[right][dcModel]) continue;
+            if (DecorProp[left][dcX] != DecorProp[right][dcX]) continue;
+            if (DecorProp[left][dcY] != DecorProp[right][dcY]) continue;
+            if (DecorProp[left][dcZ] != DecorProp[right][dcZ]) continue;
+            decorDuplicate = true;
+        }
+    }
+
+    format(detail, sizeof(detail), "%d dekorasi, indeks valid=%d/%d, duplikat=%d",
+        decorCount, decorIndexOk, decorIndexRejects, decorDuplicate);
+    Selftest_Record(decorCount > 0 && decorIndexOk && decorIndexRejects && !decorDuplicate,
+        "dekorasi kamp", detail);
+    return 1;
+}
+
+stock Selftest_CheckCompanionGear()
+{
+    /* Tier wajib menaikkan senjata DAN armour; kalau salah satu tidak naik,
+       upgrade berbayar bahan tidak memberi keuntungan nyata (ROADMAP 365). */
+    new weapon0 = Companion_WeaponForTier(0);
+    new weapon1 = Companion_WeaponForTier(1);
+    new weapon2 = Companion_WeaponForTier(2);
+
+    new Float:armour0 = Companion_ArmourForTier(0);
+    new Float:armour1 = Companion_ArmourForTier(1);
+    new Float:armour2 = Companion_ArmourForTier(2);
+
+    new bool:weaponRises = (weapon1 > weapon0 && weapon2 > weapon1);
+    new bool:armourRises = (armour0 == 0.0 && armour1 > armour0 && armour2 > armour1);
+
+    new detail[160];
+    format(detail, sizeof(detail), "senjata %d<%d<%d, armour %.0f<%.0f<%.0f",
+        weapon0, weapon1, weapon2, armour0, armour1, armour2);
+    Selftest_Record(weaponRises && armourRises, "perlengkapan rekrutan naik per tier", detail);
+
+    /* Dokumen lore: isi tidak boleh kosong dan indeks harus selalu valid. */
+    new bool:loreFilled = true;
+    for (new index = 0; index < LORE_DOCUMENT_COUNT; index++)
+    {
+        if (strlen(LoreDocument[index]) < 40) loreFilled = false;
+    }
+    new loreIndex = Lore_IndexForPlayer(0);
+    new bool:loreWrap = (loreIndex >= 0 && loreIndex < LORE_DOCUMENT_COUNT);
+    new bool:loreBadSlot = (Lore_IndexForPlayer(MAX_PLAYERS - 1) < LORE_DOCUMENT_COUNT);
+
+    format(detail, sizeof(detail), "%d dokumen terisi=%d, indeks dalam rentang=%d/%d",
+        LORE_DOCUMENT_COUNT, loreFilled, loreWrap, loreBadSlot);
+    Selftest_Record(loreFilled && loreWrap && loreBadSlot, "dokumen lore", detail);
+    return 1;
+}
+
+stock Selftest_CheckBaseMembers()
+{
+    /* Matriks izin gate: tanpa base (-1) dan member (0) harus DITOLAK, officer
+       (1) dan owner (2) boleh. Tanpa gate ini, anggota biasa bisa membuka base
+       pemain lain atau justru pemilik terkunci di luar. */
+    new bool:denyOutsider = !BaseMembers_RoleAllowsGate(-1);
+    new bool:denyMember = !BaseMembers_RoleAllowsGate(BASE_ROLE_MEMBER);
+    new bool:allowOfficer = BaseMembers_RoleAllowsGate(BASE_ROLE_OFFICER);
+    new bool:allowOwner = BaseMembers_RoleAllowsGate(BASE_ROLE_OWNER);
+    new bool:rejectBogusSlot = (BaseBuild_ToggleGate(0, -5) == -2);
+
+    new detail[176];
+    format(detail, sizeof(detail),
+        "tolak luar/member=%d/%d, izin officer/owner=%d/%d, slot palsu ditolak=%d",
+        denyOutsider, denyMember, allowOfficer, allowOwner, rejectBogusSlot);
+    Selftest_Record(denyOutsider && denyMember && allowOfficer && allowOwner && rejectBogusSlot,
+        "izin gate base", detail);
+    return 1;
+}
+
+stock Selftest_CheckModeration()
+{
+    /* Mute/warn tidak butuh pemain online untuk diuji di level state. Yang
+       penting: state awal bersih, reset idempoten, dan ambang peringatan tetap
+       seperti yang dijanjikan ke staff (3 peringatan -> mute otomatis). */
+    new bool:clean = !Moderation_IsMuted(0) && Moderation_MuteSecondsLeft(0) == 0;
+    new bool:reset = Moderation_ResetPlayerState(0) && !Moderation_IsMuted(0);
+    new bool:threshold = (WARN_BEFORE_MUTE == 3 && WARN_MUTE_MINUTES > 0
+        && MUTE_MAX_MINUTES >= WARN_MUTE_MINUTES);
+
+    new detail[160];
+    format(detail, sizeof(detail), "state bersih=%d, reset=%d, ambang %d peringatan -> %d menit",
+        clean, reset, WARN_BEFORE_MUTE, WARN_MUTE_MINUTES);
+    Selftest_Record(clean && reset && threshold, "mute dan warn", detail);
+    return 1;
+}
+
+stock Selftest_CheckBagSpeed()
+{
+    /* Skala kecepatan harus murni dan berbatas: tanpa kapasitas tas tidak boleh
+       memperlambat, dan faktor maksimum tidak boleh membuat pemain berhenti. */
+    new Float:noBag = Bag_SpeedScale(0);
+    new bool:neutral = (noBag == 1.0);
+    new bool:bounded = (BAG_SLOW_MAX > 0.0 && BAG_SLOW_MAX < 0.5);
+
+    new detail[128];
+    format(detail, sizeof(detail), "tanpa tas=%.2f, batas lambat=%.2f", noBag, BAG_SLOW_MAX);
+    Selftest_Record(neutral && bounded, "berat tas vs kecepatan", detail);
+    return 1;
+}
+
+stock Selftest_CheckWeather()
+{
+    /* Override cuaca harus menolak id di luar rentang dan bisa dikembalikan ke
+       otomatis. Kalau reset gagal, server terjebak cuaca admin selamanya. */
+    new bool:rejectHigh = !World_SetWeather(99);
+    new bool:rejectLow = !World_SetWeather(-5);
+    new bool:accept = World_SetWeather(7) && World_GetWeatherOverride() == 7;
+    World_SetWeather(-1);
+    new bool:reset = (World_GetWeatherOverride() == -1);
+
+    new detail[144];
+    format(detail, sizeof(detail), "tolak 99/%d=1/1, terima 7=%d, reset auto=%d",
+        -5, accept, reset);
+    Selftest_Record(rejectHigh && rejectLow && accept && reset, "override cuaca", detail);
+    return 1;
+}
+
+stock Selftest_CheckNightfall()
+{
+    /* Gate: Nightfall harus TERTUTUP saat boot (belum 20 pemain) dan semua jalur
+       buka/tutup yang berbahaya harus ditolak. Tanpa ini, satu bug di
+       Lobby_AutoTick bisa membuka lobby yang belum siap atau menutup lobby
+       default sehingga semua pemain kehilangan dunia. */
+    new before = LobbyCount;
+
+    new bool:lockedAtBoot = !Lobby_IsValid(NIGHTFALL_LOBBY_ID);
+    new bool:rejectNegative = !Lobby_Unlock(-1, "selftest");
+    new bool:rejectHigh = !Lobby_Unlock(MAX_LOBBIES, "selftest");
+    new bool:rejectSkip = !Lobby_Unlock(LobbyCount + 1, "selftest");
+    new bool:rejectDefault = !Lobby_Lock(0, "selftest") && LobbyCount == before;
+    new bool:noNightOnDefault = !Lobby_IsPermanentNight(0);
+
+    new detail[144];
+    format(detail, sizeof(detail),
+        "tertutup saat boot=%d, tolak -1/%d/lompat=%d/%d/%d, lobby 0 aman=%d",
+        lockedAtBoot, MAX_LOBBIES, rejectNegative, rejectHigh, rejectSkip, rejectDefault);
+
+    Selftest_Record(lockedAtBoot && rejectNegative && rejectHigh && rejectSkip
+        && rejectDefault && noNightOnDefault, "nightfall gate", detail);
+    return 1;
+}
+
+stock Selftest_CheckHudLayout()
+{
+    new offender[16], detail[96];
+    new bool:passed = HUD_WorstCaseFits(offender, sizeof(offender));
+
+    if (passed)
+    {
+        format(detail, sizeof(detail), "%d baris muat di %d px pada string terburuk",
+            sizeof(gHudFitRows), floatround(HUD_SCREEN_WIDTH));
+    }
+    else
+    {
+        format(detail, sizeof(detail), "baris %s melewati tepi kanan %d px",
+            offender, floatround(HUD_SCREEN_WIDTH));
+        Log_Warn(detail);
+    }
+
+    Selftest_Record(passed, "lebar HUD 640px", detail);
+    return 1;
+}
+
 stock Selftest_RunStatic()
 {
     /* Status lapisan transaksi harus terlihat di selftest (audit T1/#13):
@@ -339,6 +602,16 @@ stock Selftest_RunStatic()
     Selftest_CheckParty();
     Selftest_CheckCompanion();
     Selftest_CheckBoss();
+    Selftest_CheckRaidBanner();
+    Selftest_CheckDeaths();
+    Selftest_CheckInstanceQueue();
+    Selftest_CheckCompanionGear();
+    Selftest_CheckBaseMembers();
+    Selftest_CheckModeration();
+    Selftest_CheckBagSpeed();
+    Selftest_CheckWeather();
+    Selftest_CheckNightfall();
+    Selftest_CheckHudLayout();
 
     Selftest_GroundCheck("spawn kamp", SPAWN_X, SPAWN_Y, SPAWN_Z);
     Selftest_GroundCheck("hotspot stash", 1662.0, -2318.0, 13.5);
@@ -386,7 +659,7 @@ stock Selftest_Run(playerid)
         (SELECT COUNT(*) FROM anticheat_flags) AS anticheat_flags, \
         (SELECT COUNT(*) FROM barricades) AS barricades,         (SELECT COUNT(*) FROM graves) AS graves,         (SELECT COUNT(*) FROM contracts) AS contracts,         (SELECT COUNT(*) FROM owned_vehicles) AS owned_vehicles, \
         (SELECT COUNT(*) FROM companions) AS companions, \
-        (SELECT COUNT(*) FROM bans) AS bans, \
+        (SELECT COUNT(*) FROM bans) AS bans, (SELECT COUNT(*) FROM admin_actions) AS admin_actions, \
         (SELECT COUNT(*) FROM party_stash) AS party_stash, \
         (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'characters' AND COLUMN_NAME = 'wounds') AS wound_column, \
         (SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'base_structures' AND COLUMN_NAME = 'fuel') AS fuel_column, \
@@ -413,7 +686,8 @@ public Selftest_OnTablesLoaded(playerid)
     new const tableNames[][] = {
         "accounts", "characters", "bases", "base_structures", "inventory",
         "stash", "item_ledger", "kill_log", "anticheat_flags", "barricades",
-        "graves", "contracts", "owned_vehicles", "companions", "bans", "party_stash"
+        "graves", "contracts", "owned_vehicles", "companions", "bans", "party_stash",
+        "admin_actions"
     };
 
     new details[384];

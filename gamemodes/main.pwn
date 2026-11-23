@@ -21,7 +21,14 @@
 #include "../include/samp_bcrypt.inc"
 
 #include "../include/fcnpc.inc"
+/* Warning 234 muncul dari fungsi stok vendored yang tidak pernah dipanggil
+   proyek (CA_DestroyObject_DC memakai API Iter_SafeRemove lama). Disenyapkan
+   di sini supaya gate "0 warning" tetap tegas untuk kode kita sendiri,
+   tanpa mengubah file pihak ketiga. */
+#pragma warning push
+#pragma warning disable 234
 #include "../include/colandreas.inc"
+#pragma warning pop
 
 #include "modules/config/constants.inc"
 #include "modules/config/items.inc"
@@ -32,6 +39,7 @@
 #include "modules/config/lobbies.inc"
 
 #include "modules/core/logger.inc"
+#include "modules/core/instance.inc"
 #include "modules/core/zombie_stats.inc"
 #include "modules/core/perf.inc"
 #include "modules/core/mysql.inc"
@@ -50,9 +58,13 @@
 #include "modules/inventory/hotbar.inc"
 #include "modules/inventory/container_lock.inc"
 #include "modules/account/account_core.inc"
+#include "modules/core/slotqueue.inc"
+#include "modules/player/deaths.inc"
+#include "modules/content/lore.inc"
 #include "modules/account/char_create.inc"
 #include "modules/admin/roles.inc"
 #include "modules/admin/moderation.inc"
+#include "modules/admin/audit.inc"
 #include "modules/inventory/invpers.inc"
 #include "modules/inventory/stash.inc"
 #include "modules/player/tutorial.inc"
@@ -62,6 +74,7 @@
 #include "modules/progression/contracts.inc"
 #include "modules/player/party.inc"
 #include "modules/player/party_stash.inc"
+#include "modules/player/pstash_log.inc"
 #include "modules/ui/craft_ui.inc"
 #include "modules/economy/vendor.inc"
 #include "modules/economy/trade.inc"
@@ -83,6 +96,7 @@
 #include "modules/zombie/zombie_ai.inc"
 #include "modules/zombie/spawn_director.inc"
 #include "modules/world/events.inc"
+#include "modules/world/base_members.inc"
 #include "modules/world/bases.inc"
 #include "modules/world/base_build.inc"
 #include "modules/zombie/horde.inc"
@@ -90,6 +104,7 @@
 #include "modules/world/companion.inc"
 #include "modules/world/shelter.inc"
 #include "modules/world/mapping.inc"
+#include "modules/world/decor.inc"
 #include "modules/world/lobbies.inc"
 #include "modules/world/vehicles.inc"
 #include "modules/world/garage.inc"
@@ -152,6 +167,9 @@ public OnGameModeInit()
         mysql_tquery(gSQL, "DELETE FROM anticheat_flags WHERE created_at < (UNIX_TIMESTAMP() - 2592000) * 1000", "", "");
         /* Kontrak hari lama tidak berguna lagi (4 row/karakter/hari — audit T13). */
         mysql_tquery(gSQL, "DELETE FROM contracts WHERE day_id < (UNIX_TIMESTAMP() / 86400 - 7)", "", "");
+        /* deaths: 90 hari, pola sama dengan kill_log — tanpa ini tabel tumbuh
+           sebaris per kematian selamanya. */
+        mysql_tquery(gSQL, "DELETE FROM deaths WHERE created_at < UNIX_TIMESTAMP() - 7776000", "", "");
     }
 
     if (CA_Init() == 0)
@@ -187,6 +205,7 @@ public OnGameModeInit()
     SetWorldTime(WorldHour);
 
     Map_Init();
+    Decor_Init();
 
     Interact_Create(INTERACT_EXTRACT, EXTRACTION_X, EXTRACTION_Y, EXTRACTION_Z, 3.0, "Ekstraksi\n{Y} tekan Y");
     Interact_Create(INTERACT_STASH, 1662.0, -2318.0, 13.5, 2.5, "Stash Kamp\n{Y} tekan Y");
@@ -216,6 +235,7 @@ public OnGameModeInit()
     TimerHandles[17] = SetTimer("VehicleFuel_Tick", 2000, true);
     TimerHandles[18] = SetTimer("Escort_Tick", 2000, true);
     TimerHandles[19] = SetTimer("Companion_Tick", 2000, true);
+    SetTimer("Queue_Tick", QUEUE_TICK_MS, true);
 
     SetTimer("Selftest_Boot", 8000, false);
     Selftest_BcryptProbe();
@@ -327,6 +347,7 @@ public OnPlayerConnect(playerid)
     Grave_ResetPlayer(playerid);
     Contracts_Reset(playerid);
     Garage_Reset(playerid);
+    Queue_OnPlayerConnect(playerid);
     Tutorial_Reset(playerid);
     /* TradePartner default 0, sentinel INVALID_PLAYER_ID=65535: tanpa reset
        eksplisit setiap pemain baru dianggap sedang trade dengan playerid 0. */
@@ -511,7 +532,9 @@ public OnPlayerSpawn(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-    #pragma unused killerid, reason
+    /* killerid/reason dulu dibuang di sini; sekarang dicatat supaya "kenapa
+       saya mati" bisa dijawab dan kill farming punya bukti (tabel deaths). */
+    Deaths_Record(playerid, killerid, reason);
 
     PlayerSurvival[playerid][psDeaths]++;
     PlayerSurvival[playerid][psDowned] = 0;
@@ -596,6 +619,17 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
 
 public OnPlayerText(playerid, text[])
 {
+    #pragma unused text
+
+    if (Moderation_IsMuted(playerid))
+    {
+        new line[112];
+        format(line, sizeof(line), "[MUTE] Kamu dibisukan, sisa %d menit.",
+            (Moderation_MuteSecondsLeft(playerid) + 59) / 60);
+        SendClientMessage(playerid, UI_ACCENT_WARN, line);
+        return 0;
+    }
+
     if (!Player_IsAlive(playerid))
     {
         SendClientMessage(playerid, UI_TEXT_MUTED, "[LAST STAND] Anda tidak bisa bicara dalam kondisi ini.");
@@ -623,6 +657,7 @@ public Player_Tick()
         PlayerSurvival[playerid][psZone] = Zone_GetIdAt(x, y, z);
 
         if (PlayerSurvival[playerid][psInShelter]) ShelterDoor_Tick(playerid);
+        Bag_SpeedTick(playerid);   // berat tas: jalur 500 ms, bukan OnPlayerUpdate
         Player_ReviveChannelTick(playerid);
 
         new Float:engineHealth;
@@ -677,3 +712,4 @@ public OnPlayerCommandText(playerid, cmdtext[])
 {
     return Command_Process(playerid, cmdtext) ? 1 : 0;
 }
+

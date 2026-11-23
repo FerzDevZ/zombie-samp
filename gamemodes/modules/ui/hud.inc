@@ -12,6 +12,7 @@ new PlayerText:HudLoadout[MAX_PLAYERS];
 new PlayerText:HudProgress[MAX_PLAYERS];
 new PlayerText:HudVehicle[MAX_PLAYERS];
 new PlayerText:HudBoss[MAX_PLAYERS];
+new PlayerText:HudRaid[MAX_PLAYERS];
 new bool:PlayerHudVisible[MAX_PLAYERS];
 
 /* Dirty-flag render: TextDrawSetString/Show hanya dipanggil kalau nilai
@@ -24,12 +25,14 @@ new HudLastLoadout[MAX_PLAYERS][48];
 new HudLastProgress[MAX_PLAYERS][64];
 new HudLastVehicle[MAX_PLAYERS][64];
 new HudLastBoss[MAX_PLAYERS][64];
+new HudLastRaid[MAX_PLAYERS][64];
 new HudLastNeedColor[MAX_PLAYERS];
 new HudLastInfectColor[MAX_PLAYERS];
 new bool:HudVehicleShown[MAX_PLAYERS];
 new HudFuelColor[MAX_PLAYERS];
 new HudFuelWarnStage[MAX_PLAYERS];
 new bool:HudBossShown[MAX_PLAYERS];
+new bool:HudRaidShown[MAX_PLAYERS];
 
 stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSize)
 {
@@ -38,6 +41,51 @@ stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSi
     strcpy(lastText, text, lastSize);
     PlayerTextDrawSetString(playerid, td, text);
     return 1;
+}
+
+/* TextDraw tidak punya perataan kanan, jadi setiap baris HUD hanya aman kalau
+   diuji dengan string TERBURUK-nya, bukan placeholder pendek. Dua bug lama
+   (gauge BBM 560->440, muatan 560->496, BBM 440->400) semuanya lolos karena
+   tidak ada gate ini. Rasio 35.3 px per LetterSize X dipakai juga oleh
+   tools/hud_preview/generate.py; tabel di bawah HARUS sama dengan angka di
+   HUD_Create dan skrip itu membandingkan keduanya (gagal bila menyimpang). */
+#define HUD_SCREEN_WIDTH 640.0
+#define HUD_CHAR_RATIO   35.3
+
+enum E_HUD_FIT
+{
+    hudFitName[16],
+    Float:hudFitX,
+    Float:hudFitSizeX,
+    hudFitWorstLen
+};
+
+new const gHudFitRows[][E_HUD_FIT] =
+{
+    { "HudBrand",      24.0, 0.22, 10 },
+    { "HudVitals",     24.0, 0.20, 15 },
+    { "HudNeeds",      24.0, 0.19, 28 },
+    { "HudInfection",  24.0, 0.20, 11 },
+    { "HudZone",       24.0, 0.18, 22 },
+    { "HudProgress",   24.0, 0.20, 41 },
+    { "HudLoadout",   496.0, 0.20, 19 },
+    { "HudVehicle",   400.0, 0.17, 38 },
+    { "HudBoss",      210.0, 0.26, 28 },
+    { "HudRaid",      190.0, 0.24, 25 }
+};
+
+stock bool:HUD_WorstCaseFits(offender[], size)
+{
+    offender[0] = EOS;
+    for (new row = 0; row < sizeof(gHudFitRows); row++)
+    {
+        new Float:width = float(gHudFitRows[row][hudFitWorstLen])
+            * gHudFitRows[row][hudFitSizeX] * HUD_CHAR_RATIO;
+        if (gHudFitRows[row][hudFitX] + width <= HUD_SCREEN_WIDTH) continue;
+        format(offender, size, "%s", gHudFitRows[row][hudFitName]);
+        return false;
+    }
+    return true;
 }
 
 stock HUD_Create(playerid)
@@ -78,15 +126,19 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudProgress[playerid], 1);
     PlayerTextDrawFont(playerid, HudProgress[playerid], 1);
 
-    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, 560.0, 330.0, "$0  SCRAP 0");
+    /* x=496 (bukan 560): "$999999  SCRAP 999" = 17 karakter ~120 px, di 560
+       melewati tepi 640 dan terpotong (terlihat di tools/hud_preview). Sama
+       kelas dengan bug gauge BBM yang dulu dipindah 560 -> 440. */
+    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, 496.0, 330.0, "$0  SCRAP 0");
     PlayerTextDrawLetterSize(playerid, HudLoadout[playerid], 0.2, 0.8);
     PlayerTextDrawColor(playerid, HudLoadout[playerid], UI_TEXT_PRIMARY);
     PlayerTextDrawSetOutline(playerid, HudLoadout[playerid], 1);
     PlayerTextDrawFont(playerid, HudLoadout[playerid], 1);
 
-    /* x=440 (bukan 560): baris BBM butuh ~33 karakter. Di 560 teks terpotong
-       keluar layar 640 — gauge lama 30 karakter pun sudah melewati batas. */
-    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 440.0, 346.0, "BBM");
+    /* x=400 (bukan 440): cabang BBM rendah menyertakan kompas pom sehingga
+       barisnya bisa 38 karakter ("BBM [##########] 100/100L pom 8000m TG").
+       Di 440 itu meluber 28 px keluar layar. 400 + 228 px = 628, sisa 12 px. */
+    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 400.0, 346.0, "BBM");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], 0.17, 0.72);
     PlayerTextDrawColor(playerid, HudVehicle[playerid], UI_ACCENT_INFO);
     PlayerTextDrawSetOutline(playerid, HudVehicle[playerid], 1);
@@ -98,6 +150,15 @@ stock HUD_Create(playerid)
     PlayerTextDrawColor(playerid, HudBoss[playerid], UI_ACCENT_DANGER);
     PlayerTextDrawSetOutline(playerid, HudBoss[playerid], 1);
     PlayerTextDrawFont(playerid, HudBoss[playerid], 2);
+
+    /* Banner raid di atas bar boss (boss y=30). Keduanya bisa aktif bersamaan,
+       jadi raid memakai y=16. Lebar ±30 karakter cukup untuk
+       "RAID KAMP 12 ZOMBIE  2:59". */
+    HudRaid[playerid] = CreatePlayerTextDraw(playerid, 190.0, 16.0, "RAID KAMP");
+    PlayerTextDrawLetterSize(playerid, HudRaid[playerid], 0.24, 0.95);
+    PlayerTextDrawColor(playerid, HudRaid[playerid], UI_ACCENT_DANGER);
+    PlayerTextDrawSetOutline(playerid, HudRaid[playerid], 1);
+    PlayerTextDrawFont(playerid, HudRaid[playerid], 2);
 
     PlayerTextDrawShow(playerid, HudBrand[playerid]);
     PlayerTextDrawShow(playerid, HudVitals[playerid]);
@@ -118,20 +179,27 @@ stock HUD_Create(playerid)
     HudFuelColor[playerid] = 0;
     HudFuelWarnStage[playerid] = 0;
     HudLastBoss[playerid][0] = EOS;
+    HudLastRaid[playerid][0] = EOS;
     HudLastNeedColor[playerid] = 0;
     HudLastInfectColor[playerid] = 0;
     HudVehicleShown[playerid] = false;
     HudBossShown[playerid] = false;
+    HudRaidShown[playerid] = false;
     return 1;
 }
 
 /* Client (terutama SA-MP Mobile) membuang PlayerTextDraw setelah respawn atau
    setelah pemain ganti karakter, sehingga HUD hilang permanen walau server
    mengira masih terpasang. Setiap spawn kita tampilkan ulang + reset cache teks
-   supaya tick berikutnya langsung menulis nilai baru. */
-stock HUD_Reshow(playerid)
+   supaya tick berikutnya langsung menulis nilai baru.
+
+   force=false menghormati /hud: pemain yang menyembunyikan HUD tidak boleh
+   dipaksa melihatnya lagi hanya karena mati. Tanpa guard ini, mati sekali
+   membatalkan pilihan pemain secara diam-diam. */
+stock HUD_Reshow(playerid, bool:force = false)
 {
     if (!IsPlayerConnected(playerid)) return 0;
+    if (!force && !PlayerHudVisible[playerid]) return 0;
 
     PlayerTextDrawShow(playerid, HudBrand[playerid]);
     PlayerTextDrawShow(playerid, HudVitals[playerid]);
@@ -148,6 +216,13 @@ stock HUD_Reshow(playerid)
     HudLastZone[playerid][0] = EOS;
     HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
+    /* Banner yang hanya dirender saat aktif juga harus dipaksa tampil ulang:
+       cache teks kosong + flag false membuat tick berikutnya menulis dan
+       menampilkannya lagi kalau raid/boss memang masih berjalan. */
+    HudLastBoss[playerid][0] = EOS;
+    HudLastRaid[playerid][0] = EOS;
+    HudBossShown[playerid] = false;
+    HudRaidShown[playerid] = false;
     return 1;
 }
 
@@ -164,10 +239,12 @@ stock HUD_Hide(playerid)
     PlayerTextDrawHide(playerid, HudProgress[playerid]);
     PlayerTextDrawHide(playerid, HudVehicle[playerid]);
     PlayerTextDrawHide(playerid, HudBoss[playerid]);
+    PlayerTextDrawHide(playerid, HudRaid[playerid]);
 
     PlayerHudVisible[playerid] = false;
     HudVehicleShown[playerid] = false;
     HudBossShown[playerid] = false;
+    HudRaidShown[playerid] = false;
     return 1;
 }
 
@@ -179,6 +256,7 @@ stock HUD_Destroy(playerid)
     PlayerTextDrawDestroy(playerid, HudVehicle[playerid]);
 
     PlayerTextDrawDestroy(playerid, HudBoss[playerid]);
+    PlayerTextDrawDestroy(playerid, HudRaid[playerid]);
     PlayerTextDrawDestroy(playerid, HudInfection[playerid]);
     PlayerTextDrawDestroy(playerid, HudZone[playerid]);
     PlayerTextDrawDestroy(playerid, HudLoadout[playerid]);
@@ -377,6 +455,28 @@ stock HUD_Update(playerid)
     {
         HudBossShown[playerid] = false;
         PlayerTextDrawHide(playerid, HudBoss[playerid]);
+    }
+
+    /* Banner raid: satu-satunya umpan balik bertahan selain toast lobby yang
+       cepat hilang. Jumlah zombie dibaca dari cache Horde_Tick (5 dtk), jadi
+       tidak ada pemindaian ZombiePool di jalur 500 ms ini. */
+    new raidZombies, raidSeconds;
+    if (Horde_GetRaidStatus(Lobby_Of(playerid), raidZombies, raidSeconds))
+    {
+        new raidLine[64];
+        format(raidLine, sizeof(raidLine), "RAID KAMP %d ZOMBIE  %d:%02d",
+            raidZombies, raidSeconds / 60, raidSeconds % 60);
+        HUD_SetIfChanged(playerid, HudRaid[playerid], raidLine, HudLastRaid[playerid], sizeof(HudLastRaid[]));
+        if (!HudRaidShown[playerid])
+        {
+            HudRaidShown[playerid] = true;
+            PlayerTextDrawShow(playerid, HudRaid[playerid]);
+        }
+    }
+    else if (HudRaidShown[playerid])
+    {
+        HudRaidShown[playerid] = false;
+        PlayerTextDrawHide(playerid, HudRaid[playerid]);
     }
     return 1;
 }

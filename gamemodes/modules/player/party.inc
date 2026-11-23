@@ -100,6 +100,46 @@ stock bool:Party_IsSameParty(first, second)
     return PartyLeader[first] == PartyLeader[second];
 }
 
+/* Marker anggota party di radar (ROADMAP: "butuh slot blip tambahan"; ternyata
+   tidak perlu blip — SetPlayerMarkerForPlayer sudah mewarnai titik radar dan
+   nametag sekaligus). Diterapkan hanya saat keanggotaan berubah, bukan per tick. */
+#define PARTY_MARKER_COLOR 0x47C46AFF
+
+stock Party_ApplyMarkersFor(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+
+    foreach (new other : PlayerPool)
+    {
+        if (other == playerid) continue;
+        if (!IsPlayerConnected(other)) continue;
+
+        if (Party_IsSameParty(playerid, other))
+        {
+            SetPlayerMarkerForPlayer(playerid, other, PARTY_MARKER_COLOR);
+        }
+        else
+        {
+            /* Kembalikan ke warna asli pemain, bukan warna paksa: tanpa ini
+               marker tetap hijau setelah keluar party. */
+            SetPlayerMarkerForPlayer(playerid, other, GetPlayerColor(other));
+        }
+    }
+    return 1;
+}
+
+stock Party_RefreshMarkers()
+{
+    foreach (new playerid : PlayerPool)
+    {
+        if (!IsPlayerConnected(playerid)) continue;
+        if (IsPlayerNPC(playerid)) continue;
+        Party_ApplyMarkersFor(playerid);
+    }
+    return 1;
+}
+
+
 stock Party_Notify(leader, const message[], color)
 {
     for (new member = 0; member < MAX_PLAYERS; member++)
@@ -120,6 +160,7 @@ stock Party_Reset(playerid)
     PartyMember[playerid] = false;
     PartyInviteFrom[playerid] = INVALID_PLAYER_ID;
     PartyInviteTick[playerid] = 0;
+    Party_RefreshMarkers();
     return 1;
 }
 
@@ -185,6 +226,7 @@ stock Party_Create(playerid)
 
     PartyMember[playerid] = true;
     PartyLeader[playerid] = playerid;
+    Party_RefreshMarkers();
 
     SendClientMessage(playerid, UI_ACCENT_PRIMARY,
         "[PARTY] Party dibuat. Undang anggota dengan /invite [playerid] atau /party.");

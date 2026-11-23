@@ -1,0 +1,7 @@
+# Satu titik kendali untuk semua instance.
+#   systemctl enable --now laststand.target
+#   systemctl restart laststand.target     (semua instans restart)
+[Unit]
+Description=LAST STAND - semua instance SA-MP
+Wants=laststand-s1.service laststand-s2.service
+After=network-online.target docker.service

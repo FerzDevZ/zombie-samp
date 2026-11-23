@@ -143,6 +143,8 @@ stock Command_Process(playerid, const cmdtext[])
        dan login juga bisa lewat chat. */
     if (!strcmp(cmd, "daftar", true) || !strcmp(cmd, "register", true))
     {
+        if (Queue_BlockAuth(playerid)) return 1;
+
         if (AuthStage[playerid] != AUTH_REGISTER)
         {
             SendClientMessage(playerid, UI_ACCENT_WARN, "[AKUN] Kamu tidak sedang mendaftar. Kalau akun sudah ada, pakai /masuk password.");
@@ -166,6 +168,8 @@ stock Command_Process(playerid, const cmdtext[])
 
     if (!strcmp(cmd, "masuk", true) || !strcmp(cmd, "login", true))
     {
+        if (Queue_BlockAuth(playerid)) return 1;
+
         if (AuthStage[playerid] != AUTH_LOGIN)
         {
             SendClientMessage(playerid, UI_ACCENT_INFO, "[AKUN] Tidak perlu login (akun belum terdaftar atau kamu sudah masuk).");
@@ -427,6 +431,83 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "mute", true) || !strcmp(cmd, "bisukan", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[MUTE] Hanya admin.");
+            return 1;
+        }
+
+        new targetId, minutes, reason[80];
+        if (sscanf(params, "uD(10)s[80]", targetId, minutes, reason) < 1)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /mute [playerid] [menit] [alasan]");
+            return 1;
+        }
+        if (!IsPlayerConnected(targetId))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[MUTE] Pemain tidak ada.");
+            return 1;
+        }
+
+        Moderation_Mute(playerid, targetId, minutes, reason);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "unmute", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[MUTE] Hanya admin.");
+            return 1;
+        }
+
+        new targetId;
+        if (sscanf(params, "u", targetId) != 1)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /unmute [playerid]");
+            return 1;
+        }
+        if (!Moderation_Unmute(playerid, targetId))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[MUTE] Pemain itu tidak sedang dibisukan.");
+        }
+        return 1;
+    }
+
+    if (!strcmp(cmd, "warn", true) || !strcmp(cmd, "peringatkan", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[WARN] Hanya admin.");
+            return 1;
+        }
+
+        new targetId, reason[96];
+        if (sscanf(params, "us[96]", targetId, reason) < 1)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /warn [playerid] [alasan]");
+            return 1;
+        }
+        if (!IsPlayerConnected(targetId))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[WARN] Pemain tidak ada.");
+            return 1;
+        }
+
+        Moderation_Warn(playerid, targetId, reason);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "adminlog", true) || !strcmp(cmd, "audit", true))
+    {
+        new limit = 15;
+        if (sscanf(params, "d", limit) < 1) limit = 15;
+        AdminAudit_ShowRecent(playerid, limit);
+        return 1;
+    }
+
     if (!strcmp(cmd, "bans", true))
     {
         Moderation_ShowBans(playerid);
@@ -658,6 +739,80 @@ stock Command_Process(playerid, const cmdtext[])
             return 1;
         }
         Admin_SetHour(playerid, strval(arg));
+        return 1;
+    }
+
+    if (!strcmp(cmd, "weather", true) || !strcmp(cmd, "cuaca", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[CUACA] Hanya admin.");
+            return 1;
+        }
+
+        new arg[8];
+        if (sscanf(params, "s[8]", arg) != 1)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /weather [0-20] atau /weather auto");
+            return 1;
+        }
+
+        if (!strcmp(arg, "auto", true))
+        {
+            World_SetWeather(-1);
+            SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[CUACA] Kembali ke siklus otomatis (siang cerah, malam badai).");
+            Log_Format(LOG_INFO, "[CUACA] auto oleh account=%d", AccountId[playerid]);
+            return 1;
+        }
+
+        new weatherId = strval(arg);
+        if (!World_SetWeather(weatherId))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[CUACA] Id tidak valid. Rentang 0-20.");
+            return 1;
+        }
+
+        new line[96];
+        format(line, sizeof(line), "[CUACA] Cuaca di-set ke id %d (tetap sampai /weather auto).", weatherId);
+        foreach (new target : PlayerPool) SendClientMessage(target, UI_TEXT_MUTED, line);
+        Log_Format(LOG_INFO, "[CUACA] id=%d oleh account=%d", weatherId, AccountId[playerid]);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "setfuel", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[BBM] Hanya admin.");
+            return 1;
+        }
+        if (GetPlayerState(playerid) != PLAYER_STATE_DRIVER)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[BBM] Kamu harus jadi pengemudi.");
+            return 1;
+        }
+
+        new liters;
+        if (sscanf(params, "d", liters) != 1 || liters < 0)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /setfuel [liter]");
+            return 1;
+        }
+
+        new vehicleid = GetPlayerVehicleID(playerid);
+        if (vehicleid == 0)
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[BBM] Kendaraan tidak terbaca.");
+            return 1;
+        }
+
+        Vehicle_SetFuel(vehicleid, float(liters));
+
+        new line[112];
+        format(line, sizeof(line), "[BBM] Tangki kendaraan %d di-set ke %d liter.", vehicleid, liters);
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
+        Log_Format(LOG_INFO, "[BBM] setfuel veh=%d liter=%d oleh account=%d",
+            vehicleid, liters, AccountId[playerid]);
         return 1;
     }
 
@@ -1126,8 +1281,111 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "kematian", true) || !strcmp(cmd, "deaths", true))
+    {
+        if (!Account_IsPlaying(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[KEMATIAN] Login dulu untuk melihat riwayat.");
+            return 1;
+        }
+        Deaths_ShowLast(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "decor", true))
+    {
+        /* Verifikasi visual dekorasi di client: /decor = daftar, /decor tp N = lihat. */
+        if (!IsServerAdmin(playerid)) return 1;
+
+        new decorArg[8];
+        if (Command_Arg(params, 0, decorArg, sizeof(decorArg)) && !strcmp(decorArg, "tp", true))
+        {
+            new indexText[8];
+            if (!Command_Arg(params, 1, indexText, sizeof(indexText)))
+            {
+                SendClientMessage(playerid, UI_ACCENT_INFO, "Pemakaian: /decor tp <indeks>. Lihat daftar dengan /decor.");
+                return 1;
+            }
+            Decor_TeleportTo(playerid, strval(indexText));
+            return 1;
+        }
+        Decor_ShowList(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "dokumen", true) || !strcmp(cmd, "lore", true))
+    {
+        if (Inventory_CountItem(playerid, ITEM_DOCUMENT) <= 0 && Inventory_CountItem(playerid, ITEM_NOTEBOOK) <= 0)
+        {
+            SendClientMessage(playerid, UI_TEXT_MUTED, "[DOKUMEN] Kamu belum memegang dokumen apa pun.");
+            return 1;
+        }
+        Lore_ShowDocument(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "gudang", true))
+    {
+        /* Tanpa argumen = riwayat peti. Dengan argumen = tunjuk/cabut petugas
+           gudang (hanya pemimpin party, dicek di PartyStash_SetOfficer). */
+        new warehouseTarget = INVALID_PLAYER_ID;
+        if (sscanf(params, "u", warehouseTarget))
+        {
+            PartyStash_ShowHistory(playerid);
+            return 1;
+        }
+        PartyStash_SetOfficer(playerid, warehouseTarget);
+        return 1;
+    }
+
     if (!strcmp(cmd, "base", true))
     {
+        /* Sub-perintah party base (ROADMAP 222). Ditaruh paling depan supaya
+           /base add|remove|members tidak jatuh ke tampilan status. */
+        new sub[12];
+        new subTarget;
+        if (sscanf(params, "s[12]u", sub, subTarget) >= 1)
+        {
+            if (!strcmp(sub, "add", true) || !strcmp(sub, "tambah", true))
+            {
+                if (sscanf(params, "s[12]u", sub, subTarget) != 2)
+                {
+                    SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /base add [playerid]");
+                    return 1;
+                }
+                BaseMembers_Add(playerid, subTarget, BASE_ROLE_MEMBER);
+                return 1;
+            }
+            if (!strcmp(sub, "officer", true))
+            {
+                if (sscanf(params, "s[12]u", sub, subTarget) != 2)
+                {
+                    SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /base officer [playerid]");
+                    return 1;
+                }
+                BaseMembers_Add(playerid, subTarget, BASE_ROLE_OFFICER);
+                return 1;
+            }
+            if (!strcmp(sub, "remove", true) || !strcmp(sub, "kick", true))
+            {
+                if (sscanf(params, "s[12]u", sub, subTarget) != 2)
+                {
+                    SendClientMessage(playerid, UI_ACCENT_WARN, "Pemakaian: /base remove [playerid]");
+                    return 1;
+                }
+                if (!BaseMembers_Remove(playerid, subTarget))
+                {
+                    SendClientMessage(playerid, UI_ACCENT_WARN, "[BASE] Tidak bisa mengeluarkan pemain itu.");
+                }
+                return 1;
+            }
+            if (!strcmp(sub, "members", true) || !strcmp(sub, "anggota", true))
+            {
+                BaseMembers_Show(playerid);
+                return 1;
+            }
+        }
+
         if (Base_Id(playerid) == 0)
         {
             Base_Load(playerid);
@@ -1178,6 +1436,29 @@ stock Command_Process(playerid, const cmdtext[])
     if (!strcmp(cmd, "lobby", true) || !strcmp(cmd, "dunia", true))
     {
         Lobby_ShowSelect(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "nightfall", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[LOBBY] Hanya admin.");
+            return 1;
+        }
+
+        /* Toggle manual untuk pengujian: normalnya populasi yang membuka lobby. */
+        if (Lobby_IsValid(NIGHTFALL_LOBBY_ID))
+        {
+            if (!Lobby_Lock(NIGHTFALL_LOBBY_ID, "perintah admin"))
+            {
+                SendClientMessage(playerid, UI_ACCENT_WARN, "[LOBBY] Tidak bisa ditutup: masih ada pemain di dalamnya.");
+            }
+        }
+        else if (!Lobby_Unlock(NIGHTFALL_LOBBY_ID, "perintah admin"))
+        {
+            SendClientMessage(playerid, UI_ACCENT_WARN, "[LOBBY] Nightfall tidak bisa dibuka sekarang.");
+        }
         return 1;
     }
 
@@ -1431,7 +1712,9 @@ stock Command_Process(playerid, const cmdtext[])
         }
         else
         {
-            HUD_Reshow(playerid);
+            /* force=true: ini perintah eksplisit, jadi harus menampilkan walau
+               PlayerHudVisible masih false dari /hud sebelumnya. */
+            HUD_Reshow(playerid, true);
             SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[HUD] ditampilkan ulang (HP, kebutuhan, zona, BBM, progres).");
         }
         return 1;

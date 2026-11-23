@@ -11,6 +11,9 @@ PASS="${MYSQL_PASS:-change_me}"
 KEEP="${BACKUP_KEEP:-7}"
 DBS=(laststand laststand_s2)
 
+dumped=0
+declare -a backed_up=()
+
 STAMP="$(date +%Y%m%d_%H%M%S)"
 DEST="$ROOT/backups/$STAMP"
 mkdir -p "$DEST"
@@ -21,10 +24,13 @@ if ! docker inspect -f '{{.State.Running}}' "$CONTAINER" 2>/dev/null | grep -q t
 fi
 
 for db in "${DBS[@]}"; do
+    # Database yang tidak ada (mis. laststand_s2 belum dibuat di dev) dilewati,
+    # bukan mematikan seluruh backup. Gagal total hanya kalau TIDAK ADA yang
+    # berhasil di-dump — kalau tidak, cron harian error setiap malam.
     if ! docker exec "$CONTAINER" mariadb -u"$USER_NAME" -p"$PASS" -N -B \
         -e "SELECT 1" "$db" >/dev/null 2>&1; then
-        echo "[BACKUP] GAGAL: database '$db' tidak bisa diakses." >&2
-        exit 1
+        echo "[BACKUP] lewati: database '$db' tidak ada / tidak bisa diakses." >&2
+        continue
     fi
 
     docker exec "$CONTAINER" mariadb-dump -u"$USER_NAME" -p"$PASS" \
@@ -34,7 +40,14 @@ for db in "${DBS[@]}"; do
 
     size="$(du -h "$DEST/$db.sql.gz" | cut -f1)"
     echo "[BACKUP] $db.sql.gz ($size)"
+    dumped=$((dumped + 1))
+    backed_up+=("$db")
 done
+
+if [[ "$dumped" -eq 0 ]]; then
+    echo "[BACKUP] GAGAL: tidak ada database yang berhasil di-dump." >&2
+    exit 1
+fi
 
 for f in server.cfg mysql.ini; do
     [ -f "$ROOT/$f" ] && cp "$ROOT/$f" "$DEST/root_$f"
@@ -51,7 +64,7 @@ done
 
 {
     echo "stamp=$STAMP"
-    echo "databases=${DBS[*]}"
+    echo "databases=${backed_up[*]}"
     echo "host=$(hostname)"
     echo "amx_sha=$(sha256sum "$ROOT/gamemodes/main.amx" 2>/dev/null | cut -d' ' -f1)"
 } > "$DEST/MANIFEST"

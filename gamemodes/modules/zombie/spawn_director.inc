@@ -139,6 +139,10 @@ public Director_Report()
 
     Zombie_RecountZones();
 
+    /* Populasi diperiksa sekali per menit: Nightfall dibuka/ditutup di
+       sini, bukan lewat perintah, supaya tidak ada admin yang harus ingat. */
+    Lobby_AutoTick();
+
     new zoneLabel[48], line[144], lobbyLabel[32];
 
     for (new lobbyId = 0; lobbyId < LobbyCount; lobbyId++)

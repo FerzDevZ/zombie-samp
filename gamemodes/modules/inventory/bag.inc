@@ -145,6 +145,44 @@ stock bool:Bag_IsOverloaded(playerid)
     return Inventory_GetWeight(playerid) >= capacity * BAG_OVERLOAD_RATIO;
 }
 
+/* Berat tas -> kecepatan lari (ROADMAP "butuh tuning").
+   TIDAK memakai OnPlayerUpdate (invarian: tidak ada logika gameplay di callback
+   itu). Skala murni supaya bisa diuji selftest tanpa client; tick hanya
+   menerapkannya. Nilai 0.78 = tas penuh berlebih membuat lari 22% lebih lambat. */
+#define BAG_SLOW_MAX        0.22
+#define BAG_SLOW_MIN_SPEED  0.045   // di bawah ini pemain hanya berjalan: jangan disentuh
+
+stock Float:Bag_SpeedScale(playerid)
+{
+    if (!Bag_IsOverloaded(playerid)) return 1.0;
+
+    new Float:capacity = Bag_Capacity(playerid);
+    if (capacity <= 0.0) return 1.0;
+
+    new Float:ratio = Inventory_GetWeight(playerid) / capacity;
+    if (ratio < 0.0) ratio = 0.0;
+    if (ratio > 1.0) ratio = 1.0;
+
+    return 1.0 - (ratio * BAG_SLOW_MAX);
+}
+
+stock Bag_SpeedTick(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+    if (GetPlayerState(playerid) != PLAYER_STATE_ONFOOT) return 0;
+    if (!Bag_IsOverloaded(playerid)) return 0;
+
+    new Float:vx, Float:vy, Float:vz;
+    GetPlayerVelocity(playerid, vx, vy, vz);
+
+    new Float:speed = floatsqroot((vx * vx) + (vy * vy));
+    if (speed < BAG_SLOW_MIN_SPEED) return 0;
+
+    new Float:scale = Bag_SpeedScale(playerid);
+    SetPlayerVelocity(playerid, vx * scale, vy * scale, vz);
+    return 1;
+}
+
 stock Bag_WeightBar(playerid, dest[], size)
 {
     new Float:weight = Inventory_GetWeight(playerid);

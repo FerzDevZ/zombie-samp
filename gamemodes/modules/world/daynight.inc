@@ -21,6 +21,23 @@ stock World_GetHour()
     return WorldHour;
 }
 
+new WorldWeatherOverride = -1;
+
+/* Cuaca manual menimpa siklus otomatis sampai di-reset dengan /weather auto.
+   Tanpa override ini, World_Tick akan menimpanya kembali satu jam kemudian. */
+stock World_SetWeather(weatherId)
+{
+    if (weatherId < -1 || weatherId > 20) return 0;
+    WorldWeatherOverride = weatherId;
+    if (weatherId >= 0) SetWeather(weatherId);
+    return 1;
+}
+
+stock World_GetWeatherOverride()
+{
+    return WorldWeatherOverride;
+}
+
 /* Setter admin: memaksa jam dunia lalu menerapkan cuaca yang sesuai. */
 stock World_SetHour(hour)
 {
@@ -43,6 +60,17 @@ public World_Tick()
     }
 
     SetWorldTime(WorldHour);
+
+    /* Jam per pemain harus diperbarui: Nightfall memakai SetPlayerTime sendiri
+       dan SetWorldTime global tidak menyentuhnya. Iterasinya ada di modul lobby
+       karena PlayerPool baru dideklarasikan setelah file ini. */
+    Lobby_ReapplyClocks();
+
+    if (WorldWeatherOverride >= 0)
+    {
+        SetWeather(WorldWeatherOverride);
+        return 1;
+    }
 
     if (World_IsNight())
     {

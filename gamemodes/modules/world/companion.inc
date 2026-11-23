@@ -52,6 +52,18 @@
 #define COMPANION_TIER2_ELEC    4
 #define COMPANION_TIER2_AMMO    10
 
+/* Perlengkapan per tier (ROADMAP 365): senjata naik, armour ikut, dan rekrutan
+   membawakan loot yang dia lewati. Armour harus diterapkan ulang setiap spawn
+   karena FCNPC kehilangan armor saat respawn. */
+#define COMPANION_WEAPON_T1     31
+#define COMPANION_WEAPON_T2     34
+#define COMPANION_ARMOUR_T1     25.0
+#define COMPANION_ARMOUR_T2     50.0
+#define COMPANION_PICKUP_MS     3000
+#define COMPANION_PICKUP_RANGE  4.0
+
+new CompNextPickupTick[MAX_PLAYERS];
+
 forward Companion_Spawn(playerid);
 forward Companion_Despawn(playerid);
 forward Companion_Delete(playerid);
@@ -82,6 +94,50 @@ stock Float:Companion_MaxHealth(playerid)
         case 1: return COMPANION_TIER1_HP;
     }
     return COMPANION_MAX_HP;
+}
+
+/* Murni per tier supaya bisa diuji selftest tanpa menyentuh state pemain. */
+stock Companion_WeaponForTier(tier)
+{
+    switch (tier)
+    {
+        case 2: return COMPANION_WEAPON_T2;
+        case 1: return COMPANION_WEAPON_T1;
+    }
+    return COMPANION_WEAPON;
+}
+
+stock Float:Companion_ArmourForTier(tier)
+{
+    switch (tier)
+    {
+        case 2: return COMPANION_ARMOUR_T2;
+        case 1: return COMPANION_ARMOUR_T1;
+    }
+    return 0.0;
+}
+
+stock Companion_Weapon(playerid)
+{
+    return Companion_WeaponForTier(CompTier[playerid]);
+}
+
+stock Float:Companion_Armour(playerid)
+{
+    return Companion_ArmourForTier(CompTier[playerid]);
+}
+
+/* Satu tempat penerapan perlengkapan: spawn, upgrade, dan pemulihan. */
+stock Companion_ApplyGear(playerid)
+{
+    new npcid = CompNpc[playerid];
+    if (!FCNPC_IsValid(npcid)) return 0;
+
+    FCNPC_SetWeapon(npcid, Companion_Weapon(playerid));
+    FCNPC_SetAmmo(npcid, 9999);
+    FCNPC_SetWeaponAccuracy(npcid, Companion_Weapon(playerid), 0.85 + 0.05 * float(CompTier[playerid]));
+    FCNPC_SetArmour(npcid, Companion_Armour(playerid));
+    return 1;
 }
 
 stock Float:Companion_ShotDamage(playerid)
@@ -167,11 +223,10 @@ stock Companion_Spawn(playerid)
     FCNPC_SetHealth(npcid, CompHealth[playerid]);
     FCNPC_SetInvulnerable(npcid, false);
     FCNPC_SetSpeed(npcid, 0.75);
-    FCNPC_SetWeapon(npcid, COMPANION_WEAPON);
-    FCNPC_SetAmmo(npcid, 9999);
-    FCNPC_SetWeaponAccuracy(npcid, COMPANION_WEAPON, 0.85);
 
     CompNpc[playerid] = npcid;
+    Companion_ApplyGear(playerid);
+    CompNextPickupTick[playerid] = 0;
     CompNextFireTick[playerid] = 0;
     CompNextRepathTick[playerid] = 0;
     return 1;
@@ -275,6 +330,17 @@ stock Companion_TickPlayer(playerid)
 
     new Float:nx, Float:ny, Float:nz, Float:px, Float:py, Float:pz;
     FCNPC_GetPosition(npcid, nx, ny, nz);
+
+    /* Rekrutan membawakan loot yang dilewatinya (ROADMAP 365). Dibatasi satu
+       ambilan per 3 detik supaya tidak menyapu seluruh medan dalam satu tick. */
+    if (now - CompNextPickupTick[playerid] >= 0)
+    {
+        CompNextPickupTick[playerid] = now + COMPANION_PICKUP_MS;
+        if (Loot_TakeNearPoint(playerid, nx, ny, nz, COMPANION_PICKUP_RANGE))
+        {
+            Toast_Show(playerid, "Rekrutan", "Membawakan barang untukmu.", UI_ACCENT_PRIMARY);
+        }
+    }
 
     /* Zombie yang menempel mencakar rekrutan (simulasi melee, zombie tidak menarget NPC). */
     new Float:leech = 0.0;
@@ -446,6 +512,28 @@ stock Companion_OnDisconnect(playerid)
     CompHealth[playerid] = COMPANION_MAX_HP;
     CompTier[playerid] = 0;
     CompName[playerid][0] = EOS;
+    return 1;
+}
+
+/* Dipanggil dispatcher saat pemain menekan Y. Mengembalikan 1 hanya kalau
+   pemain memang berdiri di papan rekrutmen, supaya Y di tempat lain tetap
+   menjalankan aksi lain (loot, mayat, hotspot). */
+stock Companion_TryRecruitInteract(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+    if (!Account_IsPlaying(playerid)) return 0;
+    if (PlayerSurvival[playerid][psInShelter]) return 0;
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+
+    if (VectorSize(x - COMPANION_RECRUITER_X, y - COMPANION_RECRUITER_Y, z - COMPANION_RECRUITER_Z)
+        > COMPANION_RECRUITER_RANGE)
+    {
+        return 0;
+    }
+
+    Companion_Recruit(playerid);
     return 1;
 }
 
@@ -685,7 +773,7 @@ stock Companion_Upgrade(playerid)
     if (FCNPC_IsValid(CompNpc[playerid]))
     {
         FCNPC_SetHealth(CompNpc[playerid], CompHealth[playerid]);
-        FCNPC_SetWeapon(CompNpc[playerid], COMPANION_WEAPON);
+        Companion_ApplyGear(playerid);
     }
 
     Companion_Save(playerid);

@@ -9,6 +9,16 @@
 
 #define DIALOG_BUILD_MAIN 2701
 
+/* Gate: satu-satunya struktur yang bisa dibuka. Naik 3.2 unit supaya pemain
+   bisa lewat, menutup otomatis setelah 8 detik agar tidak tertinggal terbuka.
+   CollAndreas tidak punya "MoveObject", jadi objek tabrakan dihancurkan saat
+   terbuka dan dibuat ulang saat tertutup — tanpa itu pemain tetap tertahan
+   secara fisik meski model sudah naik. */
+#define BASE_GATE_OPEN_HEIGHT  3.2
+#define BASE_GATE_OPEN_SPEED   1.4
+#define BASE_GATE_AUTO_CLOSE_MS 8000
+#define BASE_GATE_USE_RANGE    3.0
+
 forward BaseBuild_OnRowsLoaded(playerid);
 forward BaseBuild_OnInserted(playerid, slot);
 
@@ -31,7 +41,9 @@ enum E_STRUCT_SLOT
     ssHealthMax,
     Float:ssFuel,
     ssLastFuelSave,
-    ssLastSaveTick
+    ssLastSaveTick,
+    bool:ssGateOpen,
+    ssGateCloseTick
 };
 
 new BaseStructure[BASE_MAX_STRUCTURES][E_STRUCT_SLOT];
@@ -169,6 +181,108 @@ stock BaseBuild_CreateVisuals(slot)
     return 1;
 }
 
+stock BaseBuild_NearestGate(playerid, Float:range)
+{
+    if (range <= 0.0) range = BASE_GATE_USE_RANGE;
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+
+    new best = -1;
+    new Float:bestDistance = range;
+
+    for (new slot = 0; slot < BASE_MAX_STRUCTURES; slot++)
+    {
+        if (!BaseStructure[slot][ssActive]) continue;
+        if (BaseStructure[slot][ssType] != STRUCT_GATE) continue;
+        if (BaseStructure[slot][ssLobby] != Lobby_Of(playerid)) continue;
+
+        new Float:distance = VectorSize(x - BaseStructure[slot][ssX],
+            y - BaseStructure[slot][ssY], z - BaseStructure[slot][ssZ]);
+        if (distance > bestDistance) continue;
+
+        bestDistance = distance;
+        best = slot;
+    }
+    return best;
+}
+
+/* Mengembalikan: 1 dibuka, 0 ditutup, -1 tidak berhak, -2 bukan gate. */
+stock BaseBuild_ToggleGate(playerid, slot)
+{
+    if (slot < 0 || slot >= BASE_MAX_STRUCTURES) return -2;
+    if (!BaseStructure[slot][ssActive]) return -2;
+    if (BaseStructure[slot][ssType] != STRUCT_GATE) return -2;
+
+    if (!BaseMembers_CanOperateGate(playerid, BaseStructure[slot][ssBaseId]))
+    {
+        SendClientMessage(playerid, UI_ACCENT_WARN,
+            "[BASE] Gate hanya bisa dibuka pemilik atau officer base.");
+        return -1;
+    }
+
+    if (BaseStructure[slot][ssGateOpen]) return BaseBuild_CloseGate(slot);
+
+    BaseStructure[slot][ssGateOpen] = true;
+    BaseStructure[slot][ssGateCloseTick] = GetTickCount() + BASE_GATE_AUTO_CLOSE_MS;
+
+    if (BaseStructure[slot][ssObject] != STREAMER_TAG_OBJECT:0)
+    {
+        MoveDynamicObject(BaseStructure[slot][ssObject],
+            BaseStructure[slot][ssX], BaseStructure[slot][ssY],
+            BaseStructure[slot][ssZ] - 0.7 + BASE_GATE_OPEN_HEIGHT,
+            BASE_GATE_OPEN_SPEED);
+    }
+
+    if (BaseStructure[slot][ssCollision] != -1)
+    {
+        CA_DestroyObject(BaseStructure[slot][ssCollision]);
+        BaseStructure[slot][ssCollision] = -1;
+    }
+
+    Toast_Show(playerid, "Gate", "Dibuka. Menutup otomatis dalam 8 detik.", UI_ACCENT_PRIMARY);
+    return 1;
+}
+
+stock BaseBuild_CloseGate(slot)
+{
+    if (slot < 0 || slot >= BASE_MAX_STRUCTURES) return 0;
+    if (!BaseStructure[slot][ssActive]) return 0;
+
+    BaseStructure[slot][ssGateOpen] = false;
+    BaseStructure[slot][ssGateCloseTick] = 0;
+
+    if (BaseStructure[slot][ssObject] != STREAMER_TAG_OBJECT:0)
+    {
+        MoveDynamicObject(BaseStructure[slot][ssObject],
+            BaseStructure[slot][ssX], BaseStructure[slot][ssY],
+            BaseStructure[slot][ssZ] - 0.7, BASE_GATE_OPEN_SPEED);
+    }
+
+    if (BaseStructure[slot][ssCollision] == -1 && gStructures[BaseStructure[slot][ssType]][stSolid])
+    {
+        BaseStructure[slot][ssCollision] = CA_CreateObject(BASE_WALL_OBJECT_MODEL,
+            BaseStructure[slot][ssX], BaseStructure[slot][ssY], BaseStructure[slot][ssZ] - 0.7,
+            0.0, 0.0, BaseStructure[slot][ssRotZ], true);
+    }
+    return 0;
+}
+
+/* Tutup otomatis: dipanggil dari Base_TickBody (500 ms), jadi gate tidak
+   pernah tertinggal terbuka setelah ditinggal pemain. */
+stock BaseBuild_GateTick()
+{
+    new now = GetTickCount();
+    for (new slot = 0; slot < BASE_MAX_STRUCTURES; slot++)
+    {
+        if (!BaseStructure[slot][ssActive]) continue;
+        if (!BaseStructure[slot][ssGateOpen]) continue;
+        if (BaseStructure[slot][ssGateCloseTick] > now) continue;
+        BaseBuild_CloseGate(slot);
+    }
+    return 1;
+}
+
 stock BaseBuild_DestroySlot(slot, bool:deleteFromDb)
 {
     if (slot < 0 || slot >= BASE_MAX_STRUCTURES) return 0;
@@ -268,6 +382,31 @@ public BaseBuild_OnRowsLoaded(playerid)
     new line[128];
     format(line, sizeof(line), "[BUILD] %d struktur dimuat untuk base #%d.", rows, baseId);
     SendClientMessage(playerid, UI_TEXT_SECONDARY, line);
+    return 1;
+}
+
+/* Migrasi base ke lobby lain (ROADMAP 306).
+   Baris `base_structures` TIDAK dihapus: hanya visual/slot memori yang dibuang
+   lalu dimuat ulang dengan world id lobby baru. Tanpa ini, pemain yang pindah
+   lobby kehilangan seluruh struktur base-nya (tertinggal di world lama). */
+stock BaseBuild_MigrateLobby(baseId, lobbyId)
+{
+    if (baseId <= 0) return 0;
+    if (!Lobby_IsValid(lobbyId)) return 0;
+
+    for (new slot = 0; slot < BASE_MAX_STRUCTURES; slot++)
+    {
+        if (!BaseStructure[slot][ssActive]) continue;
+        if (BaseStructure[slot][ssBaseId] != baseId) continue;
+        BaseBuild_DestroySlot(slot, false);
+    }
+
+    for (new playerid = 0; playerid < MAX_PLAYERS; playerid++)
+    {
+        if (Base_Id(playerid) != baseId) continue;
+        BaseBuildLoadedBase[playerid] = 0;
+        BaseLobby[playerid] = lobbyId;
+    }
     return 1;
 }
 

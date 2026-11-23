@@ -633,8 +633,8 @@ stock Account_LoadCharacters(playerid)
 {
     new query[192];
     mysql_format(gSQL, query, sizeof(query),
-        "SELECT id, slot, name, level, cash FROM characters WHERE account_id = %d ORDER BY slot ASC",
-        AccountId[playerid]);
+        "SELECT id, slot, name, level, cash FROM characters          WHERE account_id = %d AND server_id = %d ORDER BY slot ASC",
+        AccountId[playerid], Server_InstanceId());
     mysql_tquery(gSQL, query, "Account_OnCharactersLoaded", "i", playerid);
     return 1;
 }
@@ -703,8 +703,8 @@ stock Account_CreateCharacter(playerid, const charName[])
 
     new query[256];
     mysql_format(gSQL, query, sizeof(query),
-        "INSERT INTO characters (account_id, slot, name) VALUES (%d, %d, '%e')",
-        AccountId[playerid], slot, charName);
+        "INSERT INTO characters (account_id, server_id, slot, name) VALUES (%d, %d, %d, '%e')",
+        AccountId[playerid], Server_InstanceId(), slot, charName);
     mysql_tquery(gSQL, query, "Account_OnCharacterCreated", "i", playerid);
     return 1;
 }
@@ -753,8 +753,8 @@ stock Account_LoadCharacterData(playerid)
     new query[384];
     mysql_format(gSQL, query, sizeof(query),
         "SELECT name, skin, gender, age, race, origin, occupation, trait, appearance, level, xp, cash, scrap, infection, health, zone_id, lobby_id, pos_x, pos_y, pos_z, pos_a, hunger, thirst, bladder, wounds, tutorial_step, tutorial_count, hotbar, playtime_sec, rank_points \
-         FROM characters WHERE id = %d LIMIT 1",
-        ActiveCharId[playerid]);
+         FROM characters WHERE id = %d AND server_id = %d LIMIT 1",
+        ActiveCharId[playerid], Server_InstanceId());
     mysql_tquery(gSQL, query, "Account_OnCharacterLoaded", "i", playerid);
     return 1;
 }

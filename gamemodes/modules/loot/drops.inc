@@ -475,6 +475,15 @@ stock Loot_TakeNearest(playerid, Float:radius)
 
     new Float:px, Float:py, Float:pz;
     GetPlayerPos(playerid, px, py, pz);
+    return Loot_TakeNearPoint(playerid, px, py, pz, radius);
+}
+
+/* Titik acuan eksplisit: dipakai rekrutan NPC yang "membawakan" barang di
+   dekat dirinya, bukan di dekat pemain. Aturan lobby/VW/kepemilikan tetap
+   memakai pemain sebagai pemilik sah item. */
+stock Loot_TakeNearPoint(playerid, Float:px, Float:py, Float:pz, Float:radius)
+{
+    if (!Account_IsPlaying(playerid)) return 0;
 
     new lobbyId = Lobby_Of(playerid);
     new bestSlot = -1;
