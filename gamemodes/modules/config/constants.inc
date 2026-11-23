@@ -186,6 +186,15 @@
 #define HUD_GAYA_PENUH              1
 #define HUD_GAYA_MOBILE             2
 #define HUD_GAYA_MINIMAL            3
+
+/* Modul kolom kendaraan (HUD kanan). Bitmask di characters.pref_hud_modul:
+   pemain boleh mematikan satu baris tanpa mematikan seluruh kolom.
+   Didefinisikan di sini — bukan di settings.inc — karena hud.inc di-include
+   lebih dulu dan tidak boleh bergantung pada urutan include. */
+#define SETTINGS_MODUL_VEH          1
+#define SETTINGS_MODUL_SPEEDO       2
+#define SETTINGS_MODUL_GPS          4
+#define SETTINGS_MODUL_ALL          7
 #define HUD_GAYA_DEFAULT            HUD_GAYA_PENUH
 #define HUD_SCALE_MOBILE            0.70
 #define HUD_SCALE_MINIMAL           0.85

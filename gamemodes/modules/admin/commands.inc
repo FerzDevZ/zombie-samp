@@ -1352,6 +1352,21 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "gps", true) || !strcmp(cmd, "penunjuk", true))
+    {
+        /* /gps            -> daftar tujuan
+           /gps off        -> matikan penunjuk arah
+           Hanya dua bentuk ini; argumen lain diperlakukan sebagai buka menu. */
+        if (!strcmp(params, "off", true) || !strcmp(params, "mati", true))
+        {
+            if (!Gps_Clear(playerid, "[GPS] Penunjuk arah dimatikan."))
+                SendClientMessage(playerid, UI_TEXT_SECONDARY, "[GPS] Tidak ada tujuan aktif.");
+            return 1;
+        }
+        Gps_ShowMenu(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "huddiag", true))
     {
         HUD_Diag(playerid);

@@ -50,6 +50,17 @@ new AirdropNextAt = 0;
 
 forward Airdrop_Tick();
 
+/* Posisi airdrop untuk penunjuk arah (/gps). Hanya sah saat fase aktif:
+   sesudah LANDED + cleanup, koordinat lama tidak boleh dikejar pemain. */
+stock bool:Airdrop_GetPos(&Float:x, &Float:y, &Float:z)
+{
+    if (gAirdrop[aState] == AIRDROP_STATE_IDLE) return false;
+    x = gAirdrop[aX];
+    y = gAirdrop[aY];
+    z = gAirdrop[aZ];
+    return true;
+}
+
 stock Airdrop_PickZone()
 {
     /* Kumpulkan kandidat non-hub dulu, lalu pilih acak — random bias atas

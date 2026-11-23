@@ -40,3 +40,17 @@ Aturan tetap: layar 640x480; teks terburuk tetap diuji (gate `gHudFitRows` + `ge
 3. `generate.py` GATE LULUS (WORST_TEXT HudVehicle diperbarui).
 4. `gallery.py` 12 halaman, guard literal skala (`0.70`, `0.85`).
 5. Vision check: halaman mobile tidak menimpa zona joystick/tombol sentuh.
+
+## Kolom kendaraan v5 (commit ini)
+
+| Baris | Isi | Sumber | Gate |
+|---|---|---|---|
+| Identitas | `MOBIL <model>  TERKUNCI/TERBUKA` | `GetVehicleModel` + `Vehicle_IsLocked` | worst-case 19 char, muat 264 px |
+| Speedometer | angka besar font 2 + `km/j` + bar KMH | `GetVehicleVelocity` × 180, batas 240 | bar 264×4, warna ≥140 kuning, 240 merah |
+| Bahan bakar | `FUEL nn%  n/nnL pom`. . . + bar | `Vehicle_GetFuel` | bar tetap tampil di semua gaya |
+| GPS | `GPS 234m TL  <nama>` + bar progres | `Gps_*` (`gps.inc`) | nama dipotong 12 char, arah dari tabel 8 slot |
+
+- Dua kartu: `y 258..322` (info/speed/FUEL) dan `y 323..345` (GPS) — keluar dari mobil tidak meninggalkan kartu kosong.
+- Gaya: PENUH & MOBILE = kartu + bar KMH + bar GPS; MINIMAL = teks + bar FUEL saja (bar KMH/GPS dan kartu hilang, **bar FUEL tidak pernah hilang**).
+- Per-modul bisa dimatikan di `/settings` (butir 9–11) lewat `characters.pref_hud_modul`.
+- `/gps` membuka TABLIST: Base saya / Airdrop aktif / Rekan party / Matikan; tiba otomatis di bawah 20 m.

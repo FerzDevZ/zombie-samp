@@ -133,6 +133,9 @@
 
 #include "modules/player/needs.inc"
 #include "modules/interact/dispatcher.inc"
+/* gps.inc berdiri sebelum hud.inc: HUD membaca state GPS, GPS tidak pernah
+   memanggil HUD. Urutan ini mencegah dua modul saling menunggu. */
+#include "modules/ui/gps.inc"
 #include "modules/ui/hud.inc"
 #include "modules/ui/settings.inc"
 #include "modules/ui/inventory_ui.inc"
@@ -304,6 +307,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     if (VehicleMods_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Notes_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (WeaponAttach_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+    if (Gps_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Settings_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Distraction_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Menu_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
@@ -379,6 +383,7 @@ public OnPlayerConnect(playerid)
        tengah layar saat NPC ikut masuk mobil. Disembunyikan untuk pemain ini
        sejak connect; NPC yang lahir belakangan ditangani Npc_HideNameTag. */
     Npc_HideAllNameTags(playerid);
+    Gps_Reset(playerid);
     Account_ResetPlayer(playerid);
     Stash_Reset(playerid);
     Inventory_InitCondition(playerid);
@@ -467,6 +472,7 @@ public OnPlayerDisconnect(playerid, reason)
     Iter_Remove(PlayerPool, playerid);
     Hash_PlayerRemove(playerid);
     Bag_ResetPlayer(playerid);
+    Gps_Reset(playerid);
     HUD_Destroy(playerid);
     return 1;
 }

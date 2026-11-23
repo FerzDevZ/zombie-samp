@@ -25,6 +25,8 @@
 #define SETTINGS_SCALE_MIN   0
 #define SETTINGS_SCALE_MAX   4   /* 0.8 .. 1.2 langkah 0.1 */
 
+/* SETTINGS_MODUL_* ada di config/constants.inc: hud.inc memakainya dan
+   di-include sebelum berkas ini. */
 #define LANG_ID 1
 #define LANG_EN 2
 
@@ -39,8 +41,23 @@ new gPrefPrompt[MAX_PLAYERS];       /* 1 tampil, 2 sembunyi */
 new gPrefLang[MAX_PLAYERS];         /* LANG_ID / LANG_EN */
 new gPrefBeSide[MAX_PLAYERS];       /* 1 kanan, 2 kiri */
 new gPrefTdMode[MAX_PLAYERS];       /* TD_MODE_AUTO / PC / MOBILE */
+new gPrefHudModul[MAX_PLAYERS];     /* bitmask kolom kendaraan (default semua) */
 
 new PlayerText:gHudBloodFx[MAX_PLAYERS];
+
+/* Baris kolom kendaraan aktif? Dipakai hud.inc dan dialog settings. Bit yang
+   tidak dikenal diabaikan, jadi menambah baris ke-4 tidak memaksa migrasi. */
+stock bool:Settings_ModulEnabled(playerid, bit)
+{
+    return (gPrefHudModul[playerid] & bit) != 0;
+}
+
+stock Settings_ModulToggle(playerid, bit)
+{
+    gPrefHudModul[playerid] ^= bit;
+    return 1;
+}
+
 
 forward Settings_OnLoaded(playerid);
 
@@ -55,13 +72,15 @@ stock Settings_Load(playerid)
     gPrefLang[playerid] = LANG_ID;
     gPrefBeSide[playerid] = SETTINGS_FLAG_ON;
     gPrefTdMode[playerid] = TD_MODE_AUTO;
+    gPrefHudModul[playerid] = SETTINGS_MODUL_ALL;
     gTdMobileSafe[playerid] = gHudMobileClient[playerid];
     if (ActiveCharId[playerid] == 0 || !SQL_IsReady()) return 0;
 
     new query[224];
     mysql_format(gSQL, query, sizeof(query),
         "SELECT pref_hud_gaya, pref_hud_detail, pref_hud_scale, pref_contrast, \
-                pref_blood_fx, pref_prompt, pref_lang, pref_be_side \
+                pref_blood_fx, pref_prompt, pref_lang, pref_be_side, \
+                pref_td_mode, pref_hud_modul \
          FROM characters WHERE id = %d AND server_id = %d LIMIT 1",
         ActiveCharId[playerid], Server_InstanceId());
     mysql_tquery(gSQL, query, "Settings_OnLoaded", "i", playerid);
@@ -83,6 +102,8 @@ public Settings_OnLoaded(playerid)
     cache_get_value_name_int(0, "pref_lang", lang);
     cache_get_value_name_int(0, "pref_be_side", side);
     cache_get_value_name_int(0, "pref_td_mode", tdmode);
+    new modul = SETTINGS_MODUL_ALL;
+    cache_get_value_name_int(0, "pref_hud_modul", modul);
 
     if (gaya >= SETTINGS_HUD_AUTO && gaya <= HUD_GAYA_MINIMAL) gPrefHudGaya[playerid] = gaya;
     if (detail == SETTINGS_FLAG_ON || detail == SETTINGS_FLAG_OFF) gPrefHudDetail[playerid] = detail;
@@ -93,6 +114,8 @@ public Settings_OnLoaded(playerid)
     if (lang == LANG_ID || lang == LANG_EN) gPrefLang[playerid] = lang;
     if (side == SETTINGS_FLAG_ON || side == SETTINGS_FLAG_OFF) gPrefBeSide[playerid] = side;
     if (tdmode >= TD_MODE_AUTO && tdmode <= TD_MODE_MOBILE) gPrefTdMode[playerid] = tdmode;
+    /* Nilai di luar 0..7 berarti baris ditulis versi lain: pakai default. */
+    gPrefHudModul[playerid] = (modul >= 0 && modul <= SETTINGS_MODUL_ALL) ? modul : SETTINGS_MODUL_ALL;
     gTdMobileSafe[playerid] = Settings_TdMobileSafe(playerid);
 
     /* HUD belum tentu dibuat saat data preferensi tiba (asinkron). Kalau
@@ -127,14 +150,16 @@ stock Settings_Save(playerid)
 {
     if (ActiveCharId[playerid] == 0 || !SQL_IsReady()) return 0;
 
-    new query[256];
+    new query[320];
     mysql_format(gSQL, query, sizeof(query),
         "UPDATE characters SET pref_hud_gaya = %d, pref_hud_detail = %d, \
          pref_hud_scale = %d, pref_contrast = %d, pref_blood_fx = %d, \
-         pref_prompt = %d, pref_lang = %d, pref_be_side = %d, pref_td_mode = %d WHERE id = %d",
+         pref_prompt = %d, pref_lang = %d, pref_be_side = %d, pref_td_mode = %d, \
+         pref_hud_modul = %d WHERE id = %d",
         gPrefHudGaya[playerid], gPrefHudDetail[playerid], gPrefHudScale[playerid],
         gPrefContrast[playerid], gPrefBloodFx[playerid], gPrefPrompt[playerid],
-        gPrefLang[playerid], gPrefBeSide[playerid], gPrefTdMode[playerid], ActiveCharId[playerid]);
+        gPrefLang[playerid], gPrefBeSide[playerid], gPrefTdMode[playerid],
+        gPrefHudModul[playerid], ActiveCharId[playerid]);
     mysql_tquery(gSQL, query, "", "");
     return 1;
 }
@@ -241,7 +266,7 @@ stock Settings_Show(playerid)
 {
     if (!Account_IsPlaying(playerid)) return 0;
 
-    new row[96], body[768];
+    new row[96], body[1024];
     new gayaText[24];
     switch (gPrefHudGaya[playerid])
     {
@@ -288,7 +313,21 @@ stock Settings_Show(playerid)
         case TD_MODE_MOBILE: strcpy(tdModeText, "Mobile-safe (box)", sizeof(tdModeText));
         default:             strcpy(tdModeText, "Auto (ikut klien)", sizeof(tdModeText));
     }
-    format(row, sizeof(row), "Mode TextDraw\t%s", tdModeText);
+    format(row, sizeof(row), "Mode TextDraw\t%s\n", tdModeText);
+    strcat(body, row, sizeof(body));
+
+    /* Butir 9-11: kolom kendaraan dipisah supaya speedometer dan GPS bisa
+       dinyalakan sendiri tanpa memaksa seluruh panel tampil. */
+    format(row, sizeof(row), "Baris MOBIL (plat & kunci)\t%s\n",
+        Settings_ModulEnabled(playerid, SETTINGS_MODUL_VEH) ? "Tampil" : "Sembunyi");
+    strcat(body, row, sizeof(body));
+
+    format(row, sizeof(row), "Speedometer (km/j)\t%s\n",
+        Settings_ModulEnabled(playerid, SETTINGS_MODUL_SPEEDO) ? "Tampil" : "Sembunyi");
+    strcat(body, row, sizeof(body));
+
+    format(row, sizeof(row), "GPS / penunjuk arah\t%s\n",
+        Settings_ModulEnabled(playerid, SETTINGS_MODUL_GPS) ? "Tampil" : "Sembunyi");
     strcat(body, row, sizeof(body));
 
     ShowPlayerDialog(playerid, DIALOG_SETTINGS, DIALOG_STYLE_TABLIST_HEADERS,
@@ -357,6 +396,9 @@ stock Settings_ToggleFromRow(playerid, row)
             gPrefBeSide[playerid] = (gPrefBeSide[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
+        case 9:  Settings_ModulToggle(playerid, SETTINGS_MODUL_VEH);
+        case 10: Settings_ModulToggle(playerid, SETTINGS_MODUL_SPEEDO);
+        case 11: Settings_ModulToggle(playerid, SETTINGS_MODUL_GPS);
         default: return 0;
     }
 

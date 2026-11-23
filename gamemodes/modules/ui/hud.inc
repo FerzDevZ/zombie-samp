@@ -6,6 +6,7 @@
 /* Preferensi /settings (settings.inc di-include setelah file ini). */
 forward Float:Settings_HudScale(playerid);
 forward bool:Settings_BarDetailEnabled(playerid);
+forward bool:Settings_ModulEnabled(playerid, bit);
 forward bool:Settings_ContrastEnabled(playerid);
 forward bool:Settings_PromptEnabled(playerid);
 forward bool:HUD_BarVisible(playerid, index);
@@ -46,6 +47,22 @@ new HudLastMoney[MAX_PLAYERS][24];
 new HudLastClock[MAX_PLAYERS][16];
 new PlayerText:HudVehicle[MAX_PLAYERS];
 new PlayerText:HudVehCard[MAX_PLAYERS];
+/* Kolom kendaraan (kanan, x 352..628): identitas mobil, kecepatan, bahan bakar
+   dan GPS. Empat baris ini SATU kelompok visual yang terpisah dari panel
+   pemain (x 16..304) — tiga gaya HUD mengubah permukaan & gauge-nya, bukan
+   menyembunyikan baris. */
+new PlayerText:HudVehInfo[MAX_PLAYERS];
+new PlayerText:HudSpeedVal[MAX_PLAYERS];
+new PlayerText:HudSpeedUnit[MAX_PLAYERS];
+new PlayerText:HudGpsText[MAX_PLAYERS];
+new PlayerText:HudGpsCard[MAX_PLAYERS];
+new HudLastVehInfo[MAX_PLAYERS][48];
+new HudLastSpeed[MAX_PLAYERS][8];
+new HudLastGps[MAX_PLAYERS][72];
+new bool:HudVehInfoShown[MAX_PLAYERS];
+new bool:HudSpeedShown[MAX_PLAYERS];
+new bool:HudGpsShown[MAX_PLAYERS];
+new bool:HudGpsBarShown[MAX_PLAYERS];
 new gHudWriteCount;
 new gHudSetCalls;
 new gHudSetDbg[MAX_PLAYERS];
@@ -56,7 +73,8 @@ new PlayerText:HudPromptBg[MAX_PLAYERS];
 new PlayerText:HudPromptText[MAX_PLAYERS];
 new bool:PlayerHudVisible[MAX_PLAYERS];
 
-/* Bar index: 0 HP, 1 ARM, 2 INF, 3 LAP, 4 HAUS, 5 PIP, 6 BBM/GENSET, 7 BOSS. */
+/* Bar index: 0 HP, 1 ARM, 2 INF, 3 LAP, 4 HAUS, 5 PIP, 6 BBM/GENSET, 7 BOSS,
+   8 KMH (speedometer), 9 GPS (progres menuju tujuan). */
 #define HUD_BAR_HP     0
 #define HUD_BAR_ARM    1
 #define HUD_BAR_INF    2
@@ -65,7 +83,9 @@ new bool:PlayerHudVisible[MAX_PLAYERS];
 #define HUD_BAR_PIP    5
 #define HUD_BAR_VEH    6
 #define HUD_BAR_BOSS   7
-#define HUD_BAR_COUNT  8
+#define HUD_BAR_KMH    8
+#define HUD_BAR_GPS    9
+#define HUD_BAR_COUNT  10
 
 new PlayerText:HudBarBg[MAX_PLAYERS][HUD_BAR_COUNT];
 new PlayerText:HudBarFg[MAX_PLAYERS][HUD_BAR_COUNT];
@@ -74,16 +94,17 @@ new HudBarLastColor[MAX_PLAYERS][HUD_BAR_COUNT];
 
 /* Lebar/tinggi bar harus sama dengan angka di HUD_CreateBar — generate.py dan
    gallery.py membaca literal yang sama, jadi jangan ubah satu sisi saja. */
-new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 264.0, 258.0};
-new const Float:gHudBarH[HUD_BAR_COUNT] = {5.0, 5.0, 5.0, 4.0, 4.0, 4.0, 5.0, 6.0};
+new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 264.0, 258.0, 264.0, 264.0};
+new const Float:gHudBarH[HUD_BAR_COUNT] = {5.0, 5.0, 5.0, 4.0, 4.0, 4.0, 5.0, 6.0, 4.0, 4.0};
 
 /* Bar bersegmen gaya game modern: fill kontinu dipotong strip warna latar.
    0 = kontinu (micro-bar). Maksimum 10 segmen -> paling banyak 9 celah.
    Bar yang bersegmen: HP, ARM, INF, BBM/GENSET, BOSS (urutan HUD_SEG_BARS). */
 #define HUD_SEG_MAX_GAPS 9
 #define HUD_SEG_GAP_W    1.6
-new const gHudSegCount[5] = {10, 10, 10, 10, 10};
-new PlayerText:HudBarGap[MAX_PLAYERS][5][HUD_SEG_MAX_GAPS];
+/* segSlot: HP 0, ARM 1, INF 2, VEH 3, BOSS 4, KMH 5, GPS 6. */
+new const gHudSegCount[7] = {10, 10, 10, 10, 10, 12, 10};
+new PlayerText:HudBarGap[MAX_PLAYERS][7][HUD_SEG_MAX_GAPS];
 
 #define HUD_PROMPT_MAX_LABEL 20
 #define HUD_PROMPT_DISTANCE  1.5
@@ -179,21 +200,71 @@ stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSi
    bawahnya selebar kartu. Tata letak satu baris (teks kiri + bar kanan)
    menyisakan separuh kartu kosong saat BBM rendah (teks pom panjang) dan
    membuat bar terlihat "hilang" — dilaporkan sebagai "box BBM kacau". */
-/* Geometri baris kendaraan (FUEL). Dulu kartu ini duduk di x 352..628 —
+/* ---- Kolom kendaraan (kanan) ------------------------------------------
+   Satu kelompok, tiga permukaan berbeda:
+     gaya 1 PENUH   : kartu kaca + bar KMH + bar FUEL + bar GPS
+     gaya 2 MOBILE  : kartu datar + bar FUEL (teks lebih besar 10%)
+     gaya 3 MINIMAL : TANPA kartu & tanpa bar KMH/GPS, hanya teks + bar FUEL
+   Tidak ada baris yang disembunyikan oleh gaya: yang berbeda hanya
+   permukaannya. */
+#define HUD_VEHC_X          352.0
+#define HUD_VEHC_W          276.0
+#define HUD_VEHC_TXT_X      356.0
+#define HUD_VEHC_TXT_W      264.0
+#define HUD_VEHC_LETTER_X   0.16
+#define HUD_VEHC_CARD_Y     258.0
+#define HUD_VEHC_CARD_H     64.0
+#define HUD_VEHC_INFO_Y     261.0
+#define HUD_VEHC_SPEED_Y    273.0
+#define HUD_VEHC_KMH_Y      292.0
+#define HUD_VEHC_UNIT_X     398.0
+#define HUD_VEHC_FUEL_Y     300.0
+#define HUD_VEHC_FUELBAR_Y  314.0
+#define HUD_VEHC_GPS_Y      326.0
+#define HUD_VEHC_GPSBAR_Y   340.0
+#define HUD_VEHC_GPSCARD_Y  323.0
+#define HUD_VEHC_GPSCARD_H  22.0
+
+/* Skala kecepatan: velocity SA-MP x 180 = km/jam yang masuk akal (Infernus
+   ~180 km/jam di jalan lurus). 240 = batas atas bar supaya tidak pernah
+   melewati lebar kartu. */
+#define HUD_SPEED_MAX       240
+#define HUD_SPEED_WARN      140
+
+/* Pengali LetterSize per gaya: mobile sedikit lebih besar (jarak baca di HP),
+   minimal sedikit lebih kecil (teks tanpa kartu tidak boleh terasa penuh). */
+stock Float:HUD_GayaLetterMul(playerid)
+{
+    switch (gHudGaya[playerid])
+    {
+        case HUD_GAYA_MOBILE:  return 1.10;
+        case HUD_GAYA_MINIMAL: return 0.92;
+    }
+    return 1.0;
+}
+
+/* Bar KMH/GPS hanya milik gaya yang punya kartu (1 dan 2). Gaya minimal tetap
+   punya bar FUEL: itu alat keselamatan, bukan hiasan. */
+stock bool:HUD_GayaVehBars(playerid)
+{
+    return gHudGaya[playerid] != HUD_GAYA_MINIMAL;
+}
+
+/* Geometri baris FUEL (dipakai juga oleh gate 640 px). Dulu kartu ini duduk di x 352..628 —
    melayang di tengah kanan layar dan terbaca sebagai "kotak kosong di tengah"
    di ketiga gaya HUD. Sekarang ia menempel tepat di bawah panel status supaya
    selalu satu kolom visual dengan HP/ARM/LAP/UANG/JAM. */
-#define HUD_VEH_CARD_X      16.0
-#define HUD_VEH_CARD_W      288.0
-#define HUD_VEH_CARD_Y      392.0
-#define HUD_VEH_CARD_H      28.0
-#define HUD_VEH_TEXT_X      24.0
-#define HUD_VEH_TEXT_Y      395.0
-#define HUD_VEH_TEXT_W      272.0
-#define HUD_VEH_LETTER_X    0.17
-#define HUD_VEH_BAR_X       24.0
-#define HUD_VEH_BAR_Y       412.0
-#define HUD_VEH_BAR_W       272.0
+#define HUD_VEH_CARD_X      HUD_VEHC_X
+#define HUD_VEH_CARD_W      HUD_VEHC_W
+#define HUD_VEH_CARD_Y      HUD_VEHC_CARD_Y
+#define HUD_VEH_CARD_H      HUD_VEHC_CARD_H
+#define HUD_VEH_TEXT_X      HUD_VEHC_TXT_X
+#define HUD_VEH_TEXT_Y      HUD_VEHC_FUEL_Y
+#define HUD_VEH_TEXT_W      HUD_VEHC_TXT_W
+#define HUD_VEH_LETTER_X    HUD_VEHC_LETTER_X
+#define HUD_VEH_BAR_X       HUD_VEHC_TXT_X
+#define HUD_VEH_BAR_Y       HUD_VEHC_FUELBAR_Y
+#define HUD_VEH_BAR_W       HUD_VEHC_TXT_W
 
 /* Tiga gaya HUD (docs/UIUX_PLAN.md). Mobile terdeteksi otomatis dari versi
    klien; pemain tetap bisa override lewat /hudgaya 1|2|3. Skala menyusutkan
@@ -324,7 +395,11 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudProgress",   26.0, 0.18, 30 },
     { "HudMoney",      26.0, 0.16, 12 },
     { "HudClock",     120.0, 0.16,  9 },
-    { "HudVehicle",    24.0, 0.17, 28 },
+    { "HudVehicle",   356.0, 0.16, 28 },
+    { "HudVehInfo",   356.0, 0.16, 19 },
+    { "HudSpeedVal",  356.0, 0.30,  3 },
+    { "HudSpeedUnit", 398.0, 0.16,  4 },
+    { "HudGpsText",   356.0, 0.16, 26 },
     { "HudBoss",      210.0, 0.26, 16 },
     { "HudRaid",      190.0, 0.24, 25 },
     { "HudPromptText",320.0, 0.18, 23 }
@@ -676,25 +751,42 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudPipVal[playerid], 1);
     PlayerTextDrawFont(playerid, HudPipVal[playerid], 1);
 
-    /* Kartu latar baris BBM berdiri sendiri: teks dan angka tidak lagi
-       bergantung pada kotak milik textdraw teks (kotak itu dulu melintasi bar
-       sehingga tertutup). Kartu = 352..628, y 330..350. */
-    if (Settings_TdMobileSafe(playerid))
+    /* ---- kartu kolom kendaraan (kanan) ---------------------------------
+       Kartu A menampung identitas mobil + kecepatan + bahan bakar.
+       Kartu B khusus GPS, berdiri sendiri, supaya saat pemain turun dari mobil
+       tidak tersisa kartu kosong setinggi 64 px.
+       Gaya MINIMAL tidak memakai kartu sama sekali (HUD_GayaHasCard). */
+    if (HUD_GayaHasCard(playerid))
     {
-        HudVehCard[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, HUD_VEH_CARD_X),
-            HUD_Y(playerid, HUD_VEH_CARD_Y), HUD_FX(playerid, HUD_VEH_CARD_W),
-            HUD_F(playerid, HUD_VEH_CARD_H), 0x0B0F14B4);
-    }
-    else
-    {
-        HudVehCard[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_CARD_X),
-            HUD_Y(playerid, HUD_VEH_CARD_Y), "LD_SPAC:white");
-        PlayerTextDrawFont(playerid, HudVehCard[playerid], 4);
-        PlayerTextDrawTextSize(playerid, HudVehCard[playerid], HUD_FX(playerid, HUD_VEH_CARD_W),
-            HUD_F(playerid, HUD_VEH_CARD_H));
-        PlayerTextDrawColor(playerid, HudVehCard[playerid], 0x0B0F14B4);
-        PlayerTextDrawSetOutline(playerid, HudVehCard[playerid], 0);
-        PlayerTextDrawBackgroundColor(playerid, HudVehCard[playerid], 0x00000000);
+        new Float:cardX = HUD_X(playerid, HUD_VEH_CARD_X);
+        new Float:cardY = HUD_Y(playerid, HUD_VEH_CARD_Y);
+        new Float:cardW = HUD_FX(playerid, HUD_VEH_CARD_W);
+        new Float:cardH = HUD_F(playerid, HUD_VEH_CARD_H);
+        new Float:gpsY = HUD_Y(playerid, HUD_VEHC_GPSCARD_Y);
+        new Float:gpsH = HUD_F(playerid, HUD_VEHC_GPSCARD_H);
+
+        if (Settings_TdMobileSafe(playerid))
+        {
+            HudVehCard[playerid] = TD_BoxCreate(playerid, cardX, cardY, cardW, cardH, 0x0B0F14B4);
+            HudGpsCard[playerid] = TD_BoxCreate(playerid, cardX, gpsY,
+                HUD_FX(playerid, HUD_VEHC_W), gpsH, 0x0B0F14B4);
+        }
+        else
+        {
+            HudVehCard[playerid] = CreatePlayerTextDraw(playerid, cardX, cardY, "LD_SPAC:white");
+            PlayerTextDrawFont(playerid, HudVehCard[playerid], 4);
+            PlayerTextDrawTextSize(playerid, HudVehCard[playerid], cardW, cardH);
+            PlayerTextDrawColor(playerid, HudVehCard[playerid], 0x0B0F14B4);
+            PlayerTextDrawSetOutline(playerid, HudVehCard[playerid], 0);
+            PlayerTextDrawBackgroundColor(playerid, HudVehCard[playerid], 0x00000000);
+
+            HudGpsCard[playerid] = CreatePlayerTextDraw(playerid, cardX, gpsY, "LD_SPAC:white");
+            PlayerTextDrawFont(playerid, HudGpsCard[playerid], 4);
+            PlayerTextDrawTextSize(playerid, HudGpsCard[playerid], HUD_FX(playerid, HUD_VEHC_W), gpsH);
+            PlayerTextDrawColor(playerid, HudGpsCard[playerid], 0x0B0F14B4);
+            PlayerTextDrawSetOutline(playerid, HudGpsCard[playerid], 0);
+            PlayerTextDrawBackgroundColor(playerid, HudGpsCard[playerid], 0x00000000);
+        }
     }
 
     HUD_CreateBar(playerid, HUD_BAR_HP, HUD_X(playerid, 52.0), HUD_Y(playerid, 312.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK, 0);
@@ -710,6 +802,17 @@ stock HUD_Create(playerid)
     if (HUD_BarVisible(playerid, HUD_BAR_VEH))
         HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, HUD_VEH_BAR_X),
             HUD_Y(playerid, HUD_VEH_BAR_Y), UI_BG_ELEVATED, 0x0B0F14B4, 3);
+    /* Speedometer & GPS hanya punya bar di gaya berkartu. Gaya minimal tetap
+       menampilkan angkanya sebagai teks. */
+    if (HUD_GayaVehBars(playerid))
+    {
+        if (HUD_BarVisible(playerid, HUD_BAR_KMH))
+            HUD_CreateBar(playerid, HUD_BAR_KMH, HUD_X(playerid, HUD_VEHC_TXT_X),
+                HUD_Y(playerid, HUD_VEHC_KMH_Y), UI_BG_ELEVATED, 0x0B0F14B4, 5);
+        if (HUD_BarVisible(playerid, HUD_BAR_GPS))
+            HUD_CreateBar(playerid, HUD_BAR_GPS, HUD_X(playerid, HUD_VEHC_TXT_X),
+                HUD_Y(playerid, HUD_VEHC_GPSBAR_Y), UI_BG_ELEVATED, 0x0B0F14B4, 6);
+    }
     /* Bar boss di bawah teks ABOMINATION (y=30): celah gelap di atas dunia. */
     if (HUD_BarVisible(playerid, HUD_BAR_BOSS))
         HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_Y(playerid, 46.0), UI_BG_ELEVATED, 0x0B0F1499, 4);
@@ -732,12 +835,40 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudClock[playerid], 1);
     PlayerTextDrawFont(playerid, HudClock[playerid], 1);
 
-    /* Baris kanan hanya FUEL. Baris SCRAP/SAMPEL dihapus total (permintaan
-       pemain: angkanya kacau di semua gaya HUD); jumlah scrap dan sampel
-       tetap bisa dilihat di dialog tas dan /inv. */
+    /* ---- baris 1: identitas kendaraan ---------------------------------- */
+    HudVehInfo[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_TXT_X),
+        HUD_Y(playerid, HUD_VEHC_INFO_Y), "KENDARAAN");
+    PlayerTextDrawLetterSize(playerid, HudVehInfo[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.70));
+    PlayerTextDrawTextSize(playerid, HudVehInfo[playerid], HUD_FX(playerid, HUD_VEHC_TXT_W), HUD_F(playerid, 12.0));
+    PlayerTextDrawUseBox(playerid, HudVehInfo[playerid], 0);
+    PlayerTextDrawBackgroundColor(playerid, HudVehInfo[playerid], 0x00000000);
+    PlayerTextDrawColor(playerid, HudVehInfo[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudVehInfo[playerid], 1);
+    PlayerTextDrawFont(playerid, HudVehInfo[playerid], 1);
+
+    /* ---- baris 2: kecepatan (angka besar + satuan) ---------------------- */
+    HudSpeedVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_TXT_X),
+        HUD_Y(playerid, HUD_VEHC_SPEED_Y), "0");
+    PlayerTextDrawLetterSize(playerid, HudSpeedVal[playerid], HUD_FX(playerid, 0.30), HUD_F(playerid, 1.15));
+    PlayerTextDrawTextSize(playerid, HudSpeedVal[playerid], HUD_FX(playerid, 44.0), HUD_F(playerid, 14.0));
+    PlayerTextDrawUseBox(playerid, HudSpeedVal[playerid], 0);
+    PlayerTextDrawBackgroundColor(playerid, HudSpeedVal[playerid], 0x00000000);
+    PlayerTextDrawColor(playerid, HudSpeedVal[playerid], UI_ACCENT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudSpeedVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudSpeedVal[playerid], 2);
+
+    HudSpeedUnit[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_UNIT_X),
+        HUD_Y(playerid, HUD_VEHC_SPEED_Y + 6.0), "km/j");
+    PlayerTextDrawLetterSize(playerid, HudSpeedUnit[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.70));
+    PlayerTextDrawBackgroundColor(playerid, HudSpeedUnit[playerid], 0x00000000);
+    PlayerTextDrawColor(playerid, HudSpeedUnit[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudSpeedUnit[playerid], 1);
+    PlayerTextDrawFont(playerid, HudSpeedUnit[playerid], 1);
+
+    /* ---- baris 3: bahan bakar ------------------------------------------ */
     HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X),
         HUD_Y(playerid, HUD_VEH_TEXT_Y), "FUEL");
-    PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_LETTER_X), HUD_F(playerid, 0.72));
+    PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.70));
     PlayerTextDrawTextSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_TEXT_W), HUD_F(playerid, 12.0));
     PlayerTextDrawUseBox(playerid, HudVehicle[playerid], 0);
     PlayerTextDrawBoxColor(playerid, HudVehicle[playerid], 0x0B0F14B4);
@@ -746,12 +877,24 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudVehicle[playerid], 1);
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
 
+    /* ---- baris 4: GPS --------------------------------------------------- */
+    HudGpsText[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_TXT_X),
+        HUD_Y(playerid, HUD_VEHC_GPS_Y), "GPS");
+    PlayerTextDrawLetterSize(playerid, HudGpsText[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.70));
+    PlayerTextDrawTextSize(playerid, HudGpsText[playerid], HUD_FX(playerid, HUD_VEHC_TXT_W), HUD_F(playerid, 12.0));
+    PlayerTextDrawUseBox(playerid, HudGpsText[playerid], 0);
+    PlayerTextDrawBackgroundColor(playerid, HudGpsText[playerid], 0x00000000);
+    PlayerTextDrawColor(playerid, HudGpsText[playerid], UI_ACCENT_INFO);
+    PlayerTextDrawSetOutline(playerid, HudGpsText[playerid], 1);
+    PlayerTextDrawFont(playerid, HudGpsText[playerid], 1);
+
     /* Bar HP boss: teks blok, gaya sama dengan HUD lain (tanpa box tambahan). */
-    Log_Format(LOG_INFO, "hud %d baris FUEL: kartu %.0f..%.0f y%.0f..%.0f, teks x%.0f..%.0f y%.0f, bar x%.0f..%.0f y%.0f",
-        playerid, HUD_VEH_CARD_X, HUD_VEH_CARD_X + HUD_VEH_CARD_W,
+    Log_Format(LOG_INFO, "hud %d kolom kendaraan gaya %d: kartu %.0f..%.0f y%.0f..%.0f | info y%.0f speed y%.0f fuel y%.0f/bar y%.0f gps y%.0f/bar y%.0f",
+        playerid, gHudGaya[playerid],
+        HUD_VEH_CARD_X, HUD_VEH_CARD_X + HUD_VEH_CARD_W,
         HUD_VEH_CARD_Y, HUD_VEH_CARD_Y + HUD_VEH_CARD_H,
-        HUD_VEH_TEXT_X, HUD_VEH_TEXT_X + HUD_VEH_TEXT_W, HUD_VEH_TEXT_Y,
-        HUD_VEH_BAR_X, HUD_VEH_BAR_X + HUD_VEH_BAR_W, HUD_VEH_BAR_Y);
+        HUD_VEHC_INFO_Y, HUD_VEHC_SPEED_Y, HUD_VEH_TEXT_Y, HUD_VEH_BAR_Y,
+        HUD_VEHC_GPS_Y, HUD_VEHC_GPSBAR_Y);
 
     HudBoss[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 30.0), "ABOMINATION");
     PlayerTextDrawLetterSize(playerid, HudBoss[playerid], HUD_FX(playerid, 0.26), HUD_F(playerid, 1.0));
@@ -897,11 +1040,19 @@ stock HUD_AuditRows(playerid)
     HUD_AuditRow(playerid, "Brand",  26.0, 0.18, "LAST_STAND", 150.0);
     HUD_AuditRow(playerid, "Zona",  150.0, 0.18, "Bandara Lama [WASPADA]", 220.0);
     HUD_AuditRow(playerid, "HpVal", 162.0, 0.18, "100/100", 150.0);
-    /* Baris FUEL: teks harus berhenti sebelum bar mulai di x=500. */
+    /* Kolom kendaraan: keempat baris harus berhenti sebelum tepi kanan kartu. */
     HUD_AuditRow(playerid, "FUEL-teks", HUD_VEH_TEXT_X * HUD_XComp(playerid),
         HUD_VEH_LETTER_X * HUD_XComp(playerid),
         "FUEL 12%  12/80L pom 240m BD",
         (HUD_VEH_TEXT_W - 8.0) * HUD_XComp(playerid));
+    HUD_AuditRow(playerid, "MOBIL-teks", HUD_VEHC_TXT_X * HUD_XComp(playerid),
+        HUD_VEHC_LETTER_X * HUD_XComp(playerid),
+        "MOBIL 611  LS-1234  TERKUNCI",
+        (HUD_VEHC_TXT_W - 8.0) * HUD_XComp(playerid));
+    HUD_AuditRow(playerid, "GPS-teks", HUD_VEHC_TXT_X * HUD_XComp(playerid),
+        HUD_VEHC_LETTER_X * HUD_XComp(playerid),
+        "GPS 1234m TL  REKANPARTY",
+        (HUD_VEHC_TXT_W - 8.0) * HUD_XComp(playerid));
     HUD_AuditRow(playerid, "Progress", 26.0, 0.18, "LVL 99  SP 999  LUKA 9  /skill", 300.0);
     HUD_AuditRow(playerid, "Boss", 210.0, 0.26, "ABOMINATION 100%", 0.0);
     HUD_AuditRow(playerid, "Raid", 190.0, 0.24, "RAID KAMP 14 ZOMBIE  3:00", 0.0);
@@ -969,6 +1120,7 @@ stock HUD_Diag(playerid)
         new vehicleid = GetPlayerVehicleID(playerid);
         new Float:fuel = Vehicle_GetFuel(vehicleid);
         new Float:percent = Vehicle_FuelPercent(vehicleid);
+
         new fuelLine[80];
         format(fuelLine, sizeof(fuelLine), "FUEL %d%%  %.0f/%.0fL %.0fkm",
             floatround(percent * 100.0), fuel, Vehicle_GetTank(vehicleid), Vehicle_RangeKm(vehicleid));
@@ -987,6 +1139,42 @@ stock HUD_Diag(playerid)
 /* Uji cache baris HUD. Dua bug nyata bersembunyi di sini: `strcmp` yang
    membandingkan sentinel `EOS` sebagai karakter, dan `strcpy` YSI yang
    mengosongkan dest. Keduanya berujung sama — teks benar, layar kosong. */
+/* Tiga gaya HUD harus benar-benar berbeda permukaannya, tetapi TIDAK boleh
+   menyembunyikan baris keselamatan. Selftest ini mengunci keduanya. */
+stock HUD_GayaSelftest()
+{
+    new bool:ok = true;
+    new saved = gHudGaya[0];
+
+    gHudGaya[0] = HUD_GAYA_PENUH;
+    new Float:fullMul = HUD_GayaLetterMul(0);
+    if (!HUD_GayaHasCard(0)) ok = false;
+    if (!HUD_GayaVehBars(0)) ok = false;
+
+    gHudGaya[0] = HUD_GAYA_MOBILE;
+    new Float:mobileMul = HUD_GayaLetterMul(0);
+    if (!HUD_GayaHasCard(0)) ok = false;
+    if (mobileMul <= fullMul) ok = false;
+    if (!HUD_BarVisible(0, HUD_BAR_VEH)) ok = false;
+
+    gHudGaya[0] = HUD_GAYA_MINIMAL;
+    new Float:minimalMul = HUD_GayaLetterMul(0);
+    if (HUD_GayaHasCard(0)) ok = false;
+    if (HUD_GayaVehBars(0)) ok = false;
+    if (minimalMul >= fullMul) ok = false;
+    /* Gaya minimal kehilangan kartu dan bar KMH/GPS, tetapi bar bahan bakar
+       dan baris teksnya wajib tetap ada: menghilangkan bar BBM untuk menandai
+       "gaya minimal" akan menyembunyikan satu-satunya alat ukur keselamatan. */
+    if (!HUD_BarVisible(0, HUD_BAR_VEH)) ok = false;
+
+    gHudGaya[0] = saved;
+
+    Selftest_Record(ok, "tiga gaya HUD kendaraan",
+        ok ? "kartu/bar/letter beda per gaya, baris FUEL tetap tampil"
+           : "gaya HUD menyembunyikan baris atau tidak membedakan permukaan");
+    return ok;
+}
+
 stock HUD_TextCacheSelftest()
 {
     new bool:ok = true;
@@ -1083,7 +1271,14 @@ stock HUD_ResetCaches(playerid)
         HudBarLastWidth[playerid][bar] = -1;
         HudBarLastColor[playerid][bar] = 0;
     }
+    HudLastVehInfo[playerid][0] = EOS;
+    HudLastSpeed[playerid][0] = EOS;
+    HudLastGps[playerid][0] = EOS;
     HudVehicleShown[playerid] = false;
+    HudVehInfoShown[playerid] = false;
+    HudSpeedShown[playerid] = false;
+    HudGpsShown[playerid] = false;
+    HudGpsBarShown[playerid] = false;
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
     HudPromptShown[playerid] = false;
@@ -1185,7 +1380,7 @@ stock HUD_Hide(playerid)
         PlayerTextDrawHide(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawHide(playerid, HudBarFg[playerid][bar]);
     }
-    for (new seg = 0; seg < 5; seg++)
+    for (new seg = 0; seg < 7; seg++)
     {
         for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
         {
@@ -1197,7 +1392,12 @@ stock HUD_Hide(playerid)
     PlayerTextDrawHide(playerid, HudMoney[playerid]);
     PlayerTextDrawHide(playerid, HudClock[playerid]);
     PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+    PlayerTextDrawHide(playerid, HudVehInfo[playerid]);
+    PlayerTextDrawHide(playerid, HudSpeedVal[playerid]);
+    PlayerTextDrawHide(playerid, HudSpeedUnit[playerid]);
+    PlayerTextDrawHide(playerid, HudGpsText[playerid]);
     if (HudVehCard[playerid] != PlayerText:0) PlayerTextDrawHide(playerid, HudVehCard[playerid]);
+    if (HudGpsCard[playerid] != PlayerText:0) PlayerTextDrawHide(playerid, HudGpsCard[playerid]);
     PlayerTextDrawHide(playerid, HudBoss[playerid]);
     PlayerTextDrawHide(playerid, HudRaid[playerid]);
     if (HudPromptBg[playerid] != PlayerText:0)
@@ -1206,6 +1406,10 @@ stock HUD_Hide(playerid)
 
     PlayerHudVisible[playerid] = false;
     HudVehicleShown[playerid] = false;
+    HudVehInfoShown[playerid] = false;
+    HudSpeedShown[playerid] = false;
+    HudGpsShown[playerid] = false;
+    HudGpsBarShown[playerid] = false;
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
     HudPromptShown[playerid] = false;
@@ -1238,22 +1442,32 @@ stock HUD_Destroy(playerid)
         PlayerTextDrawDestroy(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawDestroy(playerid, HudBarFg[playerid][bar]);
     }
-    for (new seg = 0; seg < 5; seg++)
+    for (new seg = 0; seg < 7; seg++)
     {
         for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
         {
             if (HudBarGap[playerid][seg][cut] != PlayerText:0)
                 PlayerTextDrawDestroy(playerid, HudBarGap[playerid][seg][cut]);
+            HudBarGap[playerid][seg][cut] = PlayerText:0;
         }
     }
     PlayerTextDrawDestroy(playerid, HudProgress[playerid]);
     PlayerTextDrawDestroy(playerid, HudMoney[playerid]);
     PlayerTextDrawDestroy(playerid, HudClock[playerid]);
     PlayerTextDrawDestroy(playerid, HudVehicle[playerid]);
+    PlayerTextDrawDestroy(playerid, HudVehInfo[playerid]);
+    PlayerTextDrawDestroy(playerid, HudSpeedVal[playerid]);
+    PlayerTextDrawDestroy(playerid, HudSpeedUnit[playerid]);
+    PlayerTextDrawDestroy(playerid, HudGpsText[playerid]);
     if (HudVehCard[playerid] != PlayerText:0)
     {
         PlayerTextDrawDestroy(playerid, HudVehCard[playerid]);
         HudVehCard[playerid] = PlayerText:0;
+    }
+    if (HudGpsCard[playerid] != PlayerText:0)
+    {
+        PlayerTextDrawDestroy(playerid, HudGpsCard[playerid]);
+        HudGpsCard[playerid] = PlayerText:0;
     }
     PlayerTextDrawDestroy(playerid, HudBoss[playerid]);
     PlayerTextDrawDestroy(playerid, HudRaid[playerid]);
@@ -1496,10 +1710,79 @@ stock HUD_Update(playerid)
             HudFuelWarnStage[playerid] = 0;
         }
 
+        /* Baris identitas + speedometer kolom kanan. Plat dibaca dari data
+           kendaraan milik server (native SA-MP tidak punya getter plat);
+           status kunci datang dari Vehicle_IsLocked. */
+        new bool:allowInfo = Settings_ModulEnabled(playerid, SETTINGS_MODUL_VEH);
+        new bool:allowSpeed = Settings_ModulEnabled(playerid, SETTINGS_MODUL_SPEEDO);
+        new lockText[12];
+        format(lockText, sizeof(lockText), "%s", Vehicle_IsLocked(vehicleid) ? "TERKUNCI" : "TERBUKA");
+
+        new infoLine[64];
+        format(infoLine, sizeof(infoLine), "MOBIL %d  %s",
+            GetVehicleModel(vehicleid), lockText);
+        if (allowInfo)
+        {
+            HUD_SetIfChanged(playerid, HudVehInfo[playerid], infoLine,
+                HudLastVehInfo[playerid], sizeof(HudLastVehInfo[]));
+        }
+        else if (HudVehInfoShown[playerid])
+        {
+            HudVehInfoShown[playerid] = false;
+            PlayerTextDrawHide(playerid, HudVehInfo[playerid]);
+        }
+
+        new Float:velX, Float:velY, Float:velZ;
+        GetVehicleVelocity(vehicleid, velX, velY, velZ);
+        new kmh = floatround(floatsqroot(velX * velX + velY * velY + velZ * velZ) * 180.0);
+        if (kmh < 0) kmh = 0;
+        if (kmh > HUD_SPEED_MAX) kmh = HUD_SPEED_MAX;
+
+        new speedLine[8];
+        format(speedLine, sizeof(speedLine), "%d", kmh);
+        if (allowSpeed)
+        {
+            HUD_SetIfChanged(playerid, HudSpeedVal[playerid], speedLine,
+                HudLastSpeed[playerid], sizeof(HudLastSpeed[]));
+        }
+        else if (HudSpeedShown[playerid])
+        {
+            HudSpeedShown[playerid] = false;
+            PlayerTextDrawHide(playerid, HudSpeedVal[playerid]);
+            PlayerTextDrawHide(playerid, HudSpeedUnit[playerid]);
+        }
+
+        /* Speedometer: angka selalu tampil, bar hanya di gaya berkartu. */
+        new speedColor = UI_ACCENT_PRIMARY;
+        if (kmh >= HUD_SPEED_MAX) speedColor = UI_ACCENT_DANGER;
+        else if (kmh >= HUD_SPEED_WARN) speedColor = UI_ACCENT_WARN;
+        if (speedColor != HudFuelColor[playerid] && !HudVehicleShown[playerid])
+            HudFuelColor[playerid] = speedColor;
+        PlayerTextDrawColor(playerid, HudSpeedVal[playerid], speedColor);
+
+        if (HUD_GayaVehBars(playerid) && allowSpeed)
+        {
+            if (HUD_BarVisible(playerid, HUD_BAR_KMH))
+                HUD_SetBar(playerid, HUD_BAR_KMH, float(kmh) / float(HUD_SPEED_MAX), speedColor);
+        }
+
         if (!HudVehicleShown[playerid])
         {
             HudVehicleShown[playerid] = true;
             PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+            if (allowInfo)
+            {
+                HudVehInfoShown[playerid] = true;
+                PlayerTextDrawShow(playerid, HudVehInfo[playerid]);
+            }
+            if (allowSpeed)
+            {
+                HudSpeedShown[playerid] = true;
+                PlayerTextDrawShow(playerid, HudSpeedVal[playerid]);
+                PlayerTextDrawShow(playerid, HudSpeedUnit[playerid]);
+                if (HUD_GayaVehBars(playerid) && HUD_BarVisible(playerid, HUD_BAR_KMH))
+                    HUD_ShowBar(playerid, HUD_BAR_KMH, 5);
+            }
             if (HudVehCard[playerid] != PlayerText:0)
                 PlayerTextDrawShow(playerid, HudVehCard[playerid]);
             /* Satu baris per masuk kendaraan: cukup untuk membuktikan baris FUEL
@@ -1587,10 +1870,66 @@ stock HUD_Update(playerid)
             HudVehicleShown[playerid] = false;
             HudFuelWarnStage[playerid] = 0;
             PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+            PlayerTextDrawHide(playerid, HudVehInfo[playerid]);
+            PlayerTextDrawHide(playerid, HudSpeedVal[playerid]);
+            PlayerTextDrawHide(playerid, HudSpeedUnit[playerid]);
+            HudVehInfoShown[playerid] = false;
+            HudSpeedShown[playerid] = false;
+            if (HUD_GayaVehBars(playerid))
+                HUD_HideBar(playerid, HUD_BAR_KMH, 5);
             if (HudVehCard[playerid] != PlayerText:0)
                 PlayerTextDrawHide(playerid, HudVehCard[playerid]);
             HudVehBarShown[playerid] = false;
             HUD_HideBar(playerid, HUD_BAR_VEH, 3);
+        }
+    }
+
+    /* ---- GPS ------------------------------------------------------------
+       Berjalan di dalam maupun di luar kendaraan: tujuan tetap ditunjuk saat
+       pemain turun untuk mengambil barang atau kabur dari horde. */
+    Gps_Tick(playerid);
+    if (Gps_HasTarget(playerid) && Settings_ModulEnabled(playerid, SETTINGS_MODUL_GPS))
+    {
+        new gpsName[GPS_MAX_NAME];
+        new gpsWord[3];
+        new gpsLine[72];
+        Gps_GetName(playerid, gpsName, sizeof(gpsName));
+        Gps_DirectionWord(playerid, gpsWord, sizeof(gpsWord));
+        /* Nama dibatasi 12 karakter: nickname party bisa 24 karakter dan akan
+           memotong baris di tepi kartu. Jarak + arah tetap jadi informasi utama. */
+        format(gpsLine, sizeof(gpsLine), "GPS %.0fm %s  %.12s",
+            Gps_Distance(playerid), gpsWord, gpsName);
+        HUD_SetIfChanged(playerid, HudGpsText[playerid], gpsLine,
+            HudLastGps[playerid], sizeof(HudLastGps[]));
+
+        if (HUD_GayaVehBars(playerid) && HUD_BarVisible(playerid, HUD_BAR_GPS))
+        {
+            HUD_SetBar(playerid, HUD_BAR_GPS, Gps_Progress(playerid), UI_ACCENT_INFO);
+            if (!HudGpsBarShown[playerid])
+            {
+                HudGpsBarShown[playerid] = true;
+                HUD_ShowBar(playerid, HUD_BAR_GPS, 6);
+            }
+        }
+
+        if (!HudGpsShown[playerid])
+        {
+            HudGpsShown[playerid] = true;
+            PlayerTextDrawShow(playerid, HudGpsText[playerid]);
+            if (HudGpsCard[playerid] != PlayerText:0)
+                PlayerTextDrawShow(playerid, HudGpsCard[playerid]);
+        }
+    }
+    else if (HudGpsShown[playerid])
+    {
+        HudGpsShown[playerid] = false;
+        PlayerTextDrawHide(playerid, HudGpsText[playerid]);
+        if (HudGpsCard[playerid] != PlayerText:0)
+            PlayerTextDrawHide(playerid, HudGpsCard[playerid]);
+        if (HudGpsBarShown[playerid])
+        {
+            HudGpsBarShown[playerid] = false;
+            HUD_HideBar(playerid, HUD_BAR_GPS, 6);
         }
     }
 

@@ -75,6 +75,10 @@ WORST_TEXT = {
     "HudMoney": "UANG $999999",
     "HudClock": "JAM 23:59",
     "HudVehicle": "FUEL 12%  12/80L pom 240m BD",
+    "HudVehInfo": "MOBIL 611  TERKUNCI",
+    "HudSpeedVal": "240",
+    "HudSpeedUnit": "km/j",
+    "HudGpsText": "GPS 9999m TL  REKANPARTY12",
     "HudBoss": "ABOMINATION 100%",
     "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
     "HudPromptText": "Y  Ekstraksi sampel air",
@@ -96,6 +100,17 @@ def parse_defines(text: str) -> None:
     angka yang sama dengan HUD_Create, bukan menebak dari argumen."""
     for name, value in re.findall(r"#define\s+(HUD_\w+)\s+(-?[\d.]+)", text):
         DEFINES[name] = float(value)
+    # Alias antar-konstanta (mis. HUD_VEH_TEXT_X HUD_VEHC_TXT_X): selesaikan
+    # setelah semua angka terbaca, kalau tidak gate membaca 0 dan melaporkan
+    # DRIFT palsu untuk baris yang sebenarnya benar.
+    for _ in range(4):
+        changed = False
+        for name, target in re.findall(r"#define\s+(HUD_\w+)\s+(HUD_\w+)\s*$", text, re.M):
+            if name not in DEFINES and target in DEFINES:
+                DEFINES[name] = DEFINES[target]
+                changed = True
+        if not changed:
+            break
 
 
 def _num(arg: str) -> float:

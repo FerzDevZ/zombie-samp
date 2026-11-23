@@ -115,9 +115,18 @@ def render(path, design, comp=1.0, stretch=1.0):
 
     v = design["vehicle"]
     if v:
-        rr(d, (v["x"], v["y"], v["x"] + v["w"], v["y"] + v["h"]), 2, (10, 14, 20, 205))
-        text(d, v["text_x"], v["text_y"], v["label"], 0.17, 0.70, (16, 185, 129))
-        bar(d, v["bar_x"], v["bar_y"], v["bar_w"], 5, v["ratio"])
+        # Kartu A: identitas mobil + kecepatan + bahan bakar (y 258..322)
+        rr(d, (v["x"], 258, v["x"] + v["w"], 322), 2, (10, 14, 20, 205))
+        text(d, v["text_x"], 261, "MOBIL 411  TERBUKA", 0.16, 0.70, (248, 250, 252))
+        text(d, v["text_x"], 273, str(v["kmh"]), 0.30, 1.15, (240, 90, 60))
+        text(d, 398, 279, "km/j", 0.16, 0.70, (148, 163, 184))
+        bar(d, v["text_x"], 292, v["w"] - 12, 4, v["kmh"] / 240.0)
+        text(d, v["text_x"], 300, v["label"], 0.16, 0.70, (16, 185, 129))
+        bar(d, v["text_x"], 314, v["w"] - 12, 5, v["ratio"])
+        # Kartu B: GPS (y 323..345)
+        rr(d, (v["x"], 323, v["x"] + v["w"], 345), 2, (10, 14, 20, 205))
+        text(d, v["text_x"], 326, v["gps"], 0.16, 0.70, (56, 189, 248))
+        bar(d, v["text_x"], 340, v["w"] - 12, 4, v["gps_ratio"])
 
     # Simulasi klien HP: kanvas 640x480 diregangkan ke layar 20:9 (x 1.52x).
     if stretch != 1.0:
@@ -157,10 +166,12 @@ if __name__ == "__main__":
             {"label": "PIP", "name": (198, 348), "bar": (220, 348), "bar_w": 40,
              "bar_h": 4, "ratio": 0.12, "value": (264, 348), "text": "12"},
         ],
-        "vehicle": {"x": 16, "y": 392, "w": 288, "h": 28,
-                    "text_x": 24, "text_y": 395,
+        "vehicle": {"x": 352, "w": 276, "text_x": 356,
+                    "kmh": 128,
                     "label": "FUEL 54%  43/80L 120km",
-                    "bar_x": 24, "bar_y": 412, "bar_w": 272, "ratio": 0.54},
+                    "ratio": 0.54,
+                    "gps": "GPS 234m TL  BASE SAYA",
+                    "gps_ratio": 0.62},
     }
     comp = float(sys.argv[2]) if len(sys.argv) > 2 else 1.0
     stretch = float(sys.argv[3]) if len(sys.argv) > 3 else 1.0
