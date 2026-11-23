@@ -6,3 +6,31 @@
 # bagian dari hasil kerja:
 *.pid
 *.core
+
+# Rahasia lokal saja. Bukan artefak, jadi tidak ikut kebijakan
+# "simpan seluruh artefak". Dibuat dari scriptfiles/mysql.ini.
+.env
+!.env.example
+
+# --- Rahasia runtime (jangan pernah masuk git) ---
+# Berisi password DB / kunci admin / rcon. Nilainya sudah ada di riwayat lama;
+# lihat PLAN_GO_LIVE.md bagian rotasi kunci.
+scriptfiles/mysql.ini
+scriptfiles/admin_keys.cfg
+runtime/*/mysql.ini
+runtime/*/server.cfg
+runtime/*/scriptfiles/admin_keys.cfg
+backups/
+
+# --- Artefak build & log ---
+# main.amx dihasilkan scripts/build.sh; menyimpannya di git membuat setiap
+# build menghasilkan diff 9 MB dan biner basi bisa ikut ter-deploy.
+gamemodes/*.amx
+runtime/*/server_log.txt
+runtime/*/console.log
+runtime/*/scriptfiles/logs/
+pawn.lock
+mysql.ini
+server.cfg
+filterscripts/
+npcmodes/

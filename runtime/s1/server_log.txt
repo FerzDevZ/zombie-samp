@@ -114644,3 +114644,3219 @@ v0.3.7-R2, (C)2005-2015 SA-MP Team
 
 [06:25:24] [2026-11-22 06:25:24][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
 
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[04:43:58] 
+[04:43:58] Server Plugins
+[04:43:58] --------------
+[04:43:58]  Loading plugin: mysql.so
+[04:43:58]  >> plugin.mysql: R41-4 successfully loaded.
+[04:43:58]   Loaded.
+[04:43:58]  Loading plugin: sscanf.so
+[04:43:58] 
+[04:43:58]  ===============================
+[04:43:58] 
+[04:43:58]       sscanf plugin loaded.     
+[04:43:58] 
+[04:43:58]          Version: 2.13.8
+[04:43:58] 
+[04:43:58]    (c) 2022 Alex "Y_Less" Cole  
+[04:43:58] 
+[04:43:58]  ===============================
+[04:43:58] 
+[04:43:58]   Loaded.
+[04:43:58]  Loading plugin: ColAndreas.so
+[04:43:58]   Plugin does not conform to architecture.
+[04:43:58]   Failed.
+[04:43:58]  Loading plugin: streamer.so
+[04:43:58] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[04:43:58]   Loaded.
+[04:43:58]  Loading plugin: samp_bcrypt.so
+[04:43:58] [SampBcrypt] [info]: Version: 0.4.1
+[04:43:58]   Loaded.
+[04:43:58]  Loading plugin: FCNPC.so
+[04:43:58] 
+[04:43:58] -------------------------------------------------
+[04:43:58]      FCNPC - Fully Controllable NPC v2.0.11
+[04:43:58]             GNU/Linux SA-MP 0.3.7 R2
+[04:43:58]            Aug 23 2024 at 16:35:48
+[04:43:58] 
+[04:43:58]   Author:       OrMisicL (2013 - 2015)
+[04:43:58]   Continued by: ziggi    (2016 - present)
+[04:43:58] 
+[04:43:58]   See full credits in the README.md file
+[04:43:58] -------------------------------------------------
+[04:43:58] 
+[04:43:58] Loading...
+[04:43:58] 
+[04:43:58] -------------------------------------------------
+[04:43:58]    ColAndreasv1.4.0
+[04:43:58] 
+[04:43:58]    Created By:
+[04:43:58]      [uL]Chris42O
+[04:43:58]      [uL]Slice
+[04:43:58]      [uL]Pottus
+[04:43:58] -------------------------------------------------
+[04:43:58] 
+[04:43:58] Loading...
+[04:43:58] ColAndreas v1.4.0 Loaded.
+[04:43:58]   Loaded.
+[04:43:58]  Loaded 5 plugins.
+
+[04:43:58] 
+[04:43:58] Filterscripts
+[04:43:58] ---------------
+[04:43:58]   Loaded 0 filterscripts.
+
+[04:44:04] Loaded collision data.
+[04:44:04]  
+[04:44:04]  
+[04:44:04]          ==============================================================
+[04:44:04]          |                                                            |
+[04:44:04]          |                                                            |
+[04:44:04]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[04:44:04]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[04:44:04]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[04:44:04]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[04:44:04]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[04:44:04]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[04:44:04]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[04:44:04]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[04:44:04]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[04:44:04]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[04:44:04]          |           Y:::::Y                    S:::::S   I::::I      |
+[04:44:04]          |           Y:::::Y                    S:::::S   I::::I      |
+[04:44:04]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[04:44:04]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[04:44:04]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[04:44:04]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[04:44:04]          |                                                            |
+[04:44:04]          |                                                            |
+[04:44:04]          |                      (c) 2021 MPL v1.1                     |
+[04:44:04]          |            Alex "Y_Less" Cole and contributors.            |
+[04:44:04]          |                                                            |
+[04:44:04]          |                                                            |
+[04:44:04]          ==============================================================
+[04:44:04]  
+[04:44:04]  
+[04:44:04]  ========================================== 
+[04:44:04]  |                                        | 
+[04:44:04]  |  Missing YSI scriptfiles directories:  | 
+[04:44:04]  |                                        | 
+[04:44:04]  |      /scriptfiles/YSI/fixes/           | 
+[04:44:04]  |      /scriptfiles/YSI/temp/            | 
+[04:44:04]  |                                        | 
+[04:44:04]  ========================================== 
+[04:44:04]  |                                        | 
+[04:44:04]  |   Generating code, this may take a     | 
+[04:44:04]  |  little bit of time.  Note that this   | 
+[04:44:04]  |  code generation works best with the   | 
+[04:44:04]  |     JIT plugin, which you are not      | 
+[04:44:04]  |     currently using.  Get it here:     | 
+[04:44:04]  |                                        | 
+[04:44:04]  |       https://git.io/jit-plugin        | 
+[04:44:04]  |                                        | 
+[04:44:04]  |             Please wait...             | 
+[04:44:04]  |                                        | 
+[04:44:04]  |             Done in 77ms!              | 
+[04:44:04]  |                                        | 
+[04:44:04]  ========================================== 
+[04:44:04]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[04:44:04]  |                                        | 
+[04:44:04]  | Server:      0.3.7-R2 (L)              | 
+[04:44:04]  | Started:     23 Nov 2026 - 04:44:04    | 
+[04:44:04]  |                                        | 
+[04:44:04]  | Compiler:    3.10.10 (Linux)           | 
+[04:44:04]  | Includes:    0.3DL                     | 
+[04:44:04]  | Codepage:    <none>                    | 
+[04:44:04]  | Built:       23 Nov 2026 - 04:43:22    | 
+[04:44:04]  |                                        | 
+[04:44:04]  | YSI:         v05.10.0006               | 
+[04:44:04]  | Master:      -1                        | 
+[04:44:04]  |                                        | 
+[04:44:04]  | JIT:         <none>                    | 
+[04:44:04]  | Crashdetect: <none>                    | 
+[04:44:04]  |                                        | 
+[04:44:04]  ========================================== 
+[04:44:04]  
+[04:44:04]  
+[04:44:04] [2026-11-23 04:44:04][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[04:44:04] Loading Map.
+[04:44:04] Loaded Map.                             
+[04:44:04] [2026-11-23 04:44:04][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[04:44:04] Number of vehicle models: 0
+[04:44:04] [2026-11-23 04:44:04][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 142 ms.
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[04:44:04] [2026-11-23 04:44:04][INFO] [PROBE] bcrypt hash+verify OK.
+
+[04:44:07] [2026-11-23 04:44:07][INFO] [BASE] 0 barricade dimuat dari database.
+
+[04:44:08] [2026-11-23 04:44:08][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9)
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS antrean slot server penuh | cap=180, tahan di 179/180/181 = 0/1/1
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[04:44:12] [2026-11-23 04:44:12][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[04:44:23] --- Server Shutting Down.
+[04:44:23] [2026-11-23 04:44:23][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[04:44:23] plugin.mysql: Unloading plugin...
+[04:44:28] plugin.mysql: Plugin unloaded.
+[04:44:28] 
+[04:44:28]  ===============================
+[04:44:28] 
+[04:44:28]      sscanf plugin unloaded.    
+[04:44:28] 
+[04:44:28]  ===============================
+[04:44:28] 
+[04:44:28] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[04:44:28] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[04:45:13] 
+[04:45:13] Server Plugins
+[04:45:13] --------------
+[04:45:13]  Loading plugin: mysql.so
+[04:45:13]  >> plugin.mysql: R41-4 successfully loaded.
+[04:45:13]   Loaded.
+[04:45:13]  Loading plugin: sscanf.so
+[04:45:13] 
+[04:45:13]  ===============================
+[04:45:13] 
+[04:45:13]       sscanf plugin loaded.     
+[04:45:13] 
+[04:45:13]          Version: 2.13.8
+[04:45:13] 
+[04:45:13]    (c) 2022 Alex "Y_Less" Cole  
+[04:45:13] 
+[04:45:13]  ===============================
+[04:45:13] 
+[04:45:13]   Loaded.
+[04:45:13]  Loading plugin: ColAndreas.so
+[04:45:13]   Plugin does not conform to architecture.
+[04:45:13]   Failed.
+[04:45:13]  Loading plugin: streamer.so
+[04:45:13] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[04:45:13]   Loaded.
+[04:45:13]  Loading plugin: samp_bcrypt.so
+[04:45:13] [SampBcrypt] [info]: Version: 0.4.1
+[04:45:13]   Loaded.
+[04:45:13]  Loading plugin: FCNPC.so
+[04:45:13] 
+[04:45:13] -------------------------------------------------
+[04:45:13]      FCNPC - Fully Controllable NPC v2.0.11
+[04:45:13]             GNU/Linux SA-MP 0.3.7 R2
+[04:45:13]            Aug 23 2024 at 16:35:48
+[04:45:13] 
+[04:45:13]   Author:       OrMisicL (2013 - 2015)
+[04:45:13]   Continued by: ziggi    (2016 - present)
+[04:45:13] 
+[04:45:13]   See full credits in the README.md file
+[04:45:13] -------------------------------------------------
+[04:45:13] 
+[04:45:13] Loading...
+[04:45:13] 
+[04:45:13] -------------------------------------------------
+[04:45:13]    ColAndreasv1.4.0
+[04:45:13] 
+[04:45:13]    Created By:
+[04:45:13]      [uL]Chris42O
+[04:45:13]      [uL]Slice
+[04:45:13]      [uL]Pottus
+[04:45:13] -------------------------------------------------
+[04:45:13] 
+[04:45:13] Loading...
+[04:45:13] ColAndreas v1.4.0 Loaded.
+[04:45:13]   Loaded.
+[04:45:13]  Loaded 5 plugins.
+
+[04:45:13] 
+[04:45:13] Filterscripts
+[04:45:13] ---------------
+[04:45:13]   Loaded 0 filterscripts.
+
+[04:45:19] Loaded collision data.
+[04:45:19]  
+[04:45:19]  
+[04:45:19]          ==============================================================
+[04:45:19]          |                                                            |
+[04:45:19]          |                                                            |
+[04:45:19]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[04:45:19]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[04:45:19]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[04:45:19]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[04:45:19]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[04:45:19]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[04:45:19]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[04:45:19]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[04:45:19]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[04:45:19]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[04:45:19]          |           Y:::::Y                    S:::::S   I::::I      |
+[04:45:19]          |           Y:::::Y                    S:::::S   I::::I      |
+[04:45:19]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[04:45:19]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[04:45:19]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[04:45:19]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[04:45:19]          |                                                            |
+[04:45:19]          |                                                            |
+[04:45:19]          |                      (c) 2021 MPL v1.1                     |
+[04:45:19]          |            Alex "Y_Less" Cole and contributors.            |
+[04:45:19]          |                                                            |
+[04:45:19]          |                                                            |
+[04:45:19]          ==============================================================
+[04:45:19]  
+[04:45:19]  
+[04:45:19]  ========================================== 
+[04:45:19]  |                                        | 
+[04:45:19]  |  Missing YSI scriptfiles directories:  | 
+[04:45:19]  |                                        | 
+[04:45:19]  |      /scriptfiles/YSI/fixes/           | 
+[04:45:19]  |      /scriptfiles/YSI/temp/            | 
+[04:45:19]  |                                        | 
+[04:45:19]  ========================================== 
+[04:45:19]  |                                        | 
+[04:45:19]  |   Generating code, this may take a     | 
+[04:45:19]  |  little bit of time.  Note that this   | 
+[04:45:19]  |  code generation works best with the   | 
+[04:45:19]  |     JIT plugin, which you are not      | 
+[04:45:19]  |     currently using.  Get it here:     | 
+[04:45:19]  |                                        | 
+[04:45:19]  |       https://git.io/jit-plugin        | 
+[04:45:19]  |                                        | 
+[04:45:19]  |             Please wait...             | 
+[04:45:19]  |                                        | 
+[04:45:19]  |             Done in 77ms!              | 
+[04:45:19]  |                                        | 
+[04:45:19]  ========================================== 
+[04:45:19]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[04:45:19]  |                                        | 
+[04:45:19]  | Server:      0.3.7-R2 (L)              | 
+[04:45:19]  | Started:     23 Nov 2026 - 04:45:19    | 
+[04:45:19]  |                                        | 
+[04:45:19]  | Compiler:    3.10.10 (Linux)           | 
+[04:45:19]  | Includes:    0.3DL                     | 
+[04:45:19]  | Codepage:    <none>                    | 
+[04:45:19]  | Built:       23 Nov 2026 - 04:45:11    | 
+[04:45:19]  |                                        | 
+[04:45:19]  | YSI:         v05.10.0006               | 
+[04:45:19]  | Master:      -1                        | 
+[04:45:19]  |                                        | 
+[04:45:19]  | JIT:         <none>                    | 
+[04:45:19]  | Crashdetect: <none>                    | 
+[04:45:19]  |                                        | 
+[04:45:19]  ========================================== 
+[04:45:19]  
+[04:45:19]  
+[04:45:19] [2026-11-23 04:45:19][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[04:45:19] Loading Map.
+[04:45:19] Loaded Map.                             
+[04:45:19] [2026-11-23 04:45:19][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[04:45:19] Number of vehicle models: 0
+[04:45:19] [2026-11-23 04:45:19][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 140 ms.
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[04:45:19] [2026-11-23 04:45:19][INFO] [PROBE] bcrypt hash+verify OK.
+
+[04:45:22] [2026-11-23 04:45:22][INFO] [BASE] 0 barricade dimuat dari database.
+
+[04:45:23] [2026-11-23 04:45:23][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9)
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[04:45:27] [2026-11-23 04:45:27][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[04:45:38] --- Server Shutting Down.
+[04:45:38] [2026-11-23 04:45:38][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[04:45:38] plugin.mysql: Unloading plugin...
+[04:45:43] plugin.mysql: Plugin unloaded.
+[04:45:43] 
+[04:45:43]  ===============================
+[04:45:43] 
+[04:45:43]      sscanf plugin unloaded.    
+[04:45:43] 
+[04:45:43]  ===============================
+[04:45:43] 
+[04:45:43] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[04:45:43] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[04:58:59] 
+[04:58:59] Server Plugins
+[04:58:59] --------------
+[04:58:59]  Loading plugin: mysql.so
+[04:58:59]  >> plugin.mysql: R41-4 successfully loaded.
+[04:58:59]   Loaded.
+[04:58:59]  Loading plugin: sscanf.so
+[04:58:59] 
+[04:58:59]  ===============================
+[04:58:59] 
+[04:58:59]       sscanf plugin loaded.     
+[04:58:59] 
+[04:58:59]          Version: 2.13.8
+[04:58:59] 
+[04:58:59]    (c) 2022 Alex "Y_Less" Cole  
+[04:58:59] 
+[04:58:59]  ===============================
+[04:58:59] 
+[04:58:59]   Loaded.
+[04:58:59]  Loading plugin: ColAndreas.so
+[04:58:59]   Plugin does not conform to architecture.
+[04:58:59]   Failed.
+[04:58:59]  Loading plugin: streamer.so
+[04:58:59] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[04:58:59]   Loaded.
+[04:58:59]  Loading plugin: samp_bcrypt.so
+[04:58:59] [SampBcrypt] [info]: Version: 0.4.1
+[04:58:59]   Loaded.
+[04:58:59]  Loading plugin: FCNPC.so
+[04:58:59] 
+[04:58:59] -------------------------------------------------
+[04:58:59]      FCNPC - Fully Controllable NPC v2.0.11
+[04:58:59]             GNU/Linux SA-MP 0.3.7 R2
+[04:58:59]            Aug 23 2024 at 16:35:48
+[04:58:59] 
+[04:58:59]   Author:       OrMisicL (2013 - 2015)
+[04:58:59]   Continued by: ziggi    (2016 - present)
+[04:58:59] 
+[04:58:59]   See full credits in the README.md file
+[04:58:59] -------------------------------------------------
+[04:58:59] 
+[04:58:59] Loading...
+[04:58:59] 
+[04:58:59] -------------------------------------------------
+[04:58:59]    ColAndreasv1.4.0
+[04:58:59] 
+[04:58:59]    Created By:
+[04:58:59]      [uL]Chris42O
+[04:58:59]      [uL]Slice
+[04:58:59]      [uL]Pottus
+[04:58:59] -------------------------------------------------
+[04:58:59] 
+[04:58:59] Loading...
+[04:58:59] ColAndreas v1.4.0 Loaded.
+[04:58:59]   Loaded.
+[04:58:59]  Loaded 5 plugins.
+
+[04:58:59] 
+[04:58:59] Filterscripts
+[04:58:59] ---------------
+[04:58:59]   Loaded 0 filterscripts.
+
+[04:59:05] Loaded collision data.
+[04:59:05]  
+[04:59:05]  
+[04:59:05]          ==============================================================
+[04:59:05]          |                                                            |
+[04:59:05]          |                                                            |
+[04:59:05]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[04:59:05]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[04:59:05]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[04:59:05]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[04:59:05]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[04:59:05]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[04:59:05]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[04:59:05]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[04:59:05]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[04:59:05]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[04:59:05]          |           Y:::::Y                    S:::::S   I::::I      |
+[04:59:05]          |           Y:::::Y                    S:::::S   I::::I      |
+[04:59:05]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[04:59:05]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[04:59:05]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[04:59:05]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[04:59:05]          |                                                            |
+[04:59:05]          |                                                            |
+[04:59:05]          |                      (c) 2021 MPL v1.1                     |
+[04:59:05]          |            Alex "Y_Less" Cole and contributors.            |
+[04:59:05]          |                                                            |
+[04:59:05]          |                                                            |
+[04:59:05]          ==============================================================
+[04:59:05]  
+[04:59:05]  
+[04:59:05]  ========================================== 
+[04:59:05]  |                                        | 
+[04:59:05]  |  Missing YSI scriptfiles directories:  | 
+[04:59:05]  |                                        | 
+[04:59:05]  |      /scriptfiles/YSI/fixes/           | 
+[04:59:05]  |      /scriptfiles/YSI/temp/            | 
+[04:59:05]  |                                        | 
+[04:59:05]  ========================================== 
+[04:59:05]  |                                        | 
+[04:59:05]  |   Generating code, this may take a     | 
+[04:59:05]  |  little bit of time.  Note that this   | 
+[04:59:05]  |  code generation works best with the   | 
+[04:59:05]  |     JIT plugin, which you are not      | 
+[04:59:05]  |     currently using.  Get it here:     | 
+[04:59:05]  |                                        | 
+[04:59:05]  |       https://git.io/jit-plugin        | 
+[04:59:05]  |                                        | 
+[04:59:05]  |             Please wait...             | 
+[04:59:05]  |                                        | 
+[04:59:05]  |             Done in 77ms!              | 
+[04:59:05]  |                                        | 
+[04:59:05]  ========================================== 
+[04:59:05]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[04:59:05]  |                                        | 
+[04:59:05]  | Server:      0.3.7-R2 (L)              | 
+[04:59:05]  | Started:     23 Nov 2026 - 04:59:05    | 
+[04:59:05]  |                                        | 
+[04:59:05]  | Compiler:    3.10.10 (Linux)           | 
+[04:59:05]  | Includes:    0.3DL                     | 
+[04:59:05]  | Codepage:    <none>                    | 
+[04:59:05]  | Built:       23 Nov 2026 - 04:45:11    | 
+[04:59:05]  |                                        | 
+[04:59:05]  | YSI:         v05.10.0006               | 
+[04:59:05]  | Master:      -1                        | 
+[04:59:05]  |                                        | 
+[04:59:05]  | JIT:         <none>                    | 
+[04:59:05]  | Crashdetect: <none>                    | 
+[04:59:05]  |                                        | 
+[04:59:05]  ========================================== 
+[04:59:05]  
+[04:59:05]  
+[04:59:05] [2026-11-23 04:59:05][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[04:59:05] Loading Map.
+[04:59:05] Loaded Map.                             
+[04:59:05] [2026-11-23 04:59:05][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[04:59:05] Number of vehicle models: 0
+[04:59:05] [2026-11-23 04:59:05][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 145 ms.
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[04:59:05] [2026-11-23 04:59:05][INFO] [PROBE] bcrypt hash+verify OK.
+
+[04:59:08] [2026-11-23 04:59:08][INFO] [BASE] 0 barricade dimuat dari database.
+
+[04:59:09] [2026-11-23 04:59:09][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9)
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[04:59:13] [2026-11-23 04:59:13][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[05:00:04] --- Server Shutting Down.
+[05:00:04] [2026-11-23 05:00:04][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[05:00:04] plugin.mysql: Unloading plugin...
+[05:00:09] plugin.mysql: Plugin unloaded.
+[05:00:09] 
+[05:00:09]  ===============================
+[05:00:09] 
+[05:00:09]      sscanf plugin unloaded.    
+[05:00:09] 
+[05:00:09]  ===============================
+[05:00:09] 
+[05:00:09] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[05:00:09] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[05:00:10] 
+[05:00:10] Server Plugins
+[05:00:10] --------------
+[05:00:10]  Loading plugin: mysql.so
+[05:00:10]  >> plugin.mysql: R41-4 successfully loaded.
+[05:00:10]   Loaded.
+[05:00:10]  Loading plugin: sscanf.so
+[05:00:10] 
+[05:00:10]  ===============================
+[05:00:10] 
+[05:00:10]       sscanf plugin loaded.     
+[05:00:10] 
+[05:00:10]          Version: 2.13.8
+[05:00:10] 
+[05:00:10]    (c) 2022 Alex "Y_Less" Cole  
+[05:00:10] 
+[05:00:10]  ===============================
+[05:00:10] 
+[05:00:10]   Loaded.
+[05:00:10]  Loading plugin: ColAndreas.so
+[05:00:10]   Plugin does not conform to architecture.
+[05:00:10]   Failed.
+[05:00:10]  Loading plugin: streamer.so
+[05:00:10] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[05:00:10]   Loaded.
+[05:00:10]  Loading plugin: samp_bcrypt.so
+[05:00:10] [SampBcrypt] [info]: Version: 0.4.1
+[05:00:10]   Loaded.
+[05:00:10]  Loading plugin: FCNPC.so
+[05:00:10] 
+[05:00:10] -------------------------------------------------
+[05:00:10]      FCNPC - Fully Controllable NPC v2.0.11
+[05:00:10]             GNU/Linux SA-MP 0.3.7 R2
+[05:00:10]            Aug 23 2024 at 16:35:48
+[05:00:10] 
+[05:00:10]   Author:       OrMisicL (2013 - 2015)
+[05:00:10]   Continued by: ziggi    (2016 - present)
+[05:00:10] 
+[05:00:10]   See full credits in the README.md file
+[05:00:10] -------------------------------------------------
+[05:00:10] 
+[05:00:10] Loading...
+[05:00:10] 
+[05:00:10] -------------------------------------------------
+[05:00:10]    ColAndreasv1.4.0
+[05:00:10] 
+[05:00:10]    Created By:
+[05:00:10]      [uL]Chris42O
+[05:00:10]      [uL]Slice
+[05:00:10]      [uL]Pottus
+[05:00:10] -------------------------------------------------
+[05:00:10] 
+[05:00:10] Loading...
+[05:00:10] ColAndreas v1.4.0 Loaded.
+[05:00:10]   Loaded.
+[05:00:10]  Loaded 5 plugins.
+
+[05:00:10] 
+[05:00:10] Filterscripts
+[05:00:10] ---------------
+[05:00:10]   Loaded 0 filterscripts.
+
+[05:00:15] Loaded collision data.
+[05:00:15]  
+[05:00:15]  
+[05:00:15]          ==============================================================
+[05:00:15]          |                                                            |
+[05:00:15]          |                                                            |
+[05:00:15]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[05:00:15]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[05:00:15]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[05:00:15]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[05:00:15]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[05:00:15]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[05:00:15]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[05:00:15]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[05:00:15]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[05:00:15]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[05:00:15]          |           Y:::::Y                    S:::::S   I::::I      |
+[05:00:15]          |           Y:::::Y                    S:::::S   I::::I      |
+[05:00:15]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[05:00:15]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[05:00:15]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[05:00:15]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[05:00:15]          |                                                            |
+[05:00:15]          |                                                            |
+[05:00:15]          |                      (c) 2021 MPL v1.1                     |
+[05:00:15]          |            Alex "Y_Less" Cole and contributors.            |
+[05:00:15]          |                                                            |
+[05:00:15]          |                                                            |
+[05:00:15]          ==============================================================
+[05:00:15]  
+[05:00:15]  
+[05:00:15]  ========================================== 
+[05:00:15]  |                                        | 
+[05:00:15]  |  Missing YSI scriptfiles directories:  | 
+[05:00:15]  |                                        | 
+[05:00:15]  |      /scriptfiles/YSI/fixes/           | 
+[05:00:15]  |      /scriptfiles/YSI/temp/            | 
+[05:00:15]  |                                        | 
+[05:00:15]  ========================================== 
+[05:00:15]  |                                        | 
+[05:00:15]  |   Generating code, this may take a     | 
+[05:00:15]  |  little bit of time.  Note that this   | 
+[05:00:15]  |  code generation works best with the   | 
+[05:00:15]  |     JIT plugin, which you are not      | 
+[05:00:15]  |     currently using.  Get it here:     | 
+[05:00:15]  |                                        | 
+[05:00:15]  |       https://git.io/jit-plugin        | 
+[05:00:15]  |                                        | 
+[05:00:15]  |             Please wait...             | 
+[05:00:15]  |                                        | 
+[05:00:15]  |             Done in 78ms!              | 
+[05:00:15]  |                                        | 
+[05:00:15]  ========================================== 
+[05:00:15]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[05:00:15]  |                                        | 
+[05:00:15]  | Server:      0.3.7-R2 (L)              | 
+[05:00:15]  | Started:     23 Nov 2026 - 05:00:15    | 
+[05:00:15]  |                                        | 
+[05:00:15]  | Compiler:    3.10.10 (Linux)           | 
+[05:00:15]  | Includes:    0.3DL                     | 
+[05:00:15]  | Codepage:    <none>                    | 
+[05:00:15]  | Built:       23 Nov 2026 - 05:00:01    | 
+[05:00:15]  |                                        | 
+[05:00:15]  | YSI:         v05.10.0006               | 
+[05:00:15]  | Master:      -1                        | 
+[05:00:15]  |                                        | 
+[05:00:15]  | JIT:         <none>                    | 
+[05:00:15]  | Crashdetect: <none>                    | 
+[05:00:15]  |                                        | 
+[05:00:15]  ========================================== 
+[05:00:15]  
+[05:00:15]  
+[05:00:15] [2026-11-23 05:00:15][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[05:00:15] [2026-11-23 05:00:15][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[05:00:15] Loading Map.
+[05:00:15] Loaded Map.                             
+[05:00:15] [2026-11-23 05:00:15][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[05:00:15] [2026-11-23 05:00:15][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[05:00:15] [2026-11-23 05:00:15][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[05:00:15] [2026-11-23 05:00:15][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[05:00:15] [2026-11-23 05:00:15][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[05:00:15] Number of vehicle models: 0
+[05:00:15] [2026-11-23 05:00:15][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 140 ms.
+
+[05:00:16] [2026-11-23 05:00:16][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[05:00:16] [2026-11-23 05:00:16][INFO] [PROBE] bcrypt hash+verify OK.
+
+[05:00:19] [2026-11-23 05:00:19][INFO] [BASE] 0 barricade dimuat dari database.
+
+[05:00:20] [2026-11-23 05:00:20][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9) sumber=port
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[05:00:24] [2026-11-23 05:00:24][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[05:01:16] [2026-11-23 05:01:16][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:01:16] [2026-11-23 05:01:16][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:02:06] --- Server Shutting Down.
+[05:02:06] [2026-11-23 05:02:06][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[05:02:06] plugin.mysql: Unloading plugin...
+[05:02:11] plugin.mysql: Plugin unloaded.
+[05:02:11] 
+[05:02:11]  ===============================
+[05:02:11] 
+[05:02:11]      sscanf plugin unloaded.    
+[05:02:11] 
+[05:02:11]  ===============================
+[05:02:11] 
+[05:02:11] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[05:02:11] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[05:02:12] 
+[05:02:12] Server Plugins
+[05:02:12] --------------
+[05:02:12]  Loading plugin: mysql.so
+[05:02:12]  >> plugin.mysql: R41-4 successfully loaded.
+[05:02:12]   Loaded.
+[05:02:12]  Loading plugin: sscanf.so
+[05:02:12] 
+[05:02:12]  ===============================
+[05:02:12] 
+[05:02:12]       sscanf plugin loaded.     
+[05:02:12] 
+[05:02:12]          Version: 2.13.8
+[05:02:12] 
+[05:02:12]    (c) 2022 Alex "Y_Less" Cole  
+[05:02:12] 
+[05:02:12]  ===============================
+[05:02:12] 
+[05:02:12]   Loaded.
+[05:02:12]  Loading plugin: ColAndreas.so
+[05:02:12]   Plugin does not conform to architecture.
+[05:02:12]   Failed.
+[05:02:12]  Loading plugin: streamer.so
+[05:02:12] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[05:02:12]   Loaded.
+[05:02:12]  Loading plugin: samp_bcrypt.so
+[05:02:12] [SampBcrypt] [info]: Version: 0.4.1
+[05:02:12]   Loaded.
+[05:02:12]  Loading plugin: FCNPC.so
+[05:02:12] 
+[05:02:12] -------------------------------------------------
+[05:02:12]      FCNPC - Fully Controllable NPC v2.0.11
+[05:02:12]             GNU/Linux SA-MP 0.3.7 R2
+[05:02:12]            Aug 23 2024 at 16:35:48
+[05:02:12] 
+[05:02:12]   Author:       OrMisicL (2013 - 2015)
+[05:02:12]   Continued by: ziggi    (2016 - present)
+[05:02:12] 
+[05:02:12]   See full credits in the README.md file
+[05:02:12] -------------------------------------------------
+[05:02:12] 
+[05:02:12] Loading...
+[05:02:12] 
+[05:02:12] -------------------------------------------------
+[05:02:12]    ColAndreasv1.4.0
+[05:02:12] 
+[05:02:12]    Created By:
+[05:02:12]      [uL]Chris42O
+[05:02:12]      [uL]Slice
+[05:02:12]      [uL]Pottus
+[05:02:12] -------------------------------------------------
+[05:02:12] 
+[05:02:12] Loading...
+[05:02:12] ColAndreas v1.4.0 Loaded.
+[05:02:12]   Loaded.
+[05:02:12]  Loaded 5 plugins.
+
+[05:02:12] 
+[05:02:12] Filterscripts
+[05:02:12] ---------------
+[05:02:12]   Loaded 0 filterscripts.
+
+[05:02:17] Loaded collision data.
+[05:02:17]  
+[05:02:17]  
+[05:02:17]          ==============================================================
+[05:02:17]          |                                                            |
+[05:02:17]          |                                                            |
+[05:02:17]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[05:02:17]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[05:02:17]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[05:02:17]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[05:02:17]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[05:02:17]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[05:02:17]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[05:02:17]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[05:02:17]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[05:02:17]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[05:02:17]          |           Y:::::Y                    S:::::S   I::::I      |
+[05:02:17]          |           Y:::::Y                    S:::::S   I::::I      |
+[05:02:17]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[05:02:17]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[05:02:17]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[05:02:17]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[05:02:17]          |                                                            |
+[05:02:17]          |                                                            |
+[05:02:17]          |                      (c) 2021 MPL v1.1                     |
+[05:02:17]          |            Alex "Y_Less" Cole and contributors.            |
+[05:02:17]          |                                                            |
+[05:02:17]          |                                                            |
+[05:02:17]          ==============================================================
+[05:02:17]  
+[05:02:17]  
+[05:02:17]  ========================================== 
+[05:02:17]  |                                        | 
+[05:02:17]  |  Missing YSI scriptfiles directories:  | 
+[05:02:17]  |                                        | 
+[05:02:17]  |      /scriptfiles/YSI/fixes/           | 
+[05:02:17]  |      /scriptfiles/YSI/temp/            | 
+[05:02:17]  |                                        | 
+[05:02:17]  ========================================== 
+[05:02:17]  |                                        | 
+[05:02:17]  |   Generating code, this may take a     | 
+[05:02:17]  |  little bit of time.  Note that this   | 
+[05:02:17]  |  code generation works best with the   | 
+[05:02:17]  |     JIT plugin, which you are not      | 
+[05:02:17]  |     currently using.  Get it here:     | 
+[05:02:17]  |                                        | 
+[05:02:17]  |       https://git.io/jit-plugin        | 
+[05:02:17]  |                                        | 
+[05:02:17]  |             Please wait...             | 
+[05:02:17]  |                                        | 
+[05:02:17]  |             Done in 78ms!              | 
+[05:02:17]  |                                        | 
+[05:02:17]  ========================================== 
+[05:02:17]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[05:02:17]  |                                        | 
+[05:02:17]  | Server:      0.3.7-R2 (L)              | 
+[05:02:17]  | Started:     23 Nov 2026 - 05:02:17    | 
+[05:02:17]  |                                        | 
+[05:02:17]  | Compiler:    3.10.10 (Linux)           | 
+[05:02:17]  | Includes:    0.3DL                     | 
+[05:02:17]  | Codepage:    <none>                    | 
+[05:02:17]  | Built:       23 Nov 2026 - 05:01:33    | 
+[05:02:17]  |                                        | 
+[05:02:17]  | YSI:         v05.10.0006               | 
+[05:02:17]  | Master:      -1                        | 
+[05:02:17]  |                                        | 
+[05:02:17]  | JIT:         <none>                    | 
+[05:02:17]  | Crashdetect: <none>                    | 
+[05:02:17]  |                                        | 
+[05:02:17]  ========================================== 
+[05:02:17]  
+[05:02:17]  
+[05:02:17] [2026-11-23 05:02:17][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[05:02:17] [2026-11-23 05:02:17][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[05:02:17] Loading Map.
+[05:02:17] Loaded Map.                             
+[05:02:17] [2026-11-23 05:02:17][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[05:02:17] [2026-11-23 05:02:17][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[05:02:17] [2026-11-23 05:02:17][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[05:02:17] [2026-11-23 05:02:17][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[05:02:17] [2026-11-23 05:02:17][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[05:02:17] Number of vehicle models: 0
+[05:02:17] [2026-11-23 05:02:17][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 140 ms.
+
+[05:02:18] [2026-11-23 05:02:18][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[05:02:18] [2026-11-23 05:02:18][INFO] [PROBE] bcrypt hash+verify OK.
+
+[05:02:20] [2026-11-23 05:02:20][INFO] [BASE] 0 barricade dimuat dari database.
+
+[05:02:21] [2026-11-23 05:02:21][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9) sumber=instance.ini
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[05:02:25] [2026-11-23 05:02:25][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[05:03:18] [2026-11-23 05:03:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:03:18] [2026-11-23 05:03:18][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:04:18] [2026-11-23 05:04:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:04:19] [2026-11-23 05:04:19][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:05:18] [2026-11-23 05:05:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:05:20] [2026-11-23 05:05:20][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:06:18] [2026-11-23 05:06:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:06:21] [2026-11-23 05:06:21][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:07:18] [2026-11-23 05:07:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:07:22] [2026-11-23 05:07:22][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:08:18] [2026-11-23 05:08:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:08:23] [2026-11-23 05:08:23][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:09:18] [2026-11-23 05:09:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:09:24] [2026-11-23 05:09:24][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:10:18] [2026-11-23 05:10:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:10:25] [2026-11-23 05:10:25][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:11:18] [2026-11-23 05:11:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:11:26] [2026-11-23 05:11:26][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:12:18] [2026-11-23 05:12:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:12:27] [2026-11-23 05:12:27][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:13:18] [2026-11-23 05:13:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:13:28] [2026-11-23 05:13:28][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:14:18] [2026-11-23 05:14:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:14:29] [2026-11-23 05:14:29][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:15:18] [2026-11-23 05:15:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:15:30] [2026-11-23 05:15:30][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:16:18] [2026-11-23 05:16:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:16:31] [2026-11-23 05:16:31][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:17:18] [2026-11-23 05:17:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:17:32] [2026-11-23 05:17:32][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:18:18] [2026-11-23 05:18:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/1 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:18:33] [2026-11-23 05:18:33][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:19:18] [2026-11-23 05:19:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:19:34] [2026-11-23 05:19:34][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:20:18] [2026-11-23 05:20:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:20:35] [2026-11-23 05:20:35][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:21:18] [2026-11-23 05:21:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:21:36] [2026-11-23 05:21:36][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:22:18] [2026-11-23 05:22:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:22:37] [2026-11-23 05:22:37][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:23:18] [2026-11-23 05:23:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:23:38] [2026-11-23 05:23:38][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:24:18] [2026-11-23 05:24:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:24:39] [2026-11-23 05:24:39][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:25:18] [2026-11-23 05:25:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:25:40] [2026-11-23 05:25:40][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:26:18] [2026-11-23 05:26:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:26:41] [2026-11-23 05:26:41][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:27:18] [2026-11-23 05:27:18][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:27:42] [2026-11-23 05:27:42][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:28:19] [2026-11-23 05:28:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:28:43] [2026-11-23 05:28:43][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:29:19] [2026-11-23 05:29:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/1 veh=1/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:29:44] [2026-11-23 05:29:44][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:30:19] [2026-11-23 05:30:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:30:45] [2026-11-23 05:30:45][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:31:19] [2026-11-23 05:31:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:31:46] [2026-11-23 05:31:46][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:32:19] [2026-11-23 05:32:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:32:47] [2026-11-23 05:32:47][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:33:19] [2026-11-23 05:33:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:33:48] [2026-11-23 05:33:48][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:34:19] [2026-11-23 05:34:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:34:49] [2026-11-23 05:34:49][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:35:19] [2026-11-23 05:35:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:35:50] [2026-11-23 05:35:50][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:36:19] [2026-11-23 05:36:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:36:51] [2026-11-23 05:36:51][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:37:19] [2026-11-23 05:37:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:37:52] [2026-11-23 05:37:52][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:38:19] [2026-11-23 05:38:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=1/1 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:38:53] [2026-11-23 05:38:53][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:39:19] [2026-11-23 05:39:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/1 event=1/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:39:54] [2026-11-23 05:39:54][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:40:19] [2026-11-23 05:40:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=1/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:40:55] [2026-11-23 05:40:55][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:41:19] [2026-11-23 05:41:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=1/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:41:56] [2026-11-23 05:41:56][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:42:19] [2026-11-23 05:42:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=1/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:42:57] [2026-11-23 05:42:57][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:43:19] [2026-11-23 05:43:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:43:58] [2026-11-23 05:43:58][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:44:19] [2026-11-23 05:44:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:44:59] [2026-11-23 05:44:59][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:45:19] [2026-11-23 05:45:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:46:00] [2026-11-23 05:46:00][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:46:19] [2026-11-23 05:46:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:47:01] [2026-11-23 05:47:01][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:47:19] [2026-11-23 05:47:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:48:02] [2026-11-23 05:48:02][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:48:19] [2026-11-23 05:48:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:49:03] [2026-11-23 05:49:03][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:49:19] [2026-11-23 05:49:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:50:04] [2026-11-23 05:50:04][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:50:19] [2026-11-23 05:50:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:51:05] [2026-11-23 05:51:05][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:51:19] [2026-11-23 05:51:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:52:06] [2026-11-23 05:52:06][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:52:19] [2026-11-23 05:52:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:53:07] [2026-11-23 05:53:07][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:53:19] [2026-11-23 05:53:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:54:08] [2026-11-23 05:54:08][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:54:19] [2026-11-23 05:54:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:55:09] [2026-11-23 05:55:09][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[05:55:19] [2026-11-23 05:55:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:56:10] [2026-11-23 05:56:10][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:56:19] [2026-11-23 05:56:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:57:11] [2026-11-23 05:57:11][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:57:19] [2026-11-23 05:57:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:58:12] [2026-11-23 05:58:12][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:58:19] [2026-11-23 05:58:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[05:59:13] [2026-11-23 05:59:13][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[05:59:19] [2026-11-23 05:59:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:00:14] [2026-11-23 06:00:14][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:00:19] [2026-11-23 06:00:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:01:15] [2026-11-23 06:01:15][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:01:19] [2026-11-23 06:01:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:02:16] [2026-11-23 06:02:16][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:02:19] [2026-11-23 06:02:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:03:17] [2026-11-23 06:03:17][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:03:19] [2026-11-23 06:03:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:04:18] [2026-11-23 06:04:18][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:04:19] [2026-11-23 06:04:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:05:19] [2026-11-23 06:05:19][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:05:19] [2026-11-23 06:05:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:06:19] [2026-11-23 06:06:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:06:20] [2026-11-23 06:06:20][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:07:19] [2026-11-23 06:07:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:07:21] [2026-11-23 06:07:21][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:08:19] [2026-11-23 06:08:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:08:22] [2026-11-23 06:08:22][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:09:19] [2026-11-23 06:09:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:09:23] [2026-11-23 06:09:23][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:10:19] [2026-11-23 06:10:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/1 hud=0/0 player=1/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:10:24] [2026-11-23 06:10:24][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:11:19] [2026-11-23 06:11:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:11:25] [2026-11-23 06:11:25][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:12:19] [2026-11-23 06:12:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:12:26] [2026-11-23 06:12:26][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:13:19] [2026-11-23 06:13:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:13:27] [2026-11-23 06:13:27][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:14:19] [2026-11-23 06:14:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:14:28] [2026-11-23 06:14:28][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:15:19] [2026-11-23 06:15:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:15:29] [2026-11-23 06:15:29][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:16:19] [2026-11-23 06:16:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:16:30] [2026-11-23 06:16:30][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:17:19] [2026-11-23 06:17:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:17:31] [2026-11-23 06:17:31][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:18:19] [2026-11-23 06:18:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:18:32] [2026-11-23 06:18:32][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:19:19] [2026-11-23 06:19:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:19:33] [2026-11-23 06:19:33][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:20:19] [2026-11-23 06:20:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:20:34] [2026-11-23 06:20:34][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:21:19] [2026-11-23 06:21:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:21:35] [2026-11-23 06:21:35][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:22:19] [2026-11-23 06:22:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:22:36] [2026-11-23 06:22:36][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:23:19] [2026-11-23 06:23:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:23:37] [2026-11-23 06:23:37][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:24:19] [2026-11-23 06:24:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=1/1 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:24:38] [2026-11-23 06:24:38][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:25:19] [2026-11-23 06:25:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=1/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:25:39] [2026-11-23 06:25:39][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:26:19] [2026-11-23 06:26:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:26:40] [2026-11-23 06:26:40][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:27:19] [2026-11-23 06:27:19][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:27:41] [2026-11-23 06:27:41][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:28:20] [2026-11-23 06:28:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:28:42] [2026-11-23 06:28:42][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:29:20] [2026-11-23 06:29:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:29:43] [2026-11-23 06:29:43][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:30:20] [2026-11-23 06:30:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:30:44] [2026-11-23 06:30:44][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:31:20] [2026-11-23 06:31:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:31:45] [2026-11-23 06:31:45][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:32:20] [2026-11-23 06:32:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:32:46] [2026-11-23 06:32:46][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:33:20] [2026-11-23 06:33:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:33:47] [2026-11-23 06:33:47][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:34:20] [2026-11-23 06:34:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:34:48] [2026-11-23 06:34:48][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:35:20] [2026-11-23 06:35:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:35:49] [2026-11-23 06:35:49][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:36:20] [2026-11-23 06:36:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:36:50] [2026-11-23 06:36:50][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:37:20] [2026-11-23 06:37:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:37:51] [2026-11-23 06:37:51][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:38:20] [2026-11-23 06:38:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:38:52] [2026-11-23 06:38:52][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:39:20] [2026-11-23 06:39:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:39:53] [2026-11-23 06:39:53][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:40:20] [2026-11-23 06:40:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:40:54] [2026-11-23 06:40:54][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:41:20] [2026-11-23 06:41:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:41:55] [2026-11-23 06:41:55][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:42:20] [2026-11-23 06:42:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:42:56] [2026-11-23 06:42:56][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:43:20] [2026-11-23 06:43:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:43:57] [2026-11-23 06:43:57][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:44:20] [2026-11-23 06:44:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:44:58] [2026-11-23 06:44:58][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:45:20] [2026-11-23 06:45:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:45:59] [2026-11-23 06:45:59][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:46:20] [2026-11-23 06:46:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:47:00] [2026-11-23 06:47:00][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:47:20] [2026-11-23 06:47:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:48:01] [2026-11-23 06:48:01][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:48:20] [2026-11-23 06:48:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:49:02] [2026-11-23 06:49:02][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:49:20] [2026-11-23 06:49:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:50:03] [2026-11-23 06:50:03][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+
+[06:50:20] [2026-11-23 06:50:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:51:04] [2026-11-23 06:51:04][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:51:20] [2026-11-23 06:51:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:52:05] [2026-11-23 06:52:05][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:52:20] [2026-11-23 06:52:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:53:06] [2026-11-23 06:53:06][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:53:20] [2026-11-23 06:53:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:54:07] [2026-11-23 06:54:07][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:54:20] [2026-11-23 06:54:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/1 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:55:08] [2026-11-23 06:55:08][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:55:20] [2026-11-23 06:55:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:56:09] [2026-11-23 06:56:09][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:56:20] [2026-11-23 06:56:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:57:10] [2026-11-23 06:57:10][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[06:57:20] [2026-11-23 06:57:20][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[06:57:50] --- Server Shutting Down.
+[06:57:50] [2026-11-23 06:57:50][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[06:57:50] plugin.mysql: Unloading plugin...
+[06:57:55] plugin.mysql: Plugin unloaded.
+[06:57:55] 
+[06:57:55]  ===============================
+[06:57:55] 
+[06:57:55]      sscanf plugin unloaded.    
+[06:57:55] 
+[06:57:55]  ===============================
+[06:57:55] 
+[06:57:55] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[06:57:55] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[06:58:03] 
+[06:58:03] Server Plugins
+[06:58:03] --------------
+[06:58:03]  Loading plugin: mysql.so
+[06:58:03]  >> plugin.mysql: R41-4 successfully loaded.
+[06:58:03]   Loaded.
+[06:58:03]  Loading plugin: sscanf.so
+[06:58:03] 
+[06:58:03]  ===============================
+[06:58:03] 
+[06:58:03]       sscanf plugin loaded.     
+[06:58:03] 
+[06:58:03]          Version: 2.13.8
+[06:58:03] 
+[06:58:03]    (c) 2022 Alex "Y_Less" Cole  
+[06:58:03] 
+[06:58:03]  ===============================
+[06:58:03] 
+[06:58:03]   Loaded.
+[06:58:03]  Loading plugin: ColAndreas.so
+[06:58:03]   Plugin does not conform to architecture.
+[06:58:03]   Failed.
+[06:58:03]  Loading plugin: streamer.so
+[06:58:03] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[06:58:03]   Loaded.
+[06:58:03]  Loading plugin: samp_bcrypt.so
+[06:58:03] [SampBcrypt] [info]: Version: 0.4.1
+[06:58:03]   Loaded.
+[06:58:03]  Loading plugin: FCNPC.so
+[06:58:03] 
+[06:58:03] -------------------------------------------------
+[06:58:03]      FCNPC - Fully Controllable NPC v2.0.11
+[06:58:03]             GNU/Linux SA-MP 0.3.7 R2
+[06:58:03]            Aug 23 2024 at 16:35:48
+[06:58:03] 
+[06:58:03]   Author:       OrMisicL (2013 - 2015)
+[06:58:03]   Continued by: ziggi    (2016 - present)
+[06:58:03] 
+[06:58:03]   See full credits in the README.md file
+[06:58:03] -------------------------------------------------
+[06:58:03] 
+[06:58:03] Loading...
+[06:58:03] 
+[06:58:03] -------------------------------------------------
+[06:58:03]    ColAndreasv1.4.0
+[06:58:03] 
+[06:58:03]    Created By:
+[06:58:03]      [uL]Chris42O
+[06:58:03]      [uL]Slice
+[06:58:03]      [uL]Pottus
+[06:58:03] -------------------------------------------------
+[06:58:03] 
+[06:58:03] Loading...
+[06:58:03] ColAndreas v1.4.0 Loaded.
+[06:58:03]   Loaded.
+[06:58:03]  Loaded 5 plugins.
+
+[06:58:03] 
+[06:58:03] Filterscripts
+[06:58:03] ---------------
+[06:58:03]   Loaded 0 filterscripts.
+
+[06:58:10] Loaded collision data.
+[06:58:10]  
+[06:58:10]  
+[06:58:10]          ==============================================================
+[06:58:10]          |                                                            |
+[06:58:10]          |                                                            |
+[06:58:10]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[06:58:10]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[06:58:10]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[06:58:10]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[06:58:10]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[06:58:10]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[06:58:10]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[06:58:10]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[06:58:10]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[06:58:10]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[06:58:10]          |           Y:::::Y                    S:::::S   I::::I      |
+[06:58:10]          |           Y:::::Y                    S:::::S   I::::I      |
+[06:58:10]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[06:58:10]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[06:58:10]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[06:58:10]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[06:58:10]          |                                                            |
+[06:58:10]          |                                                            |
+[06:58:10]          |                      (c) 2021 MPL v1.1                     |
+[06:58:10]          |            Alex "Y_Less" Cole and contributors.            |
+[06:58:10]          |                                                            |
+[06:58:10]          |                                                            |
+[06:58:10]          ==============================================================
+[06:58:10]  
+[06:58:10]  
+[06:58:10]  ========================================== 
+[06:58:10]  |                                        | 
+[06:58:10]  |  Missing YSI scriptfiles directories:  | 
+[06:58:10]  |                                        | 
+[06:58:10]  |      /scriptfiles/YSI/fixes/           | 
+[06:58:10]  |      /scriptfiles/YSI/temp/            | 
+[06:58:10]  |                                        | 
+[06:58:10]  ========================================== 
+[06:58:10]  |                                        | 
+[06:58:10]  |   Generating code, this may take a     | 
+[06:58:10]  |  little bit of time.  Note that this   | 
+[06:58:10]  |  code generation works best with the   | 
+[06:58:10]  |     JIT plugin, which you are not      | 
+[06:58:10]  |     currently using.  Get it here:     | 
+[06:58:10]  |                                        | 
+[06:58:10]  |       https://git.io/jit-plugin        | 
+[06:58:10]  |                                        | 
+[06:58:10]  |             Please wait...             | 
+[06:58:10]  |                                        | 
+[06:58:10]  |             Done in 88ms!              | 
+[06:58:10]  |                                        | 
+[06:58:10]  ========================================== 
+[06:58:10]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[06:58:10]  |                                        | 
+[06:58:10]  | Server:      0.3.7-R2 (L)              | 
+[06:58:10]  | Started:     23 Nov 2026 - 06:58:10    | 
+[06:58:10]  |                                        | 
+[06:58:10]  | Compiler:    3.10.10 (Linux)           | 
+[06:58:10]  | Includes:    0.3DL                     | 
+[06:58:10]  | Codepage:    <none>                    | 
+[06:58:10]  | Built:       23 Nov 2026 - 05:01:33    | 
+[06:58:10]  |                                        | 
+[06:58:10]  | YSI:         v05.10.0006               | 
+[06:58:10]  | Master:      -1                        | 
+[06:58:10]  |                                        | 
+[06:58:10]  | JIT:         <none>                    | 
+[06:58:10]  | Crashdetect: <none>                    | 
+[06:58:10]  |                                        | 
+[06:58:10]  ========================================== 
+[06:58:10]  
+[06:58:10]  
+[06:58:10] [2026-11-23 06:58:10][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[06:58:10] [2026-11-23 06:58:10][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[06:58:10] Loading Map.
+[06:58:10] Loaded Map.                             
+[06:58:10] [2026-11-23 06:58:10][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[06:58:10] [2026-11-23 06:58:10][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[06:58:10] [2026-11-23 06:58:10][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[06:58:10] [2026-11-23 06:58:10][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[06:58:10] [2026-11-23 06:58:10][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[06:58:10] Number of vehicle models: 0
+[06:58:10] [2026-11-23 06:58:10][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 178 ms.
+
+[06:58:10] [2026-11-23 06:58:10][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[06:58:11] [2026-11-23 06:58:11][INFO] [PROBE] bcrypt hash+verify OK.
+
+[06:58:12] --- Server Shutting Down.
+[06:58:12] [2026-11-23 06:58:12][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[06:58:12] plugin.mysql: Unloading plugin...
+[06:58:17] plugin.mysql: Plugin unloaded.
+[06:58:17] 
+[06:58:17]  ===============================
+[06:58:17] 
+[06:58:17]      sscanf plugin unloaded.    
+[06:58:17] 
+[06:58:17]  ===============================
+[06:58:17] 
+[06:58:17] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[06:58:17] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[06:58:18] 
+[06:58:18] Server Plugins
+[06:58:18] --------------
+[06:58:18]  Loading plugin: mysql.so
+[06:58:18]  >> plugin.mysql: R41-4 successfully loaded.
+[06:58:18]   Loaded.
+[06:58:18]  Loading plugin: sscanf.so
+[06:58:18] 
+[06:58:18]  ===============================
+[06:58:18] 
+[06:58:18]       sscanf plugin loaded.     
+[06:58:18] 
+[06:58:18]          Version: 2.13.8
+[06:58:18] 
+[06:58:18]    (c) 2022 Alex "Y_Less" Cole  
+[06:58:18] 
+[06:58:18]  ===============================
+[06:58:18] 
+[06:58:18]   Loaded.
+[06:58:18]  Loading plugin: ColAndreas.so
+[06:58:18]   Plugin does not conform to architecture.
+[06:58:18]   Failed.
+[06:58:18]  Loading plugin: streamer.so
+[06:58:18] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[06:58:18]   Loaded.
+[06:58:18]  Loading plugin: samp_bcrypt.so
+[06:58:18] [SampBcrypt] [info]: Version: 0.4.1
+[06:58:18]   Loaded.
+[06:58:18]  Loading plugin: FCNPC.so
+[06:58:18] 
+[06:58:18] -------------------------------------------------
+[06:58:18]      FCNPC - Fully Controllable NPC v2.0.11
+[06:58:18]             GNU/Linux SA-MP 0.3.7 R2
+[06:58:18]            Aug 23 2024 at 16:35:48
+[06:58:18] 
+[06:58:18]   Author:       OrMisicL (2013 - 2015)
+[06:58:18]   Continued by: ziggi    (2016 - present)
+[06:58:18] 
+[06:58:18]   See full credits in the README.md file
+[06:58:18] -------------------------------------------------
+[06:58:18] 
+[06:58:18] Loading...
+[06:58:18] 
+[06:58:18] -------------------------------------------------
+[06:58:18]    ColAndreasv1.4.0
+[06:58:18] 
+[06:58:18]    Created By:
+[06:58:18]      [uL]Chris42O
+[06:58:18]      [uL]Slice
+[06:58:18]      [uL]Pottus
+[06:58:18] -------------------------------------------------
+[06:58:18] 
+[06:58:18] Loading...
+[06:58:18] ColAndreas v1.4.0 Loaded.
+[06:58:18]   Loaded.
+[06:58:18]  Loaded 5 plugins.
+
+[06:58:18] 
+[06:58:18] Filterscripts
+[06:58:18] ---------------
+[06:58:18]   Loaded 0 filterscripts.
+
+[06:58:24] Loaded collision data.
+[06:58:24]  
+[06:58:24]  
+[06:58:24]          ==============================================================
+[06:58:24]          |                                                            |
+[06:58:24]          |                                                            |
+[06:58:24]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[06:58:24]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[06:58:24]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[06:58:24]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[06:58:24]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[06:58:24]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[06:58:24]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[06:58:24]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[06:58:24]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[06:58:24]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[06:58:24]          |           Y:::::Y                    S:::::S   I::::I      |
+[06:58:24]          |           Y:::::Y                    S:::::S   I::::I      |
+[06:58:24]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[06:58:24]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[06:58:24]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[06:58:24]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[06:58:24]          |                                                            |
+[06:58:24]          |                                                            |
+[06:58:24]          |                      (c) 2021 MPL v1.1                     |
+[06:58:24]          |            Alex "Y_Less" Cole and contributors.            |
+[06:58:24]          |                                                            |
+[06:58:24]          |                                                            |
+[06:58:24]          ==============================================================
+[06:58:24]  
+[06:58:24]  
+[06:58:24]  ========================================== 
+[06:58:24]  |                                        | 
+[06:58:24]  |  Missing YSI scriptfiles directories:  | 
+[06:58:24]  |                                        | 
+[06:58:24]  |      /scriptfiles/YSI/fixes/           | 
+[06:58:24]  |      /scriptfiles/YSI/temp/            | 
+[06:58:24]  |                                        | 
+[06:58:24]  ========================================== 
+[06:58:24]  |                                        | 
+[06:58:24]  |   Generating code, this may take a     | 
+[06:58:24]  |  little bit of time.  Note that this   | 
+[06:58:24]  |  code generation works best with the   | 
+[06:58:24]  |     JIT plugin, which you are not      | 
+[06:58:24]  |     currently using.  Get it here:     | 
+[06:58:24]  |                                        | 
+[06:58:24]  |       https://git.io/jit-plugin        | 
+[06:58:24]  |                                        | 
+[06:58:24]  |             Please wait...             | 
+[06:58:24]  |                                        | 
+[06:58:24]  |             Done in 96ms!              | 
+[06:58:24]  |                                        | 
+[06:58:24]  ========================================== 
+[06:58:24]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[06:58:24]  |                                        | 
+[06:58:24]  | Server:      0.3.7-R2 (L)              | 
+[06:58:24]  | Started:     23 Nov 2026 - 06:58:24    | 
+[06:58:24]  |                                        | 
+[06:58:24]  | Compiler:    3.10.10 (Linux)           | 
+[06:58:24]  | Includes:    0.3DL                     | 
+[06:58:24]  | Codepage:    <none>                    | 
+[06:58:24]  | Built:       23 Nov 2026 - 05:01:33    | 
+[06:58:24]  |                                        | 
+[06:58:24]  | YSI:         v05.10.0006               | 
+[06:58:24]  | Master:      -1                        | 
+[06:58:24]  |                                        | 
+[06:58:24]  | JIT:         <none>                    | 
+[06:58:24]  | Crashdetect: <none>                    | 
+[06:58:24]  |                                        | 
+[06:58:24]  ========================================== 
+[06:58:24]  
+[06:58:24]  
+[06:58:24] [2026-11-23 06:58:24][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[06:58:24] [2026-11-23 06:58:24][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[06:58:24] Loading Map.
+[06:58:24] Loaded Map.                             
+[06:58:24] [2026-11-23 06:58:24][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[06:58:24] [2026-11-23 06:58:24][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[06:58:24] [2026-11-23 06:58:24][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[06:58:24] [2026-11-23 06:58:24][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[06:58:24] [2026-11-23 06:58:24][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[06:58:24] Number of vehicle models: 0
+[06:58:24] [2026-11-23 06:58:24][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 180 ms.
+
+[06:58:24] [2026-11-23 06:58:24][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[06:58:25] [2026-11-23 06:58:25][INFO] [PROBE] bcrypt hash+verify OK.
+
+[06:58:27] [2026-11-23 06:58:27][INFO] [BASE] 0 barricade dimuat dari database.
+
+[06:58:28] [2026-11-23 06:58:28][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9) sumber=instance.ini
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[06:58:32] [2026-11-23 06:58:32][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[06:59:03] 
+[06:59:03] Server Plugins
+[06:59:03] --------------
+[06:59:03]  Loading plugin: mysql.so
+[06:59:03]  >> plugin.mysql: R41-4 successfully loaded.
+[06:59:03]   Loaded.
+[06:59:03]  Loading plugin: sscanf.so
+[06:59:03] 
+[06:59:03]  ===============================
+[06:59:03] 
+[06:59:03]       sscanf plugin loaded.     
+[06:59:03] 
+[06:59:03]          Version: 2.13.8
+[06:59:03] 
+[06:59:03]    (c) 2022 Alex "Y_Less" Cole  
+[06:59:03] 
+[06:59:03]  ===============================
+[06:59:03] 
+[06:59:03]   Loaded.
+[06:59:03]  Loading plugin: ColAndreas.so
+[06:59:03]   Plugin does not conform to architecture.
+[06:59:03]   Failed.
+[06:59:03]  Loading plugin: streamer.so
+[06:59:03] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[06:59:03]   Loaded.
+[06:59:03]  Loading plugin: samp_bcrypt.so
+[06:59:03] [SampBcrypt] [info]: Version: 0.4.1
+[06:59:03]   Loaded.
+[06:59:03]  Loading plugin: FCNPC.so
+[06:59:03] 
+[06:59:03] -------------------------------------------------
+[06:59:03]      FCNPC - Fully Controllable NPC v2.0.11
+[06:59:03]             GNU/Linux SA-MP 0.3.7 R2
+[06:59:03]            Aug 23 2024 at 16:35:48
+[06:59:03] 
+[06:59:03]   Author:       OrMisicL (2013 - 2015)
+[06:59:03]   Continued by: ziggi    (2016 - present)
+[06:59:03] 
+[06:59:03]   See full credits in the README.md file
+[06:59:03] -------------------------------------------------
+[06:59:03] 
+[06:59:03] Loading...
+[06:59:03] 
+[06:59:03] -------------------------------------------------
+[06:59:03]    ColAndreasv1.4.0
+[06:59:03] 
+[06:59:03]    Created By:
+[06:59:03]      [uL]Chris42O
+[06:59:03]      [uL]Slice
+[06:59:03]      [uL]Pottus
+[06:59:03] -------------------------------------------------
+[06:59:03] 
+[06:59:03] Loading...
+[06:59:03] ColAndreas v1.4.0 Loaded.
+[06:59:03]   Loaded.
+[06:59:03]  Loaded 5 plugins.
+
+[06:59:03] 
+[06:59:03] Filterscripts
+[06:59:03] ---------------
+[06:59:03]   Loaded 0 filterscripts.
+
+[06:59:09] Loaded collision data.
+[06:59:09]  
+[06:59:09]  
+[06:59:09]          ==============================================================
+[06:59:09]          |                                                            |
+[06:59:09]          |                                                            |
+[06:59:09]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[06:59:09]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[06:59:09]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[06:59:09]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[06:59:09]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[06:59:09]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[06:59:09]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[06:59:09]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[06:59:09]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[06:59:09]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[06:59:09]          |           Y:::::Y                    S:::::S   I::::I      |
+[06:59:09]          |           Y:::::Y                    S:::::S   I::::I      |
+[06:59:09]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[06:59:09]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[06:59:09]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[06:59:09]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[06:59:09]          |                                                            |
+[06:59:09]          |                                                            |
+[06:59:09]          |                      (c) 2021 MPL v1.1                     |
+[06:59:09]          |            Alex "Y_Less" Cole and contributors.            |
+[06:59:09]          |                                                            |
+[06:59:09]          |                                                            |
+[06:59:09]          ==============================================================
+[06:59:09]  
+[06:59:09]  
+[06:59:09]  ========================================== 
+[06:59:09]  |                                        | 
+[06:59:09]  |  Missing YSI scriptfiles directories:  | 
+[06:59:09]  |                                        | 
+[06:59:09]  |      /scriptfiles/YSI/fixes/           | 
+[06:59:09]  |      /scriptfiles/YSI/temp/            | 
+[06:59:09]  |                                        | 
+[06:59:09]  ========================================== 
+[06:59:09]  |                                        | 
+[06:59:09]  |   Generating code, this may take a     | 
+[06:59:09]  |  little bit of time.  Note that this   | 
+[06:59:09]  |  code generation works best with the   | 
+[06:59:09]  |     JIT plugin, which you are not      | 
+[06:59:09]  |     currently using.  Get it here:     | 
+[06:59:09]  |                                        | 
+[06:59:09]  |       https://git.io/jit-plugin        | 
+[06:59:09]  |                                        | 
+[06:59:09]  |             Please wait...             | 
+[06:59:09]  |                                        | 
+[06:59:09]  |             Done in 78ms!              | 
+[06:59:09]  |                                        | 
+[06:59:09]  ========================================== 
+[06:59:09]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[06:59:09]  |                                        | 
+[06:59:09]  | Server:      0.3.7-R2 (L)              | 
+[06:59:09]  | Started:     23 Nov 2026 - 06:59:09    | 
+[06:59:09]  |                                        | 
+[06:59:09]  | Compiler:    3.10.10 (Linux)           | 
+[06:59:09]  | Includes:    0.3DL                     | 
+[06:59:09]  | Codepage:    <none>                    | 
+[06:59:09]  | Built:       23 Nov 2026 - 05:01:33    | 
+[06:59:09]  |                                        | 
+[06:59:09]  | YSI:         v05.10.0006               | 
+[06:59:09]  | Master:      -1                        | 
+[06:59:09]  |                                        | 
+[06:59:09]  | JIT:         <none>                    | 
+[06:59:09]  | Crashdetect: <none>                    | 
+[06:59:09]  |                                        | 
+[06:59:09]  ========================================== 
+[06:59:09]  
+[06:59:09]  
+[06:59:09] [2026-11-23 06:59:09][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[06:59:09] Loading Map.
+[06:59:09] Loaded Map.                             
+[06:59:09] [2026-11-23 06:59:09][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[06:59:09] Number of vehicle models: 0
+[06:59:09] [2026-11-23 06:59:09][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 145 ms.
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[06:59:09] [2026-11-23 06:59:09][INFO] [PROBE] bcrypt hash+verify OK.
+
+[06:59:12] [2026-11-23 06:59:12][INFO] [BASE] 0 barricade dimuat dari database.
+
+[06:59:13] [2026-11-23 06:59:13][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9) sumber=instance.ini
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[06:59:17] [2026-11-23 06:59:17][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[07:00:09] [2026-11-23 07:00:09][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[07:00:10] [2026-11-23 07:00:10][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+
+[07:01:05] --- Server Shutting Down.
+[07:01:05] [2026-11-23 07:01:05][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[07:01:05] plugin.mysql: Unloading plugin...
+[07:01:10] plugin.mysql: Plugin unloaded.
+[07:01:10] 
+[07:01:10]  ===============================
+[07:01:10] 
+[07:01:10]      sscanf plugin unloaded.    
+[07:01:10] 
+[07:01:10]  ===============================
+[07:01:10] 
+[07:01:10] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[07:01:10] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[07:01:10] 
+[07:01:10] Server Plugins
+[07:01:10] --------------
+[07:01:10]  Loading plugin: mysql.so
+[07:01:10]  >> plugin.mysql: R41-4 successfully loaded.
+[07:01:10]   Loaded.
+[07:01:10]  Loading plugin: sscanf.so
+[07:01:10] 
+[07:01:10]  ===============================
+[07:01:10] 
+[07:01:10]       sscanf plugin loaded.     
+[07:01:10] 
+[07:01:10]          Version: 2.13.8
+[07:01:10] 
+[07:01:10]    (c) 2022 Alex "Y_Less" Cole  
+[07:01:10] 
+[07:01:10]  ===============================
+[07:01:10] 
+[07:01:10]   Loaded.
+[07:01:10]  Loading plugin: ColAndreas.so
+[07:01:10]   Plugin does not conform to architecture.
+[07:01:10]   Failed.
+[07:01:10]  Loading plugin: streamer.so
+[07:01:10] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[07:01:10]   Loaded.
+[07:01:10]  Loading plugin: samp_bcrypt.so
+[07:01:10] [SampBcrypt] [info]: Version: 0.4.1
+[07:01:10]   Loaded.
+[07:01:10]  Loading plugin: FCNPC.so
+[07:01:10] 
+[07:01:10] -------------------------------------------------
+[07:01:10]      FCNPC - Fully Controllable NPC v2.0.11
+[07:01:10]             GNU/Linux SA-MP 0.3.7 R2
+[07:01:10]            Aug 23 2024 at 16:35:48
+[07:01:10] 
+[07:01:10]   Author:       OrMisicL (2013 - 2015)
+[07:01:10]   Continued by: ziggi    (2016 - present)
+[07:01:10] 
+[07:01:10]   See full credits in the README.md file
+[07:01:10] -------------------------------------------------
+[07:01:10] 
+[07:01:10] Loading...
+[07:01:10] 
+[07:01:10] -------------------------------------------------
+[07:01:10]    ColAndreasv1.4.0
+[07:01:10] 
+[07:01:10]    Created By:
+[07:01:10]      [uL]Chris42O
+[07:01:10]      [uL]Slice
+[07:01:10]      [uL]Pottus
+[07:01:10] -------------------------------------------------
+[07:01:10] 
+[07:01:10] Loading...
+[07:01:10] ColAndreas v1.4.0 Loaded.
+[07:01:10]   Loaded.
+[07:01:10]  Loaded 5 plugins.
+
+[07:01:10] 
+[07:01:10] Filterscripts
+[07:01:10] ---------------
+[07:01:10]   Loaded 0 filterscripts.
+
+[07:01:16] Loaded collision data.
+[07:01:16]  
+[07:01:16]  
+[07:01:16]          ==============================================================
+[07:01:16]          |                                                            |
+[07:01:16]          |                                                            |
+[07:01:16]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[07:01:16]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[07:01:16]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[07:01:16]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[07:01:16]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[07:01:16]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[07:01:16]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[07:01:16]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[07:01:16]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[07:01:16]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[07:01:16]          |           Y:::::Y                    S:::::S   I::::I      |
+[07:01:16]          |           Y:::::Y                    S:::::S   I::::I      |
+[07:01:16]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[07:01:16]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[07:01:16]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[07:01:16]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[07:01:16]          |                                                            |
+[07:01:16]          |                                                            |
+[07:01:16]          |                      (c) 2021 MPL v1.1                     |
+[07:01:16]          |            Alex "Y_Less" Cole and contributors.            |
+[07:01:16]          |                                                            |
+[07:01:16]          |                                                            |
+[07:01:16]          ==============================================================
+[07:01:16]  
+[07:01:16]  
+[07:01:16]  ========================================== 
+[07:01:16]  |                                        | 
+[07:01:16]  |  Missing YSI scriptfiles directories:  | 
+[07:01:16]  |                                        | 
+[07:01:16]  |      /scriptfiles/YSI/fixes/           | 
+[07:01:16]  |      /scriptfiles/YSI/temp/            | 
+[07:01:16]  |                                        | 
+[07:01:16]  ========================================== 
+[07:01:16]  |                                        | 
+[07:01:16]  |   Generating code, this may take a     | 
+[07:01:16]  |  little bit of time.  Note that this   | 
+[07:01:16]  |  code generation works best with the   | 
+[07:01:16]  |     JIT plugin, which you are not      | 
+[07:01:16]  |     currently using.  Get it here:     | 
+[07:01:16]  |                                        | 
+[07:01:16]  |       https://git.io/jit-plugin        | 
+[07:01:16]  |                                        | 
+[07:01:16]  |             Please wait...             | 
+[07:01:16]  |                                        | 
+[07:01:16]  |             Done in 80ms!              | 
+[07:01:16]  |                                        | 
+[07:01:16]  ========================================== 
+[07:01:16]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[07:01:16]  |                                        | 
+[07:01:16]  | Server:      0.3.7-R2 (L)              | 
+[07:01:16]  | Started:     23 Nov 2026 - 07:01:16    | 
+[07:01:16]  |                                        | 
+[07:01:16]  | Compiler:    3.10.10 (Linux)           | 
+[07:01:16]  | Includes:    0.3DL                     | 
+[07:01:16]  | Codepage:    <none>                    | 
+[07:01:16]  | Built:       23 Nov 2026 - 07:01:04    | 
+[07:01:16]  |                                        | 
+[07:01:16]  | YSI:         v05.10.0006               | 
+[07:01:16]  | Master:      -1                        | 
+[07:01:16]  |                                        | 
+[07:01:16]  | JIT:         <none>                    | 
+[07:01:16]  | Crashdetect: <none>                    | 
+[07:01:16]  |                                        | 
+[07:01:16]  ========================================== 
+[07:01:16]  
+[07:01:16]  
+[07:01:16] [2026-11-23 07:01:16][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[07:01:16] [2026-11-23 07:01:16][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[07:01:16] Loading Map.
+[07:01:16] Loaded Map.                             
+[07:01:16] [2026-11-23 07:01:16][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[07:01:16] [2026-11-23 07:01:16][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[07:01:16] [2026-11-23 07:01:16][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[07:01:16] [2026-11-23 07:01:16][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[07:01:16] [2026-11-23 07:01:16][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[07:01:16] Number of vehicle models: 0
+[07:01:16] [2026-11-23 07:01:16][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 151 ms.
+
+[07:01:17] [2026-11-23 07:01:17][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[07:01:17] [2026-11-23 07:01:17][INFO] [PROBE] bcrypt hash+verify OK.
+
+[07:01:19] [2026-11-23 07:01:19][INFO] [BASE] 0 barricade dimuat dari database.
+
+[07:01:20] [2026-11-23 07:01:20][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9) sumber=instance.ini
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[07:01:24] [2026-11-23 07:01:24][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+
+[07:02:11] --- Server Shutting Down.
+[07:02:11] [2026-11-23 07:02:11][INFO] [SHUTDOWN] semua zombie dibersihkan.
+
+[07:02:11] plugin.mysql: Unloading plugin...
+[07:02:16] plugin.mysql: Plugin unloaded.
+[07:02:16] 
+[07:02:16]  ===============================
+[07:02:16] 
+[07:02:16]      sscanf plugin unloaded.    
+[07:02:16] 
+[07:02:16]  ===============================
+[07:02:16] 
+[07:02:16] 
+
+*** Streamer Plugin v2.9.6 by Incognito unloaded ***
+
+[07:02:16] [FCNPC] Info: Plugin unloaded.
+
+----------
+Loaded log file: "server_log.txt".
+----------
+
+SA-MP Dedicated Server
+----------------------
+v0.3.7-R2, (C)2005-2015 SA-MP Team
+
+[07:02:16] 
+[07:02:16] Server Plugins
+[07:02:16] --------------
+[07:02:16]  Loading plugin: mysql.so
+[07:02:16]  >> plugin.mysql: R41-4 successfully loaded.
+[07:02:16]   Loaded.
+[07:02:16]  Loading plugin: sscanf.so
+[07:02:16] 
+[07:02:16]  ===============================
+[07:02:16] 
+[07:02:16]       sscanf plugin loaded.     
+[07:02:16] 
+[07:02:16]          Version: 2.13.8
+[07:02:16] 
+[07:02:16]    (c) 2022 Alex "Y_Less" Cole  
+[07:02:16] 
+[07:02:16]  ===============================
+[07:02:16] 
+[07:02:16]   Loaded.
+[07:02:16]  Loading plugin: ColAndreas.so
+[07:02:16]   Plugin does not conform to architecture.
+[07:02:16]   Failed.
+[07:02:16]  Loading plugin: streamer.so
+[07:02:16] 
+
+*** Streamer Plugin v2.9.6 by Incognito loaded ***
+
+[07:02:16]   Loaded.
+[07:02:16]  Loading plugin: samp_bcrypt.so
+[07:02:16] [SampBcrypt] [info]: Version: 0.4.1
+[07:02:16]   Loaded.
+[07:02:16]  Loading plugin: FCNPC.so
+[07:02:16] 
+[07:02:16] -------------------------------------------------
+[07:02:16]      FCNPC - Fully Controllable NPC v2.0.11
+[07:02:16]             GNU/Linux SA-MP 0.3.7 R2
+[07:02:16]            Aug 23 2024 at 16:35:48
+[07:02:16] 
+[07:02:16]   Author:       OrMisicL (2013 - 2015)
+[07:02:16]   Continued by: ziggi    (2016 - present)
+[07:02:16] 
+[07:02:16]   See full credits in the README.md file
+[07:02:16] -------------------------------------------------
+[07:02:16] 
+[07:02:16] Loading...
+[07:02:16] 
+[07:02:16] -------------------------------------------------
+[07:02:16]    ColAndreasv1.4.0
+[07:02:16] 
+[07:02:16]    Created By:
+[07:02:16]      [uL]Chris42O
+[07:02:16]      [uL]Slice
+[07:02:16]      [uL]Pottus
+[07:02:16] -------------------------------------------------
+[07:02:16] 
+[07:02:16] Loading...
+[07:02:16] ColAndreas v1.4.0 Loaded.
+[07:02:16]   Loaded.
+[07:02:16]  Loaded 5 plugins.
+
+[07:02:16] 
+[07:02:16] Filterscripts
+[07:02:16] ---------------
+[07:02:16]   Loaded 0 filterscripts.
+
+[07:02:21] Loaded collision data.
+[07:02:21]  
+[07:02:21]  
+[07:02:21]          ==============================================================
+[07:02:21]          |                                                            |
+[07:02:21]          |                                                            |
+[07:02:21]          |    YYYYYYY       YYYYYYY    SSSSSSSSSSSSSSS  IIIIIIIIII    |
+[07:02:21]          |    Y:::::Y       Y:::::Y  SS:::::::::::::::S I::::::::I    |
+[07:02:21]          |    Y:::::Y       Y:::::Y S:::::SSSSSS::::::S I::::::::I    |
+[07:02:21]          |    Y::::::Y     Y::::::Y S:::::S     SSSSSSS II::::::II    |
+[07:02:21]          |    YYY:::::Y   Y:::::YYY S:::::S               I::::I      |
+[07:02:21]          |       Y:::::Y Y:::::Y    S:::::S               I::::I      |
+[07:02:21]          |        Y:::::Y:::::Y      S::::SSSS            I::::I      |
+[07:02:21]          |         Y:::::::::Y        SS::::::SSSSS       I::::I      |
+[07:02:21]          |          Y:::::::Y           SSS::::::::SS     I::::I      |
+[07:02:21]          |           Y:::::Y               SSSSSS::::S    I::::I      |
+[07:02:21]          |           Y:::::Y                    S:::::S   I::::I      |
+[07:02:21]          |           Y:::::Y                    S:::::S   I::::I      |
+[07:02:21]          |           Y:::::Y        SSSSSSS     S:::::S II::::::II    |
+[07:02:21]          |        YYYY:::::YYYY     S::::::SSSSSS:::::S I::::::::I    |
+[07:02:21]          |        Y:::::::::::Y     S:::::::::::::::SS  I::::::::I    |
+[07:02:21]          |        YYYYYYYYYYYYY      SSSSSSSSSSSSSSS    IIIIIIIIII    |
+[07:02:21]          |                                                            |
+[07:02:21]          |                                                            |
+[07:02:21]          |                      (c) 2021 MPL v1.1                     |
+[07:02:21]          |            Alex "Y_Less" Cole and contributors.            |
+[07:02:21]          |                                                            |
+[07:02:21]          |                                                            |
+[07:02:21]          ==============================================================
+[07:02:21]  
+[07:02:21]  
+[07:02:21]  ========================================== 
+[07:02:21]  |                                        | 
+[07:02:21]  |  Missing YSI scriptfiles directories:  | 
+[07:02:21]  |                                        | 
+[07:02:21]  |      /scriptfiles/YSI/fixes/           | 
+[07:02:21]  |      /scriptfiles/YSI/temp/            | 
+[07:02:21]  |                                        | 
+[07:02:21]  ========================================== 
+[07:02:21]  |                                        | 
+[07:02:21]  |   Generating code, this may take a     | 
+[07:02:21]  |  little bit of time.  Note that this   | 
+[07:02:21]  |  code generation works best with the   | 
+[07:02:21]  |     JIT plugin, which you are not      | 
+[07:02:21]  |     currently using.  Get it here:     | 
+[07:02:21]  |                                        | 
+[07:02:21]  |       https://git.io/jit-plugin        | 
+[07:02:21]  |                                        | 
+[07:02:21]  |             Please wait...             | 
+[07:02:22]  |                                        | 
+[07:02:22]  |             Done in 79ms!              | 
+[07:02:22]  |                                        | 
+[07:02:22]  ========================================== 
+[07:02:22]   Filterscript '../scriptfiles/callbackfix.amx' loaded.
+[07:02:22]  |                                        | 
+[07:02:22]  | Server:      0.3.7-R2 (L)              | 
+[07:02:22]  | Started:     23 Nov 2026 - 07:02:21    | 
+[07:02:22]  |                                        | 
+[07:02:22]  | Compiler:    3.10.10 (Linux)           | 
+[07:02:22]  | Includes:    0.3DL                     | 
+[07:02:22]  | Codepage:    <none>                    | 
+[07:02:22]  | Built:       23 Nov 2026 - 07:02:08    | 
+[07:02:22]  |                                        | 
+[07:02:22]  | YSI:         v05.10.0006               | 
+[07:02:22]  | Master:      -1                        | 
+[07:02:22]  |                                        | 
+[07:02:22]  | JIT:         <none>                    | 
+[07:02:22]  | Crashdetect: <none>                    | 
+[07:02:22]  |                                        | 
+[07:02:22]  ========================================== 
+[07:02:22]  
+[07:02:22]  
+[07:02:22] [2026-11-23 07:02:22][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+
+[07:02:22] Loading Map.
+[07:02:22] Loaded Map.                             
+[07:02:22] [2026-11-23 07:02:22][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [BOOT] instans: LAST STAND 1 - Quarantine | port 7777
+
+[07:02:22] Number of vehicle models: 0
+[07:02:22] [2026-11-23 07:02:22][INFO] [MYSQL] tersambung ke laststand (10.11.19-MariaDB-ubu2204) dalam 144 ms.
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+
+[07:02:22] [2026-11-23 07:02:22][INFO] [PROBE] bcrypt hash+verify OK.
+
+[07:02:25] [2026-11-23 07:02:25][INFO] [BASE] 0 barricade dimuat dari database.
+
+[07:02:26] [2026-11-23 07:02:26][INFO] [GRAVE] 0 makam dimuat dari database.
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS log kematian: klasifikasi penyebab | pemain=1/1, lingkungan=2/2, zombie=0/0
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS log kematian: format waktu | nama tipe=1, sekarang=1, masa depan dijepit=1, 2 jam=1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9) sumber=instance.ini
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+
+[07:02:30] [2026-11-23 07:02:30][INFO] [SELFTEST] 50/50 PASS, 0 FAIL
+
+[07:03:22] [2026-11-23 07:03:22][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+
+[07:03:23] [2026-11-23 07:03:23][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+

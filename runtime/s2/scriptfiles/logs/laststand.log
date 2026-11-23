@@ -411,4 +411,663 @@
 [2026-11-22 06:24:43][INFO] [AUTH] nick 'LoadBot_095' belum ada, arahkan ke /daftar.
 [2026-11-22 06:24:45][INFO] [JOIN] id 42 nick 'LoadBot_096' ip 127.0.0.1
 [2026-11-22 06:24:45][INFO] [AUTH] cek akun nick 'LoadBot_096'
-[2026-11-22 06:24:45
+[2026-11-22 06:24:45[2026-11-23 04:59:07][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 04:59:07][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 04:59:07][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 04:59:07][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 04:59:07][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 04:59:07][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 04:59:07][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 04:59:07][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 141 ms.
+[2026-11-23 04:59:08][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 04:59:08][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 04:59:10][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 04:59:11][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS identitas instance server | server_id=1 (rentang 1..9)
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+[2026-11-23 04:59:15][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-23 04:59:15][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+[2026-11-23 05:00:08][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:00:08][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:00:12][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 05:00:23][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 05:00:23][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 05:00:23][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 05:00:23][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 05:00:23][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 05:00:23][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 05:00:23][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 05:00:23][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 142 ms.
+[2026-11-23 05:00:24][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 05:00:24][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 05:00:27][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 05:00:28][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS identitas instance server | server_id=2 (rentang 1..9) sumber=port
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+[2026-11-23 05:00:32][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-23 05:00:32][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+[2026-11-23 05:01:00][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 05:01:12][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 05:01:12][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 05:01:12][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 05:01:12][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 05:01:12][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 05:01:12][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 05:01:12][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 05:01:12][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 146 ms.
+[2026-11-23 05:01:12][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 05:01:12][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 05:01:15][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 05:01:16][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS identitas instance server | server_id=2 (rentang 1..9) sumber=port
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+[2026-11-23 05:01:20][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-23 05:01:20][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+[2026-11-23 05:01:34][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 05:01:46][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 05:01:46][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 05:01:46][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 05:01:46][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 05:01:46][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 05:01:46][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 05:01:46][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 05:01:46][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 142 ms.
+[2026-11-23 05:01:46][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 05:01:46][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 05:01:49][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 05:01:50][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS identitas instance server | server_id=2 (rentang 1..9) sumber=instance.ini
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+[2026-11-23 05:01:54][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-23 05:01:54][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+[2026-11-23 05:02:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:02:47][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:03:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:03:48][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:04:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:04:49][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:05:46][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:05:50][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:06:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:06:51][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:07:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:07:52][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:08:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:08:53][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:09:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:09:54][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:10:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:10:55][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:11:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:11:56][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:12:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:12:57][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:13:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:13:58][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:14:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:14:59][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:15:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:16:00][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:16:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:17:01][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:17:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:18:02][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:18:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:19:03][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:19:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:20:04][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:20:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:21:05][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:21:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:22:06][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:22:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:23:07][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:23:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:24:08][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:24:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=1/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:25:09][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:25:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:26:10][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:26:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:27:11][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:27:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:28:12][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:28:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:29:13][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:29:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:30:14][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:30:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/1 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:31:15][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:31:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:32:16][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:32:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:33:17][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:33:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:34:18][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:34:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/1 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:35:19][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:35:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:36:20][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:36:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/1 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:37:21][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:37:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:38:22][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:38:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:39:23][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:39:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:40:24][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:40:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:41:25][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:41:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:42:26][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:42:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:43:27][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:43:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:44:28][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:44:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:45:29][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:45:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:46:30][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:46:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:47:31][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:47:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:48:32][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:48:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:49:33][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:49:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:50:34][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:50:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:51:35][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:51:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:52:36][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:52:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:53:37][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:53:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:54:38][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 05:54:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:55:39][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:55:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:56:40][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:56:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:57:41][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:57:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:58:42][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:58:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 05:59:43][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 05:59:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=1/1 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:00:44][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:00:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:01:45][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:01:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:02:46][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:02:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:03:47][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:03:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:04:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:04:48][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:05:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:05:49][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:06:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:06:50][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:07:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:07:51][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:08:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:08:52][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:09:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:09:53][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:10:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=1/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:10:54][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:11:47][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:11:55][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:12:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:12:56][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:13:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:13:57][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:14:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:14:58][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:15:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:15:59][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:16:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:17:00][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:17:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:18:01][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:18:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:19:02][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:19:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:20:03][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:20:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:21:04][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:21:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:22:05][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:22:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:23:06][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:23:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:24:07][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:24:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:25:08][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:25:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:26:09][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:26:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:27:10][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:27:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:28:11][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:28:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:29:12][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:29:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:30:13][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:30:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:31:14][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:31:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:32:15][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:32:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:33:16][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:33:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:34:17][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:34:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:35:18][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:35:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:36:19][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:36:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:37:20][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:37:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:38:21][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:38:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:39:22][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:39:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:40:23][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:40:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:41:24][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:41:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:42:25][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:42:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/1 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:43:26][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:43:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:44:27][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:44:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:45:28][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:45:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:46:29][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:46:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:47:30][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:47:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/1 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:48:31][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:48:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:49:32][INFO] [DIRECTOR] total aktif 0/190 | malam 1
+[2026-11-23 06:49:48][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:50:33][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:50:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/1 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:51:34][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:51:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:52:35][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:52:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/1 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:53:36][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:53:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:54:37][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:54:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/1 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:55:38][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:55:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/1 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:56:39][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:56:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:57:40][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 06:57:49][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/0 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:57:56][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 06:58:10][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 06:58:10][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 06:58:10][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 06:58:10][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 06:58:10][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 06:58:10][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 06:58:10][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 06:58:10][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 192 ms.
+[2026-11-23 06:58:10][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 06:58:10][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 06:58:12][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 06:58:23][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 06:58:23][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 06:58:24][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 06:58:24][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 06:58:24][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 06:58:24][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 06:58:24][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 06:58:24][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 143 ms.
+[2026-11-23 06:58:24][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 06:58:24][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 06:58:27][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 06:58:28][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS identitas instance server | server_id=2 (rentang 1..9) sumber=instance.ini
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+[2026-11-23 06:58:32][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-23 06:58:32][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+[2026-11-23 06:59:24][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/0 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 06:59:25][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 07:00:24][INFO] [PERF] tick ms (akhir/puncak): zombie=0/0 director=0/0 base=0/1 hud=0/0 player=0/1 loot=0/0 veh=0/0 needs=0/0 event=0/0 horde=0/0 save=0/0 | zombie: alive=0 lahir=0 mati=0 atk=0 macet=0 jangkau=0 los_gagal=0 sampel=0 target=0 dekat=9999.0
+[2026-11-23 07:00:26][INFO] [DIRECTOR] total aktif 0/190 | malam 0
+[2026-11-23 07:01:05][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 07:01:16][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 07:01:16][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 07:01:16][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 07:01:16][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 07:01:16][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 07:01:16][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 07:01:16][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 07:01:16][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 180 ms.
+[2026-11-23 07:01:17][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 07:01:17][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 07:01:19][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 07:01:20][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS identitas instance server | server_id=2 (rentang 1..9) sumber=instance.ini
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS override cuaca | tolak 99/-5=1/1, terima 7=1, reset auto=1
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS nightfall gate | tertutup saat boot=1, tolak -1/3/lompat=1/1/1, lobby 0 aman=1
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS lebar HUD 640px | 10 baris muat di 640 px pada string terburuk
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | spawn kamp: model 4890 z=22.65
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot stash: model 4830 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot craft: model 4830 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot shop: model 4830 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | hotspot ekstraksi: model 4890 z=22.65
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | garasi: model 4830 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | parkir garasi: model 4830 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | pom bensin: model 4830 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Quarantine Camp: model 4890 z=22.65
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Idlewood: model 5640 z=19.62
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Ganton: model 3722 z=17.13
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Downtown LS: model 6127 z=12.38
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | LS Sewers: model 4198 z=12.53
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Angel Pine: model 18266 z=37.47
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Abandoned Airfield: model 16771 z=28.41
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Bone County Quarry: model 20000 z=-0.00
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tanah | Camp Outskirts: model 4846 z=12.54
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS tabel database | accounts=0 characters=0 bases=0 base_structures=0 inventory=0 stash=0 item_ledger=0 kill_log=0 anticheat_flags=0 barricades=0 graves=0 contracts=0 owned_vehic
+[2026-11-23 07:01:24][INFO] [SELFTEST] PASS kolom survival/role | wounds=1 fuel=1 admin_level=1 companion_tier=1 profil=1 hotbar=1
+[2026-11-23 07:01:24][INFO] [SELFTEST] 48/48 PASS, 0 FAIL
+[2026-11-23 07:02:11][INFO] [SHUTDOWN] semua zombie dibersihkan.
+[2026-11-23 07:02:22][INFO] [ADMIN] kunci admin dimuat dari admin_keys.cfg.
+[2026-11-23 07:02:22][INFO] [TX] koneksi transaksi khusus aktif (handle terpisah, atomic write item).
+[2026-11-23 07:02:23][INFO] [BOOT] ColAndreas aktif: raycast uji model 4830 di z 12.54.
+[2026-11-23 07:02:23][INFO] [MAP] kamp dimuat: 8 objek dekorasi, 3 actor.
+[2026-11-23 07:02:23][INFO] [DECOR] 6 prop + 3 papan tanda dipasang.
+[2026-11-23 07:02:23][INFO] [BOOT] LAST STAND siap. Zombie max 190, budget 18+34/pemain, sync 100 ms, zone 10.
+[2026-11-23 07:02:23][INFO] [BOOT] instans: LAST STAND 2 - Outbreak | port 7778
+[2026-11-23 07:02:23][INFO] [MYSQL] tersambung ke laststand_s2 (10.11.19-MariaDB-ubu2204) dalam 149 ms.
+[2026-11-23 07:02:23][INFO] [PROBE] hash bcrypt dibuat (prefix $2b$, panjang 60).
+[2026-11-23 07:02:23][INFO] [PROBE] bcrypt hash+verify OK.
+[2026-11-23 07:02:26][INFO] [BASE] 0 barricade dimuat dari database.
+[2026-11-23 07:02:27][INFO] [GRAVE] 0 makam dimuat dari database.
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS transaksi item | handle khusus aktif
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS registry item | 36 item diperiksa, 0 cacat
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS tabel loot | 8 tabel zombie, item tidak valid=0
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS registry lobby | 2 lobby aktif, world bentrok=0, nama kosong=0
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS registry resep | 22 resep diperiksa, 0 cacat
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS sistem tas | 4 tingkat tas, bonus maks +45 kg, 0 cacat
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS hotbar cepat | 5 slot hotbar, penyimpanan CSV maks 32 karakter, 0 cacat
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS kunci container | 24 entri kunci, tahan 60000 ms, jangkauan 10 m, 0 cacat
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS registry struktur | 7 struktur, 0 cacat, wall tier2 limit=16
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS registry zona | 9 zona berisi, slot kosong=9, target ambient total=82
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS kendaraan liar | maks 64 kendaraan, 9 liar/lobby, garasi 4, sampel min 3
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS tutorial onboarding | target/label langkah
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS mapping kamp/shelter | objek dekorasi dan actor pedagang
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS konsistensi party | 0 slot tidak konsisten dari 400
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS anggaran NPC rekrutan | maxnpc=200 butuh>=191 (zombie 190 + trader 1; rekrutan elastis), maxplayers=300
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS anggaran slot NPC | slot terpakai=0/300, bebas=300, jatah spawn=292, cadangan=8
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS boss malam | tipe=8, HP boss=2400 > brute=350, minTier=99
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS banner raid HUD | lobby -1 dan 3 ditolak, keluaran dikosongkan
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS log kematian: klasifikasi penyebab | pemain=1/1, lingkungan=2/2, zombie=0/0
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS log kematian: format waktu | nama tipe=1, sekarang=1, masa depan dijepit=1, 2 jam=1
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS identitas instance server | server_id=2 (rentang 1..9) sumber=instance.ini
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS antrean slot server penuh | cap=90, tahan di 89/90/91 = 0/1/1
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS dekorasi kamp | 9 dekorasi, indeks valid=1/1, duplikat=0
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS perlengkapan rekrutan naik per tier | senjata 24<31<34, armour 0<25<50
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS dokumen lore | 12 dokumen terisi=1, indeks dalam rentang=1/1
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS izin gate base | tolak luar/member=1/1, izin officer/owner=1/1, slot palsu ditolak=1
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS mute dan warn | state bersih=1, reset=1, ambang 3 peringatan -> 15 menit
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS berat tas vs kecepatan | tanpa tas=1.00, batas lambat=0.21
+[2026-11-23 07:02:31][INFO] [SELFTEST] PASS
