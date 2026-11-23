@@ -43,3 +43,4 @@ runtime/*/scriptfiles/logs/
 tools/hud_preview/generate.html
 tools/hud_preview/build_panel.html
 backups/preview/
+__pycache__/
