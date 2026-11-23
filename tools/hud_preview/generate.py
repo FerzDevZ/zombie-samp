@@ -223,6 +223,17 @@ def main() -> int:
         print(f"GAGAL: gHudFitRows berisi {len(table)} baris, HUD_Create punya {len(draws)}")
         return 1
 
+    # 4. SETIAP baris non-kondisional wajib punya PlayerTextDrawShow eksplisit.
+    #    Bug nyata: HudHpVal/HudArmVal/... dibuat tapi tidak pernah ditampilkan,
+    #    sehingga semua angka HUD tak terlihat walau isinya benar.
+    conditional = {"HudVehicle", "HudBoss", "HudRaid", "HudPromptText", "HudVehCard"}
+    unshown = [d["var"] for d in draws
+               if d["var"] not in conditional
+               and f"PlayerTextDrawShow(playerid, {d['var']}[playerid]);" not in hud_text]
+    if unshown:
+        print(f"GATE GAGAL: textdraw tidak pernah ditampilkan: {', '.join(unshown)}")
+        return 1
+
     failures = 0
     print(f"{len(draws)} TextDraw, tabel gate {len(table)} baris\n")
     print(f"  {'baris':<12} {'x':>5} {'len':>4} {'lebar':>6} {'sisa':>6}  status")

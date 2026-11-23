@@ -106,6 +106,10 @@ stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSi
     /* strcpy, bukan format("%s"): jalur panas 2400 salinan/dtk (audit F7). */
     strcpy(lastText, text, lastSize);
     PlayerTextDrawSetString(playerid, td, text);
+    /* Menulis string TIDAK menampilkan textdraw. Tanpa baris ini setiap baris
+       dinamis (HP/ARM/INF/LAP/HAUS/PIP/BBM) tetap tak terlihat walau isinya
+       benar — persis laporan pemain "angka HUD tidak muncul". */
+    PlayerTextDrawShow(playerid, td);
     return 1;
 }
 
@@ -653,6 +657,12 @@ stock HUD_Create(playerid)
     PlayerTextDrawShow(playerid, HudLapName[playerid]);
     PlayerTextDrawShow(playerid, HudHausName[playerid]);
     PlayerTextDrawShow(playerid, HudPipName[playerid]);
+    PlayerTextDrawShow(playerid, HudHpVal[playerid]);
+    PlayerTextDrawShow(playerid, HudArmVal[playerid]);
+    PlayerTextDrawShow(playerid, HudInfVal[playerid]);
+    PlayerTextDrawShow(playerid, HudLapVal[playerid]);
+    PlayerTextDrawShow(playerid, HudHausVal[playerid]);
+    PlayerTextDrawShow(playerid, HudPipVal[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
     PlayerHudVisible[playerid] = true;
 
@@ -846,6 +856,12 @@ stock HUD_Reshow(playerid, bool:force = false)
     PlayerTextDrawShow(playerid, HudLapName[playerid]);
     PlayerTextDrawShow(playerid, HudHausName[playerid]);
     PlayerTextDrawShow(playerid, HudPipName[playerid]);
+    PlayerTextDrawShow(playerid, HudHpVal[playerid]);
+    PlayerTextDrawShow(playerid, HudArmVal[playerid]);
+    PlayerTextDrawShow(playerid, HudInfVal[playerid]);
+    PlayerTextDrawShow(playerid, HudLapVal[playerid]);
+    PlayerTextDrawShow(playerid, HudHausVal[playerid]);
+    PlayerTextDrawShow(playerid, HudPipVal[playerid]);
     for (new bar = 0; bar < 6; bar++)
     {
         PlayerTextDrawShow(playerid, HudBarBg[playerid][bar]);
@@ -861,6 +877,8 @@ stock HUD_Reshow(playerid, bool:force = false)
         }
     }
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
+    if (HudVehCard[playerid] != PlayerText:0)
+        PlayerTextDrawShow(playerid, HudVehCard[playerid]);
 
     PlayerHudVisible[playerid] = true;
     HudLastZone[playerid][0] = EOS;
