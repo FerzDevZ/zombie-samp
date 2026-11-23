@@ -105,6 +105,7 @@
 #include "modules/world/build_edit.inc"
 #include "modules/zombie/horde.inc"
 #include "modules/world/escort.inc"
+#include "modules/world/vehicle_seats.inc"
 #include "modules/world/companion.inc"
 #include "modules/world/shelter.inc"
 #include "modules/world/mapping.inc"

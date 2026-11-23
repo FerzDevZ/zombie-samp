@@ -6,11 +6,12 @@
 #define NEEDS_TICK_MS 5000
 #define INFECTION_DAMAGE_PER_TICK 4.0
 
-/* Laju per tick 5 detik. 100 poin = sekitar 83 menit (lapar), 60 menit (haus),
-   69 menit (kandung kemih) supaya satu sesi main butuh bekal, bukan menit pertama. */
-#define NEEDS_HUNGER_DECAY   (0.10)
-#define NEEDS_THIRST_DECAY   (0.14)
-#define NEEDS_BLADDER_GAIN   (0.12)
+/* Laju per tick 5 detik. 100 poin = ~33 menit (lapar), ~26 menit (haus),
+   ~17 menit (kandung kemih). Nilai lama (0.10/0.14) hanya turun ~1 poin per
+   menit sehingga pemain mengira sistemnya mati — bar tidak pernah bergerak. */
+#define NEEDS_HUNGER_DECAY   (0.25)
+#define NEEDS_THIRST_DECAY   (0.32)
+#define NEEDS_BLADDER_GAIN   (0.30)
 
 #define NEEDS_STARVE_DAMAGE  (0.8)
 #define NEEDS_THIRST_DAMAGE  (1.2)
@@ -116,6 +117,19 @@ stock bool:Needs_Urinate(playerid)
     return true;
 }
 
+/* Satu langkah peluruhan kebutuhan tubuh. Dipisah dari timer supaya bisa
+   diuji selftest tanpa pemain dan tanpa menunggu 5 detik. */
+stock Needs_DecayStep(playerid, Float:scale)
+{
+    PlayerSurvival[playerid][psHunger] -= NEEDS_HUNGER_DECAY * scale;
+    PlayerSurvival[playerid][psThirst] -= NEEDS_THIRST_DECAY * scale;
+    PlayerSurvival[playerid][psBladder] += NEEDS_BLADDER_GAIN * scale;
+    Needs_Clamp(PlayerSurvival[playerid][psHunger]);
+    Needs_Clamp(PlayerSurvival[playerid][psThirst]);
+    Needs_Clamp(PlayerSurvival[playerid][psBladder]);
+    return 1;
+}
+
 public Needs_Tick()
 {
     new perfStart = GetTickCount();
@@ -123,12 +137,15 @@ public Needs_Tick()
     {
         if (!IsPlayerConnected(playerid)) continue;
 
-        if (Player_HasGrace(playerid)) continue;
+        /* Proteksi pemain baru hanya membatalkan DAMAGE, bukan kebutuhan tubuh.
+           Dulu grace 10 menit melewati seluruh tick → laporan "lapar/haus tidak
+           berkurang" padahal sistemnya sehat. */
+        new bool:inGrace = Player_HasGrace(playerid);
 
-        Wounds_Tick(playerid);
+        if (!inGrace) Wounds_Tick(playerid);
 
         new Float:infection = Player_GetInfection(playerid);
-        if (infection > 0.0)
+        if (!inGrace && infection > 0.0)
         {
             if (PlayerSurvival[playerid][psInfectionStage] == 2)
             {
@@ -163,12 +180,7 @@ public Needs_Tick()
            bukan cuma angka di dialog. */
         new Float:drainScale = Bag_IsOverloaded(playerid) ? 1.35 : 1.0;
 
-        PlayerSurvival[playerid][psHunger] -= NEEDS_HUNGER_DECAY * drainScale;
-        PlayerSurvival[playerid][psThirst] -= NEEDS_THIRST_DECAY * drainScale;
-        PlayerSurvival[playerid][psBladder] += NEEDS_BLADDER_GAIN;
-        Needs_Clamp(PlayerSurvival[playerid][psHunger]);
-        Needs_Clamp(PlayerSurvival[playerid][psThirst]);
-        Needs_Clamp(PlayerSurvival[playerid][psBladder]);
+        Needs_DecayStep(playerid, drainScale);
 
         if (Player_IsDowned(playerid)) continue;
         if (Player_IsTurned(playerid)) continue;
@@ -224,5 +236,40 @@ stock Needs_ResetForPlayer(playerid)
     if (!IsPlayerConnected(playerid)) return 0;
     PlayerSurvival[playerid][psInfection] = 0.0;
     PlayerSurvival[playerid][psInfectionStage] = 0;
+    return 1;
+}
+
+stock Needs_Selftest()
+{
+    new bool:ok = true;
+
+    /* Peluruhan wajib terjadi walau pemain masih dalam masa proteksi spawn:
+       grace hanya membatalkan damage, bukan kebutuhan tubuh. */
+    PlayerSurvival[0][psHunger] = 100.0;
+    PlayerSurvival[0][psThirst] = 100.0;
+    PlayerSurvival[0][psBladder] = 0.0;
+    Needs_DecayStep(0, 1.0);
+    ok = ok && PlayerSurvival[0][psHunger] < 100.0;
+    ok = ok && PlayerSurvival[0][psThirst] < 100.0;
+    ok = ok && PlayerSurvival[0][psBladder] > 0.0;
+
+    /* Beban berat (tas overload) mempercepat 1.35x. */
+    PlayerSurvival[0][psHunger] = 50.0;
+    Needs_DecayStep(0, 1.35);
+    ok = ok && floatround((50.0 - PlayerSurvival[0][psHunger]) * 100.0)
+             == floatround(NEEDS_HUNGER_DECAY * 1.35 * 100.0);
+
+    /* Clamp bawah dan atas. */
+    PlayerSurvival[0][psHunger] = 0.05;
+    Needs_DecayStep(0, 1.0);
+    ok = ok && PlayerSurvival[0][psHunger] == 0.0;
+    PlayerSurvival[0][psBladder] = 99.95;
+    Needs_DecayStep(0, 1.0);
+    ok = ok && PlayerSurvival[0][psBladder] == 100.0;
+
+    new detail[144];
+    format(detail, sizeof(detail), "lapar %.2f / haus %.2f / kemih %.2f per tick 5 dtk, clamp 0..100",
+        NEEDS_HUNGER_DECAY, NEEDS_THIRST_DECAY, NEEDS_BLADDER_GAIN);
+    Selftest_Record(ok, "peluruhan kebutuhan tubuh", detail);
     return 1;
 }

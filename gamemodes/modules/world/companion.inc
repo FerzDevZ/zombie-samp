@@ -23,6 +23,8 @@
 #define COMPANION_MELEE_HIT     6.0
 #define COMPANION_DOWNED_TIMEOUT_MS 180000
 #define COMPANION_REPATH_MS     1500
+#define COMPANION_ENTER_MS      2500   /* jeda antar percobaan naik kendaraan */
+#define COMPANION_MAX_SEATS     10
 
 #define COMPANION_RECRUIT_CASH  600
 #define COMPANION_RECRUIT_FOOD  2
@@ -81,10 +83,46 @@ new bool:CompDowned[MAX_PLAYERS];
 new CompDownedTick[MAX_PLAYERS];
 new CompNextFireTick[MAX_PLAYERS];
 new CompNextRepathTick[MAX_PLAYERS];
+new CompNextEnterTick[MAX_PLAYERS];
+new CompVehicle[MAX_PLAYERS];   /* kendaraan yang sedang dinaiki NPC */
 new CompName[MAX_PLAYERS][24];
 /* NPC yang mati dari engine TIDAK dihancurkan di dalam FCNPC_OnDeath (re-entrancy);
    id-nya dititipkan di sini lalu dihancurkan tick berikutnya. */
 new CompDeadNpc[MAX_PLAYERS] = {INVALID_PLAYER_ID, ...};
+
+/* Kursi penumpang bebas: bitmask kursi terpakai, 0 = kursi pengemudi.
+   Dipisah sebagai fungsi murni supaya logika kursi bisa diuji tanpa kendaraan. */
+stock Companion_PickSeat(seats, occupiedMask)
+{
+    if (seats > COMPANION_MAX_SEATS) seats = COMPANION_MAX_SEATS;
+    for (new seat = 1; seat < seats; seat++)
+    {
+        if (occupiedMask & (1 << seat)) continue;
+        return seat;
+    }
+    return -1;
+}
+
+/* Bitmask kursi yang sudah terisi pemain lain atau rekrutan lain. */
+stock Companion_OccupiedMask(vehicleid)
+{
+    new mask = 0;
+    foreach (new other : PlayerPool)
+    {
+        if (!IsPlayerConnected(other)) continue;
+        if (!IsPlayerInVehicle(other, vehicleid)) continue;
+        new seat = GetPlayerVehicleSeat(other);
+        if (seat > 0 && seat < COMPANION_MAX_SEATS) mask |= (1 << seat);
+    }
+    foreach (new other : PlayerPool)
+    {
+        if (!CompHas[other] || !FCNPC_IsValid(CompNpc[other])) continue;
+        if (FCNPC_GetVehicleID(CompNpc[other]) != vehicleid) continue;
+        new seat = FCNPC_GetVehicleSeat(CompNpc[other]);
+        if (seat > 0 && seat < COMPANION_MAX_SEATS) mask |= (1 << seat);
+    }
+    return mask;
+}
 
 stock Float:Companion_MaxHealth(playerid)
 {
@@ -164,6 +202,8 @@ stock Companion_Init()
         CompDownedTick[playerid] = 0;
         CompNextFireTick[playerid] = 0;
         CompNextRepathTick[playerid] = 0;
+        CompNextEnterTick[playerid] = 0;
+        CompVehicle[playerid] = 0;
         CompName[playerid][0] = EOS;
         CompDeadNpc[playerid] = INVALID_PLAYER_ID;
     }
@@ -229,6 +269,8 @@ stock Companion_Spawn(playerid)
     CompNextPickupTick[playerid] = 0;
     CompNextFireTick[playerid] = 0;
     CompNextRepathTick[playerid] = 0;
+    CompNextEnterTick[playerid] = 0;
+    CompVehicle[playerid] = 0;
     return 1;
 }
 
@@ -331,6 +373,40 @@ stock Companion_TickPlayer(playerid)
     new Float:nx, Float:ny, Float:nz, Float:px, Float:py, Float:pz;
     FCNPC_GetPosition(npcid, nx, ny, nz);
 
+    /* ---- Kendaraan: rekrutan ikut naik saat pemilik menyetir ----
+       Sebelum ini NPC hanya berjalan kaki sehingga tertinggal di belakang
+       begitu pemain menyetir. Kursi dipilih dari kursi penumpang yang bebas. */
+    new npcVehicle = FCNPC_GetVehicleID(npcid);
+    /* Pemain sebagai penumpang pun tetap dianggap "di kendaraan": rekrutan
+       tidak boleh keluar hanya karena pemiliknya bukan pengemudi. */
+    new bool:ownerDriving = (IsPlayerInAnyVehicle(playerid) != 0);
+    if (ownerDriving)
+    {
+        new ownerVehicle = GetPlayerVehicleID(playerid);
+        if (npcVehicle != ownerVehicle && now >= CompNextEnterTick[playerid])
+        {
+            CompNextEnterTick[playerid] = now + COMPANION_ENTER_MS;
+            new seat = Companion_PickSeat(VehicleSeatsTotal(GetVehicleModel(ownerVehicle)),
+                Companion_OccupiedMask(ownerVehicle));
+            if (seat >= 0)
+            {
+                FCNPC_EnterVehicle(npcid, ownerVehicle, seat, FCNPC_MOVE_TYPE_RUN);
+                CompVehicle[playerid] = ownerVehicle;
+                Toast_Show(playerid, "Rekrutan", "Ikut naik kendaraan.", UI_ACCENT_PRIMARY);
+            }
+        }
+        if (npcVehicle == ownerVehicle)
+        {
+            FCNPC_Stop(npcid);      /* jangan jalan kaki di dalam mobil */
+        }
+    }
+    else if (npcVehicle != INVALID_VEHICLE_ID && CompVehicle[playerid] != 0)
+    {
+        /* Pemilik turun: rekrutan keluar lalu kembali mengikuti. */
+        FCNPC_ExitVehicle(npcid);
+        CompVehicle[playerid] = 0;
+    }
+
     /* Rekrutan membawakan loot yang dilewatinya (ROADMAP 365). Dibatasi satu
        ambilan per 3 detik supaya tidak menyapu seluruh medan dalam satu tick. */
     if (now - CompNextPickupTick[playerid] >= 0)
@@ -412,6 +488,9 @@ stock Companion_TickPlayer(playerid)
             return 1;
         }
     }
+
+    /* Saat ikut di kendaraan, jalur kaki dilewati sepenuhnya. */
+    if (FCNPC_GetVehicleID(npcid) != INVALID_VEHICLE_ID) return 1;
 
     if (distToPlayer > COMPANION_FOLLOW_DIST && now >= CompNextRepathTick[playerid])
     {
@@ -857,5 +936,29 @@ stock Companion_OnDialogResponse(playerid, dialogid, response, listitem, const i
         case 4: Companion_Dismiss(playerid);
         default: return 1;
     }
+    return 1;
+}
+
+stock Companion_VehicleSelftest()
+{
+    new bool:ok = true;
+
+    /* Kursi: pengemudi 0, jadi penumpang pertama = 1. */
+    ok = ok && Companion_PickSeat(4, 0) == 1;
+    ok = ok && Companion_PickSeat(4, (1 << 1)) == 2;
+    ok = ok && Companion_PickSeat(4, (1 << 1) | (1 << 2) | (1 << 3)) == -1;
+    ok = ok && Companion_PickSeat(2, 0) == 1;
+    ok = ok && Companion_PickSeat(1, 0) == -1;     /* hanya pengemudi */
+
+    /* Tabel kursi: nilai acuan model nyata. */
+    ok = ok && VehicleSeatsTotal(411) == 2;        /* Infernus */
+    ok = ok && VehicleSeatsTotal(431) >= 8;        /* Bus */
+    ok = ok && VehiclePassengerSeats(481) == 0;    /* BMX tanpa penumpang */
+
+    new detail[144];
+    format(detail, sizeof(detail), "infernus=%d bus=%d bmx_penumpang=%d kursi(4,kosong)=%d",
+        VehicleSeatsTotal(411), VehicleSeatsTotal(431),
+        VehiclePassengerSeats(481), Companion_PickSeat(4, 0));
+    Selftest_Record(ok, "rekrutan ikut kendaraan", detail);
     return 1;
 }

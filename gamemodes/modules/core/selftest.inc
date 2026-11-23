@@ -739,6 +739,8 @@ stock Selftest_RunStatic()
     WeaponAttach_Selftest();
     Settings_Selftest();
     Distraction_Selftest();
+    Needs_Selftest();
+    Companion_VehicleSelftest();
     Selftest_CheckHudLayout();
 
     Selftest_GroundCheck("spawn kamp", SPAWN_X, SPAWN_Y, SPAWN_Z);
