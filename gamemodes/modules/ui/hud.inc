@@ -47,6 +47,8 @@ new HudLastClock[MAX_PLAYERS][16];
 new PlayerText:HudVehicle[MAX_PLAYERS];
 new PlayerText:HudVehCard[MAX_PLAYERS];
 new gHudWriteCount;
+new gHudSetCalls;
+new gHudSetDbg[MAX_PLAYERS];
 new gHudTickCount;
 new PlayerText:HudBoss[MAX_PLAYERS];
 new PlayerText:HudRaid[MAX_PLAYERS];
@@ -109,14 +111,53 @@ new bool:HudBossShown[MAX_PLAYERS];
 new bool:HudRaidShown[MAX_PLAYERS];
 new bool:HudPromptShown[MAX_PLAYERS];
 
+/* Pembanding/pengisi string manual. `strcmp` dan YSI `strcpy` sama-sama
+   bermasalah di jalur ini: `strcmp` menerima sentinel `EOS` sebagai karakter
+   pembanding, dan `strcpy` YSI adalah makro `strcat` yang mengosongkan dest
+   (bisa merusak saat dest == sumber). Dua helper ini hanya membandingkan /
+   menyalin sampai terminator pertama, jadi hasilnya tidak bergantung pada
+   perilaku pustaka luar. */
+stock bool:HUD_TextSame(const a[], const b[], size)
+{
+    for (new i = 0; i < size; i++)
+    {
+        if (a[i] != b[i]) return false;
+        if (a[i] == EOS) return true;
+    }
+    return true;
+}
+
+stock HUD_TextStore(dest[], const src[], size)
+{
+    for (new i = 0; i < size - 1; i++)
+    {
+        dest[i] = src[i];
+        if (src[i] == EOS) return 1;
+    }
+    dest[size - 1] = EOS;
+    return 1;
+}
+
 stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSize)
 {
-    if (!strcmp(text, lastText, false)) return 0;
-    /* strcpy, bukan format("%s"): jalur panas 2400 salinan/dtk (audit F7). */
-    strcpy(lastText, text, lastSize);
+    gHudSetCalls++;
+
+    /* Jejak dua panggilan pertama per pemain. Tanpa ini "string benar tapi
+       layar tidak berubah" hanya bisa ditebak — dan tebakan itu sudah dua kali
+       salah (strcmp vs sentinel EOS, lalu strcpy YSI yang mengosongkan dest). */
+    if (gHudSetDbg[playerid] < 2)
+    {
+        gHudSetDbg[playerid]++;
+        Log_Format(LOG_INFO, "hudset %d: td=%d baru='%s' lama='%s' sama=%d",
+            playerid, _:td, text, lastText, HUD_TextSame(text, lastText, lastSize));
+    }
+
+    if (HUD_TextSame(text, lastText, lastSize)) return 0;
+
+    HUD_TextStore(lastText, text, lastSize);
     PlayerTextDrawSetString(playerid, td, text);
     /* Menulis string TIDAK menampilkan textdraw. Tanpa baris ini setiap baris
-       dinamis (HP/ARM/INF/LAP/HAUS/PIP/BBM) tetap tak terlihat walau isinya
+       dinamis (HP/ARM/INF/LAP/HAUS/PIP/FUEL) tetap tak terlihat walau isinya
        benar — persis laporan pemain "angka HUD tidak muncul". */
     PlayerTextDrawShow(playerid, td);
     gHudWriteCount++;
@@ -138,17 +179,21 @@ stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSi
    bawahnya selebar kartu. Tata letak satu baris (teks kiri + bar kanan)
    menyisakan separuh kartu kosong saat BBM rendah (teks pom panjang) dan
    membuat bar terlihat "hilang" — dilaporkan sebagai "box BBM kacau". */
-#define HUD_VEH_CARD_X      352.0
-#define HUD_VEH_CARD_W      276.0
-#define HUD_VEH_CARD_Y      327.0
+/* Geometri baris kendaraan (FUEL). Dulu kartu ini duduk di x 352..628 —
+   melayang di tengah kanan layar dan terbaca sebagai "kotak kosong di tengah"
+   di ketiga gaya HUD. Sekarang ia menempel tepat di bawah panel status supaya
+   selalu satu kolom visual dengan HP/ARM/LAP/UANG/JAM. */
+#define HUD_VEH_CARD_X      16.0
+#define HUD_VEH_CARD_W      288.0
+#define HUD_VEH_CARD_Y      392.0
 #define HUD_VEH_CARD_H      28.0
-#define HUD_VEH_TEXT_X      356.0
-#define HUD_VEH_TEXT_Y      330.0
-#define HUD_VEH_TEXT_W      264.0
+#define HUD_VEH_TEXT_X      24.0
+#define HUD_VEH_TEXT_Y      395.0
+#define HUD_VEH_TEXT_W      272.0
 #define HUD_VEH_LETTER_X    0.17
-#define HUD_VEH_BAR_X       356.0
-#define HUD_VEH_BAR_Y       345.0
-#define HUD_VEH_BAR_W       264.0
+#define HUD_VEH_BAR_X       24.0
+#define HUD_VEH_BAR_Y       412.0
+#define HUD_VEH_BAR_W       272.0
 
 /* Tiga gaya HUD (docs/UIUX_PLAN.md). Mobile terdeteksi otomatis dari versi
    klien; pemain tetap bisa override lewat /hudgaya 1|2|3. Skala menyusutkan
@@ -279,7 +324,7 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudProgress",   26.0, 0.18, 30 },
     { "HudMoney",      26.0, 0.16, 12 },
     { "HudClock",     120.0, 0.16,  9 },
-    { "HudVehicle",   356.0, 0.17, 28 },
+    { "HudVehicle",    24.0, 0.17, 28 },
     { "HudBoss",      210.0, 0.26, 16 },
     { "HudRaid",      190.0, 0.24, 25 },
     { "HudPromptText",320.0, 0.18, 23 }
@@ -450,10 +495,11 @@ stock HUD_ShowBar(playerid, index, segSlot = -1)
    lain selalu tampil. Guard mencegah sentuhan ke textdraw yang tidak dibuat. */
 stock bool:HUD_BarVisible(playerid, index)
 {
-    if (index == HUD_BAR_VEH || index == HUD_BAR_BOSS)
-    {
-        return Settings_BarDetailEnabled(playerid);
-    }
+    /* Bar bahan bakar tidak mengikuti preferensi "detail": tanpa bar, pemain
+       hanya punya angka dan tidak bisa menilai sisa bensin sekilas — keluhan
+       "ga tau sisa berapa bensinnya". Bar boss tetap mengikuti preferensi. */
+    if (index == HUD_BAR_VEH) return true;
+    if (index == HUD_BAR_BOSS) return Settings_BarDetailEnabled(playerid);
     return true;
 }
 
@@ -938,6 +984,42 @@ stock HUD_Diag(playerid)
     return 1;
 }
 
+/* Uji cache baris HUD. Dua bug nyata bersembunyi di sini: `strcmp` yang
+   membandingkan sentinel `EOS` sebagai karakter, dan `strcpy` YSI yang
+   mengosongkan dest. Keduanya berujung sama — teks benar, layar kosong. */
+stock HUD_TextCacheSelftest()
+{
+    new bool:ok = true;
+    new a[32] = "FUEL 55%  43/80L 8km";
+    new b[32] = "FUEL 55%  43/80L 8km";
+    new c[32] = "FUEL 54%  43/80L 8km";
+    new empty[32];
+
+    ok = ok && HUD_TextSame(a, b, sizeof(a));          /* identik */
+    ok = ok && !HUD_TextSame(a, c, sizeof(a));         /* beda satu digit */
+    ok = ok && !HUD_TextSame(a, empty, sizeof(a));     /* kosong != berisi */
+    ok = ok && HUD_TextSame(empty, empty, sizeof(empty));
+
+    /* Penyalinan harus benar-benar mengisi cache: kegagalan di sini membuat
+       SetIfChanged menulis ulang tiap 500 ms tanpa pernah mengubah layar. */
+    HUD_TextStore(empty, a, sizeof(empty));
+    ok = ok && HUD_TextSame(empty, a, sizeof(empty));
+
+    /* Alias (dest == sumber) tidak boleh merusak isi. */
+    HUD_TextStore(a, a, sizeof(a));
+    ok = ok && HUD_TextSame(a, b, sizeof(a));
+
+    /* Batas ukuran: dest 8 sel tidak boleh meluber, harus ter-terminasi. */
+    new small[8];
+    HUD_TextStore(small, c, sizeof(small));
+    ok = ok && small[sizeof(small) - 1] == EOS;
+    ok = ok && strlen(small) <= sizeof(small) - 1;
+
+    Selftest_Record(ok, "cache baris HUD",
+        ok ? "banding + salin + alias + batas ukuran benar" : "pembanding/penyalin string HUD salah");
+    return ok;
+}
+
 stock HUD_MeasureSelftest()
 {
     /* Tabel fonts.dat: lebar '0'=23, 'B'=22, spasi=15, '%'=34.
@@ -983,6 +1065,7 @@ stock HUD_MeasureSelftest()
 
 stock HUD_ResetCaches(playerid)
 {
+    gHudSetDbg[playerid] = 0;
     HudLastZone[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     HudLastVehicle[playerid][0] = EOS;
@@ -1618,8 +1701,8 @@ public HUD_Tick()
     gHudTickCount++;
     if ((gHudTickCount % 24) == 0)
     {
-        Log_Format(LOG_INFO, "hudtick %d: pemain=%d tulis=%d fuel='%s' hp='%s' sampel=%d",
-            gHudTickCount, ticked, gHudWriteCount,
+        Log_Format(LOG_INFO, "hudtick %d: pemain=%d panggil=%d tulis=%d fuel='%s' hp='%s' sampel=%d",
+            gHudTickCount, ticked, gHudSetCalls, gHudWriteCount,
             (realPlayer >= 0) ? HudLastVehicle[realPlayer] : "",
             (realPlayer >= 0) ? HudLastHpVal[realPlayer] : "", realPlayer);
     }

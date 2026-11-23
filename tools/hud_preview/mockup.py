@@ -157,10 +157,10 @@ if __name__ == "__main__":
             {"label": "PIP", "name": (198, 348), "bar": (220, 348), "bar_w": 40,
              "bar_h": 4, "ratio": 0.12, "value": (264, 348), "text": "12"},
         ],
-        "vehicle": {"x": 352, "y": 327, "w": 276, "h": 28,
-                    "text_x": 356, "text_y": 330,
-                    "label": "BBM 54%  43/80L 120km",
-                    "bar_x": 356, "bar_y": 345, "bar_w": 264, "ratio": 0.54},
+        "vehicle": {"x": 16, "y": 392, "w": 288, "h": 28,
+                    "text_x": 24, "text_y": 395,
+                    "label": "FUEL 54%  43/80L 120km",
+                    "bar_x": 24, "bar_y": 412, "bar_w": 272, "ratio": 0.54},
     }
     comp = float(sys.argv[2]) if len(sys.argv) > 2 else 1.0
     stretch = float(sys.argv[3]) if len(sys.argv) > 3 else 1.0

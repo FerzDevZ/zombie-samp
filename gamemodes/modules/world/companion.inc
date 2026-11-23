@@ -259,6 +259,7 @@ stock Companion_Spawn(playerid)
         return 0;
     }
 
+    Npc_HideNameTag(npcid);
     FCNPC_Spawn(npcid, COMPANION_SKIN,
         x - floatsin(-angle, degrees) * 1.6,
         y - floatcos(-angle, degrees) * 1.6,
@@ -807,6 +808,7 @@ stock Companion_Revive(playerid)
         return 0;
     }
 
+    Npc_HideNameTag(npcid);
     FCNPC_Spawn(npcid, COMPANION_SKIN, x + 1.2, y, z);
     FCNPC_SetVirtualWorld(npcid, Lobby_WorldById(lobby));
     FCNPC_SetHealth(npcid, COMPANION_REVIVE_HP);

@@ -193,6 +193,7 @@ stock Zombie_Create(E_ZOMBIE_TYPE:type, Float:x, Float:y, Float:z, lobbyId = 0)
             Npc_NoteCreateFailure();
             return INVALID_ZOMBIE;
         }
+        Npc_HideNameTag(zombieid);
     }
 
     /* Reuse tetap harus mengganti kulit: tipe zombie menentukan model. */

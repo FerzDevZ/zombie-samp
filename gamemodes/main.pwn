@@ -375,6 +375,10 @@ public OnPlayerConnect(playerid)
     gTdMobileSafe[playerid] = gHudMobileClient[playerid];
     gHudGaya[playerid] = 0;
     HUD_Create(playerid);
+    /* Nametag NPC (zombie/rekrutan/trader) tidak pernah berguna dan muncul di
+       tengah layar saat NPC ikut masuk mobil. Disembunyikan untuk pemain ini
+       sejak connect; NPC yang lahir belakangan ditangani Npc_HideNameTag. */
+    Npc_HideAllNameTags(playerid);
     Account_ResetPlayer(playerid);
     Stash_Reset(playerid);
     Inventory_InitCondition(playerid);

@@ -236,6 +236,7 @@ stock Escort_Start(playerid)
         return 0;
     }
 
+    Npc_HideNameTag(npcid);
     FCNPC_Spawn(npcid, ESCORT_NPC_SKIN, x + 1.6, y, z);
     FCNPC_SetVirtualWorld(npcid, Lobby_WorldById(lobby));
     FCNPC_SetHealth(npcid, ESCORT_NPC_HEALTH);

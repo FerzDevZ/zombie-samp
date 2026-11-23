@@ -757,6 +757,7 @@ stock Selftest_RunStatic()
     Distraction_Selftest();
     Needs_Selftest();
     HUD_MeasureSelftest();
+    HUD_TextCacheSelftest();
     Companion_VehicleSelftest();
     Selftest_CheckHudLayout();
 
