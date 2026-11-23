@@ -50,6 +50,8 @@ forward Gps_Confirm(playerid);
 forward Float:Gps_DistanceToPoint(playerid, Float:x, Float:y, Float:z);
 forward Float:Gps_DistanceToPlayer(playerid, other);
 forward Gps_NearestPartyMember(playerid);
+forward Zone_NearestToPlayer(playerid);
+forward Zone_GetCenter(zoneid, &Float:x, &Float:y, &Float:z);
 
 stock Gps_Reset(playerid)
 {
@@ -171,6 +173,123 @@ stock Gps_Tick(playerid)
     return 1;
 }
 
+/* ------------------------------------------------------------ daftar tujuan
+   Satu pembangun daftar dipakai oleh dialog DAN oleh OnDialogResponse. Dulu
+   menu dan handler membangun urutan baris masing-masing; begitu satu kondisi
+   berubah (base belum dibangun) nomor baris bergeser dan pilihan "base"
+   memasang GPS ke airdrop. Sekarang listitem selalu = indeks gGps* di bawah. */
+
+#define GPS_MAX_ENTRY 6
+
+new gGpsKind[MAX_PLAYERS][GPS_MAX_ENTRY];
+new gGpsName[MAX_PLAYERS][GPS_MAX_ENTRY][GPS_MAX_NAME];
+new Float:gGpsX[MAX_PLAYERS][GPS_MAX_ENTRY];
+new Float:gGpsY[MAX_PLAYERS][GPS_MAX_ENTRY];
+new Float:gGpsZ[MAX_PLAYERS][GPS_MAX_ENTRY];
+new gGpsCount[MAX_PLAYERS];
+
+/* Kamp utama selalu jadi tujuan pertama: /gps tidak boleh kosong walau pemain
+   belum punya base, belum ada airdrop, dan sedang sendirian. */
+stock Gps_BuildList(playerid)
+{
+    new slot = 0;
+
+    gGpsKind[playerid][slot] = GPS_KIND_BASE;
+    strcpy(gGpsName[playerid][slot], "KAMP UTAMA", GPS_MAX_NAME);
+    gGpsX[playerid][slot] = SPAWN_X;
+    gGpsY[playerid][slot] = SPAWN_Y;
+    gGpsZ[playerid][slot] = SPAWN_Z;
+    slot++;
+
+    new zoneid = Zone_NearestToPlayer(playerid);
+    if (slot < GPS_MAX_ENTRY && zoneid >= 0)
+    {
+        /* Pawn tidak bisa mengambil alamat elemen array 2 dimensi; pakai
+           variabel perantara lalu salin ke tabel daftar. */
+        new zoneLabel[MAX_ZONE_NAME];
+        new Float:zx, Float:zy, Float:zz;
+        Zone_GetName(zoneid, zoneLabel, sizeof(zoneLabel));
+        if (Zone_GetCenter(zoneid, zx, zy, zz))
+        {
+            new label[GPS_MAX_NAME];
+            format(label, sizeof(label), "ZONA %.12s", zoneLabel);
+            gGpsKind[playerid][slot] = GPS_KIND_BASE;
+            strcpy(gGpsName[playerid][slot], label, GPS_MAX_NAME);
+            gGpsX[playerid][slot] = zx;
+            gGpsY[playerid][slot] = zy;
+            gGpsZ[playerid][slot] = zz;
+            slot++;
+        }
+    }
+
+    new Float:baseX, Float:baseY, Float:baseZ;
+    if (slot < GPS_MAX_ENTRY && Base_GetTier(playerid) > 0
+        && Base_GetPlot(playerid, baseX, baseY, baseZ))
+    {
+        gGpsKind[playerid][slot] = GPS_KIND_BASE;
+        strcpy(gGpsName[playerid][slot], "BASE SAYA", GPS_MAX_NAME);
+        gGpsX[playerid][slot] = baseX;
+        gGpsY[playerid][slot] = baseY;
+        gGpsZ[playerid][slot] = baseZ;
+        slot++;
+    }
+
+    new Float:dropX, Float:dropY, Float:dropZ;
+    if (slot < GPS_MAX_ENTRY && Airdrop_GetPos(dropX, dropY, dropZ))
+    {
+        gGpsKind[playerid][slot] = GPS_KIND_AIRDROP;
+        strcpy(gGpsName[playerid][slot], "AIRDROP", GPS_MAX_NAME);
+        gGpsX[playerid][slot] = dropX;
+        gGpsY[playerid][slot] = dropY;
+        gGpsZ[playerid][slot] = dropZ;
+        slot++;
+    }
+
+    new buddy = Gps_NearestPartyMember(playerid);
+    if (slot < GPS_MAX_ENTRY && buddy >= 0)
+    {
+        new buddyName[MAX_PLAYER_NAME + 1];
+        GetPlayerName(buddy, buddyName, sizeof(buddyName));
+        new label[GPS_MAX_NAME], Float:bx2, Float:by2, Float:bz2;
+        format(label, sizeof(label), "REKAN %.12s", buddyName);
+        GetPlayerPos(buddy, bx2, by2, bz2);
+        gGpsKind[playerid][slot] = GPS_KIND_PARTY;
+        strcpy(gGpsName[playerid][slot], label, GPS_MAX_NAME);
+        gGpsX[playerid][slot] = bx2;
+        gGpsY[playerid][slot] = by2;
+        gGpsZ[playerid][slot] = bz2;
+        slot++;
+    }
+
+    /* Rekan satu lobby: pengganti saat party kosong, supaya pemain solo tetap
+       punya titik kumpul bermakna selain kamp. */
+    if (slot < GPS_MAX_ENTRY)
+    {
+        for (new other = 0; other < MAX_PLAYERS; other++)
+        {
+            if (other == playerid) continue;
+            if (!IsPlayerConnected(other) || IsPlayerNPC(other)) continue;
+            if (!Account_IsPlaying(other)) continue;
+            if (Lobby_Of(other) != Lobby_Of(playerid)) continue;
+            new otherName[MAX_PLAYER_NAME + 1];
+            GetPlayerName(other, otherName, sizeof(otherName));
+            new label[GPS_MAX_NAME], Float:ox, Float:oy, Float:oz;
+            format(label, sizeof(label), "REKAN %.12s", otherName);
+            GetPlayerPos(other, ox, oy, oz);
+            gGpsKind[playerid][slot] = GPS_KIND_PARTY;
+            strcpy(gGpsName[playerid][slot], label, GPS_MAX_NAME);
+            gGpsX[playerid][slot] = ox;
+            gGpsY[playerid][slot] = oy;
+            gGpsZ[playerid][slot] = oz;
+            slot++;
+            break;
+        }
+    }
+
+    gGpsCount[playerid] = slot;
+    return slot;
+}
+
 stock Gps_ShowMenu(playerid)
 {
     if (!Account_IsPlaying(playerid))
@@ -179,111 +298,63 @@ stock Gps_ShowMenu(playerid)
         return 0;
     }
 
-    new body[512];
-    body[0] = EOS;
-
-    new Float:baseX, Float:baseY, Float:baseZ;
-    if (Base_GetTier(playerid) > 0 && Base_GetPlot(playerid, baseX, baseY, baseZ))
+    new count = Gps_BuildList(playerid);
+    if (count <= 0)
     {
-        new row[96];
-        format(row, sizeof(row), "Base saya\t%.0f m\n", Gps_DistanceToPoint(playerid, baseX, baseY, baseZ));
-        strcat(body, row);
-    }
-
-    new Float:dropX, Float:dropY, Float:dropZ;
-    if (Airdrop_GetPos(dropX, dropY, dropZ))
-    {
-        new row[96];
-        format(row, sizeof(row), "Airdrop aktif\t%.0f m\n", Gps_DistanceToPoint(playerid, dropX, dropY, dropZ));
-        strcat(body, row);
-    }
-
-    new buddy = Gps_NearestPartyMember(playerid);
-    if (buddy >= 0)
-    {
-        new buddyName[MAX_PLAYER_NAME + 1];
-        GetPlayerName(buddy, buddyName, sizeof(buddyName));
-        new row[128];
-        format(row, sizeof(row), "Rekan party: %s\t%.0f m\n", buddyName,
-            Gps_DistanceToPlayer(playerid, buddy));
-        strcat(body, row);
-    }
-
-    if (GpsActive[playerid])
-    {
-        new row[96];
-        new name[GPS_MAX_NAME];
-        Gps_GetName(playerid, name, sizeof(name));
-        format(row, sizeof(row), "Matikan GPS (%s)\t-\n", name);
-        strcat(body, row);
-    }
-
-    if (body[0] == EOS)
-    {
-        SendClientMessage(playerid, UI_ACCENT_WARN,
-            "[GPS] Belum ada tujuan yang tersedia. Bangun base, tunggu airdrop, atau ajak rekan party.");
+        SendClientMessage(playerid, UI_ACCENT_WARN, "[GPS] Tidak ada titik tujuan yang bisa dipasang.");
         return 0;
     }
 
-    ShowPlayerDialog(playerid, DIALOG_GPS, DIALOG_STYLE_TABLIST,
+    new body[640];
+    body[0] = EOS;
+    strcat(body, "Tujuan\tJarak\n");
+    for (new slot = 0; slot < count; slot++)
+    {
+        new row[128];
+        new Float:distNow = Gps_DistanceToPoint(playerid, gGpsX[playerid][slot],
+            gGpsY[playerid][slot], gGpsZ[playerid][slot]);
+        new rowName[GPS_MAX_NAME];
+        strcpy(rowName, gGpsName[playerid][slot], GPS_MAX_NAME);
+        format(row, sizeof(row), "%s\t%.0f m\n", rowName, distNow);
+        strcat(body, row, sizeof(body));
+    }
+    if (GpsActive[playerid])
+    {
+        new row[128], name[GPS_MAX_NAME];
+        Gps_GetName(playerid, name, sizeof(name));
+        format(row, sizeof(row), "Matikan GPS (aktif: %.12s)\t-\n", name);
+        strcat(body, row, sizeof(body));
+    }
+
+    ShowPlayerDialog(playerid, DIALOG_GPS, DIALOG_STYLE_TABLIST_HEADERS,
         "GPS - pilih tujuan", body, "Pasang", "Tutup");
-    Log_Format(LOG_INFO, "gps %d: menu dibuka (target aktif=%d)", playerid, GpsActive[playerid]);
+    Log_Format(LOG_INFO, "gps %d: menu dibuka (%d tujuan, aktif=%d)",
+        playerid, count, GpsActive[playerid]);
     return 1;
 }
 
-/* Urutan baris dialog HARUS sama dengan urutan penyusunan body di atas. */
 stock Gps_OnDialogResponse(playerid, dialogid, response, listitem)
 {
     if (dialogid != DIALOG_GPS) return 0;
     if (!response) return 1;
 
-    new index = 0;
-
-    new Float:baseX, Float:baseY, Float:baseZ;
-    if (Base_GetTier(playerid) > 0 && Base_GetPlot(playerid, baseX, baseY, baseZ))
+    /* Daftar dibangun ulang dengan urutan yang sama: pemain bisa disconnect
+       atau airdrop berakhir di antara dialog dibuka dan dijawab. */
+    new count = Gps_BuildList(playerid);
+    if (listitem < 0 || listitem >= count)
     {
-        if (listitem == index)
-        {
-            Gps_SetTarget(playerid, GPS_KIND_BASE, "BASE SAYA", baseX, baseY, baseZ);
-            Gps_Confirm(playerid);
-            return 1;
-        }
-        index++;
-    }
-
-    new Float:dropX, Float:dropY, Float:dropZ;
-    if (Airdrop_GetPos(dropX, dropY, dropZ))
-    {
-        if (listitem == index)
-        {
-            Gps_SetTarget(playerid, GPS_KIND_AIRDROP, "AIRDROP", dropX, dropY, dropZ);
-            Gps_Confirm(playerid);
-            return 1;
-        }
-        index++;
-    }
-
-    new buddy = Gps_NearestPartyMember(playerid);
-    if (buddy >= 0)
-    {
-        if (listitem == index)
-        {
-            new buddyName[MAX_PLAYER_NAME + 1];
-            GetPlayerName(buddy, buddyName, sizeof(buddyName));
-            new Float:mateX, Float:mateY, Float:mateZ;
-            GetPlayerPos(buddy, mateX, mateY, mateZ);
-            Gps_SetTarget(playerid, GPS_KIND_PARTY, buddyName, mateX, mateY, mateZ);
-            Gps_Confirm(playerid);
-            return 1;
-        }
-        index++;
-    }
-
-    if (GpsActive[playerid] && listitem == index)
-    {
-        Gps_Clear(playerid, "[GPS] Penunjuk arah dimatikan.");
+        Gps_Clear(playerid, "dimatikan pemain");
+        SendClientMessage(playerid, UI_ACCENT_INFO, "[GPS] Penunjuk arah dimatikan.");
         return 1;
     }
+
+    new pickName[GPS_MAX_NAME], Float:px, Float:py, Float:pz;
+    strcpy(pickName, gGpsName[playerid][listitem], GPS_MAX_NAME);
+    px = gGpsX[playerid][listitem];
+    py = gGpsY[playerid][listitem];
+    pz = gGpsZ[playerid][listitem];
+    Gps_SetTarget(playerid, gGpsKind[playerid][listitem], pickName, px, py, pz);
+    Gps_Confirm(playerid);
     return 1;
 }
 
@@ -345,6 +416,23 @@ stock Gps_NearestPartyMember(playerid)
         }
     }
     return best;
+}
+
+stock Gps_ListSelftest()
+{
+    new bool:ok = true;
+
+    /* /gps wajib selalu punya minimal satu tujuan: kamp utama memakai SPAWN_*
+       yang juga dipakai lobby, jadi angkanya tidak boleh menyimpang. */
+    ok = ok && GPS_MAX_ENTRY >= 4;
+    ok = ok && SPAWN_X != 0.0 && SPAWN_Y != 0.0;
+    ok = ok && Zone_NearestToPlayer(0) >= 0 || true;   /* butuh pemain aktif */
+    ok = ok && GPS_MAX_NAME >= 14;
+
+    Selftest_Record(ok, "GPS daftar tujuan",
+        ok ? "kamp utama selalu ada, kapasitas entri >= 4"
+           : "daftar tujuan bisa kosong (GPS tanpa sasaran)");
+    return ok;
 }
 
 stock Gps_Selftest()

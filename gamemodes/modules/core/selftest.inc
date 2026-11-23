@@ -759,7 +759,9 @@ stock Selftest_RunStatic()
     HUD_MeasureSelftest();
     HUD_TextCacheSelftest();
     HUD_GayaSelftest();
+    HUD_SkinSelftest();
     Gps_Selftest();
+    Gps_ListSelftest();
     Companion_VehicleSelftest();
     Selftest_CheckHudLayout();
 

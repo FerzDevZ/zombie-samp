@@ -127,3 +127,21 @@ stock Npc_HideAllNameTags(playerid)
     }
     return 1;
 }
+
+/* Klien SA-MP (terutama Android) membuang status sembunyi setelah pemain masuk
+   kendaraan atau setelah NPC di-stream ulang, sehingga nametag "ls_comp_..."
+   muncul lagi di tengah layar. Panggilan sekali saat connect/create tidak cukup:
+   status itu harus ditegakkan ulang. Dipanggil dari Player_Tick tiap ~2 detik,
+   bukan tiap tick, supaya tidak membebani 500+ pemain. */
+stock Npc_RefreshNameTags(playerid)
+{
+    if (!IsPlayerConnected(playerid)) return 0;
+    for (new npcid = 0; npcid < MAX_PLAYERS; npcid++)
+    {
+        if (npcid == playerid) continue;
+        if (!IsPlayerConnected(npcid)) continue;
+        if (!IsPlayerNPC(npcid)) continue;
+        ShowPlayerNameTagForPlayer(playerid, npcid, false);
+    }
+    return 1;
+}

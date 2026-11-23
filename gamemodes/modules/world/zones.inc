@@ -30,6 +30,38 @@ new const gZones[MAX_ZONE_COUNT][E_ZONE_DATA] = {
     {"",                 0.0,    0.0,    0.0,   0.0, 0, false, false,  0}
 };
 
+/* Titik tengah zona: dipakai GPS dan laporan "zona terdekat" supaya tidak ada
+   yang menyalin koordinat dari tabel gZones di modul lain. */
+stock Zone_GetCenter(zoneid, &Float:x, &Float:y, &Float:z)
+{
+    if (zoneid < 0 || zoneid >= MAX_ZONE_COUNT) return 0;
+    x = gZones[zoneid][zoneX];
+    y = gZones[zoneid][zoneY];
+    z = gZones[zoneid][zoneZ];
+    return 1;
+}
+
+stock Zone_NearestToPlayer(playerid)
+{
+    new Float:px, Float:py, Float:pz;
+    GetPlayerPos(playerid, px, py, pz);
+    new bestZone = -1;
+    new Float:bestDist = 999999.0;
+    for (new zoneid = 0; zoneid < MAX_ZONE_COUNT; zoneid++)
+    {
+        if (gZones[zoneid][zoneName][0] == EOS) continue;
+        new Float:dx = gZones[zoneid][zoneX] - px;
+        new Float:dy = gZones[zoneid][zoneY] - py;
+        new Float:dist = dx * dx + dy * dy;
+        if (dist < bestDist)
+        {
+            bestDist = dist;
+            bestZone = zoneid;
+        }
+    }
+    return bestZone;
+}
+
 stock Zone_GetIdAt(Float:x, Float:y, Float:z)
 {
     for (new zoneid = 0; zoneid < MAX_ZONE_COUNT; zoneid++)

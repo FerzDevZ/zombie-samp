@@ -54,3 +54,58 @@ Aturan tetap: layar 640x480; teks terburuk tetap diuji (gate `gHudFitRows` + `ge
 - Gaya: PENUH & MOBILE = kartu + bar KMH + bar GPS; MINIMAL = teks + bar FUEL saja (bar KMH/GPS dan kartu hilang, **bar FUEL tidak pernah hilang**).
 - Per-modul bisa dimatikan di `/settings` (butir 9–11) lewat `characters.pref_hud_modul`.
 - `/gps` membuka TABLIST: Base saya / Airdrop aktif / Rekan party / Matikan; tiba otomatis di bawah 20 m.
+
+## Design HUD (skin) + `/gps` yang selalu punya tujuan — v6
+
+### Kenapa ditambah
+Pemain meminta **memilih rupa textdraw** HUD, bukan hanya gayanya. Sebelumnya
+`/settings` hanya punya "Gaya HUD" (PENUH / MOBILE / MINIMAL) dan baris modul;
+tidak ada satu pun baris yang mengubah **palet** HUD. `/gps` juga bisa kosong
+tanpa tujuan sehingga penunjuk arah tidak pernah muncul.
+
+### Struktur menu `/settings` sekarang (urut dari atas)
+| Baris | Isi | Efek |
+|---|---|---|
+| 0 | Gaya HUD (auto / penuh / mobile / minimal) | permukaan + bar per grup |
+| 1 | **Design HUD** (auto / KACA / NEON / TACTICAL / TERANG) | palet kartu, warna teks, warna aksen, bar solid vs segmen |
+| 2..8 | detail, skala, kontras, darah, prompt, bahasa, sisi break-even | perilaku |
+| 9 | mode renderer textdraw (auto / aman / cepat) | box vs sprite (Android) |
+| 10..12 | baris MOBIL / speedometer / GPS | modul tampil atau tidak |
+
+### Tabel design (`gHudSkins` di `hud.inc`)
+| # | Nama | Kartu | Track | Teks utama | Aksen | Bar |
+|---|---|---|---|---|---|---|
+| 0 | AUTO | diresolusi saat apply: mobile → NEON, PC → KACA | | | | |
+| 1 | KACA | `0B0F19E6` | `1E293BFF` | `F8FAFCFF` | `10B981FF` | segmen |
+| 2 | NEON | `06141BF0` | `0E3A46FF` | `ECFEFFFF` | `22D3EEFF` | solid |
+| 3 | TACTICAL | `1A1C14F2` | `33351FFF` | `F5F3E7FF` | `F59E0BFF` | solid |
+| 4 | TERANG | `E8E4D9F7` | `BBB5A5FF` | `1F2937FF` | `0F766EFF` | solid |
+
+Aturan yang tidak boleh dilanggar:
+1. **Merah bahaya tidak pernah diubah design.** `HUD_SkinBarColor` hanya
+   memetakan aksen netral (primary/info/warn); `UI_ACCENT_DANGER` lolos apa adanya
+   supaya arti "HP kritis" tetap sama di semua design.
+2. **Design diresolusi SEBELUM `HUD_Create`**, bukan di-recolour sesudahnya —
+   kalau tidak, textdraw sudah terbuat dengan palet lama.
+3. **Warna track dan warna celah bar diambil dari tabel skin**, sehingga bar
+   segmen di design terang tidak menyisakan garis gelap.
+
+### Grid kolom kendaraan (setelah dirapikan)
+```
+256 .. 320  kartu A : info 259 | angka speed 267 (letter 1.30) | km/j 275 @x396
+                      bar KMH 286 | FUEL 293 | bar FUEL 305
+322 .. 344  kartu B : GPS 325 | bar GPS 336
+```
+Semua baris teks memakai LetterSize Y `0.62` (satu garis dasar); hanya angka
+kecepatan memakai `1.30`. `HUD_VEHC_CARD_Y` turun dari 258 → 256 supaya tidak
+menempel baris PIP di `y 348`.
+
+### `/gps` — daftar tujuan dibangun satu kali
+`Gps_BuildList` mengisi tabel `gGpsKind / gGpsName / gGpsX/Y/Z` dan
+`Gps_ShowMenu` **serta** `Gps_OnDialogResponse` memakai indeks yang sama. Dulu
+keduanya menyusun baris sendiri-sendiri: ketika satu syarat berubah (base belum
+dibangun) nomor baris bergeser dan pilihan "base" memasang target yang salah.
+
+Urutan tujuan: **KAMP UTAMA (selalu ada)** → zona terdekat → base pribadi →
+airdrop aktif → rekan party → rekan satu lobby → baris "Matikan GPS".
+Kamp memakai `SPAWN_X/Y/Z` yang sama dengan lobby, jadi tidak ada salinan angka.

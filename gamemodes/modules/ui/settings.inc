@@ -33,6 +33,7 @@
 #define DIALOG_SETTINGS      2964
 
 new gPrefHudGaya[MAX_PLAYERS];      /* 0 auto, 1..3 gaya HUD */
+new gPrefHudSkin[MAX_PLAYERS];      /* HUD_SKIN_AUTO / KACA / NEON / TACTICAL / TERANG */
 new gPrefHudDetail[MAX_PLAYERS];    /* 1 tampil bar detail, 2 sembunyi */
 new gPrefHudScale[MAX_PLAYERS];     /* indeks 0..4 -> 0.8..1.2 */
 new gPrefContrast[MAX_PLAYERS];     /* 1 normal, 2 kontras tinggi */
@@ -64,6 +65,7 @@ forward Settings_OnLoaded(playerid);
 stock Settings_Load(playerid)
 {
     gPrefHudGaya[playerid] = SETTINGS_HUD_AUTO;
+    gPrefHudSkin[playerid] = HUD_SKIN_AUTO;
     gPrefHudDetail[playerid] = SETTINGS_FLAG_ON;
     gPrefHudScale[playerid] = 2;    /* 100% */
     gPrefContrast[playerid] = SETTINGS_FLAG_ON;
@@ -78,7 +80,7 @@ stock Settings_Load(playerid)
 
     new query[224];
     mysql_format(gSQL, query, sizeof(query),
-        "SELECT pref_hud_gaya, pref_hud_detail, pref_hud_scale, pref_contrast, \
+        "SELECT pref_hud_gaya, pref_hud_skin, pref_hud_detail, pref_hud_scale, pref_contrast, \
                 pref_blood_fx, pref_prompt, pref_lang, pref_be_side, \
                 pref_td_mode, pref_hud_modul \
          FROM characters WHERE id = %d AND server_id = %d LIMIT 1",
@@ -92,8 +94,9 @@ public Settings_OnLoaded(playerid)
     if (!IsPlayerConnected(playerid)) return 0;
     if (cache_num_rows() == 0) return 0;
 
-    new gaya = 0, detail = 1, scale = 2, contrast = 1, blood = 1, prompt = 1, lang = 1, side = 1, tdmode = 0;
+    new gaya = 0, skin = HUD_SKIN_AUTO, detail = 1, scale = 2, contrast = 1, blood = 1, prompt = 1, lang = 1, side = 1, tdmode = 0;
     cache_get_value_name_int(0, "pref_hud_gaya", gaya);
+    cache_get_value_name_int(0, "pref_hud_skin", skin);
     cache_get_value_name_int(0, "pref_hud_detail", detail);
     cache_get_value_name_int(0, "pref_hud_scale", scale);
     cache_get_value_name_int(0, "pref_contrast", contrast);
@@ -106,6 +109,7 @@ public Settings_OnLoaded(playerid)
     cache_get_value_name_int(0, "pref_hud_modul", modul);
 
     if (gaya >= SETTINGS_HUD_AUTO && gaya <= HUD_GAYA_MINIMAL) gPrefHudGaya[playerid] = gaya;
+    if (skin >= HUD_SKIN_AUTO && skin <= HUD_SKIN_COUNT) gPrefHudSkin[playerid] = skin;
     if (detail == SETTINGS_FLAG_ON || detail == SETTINGS_FLAG_OFF) gPrefHudDetail[playerid] = detail;
     if (scale >= SETTINGS_SCALE_MIN && scale <= SETTINGS_SCALE_MAX) gPrefHudScale[playerid] = scale;
     if (contrast == SETTINGS_FLAG_ON || contrast == SETTINGS_FLAG_OFF) gPrefContrast[playerid] = contrast;
@@ -137,6 +141,14 @@ stock Settings_Apply(playerid)
         gHudGaya[playerid] = 0;
     }
 
+    /* Design HUD harus diresolusi SEBELUM HUD_Create: seluruh palet kartu
+       dibaca dari gHudSkin saat textdraw dibuat (bukan di-recolour belakangan). */
+    if (gPrefHudSkin[playerid] == HUD_SKIN_AUTO)
+    {
+        gHudSkin[playerid] = gHudMobileClient[playerid] ? HUD_SKIN_NEON : HUD_SKIN_DEFAULT;
+    }
+    else gHudSkin[playerid] = gPrefHudSkin[playerid];
+
     /* Mode renderer harus disinkronkan SEBELUM HUD dibangun: HUD_Create membaca
        Settings_TdMobileSafe untuk memilih box vs sprite. */
     gTdMobileSafe[playerid] = Settings_TdMobileSafe(playerid);
@@ -150,13 +162,13 @@ stock Settings_Save(playerid)
 {
     if (ActiveCharId[playerid] == 0 || !SQL_IsReady()) return 0;
 
-    new query[320];
+    new query[360];
     mysql_format(gSQL, query, sizeof(query),
-        "UPDATE characters SET pref_hud_gaya = %d, pref_hud_detail = %d, \
+        "UPDATE characters SET pref_hud_gaya = %d, pref_hud_skin = %d, pref_hud_detail = %d, \
          pref_hud_scale = %d, pref_contrast = %d, pref_blood_fx = %d, \
          pref_prompt = %d, pref_lang = %d, pref_be_side = %d, pref_td_mode = %d, \
          pref_hud_modul = %d WHERE id = %d",
-        gPrefHudGaya[playerid], gPrefHudDetail[playerid], gPrefHudScale[playerid],
+        gPrefHudGaya[playerid], gPrefHudSkin[playerid], gPrefHudDetail[playerid], gPrefHudScale[playerid],
         gPrefContrast[playerid], gPrefBloodFx[playerid], gPrefPrompt[playerid],
         gPrefLang[playerid], gPrefBeSide[playerid], gPrefTdMode[playerid],
         gPrefHudModul[playerid], ActiveCharId[playerid]);
@@ -279,6 +291,15 @@ stock Settings_Show(playerid)
     format(row, sizeof(row), "Gaya HUD\t%s\n", gayaText);
     strcat(body, row, sizeof(body));
 
+    /* Baris 2: design HUD (palet kartu + bentuk bar). Ini yang diminta:
+       di bawah pilihan mode/gaya, pemain memilih rupa textdraw-nya sendiri. */
+    new skinText[20];
+    new skinIdx = (gPrefHudSkin[playerid] == HUD_SKIN_AUTO) ? 0 : gPrefHudSkin[playerid];
+    if (skinIdx == 0) strcpy(skinText, "Auto (ikut klien)", sizeof(skinText));
+    else format(skinText, sizeof(skinText), "%d - %s", skinIdx, gHudSkins[skinIdx][skinName]);
+    format(row, sizeof(row), "Design HUD\t%s\n", skinText);
+    strcat(body, row, sizeof(body));
+
     format(row, sizeof(row), "Bar Detail (Kendaraan & Boss)\t%s\n",
         (gPrefHudDetail[playerid] == SETTINGS_FLAG_OFF) ? "Sembunyi" : "Tampil");
     strcat(body, row, sizeof(body));
@@ -339,7 +360,7 @@ stock Settings_ToggleFromRow(playerid, row)
 {
     /* Baris terakhir = mode renderer: 0 auto -> 1 PC -> 2 mobile-safe -> auto.
        Perubahan langsung membangun ulang textdraw supaya bisa dibandingkan. */
-    if (row == 8)
+    if (row == 9)
     {
         gPrefTdMode[playerid]++;
         if (gPrefTdMode[playerid] > TD_MODE_MOBILE) gPrefTdMode[playerid] = TD_MODE_AUTO;
@@ -362,44 +383,58 @@ stock Settings_ToggleFromRow(playerid, row)
             gPrefHudGaya[playerid]++;
             if (gPrefHudGaya[playerid] > HUD_GAYA_MINIMAL) gPrefHudGaya[playerid] = SETTINGS_HUD_AUTO;
         }
-        case 1:
+        case 1: /* design HUD: auto -> KACA -> NEON -> TACTICAL -> TERANG -> auto */
+        {
+            gPrefHudSkin[playerid]++;
+            if (gPrefHudSkin[playerid] > HUD_SKIN_COUNT) gPrefHudSkin[playerid] = HUD_SKIN_AUTO;
+        }
+        case 2:
         {
             gPrefHudDetail[playerid] = (gPrefHudDetail[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 2:
+        case 3:
         {
             gPrefHudScale[playerid]++;
             if (gPrefHudScale[playerid] > SETTINGS_SCALE_MAX) gPrefHudScale[playerid] = SETTINGS_SCALE_MIN;
         }
-        case 3:
+        case 4:
         {
             gPrefContrast[playerid] = (gPrefContrast[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 4:
+        case 5:
         {
             gPrefBloodFx[playerid] = (gPrefBloodFx[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 5:
+        case 6:
         {
             gPrefPrompt[playerid] = (gPrefPrompt[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 6:
+        case 7:
         {
             gPrefLang[playerid] = (gPrefLang[playerid] == LANG_EN) ? LANG_ID : LANG_EN;
         }
-        case 7:
+        case 8:
         {
             gPrefBeSide[playerid] = (gPrefBeSide[playerid] == SETTINGS_FLAG_OFF)
                 ? SETTINGS_FLAG_ON : SETTINGS_FLAG_OFF;
         }
-        case 9:  Settings_ModulToggle(playerid, SETTINGS_MODUL_VEH);
-        case 10: Settings_ModulToggle(playerid, SETTINGS_MODUL_SPEEDO);
-        case 11: Settings_ModulToggle(playerid, SETTINGS_MODUL_GPS);
+        case 10: Settings_ModulToggle(playerid, SETTINGS_MODUL_VEH);
+        case 11: Settings_ModulToggle(playerid, SETTINGS_MODUL_SPEEDO);
+        case 12: Settings_ModulToggle(playerid, SETTINGS_MODUL_GPS);
         default: return 0;
+    }
+
+    if (row == 1)
+    {
+        new skinMsg[96], skinLabel[20];
+        if (gPrefHudSkin[playerid] == HUD_SKIN_AUTO) strcpy(skinLabel, "Auto (ikut klien)", sizeof(skinLabel));
+        else format(skinLabel, sizeof(skinLabel), "%s", gHudSkins[gPrefHudSkin[playerid]][skinName]);
+        format(skinMsg, sizeof(skinMsg), "[SETELAN] Design HUD: %s", skinLabel);
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, skinMsg);
     }
 
     Settings_Apply(playerid);

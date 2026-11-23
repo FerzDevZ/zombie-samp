@@ -195,6 +195,16 @@
 #define SETTINGS_MODUL_SPEEDO       2
 #define SETTINGS_MODUL_GPS          4
 #define SETTINGS_MODUL_ALL          7
+
+/* Design (skin) HUD: dipilih di /settings baris "Design HUD". Angka 0 = auto
+   (ikut klien: mobile -> NEON agar kontras di layar kecil). */
+#define HUD_SKIN_AUTO               0
+#define HUD_SKIN_KACA               1   /* kaca gelap slate (default PC)  */
+#define HUD_SKIN_NEON               2   /* gelap + aksen cyan, bar solid  */
+#define HUD_SKIN_TACTICAL           3   /* olive/amber militer, bar solid */
+#define HUD_SKIN_TERANG             4   /* kartu terang, teks gelap       */
+#define HUD_SKIN_COUNT              4
+#define HUD_SKIN_DEFAULT            HUD_SKIN_KACA
 #define HUD_GAYA_DEFAULT            HUD_GAYA_PENUH
 #define HUD_SCALE_MOBILE            0.70
 #define HUD_SCALE_MINIMAL           0.85

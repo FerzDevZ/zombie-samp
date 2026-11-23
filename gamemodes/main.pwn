@@ -167,6 +167,7 @@ forward Player_Tick();
 forward Escort_Tick();
 forward Airdrop_Tick();
 new TimerHandles[22];
+new gNpcTagTick = 0;
 
 public OnGameModeInit()
 {
@@ -728,6 +729,10 @@ public Player_Tick()
         BuildEdit_TickPlayer(playerid);   // pratinjau/edit struktur ikut pemain
         WeaponAttach_VisualTick(playerid);   // objek attachment ikut senjata di tangan
         Player_ReviveChannelTick(playerid);
+
+        /* Nametag NPC ditegakkan ulang tiap ~2 detik (4 tick): klien HP
+           menghidupkannya kembali setelah masuk kendaraan. */
+        if ((++gNpcTagTick & 3) == 0) Npc_RefreshNameTags(playerid);
 
         new Float:engineHealth;
         GetPlayerHealth(playerid, engineHealth);
