@@ -35,6 +35,8 @@ enum E_OWNED_VEHICLE
     Float:ovFuel,
     Float:ovHealth,
     ovLocked,
+    ovPlating,
+    ovTrunk[224],
     ovPlate[16]
 };
 
@@ -129,7 +131,7 @@ stock Garage_Load(playerid)
 
     new query[192];
     mysql_format(gSQL, query, sizeof(query),
-        "SELECT id, model, fuel, health, locked, plate FROM owned_vehicles \
+        "SELECT id, model, fuel, health, locked, plating, trunk, plate FROM owned_vehicles \
          WHERE char_id = %d ORDER BY id ASC LIMIT %d",
         ActiveCharId[playerid], MAX_OWNED_VEHICLES);
     mysql_tquery(gSQL, query, "Garage_OnLoaded", "i", playerid);
@@ -153,6 +155,8 @@ public Garage_OnLoaded(playerid)
         cache_get_value_name_float(row, "fuel", GarageVehicles[playerid][index][ovFuel]);
         cache_get_value_name_float(row, "health", GarageVehicles[playerid][index][ovHealth]);
         cache_get_value_name_int(row, "locked", GarageVehicles[playerid][index][ovLocked]);
+        cache_get_value_name_int(row, "plating", GarageVehicles[playerid][index][ovPlating]);
+        cache_get_value_name(row, "trunk", GarageVehicles[playerid][index][ovTrunk], 224);
         cache_get_value_name(row, "plate", GarageVehicles[playerid][index][ovPlate], 16);
 
         GarageCount[playerid]++;
@@ -279,6 +283,8 @@ stock Garage_Deploy(playerid, index)
             SendClientMessage(playerid, UI_ACCENT_DANGER, "[GARASI] Slot kendaraan server penuh.");
             return 0;
         }
+        VehicleMods_ApplyPersisted(tracked, GarageVehicles[playerid][index][ovPlating],
+            GarageVehicles[playerid][index][ovTrunk]);
 
         new line[128], vehicleName[24];
         Garage_VehicleName(modelid, vehicleName, sizeof(vehicleName));
@@ -303,10 +309,15 @@ stock Garage_SaveToDb(vehicleid)
     new Float:fuel = Vehicle_GetFuel(vehicleid);
     if (fuel < 0.0) fuel = 0.0;
 
-    new query[192];
+    new slot = Vehicle_TrackedSlot(vehicleid);
+    new plating = (slot >= 0) ? VehiclePlateLevel[slot] : 0;
+    new trunkData[224] = "";
+    if (slot >= 0) VehicleMods_EncodeTrunk(slot, trunkData, sizeof(trunkData));
+
+    new query[384];
     mysql_format(gSQL, query, sizeof(query),
-        "UPDATE owned_vehicles SET fuel = %f, health = %f, locked = 1 WHERE id = %d",
-        fuel, health, dbId);
+        "UPDATE owned_vehicles SET fuel = %f, health = %f, locked = 1, plating = %d, trunk = '%e' WHERE id = %d",
+        fuel, health, plating, trunkData, dbId);
     mysql_tquery(gSQL, query, "", "");
     return 1;
 }
@@ -376,11 +387,7 @@ stock Garage_StoreNearest(playerid)
     GetVehicleHealth(vehicleid, health);
     if (fuel < 0.0) fuel = 0.0;
 
-    new query[192];
-    mysql_format(gSQL, query, sizeof(query),
-        "UPDATE owned_vehicles SET fuel = %f, health = %f, locked = 1 WHERE id = %d",
-        fuel, health, dbId);
-    mysql_tquery(gSQL, query, "", "");
+    Garage_SaveToDb(vehicleid);   // fuel + health + plating + trunk sekali jalan
 
     Garage_UpdateMemory(playerid, dbId, fuel, health);
     Vehicle_NotifyDestroyed(vehicleid);

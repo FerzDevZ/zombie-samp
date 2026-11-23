@@ -3,6 +3,9 @@
 #endif
 #define _ls_damage_pipeline_included
 
+/* Zirah kendaraan (vehicle_mods.inc): bonus damage tabrakan ke zombie. */
+forward Float:VehicleMods_RamMultiplier(playerid);
+
 /* Single entry point for every damage event. No module is allowed to touch
    player or zombie health directly: skipping validation here is how silent-aim,
    wallbang and PvP-in-safe-zone exploit all start. */
@@ -141,6 +144,13 @@ bool:Damage_Apply(E_DAMAGE_KIND:kind, victimId, attackerId, Float:amount, weapon
             {
                 if (!Dps_TrackPlayerDamage(attackerId, amount, weaponId)) return false;
                 outgoing *= Skills_DamageDealtMultiplier(attackerId);
+
+                /* Zirah: menabrak zombie dengan kendaraan berpelat/bumper duri
+                   jauh lebih mematikan (weapon 49 = tabrakan kendaraan). */
+                if (weaponId == 49)
+                {
+                    outgoing *= VehicleMods_RamMultiplier(attackerId);
+                }
             }
             return Zombie_ApplyDamage(victimId, attackerId, outgoing, weaponId);
         }

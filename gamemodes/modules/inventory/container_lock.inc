@@ -22,6 +22,7 @@
 #define LOCK_KIND_GRAVE       2
 #define LOCK_KIND_STASH       3
 #define LOCK_KIND_CORPSE      4
+#define LOCK_KIND_VEHICLE_TRUNK 5
 
 #define LOCK_MAX              24
 #define LOCK_HOLD_MS          60000
@@ -48,6 +49,7 @@ stock Lock_KindName(kind, dest[], destSize)
         case LOCK_KIND_GRAVE:       format(dest, destSize, "makam");
         case LOCK_KIND_STASH:       format(dest, destSize, "stash");
         case LOCK_KIND_CORPSE:      format(dest, destSize, "mayat");
+        case LOCK_KIND_VEHICLE_TRUNK: format(dest, destSize, "bagasi mobil");
         default:                    format(dest, destSize, "container");
     }
     return 1;

@@ -1292,6 +1292,24 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "zirah", true) || !strcmp(cmd, "armor", true))
+    {
+        VehicleMods_InstallPlate(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "bagasi", true) || !strcmp(cmd, "trunk", true))
+    {
+        VehicleMods_ShowTrunk(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "hotwire", true) || !strcmp(cmd, "kabel", true))
+    {
+        VehicleMods_StartHotwire(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "shop", true) || !strcmp(cmd, "toko", true))
     {
         Vendor_ShowMenu(playerid);

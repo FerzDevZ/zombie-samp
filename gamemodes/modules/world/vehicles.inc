@@ -182,6 +182,7 @@ stock Vehicle_Register(vehicleid, modelid, lobbyId, Float:fuel, bool:locked, boo
         TrackedVehicle[slot][tvActive] = 1;
         TrackedVehicle[slot][tvLastWarn] = 0;
         TrackedVehicle[slot][tvSpawnTick] = GetTickCount();
+        VehicleMods_ResetSlot(slot);
 
         Vehicle_SetEngine(vehicleid, !locked);
         return slot;
@@ -194,6 +195,7 @@ stock Vehicle_Unregister(vehicleid)
     new slot = Vehicle_TrackedSlot(vehicleid);
     if (slot < 0) return 0;
 
+    VehicleMods_ResetSlot(slot);
     TrackedVehicle[slot][tvActive] = 0;
     TrackedVehicle[slot][tvVehicle] = 0;
     TrackedVehicle[slot][tvFuel] = 0.0;
@@ -366,6 +368,7 @@ stock Vehicle_DestroyAll()
         if (!TrackedVehicle[slot][tvActive]) continue;
 
         DestroyVehicle(TrackedVehicle[slot][tvVehicle]);
+        VehicleMods_ResetSlot(slot);
         TrackedVehicle[slot][tvActive] = 0;
         TrackedVehicle[slot][tvVehicle] = 0;
         TrackedVehicle[slot][tvFuel] = 0.0;
@@ -397,6 +400,7 @@ stock Vehicle_OnDeath(vehicleid)
     if (tracked < 0) return 0;
 
     Garage_OnVehicleDestroyed(vehicleid);
+    VehicleMods_OnVehicleDeath(vehicleid);
     Vehicle_NotifyDestroyed(vehicleid);
     DestroyVehicle(vehicleid);
     return 1;
@@ -922,6 +926,7 @@ public VehicleFuel_Tick()
 {
     new perfStart = GetTickCount();
     VehicleFuel_TickBody();
+    VehicleMods_Tick();
     Perf_Update(PERF_VEHICLE, perfStart);
     return 1;
 }

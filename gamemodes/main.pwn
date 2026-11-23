@@ -110,6 +110,7 @@
 #include "modules/world/decor.inc"
 #include "modules/world/lobbies.inc"
 #include "modules/world/vehicles.inc"
+#include "modules/world/vehicle_mods.inc"
 #include "modules/world/garage.inc"
 #include "modules/player/extraction.inc"
 
@@ -280,6 +281,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     if (Contracts_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Lobby_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Garage_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
+    if (VehicleMods_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Menu_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     return 0;
 }
