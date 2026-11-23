@@ -112,6 +112,7 @@
 #include "modules/world/vehicles.inc"
 #include "modules/world/vehicle_mods.inc"
 #include "modules/world/garage.inc"
+#include "modules/world/notes.inc"
 #include "modules/player/extraction.inc"
 
 #include "modules/player/needs.inc"
@@ -211,6 +212,7 @@ public OnGameModeInit()
 
     Map_Init();
     Decor_Init();
+    Notes_Init();
 
     Interact_Create(INTERACT_EXTRACT, EXTRACTION_X, EXTRACTION_Y, EXTRACTION_Z, 3.0, "Ekstraksi\n{Y} tekan Y");
     Interact_Create(INTERACT_STASH, 1662.0, -2318.0, 13.5, 2.5, "Stash Kamp\n{Y} tekan Y");
@@ -282,6 +284,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     if (Lobby_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (Garage_OnDialogResponse(playerid, dialogid, response, listitem)) return 1;
     if (VehicleMods_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+    if (Notes_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Menu_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     return 0;
 }
@@ -405,6 +408,7 @@ public OnPlayerDisconnect(playerid, reason)
         Contracts_Save(playerid);
         Account_SaveCharacter(playerid);
     }
+    Notes_ResetPlayer(playerid);
 
     /* Pratinjau struktur: ghost object + panel TextDraw harus mati bersama
        pemain, kalau tidak objek hantu tertinggal di world base. */

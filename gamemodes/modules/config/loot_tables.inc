@@ -13,7 +13,7 @@
 
 #define LOOT_TABLE_SLOTS 10
 #define LOOT_RARE_SLOTS 17
-#define LOOT_NODE_SLOTS 14
+#define LOOT_NODE_SLOTS 15
 
 enum E_LOOT_ENTRY
 {
@@ -162,7 +162,8 @@ new const gNodeLoot[LOOT_NODE_SLOTS][E_LOOT_ENTRY] =
     {ITEM_JERRYCAN,      4, 1, 1},
     {ITEM_REPAIR_KIT,    4, 1, 1},
     {ITEM_ENERGY_DRINK,  8, 1, 2},
-    {ITEM_DECOY,         5, 1, 1}
+    {ITEM_DECOY,         5, 1, 1},
+    {ITEM_PAPER,        10, 1, 2}
 };
 
 /* ---------- Visual & mayat ---------- */

@@ -1310,6 +1310,24 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "tulis", true) || !strcmp(cmd, "write", true))
+    {
+        Notes_StartWrite(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "tempel", true) || !strcmp(cmd, "stick", true))
+    {
+        Notes_Stick(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "baca", true) || !strcmp(cmd, "papan", true))
+    {
+        Notes_ShowList(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "shop", true) || !strcmp(cmd, "toko", true))
     {
         Vendor_ShowMenu(playerid);

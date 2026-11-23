@@ -62,7 +62,8 @@ const ITEM_BAG_DAY = 33;
 const ITEM_BAG_HIKING = 34;
 const ITEM_BAG_MILITARY = 35;
 const ITEM_SUPPRESSOR = 36;
-const ITEM_COUNT = 37;
+const ITEM_PAPER = 37;
+const ITEM_COUNT = 38;
 
 new const gItemRegistry[ITEM_COUNT][E_ITEM_DATA] = {
     {0,      "None",             0.0, 0, 0,   ITEM_NONE},
@@ -103,7 +104,10 @@ new const gItemRegistry[ITEM_COUNT][E_ITEM_DATA] = {
     {1550,   "Tas Militer",      1.6, 0, 1,   ITEM_TOOL},
     /* Suppressor: durability = sisa tembakan (SUPPRESSOR_SHOTS saat craft).
        Selama dibawa di tas, tembakan pistol (22-24) memakai radius senyap. */
-    {19997,  "Suppressor",       0.3, 0, 1,   ITEM_TOOL}
+    {19997,  "Suppressor",       0.3, 0, 1,   ITEM_TOOL},
+    /* Kertas: bahan menulis pesan untuk papan pengumuman (fitur #34).
+       Model 2894 sama dengan Dokumen — pola reuse model seperti tas 1550. */
+    {2894,   "Kertas",           0.1, 1, 20,  ITEM_MATERIAL}
 };
 
 stock bool:Item_IsValid(itemid)

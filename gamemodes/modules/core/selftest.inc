@@ -735,6 +735,7 @@ stock Selftest_RunStatic()
     Scent_Selftest();
     Airdrop_Selftest();
     VehicleMods_Selftest();
+    Notes_Selftest();
     Selftest_CheckHudLayout();
 
     Selftest_GroundCheck("spawn kamp", SPAWN_X, SPAWN_Y, SPAWN_Z);
