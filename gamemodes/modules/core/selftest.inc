@@ -569,7 +569,7 @@ stock Selftest_CheckBuildPanel()
 
     /* Layar acuan SA-MP selalu 640x480; HUD_SCREEN_HEIGHT tidak ada di hud.inc. */
     new bool:insideScreen = (panelRight <= HUD_SCREEN_WIDTH) && (panelBottom <= 480.0);
-    /* HudLoadout mulai y=330 dan HudVehicle y=346: panel tidak boleh turun ke situ. */
+    /* Baris BBM mulai y=330 (kartu 330..350): panel tidak boleh turun ke situ. */
     new bool:clearHud = (panelBottom <= 330.0);
 
     new Float:buttonRight = BUILD_EDIT_PANEL_X + 228.0 + 40.0;

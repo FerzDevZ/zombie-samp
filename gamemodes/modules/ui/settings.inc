@@ -504,12 +504,13 @@ stock Settings_Selftest()
     gHudMobileClient[0] = false;
     ok = ok && Settings_TdMobileSafe(0) == false;
 
-    /* REGRESI "scrap 0 padahal ada 50": cache teks HUD harus kosong setelah
-       dibangun ulang, kalau tidak HUD_SetIfChanged melewati penulisan. */
-    strcpy(HudLastLoadout[0], "SCRAP 0  SAMPEL 0", 48);
+    /* REGRESI "nilai HUD basi setelah dibangun ulang": cache teks HUD harus
+       kosong setelah HUD_Create, kalau tidak HUD_SetIfChanged melewati
+       penulisan (dulu tampil "SCRAP 0 padahal ada 50"). */
+    strcpy(HudLastVehicle[0], "BBM 0%", 48);
     strcpy(HudLastProgress[0], "LVL 1  SP 0  LUKA 0  /skill", 64);
     HUD_ResetCaches(0);
-    ok = ok && HudLastLoadout[0][0] == EOS && HudLastProgress[0][0] == EOS;
+    ok = ok && HudLastVehicle[0][0] == EOS && HudLastProgress[0][0] == EOS;
     ok = ok && HudBarLastWidth[0][0] == -1;
 
     /* Panel bangun mobile: kanan vs kiri. */

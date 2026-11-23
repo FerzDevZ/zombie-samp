@@ -37,8 +37,8 @@ new PlayerText:HudHausVal[MAX_PLAYERS];
 new PlayerText:HudPipName[MAX_PLAYERS];
 new PlayerText:HudPipVal[MAX_PLAYERS];
 new PlayerText:HudProgress[MAX_PLAYERS];
-new PlayerText:HudLoadout[MAX_PLAYERS];
 new PlayerText:HudVehicle[MAX_PLAYERS];
+new PlayerText:HudVehCard[MAX_PLAYERS];
 new PlayerText:HudBoss[MAX_PLAYERS];
 new PlayerText:HudRaid[MAX_PLAYERS];
 new PlayerText:HudPromptBg[MAX_PLAYERS];
@@ -86,7 +86,6 @@ new HudLastInfVal[MAX_PLAYERS][8];
 new HudLastLapVal[MAX_PLAYERS][8];
 new HudLastHausVal[MAX_PLAYERS][8];
 new HudLastPipVal[MAX_PLAYERS][8];
-new HudLastLoadout[MAX_PLAYERS][48];
 new HudLastProgress[MAX_PLAYERS][64];
 new HudLastVehicle[MAX_PLAYERS][64];
 new HudLastPrompt[MAX_PLAYERS][40];
@@ -188,7 +187,6 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudPipName",   198.0, 0.15,  3 },
     { "HudPipVal",    264.0, 0.15,  3 },
     { "HudProgress",   26.0, 0.18, 30 },
-    { "HudLoadout",   352.0, 0.20, 22 },
     { "HudVehicle",   356.0, 0.17, 27 },
     { "HudBoss",      210.0, 0.26, 16 },
     { "HudRaid",      190.0, 0.24, 25 },
@@ -559,17 +557,26 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudProgress[playerid], 1);
     PlayerTextDrawFont(playerid, HudProgress[playerid], 1);
 
-    /* Kolom kanan sejajar: SCRAP/SAMPEL dan BBM satu x (352) satu lebar (276).
-       Dulu 452 vs 400 — dua kotak melayang dengan tepi yang tidak segaris. */
-    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 318.0), "SCRAP 0  SAMPEL 0");
-    PlayerTextDrawLetterSize(playerid, HudLoadout[playerid], HUD_F(playerid, 0.2), HUD_F(playerid, 0.8));
-    PlayerTextDrawTextSize(playerid, HudLoadout[playerid], HUD_F(playerid, 276.0), HUD_F(playerid, 12.0));
-    PlayerTextDrawUseBox(playerid, HudLoadout[playerid], HUD_GayaHasBox(playerid) ? 1 : 0);
-    PlayerTextDrawBoxColor(playerid, HudLoadout[playerid], 0x0B0F14B4);
-    PlayerTextDrawBackgroundColor(playerid, HudLoadout[playerid], 0x00000000);
-    PlayerTextDrawColor(playerid, HudLoadout[playerid], UI_TEXT_PRIMARY);
-    PlayerTextDrawSetOutline(playerid, HudLoadout[playerid], 1);
-    PlayerTextDrawFont(playerid, HudLoadout[playerid], 1);
+    /* Baris kanan hanya BBM. Baris SCRAP/SAMPEL dihapus total (permintaan
+       pemain: angkanya kacau di semua gaya HUD); jumlah scrap dan sampel
+       tetap bisa dilihat di dialog tas dan /inv. */
+    /* Kartu latar baris BBM berdiri sendiri: teks dan angka tidak lagi
+       bergantung pada kotak milik textdraw teks (kotak itu dulu melintasi bar
+       sehingga tertutup). Kartu = 352..628, y 330..350. */
+    if (Settings_TdMobileSafe(playerid))
+    {
+        HudVehCard[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0),
+            HUD_F(playerid, 276.0), HUD_F(playerid, 20.0), 0x0B0F14B4);
+    }
+    else
+    {
+        HudVehCard[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 352.0), HUD_Y(playerid, 330.0), "LD_SPAC:white");
+        PlayerTextDrawFont(playerid, HudVehCard[playerid], 4);
+        PlayerTextDrawTextSize(playerid, HudVehCard[playerid], HUD_F(playerid, 276.0), HUD_F(playerid, 20.0));
+        PlayerTextDrawColor(playerid, HudVehCard[playerid], 0x0B0F14B4);
+        PlayerTextDrawSetOutline(playerid, HudVehCard[playerid], 0);
+        PlayerTextDrawBackgroundColor(playerid, HudVehCard[playerid], 0x00000000);
+    }
 
     HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X), HUD_Y(playerid, 334.0), "BBM");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_F(playerid, HUD_VEH_LETTER_X), HUD_F(playerid, 0.72));
@@ -582,6 +589,10 @@ stock HUD_Create(playerid)
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
 
     /* Bar HP boss: teks blok, gaya sama dengan HUD lain (tanpa box tambahan). */
+    Log_Format(LOG_INFO, "hud %d baris BBM: kartu 352..628 y330..350, teks x=%.0f batas=%.0f, bar %.0f..%.0f",
+        playerid, HUD_VEH_TEXT_X, HUD_VEH_TEXT_X + HUD_VEH_TEXT_W,
+        HUD_VEH_BAR_X, HUD_VEH_BAR_X + HUD_VEH_BAR_W);
+
     HudBoss[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 30.0), "ABOMINATION");
     PlayerTextDrawLetterSize(playerid, HudBoss[playerid], HUD_F(playerid, 0.26), HUD_F(playerid, 1.0));
     PlayerTextDrawColor(playerid, HudBoss[playerid], UI_ACCENT_DANGER);
@@ -642,7 +653,6 @@ stock HUD_Create(playerid)
     PlayerTextDrawShow(playerid, HudLapName[playerid]);
     PlayerTextDrawShow(playerid, HudHausName[playerid]);
     PlayerTextDrawShow(playerid, HudPipName[playerid]);
-    PlayerTextDrawShow(playerid, HudLoadout[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
     PlayerHudVisible[playerid] = true;
 
@@ -653,7 +663,6 @@ stock HUD_Create(playerid)
     HudLastLapVal[playerid][0] = EOS;
     HudLastHausVal[playerid][0] = EOS;
     HudLastPipVal[playerid][0] = EOS;
-    HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     HudLastVehicle[playerid][0] = EOS;
     HudLastPrompt[playerid][0] = EOS;
@@ -718,7 +727,6 @@ stock HUD_AuditRows(playerid)
     HUD_AuditRow(playerid, "Brand",  26.0, 0.18, "LAST_STAND", 150.0);
     HUD_AuditRow(playerid, "Zona",  150.0, 0.18, "Bandara Lama [WASPADA]", 220.0);
     HUD_AuditRow(playerid, "HpVal", 162.0, 0.18, "100/100", 150.0);
-    HUD_AuditRow(playerid, "Loadout", 352.0, 0.20, "SCRAP 9999  SAMPEL 999", 276.0);
     /* Baris BBM: teks harus berhenti sebelum bar mulai di x=500. */
     HUD_AuditRow(playerid, "BBM-teks", HUD_VEH_TEXT_X, HUD_VEH_LETTER_X,
         "BBM 12%  12/80L pom 240m BD", HUD_VEH_BAR_X - HUD_VEH_TEXT_X - 4.0);
@@ -760,7 +768,6 @@ stock HUD_MeasureSelftest()
 stock HUD_ResetCaches(playerid)
 {
     HudLastZone[playerid][0] = EOS;
-    HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     HudLastVehicle[playerid][0] = EOS;
     HudLastBoss[playerid][0] = EOS;
@@ -815,7 +822,6 @@ stock HUD_Reshow(playerid, bool:force = false)
                 PlayerTextDrawShow(playerid, HudBarGap[playerid][seg][cut]);
         }
     }
-    PlayerTextDrawShow(playerid, HudLoadout[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
 
     PlayerHudVisible[playerid] = true;
@@ -826,7 +832,6 @@ stock HUD_Reshow(playerid, bool:force = false)
     HudLastLapVal[playerid][0] = EOS;
     HudLastHausVal[playerid][0] = EOS;
     HudLastPipVal[playerid][0] = EOS;
-    HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     /* Banner yang hanya dirender saat aktif juga harus dipaksa tampil ulang:
        cache teks kosong + flag false membuat tick berikutnya menulis dan
@@ -878,9 +883,9 @@ stock HUD_Hide(playerid)
                 PlayerTextDrawHide(playerid, HudBarGap[playerid][seg][cut]);
         }
     }
-    PlayerTextDrawHide(playerid, HudLoadout[playerid]);
     PlayerTextDrawHide(playerid, HudProgress[playerid]);
     PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+    if (HudVehCard[playerid] != PlayerText:0) PlayerTextDrawHide(playerid, HudVehCard[playerid]);
     PlayerTextDrawHide(playerid, HudBoss[playerid]);
     PlayerTextDrawHide(playerid, HudRaid[playerid]);
     if (HudPromptBg[playerid] != PlayerText:0)
@@ -930,8 +935,12 @@ stock HUD_Destroy(playerid)
         }
     }
     PlayerTextDrawDestroy(playerid, HudProgress[playerid]);
-    PlayerTextDrawDestroy(playerid, HudLoadout[playerid]);
     PlayerTextDrawDestroy(playerid, HudVehicle[playerid]);
+    if (HudVehCard[playerid] != PlayerText:0)
+    {
+        PlayerTextDrawDestroy(playerid, HudVehCard[playerid]);
+        HudVehCard[playerid] = PlayerText:0;
+    }
     PlayerTextDrawDestroy(playerid, HudBoss[playerid]);
     PlayerTextDrawDestroy(playerid, HudRaid[playerid]);
     if (HudPromptBg[playerid] != PlayerText:0)
@@ -1148,6 +1157,8 @@ stock HUD_Update(playerid)
         {
             HudVehicleShown[playerid] = true;
             PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+            if (HudVehCard[playerid] != PlayerText:0)
+                PlayerTextDrawShow(playerid, HudVehCard[playerid]);
         }
     }
     else
@@ -1217,6 +1228,8 @@ stock HUD_Update(playerid)
             {
                 HudVehicleShown[playerid] = true;
                 PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+                if (HudVehCard[playerid] != PlayerText:0)
+                    PlayerTextDrawShow(playerid, HudVehCard[playerid]);
                 HUD_ShowBar(playerid, HUD_BAR_VEH, 3);
             }
         }
@@ -1225,6 +1238,8 @@ stock HUD_Update(playerid)
             HudVehicleShown[playerid] = false;
             HudFuelWarnStage[playerid] = 0;
             PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+            if (HudVehCard[playerid] != PlayerText:0)
+                PlayerTextDrawHide(playerid, HudVehCard[playerid]);
             HudVehBarShown[playerid] = false;
             HUD_HideBar(playerid, HUD_BAR_VEH, 3);
         }
@@ -1240,12 +1255,6 @@ stock HUD_Update(playerid)
     else if (zoneHeat < 30.0) format(zoneLine, sizeof(zoneLine), "%s [WASPADA]", zoneLabel);
     else format(zoneLine, sizeof(zoneLine), "%s [BAHAYA]", zoneLabel);
     HUD_SetIfChanged(playerid, HudZone[playerid], zoneLine, HudLastZone[playerid], sizeof(HudLastZone[]));
-
-    /* Uang sengaja tidak ditampilkan (permintaan pemain). Yang tersisa adalah
-       dua angka yang benar-benar dipakai saat membangun dan bertahan. */
-    format(hudLine, sizeof(hudLine), "SCRAP %d  SAMPEL %d",
-        Inventory_CountItem(playerid, ITEM_SCRAP), Inventory_CountItem(playerid, ITEM_SPECIMEN));
-    HUD_SetIfChanged(playerid, HudLoadout[playerid], hudLine, HudLastLoadout[playerid], sizeof(HudLastLoadout[]));
 
     // Progres skill harus terlihat tanpa membuka dialog: ini satu-satunya petunjuk
     // bahwa level dan poin skill bertambah. SAMPEL dihapus — sudah ada di kolom
