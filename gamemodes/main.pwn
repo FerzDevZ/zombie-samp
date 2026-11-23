@@ -50,6 +50,9 @@
 #include "modules/world/zones.inc"
 #include "modules/world/daynight.inc"
 
+/* Pengukur lebar teks (fonts.dat) — dipakai HUD & panel bangun. */
+#include "modules/ui/td_measure.inc"
+
 #include "modules/ui/toast.inc"
 #include "modules/player/state.inc"
 #include "modules/admin/admin_state.inc"

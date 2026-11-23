@@ -84,7 +84,9 @@ new CompDownedTick[MAX_PLAYERS];
 new CompNextFireTick[MAX_PLAYERS];
 new CompNextRepathTick[MAX_PLAYERS];
 new CompNextEnterTick[MAX_PLAYERS];
-new CompVehicle[MAX_PLAYERS];   /* kendaraan yang sedang dinaiki NPC */
+new CompVehicle[MAX_PLAYERS];
+new CompPendingSeat[MAX_PLAYERS];
+new CompEnterSince[MAX_PLAYERS];   /* kendaraan yang sedang dinaiki NPC */
 new CompName[MAX_PLAYERS][24];
 /* NPC yang mati dari engine TIDAK dihancurkan di dalam FCNPC_OnDeath (re-entrancy);
    id-nya dititipkan di sini lalu dihancurkan tick berikutnya. */
@@ -204,6 +206,8 @@ stock Companion_Init()
         CompNextRepathTick[playerid] = 0;
         CompNextEnterTick[playerid] = 0;
         CompVehicle[playerid] = 0;
+        CompPendingSeat[playerid] = -1;
+        CompEnterSince[playerid] = 0;
         CompName[playerid][0] = EOS;
         CompDeadNpc[playerid] = INVALID_PLAYER_ID;
     }
@@ -383,21 +387,62 @@ stock Companion_TickPlayer(playerid)
     if (ownerDriving)
     {
         new ownerVehicle = GetPlayerVehicleID(playerid);
-        if (npcVehicle != ownerVehicle && now >= CompNextEnterTick[playerid])
+        if (npcVehicle != ownerVehicle)
         {
-            CompNextEnterTick[playerid] = now + COMPANION_ENTER_MS;
-            new seat = Companion_PickSeat(VehicleSeatsTotal(GetVehicleModel(ownerVehicle)),
-                Companion_OccupiedMask(ownerVehicle));
-            if (seat >= 0)
+            /* FCNPC_EnterVehicle DIAM-DIAM gagal bila NPC lebih dari
+               MAX_DISTANCE_TO_ENTER_VEHICLE (30 m di sumber plugin). Itu
+               penyebab "log bilang naik, NPC tetap di jalan". Jadi jarak
+               diukur dulu; terlalu jauh = langsung tempatkan di kursi. */
+            new Float:vx, Float:vy, Float:vz;
+            GetVehiclePos(ownerVehicle, vx, vy, vz);
+            new Float:seatGap = floatsqroot((nx - vx) * (nx - vx) + (ny - vy) * (ny - vy) + (nz - vz) * (nz - vz));
+
+            if (now >= CompNextEnterTick[playerid])
             {
-                FCNPC_EnterVehicle(npcid, ownerVehicle, seat, FCNPC_MOVE_TYPE_RUN);
-                CompVehicle[playerid] = ownerVehicle;
-                Toast_Show(playerid, "Rekrutan", "Ikut naik kendaraan.", UI_ACCENT_PRIMARY);
+                CompNextEnterTick[playerid] = now + COMPANION_ENTER_MS;
+                new seat = Companion_PickSeat(VehicleSeatsTotal(GetVehicleModel(ownerVehicle)),
+                    Companion_OccupiedMask(ownerVehicle));
+                if (seat >= 0)
+                {
+                    if (seatGap <= 28.0)
+                    {
+                        FCNPC_EnterVehicle(npcid, ownerVehicle, seat, FCNPC_MOVE_TYPE_RUN);
+                        CompPendingSeat[playerid] = seat;
+                        CompEnterSince[playerid] = now;
+                    }
+                    else
+                    {
+                        /* Sudah ditinggal mobil: animasi masuk mustahil, jadi
+                           dipindahkan langsung supaya benar-benar di dalam. */
+                        FCNPC_PutInVehicle(npcid, ownerVehicle, seat);
+                        CompPendingSeat[playerid] = -1;
+                        Log_Format(LOG_INFO,
+                            "companion: npc %d ditempatkan di kendaraan %d kursi %d (jarak %.0f m)",
+                            npcid, ownerVehicle, seat, seatGap);
+                    }
+                    CompVehicle[playerid] = ownerVehicle;
+                }
+            }
+
+            /* Verifikasi: animasi masuk butuh waktu. Bila 4 detik belum masuk,
+               paksa pindah ke kursi (jangan biarkan NPC tertinggal). */
+            if (CompPendingSeat[playerid] >= 0 && now - CompEnterSince[playerid] > 4000)
+            {
+                FCNPC_PutInVehicle(npcid, ownerVehicle, CompPendingSeat[playerid]);
+                Log_Format(LOG_WARN,
+                    "companion: npc %d gagal animasi masuk, dipindah paksa ke kendaraan %d",
+                    npcid, ownerVehicle);
+                CompPendingSeat[playerid] = -1;
             }
         }
-        if (npcVehicle == ownerVehicle)
+        else
         {
-            FCNPC_Stop(npcid);      /* jangan jalan kaki di dalam mobil */
+            FCNPC_Stop(npcid);          /* jangan jalan kaki di dalam mobil */
+            if (CompPendingSeat[playerid] >= 0)
+            {
+                CompPendingSeat[playerid] = -1;
+                Toast_Show(playerid, "Rekrutan", "Ikut naik kendaraan.", UI_ACCENT_PRIMARY);
+            }
         }
     }
     else if (npcVehicle != INVALID_VEHICLE_ID && CompVehicle[playerid] != 0)

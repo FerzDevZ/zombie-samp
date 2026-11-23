@@ -23,6 +23,34 @@ HUD = ROOT / "gamemodes/modules/ui/hud.inc"
 CONST = ROOT / "gamemodes/modules/config/constants.inc"
 
 SCREEN_W = 640.0
+
+# lebar dasar karakter font 1 dari data/fonts.dat GTA San Andreas
+# (dipublikasikan di forum SA-MP; dipakai kristoisberg/samp-td-string-width).
+# Lebar teks pada kanvas 640x480 = jumlah(lebar karakter) * LetterSize X.
+FONT1_WIDTH = [
+    0, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+    15, 9, 17, 27, 20, 34, 23, 12, 12, 12, 21, 20, 12, 14, 12, 15,
+    23, 15, 21, 21, 21, 21, 21, 21, 20, 21, 12, 12, 24, 24, 24, 19,
+    10, 22, 19, 19, 22, 16, 19, 24, 22, 11, 16, 21, 15, 28, 24, 27,
+    20, 25, 19, 19, 18, 23, 23, 31, 23, 19, 21, 21, 13, 35, 11, 21,
+    10, 19, 20, 14, 20, 19, 13, 20, 19, 9, 9, 19, 9, 29, 19, 21,
+    19, 19, 15, 15, 14, 18, 19, 27, 20, 20, 17, 21, 17, 20, 15, 15,
+    22, 22, 22, 22, 29, 19, 16, 16, 16, 16, 11, 11, 11, 11, 27, 27,
+    27, 27, 23, 23, 23, 23, 20, 19, 19, 19, 19, 30, 14, 19, 19, 19,
+    19, 9, 9, 9, 9, 21, 21, 21, 21, 18, 18, 18, 18, 24, 19, 19,
+]
+
+
+def measured_width(text: str, size_x: float) -> float:
+    """Lebar nyata di kanvas 640x480 memakai tabel fonts.dat."""
+    total = 0
+    for ch in text:
+        code = ord(ch)
+        if code > 175:
+            code = 32
+        total += FONT1_WIDTH[code]
+    return total * size_x
 # Harus sama dengan HUD_CHAR_RATIO di hud.inc.
 CHAR_ADVANCE_RATIO = 35.3
 LINE_HEIGHT_RATIO = 10.5
@@ -59,11 +87,25 @@ def parse_colors(text: str) -> dict[str, str]:
     return colors
 
 
+DEFINES: dict[str, float] = {}
+
+
+def parse_defines(text: str) -> None:
+    """Konstanta geometri (mis. HUD_VEH_TEXT_X 356.0) supaya gate membaca
+    angka yang sama dengan HUD_Create, bukan menebak dari argumen."""
+    for name, value in re.findall(r"#define\s+(HUD_\w+)\s+(-?[\d.]+)", text):
+        DEFINES[name] = float(value)
+
+
 def _num(arg: str) -> float:
     """Ambil angka dari argumen koordinat: literal 26.0 atau HUD_X(playerid, 26.0).
     Pada skala 1.0 (PC) helper mengembalikan literal itu sendiri, jadi gate
     selalu menguji layout PC yang paling lebar."""
-    found = re.findall(r"([-\d.]+)", arg)
+    token = re.findall(r"[A-Za-z_]\w*", arg)
+    for name in reversed(token):
+        if name in DEFINES:
+            return DEFINES[name]
+    found = re.findall(r"(-?\d+\.?\d*)", arg)
     return float(found[-1]) if found else 0.0
 
 
@@ -171,6 +213,7 @@ def main() -> int:
     out = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).with_suffix(".html")
     hud_text = HUD.read_text(encoding="utf-8")
     colors = parse_colors(CONST.read_text(encoding="utf-8"))
+    parse_defines(hud_text)
     draws = parse_textdraws(hud_text)
     table = parse_fit_table(hud_text)
 
@@ -187,7 +230,7 @@ def main() -> int:
     for draw in draws:
         name = draw["var"]
         label = WORST_TEXT.get(name, draw["initial"])
-        width = len(label) * draw["size_x"] * CHAR_ADVANCE_RATIO
+        width = measured_width(label, draw["size_x"])
         sisa = SCREEN_W - draw["x"] - width
         status = []
 

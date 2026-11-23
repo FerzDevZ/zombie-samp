@@ -431,6 +431,8 @@ stock Settings_TdDebug(playerid)
     PlayerTextDrawShow(playerid, gTdCalib[playerid][5]);
     gTdCalibOn[playerid] = true;
 
+    HUD_AuditRows(playerid);
+
     SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[TDD] Pola kalibrasi aktif. Merah=kiri-bawah, biru=kanan-bawah, putih=tengah.");
     Log_Info(msg);
     return 1;
