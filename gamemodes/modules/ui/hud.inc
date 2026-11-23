@@ -3,6 +3,14 @@
 #endif
 #define _ls_hud_included
 
+/* Preferensi /settings (settings.inc di-include setelah file ini). */
+forward Float:Settings_HudScale(playerid);
+forward bool:Settings_BarDetailEnabled(playerid);
+forward bool:Settings_ContrastEnabled(playerid);
+forward bool:Settings_PromptEnabled(playerid);
+forward bool:HUD_BarVisible(playerid, index);
+forward bool:Settings_TdMobileSafe(playerid);
+
 /* ============================================================ HUD v2 ======
    Desain (audit UX 2026): teks polos tujuh baris terbaca seperti dump debug.
    v2 menggantinya dengan:
@@ -124,10 +132,10 @@ stock Float:HUD_ScaleOf(playerid)
 {
     switch (gHudGaya[playerid])
     {
-        case HUD_GAYA_MOBILE: return HUD_SCALE_MOBILE;
-        case HUD_GAYA_MINIMAL: return HUD_SCALE_MINIMAL;
+        case HUD_GAYA_MOBILE: return HUD_SCALE_MOBILE * Settings_HudScale(playerid);
+        case HUD_GAYA_MINIMAL: return HUD_SCALE_MINIMAL * Settings_HudScale(playerid);
     }
-    return 1.0;
+    return 1.0 * Settings_HudScale(playerid);
 }
 
 /* Koordinat biasa: menyusut menuju pojok kiri-atas. */
@@ -193,10 +201,40 @@ stock bool:HUD_WorstCaseFits(offender[], size)
     return true;
 }
 
+/* Permukaan kotak polos: satu textdraw box, tanpa sprite. Dipakai saat mode
+   mobile-safe aktif (permintaan pemain: layout Android berantakan/tumpang). */
+stock PlayerText:TD_BoxCreate(playerid, Float:x, Float:y, Float:width, Float:height, color)
+{
+    new PlayerText:td = CreatePlayerTextDraw(playerid, x, y, " ");
+    PlayerTextDrawFont(playerid, td, 1);
+    PlayerTextDrawLetterSize(playerid, td, 0.0, 0.0);
+    PlayerTextDrawTextSize(playerid, td, width, height);
+    PlayerTextDrawColor(playerid, td, 0xFFFFFFFF);
+    PlayerTextDrawBackgroundColor(playerid, td, 0x00000000);
+    PlayerTextDrawUseBox(playerid, td, 1);
+    PlayerTextDrawBoxColor(playerid, td, color);
+    PlayerTextDrawSetOutline(playerid, td, 0);
+    PlayerTextDrawSetShadow(playerid, td, 0);
+    PlayerTextDrawSetSelectable(playerid, td, false);
+    return td;
+}
+
 /* Kartu kaca rounded: 2 strip LD_SPAC + 4 chit sudut. Persis pola panel bangun
-   (BuildEdit_CreateCard) — PlayerTextDrawBoxColor TIDAK punya sudut bulat. */
+   (BuildEdit_CreateCard) — PlayerTextDrawBoxColor TIDAK punya sudut bulat.
+   Mode mobile-safe: satu box utuh, 5 slot sisa dibuat berukuran nol supaya
+   pola Show/Hide/Destroy (yang mengiterasi 6 slot) tetap sah. */
 stock HUD_CreateCard(playerid, Float:x, Float:y, Float:width, Float:height, Float:radius)
 {
+    if (Settings_TdMobileSafe(playerid))
+    {
+        HudCard[playerid][0] = TD_BoxCreate(playerid, x, y, width, height, UI_BG_GLASS_DARK);
+        for (new slot = 1; slot < 6; slot++)
+        {
+            HudCard[playerid][slot] = TD_BoxCreate(playerid, x, y, 0.0, 0.0, 0x00000000);
+        }
+        return 1;
+    }
+
     new Float:rx = radius * TD_ASPECT_16_9;
     new Float:diamX = rx * 2.0;
     new Float:diamY = radius * 2.0;
@@ -237,6 +275,26 @@ stock HUD_CreateBar(playerid, index, Float:x, Float:y, trackColor, gapColor, seg
     new Float:barH = gHudBarH[index] * HUD_ScaleOf(playerid);
     new Float:gapW = HUD_SEG_GAP_W * HUD_ScaleOf(playerid);
 
+    /* Mobile-safe: bar = dua box. Lebar isi diatur HUD_SetBar lewat TextSize. */
+    if (Settings_TdMobileSafe(playerid))
+    {
+        HudBarBg[playerid][index] = TD_BoxCreate(playerid, x, y, barW, barH, trackColor);
+        HudBarFg[playerid][index] = TD_BoxCreate(playerid, x, y, 0.0, barH, gapColor);
+        HudBarLastWidth[playerid][index] = -1;
+        HudBarLastColor[playerid][index] = 0;
+        if (segSlot >= 0)
+        {
+            new segments = gHudSegCount[segSlot];
+            new Float:step = barW / float(segments);
+            for (new cut = 1; cut < segments && cut <= HUD_SEG_MAX_GAPS; cut++)
+            {
+                new Float:gapX = x + float(cut) * step - gapW * 0.5;
+                HudBarGap[playerid][segSlot][cut - 1] = TD_BoxCreate(playerid, gapX, y, gapW, barH, gapColor);
+            }
+        }
+        return 1;
+    }
+
     HudBarBg[playerid][index] = CreatePlayerTextDraw(playerid, x, y, "LD_SPAC:white");
     PlayerTextDrawFont(playerid, HudBarBg[playerid][index], TEXT_DRAW_FONT_SPRITE_DRAW);
     PlayerTextDrawTextSize(playerid, HudBarBg[playerid][index], barW, barH);
@@ -276,6 +334,7 @@ stock HUD_CreateBar(playerid, index, Float:x, Float:y, trackColor, gapColor, seg
    bar yang mengambang tanpa label adalah sampah visual. segSlot < 0 = tanpa celah. */
 stock HUD_ShowBar(playerid, index, segSlot = -1)
 {
+    if (!HUD_BarVisible(playerid, index)) return 0;
     PlayerTextDrawShow(playerid, HudBarBg[playerid][index]);
     PlayerTextDrawShow(playerid, HudBarFg[playerid][index]);
     if (segSlot >= 0)
@@ -289,8 +348,20 @@ stock HUD_ShowBar(playerid, index, segSlot = -1)
     return 1;
 }
 
+/* Bar detail (kendaraan & boss) bisa disembunyikan lewat /settings; bar
+   lain selalu tampil. Guard mencegah sentuhan ke textdraw yang tidak dibuat. */
+stock bool:HUD_BarVisible(playerid, index)
+{
+    if (index == HUD_BAR_VEH || index == HUD_BAR_BOSS)
+    {
+        return Settings_BarDetailEnabled(playerid);
+    }
+    return true;
+}
+
 stock HUD_HideBar(playerid, index, segSlot = -1)
 {
+    if (!HUD_BarVisible(playerid, index)) return 0;
     PlayerTextDrawHide(playerid, HudBarBg[playerid][index]);
     PlayerTextDrawHide(playerid, HudBarFg[playerid][index]);
     if (segSlot >= 0)
@@ -308,6 +379,14 @@ stock HUD_HideBar(playerid, index, segSlot = -1)
    TextSize 0 menyembunyikan sprite (bar kosong) tanpa Hide/Show ping-pong. */
 stock HUD_SetBar(playerid, index, Float:ratio, color)
 {
+    /* Mode kontras tinggi (/settings): merah & oranye bar diganti warna
+       yang lebih terbaca bagi mata lelah / buta warna parsial. */
+    if (Settings_ContrastEnabled(playerid))
+    {
+        if (color == UI_ACCENT_DANGER) color = 0xFF9500FF;
+        else if (color == UI_ACCENT_WARN) color = 0xFFD60AFF;
+    }
+    if (!HUD_BarVisible(playerid, index)) return 0;
     if (ratio < 0.0) ratio = 0.0;
     if (ratio > 1.0) ratio = 1.0;
 
@@ -323,6 +402,11 @@ stock HUD_SetBar(playerid, index, Float:ratio, color)
     {
         HudBarLastColor[playerid][index] = color;
         PlayerTextDrawColor(playerid, HudBarFg[playerid][index], color);
+        if (Settings_TdMobileSafe(playerid))
+        {
+            /* Box textdraw: warna isi ada di BoxColor, bukan text color. */
+            PlayerTextDrawBoxColor(playerid, HudBarFg[playerid][index], color);
+        }
         PlayerTextDrawShow(playerid, HudBarFg[playerid][index]);
     }
     return 1;
@@ -347,7 +431,12 @@ stock HUD_Create(playerid)
 
     if (HUD_GayaHasCard(playerid))
     {
-        HudCardAccent[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 18.0), HUD_Y(playerid, 288.0), "LD_SPAC:white");
+        if (Settings_TdMobileSafe(playerid))
+        {
+            HudCardAccent[playerid] = TD_BoxCreate(playerid, HUD_X(playerid, 18.0), HUD_Y(playerid, 289.0),
+                HUD_F(playerid, 3.0), HUD_F(playerid, 98.0), UI_ACCENT_PRIMARY);
+        }
+        else HudCardAccent[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 18.0), HUD_Y(playerid, 288.0), "LD_SPAC:white");
         PlayerTextDrawFont(playerid, HudCardAccent[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
         PlayerTextDrawTextSize(playerid, HudCardAccent[playerid], HUD_F(playerid, 284.0), HUD_F(playerid, 2.0));
         PlayerTextDrawColor(playerid, HudCardAccent[playerid], UI_ACCENT_PRIMARY);
@@ -447,9 +536,11 @@ stock HUD_Create(playerid)
     HUD_CreateBar(playerid, HUD_BAR_PIP, HUD_X(playerid, 220.0), HUD_Y(playerid, 348.0), UI_BG_ELEVATED, UI_BG_GLASS_DARK);
     /* Bar BBM di dalam kotak kanan (x 352..628): bar mulai x=500. Celah warna
        kotak 0x0B0F14B4 supaya potongan menyatu dengan latar kotak. */
-    HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, 500.0), HUD_Y(playerid, 338.0), UI_BG_ELEVATED, 0x0B0F14B4, 3);
+    if (HUD_BarVisible(playerid, HUD_BAR_VEH))
+        HUD_CreateBar(playerid, HUD_BAR_VEH, HUD_X(playerid, 500.0), HUD_Y(playerid, 338.0), UI_BG_ELEVATED, 0x0B0F14B4, 3);
     /* Bar boss di bawah teks ABOMINATION (y=30): celah gelap di atas dunia. */
-    HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_Y(playerid, 46.0), UI_BG_ELEVATED, 0x0B0F1499, 4);
+    if (HUD_BarVisible(playerid, HUD_BAR_BOSS))
+        HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_Y(playerid, 46.0), UI_BG_ELEVATED, 0x0B0F1499, 4);
 
     HudProgress[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 360.0), "LVL 1  SP 0  /skill");
     PlayerTextDrawLetterSize(playerid, HudProgress[playerid], HUD_F(playerid, 0.18), HUD_F(playerid, 0.75));
@@ -499,11 +590,19 @@ stock HUD_Create(playerid)
        Teks center (align 2) berarti x=320 adalah TENGAH pil. */
     if (HUD_GayaHasBox(playerid))
     {
+        if (Settings_TdMobileSafe(playerid))
+        {
+            HudPromptBg[playerid] = TD_BoxCreate(playerid, HUD_XC(playerid, 110.0), HUD_Y(playerid, 412.0),
+                HUD_F(playerid, 220.0), HUD_F(playerid, 20.0), 0x0B0F14E6);
+        }
+        else
+        {
         HudPromptBg[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 414.0), "LD_SPAC:white");
         PlayerTextDrawFont(playerid, HudPromptBg[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
         PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], HUD_F(playerid, 220.0), HUD_F(playerid, 18.0));
         PlayerTextDrawColor(playerid, HudPromptBg[playerid], 0x0B0F14E6);
         PlayerTextDrawSetSelectable(playerid, HudPromptBg[playerid], false);
+        }
     }
 
     HudPromptText[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 320.0), HUD_Y(playerid, 418.0), "Y");
@@ -555,6 +654,15 @@ stock HUD_Create(playerid)
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
     HudPromptShown[playerid] = false;
+    HUD_ResetCaches(playerid);   /* wajib: textdraw baru, cache lama tidak sah */
+    /* Jejak bukti: kalau pemain melaporkan "scrap 0 padahal ada", log ini
+       menunjukkan mode renderer + gaya yang dipakai saat HUD dibangun. */
+    new hudDiag[96];
+    format(hudDiag, sizeof(hudDiag), "[HUD] char %d dibangun: gaya=%d mode=%s skala=%d",
+        ActiveCharId[playerid], gHudGaya[playerid],
+        Settings_TdMobileSafe(playerid) ? "mobile-safe" : "pc-sprite",
+        floatround(Settings_HudScale(playerid) * 100.0));
+    Log_Info(hudDiag);
     return 1;
 }
 
@@ -566,6 +674,38 @@ stock HUD_Create(playerid)
    force=false menghormati /hud: pemain yang menyembunyikan HUD tidak boleh
    dipaksa melihatnya lagi hanya karena mati. Tanpa guard ini, mati sekali
    membatalkan pilihan pemain secara diam-diam. */
+/* Cache teks HUD harus direset SETIAP kali textdraw dibuat ulang. Tanpa ini,
+   HUD_Create memasang string awal ("SCRAP 0  SAMPEL 0") sementara cache masih
+   menyimpan nilai lama, sehingga HUD_SetIfChanged menganggap "tidak berubah"
+   dan angka nyata tidak pernah ditulis — inilah akar laporan pemain
+   "scrap 0 padahal di tas ada 50" setelah ganti gaya HUD / /settings. */
+stock HUD_ResetCaches(playerid)
+{
+    HudLastZone[playerid][0] = EOS;
+    HudLastLoadout[playerid][0] = EOS;
+    HudLastProgress[playerid][0] = EOS;
+    HudLastVehicle[playerid][0] = EOS;
+    HudLastBoss[playerid][0] = EOS;
+    HudLastRaid[playerid][0] = EOS;
+    HudLastPrompt[playerid][0] = EOS;
+    HudLastHpVal[playerid][0] = EOS;
+    HudLastArmVal[playerid][0] = EOS;
+    HudLastInfVal[playerid][0] = EOS;
+    HudLastLapVal[playerid][0] = EOS;
+    HudLastHausVal[playerid][0] = EOS;
+    HudLastPipVal[playerid][0] = EOS;
+    for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
+    {
+        HudBarLastWidth[playerid][bar] = -1;
+        HudBarLastColor[playerid][bar] = 0;
+    }
+    HudVehicleShown[playerid] = false;
+    HudBossShown[playerid] = false;
+    HudRaidShown[playerid] = false;
+    HudPromptShown[playerid] = false;
+    return 1;
+}
+
 stock HUD_Reshow(playerid, bool:force = false)
 {
     if (!IsPlayerConnected(playerid)) return 0;
@@ -648,6 +788,7 @@ stock HUD_Hide(playerid)
     PlayerTextDrawHide(playerid, HudPipName[playerid]);
     for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
     {
+        if (!HUD_BarVisible(playerid, bar)) continue;   /* bar detail dimatikan */
         PlayerTextDrawHide(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawHide(playerid, HudBarFg[playerid][bar]);
     }
@@ -698,6 +839,7 @@ stock HUD_Destroy(playerid)
     PlayerTextDrawDestroy(playerid, HudPipVal[playerid]);
     for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
     {
+        if (!HUD_BarVisible(playerid, bar)) continue;   /* tidak pernah dibuat */
         PlayerTextDrawDestroy(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawDestroy(playerid, HudBarFg[playerid][bar]);
     }
@@ -733,7 +875,7 @@ stock HUD_UpdatePrompt(playerid)
     {
         new Float:promptDistance;
         new promptSlot = Interact_NearestForPlayer(playerid, promptDistance);
-        if (promptSlot >= 0 && promptDistance <= HUD_PROMPT_DISTANCE)
+        if (promptSlot >= 0 && promptDistance <= HUD_PROMPT_DISTANCE && Settings_PromptEnabled(playerid))
         {
             /* Label interact berformat "Nama\n{Y} tekan Y" — ambil baris pertama
                saja dan batasi panjangnya agar pil tidak meluber. */

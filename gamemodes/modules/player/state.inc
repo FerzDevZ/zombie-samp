@@ -175,6 +175,7 @@ stock Player_ApplyDamage(playerid, Float:amount, attackerid = INVALID_PLAYER_ID,
     PlayerSurvival[playerid][psHealth] -= amount;
     PlayerSurvival[playerid][psLastDamageTick] = GetTickCount();
     PlayerSurvival[playerid][psLastAttacker] = attackerid;
+    Settings_BloodFlash(playerid);   /* /settings: efek layar darah bisa dimatikan */
 
     if (applyInfection)
     {

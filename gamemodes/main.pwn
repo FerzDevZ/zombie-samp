@@ -114,6 +114,7 @@
 #include "modules/world/vehicle_mods.inc"
 #include "modules/world/garage.inc"
 #include "modules/world/notes.inc"
+#include "modules/world/distraction.inc"
 #include "modules/player/extraction.inc"
 
 #include "modules/player/needs.inc"
@@ -245,6 +246,7 @@ public OnGameModeInit()
     TimerHandles[18] = SetTimer("Escort_Tick", 2000, true);
     TimerHandles[19] = SetTimer("Companion_Tick", 2000, true);
     TimerHandles[20] = SetTimer("Airdrop_Tick", 2000, true);
+    TimerHandles[21] = SetTimer("Distraction_Tick", 2000, true);
     SetTimer("Queue_Tick", QUEUE_TICK_MS, true);
 
     SetTimer("Selftest_Boot", 8000, false);
@@ -289,6 +291,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[])
     if (Notes_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (WeaponAttach_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Settings_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
+    if (Distraction_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     if (Menu_OnDialogResponse(playerid, dialogid, response, listitem, inputtext)) return 1;
     return 0;
 }
@@ -352,6 +355,9 @@ public OnPlayerConnect(playerid)
     new clientVersion[24];
     GetPlayerVersion(playerid, clientVersion, sizeof(clientVersion));
     gHudMobileClient[playerid] = (strfind(clientVersion, "mobile", true) != -1);
+    /* Renderer HUD langsung mengikuti klien sebelum preferensi DB tiba;
+       Settings_Apply akan membangun ulang kalau pemain memilih mode lain. */
+    gTdMobileSafe[playerid] = gHudMobileClient[playerid];
     gHudGaya[playerid] = 0;
     HUD_Create(playerid);
     Account_ResetPlayer(playerid);
@@ -414,7 +420,9 @@ public OnPlayerDisconnect(playerid, reason)
     }
     Notes_ResetPlayer(playerid);
     WeaponAttach_Reset(playerid);
+    Settings_TdDebugReset(playerid);
     Settings_ResetPlayer(playerid);
+    Distraction_ResetPlayer(playerid);
 
     /* Pratinjau struktur: ghost object + panel TextDraw harus mati bersama
        pemain, kalau tidak objek hantu tertinggal di world base. */

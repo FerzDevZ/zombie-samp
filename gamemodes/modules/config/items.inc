@@ -65,7 +65,10 @@ const ITEM_SUPPRESSOR = 36;
 const ITEM_PAPER = 37;
 const ITEM_SCOPE = 38;
 const ITEM_EXTMAG = 39;
-const ITEM_COUNT = 40;
+const ITEM_FIRECRACKER = 40;
+const ITEM_BOTTLE = 41;
+const ITEM_FLARE = 42;
+const ITEM_COUNT = 43;
 
 new const gItemRegistry[ITEM_COUNT][E_ITEM_DATA] = {
     {0,      "None",             0.0, 0, 0,   ITEM_NONE},
@@ -114,7 +117,11 @@ new const gItemRegistry[ITEM_COUNT][E_ITEM_DATA] = {
        semua drop memakai ikon koper 1210. Wujud terpasang = objek menempel
        di tangan (weapon_attach.inc). */
     {348,    "Scope",            0.3, 0, 1,   ITEM_TOOL},
-    {2038,   "Magasin Tambahan", 0.4, 0, 1,   ITEM_TOOL}
+    {2038,   "Magasin Tambahan", 0.4, 0, 1,   ITEM_TOOL},
+    /* Perangkap suara (fitur #17): lempar untuk mengalihkan zombie. */
+    {345,    "Petasan",          0.2, 1, 5,   ITEM_MATERIAL},
+    {1543,   "Botol Kaca",       0.4, 1, 5,   ITEM_MATERIAL},
+    {354,    "Flare",            0.3, 1, 3,   ITEM_TOOL}
 };
 
 stock bool:Item_IsValid(itemid)

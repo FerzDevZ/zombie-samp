@@ -3,6 +3,12 @@
 #endif
 #define _ls_build_edit_included
 
+/* Preferensi sisi panel mobile (/settings, settings.inc di-include nanti). */
+forward Float:Settings_BuildPanelX(playerid);
+forward bool:Settings_TdMobileSafe(playerid);
+/* hud.inc di-include SETELAH file ini: deklarasi box helper wajib di sini. */
+forward PlayerText:TD_BoxCreate(playerid, Float:x, Float:y, Float:width, Float:height, color);
+
 /* Editor struktur base — UI klik-able gaya FiveM/NoPixel.
 
    Mode ini menggantikan jalur lama yang "menaruh struktur lalu berharap":
@@ -68,7 +74,7 @@ stock BuildEdit_ComputeLayout(playerid)
     if (gHudGaya[playerid] == HUD_GAYA_MOBILE)
     {
         gBeLayout[playerid][blMobile] = 1;
-        gBeLayout[playerid][blX] = 425.8;
+        gBeLayout[playerid][blX] = Settings_BuildPanelX(playerid);   /* /settings: kanan/kiri */
         gBeLayout[playerid][blY] = 28.0;
         gBeLayout[playerid][blW] = 206.0;
         gBeLayout[playerid][blH] = 224.0;
@@ -239,6 +245,15 @@ stock BuildEdit_IsActive(playerid)
 
 stock BuildEdit_CreateCard(playerid, Float:x, Float:y, Float:width, Float:height, Float:radius)
 {
+    if (Settings_TdMobileSafe(playerid))
+    {
+        BuildEditCard[playerid][0] = TD_BoxCreate(playerid, x, y, width, height, UI_BG_GLASS_DARK);
+        for (new slot = 1; slot < 6; slot++)
+        {
+            BuildEditCard[playerid][slot] = TD_BoxCreate(playerid, x, y, 0.0, 0.0, 0x00000000);
+        }
+        return 1;
+    }
     new Float:rx = radius * TD_ASPECT_16_9;
     new Float:diamX = rx * 2.0;
     new Float:diamY = radius * 2.0;
@@ -278,11 +293,19 @@ stock BuildEdit_CreateCard(playerid, Float:x, Float:y, Float:width, Float:height
 stock BuildEdit_CreateButton(playerid, index, Float:x, Float:y, Float:width, Float:height,
     const label[], background)
 {
+    if (Settings_TdMobileSafe(playerid))
+    {
+        BuildEditBtn[playerid][index] = TD_BoxCreate(playerid, x, y, width, height, background);
+        PlayerTextDrawSetSelectable(playerid, BuildEditBtn[playerid][index], true);
+    }
+    else
+    {
     BuildEditBtn[playerid][index] = CreatePlayerTextDraw(playerid, x, y, "LD_SPAC:white");
     PlayerTextDrawFont(playerid, BuildEditBtn[playerid][index], TEXT_DRAW_FONT_SPRITE_DRAW);
     PlayerTextDrawTextSize(playerid, BuildEditBtn[playerid][index], width, height);
     PlayerTextDrawColor(playerid, BuildEditBtn[playerid][index], background);
     PlayerTextDrawSetSelectable(playerid, BuildEditBtn[playerid][index], true);
+    }
 
     BuildEditBtnText[playerid][index] = CreatePlayerTextDraw(playerid,
         x + (width / 2.0), y + (height / 2.0) - 4.6, label);

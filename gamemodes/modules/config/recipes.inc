@@ -5,7 +5,7 @@
 
 /* Resep crafting. Hasil dan bahan memakai id permanen dari config/items.inc.
    rcResult -1 berarti resep khusus (perbaikan alat), bukan pembuatan item. */
-#define MAX_RECIPES 22
+#define MAX_RECIPES 24
 #define RECIPE_REPAIR_TOOLS -1
 #define RECIPE_REPAIR_WEAPON -2
 
@@ -38,6 +38,8 @@ new const gRecipes[MAX_RECIPES][E_RECIPE] = {
     {ITEM_DECOY,         2, ITEM_POWDER,    2, ITEM_ELECTRONICS, 1, ITEM_NONE_ID,             "Decoy Sirene x2"},
     {ITEM_ADRENALINE,    1, ITEM_CHEMICAL,  2, ITEM_HERB,      1, ITEM_NONE_ID,             "Adrenaline Shot x1"},
     {ITEM_VACCINE,       1, ITEM_HERB,      3, ITEM_CHEMICAL,  2, ITEM_NONE_ID,             "Vaksin x1"},
+    {ITEM_FIRECRACKER,   2, ITEM_POWDER,    1, ITEM_CLOTH,     1, ITEM_NONE_ID,             "Petasan x2"},
+    {ITEM_FLARE,         1, ITEM_CHEMICAL,  1, ITEM_ELECTRONICS, 1, ITEM_NONE_ID,            "Flare x1"},
     {ITEM_TOOLBOX,       1, ITEM_SCRAP,     4, ITEM_ELECTRONICS, 2, ITEM_NONE_ID,             "Toolbox x1"},
     {ITEM_BAG_SMALL,     1, ITEM_CLOTH,     4, ITEM_SCRAP,      2, ITEM_NONE_ID,             "Tas Kecil x1"},
     {ITEM_BAG_DAY,       1, ITEM_BAG_SMALL, 1, ITEM_CLOTH,      6, ITEM_NONE_ID,             "Tas Harian x1"},

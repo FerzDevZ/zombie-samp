@@ -738,6 +738,7 @@ stock Selftest_RunStatic()
     Notes_Selftest();
     WeaponAttach_Selftest();
     Settings_Selftest();
+    Distraction_Selftest();
     Selftest_CheckHudLayout();
 
     Selftest_GroundCheck("spawn kamp", SPAWN_X, SPAWN_Y, SPAWN_Z);

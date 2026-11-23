@@ -193,6 +193,15 @@
 new gHudGaya[MAX_PLAYERS];
 new bool:gHudMobileClient[MAX_PLAYERS];
 
+/* Mode renderer TextDraw. Sprite font 4 (LD_SPAC / LD_BEAT) digambar berbeda
+   oleh klien SA-MP Mobile (Android): permukaan membesar dan saling tumpang,
+   teks jadi berantakan. Mode mobile-safe mengganti SEMUA permukaan sprite
+   dengan box textdraw biasa yang renderer mobile tangani sama seperti PC. */
+#define TD_MODE_AUTO          0
+#define TD_MODE_PC            1
+#define TD_MODE_MOBILE        2
+new bool:gTdMobileSafe[MAX_PLAYERS];
+
 /* ---------------------------------------------------------------- misc */
 #define NOISE_SHOT_PISTOL           (45.0)
 #define NOISE_SHOT_SMG              (60.0)
