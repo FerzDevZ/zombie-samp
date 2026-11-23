@@ -29,6 +29,14 @@
 #define VEHICLE_MOD_RANGE           4.5
 #define VEHICLE_HOTWIRE_HORDE       6
 
+/* Bentukan fisik di kendaraan (streamer + AttachDynamicObjectToVehicle).
+   Semua fitur modifikasi WAJIB punya wujud terlihat, bukan cuma stat. */
+#define VEH_OBJ_PLATE               914     /* peti metal: pelat terpasang  */
+#define VEH_OBJ_SPIKE               19425   /* bump stop miring: duri       */
+#define VEH_OBJ_TRUNK               1550    /* duffel bag: isi bagasi       */
+#define VEH_OBJ_HOTWIRE             11738   /* toolbox: minigame kabel      */
+#define VEHICLE_PLATE_OBJECTS       6       /* maks objek zirah per mobil  */
+
 /* Bobcat 422, Patriot 470, Rancher 489 — bodi berat yang masuk akal dilapis. */
 new const gPlatableModels[] = { 422, 470, 489 };
 
@@ -53,6 +61,9 @@ new VehicleAlarmUntil[MAX_TRACKED_VEHICLES];
 
 new Float:VehicleHealthMemo[MAX_TRACKED_VEHICLES];
 
+new VehicleModObjects[MAX_TRACKED_VEHICLES][VEHICLE_PLATE_OBJECTS];
+new VehicleTrunkVisual[MAX_TRACKED_VEHICLES];
+new VehicleHotwireVisual[MAX_PLAYERS];
 new VehicleTrunkSel[MAX_PLAYERS];
 
 forward VehicleMods_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
@@ -71,7 +82,128 @@ stock VehicleMods_ResetSlot(slot)
     VehiclePlateLevel[slot] = 0;
     VehicleHealthMemo[slot] = 1000.0;
     VehicleAlarmUntil[slot] = 0;
+    VehicleMods_DestroyVisuals(slot);
     return 1;
+}
+
+/* ------------------------------------------------- bentukan fisik (visual) */
+
+stock VehicleMods_DestroyVisuals(slot)
+{
+    if (slot < 0 || slot >= MAX_TRACKED_VEHICLES) return 0;
+    for (new i = 0; i < VEHICLE_PLATE_OBJECTS; i++)
+    {
+        if (VehicleModObjects[slot][i] != INVALID_OBJECT_ID)
+        {
+            DestroyDynamicObject(VehicleModObjects[slot][i]);
+            VehicleModObjects[slot][i] = INVALID_OBJECT_ID;
+        }
+    }
+    if (VehicleTrunkVisual[slot] != INVALID_OBJECT_ID)
+    {
+        DestroyDynamicObject(VehicleTrunkVisual[slot]);
+        VehicleTrunkVisual[slot] = INVALID_OBJECT_ID;
+    }
+    return 1;
+}
+
+stock VehicleMods_Attach(slot, index, modelid, Float:ox, Float:oy, Float:oz, Float:rz)
+{
+    new vehicleid = TrackedVehicle[slot][tvVehicle];
+    new obj = CreateDynamicObject(modelid, 0.0, 0.0, 0.0, 0.0, 0.0, rz);
+    if (obj == INVALID_OBJECT_ID) return 0;
+    AttachDynamicObjectToVehicle(obj, vehicleid, ox, oy, oz, 0.0, 0.0, rz);
+    VehicleModObjects[slot][index] = obj;
+    return 1;
+}
+
+/* Zirah: level 1 = 3 peti metal (kap, kiri, kanan); level 2 = + 2 duri depan
+   + 1 pelat belakang. Offset generik untuk Bobcat/Patriot/Rancher. */
+stock VehicleMods_RefreshVisuals(slot)
+{
+    if (slot < 0 || slot >= MAX_TRACKED_VEHICLES) return 0;
+    VehicleMods_DestroyVisuals(slot);
+    if (!TrackedVehicle[slot][tvActive]) return 0;
+
+    new level = VehiclePlateLevel[slot];
+    if (level >= 1)
+    {
+        VehicleMods_Attach(slot, 0, VEH_OBJ_PLATE, 0.0, 0.9, 0.45, 0.0);
+        VehicleMods_Attach(slot, 1, VEH_OBJ_PLATE, -1.05, -0.2, 0.10, 0.0);
+        VehicleMods_Attach(slot, 2, VEH_OBJ_PLATE, 1.05, -0.2, 0.10, 0.0);
+    }
+    if (level >= 2)
+    {
+        VehicleMods_Attach(slot, 3, VEH_OBJ_SPIKE, -0.55, 2.25, -0.15, 30.0);
+        VehicleMods_Attach(slot, 4, VEH_OBJ_SPIKE, 0.55, 2.25, -0.15, -30.0);
+        VehicleMods_Attach(slot, 5, VEH_OBJ_PLATE, 0.0, -2.2, 0.05, 0.0);
+    }
+    return 1;
+}
+
+/* Bagasi: duffel bag di bak/bagasi selama ada isi. */
+stock VehicleMods_RefreshTrunkVisual(slot)
+{
+    if (slot < 0 || slot >= MAX_TRACKED_VEHICLES) return 0;
+    if (!TrackedVehicle[slot][tvActive])
+    {
+        if (VehicleTrunkVisual[slot] != INVALID_OBJECT_ID)
+        {
+            DestroyDynamicObject(VehicleTrunkVisual[slot]);
+            VehicleTrunkVisual[slot] = INVALID_OBJECT_ID;
+        }
+        return 0;
+    }
+
+    if (VehicleMods_TrunkUsed(slot) > 0)
+    {
+        if (VehicleTrunkVisual[slot] == INVALID_OBJECT_ID)
+        {
+            new obj = CreateDynamicObject(VEH_OBJ_TRUNK, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+            if (obj != INVALID_OBJECT_ID)
+            {
+                AttachDynamicObjectToVehicle(obj, TrackedVehicle[slot][tvVehicle], 0.0, -1.75, 0.30, 0.0, 0.0, 0.0);
+                VehicleTrunkVisual[slot] = obj;
+            }
+        }
+    }
+    else if (VehicleTrunkVisual[slot] != INVALID_OBJECT_ID)
+    {
+        DestroyDynamicObject(VehicleTrunkVisual[slot]);
+        VehicleTrunkVisual[slot] = INVALID_OBJECT_ID;
+    }
+    return 1;
+}
+
+/* Hotwire: toolbox muncul di pintu pengemudi selama minigame berjalan. */
+stock VehicleMods_HotwireVisualShow(playerid, vehicleid)
+{
+    if (VehicleHotwireVisual[playerid] != INVALID_OBJECT_ID)
+    {
+        DestroyDynamicObject(VehicleHotwireVisual[playerid]);
+    }
+    new Float:x, Float:y, Float:z;
+    GetVehiclePos(vehicleid, x, y, z);
+    VehicleHotwireVisual[playerid] = CreateDynamicObject(VEH_OBJ_HOTWIRE, x + 1.1, y + 0.2, z, 0.0, 0.0, 0.0, Lobby_WorldById(Lobby_Of(playerid)));
+    return 1;
+}
+
+stock VehicleMods_HotwireVisualHide(playerid)
+{
+    if (VehicleHotwireVisual[playerid] != INVALID_OBJECT_ID)
+    {
+        DestroyDynamicObject(VehicleHotwireVisual[playerid]);
+        VehicleHotwireVisual[playerid] = INVALID_OBJECT_ID;
+    }
+    return 1;
+}
+
+/* Jumlah objek zirah sesuai level (murni, untuk selftest). */
+stock VehicleMods_VisualCountForLevel(level)
+{
+    if (level <= 0) return 0;
+    if (level == 1) return 3;
+    return 6;
 }
 
 stock bool:VehicleMods_PlatableModel(modelid)
@@ -157,6 +289,7 @@ stock VehicleMods_InstallPlate(playerid)
         SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[ZIRAH] Bumper berduri terpasang. Menerobos kerumunan jauh lebih mematikan.");
     }
 
+    VehicleMods_RefreshVisuals(slot);
     Log_Format(LOG_INFO, "[ZIRAH] char=%d kendaraan=%d level=%d", ActiveCharId[playerid], vehicleid, VehiclePlateLevel[slot]);
     return 1;
 }
@@ -310,6 +443,7 @@ stock VehicleMods_TrunkTake(playerid, slot, trunkIndex, amount)
     Inventory_Ledger(playerid, itemid, take, "trunk_out");
     Inventory_Save(playerid);
     Tx_Commit();
+    VehicleMods_RefreshTrunkVisual(slot);
     return 1;
 }
 
@@ -352,6 +486,7 @@ stock VehicleMods_TrunkPut(playerid, slot, invSlot, amount)
     Inventory_Ledger(playerid, itemid, -put, "trunk_in");
     Inventory_Save(playerid);
     Tx_Commit();
+    VehicleMods_RefreshTrunkVisual(slot);
     return 1;
 }
 
@@ -418,6 +553,7 @@ stock VehicleMods_OnVehicleDeath(vehicleid)
     {
         Log_Format(LOG_INFO, "[BAGASI] kendaraan=%d hancur, %d item musnah", vehicleid, lost);
     }
+    VehicleMods_DestroyVisuals(slot);
     return 1;
 }
 
@@ -445,6 +581,7 @@ stock VehicleMods_StartHotwire(playerid)
     VehicleHotwireVehicle[playerid] = vehicleid;
     VehicleHotwireAnswer[playerid] = random(4);
     VehicleHotwireCooldown[playerid] = GetTickCount();
+    VehicleMods_HotwireVisualShow(playerid, vehicleid);
 
     ShowPlayerDialog(playerid, DIALOG_VHOTWIRE, DIALOG_STYLE_LIST, "Sambung kabel — pilih pasangan yang benar",
         "Kabel merah - kabel hitam\nKabel biru - kabel hitam\nKabel kuning - kabel hitam\nKabel hijau - kabel hitam",
@@ -456,6 +593,7 @@ stock VehicleMods_HotwireResult(playerid, listitem)
 {
     new vehicleid = VehicleHotwireVehicle[playerid];
     VehicleHotwireVehicle[playerid] = INVALID_VEHICLE_ID;
+    VehicleMods_HotwireVisualHide(playerid);
     if (vehicleid == INVALID_VEHICLE_ID) return 0;
 
     if (listitem == VehicleHotwireAnswer[playerid])
@@ -551,6 +689,9 @@ stock VehicleMods_ApplyPersisted(slot, plating, const trunkData[])
         VehicleTrunk[slot][trunkIndex][vtDurability] = durability;
         trunkIndex++;
     }
+
+    VehicleMods_RefreshVisuals(slot);
+    VehicleMods_RefreshTrunkVisual(slot);
     return 1;
 }
 
@@ -619,6 +760,7 @@ public VehicleMods_OnDialogResponse(playerid, dialogid, response, listitem, inpu
         case DIALOG_VHOTWIRE:
         {
             if (response) VehicleMods_HotwireResult(playerid, listitem);
+            else VehicleMods_HotwireVisualHide(playerid);
             return 1;
         }
     }
@@ -693,8 +835,13 @@ stock VehicleMods_Selftest()
     /* Model zirah tidak boleh kosong dan semua harus kendaraan darat. */
     ok = ok && sizeof(gPlatableModels) >= 3;
 
+    /* Bentukan fisik: level 0 tanpa objek, level 1 tiga pelat, level 2 enam. */
+    ok = ok && VehicleMods_VisualCountForLevel(0) == 0;
+    ok = ok && VehicleMods_VisualCountForLevel(1) == 3;
+    ok = ok && VehicleMods_VisualCountForLevel(2) == 6;
+
     VehicleMods_ResetSlot(testSlot);
     Selftest_Record(ok, "modifikasi kendaraan",
-        ok ? "roundtrip bagasi + zirah konsisten" : "roundtrip bagasi gagal");
+        ok ? "roundtrip bagasi + zirah + bentukan visual konsisten" : "roundtrip bagasi/zirah gagal");
     return 1;
 }
