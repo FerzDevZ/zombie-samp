@@ -499,6 +499,23 @@ stock bool:ZombieAI_HasAnchor(zombieid)
     return ZombieAI[zombieid][zaiHasAnchor];
 }
 
+/* Lepas semua zombie yang mengejar pemain ini — dipakai kamuflase bau:
+   zombie kehilangan jejak bau manusia dan kembali idle/ke anchor. */
+stock ZombieAI_DropTargetOf(playerid)
+{
+    foreach (new zombieid : ZombiePool)
+    {
+        if (!Zombie_IsActive(zombieid)) continue;
+        if (ZombieAI[zombieid][zaiTarget] != playerid) continue;
+
+        ZombieAI[zombieid][zaiTarget] = INVALID_PLAYER_ID;
+        ZombieAI[zombieid][zaiHasTargetPos] = false;
+        ZombieAI[zombieid][zaiBehaviour] = ZB_IDLE;
+        FCNPC_Stop(zombieid);
+    }
+    return 1;
+}
+
 stock ZombieAI_ReturnToAnchor(zombieid, E_ZOMBIE_TYPE:type, Float:zx, Float:zy, Float:zz)
 {
     new Float:dx = ZombieAI[zombieid][zaiAnchorX] - zx;

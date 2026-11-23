@@ -1275,6 +1275,23 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "airdrop", true))
+    {
+        if (!IsServerAdmin(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_DANGER, "[AIRDROP] Khusus admin.");
+            return 1;
+        }
+        Airdrop_Force(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "lumur", true) || !strcmp(cmd, "scent", true))
+    {
+        Scent_Apply(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "shop", true) || !strcmp(cmd, "toko", true))
     {
         Vendor_ShowMenu(playerid);

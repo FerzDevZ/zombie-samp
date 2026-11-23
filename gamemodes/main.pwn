@@ -89,6 +89,7 @@
 #include "modules/loot/nodes.inc"
 #include "modules/loot/corpse.inc"
 #include "modules/loot/grave.inc"
+#include "modules/player/scent.inc"
 
 #include "modules/zombie/zombie_core.inc"
 #include "modules/combat/damage_pipeline.inc"
@@ -96,6 +97,7 @@
 #include "modules/zombie/zombie_ai.inc"
 #include "modules/zombie/spawn_director.inc"
 #include "modules/world/events.inc"
+#include "modules/world/airdrop.inc"
 #include "modules/world/base_members.inc"
 #include "modules/world/bases.inc"
 #include "modules/world/base_build.inc"
@@ -141,7 +143,8 @@ forward Needs_Tick();
 forward HUD_Tick();
 forward Player_Tick();
 forward Escort_Tick();
-new TimerHandles[20];
+forward Airdrop_Tick();
+new TimerHandles[22];
 
 public OnGameModeInit()
 {
@@ -236,6 +239,7 @@ public OnGameModeInit()
     TimerHandles[17] = SetTimer("VehicleFuel_Tick", 2000, true);
     TimerHandles[18] = SetTimer("Escort_Tick", 2000, true);
     TimerHandles[19] = SetTimer("Companion_Tick", 2000, true);
+    TimerHandles[20] = SetTimer("Airdrop_Tick", 2000, true);
     SetTimer("Queue_Tick", QUEUE_TICK_MS, true);
 
     SetTimer("Selftest_Boot", 8000, false);
@@ -610,6 +614,7 @@ public OnPlayerTakeDamage(playerid, issuerid, Float:amount, weaponid, bodypart)
         return 0;
     }
     Damage_Apply(DAMAGE_KIND_PLAYER, playerid, issuerid, amount, weaponid, bodypart);
+    Scent_Break(playerid, "Kamu terluka — darah segar membongkar kamuflase.");
     return 0;
 }
 
@@ -623,6 +628,7 @@ public OnPlayerWeaponShot(playerid, weaponid, hittype, hitid, Float:fX, Float:fY
     /* Cek rapid-fire DULU sebelum noise/wear (audit F-15): tembakan ilegal
        tidak boleh membangunkan horde atau mengurangi kondisi senjata. */
     if (!AC_OnWeaponShot(playerid, weaponid)) return 0;
+    Scent_Break(playerid, "Kamu menembak — suara dan bau mesiu membongkar kamuflase.");
     Noise_EmitFromPlayer(playerid, weaponid);
     Inventory_DamageWeapon(playerid, weaponid);
     return 1;
@@ -669,6 +675,7 @@ public Player_Tick()
 
         if (PlayerSurvival[playerid][psInShelter]) ShelterDoor_Tick(playerid);
         Bag_SpeedTick(playerid);   // berat tas: jalur 500 ms, bukan OnPlayerUpdate
+        Scent_Tick(playerid);      // kamuflase bau: kedaluwarsa + deteksi lari
         BuildEdit_TickPlayer(playerid);   // pratinjau/edit struktur ikut pemain
         Player_ReviveChannelTick(playerid);
 

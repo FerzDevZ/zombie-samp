@@ -23,6 +23,7 @@ enum E_CORPSE
     cpAmount[LOOT_CORPSE_SLOTS],
     cpCount,
     cpExpireTick,
+    bool:cpScentUsed,       // sudah dipakai kamuflase bau (satu pakai per bangkai)
     STREAMER_TAG_PICKUP:cpPickup,
     STREAMER_TAG_3D_TEXT_LABEL:cpLabel
 };
@@ -60,6 +61,7 @@ stock Corpse_Clear(slot)
 
     Corpse[slot][cpActive] = false;
     Corpse[slot][cpCount] = 0;
+    Corpse[slot][cpScentUsed] = false;
     return 1;
 }
 
@@ -113,6 +115,7 @@ stock Corpse_Create(E_ZOMBIE_TYPE:type, Float:x, Float:y, Float:z, lobbyId)
     Corpse[slot][cpZ] = z;
     Corpse[slot][cpCount] = 0;
     Corpse[slot][cpExpireTick] = GetTickCount() + LOOT_CORPSE_EXPIRE_MS;
+    Corpse[slot][cpScentUsed] = false;
 
     new tier = Loot_ZombieTier(x, y, z);
     new rolls = (type == ZT_BRUTE) ? 2 + random(2) : 2;

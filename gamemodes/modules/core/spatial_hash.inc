@@ -9,6 +9,7 @@
 new Iterator:HashCellZombies[HASH_ZOMBIE_SLOTS]<MAX_ZOMBIE_SLOTS>;
 forward bool:Player_IsAlive(playerid);
 forward bool:Player_IsSafe(playerid);
+forward bool:Scent_IsMasked(playerid);
 
 new Iterator:HashCellPlayers[HASH_PLAYER_SLOTS]<MAX_PLAYERS>;
 
@@ -146,6 +147,7 @@ stock Hash_NearestPlayer(Float:x, Float:y, Float:z, Float:scanRadius, &Float:out
                 if (IsPlayerNPC(candidate)) continue;
                 if (!Player_IsAlive(candidate)) continue;
                 if (Player_IsSafe(candidate)) continue;   // shelter/hub bukan target zombie
+                if (Scent_IsMasked(candidate)) continue;  // berlumur darah zombie: bukan mangsa
                 if (lobbyId >= 0 && Lobby_Of(candidate) != lobbyId) continue; // zombie tidak menyeberang lobby
 
                 new Float:px, Float:py, Float:pz;
