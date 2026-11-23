@@ -447,4 +447,5 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Panel bangun klik-able (SelectTextDraw): kartu rounded, tombol X/Y/Z, putar, langkah 3 tingkat, PASANG/BATAL, `/panel`; gate tata letak `Selftest_CheckBuildPanel` + `tools/hud_preview/build_panel.py`
 - [x] Perbaikan "struktur bergeser": penanda muat per **base** (`BaseBuild_IsLoaded`/`MarkLoaded`/`ForgetLoaded`) + pagar duplikat di `BaseBuild_OnRowsLoaded`; selftest `muat struktur per base` (52/52)
 - [x] HUD: nominal uang dihapus, SCRAP/SAMPEL diberi kotak latar gelap, BBM tampil untuk pengemudi **dan** penumpang, plus baris GENSET saat berdiri <= 12 m dari generator sendiri
+- [x] HUD v2 (audit UX): kartu kaca rounded + bar HP/ARM/INF berlabel + micro-bar LAP/HAUS/PIP, kolom kanan segaris (x=352 lebar 276), pil prompt interaksi `[Y] <nama>` bawah-tengah saat ≤ 1,5 m dari hotspot (sembunyi saat mode bangun), SAMPEL dobel dihapus dari baris progres; gate `gHudFitRows` 20 baris + `generate.py` skip sprite + galeri 4 skenario baru
 

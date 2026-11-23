@@ -192,6 +192,19 @@ def td(x: float, y: float, text: str, size_x: float, size_y: float, color: str,
             f'color:{color};">{escaped}</div>')
 
 
+def td_center(text: str, size_x: float, size_y: float, color: str) -> str:
+    """Teks center (align 2): x=320 adalah titik tengah pil prompt."""
+    advance = size_x * CHAR_ADVANCE_RATIO
+    height = size_y * LINE_HEIGHT_RATIO
+    font_size = height * 1.30
+    spacing = advance - font_size * 0.60
+    escaped = (text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
+    return (f'<div class="td" style="left:320px;top:418px;transform:translateX(-50%);'
+            f'font-size:{font_size:.1f}px;letter-spacing:{spacing:.2f}px;font-weight:500;'
+            f"font-family:'DejaVu Sans Mono','Courier New',monospace;"
+            f'color:{color};">{escaped}</div>')
+
+
 def bar(x: float, y: float, w: float, h: float, color: str) -> str:
     return f'<div class="bar" style="left:{x}px;top:{y}px;width:{w}px;height:{h}px;background:{color};"></div>'
 
@@ -204,65 +217,113 @@ def ghost_wall(x: float, y: float, w: float, h: float, label: str) -> str:
 
 # ------------------------------------------------------------------------ HUD
 
+# Geometri kartu + bar HARUS sama dengan hud.inc; guard require_literal di main()
+# membuat galeri gagal bila kode HUD berubah tanpa memperbarui file ini.
+HUD_CARD = (16.0, 288.0, 288.0, 100.0)
+HUD_ACCENT = (18.0, 288.0, 284.0, 2.0)
+# index: (x, y, w, h) — HP/ARM/INF lalu LAP/HAUS/PIP
+HUD_BARS = [
+    (52.0, 312.0, 104.0, 5.0),
+    (52.0, 324.0, 104.0, 5.0),
+    (52.0, 336.0, 104.0, 5.0),
+    (48.0, 348.0, 40.0, 4.0),
+    (134.0, 348.0, 40.0, 4.0),
+    (220.0, 348.0, 40.0, 4.0),
+]
+HUD_PROMPT = (210.0, 414.0, 220.0, 18.0)
+
 HUD_SCENARIOS: dict[str, dict] = {
-    # name: {"text": {...}, "hide": [...]}
+    # name: {"text": {...}, "bars": [(index, ratio, warna)], "hide": [...]}
     "01-hud-pejalanan": {
         "text": {
             "HudBrand": "LAST_STAND",
-            "HudVitals": "HP 87  ARM 45",
-            "HudNeeds": "LAP 62  HAUS 48  PIPIS 21",
-            "HudInfection": "INFECT 12%",
             "HudZone": "Bandara Lama [AMAN]",
-            "HudProgress": "LVL 7  SP 240  SAMPEL 12  LUKA 1",
+            "HudHpVal": "87/100",
+            "HudArmVal": "45/100",
+            "HudInfVal": "12%",
+            "HudLapVal": "62",
+            "HudHausVal": "48",
+            "HudPipVal": "21",
+            "HudProgress": "LVL 7  SP 240  LUKA 1  /skill",
             "HudLoadout": "SCRAP 34  SAMPEL 12",
+            "HudPromptText": "Y  Stash Kamp",
         },
+        "bars": [
+            (0, 0.87, "UI_ACCENT_PRIMARY"), (1, 0.45, "UI_ACCENT_INFO"),
+            (2, 0.12, "UI_ACCENT_PRIMARY"), (3, 0.62, "UI_ACCENT_PRIMARY"),
+            (4, 0.48, "UI_ACCENT_PRIMARY"), (5, 0.79, "UI_ACCENT_PRIMARY"),
+        ],
         "hide": ["HudVehicle", "HudBoss", "HudRaid"],
-        "note": "pejalanan - HUD dasar",
+        "note": "pejalanan dekat stash - bar HP/ARM/INF + prompt interaksi [Y]",
     },
     "02-hud-kendaraan": {
         "text": {
             "HudBrand": "LAST_STAND",
-            "HudVitals": "HP 92  ARM 60",
-            "HudNeeds": "LAP 55  HAUS 41  PIPIS 30",
-            "HudInfection": "INFECT 8%",
             "HudZone": "Jalan Raya [AMAN]",
-            "HudProgress": "LVL 7  SP 240  SAMPEL 12  LUKA 0",
+            "HudHpVal": "92/100",
+            "HudArmVal": "60/100",
+            "HudInfVal": "8%",
+            "HudLapVal": "55",
+            "HudHausVal": "41",
+            "HudPipVal": "30",
+            "HudProgress": "LVL 7  SP 240  LUKA 0  /skill",
             "HudLoadout": "SCRAP 34  SAMPEL 12",
             "HudVehicle": "BBM [######----] 62/100L",
         },
-        "hide": ["HudBoss", "HudRaid"],
-        "note": "di dalam kendaraan - bar BBM (pengemudi & penumpang)",
+        "bars": [
+            (0, 0.92, "UI_ACCENT_PRIMARY"), (1, 0.60, "UI_ACCENT_INFO"),
+            (2, 0.08, "UI_ACCENT_PRIMARY"), (3, 0.55, "UI_ACCENT_PRIMARY"),
+            (4, 0.41, "UI_ACCENT_PRIMARY"), (5, 0.70, "UI_ACCENT_PRIMARY"),
+        ],
+        "hide": ["HudBoss", "HudRaid", "HudPromptText"],
+        "note": "di dalam kendaraan - bar BBM (pengemudi & penumpang), kolom kanan sejajar",
     },
     "03-hud-generator": {
         "text": {
             "HudBrand": "LAST_STAND",
-            "HudVitals": "HP 74  ARM 20",
-            "HudNeeds": "LAP 40  HAUS 33  PIPIS 18",
-            "HudInfection": "INFECT 21%",
             "HudZone": "Base Kamp [AMAN]",
-            "HudProgress": "LVL 7  SP 240  SAMPEL 12  LUKA 1",
+            "HudHpVal": "74/100",
+            "HudArmVal": "20/100",
+            "HudInfVal": "21%",
+            "HudLapVal": "40",
+            "HudHausVal": "33",
+            "HudPipVal": "18",
+            "HudProgress": "LVL 7  SP 240  LUKA 1  /skill",
             "HudLoadout": "SCRAP 51  SAMPEL 12",
             "HudVehicle": "GENSET [##########] 12/20L",
         },
-        "hide": ["HudBoss", "HudRaid"],
+        "bars": [
+            (0, 0.74, "UI_ACCENT_PRIMARY"), (1, 0.20, "UI_ACCENT_INFO"),
+            (2, 0.21, "UI_ACCENT_PRIMARY"), (3, 0.40, "UI_ACCENT_WARN"),
+            (4, 0.33, "UI_ACCENT_WARN"), (5, 0.82, "UI_ACCENT_PRIMARY"),
+        ],
+        "hide": ["HudBoss", "HudRaid", "HudPromptText"],
         "note": "di dekat genset base sendiri (<= 12 m) - baris GENSET menggantikan BBM",
     },
     "04-hud-kritis": {
         "text": {
             "HudBrand": "LAST_STAND",
-            "HudVitals": "HP 14  ARM 0",
-            "HudNeeds": "LAP 3  HAUS 8  PIPIS 74",
-            "HudInfection": "INFECT 78%",
             "HudZone": "Kota Los Santos [WASPADA]",
-            "HudProgress": "LVL 7  SP 240  SAMPEL 12  LUKA 3",
+            "HudHpVal": "14/100",
+            "HudArmVal": "0/100",
+            "HudInfVal": "78%",
+            "HudLapVal": "3",
+            "HudHausVal": "8",
+            "HudPipVal": "74",
+            "HudProgress": "LVL 7  SP 240  LUKA 3  /skill",
             "HudLoadout": "SCRAP 4  SAMPEL 0",
             "HudVehicle": "BBM [##--------] 18/100L",
             "HudBoss": "ABOMINATION 100%  ##########",
             "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
         },
-        "hide": [],
-        "note": ("semua peringatan aktif - warna baris kritis dihitung runtime "
-                 "(warn/danger), gambar ini memakai warna dasar"),
+        "bars": [
+            (0, 0.14, "UI_ACCENT_DANGER"), (1, 0.0, "UI_ACCENT_INFO"),
+            (2, 0.78, "UI_ACCENT_DANGER"), (3, 0.03, "UI_ACCENT_DANGER"),
+            (4, 0.08, "UI_ACCENT_DANGER"), (5, 0.26, "UI_ACCENT_DANGER"),
+        ],
+        "hide": ["HudPromptText"],
+        "note": ("semua peringatan aktif - bar merah = kritis; warna bar dihitung "
+                 "runtime, gambar memakai warna state yang sama"),
     },
 }
 
@@ -271,12 +332,49 @@ def render_hud(scene: dict, draws: list[dict], colors: dict[str, str],
                fit: dict[str, tuple[float, float, int]]) -> str:
     hidden = set(scene["hide"])
     parts: list[str] = []
+
+    # kartu kaca rounded + aksen tipis (pola 2 strip + 4 chit di hud.inc)
+    cx, cy, cw, ch = HUD_CARD
+    accent = colors["UI_ACCENT_PRIMARY"]
+    parts.append(
+        f'<div style="position:absolute;left:{cx}px;top:{cy}px;width:{cw}px;height:{ch}px;'
+        f'background:{colors["UI_BG_GLASS_DARK"]};border:1px solid rgba(148,163,184,0.18);'
+        f'border-radius:4px;"></div>')
+    ax, ay, aw, ah = HUD_ACCENT
+    parts.append(
+        f'<div style="position:absolute;left:{ax}px;top:{ay}px;width:{aw}px;height:{ah}px;'
+        f'background:{accent};border-radius:1px;"></div>')
+
+    # bar: track (UI_BG_ELEVATED) + fill dinamis
+    for index, (bx, by, bw, bh) in enumerate(HUD_BARS):
+        parts.append(
+            f'<div style="position:absolute;left:{bx}px;top:{by}px;width:{bw}px;height:{bh}px;'
+            f'background:{colors["UI_BG_ELEVATED"]};border-radius:1px;"></div>')
+    for index, ratio, color_name in scene["bars"]:
+        bx, by, bw, bh = HUD_BARS[index]
+        fill_w = max(0.0, min(1.0, ratio)) * bw
+        parts.append(
+            f'<div style="position:absolute;left:{bx}px;top:{by}px;width:{fill_w:.1f}px;height:{bh}px;'
+            f'background:{colors[color_name]};border-radius:1px;"></div>')
+
+    # pil prompt interaksi
+    if "HudPromptText" not in hidden:
+        px, py, pw, ph = HUD_PROMPT
+        parts.append(
+            f'<div style="position:absolute;left:{px}px;top:{py}px;width:{pw}px;height:{ph}px;'
+            f'background:rgba(11,15,20,0.9);border:1px solid rgba(148,163,184,0.25);'
+            f'border-radius:9px;"></div>')
+
     for draw in draws:
         name = draw["var"]
         if name in hidden:
             continue
         text = scene["text"].get(name, draw["initial"])
         size_x = fit[name][1] if name in fit else draw["size_x"]
+        if name == "HudPromptText":
+            # align 2 = center: x adalah titik tengah, bukan tepi kiri
+            parts.append(td_center(text, size_x, draw["size_y"], colors.get(draw["color"], "#f8fafc")))
+            continue
         parts.append(td(draw["x"], draw["y"], text, size_x, draw["size_y"],
                         colors.get(draw["color"], "#f8fafc"),
                         weight=700 if draw["font"] == 2 else 500,
@@ -484,6 +582,16 @@ def main() -> int:
     require_literal(edit_text, "x + 186.0", "kolom tombol kiri")
     require_literal(edit_text, "x + 228.0", "kolom tombol kanan")
     require_literal(edit_text, "x + 12.0, y + 142.0, 130.0, 20.0, \"PASANG\"", "tombol PASANG")
+
+    # Geometri kartu/bar/prompt HUD harus masih persis di hud.inc — kalau angka
+    # ini berubah, galeri (dan pemahaman kita tentang layar) basi.
+    require_literal(hud_text, "HUD_CreateCard(playerid, 16.0, 288.0, 288.0, 100.0, 2.0)", "kartu HUD")
+    require_literal(hud_text, "284.0, 2.0", "aksen kartu HUD")
+    require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0}", "lebar bar HUD")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_HP, 52.0, 312.0", "bar HP")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_PIP, 220.0, 348.0", "bar PIP")
+    require_literal(hud_text, "CreatePlayerTextDraw(playerid, 210.0, 414.0", "pil prompt")
+    require_literal(hud_text, "PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], 220.0, 18.0)", "ukuran pil prompt")
 
     items = parse_items(items_text)
     structures = parse_structures(structures_text, items)

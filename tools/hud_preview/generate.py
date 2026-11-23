@@ -30,15 +30,25 @@ LINE_HEIGHT_RATIO = 10.5
 # String TERBURUK per baris, bukan contoh pendek: nilai maksimum tiap format.
 WORST_TEXT = {
     "HudBrand": "LAST_STAND",
-    "HudVitals": "HP 100  ARM 100",
-    "HudNeeds": "LAP 100  HAUS 100  PIPIS 100",
-    "HudInfection": "INFECT 100%",
     "HudZone": "Bandara Lama [WASPADA]",
-    "HudProgress": "LVL 99  SP 99  SAMPEL 999  LUKA 9  /skill",
+    "HudHpName": "HP",
+    "HudHpVal": "100/100",
+    "HudArmName": "ARM",
+    "HudArmVal": "100/100",
+    "HudInfName": "INF",
+    "HudInfVal": "100%",
+    "HudLapName": "LAP",
+    "HudLapVal": "100",
+    "HudHausName": "HAUS",
+    "HudHausVal": "100",
+    "HudPipName": "PIP",
+    "HudPipVal": "100",
+    "HudProgress": "LVL 99  SP 999  LUKA 9  /skill",
     "HudLoadout": "SCRAP 9999  SAMPEL 999",
     "HudVehicle": "BBM [##########] 100/100L pom 8000m TG",
     "HudBoss": "ABOMINATION 100%  ##########",
     "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
+    "HudPromptText": "Y  Ekstraksi sampel air",
 }
 
 
@@ -58,6 +68,10 @@ def parse_textdraws(text: str) -> list[dict]:
     )
     for match in create.finditer(text):
         var, x, y, initial = match.group(1), float(match.group(2)), float(match.group(3)), match.group(4)
+        # Sprite (LD_SPAC/LD_BEAT) dan TD berbasis array (kartu, bar) bukan teks:
+        # tidak punya string terburuk, jadi di luar gate panjang.
+        if initial.startswith("LD_"):
+            continue
         tail = text[match.end():match.end() + 600]
         letter = re.search(
             r"PlayerTextDrawLetterSize\(playerid,\s*" + var + r"\[playerid\],\s*([-\d.]+),\s*([-\d.]+)\)", tail

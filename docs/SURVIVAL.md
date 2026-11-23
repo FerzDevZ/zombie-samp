@@ -2,13 +2,15 @@
 
 ## 1. Kebutuhan tubuh
 
-HUD kiri menampilkan `LAP`, `HAUS`, `PIPIS`.
+HUD kiri (kartu kaca rounded) menampilkan bar `LAP`, `HAUS`, `PIP` di satu
+baris, di atasnya bar berlabel `HP`, `ARM`, `INF` dengan angka di kanan bar.
+Saat dekat hotspot (≤ 1,5 m) muncul pil `[Y] <nama>` di bawah-tengah layar.
 
 | Meter | Arti | Laju | Akibat saat ekstrem |
 |---|---|---|---|
 | `LAP` | hunger | −0.10 / 5 s (≈83 menit) | 0 → 0.8 HP / 5 s |
 | `HAUS` | thirst | −0.14 / 5 s (≈60 menit) | 0 → 1.2 HP / 5 s |
-| `PIPIS` | bladder | +0.12 / 5 s (≈69 menit) | 100 → 0.6 HP / 5 s |
+| `PIP` | bladder | +0.12 / 5 s (≈69 menit) | 100 → 0.6 HP / 5 s |
 
 - `Canned Food`: +30 lapar, +3 haus. `Water Bottle`: +42 haus, +12 pipis.
 - `/kencing` (alias `/pipis`) mengosongkan kandung kemih; butuh ≥12%.
@@ -173,7 +175,7 @@ Titik ekstraksi di Camp Outskirts (`/ekstrak` atau Y).
 
 ## 7. Uji
 
-1. HUD tiga meter turun; makan/minum menaikkan; relog mempertahankan nilai.
+1. HUD tiga bar kebutuhan turun; makan/minum menaikkan; relog mempertahankan nilai.
 2. `/kencing` pada PIPIS ≥12% → 0.
 3. Tunggu spawn liar → mobil `ABANDON` → `/lockpick` → `/mesin`.
 4. Mengemudi → `FUEL x/60 L` turun; habis → mesin mati; isi di pom atau jerrycan.

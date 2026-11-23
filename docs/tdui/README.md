@@ -16,10 +16,10 @@ Resolusi: 1280×960 (2× dari koordinat asli 640×480 SA-MP).
 
 | Gambar | Isi | Sumber kode |
 |---|---|---|
-| ![HUD pejalanan](01-hud-pejalanan.png) | 7 baris HUD dasar: brand, HP/armour, kebutuhan, infeksi, zona, progres, scrap/sampel | `ui/hud.inc` |
-| ![HUD kendaraan](02-hud-kendaraan.png) | Baris BBM aktif untuk pengemudi **dan** penumpang | `ui/hud.inc` |
+| ![HUD pejalanan](01-hud-pejalanan.png) | Kartu kaca rounded: bar HP/ARM/INF berlabel + angka, micro-bar LAP/HAUS/PIP, zona di baris brand, pil prompt `Y  Stash Kamp` | `ui/hud.inc` |
+| ![HUD kendaraan](02-hud-kendaraan.png) | Baris BBM aktif untuk pengemudi **dan** penumpang; kolom kanan SCRAP/SAMPEL + BBM segaris (x=352, lebar 276) | `ui/hud.inc` |
 | ![HUD genset](03-hud-generator.png) | Saat tidak di kendaraan tapi ≤ 12 m dari genset base sendiri, baris BBM berganti jadi `GENSET [##########] 12/20L` | `ui/hud.inc` + `BaseBuild_GeneratorSlot` |
-| ![HUD kritis](04-hud-kritis.png) | Semua peringatan aktif: HP rendah, infeksi 78%, BBM 18 L, boss, raid | `ui/hud.inc` |
+| ![HUD kritis](04-hud-kritis.png) | Semua peringatan aktif: bar HP/INF merah, ARM kosong, kebutuhan hampir habis, boss, raid | `ui/hud.inc` |
 | ![Panel bangun - pasang](05-bangun-pratinjau.png) | Panel bangun mode **PASANG**: SAMPING/MAJU/NAIK/ARAH/JARAK/LANGKAH, tombol sprite, PASANG hijau = material cukup | `world/build_edit.inc` |
 | ![Panel bangun - geser](06-bangun-geser.png) | Panel bangun mode **GESER**: tiga baris atas berubah jadi koordinat dunia X/Y/Z, PASANG kuning | `world/build_edit.inc` |
 

@@ -3,36 +3,84 @@
 #endif
 #define _ls_hud_included
 
+/* ============================================================ HUD v2 ======
+   Desain (audit UX 2026): teks polos tujuh baris terbaca seperti dump debug.
+   v2 menggantinya dengan:
+     - kartu kaca rounded (2 strip + 4 chit, pola sama dengan panel bangun)
+     - bar HP/ARM/INF berlabel + 3 micro-bar kebutuhan (LAP/HAUS/PIP)
+     - kolom kanan sejajar (SCRAP/SAMPEL dan BBM satu x, satu lebar)
+     - prompt interaksi "[Y] <nama>" di bawah-tengah saat dekat hotspot
+   Semua posisi divalidasi gHudFitRows (string TERBURUK) + generate.py. ==== */
+
+new PlayerText:HudCard[MAX_PLAYERS][6];
+new PlayerText:HudCardAccent[MAX_PLAYERS];
 new PlayerText:HudBrand[MAX_PLAYERS];
-new PlayerText:HudVitals[MAX_PLAYERS];
-new PlayerText:HudNeeds[MAX_PLAYERS];
-new PlayerText:HudInfection[MAX_PLAYERS];
 new PlayerText:HudZone[MAX_PLAYERS];
-new PlayerText:HudLoadout[MAX_PLAYERS];
+new PlayerText:HudHpName[MAX_PLAYERS];
+new PlayerText:HudHpVal[MAX_PLAYERS];
+new PlayerText:HudArmName[MAX_PLAYERS];
+new PlayerText:HudArmVal[MAX_PLAYERS];
+new PlayerText:HudInfName[MAX_PLAYERS];
+new PlayerText:HudInfVal[MAX_PLAYERS];
+new PlayerText:HudLapName[MAX_PLAYERS];
+new PlayerText:HudLapVal[MAX_PLAYERS];
+new PlayerText:HudHausName[MAX_PLAYERS];
+new PlayerText:HudHausVal[MAX_PLAYERS];
+new PlayerText:HudPipName[MAX_PLAYERS];
+new PlayerText:HudPipVal[MAX_PLAYERS];
 new PlayerText:HudProgress[MAX_PLAYERS];
+new PlayerText:HudLoadout[MAX_PLAYERS];
 new PlayerText:HudVehicle[MAX_PLAYERS];
 new PlayerText:HudBoss[MAX_PLAYERS];
 new PlayerText:HudRaid[MAX_PLAYERS];
+new PlayerText:HudPromptBg[MAX_PLAYERS];
+new PlayerText:HudPromptText[MAX_PLAYERS];
 new bool:PlayerHudVisible[MAX_PLAYERS];
+
+/* Bar index: 0 HP, 1 ARM, 2 INF, 3 LAP, 4 HAUS, 5 PIP. */
+#define HUD_BAR_HP     0
+#define HUD_BAR_ARM    1
+#define HUD_BAR_INF    2
+#define HUD_BAR_LAP    3
+#define HUD_BAR_HAUS   4
+#define HUD_BAR_PIP    5
+#define HUD_BAR_COUNT  6
+
+new PlayerText:HudBarBg[MAX_PLAYERS][HUD_BAR_COUNT];
+new PlayerText:HudBarFg[MAX_PLAYERS][HUD_BAR_COUNT];
+new HudBarLastWidth[MAX_PLAYERS][HUD_BAR_COUNT];
+new HudBarLastColor[MAX_PLAYERS][HUD_BAR_COUNT];
+
+/* Lebar/tinggi bar harus sama dengan angka di HUD_CreateBar — generate.py dan
+   gallery.py membaca literal yang sama, jadi jangan ubah satu sisi saja. */
+new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0};
+new const Float:gHudBarH[HUD_BAR_COUNT] = {5.0, 5.0, 5.0, 4.0, 4.0, 4.0};
+
+#define HUD_PROMPT_MAX_LABEL 20
+#define HUD_PROMPT_DISTANCE  1.5
 
 /* Dirty-flag render: TextDrawSetString/Show hanya dipanggil kalau nilai
    berubah. Refresh penuh 500 ms x 200 pemain = ribuan paket TD sia-sia. */
-new HudLastVitals[MAX_PLAYERS][48];
-new HudLastNeeds[MAX_PLAYERS][48];
-new HudLastInfect[MAX_PLAYERS][24];
 new HudLastZone[MAX_PLAYERS][48];
+new HudLastHpVal[MAX_PLAYERS][12];
+new HudLastArmVal[MAX_PLAYERS][12];
+new HudLastInfVal[MAX_PLAYERS][8];
+new HudLastLapVal[MAX_PLAYERS][8];
+new HudLastHausVal[MAX_PLAYERS][8];
+new HudLastPipVal[MAX_PLAYERS][8];
 new HudLastLoadout[MAX_PLAYERS][48];
 new HudLastProgress[MAX_PLAYERS][64];
 new HudLastVehicle[MAX_PLAYERS][64];
+new HudLastPrompt[MAX_PLAYERS][40];
 new HudLastBoss[MAX_PLAYERS][64];
 new HudLastRaid[MAX_PLAYERS][64];
-new HudLastNeedColor[MAX_PLAYERS];
 new HudLastInfectColor[MAX_PLAYERS];
 new bool:HudVehicleShown[MAX_PLAYERS];
 new HudFuelColor[MAX_PLAYERS];
 new HudFuelWarnStage[MAX_PLAYERS];
 new bool:HudBossShown[MAX_PLAYERS];
 new bool:HudRaidShown[MAX_PLAYERS];
+new bool:HudPromptShown[MAX_PLAYERS];
 
 stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSize)
 {
@@ -62,16 +110,26 @@ enum E_HUD_FIT
 
 new const gHudFitRows[][E_HUD_FIT] =
 {
-    { "HudBrand",      24.0, 0.22, 10 },
-    { "HudVitals",     24.0, 0.20, 15 },
-    { "HudNeeds",      24.0, 0.19, 28 },
-    { "HudInfection",  24.0, 0.20, 11 },
-    { "HudZone",       24.0, 0.18, 22 },
-    { "HudProgress",   24.0, 0.20, 41 },
-    { "HudLoadout",   452.0, 0.20, 22 },
-    { "HudVehicle",   400.0, 0.17, 38 },
+    { "HudBrand",      26.0, 0.20, 10 },
+    { "HudZone",      150.0, 0.16, 22 },
+    { "HudHpName",     26.0, 0.16,  2 },
+    { "HudHpVal",     162.0, 0.16,  7 },
+    { "HudArmName",    26.0, 0.16,  3 },
+    { "HudArmVal",    162.0, 0.16,  7 },
+    { "HudInfName",    26.0, 0.16,  3 },
+    { "HudInfVal",    162.0, 0.16,  4 },
+    { "HudLapName",    26.0, 0.15,  3 },
+    { "HudLapVal",     92.0, 0.15,  3 },
+    { "HudHausName",  112.0, 0.15,  4 },
+    { "HudHausVal",   178.0, 0.15,  3 },
+    { "HudPipName",   198.0, 0.15,  3 },
+    { "HudPipVal",    264.0, 0.15,  3 },
+    { "HudProgress",   26.0, 0.18, 30 },
+    { "HudLoadout",   352.0, 0.20, 22 },
+    { "HudVehicle",   352.0, 0.17, 38 },
     { "HudBoss",      210.0, 0.26, 28 },
-    { "HudRaid",      190.0, 0.24, 25 }
+    { "HudRaid",      190.0, 0.24, 25 },
+    { "HudPromptText",320.0, 0.18, 23 }
 };
 
 stock bool:HUD_WorstCaseFits(offender[], size)
@@ -88,52 +146,200 @@ stock bool:HUD_WorstCaseFits(offender[], size)
     return true;
 }
 
+/* Kartu kaca rounded: 2 strip LD_SPAC + 4 chit sudut. Persis pola panel bangun
+   (BuildEdit_CreateCard) — PlayerTextDrawBoxColor TIDAK punya sudut bulat. */
+stock HUD_CreateCard(playerid, Float:x, Float:y, Float:width, Float:height, Float:radius)
+{
+    new Float:rx = radius * TD_ASPECT_16_9;
+    new Float:diamX = rx * 2.0;
+    new Float:diamY = radius * 2.0;
+
+    HudCard[playerid][0] = CreatePlayerTextDraw(playerid, x, y + radius, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, HudCard[playerid][0], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, HudCard[playerid][0], width, height - diamY);
+    PlayerTextDrawColor(playerid, HudCard[playerid][0], UI_BG_GLASS_DARK);
+    PlayerTextDrawSetSelectable(playerid, HudCard[playerid][0], false);
+
+    HudCard[playerid][1] = CreatePlayerTextDraw(playerid, x + rx, y, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, HudCard[playerid][1], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, HudCard[playerid][1], width - diamX, height);
+    PlayerTextDrawColor(playerid, HudCard[playerid][1], UI_BG_GLASS_DARK);
+    PlayerTextDrawSetSelectable(playerid, HudCard[playerid][1], false);
+
+    new Float:cornerX[4];
+    new Float:cornerY[4];
+    cornerX[0] = x;                      cornerY[0] = y;
+    cornerX[1] = x + width - diamX;      cornerY[1] = y;
+    cornerX[2] = x;                      cornerY[2] = y + height - diamY;
+    cornerX[3] = x + width - diamX;      cornerY[3] = y + height - diamY;
+
+    for (new corner = 0; corner < 4; corner++)
+    {
+        HudCard[playerid][2 + corner] = CreatePlayerTextDraw(playerid, cornerX[corner], cornerY[corner], "LD_BEAT:chit");
+        PlayerTextDrawFont(playerid, HudCard[playerid][2 + corner], TEXT_DRAW_FONT_SPRITE_DRAW);
+        PlayerTextDrawTextSize(playerid, HudCard[playerid][2 + corner], diamX, diamY);
+        PlayerTextDrawColor(playerid, HudCard[playerid][2 + corner], UI_BG_GLASS_DARK);
+        PlayerTextDrawSetSelectable(playerid, HudCard[playerid][2 + corner], false);
+    }
+    return 1;
+}
+
+stock HUD_CreateBar(playerid, index, Float:x, Float:y, trackColor)
+{
+    HudBarBg[playerid][index] = CreatePlayerTextDraw(playerid, x, y, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, HudBarBg[playerid][index], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, HudBarBg[playerid][index], gHudBarW[index], gHudBarH[index]);
+    PlayerTextDrawColor(playerid, HudBarBg[playerid][index], trackColor);
+    PlayerTextDrawSetSelectable(playerid, HudBarBg[playerid][index], false);
+
+    HudBarFg[playerid][index] = CreatePlayerTextDraw(playerid, x, y, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, HudBarFg[playerid][index], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, HudBarFg[playerid][index], 0.0, gHudBarH[index]);
+    PlayerTextDrawColor(playerid, HudBarFg[playerid][index], UI_ACCENT_PRIMARY);
+    PlayerTextDrawSetSelectable(playerid, HudBarFg[playerid][index], false);
+
+    HudBarLastWidth[playerid][index] = 0;
+    HudBarLastColor[playerid][index] = UI_ACCENT_PRIMARY;
+    return 1;
+}
+
+/* Lebar bar berubah hanya saat piksel berubah; warna hanya saat berbeda.
+   TextSize 0 menyembunyikan sprite (bar kosong) tanpa Hide/Show ping-pong. */
+stock HUD_SetBar(playerid, index, Float:ratio, color)
+{
+    if (ratio < 0.0) ratio = 0.0;
+    if (ratio > 1.0) ratio = 1.0;
+
+    new width = floatround(gHudBarW[index] * ratio);
+    if (width != HudBarLastWidth[playerid][index])
+    {
+        HudBarLastWidth[playerid][index] = width;
+        PlayerTextDrawTextSize(playerid, HudBarFg[playerid][index], float(width), gHudBarH[index]);
+        PlayerTextDrawShow(playerid, HudBarFg[playerid][index]);
+    }
+    if (color != HudBarLastColor[playerid][index])
+    {
+        HudBarLastColor[playerid][index] = color;
+        PlayerTextDrawColor(playerid, HudBarFg[playerid][index], color);
+        PlayerTextDrawShow(playerid, HudBarFg[playerid][index]);
+    }
+    return 1;
+}
+
 stock HUD_Create(playerid)
 {
-    HudBrand[playerid] = CreatePlayerTextDraw(playerid, 24.0, 300.0, "LAST_STAND");
-    PlayerTextDrawLetterSize(playerid, HudBrand[playerid], 0.22, 0.9);
+    /* Kartu kiri: x 16..304, y 288..388 — di atas panel bangun (y>=330 kanan). */
+    HUD_CreateCard(playerid, 16.0, 288.0, 288.0, 100.0, 2.0);
+
+    HudCardAccent[playerid] = CreatePlayerTextDraw(playerid, 18.0, 288.0, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, HudCardAccent[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, HudCardAccent[playerid], 284.0, 2.0);
+    PlayerTextDrawColor(playerid, HudCardAccent[playerid], UI_ACCENT_PRIMARY);
+    PlayerTextDrawSetSelectable(playerid, HudCardAccent[playerid], false);
+
+    HudBrand[playerid] = CreatePlayerTextDraw(playerid, 26.0, 294.0, "LAST_STAND");
+    PlayerTextDrawLetterSize(playerid, HudBrand[playerid], 0.20, 0.85);
     PlayerTextDrawColor(playerid, HudBrand[playerid], UI_TEXT_PRIMARY);
     PlayerTextDrawSetOutline(playerid, HudBrand[playerid], 1);
     PlayerTextDrawFont(playerid, HudBrand[playerid], 2);
 
-    HudVitals[playerid] = CreatePlayerTextDraw(playerid, 24.0, 314.0, "HP 100");
-    PlayerTextDrawLetterSize(playerid, HudVitals[playerid], 0.2, 0.8);
-    PlayerTextDrawColor(playerid, HudVitals[playerid], UI_ACCENT_PRIMARY);
-    PlayerTextDrawSetOutline(playerid, HudVitals[playerid], 1);
-    PlayerTextDrawFont(playerid, HudVitals[playerid], 1);
-
-    HudNeeds[playerid] = CreatePlayerTextDraw(playerid, 24.0, 327.0, "LAP 100  HAUS 100  PIPIS 0");
-    PlayerTextDrawLetterSize(playerid, HudNeeds[playerid], 0.19, 0.75);
-    PlayerTextDrawColor(playerid, HudNeeds[playerid], UI_TEXT_SECONDARY);
-    PlayerTextDrawSetOutline(playerid, HudNeeds[playerid], 1);
-    PlayerTextDrawFont(playerid, HudNeeds[playerid], 1);
-
-    HudInfection[playerid] = CreatePlayerTextDraw(playerid, 24.0, 340.0, "INFECT 0%");
-    PlayerTextDrawLetterSize(playerid, HudInfection[playerid], 0.2, 0.8);
-    PlayerTextDrawColor(playerid, HudInfection[playerid], UI_ACCENT_PRIMARY);
-    PlayerTextDrawSetOutline(playerid, HudInfection[playerid], 1);
-    PlayerTextDrawFont(playerid, HudInfection[playerid], 1);
-
-    HudZone[playerid] = CreatePlayerTextDraw(playerid, 24.0, 353.0, "ZONE");
-    PlayerTextDrawLetterSize(playerid, HudZone[playerid], 0.18, 0.75);
-    PlayerTextDrawColor(playerid, HudZone[playerid], UI_TEXT_MUTED);
+    /* Zona pindah ke baris brand: hemat satu baris, tetap terbaca. */
+    HudZone[playerid] = CreatePlayerTextDraw(playerid, 150.0, 296.0, "ZONE");
+    PlayerTextDrawLetterSize(playerid, HudZone[playerid], 0.16, 0.75);
+    PlayerTextDrawColor(playerid, HudZone[playerid], UI_TEXT_SECONDARY);
     PlayerTextDrawSetOutline(playerid, HudZone[playerid], 1);
     PlayerTextDrawFont(playerid, HudZone[playerid], 1);
 
-    HudProgress[playerid] = CreatePlayerTextDraw(playerid, 24.0, 366.0, "LVL 1  SP 0  /skill");
-    PlayerTextDrawLetterSize(playerid, HudProgress[playerid], 0.2, 0.8);
+    HudHpName[playerid] = CreatePlayerTextDraw(playerid, 26.0, 310.0, "HP");
+    PlayerTextDrawLetterSize(playerid, HudHpName[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, HudHpName[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudHpName[playerid], 1);
+    PlayerTextDrawFont(playerid, HudHpName[playerid], 1);
+
+    HudArmName[playerid] = CreatePlayerTextDraw(playerid, 26.0, 322.0, "ARM");
+    PlayerTextDrawLetterSize(playerid, HudArmName[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, HudArmName[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudArmName[playerid], 1);
+    PlayerTextDrawFont(playerid, HudArmName[playerid], 1);
+
+    HudInfName[playerid] = CreatePlayerTextDraw(playerid, 26.0, 334.0, "INF");
+    PlayerTextDrawLetterSize(playerid, HudInfName[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, HudInfName[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudInfName[playerid], 1);
+    PlayerTextDrawFont(playerid, HudInfName[playerid], 1);
+
+    HudHpVal[playerid] = CreatePlayerTextDraw(playerid, 162.0, 310.0, "100/100");
+    PlayerTextDrawLetterSize(playerid, HudHpVal[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, HudHpVal[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudHpVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudHpVal[playerid], 1);
+
+    HudArmVal[playerid] = CreatePlayerTextDraw(playerid, 162.0, 322.0, "0/100");
+    PlayerTextDrawLetterSize(playerid, HudArmVal[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, HudArmVal[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudArmVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudArmVal[playerid], 1);
+
+    HudInfVal[playerid] = CreatePlayerTextDraw(playerid, 162.0, 334.0, "0%");
+    PlayerTextDrawLetterSize(playerid, HudInfVal[playerid], 0.16, 0.8);
+    PlayerTextDrawColor(playerid, HudInfVal[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudInfVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudInfVal[playerid], 1);
+
+    HudLapName[playerid] = CreatePlayerTextDraw(playerid, 26.0, 346.0, "LAP");
+    PlayerTextDrawLetterSize(playerid, HudLapName[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, HudLapName[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudLapName[playerid], 1);
+    PlayerTextDrawFont(playerid, HudLapName[playerid], 1);
+
+    HudHausName[playerid] = CreatePlayerTextDraw(playerid, 112.0, 346.0, "HAUS");
+    PlayerTextDrawLetterSize(playerid, HudHausName[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, HudHausName[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudHausName[playerid], 1);
+    PlayerTextDrawFont(playerid, HudHausName[playerid], 1);
+
+    HudPipName[playerid] = CreatePlayerTextDraw(playerid, 198.0, 346.0, "PIP");
+    PlayerTextDrawLetterSize(playerid, HudPipName[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, HudPipName[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudPipName[playerid], 1);
+    PlayerTextDrawFont(playerid, HudPipName[playerid], 1);
+
+    HudLapVal[playerid] = CreatePlayerTextDraw(playerid, 92.0, 346.0, "100");
+    PlayerTextDrawLetterSize(playerid, HudLapVal[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, HudLapVal[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudLapVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudLapVal[playerid], 1);
+
+    HudHausVal[playerid] = CreatePlayerTextDraw(playerid, 178.0, 346.0, "100");
+    PlayerTextDrawLetterSize(playerid, HudHausVal[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, HudHausVal[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudHausVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudHausVal[playerid], 1);
+
+    HudPipVal[playerid] = CreatePlayerTextDraw(playerid, 264.0, 346.0, "0");
+    PlayerTextDrawLetterSize(playerid, HudPipVal[playerid], 0.15, 0.75);
+    PlayerTextDrawColor(playerid, HudPipVal[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudPipVal[playerid], 1);
+    PlayerTextDrawFont(playerid, HudPipVal[playerid], 1);
+
+    HUD_CreateBar(playerid, HUD_BAR_HP, 52.0, 312.0, UI_BG_ELEVATED);
+    HUD_CreateBar(playerid, HUD_BAR_ARM, 52.0, 324.0, UI_BG_ELEVATED);
+    HUD_CreateBar(playerid, HUD_BAR_INF, 52.0, 336.0, UI_BG_ELEVATED);
+    HUD_CreateBar(playerid, HUD_BAR_LAP, 48.0, 348.0, UI_BG_ELEVATED);
+    HUD_CreateBar(playerid, HUD_BAR_HAUS, 134.0, 348.0, UI_BG_ELEVATED);
+    HUD_CreateBar(playerid, HUD_BAR_PIP, 220.0, 348.0, UI_BG_ELEVATED);
+
+    HudProgress[playerid] = CreatePlayerTextDraw(playerid, 26.0, 360.0, "LVL 1  SP 0  /skill");
+    PlayerTextDrawLetterSize(playerid, HudProgress[playerid], 0.18, 0.75);
     PlayerTextDrawColor(playerid, HudProgress[playerid], UI_TEXT_SECONDARY);
     PlayerTextDrawSetOutline(playerid, HudProgress[playerid], 1);
     PlayerTextDrawFont(playerid, HudProgress[playerid], 1);
 
-    /* x=452: "SCRAP 9999  SAMPEL 999" = 22 karakter ~155 px -> 607.
-       Uang dihapus dari HUD (permintaan pemain: nominal cash terus berubah dan
-       tidak dipakai saat bertahan hidup); scrap + sampel yang menentukan.
-       Kotak gelap ditambahkan karena teks ini dulu hilang di latar terang —
-       dilaporkan sebagai "textdraw scrap di latar". */
-    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, 452.0, 330.0, "SCRAP 0  SAMPEL 0");
+    /* Kolom kanan sejajar: SCRAP/SAMPEL dan BBM satu x (352) satu lebar (276).
+       Dulu 452 vs 400 — dua kotak melayang dengan tepi yang tidak segaris. */
+    HudLoadout[playerid] = CreatePlayerTextDraw(playerid, 352.0, 318.0, "SCRAP 0  SAMPEL 0");
     PlayerTextDrawLetterSize(playerid, HudLoadout[playerid], 0.2, 0.8);
-    PlayerTextDrawTextSize(playerid, HudLoadout[playerid], 176.0, 12.0);
+    PlayerTextDrawTextSize(playerid, HudLoadout[playerid], 276.0, 12.0);
     PlayerTextDrawUseBox(playerid, HudLoadout[playerid], 1);
     PlayerTextDrawBoxColor(playerid, HudLoadout[playerid], 0x0B0F14B4);
     PlayerTextDrawBackgroundColor(playerid, HudLoadout[playerid], 0x00000000);
@@ -141,12 +347,9 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudLoadout[playerid], 1);
     PlayerTextDrawFont(playerid, HudLoadout[playerid], 1);
 
-    /* x=400 (bukan 440): cabang BBM rendah menyertakan kompas pom sehingga
-       barisnya bisa 38 karakter ("BBM [##########] 100/100L pom 8000m TG").
-       Di 440 itu meluber 28 px keluar layar. 400 + 228 px = 628, sisa 12 px. */
-    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 400.0, 346.0, "BBM");
+    HudVehicle[playerid] = CreatePlayerTextDraw(playerid, 352.0, 334.0, "BBM");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], 0.17, 0.72);
-    PlayerTextDrawTextSize(playerid, HudVehicle[playerid], 232.0, 12.0);
+    PlayerTextDrawTextSize(playerid, HudVehicle[playerid], 276.0, 12.0);
     PlayerTextDrawUseBox(playerid, HudVehicle[playerid], 1);
     PlayerTextDrawBoxColor(playerid, HudVehicle[playerid], 0x0B0F14B4);
     PlayerTextDrawBackgroundColor(playerid, HudVehicle[playerid], 0x00000000);
@@ -170,31 +373,58 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudRaid[playerid], 1);
     PlayerTextDrawFont(playerid, HudRaid[playerid], 2);
 
+    /* Prompt interaksi gaya FiveM: pil di bawah-tengah saat dekat hotspot.
+       Teks center (align 2) berarti x=320 adalah TENGAH pil. */
+    HudPromptBg[playerid] = CreatePlayerTextDraw(playerid, 210.0, 414.0, "LD_SPAC:white");
+    PlayerTextDrawFont(playerid, HudPromptBg[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
+    PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], 220.0, 18.0);
+    PlayerTextDrawColor(playerid, HudPromptBg[playerid], 0x0B0F14E6);
+    PlayerTextDrawSetSelectable(playerid, HudPromptBg[playerid], false);
+
+    HudPromptText[playerid] = CreatePlayerTextDraw(playerid, 320.0, 418.0, "Y");
+    PlayerTextDrawLetterSize(playerid, HudPromptText[playerid], 0.18, 0.8);
+    PlayerTextDrawAlignment(playerid, HudPromptText[playerid], 2);
+    PlayerTextDrawColor(playerid, HudPromptText[playerid], UI_TEXT_PRIMARY);
+    PlayerTextDrawSetOutline(playerid, HudPromptText[playerid], 1);
+    PlayerTextDrawFont(playerid, HudPromptText[playerid], 1);
+
+    PlayerTextDrawShow(playerid, HudCard[playerid][0]);
+    PlayerTextDrawShow(playerid, HudCard[playerid][1]);
+    PlayerTextDrawShow(playerid, HudCard[playerid][2]);
+    PlayerTextDrawShow(playerid, HudCard[playerid][3]);
+    PlayerTextDrawShow(playerid, HudCard[playerid][4]);
+    PlayerTextDrawShow(playerid, HudCard[playerid][5]);
+    PlayerTextDrawShow(playerid, HudCardAccent[playerid]);
     PlayerTextDrawShow(playerid, HudBrand[playerid]);
-    PlayerTextDrawShow(playerid, HudVitals[playerid]);
-    PlayerTextDrawShow(playerid, HudNeeds[playerid]);
-    PlayerTextDrawShow(playerid, HudInfection[playerid]);
     PlayerTextDrawShow(playerid, HudZone[playerid]);
+    PlayerTextDrawShow(playerid, HudHpName[playerid]);
+    PlayerTextDrawShow(playerid, HudArmName[playerid]);
+    PlayerTextDrawShow(playerid, HudInfName[playerid]);
+    PlayerTextDrawShow(playerid, HudLapName[playerid]);
+    PlayerTextDrawShow(playerid, HudHausName[playerid]);
+    PlayerTextDrawShow(playerid, HudPipName[playerid]);
     PlayerTextDrawShow(playerid, HudLoadout[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
     PlayerHudVisible[playerid] = true;
 
-    HudLastVitals[playerid][0] = EOS;
-    HudLastNeeds[playerid][0] = EOS;
-    HudLastInfect[playerid][0] = EOS;
     HudLastZone[playerid][0] = EOS;
+    HudLastHpVal[playerid][0] = EOS;
+    HudLastArmVal[playerid][0] = EOS;
+    HudLastInfVal[playerid][0] = EOS;
+    HudLastLapVal[playerid][0] = EOS;
+    HudLastHausVal[playerid][0] = EOS;
+    HudLastPipVal[playerid][0] = EOS;
     HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     HudLastVehicle[playerid][0] = EOS;
+    HudLastPrompt[playerid][0] = EOS;
     HudFuelColor[playerid] = 0;
     HudFuelWarnStage[playerid] = 0;
-    HudLastBoss[playerid][0] = EOS;
-    HudLastRaid[playerid][0] = EOS;
-    HudLastNeedColor[playerid] = 0;
     HudLastInfectColor[playerid] = 0;
     HudVehicleShown[playerid] = false;
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
+    HudPromptShown[playerid] = false;
     return 1;
 }
 
@@ -211,19 +441,32 @@ stock HUD_Reshow(playerid, bool:force = false)
     if (!IsPlayerConnected(playerid)) return 0;
     if (!force && !PlayerHudVisible[playerid]) return 0;
 
+    for (new card = 0; card < 6; card++) PlayerTextDrawShow(playerid, HudCard[playerid][card]);
+    PlayerTextDrawShow(playerid, HudCardAccent[playerid]);
     PlayerTextDrawShow(playerid, HudBrand[playerid]);
-    PlayerTextDrawShow(playerid, HudVitals[playerid]);
-    PlayerTextDrawShow(playerid, HudNeeds[playerid]);
-    PlayerTextDrawShow(playerid, HudInfection[playerid]);
     PlayerTextDrawShow(playerid, HudZone[playerid]);
+    PlayerTextDrawShow(playerid, HudHpName[playerid]);
+    PlayerTextDrawShow(playerid, HudArmName[playerid]);
+    PlayerTextDrawShow(playerid, HudInfName[playerid]);
+    PlayerTextDrawShow(playerid, HudLapName[playerid]);
+    PlayerTextDrawShow(playerid, HudHausName[playerid]);
+    PlayerTextDrawShow(playerid, HudPipName[playerid]);
+    for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
+    {
+        PlayerTextDrawShow(playerid, HudBarBg[playerid][bar]);
+        PlayerTextDrawShow(playerid, HudBarFg[playerid][bar]);
+    }
     PlayerTextDrawShow(playerid, HudLoadout[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
 
     PlayerHudVisible[playerid] = true;
-    HudLastVitals[playerid][0] = EOS;
-    HudLastNeeds[playerid][0] = EOS;
-    HudLastInfect[playerid][0] = EOS;
     HudLastZone[playerid][0] = EOS;
+    HudLastHpVal[playerid][0] = EOS;
+    HudLastArmVal[playerid][0] = EOS;
+    HudLastInfVal[playerid][0] = EOS;
+    HudLastLapVal[playerid][0] = EOS;
+    HudLastHausVal[playerid][0] = EOS;
+    HudLastPipVal[playerid][0] = EOS;
     HudLastLoadout[playerid][0] = EOS;
     HudLastProgress[playerid][0] = EOS;
     /* Banner yang hanya dirender saat aktif juga harus dipaksa tampil ulang:
@@ -231,8 +474,18 @@ stock HUD_Reshow(playerid, bool:force = false)
        menampilkannya lagi kalau raid/boss memang masih berjalan. */
     HudLastBoss[playerid][0] = EOS;
     HudLastRaid[playerid][0] = EOS;
+    HudLastPrompt[playerid][0] = EOS;
+    /* Cache bar di-reset agar tick berikutnya menulis ulang lebar + warna
+       (client baru saja membuang semua TD; nilai lama tidak bisa dipercaya). */
+    for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
+    {
+        HudBarLastWidth[playerid][bar] = -1;
+        HudBarLastColor[playerid][bar] = 0;
+    }
+    HudVehicleShown[playerid] = false;
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
+    HudPromptShown[playerid] = false;
     return 1;
 }
 
@@ -240,38 +493,112 @@ stock HUD_Hide(playerid)
 {
     if (!IsPlayerConnected(playerid)) return 0;
 
+    for (new card = 0; card < 6; card++) PlayerTextDrawHide(playerid, HudCard[playerid][card]);
+    PlayerTextDrawHide(playerid, HudCardAccent[playerid]);
     PlayerTextDrawHide(playerid, HudBrand[playerid]);
-    PlayerTextDrawHide(playerid, HudVitals[playerid]);
-    PlayerTextDrawHide(playerid, HudNeeds[playerid]);
-    PlayerTextDrawHide(playerid, HudInfection[playerid]);
     PlayerTextDrawHide(playerid, HudZone[playerid]);
+    PlayerTextDrawHide(playerid, HudHpName[playerid]);
+    PlayerTextDrawHide(playerid, HudArmName[playerid]);
+    PlayerTextDrawHide(playerid, HudInfName[playerid]);
+    PlayerTextDrawHide(playerid, HudLapName[playerid]);
+    PlayerTextDrawHide(playerid, HudHausName[playerid]);
+    PlayerTextDrawHide(playerid, HudPipName[playerid]);
+    for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
+    {
+        PlayerTextDrawHide(playerid, HudBarBg[playerid][bar]);
+        PlayerTextDrawHide(playerid, HudBarFg[playerid][bar]);
+    }
     PlayerTextDrawHide(playerid, HudLoadout[playerid]);
     PlayerTextDrawHide(playerid, HudProgress[playerid]);
     PlayerTextDrawHide(playerid, HudVehicle[playerid]);
     PlayerTextDrawHide(playerid, HudBoss[playerid]);
     PlayerTextDrawHide(playerid, HudRaid[playerid]);
+    PlayerTextDrawHide(playerid, HudPromptBg[playerid]);
+    PlayerTextDrawHide(playerid, HudPromptText[playerid]);
 
     PlayerHudVisible[playerid] = false;
     HudVehicleShown[playerid] = false;
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
+    HudPromptShown[playerid] = false;
     return 1;
 }
 
 stock HUD_Destroy(playerid)
 {
+    for (new card = 0; card < 6; card++) PlayerTextDrawDestroy(playerid, HudCard[playerid][card]);
+    PlayerTextDrawDestroy(playerid, HudCardAccent[playerid]);
     PlayerTextDrawDestroy(playerid, HudBrand[playerid]);
-    PlayerTextDrawDestroy(playerid, HudVitals[playerid]);
-    PlayerTextDrawDestroy(playerid, HudNeeds[playerid]);
+    PlayerTextDrawDestroy(playerid, HudZone[playerid]);
+    PlayerTextDrawDestroy(playerid, HudHpName[playerid]);
+    PlayerTextDrawDestroy(playerid, HudHpVal[playerid]);
+    PlayerTextDrawDestroy(playerid, HudArmName[playerid]);
+    PlayerTextDrawDestroy(playerid, HudArmVal[playerid]);
+    PlayerTextDrawDestroy(playerid, HudInfName[playerid]);
+    PlayerTextDrawDestroy(playerid, HudInfVal[playerid]);
+    PlayerTextDrawDestroy(playerid, HudLapName[playerid]);
+    PlayerTextDrawDestroy(playerid, HudLapVal[playerid]);
+    PlayerTextDrawDestroy(playerid, HudHausName[playerid]);
+    PlayerTextDrawDestroy(playerid, HudHausVal[playerid]);
+    PlayerTextDrawDestroy(playerid, HudPipName[playerid]);
+    PlayerTextDrawDestroy(playerid, HudPipVal[playerid]);
+    for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
+    {
+        PlayerTextDrawDestroy(playerid, HudBarBg[playerid][bar]);
+        PlayerTextDrawDestroy(playerid, HudBarFg[playerid][bar]);
+    }
+    PlayerTextDrawDestroy(playerid, HudProgress[playerid]);
+    PlayerTextDrawDestroy(playerid, HudLoadout[playerid]);
     PlayerTextDrawDestroy(playerid, HudVehicle[playerid]);
-
     PlayerTextDrawDestroy(playerid, HudBoss[playerid]);
     PlayerTextDrawDestroy(playerid, HudRaid[playerid]);
-    PlayerTextDrawDestroy(playerid, HudInfection[playerid]);
-    PlayerTextDrawDestroy(playerid, HudZone[playerid]);
-    PlayerTextDrawDestroy(playerid, HudLoadout[playerid]);
-    PlayerTextDrawDestroy(playerid, HudProgress[playerid]);
+    PlayerTextDrawDestroy(playerid, HudPromptBg[playerid]);
+    PlayerTextDrawDestroy(playerid, HudPromptText[playerid]);
     PlayerHudVisible[playerid] = false;
+    return 1;
+}
+
+/* Prompt hanya boleh tampil saat TIDAK membangun: Y di mode bangun berarti
+   pasang struktur, bukan membuka pintu yang kebetulan di depan (dispatcher.inc
+   sudah memprioritaskan BuildEdit_OnKeyState; HUD mengikuti aturan yang sama). */
+stock HUD_UpdatePrompt(playerid)
+{
+    new hudLine[48];
+    hudLine[0] = EOS;
+
+    if (!BuildEdit_IsActive(playerid))
+    {
+        new Float:promptDistance;
+        new promptSlot = Interact_NearestForPlayer(playerid, promptDistance);
+        if (promptSlot >= 0 && promptDistance <= HUD_PROMPT_DISTANCE)
+        {
+            /* Label interact berformat "Nama\n{Y} tekan Y" — ambil baris pertama
+               saja dan batasi panjangnya agar pil tidak meluber. */
+            new labelPart[32];
+            strmid(labelPart, InteractPoint[promptSlot][iaLabelText], 0, HUD_PROMPT_MAX_LABEL, sizeof(labelPart));
+            new newline = strfind(labelPart, "\n");
+            if (newline >= 0) labelPart[newline] = EOS;
+            format(hudLine, sizeof(hudLine), "Y  %s", labelPart);
+        }
+    }
+
+    if (hudLine[0] != EOS)
+    {
+        HUD_SetIfChanged(playerid, HudPromptText[playerid], hudLine, HudLastPrompt[playerid], sizeof(HudLastPrompt[]));
+        if (!HudPromptShown[playerid])
+        {
+            HudPromptShown[playerid] = true;
+            PlayerTextDrawShow(playerid, HudPromptBg[playerid]);
+            PlayerTextDrawShow(playerid, HudPromptText[playerid]);
+        }
+    }
+    else if (HudPromptShown[playerid])
+    {
+        HudPromptShown[playerid] = false;
+        HudLastPrompt[playerid][0] = EOS;
+        PlayerTextDrawHide(playerid, HudPromptBg[playerid]);
+        PlayerTextDrawHide(playerid, HudPromptText[playerid]);
+    }
     return 1;
 }
 
@@ -281,34 +608,61 @@ stock HUD_Update(playerid)
     if (!PlayerHudVisible[playerid]) return 0;
 
     new hudLine[96];
-    format(hudLine, sizeof(hudLine), "HP %.0f  ARM %.0f",
-        Player_GetHealth(playerid), PlayerSurvival[playerid][psArmour]);
-    HUD_SetIfChanged(playerid, HudVitals[playerid], hudLine, HudLastVitals[playerid], sizeof(HudLastVitals[]));
 
-    new needColor = UI_TEXT_SECONDARY;
-    if (PlayerSurvival[playerid][psHunger] <= 20.0
-        || PlayerSurvival[playerid][psThirst] <= 20.0
-        || PlayerSurvival[playerid][psBladder] >= 90.0)
-    {
-        needColor = UI_ACCENT_DANGER;
-    }
-    else if (PlayerSurvival[playerid][psHunger] <= 40.0
-        || PlayerSurvival[playerid][psThirst] <= 40.0
-        || PlayerSurvival[playerid][psBladder] >= 75.0)
-    {
-        needColor = UI_ACCENT_WARN;
-    }
+    /* ---- baris statistik + bar ------------------------------------------ */
+    new Float:playerHealth = Player_GetHealth(playerid);
+    new Float:playerArmour = PlayerSurvival[playerid][psArmour];
+    new Float:infection = Player_GetInfection(playerid);
 
-    format(hudLine, sizeof(hudLine), "LAP %.0f  HAUS %.0f  PIPIS %.0f",
-        PlayerSurvival[playerid][psHunger], PlayerSurvival[playerid][psThirst],
-        PlayerSurvival[playerid][psBladder]);
-    HUD_SetIfChanged(playerid, HudNeeds[playerid], hudLine, HudLastNeeds[playerid], sizeof(HudLastNeeds[]));
-    if (needColor != HudLastNeedColor[playerid])
-    {
-        HudLastNeedColor[playerid] = needColor;
-        PlayerTextDrawColor(playerid, HudNeeds[playerid], needColor);
-        PlayerTextDrawShow(playerid, HudNeeds[playerid]);
-    }
+    new hpColor = UI_ACCENT_PRIMARY;
+    if (playerHealth <= 30.0) hpColor = UI_ACCENT_DANGER;
+    else if (playerHealth <= 60.0) hpColor = UI_ACCENT_WARN;
+    HUD_SetBar(playerid, HUD_BAR_HP, playerHealth / 100.0, hpColor);
+
+    format(hudLine, sizeof(hudLine), "%.0f/100", playerHealth);
+    HUD_SetIfChanged(playerid, HudHpVal[playerid], hudLine, HudLastHpVal[playerid], sizeof(HudLastHpVal[]));
+
+    HUD_SetBar(playerid, HUD_BAR_ARM, playerArmour / 100.0, UI_ACCENT_INFO);
+    format(hudLine, sizeof(hudLine), "%.0f/100", playerArmour);
+    HUD_SetIfChanged(playerid, HudArmVal[playerid], hudLine, HudLastArmVal[playerid], sizeof(HudLastArmVal[]));
+
+    new infectionColor = UI_ACCENT_PRIMARY;
+    if (infection >= 80.0) infectionColor = UI_ACCENT_DANGER;
+    else if (infection >= 40.0) infectionColor = UI_ACCENT_WARN;
+    HUD_SetBar(playerid, HUD_BAR_INF, infection / 100.0, infectionColor);
+    HudLastInfectColor[playerid] = infectionColor;
+
+    format(hudLine, sizeof(hudLine), "%.0f%%", infection);
+    HUD_SetIfChanged(playerid, HudInfVal[playerid], hudLine, HudLastInfVal[playerid], sizeof(HudLastInfVal[]));
+
+    /* ---- kebutuhan: LAP/HAUS turun = bar menyusut, PIP sebaliknya -------- */
+    new Float:hunger = PlayerSurvival[playerid][psHunger];
+    new Float:thirst = PlayerSurvival[playerid][psThirst];
+    new Float:bladder = PlayerSurvival[playerid][psBladder];
+
+    new needColor = UI_ACCENT_PRIMARY;
+    if (hunger <= 20.0) needColor = UI_ACCENT_DANGER;
+    else if (hunger <= 40.0) needColor = UI_ACCENT_WARN;
+    HUD_SetBar(playerid, HUD_BAR_LAP, hunger / 100.0, needColor);
+    format(hudLine, sizeof(hudLine), "%.0f", hunger);
+    HUD_SetIfChanged(playerid, HudLapVal[playerid], hudLine, HudLastLapVal[playerid], sizeof(HudLastLapVal[]));
+
+    needColor = UI_ACCENT_PRIMARY;
+    if (thirst <= 20.0) needColor = UI_ACCENT_DANGER;
+    else if (thirst <= 40.0) needColor = UI_ACCENT_WARN;
+    HUD_SetBar(playerid, HUD_BAR_HAUS, thirst / 100.0, needColor);
+    format(hudLine, sizeof(hudLine), "%.0f", thirst);
+    HUD_SetIfChanged(playerid, HudHausVal[playerid], hudLine, HudLastHausVal[playerid], sizeof(HudLastHausVal[]));
+
+    needColor = UI_ACCENT_PRIMARY;
+    if (bladder >= 90.0) needColor = UI_ACCENT_DANGER;
+    else if (bladder >= 75.0) needColor = UI_ACCENT_WARN;
+    HUD_SetBar(playerid, HUD_BAR_PIP, (100.0 - bladder) / 100.0, needColor);
+    format(hudLine, sizeof(hudLine), "%.0f", bladder);
+    HUD_SetIfChanged(playerid, HudPipVal[playerid], hudLine, HudLastPipVal[playerid], sizeof(HudLastPipVal[]));
+
+    /* ---- prompt interaksi ------------------------------------------------ */
+    HUD_UpdatePrompt(playerid);
 
     /* Dulu hanya PLAYER_STATE_DRIVER, jadi penumpang tidak pernah melihat BBM
        sama sekali (dilaporkan "tidak ada textdraw bensin"). Sekarang semua
@@ -338,6 +692,7 @@ stock HUD_Update(playerid)
         /* Baris sempit (±33 karakter). Saat BBM rendah, angka km diganti arah
            pom: informasi yang benar-benar dibutuhkan saat itu. */
         new fuelLine[96];
+
         if (fuel < 0.0)
         {
             format(fuelLine, sizeof(fuelLine), "TANPA BBM [----------]");
@@ -469,20 +824,6 @@ stock HUD_Update(playerid)
         }
     }
 
-    new Float:infection = Player_GetInfection(playerid);
-    new infectionColor = UI_ACCENT_PRIMARY;
-    if (infection >= 80.0) infectionColor = UI_ACCENT_DANGER;
-    else if (infection >= 40.0) infectionColor = UI_ACCENT_WARN;
-
-    format(hudLine, sizeof(hudLine), "INFECT %.0f%%", infection);
-    HUD_SetIfChanged(playerid, HudInfection[playerid], hudLine, HudLastInfect[playerid], sizeof(HudLastInfect[]));
-    if (infectionColor != HudLastInfectColor[playerid])
-    {
-        HudLastInfectColor[playerid] = infectionColor;
-        PlayerTextDrawColor(playerid, HudInfection[playerid], infectionColor);
-        PlayerTextDrawShow(playerid, HudInfection[playerid]);
-    }
-
     new zoneLabel[48], zoneLine[64];
     new zoneId = Player_GetZone(playerid);
     Zone_GetName(zoneId, zoneLabel, sizeof(zoneLabel));
@@ -501,10 +842,10 @@ stock HUD_Update(playerid)
     HUD_SetIfChanged(playerid, HudLoadout[playerid], hudLine, HudLastLoadout[playerid], sizeof(HudLastLoadout[]));
 
     // Progres skill harus terlihat tanpa membuka dialog: ini satu-satunya petunjuk
-    // bahwa level dan poin skill bertambah.
-    format(hudLine, sizeof(hudLine), "LVL %d  SP %d  SAMPEL %d  LUKA %d  /skill",
-        PlayerSurvival[playerid][psLevel], SkillPoints[playerid],
-        Inventory_CountItem(playerid, ITEM_SPECIMEN), Wounds_Get(playerid));
+    // bahwa level dan poin skill bertambah. SAMPEL dihapus — sudah ada di kolom
+    // kanan; dobel di dua baris adalah noise (audit UX).
+    format(hudLine, sizeof(hudLine), "LVL %d  SP %d  LUKA %d  /skill",
+        PlayerSurvival[playerid][psLevel], SkillPoints[playerid], Wounds_Get(playerid));
     HUD_SetIfChanged(playerid, HudProgress[playerid], hudLine, HudLastProgress[playerid], sizeof(HudLastProgress[]));
 
     new Float:bossHealth, Float:bossMax;
