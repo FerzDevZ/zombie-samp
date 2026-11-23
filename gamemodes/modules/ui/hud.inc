@@ -279,7 +279,7 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudProgress",   26.0, 0.18, 30 },
     { "HudMoney",      26.0, 0.16, 12 },
     { "HudClock",     120.0, 0.16,  9 },
-    { "HudVehicle",   356.0, 0.17, 27 },
+    { "HudVehicle",   356.0, 0.17, 28 },
     { "HudBoss",      210.0, 0.26, 16 },
     { "HudRaid",      190.0, 0.24, 25 },
     { "HudPromptText",320.0, 0.18, 23 }
@@ -686,11 +686,11 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudClock[playerid], 1);
     PlayerTextDrawFont(playerid, HudClock[playerid], 1);
 
-    /* Baris kanan hanya BBM. Baris SCRAP/SAMPEL dihapus total (permintaan
+    /* Baris kanan hanya FUEL. Baris SCRAP/SAMPEL dihapus total (permintaan
        pemain: angkanya kacau di semua gaya HUD); jumlah scrap dan sampel
        tetap bisa dilihat di dialog tas dan /inv. */
     HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X),
-        HUD_Y(playerid, HUD_VEH_TEXT_Y), "BBM");
+        HUD_Y(playerid, HUD_VEH_TEXT_Y), "FUEL");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_LETTER_X), HUD_F(playerid, 0.72));
     PlayerTextDrawTextSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_TEXT_W), HUD_F(playerid, 12.0));
     PlayerTextDrawUseBox(playerid, HudVehicle[playerid], 0);
@@ -701,7 +701,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
 
     /* Bar HP boss: teks blok, gaya sama dengan HUD lain (tanpa box tambahan). */
-    Log_Format(LOG_INFO, "hud %d baris BBM: kartu %.0f..%.0f y%.0f..%.0f, teks x%.0f..%.0f y%.0f, bar x%.0f..%.0f y%.0f",
+    Log_Format(LOG_INFO, "hud %d baris FUEL: kartu %.0f..%.0f y%.0f..%.0f, teks x%.0f..%.0f y%.0f, bar x%.0f..%.0f y%.0f",
         playerid, HUD_VEH_CARD_X, HUD_VEH_CARD_X + HUD_VEH_CARD_W,
         HUD_VEH_CARD_Y, HUD_VEH_CARD_Y + HUD_VEH_CARD_H,
         HUD_VEH_TEXT_X, HUD_VEH_TEXT_X + HUD_VEH_TEXT_W, HUD_VEH_TEXT_Y,
@@ -851,10 +851,10 @@ stock HUD_AuditRows(playerid)
     HUD_AuditRow(playerid, "Brand",  26.0, 0.18, "LAST_STAND", 150.0);
     HUD_AuditRow(playerid, "Zona",  150.0, 0.18, "Bandara Lama [WASPADA]", 220.0);
     HUD_AuditRow(playerid, "HpVal", 162.0, 0.18, "100/100", 150.0);
-    /* Baris BBM: teks harus berhenti sebelum bar mulai di x=500. */
-    HUD_AuditRow(playerid, "BBM-teks", HUD_VEH_TEXT_X * HUD_XComp(playerid),
+    /* Baris FUEL: teks harus berhenti sebelum bar mulai di x=500. */
+    HUD_AuditRow(playerid, "FUEL-teks", HUD_VEH_TEXT_X * HUD_XComp(playerid),
         HUD_VEH_LETTER_X * HUD_XComp(playerid),
-        "BBM 12%  12/80L pom 240m BD",
+        "FUEL 12%  12/80L pom 240m BD",
         (HUD_VEH_TEXT_W - 8.0) * HUD_XComp(playerid));
     HUD_AuditRow(playerid, "Progress", 26.0, 0.18, "LVL 99  SP 999  LUKA 9  /skill", 300.0);
     HUD_AuditRow(playerid, "Boss", 210.0, 0.26, "ABOMINATION 100%", 0.0);
@@ -862,7 +862,7 @@ stock HUD_AuditRows(playerid)
     HUD_AuditRow(playerid, "Prompt", 320.0, 0.18, "Y  Ekstraksi sampel air", 0.0);
 
     new line[128];
-    format(line, sizeof(line), "[TDD] BBM: kartu %.0f..%.0f, teks y%.0f batas %.0f, bar x%.0f..%.0f y%.0f",
+    format(line, sizeof(line), "[TDD] FUEL: kartu %.0f..%.0f, teks y%.0f batas %.0f, bar x%.0f..%.0f y%.0f",
         HUD_VEH_CARD_X, HUD_VEH_CARD_X + HUD_VEH_CARD_W, HUD_VEH_TEXT_Y,
         HUD_VEH_TEXT_W - 8.0, HUD_VEH_BAR_X, HUD_VEH_BAR_X + HUD_VEH_BAR_W, HUD_VEH_BAR_Y);
     SendClientMessage(playerid, UI_ACCENT_INFO, line);
@@ -909,7 +909,7 @@ stock HUD_Diag(playerid)
         PlayerHudVisible[playerid], IsPlayerInAnyVehicle(playerid),
         Iter_Count(PlayerPool), Iter_Contains(PlayerPool, playerid), HudLastVehicle[playerid]);
     SendClientMessage(playerid, UI_ACCENT_INFO, line);
-    Log_Format(LOG_INFO, "huddiag %d: tampil=%d inCar=%d bbm=\"%s\" hp=\"%s\" arm=\"%s\"",
+    Log_Format(LOG_INFO, "huddiag %d: tampil=%d inCar=%d fuel=\"%s\" hp=\"%s\" arm=\"%s\"",
         playerid, PlayerHudVisible[playerid], IsPlayerInAnyVehicle(playerid),
         HudLastVehicle[playerid], HudLastHpVal[playerid], HudLastArmVal[playerid]);
 
@@ -924,13 +924,13 @@ stock HUD_Diag(playerid)
         new Float:fuel = Vehicle_GetFuel(vehicleid);
         new Float:percent = Vehicle_FuelPercent(vehicleid);
         new fuelLine[80];
-        format(fuelLine, sizeof(fuelLine), "BBM %d%%  %.0f/%.0fL %.0fkm",
+        format(fuelLine, sizeof(fuelLine), "FUEL %d%%  %.0f/%.0fL %.0fkm",
             floatround(percent * 100.0), fuel, Vehicle_GetTank(vehicleid), Vehicle_RangeKm(vehicleid));
         new Float:diagLetterX = HUD_VEH_LETTER_X * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
         new Float:textBudget = (HUD_VEH_TEXT_W - 8.0)
             * HUD_ScaleOf(playerid) * HUD_XComp(playerid);
         TD_FitText(fuelLine, sizeof(fuelLine), fuelLine, diagLetterX, textBudget);
-        format(line, sizeof(line), "[DIAG] bbm %.1fL (%.0f%%) lebar=%d%% baris=\"%s\" (%.0f/%.0f satuan)",
+        format(line, sizeof(line), "[DIAG] fuel %.1fL (%.0f%%) lebar=%d%% baris=\"%s\" (%.0f/%.0f satuan)",
             fuel, percent * 100.0, floatround(HUD_XComp(playerid) * 100.0), fuelLine,
             TD_TextWidth(fuelLine, diagLetterX), textBudget);
         SendClientMessage(playerid, UI_ACCENT_PRIMARY, line);
@@ -948,10 +948,15 @@ stock HUD_MeasureSelftest()
     ok = ok && TD_CharWidthOrZero('B') == 19;
     ok = ok && TD_CharWidthOrZero(' ') == 15;
     ok = ok && TD_CharWidthOrZero('%') == 34;
-    ok = ok && floatround(TD_TextWidth("BBM", 0.17) * 100.0) == floatround((19.0 + 19.0 + 28.0) * 0.17 * 100.0);
+    /* Lebar "FUEL" dihitung dari tabel yang sama dengan pengukurnya — bukan
+       angka hafalan. Kalau fonts.dat berubah, uji ini ikut bergerak. */
+    new Float:fuelWidth = TD_TextWidth("FUEL", 0.17);
+    new Float:fuelExpected = float(TD_CharWidthOrZero('F') + TD_CharWidthOrZero('U')
+        + TD_CharWidthOrZero('E') + TD_CharWidthOrZero('L')) * 0.17;
+    ok = ok && (fuelWidth - fuelExpected < 0.01) && (fuelExpected - fuelWidth < 0.01);
 
-    /* Teks BBM wajib muat sebelum bar mulai. */
-    new Float:textWidth = TD_TextWidth("BBM 12%  12/80L pom 240m BD", HUD_VEH_LETTER_X);
+    /* Teks FUEL wajib muat sebelum bar mulai. */
+    new Float:textWidth = TD_TextWidth("FUEL 12%  12/80L pom 240m BD", HUD_VEH_LETTER_X);
     ok = ok && textWidth <= (HUD_VEH_TEXT_W - 8.0);
 
     new detail[144];
@@ -960,17 +965,17 @@ stock HUD_MeasureSelftest()
        mengosongkan string lalu menyalin dari dirinya sendiri -> baris BBM jadi
        kosong dan tidak pernah tampil. Uji ini mengunci perilaku alias. */
     new aliasLine[80];
-    format(aliasLine, sizeof(aliasLine), "BBM 54%%  43.9/80L 120km");
+    format(aliasLine, sizeof(aliasLine), "FUEL 54%%  43.9/80L 120km");
     TD_FitText(aliasLine, sizeof(aliasLine), aliasLine, HUD_VEH_LETTER_X, 140.0);
-    new bool:aliasOk = (strlen(aliasLine) > 4) && !strcmp(aliasLine, "BBM 54%  43.9/80L 120km", false);
+    new bool:aliasOk = (strlen(aliasLine) > 4) && !strcmp(aliasLine, "FUEL 54%  43.9/80L 120km", false);
 
     new shortLine[32];
-    format(shortLine, sizeof(shortLine), "BBM sangat panjang sekali 999km");
+    format(shortLine, sizeof(shortLine), "FUEL sangat panjang sekali 999km");
     TD_FitText(shortLine, sizeof(shortLine), shortLine, HUD_VEH_LETTER_X, 40.0);
     new bool:trimOk = (strlen(shortLine) > 0) && (TD_TextWidth(shortLine, HUD_VEH_LETTER_X) <= 40.0);
     ok = ok && aliasOk && trimOk;
 
-    format(detail, sizeof(detail), "fonts.dat '0'=23 'A'=22 'B'=19 spasi=15; BBM %.0f/%.0f satuan (teks<batas baris)",
+    format(detail, sizeof(detail), "fonts.dat '0'=23 'A'=22 'B'=19 spasi=15; FUEL %.0f/%.0f satuan (teks<batas baris)",
         textWidth, HUD_VEH_TEXT_W - 8.0);
     Selftest_Record(ok, "pengukur lebar textdraw", detail);
     return 1;
@@ -1313,19 +1318,19 @@ stock HUD_Update(playerid)
 
         if (fuel < 0.0)
         {
-            format(fuelLine, sizeof(fuelLine), "BBM 0%%  TANPA BBM");
+            format(fuelLine, sizeof(fuelLine), "FUEL 0%%  TANPA FUEL");
             HUD_SetBar(playerid, HUD_BAR_VEH, 0.0, UI_ACCENT_DANGER);
         }
         else if (percent <= 0.25)
         {
             new pumpPart[40];
             Garage_FuelCompass(playerid, pumpPart, sizeof(pumpPart), true);
-            format(fuelLine, sizeof(fuelLine), "BBM %d%%  %.0f/%.0fL %s",
+            format(fuelLine, sizeof(fuelLine), "FUEL %d%%  %.0f/%.0fL %s",
                 floatround(percent * 100.0), fuel, tank, pumpPart);
         }
         else
         {
-            format(fuelLine, sizeof(fuelLine), "BBM %d%%  %.0f/%.0fL %.0fkm",
+            format(fuelLine, sizeof(fuelLine), "FUEL %d%%  %.0f/%.0fL %.0fkm",
                 floatround(percent * 100.0), fuel, tank, Vehicle_RangeKm(vehicleid));
         }
 
@@ -1340,13 +1345,13 @@ stock HUD_Update(playerid)
            log supaya penyebabnya terlihat dari server, bukan dari tebakan. */
         if (strlen(fuelLine) < 6)
         {
-            Log_Format(LOG_WARN, "bbm %d: string pendek '%s' (len=%d budget=%.0f lebar=%.0f)",
+            Log_Format(LOG_WARN, "fuel %d: string pendek '%s' (len=%d budget=%.0f lebar=%.0f)",
                 playerid, fuelLine, strlen(fuelLine), textBudget,
                 TD_TextWidth(fuelLine, vehLetterX));
         }
         else if (HudLastVehicle[playerid][0] == EOS)
         {
-            Log_Format(LOG_INFO, "bbm %d: '%s' (len=%d budget=%.0f lebar=%.0f)",
+            Log_Format(LOG_INFO, "fuel %d: '%s' (len=%d budget=%.0f lebar=%.0f)",
                 playerid, fuelLine, strlen(fuelLine), textBudget,
                 TD_TextWidth(fuelLine, vehLetterX));
         }
@@ -1393,11 +1398,11 @@ stock HUD_Update(playerid)
             PlayerPlaySound(playerid, 1054, 0.0, 0.0, 0.0);
             if (warnStage == 1)
             {
-                SendClientMessage(playerid, UI_ACCENT_WARN, "[BBM] Tangki tinggal seperempat. Isi di pom kamp (/isi) atau pakai jerrycan.");
+                SendClientMessage(playerid, UI_ACCENT_WARN, "[FUEL] Tangki tinggal seperempat. Isi di pom kamp (/isi) atau pakai jerrycan.");
             }
             else
             {
-                SendClientMessage(playerid, UI_ACCENT_DANGER, "[BBM] Hampir kering! /isi sekarang, mesin bisa mati kapan saja.");
+                SendClientMessage(playerid, UI_ACCENT_DANGER, "[FUEL] Hampir kering! /isi sekarang, mesin bisa mati kapan saja.");
             }
         }
         else if (percent > 0.30)

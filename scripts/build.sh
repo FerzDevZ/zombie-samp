@@ -19,6 +19,22 @@ command -v sampctl >/dev/null 2>&1 || fail "sampctl tidak ada. Install: https://
 
 cd "$ROOT"
 
+# Gate keamanan statis (skill samp-security-lint). Dijalankan SEBELUM kompilasi
+# supaya build gagal lebih awal kalau ada format(..., params) atau mysql %s.
+# Aturan yang hanya warning (poolsize-loop) tidak menggagalkan build.
+if [[ -x "$ROOT/scripts/lint-security.sh" ]]; then
+  echo "[BUILD] gate keamanan statis"
+  set +e
+  bash "$ROOT/scripts/lint-security.sh" >"$ROOT/backups/lint.log" 2>&1
+  LINT_RC=$?
+  set -e
+  grep -v 'poolsize-loop' "$ROOT/backups/lint.log" | grep -v 'ringkasan' | sed '/^$/d' || true
+  if [[ $LINT_RC -ne 0 ]]; then
+    cat "$ROOT/backups/lint.log" >&2
+    fail "gate keamanan statis menemukan error — lihat backups/lint.log"
+  fi
+fi
+
 if [[ "${1:-}" == "--clean" ]]; then
   echo "[BUILD] bersihkan artefak lama"
   rm -f "$AMX" "$ROOT/gamemodes/main.amx.tmp" 2>/dev/null || true

@@ -62,6 +62,16 @@
 #include "modules/inventory/container_lock.inc"
 #include "modules/account/account_core.inc"
 #include "modules/core/slotqueue.inc"
+/* Kepemilikan timer per pemain (skill samp-timer-scheduling). Semua timer yang
+   hanya membawa playerid didaftarkan ke slot supaya TG_StopAll di disconnect
+   pasti mematikannya — id pemain yang didaur ulang tidak boleh menerima timer
+   milik pemain sebelumnya. Nama file dipendekkan (samp_elife) karena pawncc
+   diam-diam melewati #include yang path-nya melebihi ~32 karakter. */
+#include "modules/core/samp_timer.inc"
+/* Pustaka kepemilikan entitas (skill samp-entity-lifecycle). Helper internalnya
+   sudah diubah static -> stock di salinan vendored supaya gate 0 warning tetap
+   lulus sampai ada modul yang benar-benar memiliki entitas per pemain. */
+#include "modules/core/samp_elife.inc"
 #include "modules/player/deaths.inc"
 #include "modules/content/lore.inc"
 #include "modules/account/char_create.inc"
