@@ -34,3 +34,5 @@ mysql.ini
 server.cfg
 filterscripts/
 npcmodes/
+sampctl_build_file.inc
+server_log.txt
