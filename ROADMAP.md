@@ -448,4 +448,5 @@ Gate: 100 pemain + 190 zombie, tick p95 < 20 ms, 0 crash 60 menit, 3 cheat simul
 - [x] Perbaikan "struktur bergeser": penanda muat per **base** (`BaseBuild_IsLoaded`/`MarkLoaded`/`ForgetLoaded`) + pagar duplikat di `BaseBuild_OnRowsLoaded`; selftest `muat struktur per base` (52/52)
 - [x] HUD: nominal uang dihapus, SCRAP/SAMPEL diberi kotak latar gelap, BBM tampil untuk pengemudi **dan** penumpang, plus baris GENSET saat berdiri <= 12 m dari generator sendiri
 - [x] HUD v2 (audit UX): kartu kaca rounded + bar HP/ARM/INF berlabel + micro-bar LAP/HAUS/PIP, kolom kanan segaris (x=352 lebar 276), pil prompt interaksi `[Y] <nama>` bawah-tengah saat ≤ 1,5 m dari hotspot (sembunyi saat mode bangun), SAMPEL dobel dihapus dari baris progres; gate `gHudFitRows` 20 baris + `generate.py` skip sprite + galeri 4 skenario baru
+- [x] HUD v3 (modernisasi): gauge ASCII `[####----]`/`##########` dihapus — BBM/GENSET pakai bar bersegmen 118 px di dalam kotak, boss pakai bar merah 258 px di bawah nama; bar HP/ARM/INF ikut bersegmen (10 celah strip latar); bar kondisional hilang UTUH bersama konteksnya (BBM ≤25% / genset mati / boss mati), track kosong tidak boleh mengambang
 

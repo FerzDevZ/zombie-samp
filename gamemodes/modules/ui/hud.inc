@@ -37,14 +37,16 @@ new PlayerText:HudPromptBg[MAX_PLAYERS];
 new PlayerText:HudPromptText[MAX_PLAYERS];
 new bool:PlayerHudVisible[MAX_PLAYERS];
 
-/* Bar index: 0 HP, 1 ARM, 2 INF, 3 LAP, 4 HAUS, 5 PIP. */
+/* Bar index: 0 HP, 1 ARM, 2 INF, 3 LAP, 4 HAUS, 5 PIP, 6 BBM/GENSET, 7 BOSS. */
 #define HUD_BAR_HP     0
 #define HUD_BAR_ARM    1
 #define HUD_BAR_INF    2
 #define HUD_BAR_LAP    3
 #define HUD_BAR_HAUS   4
 #define HUD_BAR_PIP    5
-#define HUD_BAR_COUNT  6
+#define HUD_BAR_VEH    6
+#define HUD_BAR_BOSS   7
+#define HUD_BAR_COUNT  8
 
 new PlayerText:HudBarBg[MAX_PLAYERS][HUD_BAR_COUNT];
 new PlayerText:HudBarFg[MAX_PLAYERS][HUD_BAR_COUNT];
@@ -53,8 +55,16 @@ new HudBarLastColor[MAX_PLAYERS][HUD_BAR_COUNT];
 
 /* Lebar/tinggi bar harus sama dengan angka di HUD_CreateBar — generate.py dan
    gallery.py membaca literal yang sama, jadi jangan ubah satu sisi saja. */
-new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0};
-new const Float:gHudBarH[HUD_BAR_COUNT] = {5.0, 5.0, 5.0, 4.0, 4.0, 4.0};
+new const Float:gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 118.0, 258.0};
+new const Float:gHudBarH[HUD_BAR_COUNT] = {5.0, 5.0, 5.0, 4.0, 4.0, 4.0, 5.0, 6.0};
+
+/* Bar bersegmen gaya game modern: fill kontinu dipotong strip warna latar.
+   0 = kontinu (micro-bar). Maksimum 10 segmen -> paling banyak 9 celah.
+   Bar yang bersegmen: HP, ARM, INF, BBM/GENSET, BOSS (urutan HUD_SEG_BARS). */
+#define HUD_SEG_MAX_GAPS 9
+#define HUD_SEG_GAP_W    1.6
+new const gHudSegCount[5] = {10, 10, 10, 10, 10};
+new PlayerText:HudBarGap[MAX_PLAYERS][5][HUD_SEG_MAX_GAPS];
 
 #define HUD_PROMPT_MAX_LABEL 20
 #define HUD_PROMPT_DISTANCE  1.5
@@ -76,6 +86,7 @@ new HudLastBoss[MAX_PLAYERS][64];
 new HudLastRaid[MAX_PLAYERS][64];
 new HudLastInfectColor[MAX_PLAYERS];
 new bool:HudVehicleShown[MAX_PLAYERS];
+new bool:HudVehBarShown[MAX_PLAYERS];
 new HudFuelColor[MAX_PLAYERS];
 new HudFuelWarnStage[MAX_PLAYERS];
 new bool:HudBossShown[MAX_PLAYERS];
@@ -126,8 +137,8 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudPipVal",    264.0, 0.15,  3 },
     { "HudProgress",   26.0, 0.18, 30 },
     { "HudLoadout",   352.0, 0.20, 22 },
-    { "HudVehicle",   352.0, 0.17, 38 },
-    { "HudBoss",      210.0, 0.26, 28 },
+    { "HudVehicle",   352.0, 0.17, 26 },
+    { "HudBoss",      210.0, 0.26, 16 },
     { "HudRaid",      190.0, 0.24, 25 },
     { "HudPromptText",320.0, 0.18, 23 }
 };
@@ -184,7 +195,7 @@ stock HUD_CreateCard(playerid, Float:x, Float:y, Float:width, Float:height, Floa
     return 1;
 }
 
-stock HUD_CreateBar(playerid, index, Float:x, Float:y, trackColor)
+stock HUD_CreateBar(playerid, index, Float:x, Float:y, trackColor, gapColor, segSlot = -1)
 {
     HudBarBg[playerid][index] = CreatePlayerTextDraw(playerid, x, y, "LD_SPAC:white");
     PlayerTextDrawFont(playerid, HudBarBg[playerid][index], TEXT_DRAW_FONT_SPRITE_DRAW);
@@ -198,8 +209,58 @@ stock HUD_CreateBar(playerid, index, Float:x, Float:y, trackColor)
     PlayerTextDrawColor(playerid, HudBarFg[playerid][index], UI_ACCENT_PRIMARY);
     PlayerTextDrawSetSelectable(playerid, HudBarFg[playerid][index], false);
 
+    /* Celah segmen dibuat SETELAH fill supaya tergambar di atasnya. Warna celah
+       = warna latar bar (kartu / kotak BBM / dunia) supaya terlihat seperti
+       potongan, bukan garis tambahan. */
+    if (segSlot >= 0)
+    {
+        new segments = gHudSegCount[segSlot];
+        new Float:step = gHudBarW[index] / float(segments);
+        for (new cut = 1; cut < segments && cut <= HUD_SEG_MAX_GAPS; cut++)
+        {
+            new Float:gapX = x + float(cut) * step - HUD_SEG_GAP_W * 0.5;
+            HudBarGap[playerid][segSlot][cut - 1] = CreatePlayerTextDraw(playerid, gapX, y, "LD_SPAC:white");
+            PlayerTextDrawFont(playerid, HudBarGap[playerid][segSlot][cut - 1], TEXT_DRAW_FONT_SPRITE_DRAW);
+            PlayerTextDrawTextSize(playerid, HudBarGap[playerid][segSlot][cut - 1], HUD_SEG_GAP_W, gHudBarH[index]);
+            PlayerTextDrawColor(playerid, HudBarGap[playerid][segSlot][cut - 1], gapColor);
+            PlayerTextDrawSetSelectable(playerid, HudBarGap[playerid][segSlot][cut - 1], false);
+        }
+    }
+
     HudBarLastWidth[playerid][index] = 0;
     HudBarLastColor[playerid][index] = UI_ACCENT_PRIMARY;
+    return 1;
+}
+
+/* Bar kondisional (BBM/GENSET, boss) harus tampil-hilang BERSAMA konteksnya —
+   bar yang mengambang tanpa label adalah sampah visual. segSlot < 0 = tanpa celah. */
+stock HUD_ShowBar(playerid, index, segSlot = -1)
+{
+    PlayerTextDrawShow(playerid, HudBarBg[playerid][index]);
+    PlayerTextDrawShow(playerid, HudBarFg[playerid][index]);
+    if (segSlot >= 0)
+    {
+        for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
+        {
+            if (HudBarGap[playerid][segSlot][cut] != PlayerText:0)
+                PlayerTextDrawShow(playerid, HudBarGap[playerid][segSlot][cut]);
+        }
+    }
+    return 1;
+}
+
+stock HUD_HideBar(playerid, index, segSlot = -1)
+{
+    PlayerTextDrawHide(playerid, HudBarBg[playerid][index]);
+    PlayerTextDrawHide(playerid, HudBarFg[playerid][index]);
+    if (segSlot >= 0)
+    {
+        for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
+        {
+            if (HudBarGap[playerid][segSlot][cut] != PlayerText:0)
+                PlayerTextDrawHide(playerid, HudBarGap[playerid][segSlot][cut]);
+        }
+    }
     return 1;
 }
 
@@ -322,12 +383,17 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudPipVal[playerid], 1);
     PlayerTextDrawFont(playerid, HudPipVal[playerid], 1);
 
-    HUD_CreateBar(playerid, HUD_BAR_HP, 52.0, 312.0, UI_BG_ELEVATED);
-    HUD_CreateBar(playerid, HUD_BAR_ARM, 52.0, 324.0, UI_BG_ELEVATED);
-    HUD_CreateBar(playerid, HUD_BAR_INF, 52.0, 336.0, UI_BG_ELEVATED);
-    HUD_CreateBar(playerid, HUD_BAR_LAP, 48.0, 348.0, UI_BG_ELEVATED);
-    HUD_CreateBar(playerid, HUD_BAR_HAUS, 134.0, 348.0, UI_BG_ELEVATED);
-    HUD_CreateBar(playerid, HUD_BAR_PIP, 220.0, 348.0, UI_BG_ELEVATED);
+    HUD_CreateBar(playerid, HUD_BAR_HP, 52.0, 312.0, UI_BG_ELEVATED, UI_BG_GLASS_DARK, 0);
+    HUD_CreateBar(playerid, HUD_BAR_ARM, 52.0, 324.0, UI_BG_ELEVATED, UI_BG_GLASS_DARK, 1);
+    HUD_CreateBar(playerid, HUD_BAR_INF, 52.0, 336.0, UI_BG_ELEVATED, UI_BG_GLASS_DARK, 2);
+    HUD_CreateBar(playerid, HUD_BAR_LAP, 48.0, 348.0, UI_BG_ELEVATED, UI_BG_GLASS_DARK);
+    HUD_CreateBar(playerid, HUD_BAR_HAUS, 134.0, 348.0, UI_BG_ELEVATED, UI_BG_GLASS_DARK);
+    HUD_CreateBar(playerid, HUD_BAR_PIP, 220.0, 348.0, UI_BG_ELEVATED, UI_BG_GLASS_DARK);
+    /* Bar BBM di dalam kotak kanan (x 352..628): bar mulai x=500. Celah warna
+       kotak 0x0B0F14B4 supaya potongan menyatu dengan latar kotak. */
+    HUD_CreateBar(playerid, HUD_BAR_VEH, 500.0, 338.0, UI_BG_ELEVATED, 0x0B0F14B4, 3);
+    /* Bar boss di bawah teks ABOMINATION (y=30): celah gelap di atas dunia. */
+    HUD_CreateBar(playerid, HUD_BAR_BOSS, 210.0, 46.0, UI_BG_ELEVATED, 0x0B0F1499, 4);
 
     HudProgress[playerid] = CreatePlayerTextDraw(playerid, 26.0, 360.0, "LVL 1  SP 0  /skill");
     PlayerTextDrawLetterSize(playerid, HudProgress[playerid], 0.18, 0.75);
@@ -422,6 +488,7 @@ stock HUD_Create(playerid)
     HudFuelWarnStage[playerid] = 0;
     HudLastInfectColor[playerid] = 0;
     HudVehicleShown[playerid] = false;
+    HudVehBarShown[playerid] = false;
     HudBossShown[playerid] = false;
     HudRaidShown[playerid] = false;
     HudPromptShown[playerid] = false;
@@ -451,10 +518,19 @@ stock HUD_Reshow(playerid, bool:force = false)
     PlayerTextDrawShow(playerid, HudLapName[playerid]);
     PlayerTextDrawShow(playerid, HudHausName[playerid]);
     PlayerTextDrawShow(playerid, HudPipName[playerid]);
-    for (new bar = 0; bar < HUD_BAR_COUNT; bar++)
+    for (new bar = 0; bar < 6; bar++)
     {
         PlayerTextDrawShow(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawShow(playerid, HudBarFg[playerid][bar]);
+    }
+    /* Hanya segmen HP/ARM/INF (slot 0-2) yang statis; bar BBM/boss kondisional. */
+    for (new seg = 0; seg < 3; seg++)
+    {
+        for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
+        {
+            if (HudBarGap[playerid][seg][cut] != PlayerText:0)
+                PlayerTextDrawShow(playerid, HudBarGap[playerid][seg][cut]);
+        }
     }
     PlayerTextDrawShow(playerid, HudLoadout[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
@@ -508,6 +584,14 @@ stock HUD_Hide(playerid)
         PlayerTextDrawHide(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawHide(playerid, HudBarFg[playerid][bar]);
     }
+    for (new seg = 0; seg < 5; seg++)
+    {
+        for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
+        {
+            if (HudBarGap[playerid][seg][cut] != PlayerText:0)
+                PlayerTextDrawHide(playerid, HudBarGap[playerid][seg][cut]);
+        }
+    }
     PlayerTextDrawHide(playerid, HudLoadout[playerid]);
     PlayerTextDrawHide(playerid, HudProgress[playerid]);
     PlayerTextDrawHide(playerid, HudVehicle[playerid]);
@@ -546,6 +630,14 @@ stock HUD_Destroy(playerid)
     {
         PlayerTextDrawDestroy(playerid, HudBarBg[playerid][bar]);
         PlayerTextDrawDestroy(playerid, HudBarFg[playerid][bar]);
+    }
+    for (new seg = 0; seg < 5; seg++)
+    {
+        for (new cut = 0; cut < HUD_SEG_MAX_GAPS; cut++)
+        {
+            if (HudBarGap[playerid][seg][cut] != PlayerText:0)
+                PlayerTextDrawDestroy(playerid, HudBarGap[playerid][seg][cut]);
+        }
     }
     PlayerTextDrawDestroy(playerid, HudProgress[playerid]);
     PlayerTextDrawDestroy(playerid, HudLoadout[playerid]);
@@ -674,39 +766,26 @@ stock HUD_Update(playerid)
         new Float:tank = Vehicle_GetTank(vehicleid);
         new Float:percent = Vehicle_FuelPercent(vehicleid);
 
-        /* Gauge blok 10 karakter: terbaca di layar HP tanpa perlu font khusus. */
-        new bar[12];
-        new filled = floatround(percent * 10.0);
-        if (filled < 0) filled = 0;
-        if (filled > 10) filled = 10;
-
-        new index = 0;
-        bar[index++] = '[';
-        for (new cell = 0; cell < 10; cell++)
-        {
-            bar[index++] = (cell < filled) ? '#' : '-';
-        }
-        bar[index++] = ']';
-        bar[index] = EOS;
-
-        /* Baris sempit (±33 karakter). Saat BBM rendah, angka km diganti arah
-           pom: informasi yang benar-benar dibutuhkan saat itu. */
+        /* Gauge ASCII [####----] diganti bar bersegmen sungguhan: label + angka
+           di kiri, bar 118 px di kanan kotak (x 500..618). Saat BBM <= 25% bar
+           disembunyikan dan teks memakai lebar penuh untuk arah pom. */
         new fuelLine[96];
 
         if (fuel < 0.0)
         {
-            format(fuelLine, sizeof(fuelLine), "TANPA BBM [----------]");
+            format(fuelLine, sizeof(fuelLine), "TANPA BBM");
+            HUD_SetBar(playerid, HUD_BAR_VEH, 0.0, UI_ACCENT_DANGER);
         }
         else if (percent <= 0.25)
         {
             new pumpPart[40];
             Garage_FuelCompass(playerid, pumpPart, sizeof(pumpPart), true);
-            format(fuelLine, sizeof(fuelLine), "BBM %s %.0f/%.0fL %s", bar, fuel, tank, pumpPart);
+            format(fuelLine, sizeof(fuelLine), "BBM  %.0f/%.0fL %s", fuel, tank, pumpPart);
         }
         else
         {
-            format(fuelLine, sizeof(fuelLine), "BBM %s %.0f/%.0fL %.0fkm",
-                bar, fuel, tank, Vehicle_RangeKm(vehicleid));
+            format(fuelLine, sizeof(fuelLine), "BBM  %.0f/%.0fL %.0fkm",
+                fuel, tank, Vehicle_RangeKm(vehicleid));
         }
 
         HUD_SetIfChanged(playerid, HudVehicle[playerid], fuelLine, HudLastVehicle[playerid], sizeof(HudLastVehicle[]));
@@ -719,6 +798,23 @@ stock HUD_Update(playerid)
             HudFuelColor[playerid] = fuelColor;
             PlayerTextDrawColor(playerid, HudVehicle[playerid], fuelColor);
             PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+        }
+
+        /* Bar hanya saat BBM aman (>25%): saat rendah teks pom pakai lebar penuh
+           dan track kosong justru terlihat seperti bug — bar hilang utuh. */
+        if (fuel >= 0.0 && percent > 0.25)
+        {
+            HUD_SetBar(playerid, HUD_BAR_VEH, percent, fuelColor);
+            if (!HudVehBarShown[playerid])
+            {
+                HudVehBarShown[playerid] = true;
+                HUD_ShowBar(playerid, HUD_BAR_VEH, 3);
+            }
+        }
+        else if (HudVehBarShown[playerid])
+        {
+            HudVehBarShown[playerid] = false;
+            HUD_HideBar(playerid, HUD_BAR_VEH, 3);
         }
 
         /* Peringatan sekali per ambang: bunyi + pesan pendek. Tanpa ini pemain
@@ -774,23 +870,12 @@ stock HUD_Update(playerid)
                 new gensetLine[96];
                 if (gensetFuel <= 0.0)
                 {
-                    format(gensetLine, sizeof(gensetLine), "GENSET MATI [----------] 0/%.0fL", BASE_GENERATOR_FUEL_MAX);
+                    format(gensetLine, sizeof(gensetLine), "GENSET MATI");
                 }
                 else
                 {
-                    new filled = floatround((gensetFuel / BASE_GENERATOR_FUEL_MAX) * 10.0);
-                    if (filled < 0) filled = 0;
-                    if (filled > 10) filled = 10;
-
-                    new gensetBar[14];
-                    gensetBar[0] = EOS;
-                    for (new cell = 0; cell < 10; cell++)
-                    {
-                        strcat(gensetBar, (cell < filled) ? "#" : "-", sizeof(gensetBar));
-                    }
-                    /* Baris terburuk: "GENSET [##########] 20/20L" = 28 karakter. */
-                    format(gensetLine, sizeof(gensetLine), "GENSET [%s] %.0f/%.0fL",
-                        gensetBar, gensetFuel, BASE_GENERATOR_FUEL_MAX);
+                    format(gensetLine, sizeof(gensetLine), "GENSET  %.0f/%.0fL",
+                        gensetFuel, BASE_GENERATOR_FUEL_MAX);
                 }
 
                 HUD_SetIfChanged(playerid, HudVehicle[playerid], gensetLine,
@@ -805,6 +890,21 @@ stock HUD_Update(playerid)
                     HudFuelColor[playerid] = gensetColor;
                     PlayerTextDrawColor(playerid, HudVehicle[playerid], gensetColor);
                 }
+                HUD_SetBar(playerid, HUD_BAR_VEH,
+                    (gensetFuel <= 0.0) ? 0.0 : (gensetFuel / BASE_GENERATOR_FUEL_MAX), gensetColor);
+                if (gensetFuel > 0.0)
+                {
+                    if (!HudVehBarShown[playerid])
+                    {
+                        HudVehBarShown[playerid] = true;
+                        HUD_ShowBar(playerid, HUD_BAR_VEH, 3);
+                    }
+                }
+                else if (HudVehBarShown[playerid])
+                {
+                    HudVehBarShown[playerid] = false;
+                    HUD_HideBar(playerid, HUD_BAR_VEH, 3);
+                }
             }
         }
 
@@ -814,6 +914,7 @@ stock HUD_Update(playerid)
             {
                 HudVehicleShown[playerid] = true;
                 PlayerTextDrawShow(playerid, HudVehicle[playerid]);
+                HUD_ShowBar(playerid, HUD_BAR_VEH, 3);
             }
         }
         else if (HudVehicleShown[playerid])
@@ -821,6 +922,8 @@ stock HUD_Update(playerid)
             HudVehicleShown[playerid] = false;
             HudFuelWarnStage[playerid] = 0;
             PlayerTextDrawHide(playerid, HudVehicle[playerid]);
+            HudVehBarShown[playerid] = false;
+            HUD_HideBar(playerid, HUD_BAR_VEH, 3);
         }
     }
 
@@ -851,31 +954,24 @@ stock HUD_Update(playerid)
     new Float:bossHealth, Float:bossMax;
     if (Director_BossStatus(Lobby_Of(playerid), bossHealth, bossMax) && bossMax > 0.0)
     {
-        new filled = floatround((bossHealth / bossMax) * 10.0);
-        if (filled < 0) filled = 0;
-        if (filled > 10) filled = 10;
-
-        new bar[16];
-        bar[0] = EOS;
-        for (new index = 0; index < 10; index++)
-        {
-            strcat(bar, (index < filled) ? "#" : "-", sizeof(bar));
-        }
-
+        /* Gauge ASCII diganti bar bersegmen 258 px di bawah nama boss. */
         new bossLine[64];
-        format(bossLine, sizeof(bossLine), "ABOMINATION %d%%  %s",
-            floatround((bossHealth / bossMax) * 100.0), bar);
+        format(bossLine, sizeof(bossLine), "ABOMINATION %d%%",
+            floatround((bossHealth / bossMax) * 100.0));
         HUD_SetIfChanged(playerid, HudBoss[playerid], bossLine, HudLastBoss[playerid], sizeof(HudLastBoss[]));
+        HUD_SetBar(playerid, HUD_BAR_BOSS, bossHealth / bossMax, UI_ACCENT_DANGER);
         if (!HudBossShown[playerid])
         {
             HudBossShown[playerid] = true;
             PlayerTextDrawShow(playerid, HudBoss[playerid]);
+            HUD_ShowBar(playerid, HUD_BAR_BOSS, 4);
         }
     }
     else if (HudBossShown[playerid])
     {
         HudBossShown[playerid] = false;
         PlayerTextDrawHide(playerid, HudBoss[playerid]);
+        HUD_HideBar(playerid, HUD_BAR_BOSS, 4);
     }
 
     /* Banner raid: satu-satunya umpan balik bertahan selain toast lobby yang

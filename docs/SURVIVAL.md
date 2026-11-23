@@ -43,12 +43,13 @@ Saat dekat hotspot (≤ 1,5 m) muncul pil `[Y] <nama>` di bawah-tengah layar.
 | Van/bus | Burrito, Boxville | 80 L | 13.5 L/100 km |
 | Truk/industri | Benson, DFT-30 | 150 L | 28 L/100 km |
 
-HUD kanan bawah saat mengemudi: `BBM [####------] 34/60L 8km` dengan warna
-hijau → kuning (≤25%) → merah (≤8%). Peringatan bunyi + pesan muncul sekali per
-ambang; `/bensin` kapan saja menampilkan liter, persen, sisa km, dan jarak pom.
+HUD kanan bawah saat mengemudi: `BBM  34/60L 8km` + bar bersegmen 118 px di
+kanan kotak, warna hijau → kuning (≤25%) → merah (≤8%). Peringatan bunyi +
+pesan muncul sekali per ambang; `/bensin` kapan saja menampilkan liter, persen,
+sisa km, dan jarak pom.
 
-Begitu BBM ≤25%, angka km di baris HUD diganti arah pom, mis.
-`BBM [##--------] 12/80L pom 240m BD` (BD = barat daya). Tujuannya satu: pemain
+Begitu BBM ≤25%, bar disembunyikan dan angka km diganti arah pom, mis.
+`BBM  12/80L pom 240m BD` (BD = barat daya). Tujuannya satu: pemain
 yang kehabisan bensin tidak perlu menebak harus ke mana. Baris ini dibatasi
 ±33 karakter karena ditaruh di x=440 dari layar 640 — lebih dari itu terpotong.
 

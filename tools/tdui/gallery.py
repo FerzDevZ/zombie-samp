@@ -231,6 +231,11 @@ HUD_BARS = [
     (220.0, 348.0, 40.0, 4.0),
 ]
 HUD_PROMPT = (210.0, 414.0, 220.0, 18.0)
+# Bar bersegmen: (x, y, w, h, segmen) — celah digambar sebagai strip latar.
+HUD_SEG_GAP_W = 1.6
+HUD_SEG_BARS = {0: 10, 1: 10, 2: 10, 6: 10, 7: 10}  # index bar -> jumlah segmen
+HUD_VEH_BAR = (500.0, 338.0, 118.0, 5.0)
+HUD_BOSS_BAR = (210.0, 46.0, 258.0, 6.0)
 
 HUD_SCENARIOS: dict[str, dict] = {
     # name: {"text": {...}, "bars": [(index, ratio, warna)], "hide": [...]}
@@ -268,8 +273,9 @@ HUD_SCENARIOS: dict[str, dict] = {
             "HudPipVal": "30",
             "HudProgress": "LVL 7  SP 240  LUKA 0  /skill",
             "HudLoadout": "SCRAP 34  SAMPEL 12",
-            "HudVehicle": "BBM [######----] 62/100L",
+            "HudVehicle": "BBM  62/100L 240km",
         },
+        "veh_bar": (0.62, "UI_ACCENT_PRIMARY"),
         "bars": [
             (0, 0.92, "UI_ACCENT_PRIMARY"), (1, 0.60, "UI_ACCENT_INFO"),
             (2, 0.08, "UI_ACCENT_PRIMARY"), (3, 0.55, "UI_ACCENT_PRIMARY"),
@@ -290,8 +296,9 @@ HUD_SCENARIOS: dict[str, dict] = {
             "HudPipVal": "18",
             "HudProgress": "LVL 7  SP 240  LUKA 1  /skill",
             "HudLoadout": "SCRAP 51  SAMPEL 12",
-            "HudVehicle": "GENSET [##########] 12/20L",
+            "HudVehicle": "GENSET  12/20L",
         },
+        "veh_bar": (0.60, "UI_ACCENT_PRIMARY"),
         "bars": [
             (0, 0.74, "UI_ACCENT_PRIMARY"), (1, 0.20, "UI_ACCENT_INFO"),
             (2, 0.21, "UI_ACCENT_PRIMARY"), (3, 0.40, "UI_ACCENT_WARN"),
@@ -312,10 +319,12 @@ HUD_SCENARIOS: dict[str, dict] = {
             "HudPipVal": "74",
             "HudProgress": "LVL 7  SP 240  LUKA 3  /skill",
             "HudLoadout": "SCRAP 4  SAMPEL 0",
-            "HudVehicle": "BBM [##--------] 18/100L",
-            "HudBoss": "ABOMINATION 100%  ##########",
+            "HudVehicle": "BBM  18/100L pom 240m BD",
+            "HudBoss": "ABOMINATION 100%",
             "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
         },
+        "veh_bar": (0.0, "UI_ACCENT_DANGER"),  # <=25%: bar disembunyikan, teks pom full width
+        "boss_bar": 1.0,
         "bars": [
             (0, 0.14, "UI_ACCENT_DANGER"), (1, 0.0, "UI_ACCENT_INFO"),
             (2, 0.78, "UI_ACCENT_DANGER"), (3, 0.03, "UI_ACCENT_DANGER"),
@@ -345,7 +354,7 @@ def render_hud(scene: dict, draws: list[dict], colors: dict[str, str],
         f'<div style="position:absolute;left:{ax}px;top:{ay}px;width:{aw}px;height:{ah}px;'
         f'background:{accent};border-radius:1px;"></div>')
 
-    # bar: track (UI_BG_ELEVATED) + fill dinamis
+    # bar: track (UI_BG_ELEVATED) + fill dinamis + celah segmen
     for index, (bx, by, bw, bh) in enumerate(HUD_BARS):
         parts.append(
             f'<div style="position:absolute;left:{bx}px;top:{by}px;width:{bw}px;height:{bh}px;'
@@ -356,6 +365,49 @@ def render_hud(scene: dict, draws: list[dict], colors: dict[str, str],
         parts.append(
             f'<div style="position:absolute;left:{bx}px;top:{by}px;width:{fill_w:.1f}px;height:{bh}px;'
             f'background:{colors[color_name]};border-radius:1px;"></div>')
+        segments = HUD_SEG_BARS.get(index, 0)
+        for cut in range(1, segments):
+            gap_x = bx + cut * (bw / segments) - HUD_SEG_GAP_W * 0.5
+            parts.append(
+                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{by}px;'
+                f'width:{HUD_SEG_GAP_W}px;height:{bh}px;background:{colors["UI_BG_GLASS_DARK"]};"></div>')
+
+    # bar BBM/GENSET di dalam kotak kanan: track+fill+celah hanya saat rasio > 0
+    # (sama dengan Pawn: bar hilang utuh saat BBM <= 25% / genset mati)
+    vx, vy, vw, vh = HUD_VEH_BAR
+    veh_ratio, veh_color = scene.get("veh_bar", (0.0, "UI_ACCENT_PRIMARY"))
+    if "HudVehicle" not in hidden and veh_ratio > 0.0:
+        parts.append(
+            f'<div style="position:absolute;left:{vx}px;top:{vy}px;width:{vw}px;height:{vh}px;'
+            f'background:{colors["UI_BG_ELEVATED"]};border-radius:1px;"></div>')
+        fill_w = max(0.0, min(1.0, veh_ratio)) * vw
+        if fill_w > 0:
+            parts.append(
+                f'<div style="position:absolute;left:{vx}px;top:{vy}px;width:{fill_w:.1f}px;height:{vh}px;'
+                f'background:{colors[veh_color]};border-radius:1px;"></div>')
+        for cut in range(1, 10):
+            gap_x = vx + cut * (vw / 10) - HUD_SEG_GAP_W * 0.5
+            parts.append(
+                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{vy}px;'
+                f'width:{HUD_SEG_GAP_W}px;height:{vh}px;background:rgba(11,15,20,0.71);"></div>')
+
+    # bar boss di bawah teks (tampil bila HudBoss tidak disembunyikan)
+    ox, oy, ow, oh = HUD_BOSS_BAR
+    if "HudBoss" not in hidden:
+        parts.append(
+            f'<div style="position:absolute;left:{ox}px;top:{oy}px;width:{ow}px;height:{oh}px;'
+            f'background:{colors["UI_BG_ELEVATED"]};border-radius:2px;"></div>')
+        boss_ratio = scene.get("boss_bar", 1.0)
+        fill_w = max(0.0, min(1.0, boss_ratio)) * ow
+        if fill_w > 0:
+            parts.append(
+                f'<div style="position:absolute;left:{ox}px;top:{oy}px;width:{fill_w:.1f}px;height:{oh}px;'
+                f'background:{colors["UI_ACCENT_DANGER"]};border-radius:2px;"></div>')
+        for cut in range(1, 10):
+            gap_x = ox + cut * (ow / 10) - HUD_SEG_GAP_W * 0.5
+            parts.append(
+                f'<div style="position:absolute;left:{gap_x:.1f}px;top:{oy}px;'
+                f'width:{HUD_SEG_GAP_W}px;height:{oh}px;background:rgba(11,15,20,0.6);"></div>')
 
     # pil prompt interaksi
     if "HudPromptText" not in hidden:
@@ -587,11 +639,15 @@ def main() -> int:
     # ini berubah, galeri (dan pemahaman kita tentang layar) basi.
     require_literal(hud_text, "HUD_CreateCard(playerid, 16.0, 288.0, 288.0, 100.0, 2.0)", "kartu HUD")
     require_literal(hud_text, "284.0, 2.0", "aksen kartu HUD")
-    require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0}", "lebar bar HUD")
+    require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 118.0, 258.0}", "lebar bar HUD v3")
     require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_HP, 52.0, 312.0", "bar HP")
     require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_PIP, 220.0, 348.0", "bar PIP")
     require_literal(hud_text, "CreatePlayerTextDraw(playerid, 210.0, 414.0", "pil prompt")
     require_literal(hud_text, "PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], 220.0, 18.0)", "ukuran pil prompt")
+    require_literal(hud_text, "gHudBarW[HUD_BAR_COUNT] = {104.0, 104.0, 104.0, 40.0, 40.0, 40.0, 118.0, 258.0}", "lebar bar v3")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_VEH, 500.0, 338.0", "bar BBM")
+    require_literal(hud_text, "HUD_CreateBar(playerid, HUD_BAR_BOSS, 210.0, 46.0", "bar boss")
+    require_literal(hud_text, "#define HUD_SEG_GAP_W    1.6", "lebar celah segmen")
 
     items = parse_items(items_text)
     structures = parse_structures(structures_text, items)
