@@ -181,6 +181,10 @@ stock Float:HUD_ScaleOf(playerid)
    Nilai default: 0.66 untuk klien mobile, 1.00 untuk PC. Pemain bisa
    menyesuaikan sendiri lewat /hudlebar (50-100). */
 new Float:gHudXLebar[MAX_PLAYERS];
+/* Penanda pemain sudah menimpa lebar manual lewat /hudlebar. Tanpa penanda ini
+   deteksi klien tidak bisa memperbaiki nilai karena HUD_Create sudah terlanjur
+   menulis 1.00 sebelum deteksi berjalan (urutan OnPlayerConnect). */
+new bool:gHudXLebarManual[MAX_PLAYERS];
 #define HUD_XLEBAR_MOBILE 0.66
 #define HUD_XLEBAR_PC     1.00
 
@@ -205,13 +209,13 @@ stock HUD_DetectClient(playerid)
     else if (strfind(version, "0.3", true) == -1) mobile = true;
 
     gHudMobileClient[playerid] = mobile;
-    if (gHudXLebar[playerid] <= 0.0)
+    if (!gHudXLebarManual[playerid])
     {
         gHudXLebar[playerid] = mobile ? HUD_XLEBAR_MOBILE : HUD_XLEBAR_PC;
     }
 
-    Log_Format(LOG_INFO, "klien %d: versi '%s' mobile=%d lebar=%.2f",
-        playerid, version, mobile, gHudXLebar[playerid]);
+    Log_Format(LOG_INFO, "klien %d: versi '%s' mobile=%d lebar=%.2f manual=%d",
+        playerid, version, mobile, gHudXLebar[playerid], gHudXLebarManual[playerid]);
     return mobile;
 }
 
@@ -226,6 +230,7 @@ stock HUD_XLebarSet(playerid, value)
     if (value < 50) value = 50;
     if (value > 100) value = 100;
     gHudXLebar[playerid] = float(value) / 100.0;
+    gHudXLebarManual[playerid] = true;
     return value;
 }
 
@@ -512,7 +517,7 @@ stock HUD_Create(playerid)
     if (gHudGaya[playerid] == 0)
     {
         gHudGaya[playerid] = gHudMobileClient[playerid] ? HUD_GAYA_MOBILE : HUD_GAYA_DEFAULT;
-        if (gHudXLebar[playerid] <= 0.0)
+        if (!gHudXLebarManual[playerid])
         {
             gHudXLebar[playerid] = gHudMobileClient[playerid] ? HUD_XLEBAR_MOBILE : HUD_XLEBAR_PC;
         }

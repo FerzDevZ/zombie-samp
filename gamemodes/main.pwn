@@ -354,11 +354,12 @@ public OnPlayerConnect(playerid)
     Player_InitSurvival(playerid);
     Needs_ResetPlayer(playerid);
     Inventory_Clear(playerid);
-    /* Deteksi klien Android: versi klien mengandung "mobile" (tidak peka huruf).
-       Dipakai HUD untuk memilih gaya Mobile Kompak secara otomatis. */
-    new clientVersion[24];
-    GetPlayerVersion(playerid, clientVersion, sizeof(clientVersion));
-    gHudMobileClient[playerid] = (strfind(clientVersion, "mobile", true) != -1);
+    /* Deteksi klien WAJIB sebelum HUD_Create: HUD_Create memakai
+       gHudMobileClient + gHudXLebar untuk memilih gaya dan kompensasi tarik
+       horizontal. Sebelumnya deteksi dipanggil sesudahnya sehingga HUD selalu
+       dibangun dengan lebar PC = 1.00 dan tampil melar 1.52x di HP Android. */
+    gHudXLebarManual[playerid] = false;
+    HUD_DetectClient(playerid);
     /* Renderer HUD langsung mengikuti klien sebelum preferensi DB tiba;
        Settings_Apply akan membangun ulang kalau pemain memilih mode lain. */
     gTdMobileSafe[playerid] = gHudMobileClient[playerid];
@@ -384,7 +385,6 @@ public OnPlayerConnect(playerid)
     Trade_Reset(playerid);
 
     Iter_Add(PlayerPool, playerid);
-    HUD_DetectClient(playerid);
 
     /* Jejak koneksi: dipakai saat pemain bilang "tidak bisa daftar" — kita bisa
        pastikan nick-nya benar-benar sampai ke server atau tidak. */
