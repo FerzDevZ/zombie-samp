@@ -36,3 +36,5 @@ filterscripts/
 npcmodes/
 sampctl_build_file.inc
 server_log.txt
+runtime/*/console.log
+runtime/*/scriptfiles/logs/
