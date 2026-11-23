@@ -37,6 +37,13 @@ new PlayerText:HudHausVal[MAX_PLAYERS];
 new PlayerText:HudPipName[MAX_PLAYERS];
 new PlayerText:HudPipVal[MAX_PLAYERS];
 new PlayerText:HudProgress[MAX_PLAYERS];
+/* Dua baris tambahan (permintaan pemain): uang tunai & jam server. Keduanya
+   dipakai terus-menerus saat bermain (belanja/loot vs janji bertemu pemain
+   lain) sehingga layak selalu tampil, bukan disembunyikan di dialog. */
+new PlayerText:HudMoney[MAX_PLAYERS];
+new PlayerText:HudClock[MAX_PLAYERS];
+new HudLastMoney[MAX_PLAYERS][24];
+new HudLastClock[MAX_PLAYERS][16];
 new PlayerText:HudVehicle[MAX_PLAYERS];
 new PlayerText:HudVehCard[MAX_PLAYERS];
 new gHudWriteCount;
@@ -258,6 +265,8 @@ new const gHudFitRows[][E_HUD_FIT] =
     { "HudPipName",   198.0, 0.15,  3 },
     { "HudPipVal",    264.0, 0.15,  3 },
     { "HudProgress",   26.0, 0.18, 30 },
+    { "HudMoney",      26.0, 0.16, 12 },
+    { "HudClock",     120.0, 0.16,  9 },
     { "HudVehicle",   356.0, 0.17, 27 },
     { "HudBoss",      210.0, 0.26, 16 },
     { "HudRaid",      190.0, 0.24, 25 },
@@ -507,7 +516,7 @@ stock HUD_Create(playerid)
     if (HUD_GayaHasCard(playerid))
     {
         HUD_CreateCard(playerid, HUD_X(playerid, 16.0), HUD_Y(playerid, 288.0),
-            HUD_FX(playerid, 288.0), HUD_F(playerid, 88.0), HUD_F(playerid, 2.0));
+            HUD_FX(playerid, 288.0), HUD_F(playerid, 100.0), HUD_F(playerid, 2.0));
     }
 
     if (HUD_GayaHasCard(playerid))
@@ -653,6 +662,18 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudProgress[playerid], 1);
     PlayerTextDrawFont(playerid, HudProgress[playerid], 1);
 
+    HudMoney[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 372.0), "UANG $0");
+    PlayerTextDrawLetterSize(playerid, HudMoney[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.78));
+    PlayerTextDrawColor(playerid, HudMoney[playerid], UI_ACCENT_WARN);
+    PlayerTextDrawSetOutline(playerid, HudMoney[playerid], 1);
+    PlayerTextDrawFont(playerid, HudMoney[playerid], 1);
+
+    HudClock[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 120.0), HUD_Y(playerid, 372.0), "JAM 00:00");
+    PlayerTextDrawLetterSize(playerid, HudClock[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.78));
+    PlayerTextDrawColor(playerid, HudClock[playerid], UI_TEXT_SECONDARY);
+    PlayerTextDrawSetOutline(playerid, HudClock[playerid], 1);
+    PlayerTextDrawFont(playerid, HudClock[playerid], 1);
+
     /* Baris kanan hanya BBM. Baris SCRAP/SAMPEL dihapus total (permintaan
        pemain: angkanya kacau di semua gaya HUD); jumlah scrap dan sampel
        tetap bisa dilihat di dialog tas dan /inv. */
@@ -741,9 +762,13 @@ stock HUD_Create(playerid)
     PlayerTextDrawShow(playerid, HudHausVal[playerid]);
     PlayerTextDrawShow(playerid, HudPipVal[playerid]);
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
+    PlayerTextDrawShow(playerid, HudMoney[playerid]);
+    PlayerTextDrawShow(playerid, HudClock[playerid]);
     PlayerHudVisible[playerid] = true;
 
     HudLastZone[playerid][0] = EOS;
+    HudLastMoney[playerid][0] = EOS;
+    HudLastClock[playerid][0] = EOS;
     HudLastHpVal[playerid][0] = EOS;
     HudLastArmVal[playerid][0] = EOS;
     HudLastInfVal[playerid][0] = EOS;
@@ -1003,8 +1028,11 @@ stock HUD_Reshow(playerid, bool:force = false)
         }
     }
     PlayerTextDrawShow(playerid, HudProgress[playerid]);
-    if (HudVehCard[playerid] != PlayerText:0)
-        PlayerTextDrawShow(playerid, HudVehCard[playerid]);
+    PlayerTextDrawShow(playerid, HudMoney[playerid]);
+    PlayerTextDrawShow(playerid, HudClock[playerid]);
+    /* Kartu BBM TIDAK ditampilkan di sini: saat pemain turun dari kendaraan
+       kartu kosong itu terlihat sebagai "kotak hitam tanpa isi". Kartu hanya
+       muncul bersama baris BBM di HUD_Update. */
 
     PlayerHudVisible[playerid] = true;
     HudLastZone[playerid][0] = EOS;
@@ -1066,6 +1094,8 @@ stock HUD_Hide(playerid)
         }
     }
     PlayerTextDrawHide(playerid, HudProgress[playerid]);
+    PlayerTextDrawHide(playerid, HudMoney[playerid]);
+    PlayerTextDrawHide(playerid, HudClock[playerid]);
     PlayerTextDrawHide(playerid, HudVehicle[playerid]);
     if (HudVehCard[playerid] != PlayerText:0) PlayerTextDrawHide(playerid, HudVehCard[playerid]);
     PlayerTextDrawHide(playerid, HudBoss[playerid]);
@@ -1117,6 +1147,8 @@ stock HUD_Destroy(playerid)
         }
     }
     PlayerTextDrawDestroy(playerid, HudProgress[playerid]);
+    PlayerTextDrawDestroy(playerid, HudMoney[playerid]);
+    PlayerTextDrawDestroy(playerid, HudClock[playerid]);
     PlayerTextDrawDestroy(playerid, HudVehicle[playerid]);
     if (HudVehCard[playerid] != PlayerText:0)
     {
@@ -1443,6 +1475,16 @@ stock HUD_Update(playerid)
     format(hudLine, sizeof(hudLine), "LVL %d  SP %d  LUKA %d  /skill",
         PlayerSurvival[playerid][psLevel], SkillPoints[playerid], Wounds_Get(playerid));
     HUD_SetIfChanged(playerid, HudProgress[playerid], hudLine, HudLastProgress[playerid], sizeof(HudLastProgress[]));
+
+    new moneyLine[24];
+    format(moneyLine, sizeof(moneyLine), "UANG $%d", GetPlayerMoney(playerid));
+    HUD_SetIfChanged(playerid, HudMoney[playerid], moneyLine, HudLastMoney[playerid], sizeof(HudLastMoney[]));
+
+    new hour, minute, second;
+    gettime(hour, minute, second);
+    new clockLine[16];
+    format(clockLine, sizeof(clockLine), "JAM %02d:%02d", hour, minute);
+    HUD_SetIfChanged(playerid, HudClock[playerid], clockLine, HudLastClock[playerid], sizeof(HudLastClock[]));
 
     new Float:bossHealth, Float:bossMax;
     if (Director_BossStatus(Lobby_Of(playerid), bossHealth, bossMax) && bossMax > 0.0)

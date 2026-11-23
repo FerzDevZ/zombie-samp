@@ -109,7 +109,9 @@ def render(path, design, comp=1.0, stretch=1.0):
         text(d, mini["value"][0], mini["value"][1], mini["text"], 0.15, 0.72, (232, 238, 245))
 
     text(d, p["progress"][0], p["progress"][1], "LVL 3  SP 2  LUKA 0  /skill",
-         0.15, 0.72, (190, 198, 208))
+         0.18, 0.75, (190, 198, 208))
+    text(d, 26, 372, "UANG $1240", 0.16, 0.78, (245, 158, 11))
+    text(d, 190, 372, "JAM 14:32", 0.16, 0.78, (200, 208, 218))
 
     v = design["vehicle"]
     if v:
@@ -133,7 +135,7 @@ if __name__ == "__main__":
     out = sys.argv[1] if len(sys.argv) > 1 else "mockup.png"
     DESIGN = {
         "panel": {
-            "x": 16, "y": 288, "w": 288, "h": 88,
+            "x": 16, "y": 288, "w": 288, "h": 100,
             "brand": (26, 294), "zone": (150, 296), "progress": (26, 360),
         },
         "rows": [

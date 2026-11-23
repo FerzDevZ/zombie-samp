@@ -72,6 +72,8 @@ WORST_TEXT = {
     "HudPipName": "PIP",
     "HudPipVal": "100",
     "HudProgress": "LVL 99  SP 999  LUKA 9  /skill",
+    "HudMoney": "UANG $999999",
+    "HudClock": "JAM 23:59",
     "HudVehicle": "BBM 12%  12/80L pom 240m BD",
     "HudBoss": "ABOMINATION 100%",
     "HudRaid": "RAID KAMP 14 ZOMBIE  3:00",
