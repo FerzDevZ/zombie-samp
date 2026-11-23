@@ -39,6 +39,12 @@ if [[ -z "${GH_TOKEN:-}" ]]; then
     exit 1
 fi
 
+# Helper kredensial dijalankan git sebagai proses shell baru, jadi kedua nama
+# ini WAJIB di-export; variabel shell biasa tidak ikut ke environment anak dan
+# helper akan mengirim username/password kosong ("Invalid username or token").
+export GH_USER
+export GH_TOKEN
+
 cleanup() { unset GH_TOKEN; }
 trap cleanup EXIT INT TERM
 
