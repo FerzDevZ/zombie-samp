@@ -78,6 +78,25 @@ Visual: setiap tipe punya model sendiri di `gamemodes/modules/config/structures.
 | Turret | 1997 | dudukan mesin |
 | Generator | 1676 | mesin pompa, sama dengan `world/garage.inc` |
 
+### Panel bangun di layar kecil
+
+Panel `/bangun` menutupi layar saat mapping. Tiga jalan keluar, tanpa mengubah
+posisi objek yang sudah diatur:
+
+| Aksi | Efek |
+|---|---|
+| tombol `UKURAN` di panel | skala 100% -> 80% -> 62% -> 48% (lantai: tombol >= 12/16 px, font >= 0.10) |
+| `/ukuran` | sama dengan tombol UKURAN |
+| `/panel kecil` / `/panel besar` | satu langkah turun / naik |
+| `/panel off` / `/panel on` | sembunyikan / tampilkan panel; ghost + tombol fisik tetap jalan |
+
+Ukuran panel diingat selama sesi dan kembali 100% saat pratinjau baru dimulai.
+
+**Objek tidak bisa dikecilkan**: SA-MP 0.3.7 tidak punya `SetObjectScale`. Kalau
+dinding terasa terlalu besar, ganti modelnya (`/model daftar` untuk kandidat,
+`/model <id>` untuk mencoba). Model yang lebih kecil terasa jauh lebih enak untuk
+mapping daripada mengecilkan panel.
+
 Semua tipe sekarang membuat **objek nyata** (dulu tipe non-solid hanya pickup, jadi yang
 terlihat ikon koper melayang) plus pickup sebagai jangkar interaksi — pola yang sama
 dipakai `loot/drops.inc`. Bila sebuah siluet tidak sesuai harapan, `/model <id>` saat

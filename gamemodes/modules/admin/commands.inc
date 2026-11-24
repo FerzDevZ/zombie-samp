@@ -1710,6 +1710,12 @@ stock Command_Process(playerid, const cmdtext[])
             return 1;
         }
 
+        if (!strcmp(params, "daftar", true) || !strcmp(params, "list", true))
+        {
+            BuildEdit_ShowModelList(playerid);
+            return 1;
+        }
+
         new model = strval(params);
         if (model <= 0)
         {
@@ -1726,7 +1732,51 @@ stock Command_Process(playerid, const cmdtext[])
 
     if (!strcmp(cmd, "panel", true) || !strcmp(cmd, "kursor", true))
     {
+        /* Pemain mengeluh panel bangun menutupi layar saat mapping:
+           /panel kecil|besar  - ubah ukuran
+           /panel off|on       - sembunyikan / tampilkan
+           /panel (kosong)     - panggil/lepas kursor seperti dulu */
+        if (!strcmp(params, "kecil", true) || !strcmp(params, "kecilin", true))
+        {
+            BuildEdit_ScaleDown(playerid);
+            return 1;
+        }
+
+        if (!strcmp(params, "besar", true) || !strcmp(params, "gedein", true))
+        {
+            BuildEdit_ScaleUp(playerid);
+            return 1;
+        }
+
+        if (!strcmp(params, "off", true) || !strcmp(params, "mati", true) || !strcmp(params, "sembunyi", true))
+        {
+            if (!BuildEdit_IsActive(playerid)) return 1;
+            BuildEdit_SetPanelHidden(playerid, true);
+            return 1;
+        }
+
+        if (!strcmp(params, "on", true) || !strcmp(params, "nyala", true) || !strcmp(params, "tampil", true))
+        {
+            if (!BuildEdit_IsActive(playerid)) return 1;
+            BuildEdit_SetPanelHidden(playerid, false);
+            return 1;
+        }
+
+        if (BuildEditPanelHidden[playerid]) { BuildEdit_SetPanelHidden(playerid, false); return 1; }
+
         BuildEdit_ToggleMouse(playerid);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "ukuran", true) || !strcmp(cmd, "panelsize", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] /ukuran hanya saat pratinjau aktif (/bangun).");
+            return 1;
+        }
+
+        BuildEdit_CyclePanelScale(playerid);
         return 1;
     }
 

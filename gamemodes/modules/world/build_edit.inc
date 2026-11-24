@@ -65,12 +65,23 @@ enum E_BE_LAYOUT {
     Float:blPasangY,
     Float:blPasangH,
     Float:blHintY,
-    Float:blFontRow
+    Float:blFontRow,
+    Float:blScale
 }
 new gBeLayout[MAX_PLAYERS][E_BE_LAYOUT];
 
+/* Ukuran panel bangun. Pemain melaporkan panel menutupi layar sehingga susah
+   menaruh dinding: satu tombol UKURAN + /panel kecil|besar menyusutkan seluruh
+   panel. Tombol tetap punya lantai ukuran supaya masih bisa disentuh di HP. */
+#define BE_PANEL_SCALE_COUNT 4
+new const Float:BE_PANEL_SCALES[BE_PANEL_SCALE_COUNT] = {1.00, 0.80, 0.62, 0.48};
+new Float:BuildEditPanelScale[MAX_PLAYERS];
+new bool:BuildEditPanelHidden[MAX_PLAYERS];
+
 stock BuildEdit_ComputeLayout(playerid)
 {
+    if (BuildEditPanelScale[playerid] <= 0.0) BuildEditPanelScale[playerid] = 1.0;
+
     if (gHudGaya[playerid] == HUD_GAYA_MOBILE)
     {
         gBeLayout[playerid][blMobile] = 1;
@@ -90,6 +101,7 @@ stock BuildEdit_ComputeLayout(playerid)
         gBeLayout[playerid][blPasangH] = 22.0;
         gBeLayout[playerid][blHintY] = 200.0;
         gBeLayout[playerid][blFontRow] = 0.13;
+        BuildEdit_ApplyScale(playerid, 16.0, 34.0, 150.0, 132.0);
         return 1;
     }
 
@@ -110,6 +122,66 @@ stock BuildEdit_ComputeLayout(playerid)
     gBeLayout[playerid][blPasangH] = 20.0;
     gBeLayout[playerid][blHintY] = 168.0;
     gBeLayout[playerid][blFontRow] = 0.19;
+    BuildEdit_ApplyScale(playerid, 12.0, 30.0, 176.0, 140.0);
+    return 1;
+}
+
+/* Lantai ukuran (minBtnH/minBtnW/minW/minH) penting: menyusutkan tombol sampai
+   < 16 px membuatnya tidak bisa disentuh di Android. */
+stock BuildEdit_ApplyScale(playerid, Float:minBtnH, Float:minBtnW, Float:minW, Float:minH)
+{
+    new Float:scale = BuildEditPanelScale[playerid];
+    gBeLayout[playerid][blScale] = scale;
+
+    gBeLayout[playerid][blW] = gBeLayout[playerid][blW] * scale;
+    if (gBeLayout[playerid][blW] < minW) gBeLayout[playerid][blW] = minW;
+
+    gBeLayout[playerid][blH] = gBeLayout[playerid][blH] * scale;
+    if (gBeLayout[playerid][blH] < minH) gBeLayout[playerid][blH] = minH;
+
+    gBeLayout[playerid][blBtnW] = gBeLayout[playerid][blBtnW] * scale;
+    if (gBeLayout[playerid][blBtnW] < minBtnW) gBeLayout[playerid][blBtnW] = minBtnW;
+
+    gBeLayout[playerid][blBtnH] = gBeLayout[playerid][blBtnH] * scale;
+    if (gBeLayout[playerid][blBtnH] < minBtnH) gBeLayout[playerid][blBtnH] = minBtnH;
+
+    gBeLayout[playerid][blRowStep] = gBeLayout[playerid][blRowStep] * scale;
+    if (gBeLayout[playerid][blRowStep] < gBeLayout[playerid][blBtnH] + 3.0)
+        gBeLayout[playerid][blRowStep] = gBeLayout[playerid][blBtnH] + 3.0;
+
+    gBeLayout[playerid][blInfoStep] = gBeLayout[playerid][blInfoStep] * scale;
+    if (gBeLayout[playerid][blInfoStep] < 10.0) gBeLayout[playerid][blInfoStep] = 10.0;
+
+    gBeLayout[playerid][blColL] = gBeLayout[playerid][blColL] * scale;
+    gBeLayout[playerid][blColR] = gBeLayout[playerid][blColR] * scale;
+
+    /* Tombol + tidak boleh melewati tepi kanan panel. */
+    if (gBeLayout[playerid][blColR] + gBeLayout[playerid][blBtnW] > gBeLayout[playerid][blW] - 4.0)
+    {
+        new Float:overflow = (gBeLayout[playerid][blColR] + gBeLayout[playerid][blBtnW]) - (gBeLayout[playerid][blW] - 4.0);
+        gBeLayout[playerid][blW] = gBeLayout[playerid][blW] + overflow;
+    }
+
+    gBeLayout[playerid][blPasangX] = gBeLayout[playerid][blPasangX] * scale;
+    gBeLayout[playerid][blPasangW] = gBeLayout[playerid][blPasangW] * scale;
+    gBeLayout[playerid][blPasangY] = gBeLayout[playerid][blPasangY] * scale;
+    gBeLayout[playerid][blPasangH] = gBeLayout[playerid][blPasangH] * scale;
+    if (gBeLayout[playerid][blPasangH] < minBtnH) gBeLayout[playerid][blPasangH] = minBtnH;
+
+    /* Dua tombol pasang+batal harus muat berdampingan. */
+    new Float:pairNeed = (gBeLayout[playerid][blPasangW] * 2.0) + (gBeLayout[playerid][blPasangX] * 2.0) + 4.0;
+    if (gBeLayout[playerid][blW] < pairNeed) gBeLayout[playerid][blW] = pairNeed;
+
+    /* Semua isi panel harus berhenti sebelum tepi bawah. */
+    new Float:contentBottom = gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 26.0;
+    if (gBeLayout[playerid][blH] < contentBottom) gBeLayout[playerid][blH] = contentBottom;
+
+    gBeLayout[playerid][blHintY] = gBeLayout[playerid][blH] - 22.0;
+    if (gBeLayout[playerid][blHintY] < gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 2.0)
+        gBeLayout[playerid][blHintY] = gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 2.0;
+
+    gBeLayout[playerid][blFontRow] = gBeLayout[playerid][blFontRow] * scale;
+    if (gBeLayout[playerid][blFontRow] < 0.10) gBeLayout[playerid][blFontRow] = 0.10;
     return 1;
 }
 
@@ -128,7 +200,8 @@ stock BuildEdit_ComputeLayout(playerid)
 #define BE_BTN_CONFIRM  11
 #define BE_BTN_CANCEL   12
 #define BE_BTN_CLOSEMOUSE 13
-#define BE_BTN_COUNT    14
+#define BE_BTN_SIZE     14
+#define BE_BTN_COUNT    15
 
 /* Langkah presisi: 0 = halus, 1 = normal, 2 = kasar. Rotasi ikut supaya satu
    tombol cukup untuk "geser dikit" dan "geser jauh". */
@@ -236,6 +309,7 @@ stock BuildEdit_ResetState(playerid)
     BuildEdit[playerid][beGhost] = STREAMER_TAG_OBJECT:0;
     BuildEdit[playerid][beLastKeyTick] = 0;
     BuildEditModelOverride[playerid] = 0;
+    BuildEditPanelHidden[playerid] = false;
 
     BuildEdit_HidePanel(playerid);
     return 1;
@@ -427,11 +501,159 @@ stock BuildEdit_CreatePanel(playerid)
     BuildEdit_CreateButton(playerid, BE_BTN_CANCEL, x + panelW - gBeLayout[playerid][blPasangW] - gBeLayout[playerid][blPasangX],
         y + gBeLayout[playerid][blPasangY], gBeLayout[playerid][blPasangW], gBeLayout[playerid][blPasangH], "BATAL", 0x7F1D1DF2);
     BuildEdit_CreateButton(playerid, BE_BTN_CLOSEMOUSE, x + panelW - 30.0, y + 6.0, 24.0, 14.0, "X", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_SIZE, x + panelW - 74.0, y + 6.0, 40.0, 14.0, "UKURAN", UI_BG_ELEVATED);
+    return 1;
+}
+
+/* Panel dihancurkan lalu dibuat ulang setiap ukuran berubah: geometri
+   PlayerTextDraw tidak bisa diubah tanpa CreatePlayerTextDraw baru. */
+stock BuildEdit_DestroyPanel(playerid)
+{
+    for (new card = 0; card < 6; card++)
+    {
+        if (BuildEditCard[playerid][card] != PlayerText:0)
+        {
+            PlayerTextDrawDestroy(playerid, BuildEditCard[playerid][card]);
+        }
+        BuildEditCard[playerid][card] = PlayerText:0;
+    }
+
+    if (BuildEditAccent[playerid] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditAccent[playerid]);
+    if (BuildEditTitle[playerid] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditTitle[playerid]);
+    if (BuildEditSub[playerid] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditSub[playerid]);
+    if (BuildEditDivider[playerid] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditDivider[playerid]);
+    if (BuildEditHint[playerid] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditHint[playerid]);
+
+    BuildEditAccent[playerid] = PlayerText:0;
+    BuildEditTitle[playerid] = PlayerText:0;
+    BuildEditSub[playerid] = PlayerText:0;
+    BuildEditDivider[playerid] = PlayerText:0;
+    BuildEditHint[playerid] = PlayerText:0;
+
+    for (new row = 0; row < 6; row++)
+    {
+        if (BuildEditRow[playerid][row] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditRow[playerid][row]);
+        BuildEditRow[playerid][row] = PlayerText:0;
+    }
+
+    for (new button = 0; button < BE_BTN_COUNT; button++)
+    {
+        if (BuildEditBtn[playerid][button] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditBtn[playerid][button]);
+        if (BuildEditBtnText[playerid][button] != PlayerText:0) PlayerTextDrawDestroy(playerid, BuildEditBtnText[playerid][button]);
+        BuildEditBtn[playerid][button] = PlayerText:0;
+        BuildEditBtnText[playerid][button] = PlayerText:0;
+    }
+
+    BuildEdit[playerid][bePanelShown] = false;
+    return 1;
+}
+
+/* Setelah panel dibuat ulang, hitbox SelectTextDraw masih menunjuk TextDraw
+   lama. Lepas lalu pilih ulang supaya tombol baru bisa diklik. */
+stock BuildEdit_RebuildPanel(playerid)
+{
+    BuildEdit_DestroyPanel(playerid);
+    BuildEdit_CreatePanel(playerid);
+    BuildEdit_RefreshPanel(playerid);
+
+    if (BuildEditPanelHidden[playerid]) return 1;
+
+    if (BuildEdit[playerid][beMouseOn])
+    {
+        CancelSelectTextDraw(playerid);
+        SelectTextDraw(playerid, 0xEF444488);
+    }
+    return 1;
+}
+
+stock BuildEdit_SetPanelHidden(playerid, bool:hidden)
+{
+    BuildEditPanelHidden[playerid] = hidden;
+
+    if (hidden)
+    {
+        BuildEdit_HidePanel(playerid);
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Panel disembunyikan. /panel untuk memunculkan lagi.");
+        return 1;
+    }
+
+    BuildEdit_RefreshPanel(playerid);
+    SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] Panel tampil lagi.");
+    return 1;
+}
+
+stock BuildEdit_ScaleDown(playerid)
+{
+    if (!BuildEdit_IsActive(playerid)) return 0;
+
+    new current = 0;
+    for (new index = 0; index < BE_PANEL_SCALE_COUNT; index++)
+    {
+        if (floatabs(BE_PANEL_SCALES[index] - BuildEditPanelScale[playerid]) < 0.01) current = index;
+    }
+
+    if (current >= BE_PANEL_SCALE_COUNT - 1)
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Panel sudah paling kecil.");
+        return 1;
+    }
+
+    BuildEditPanelScale[playerid] = BE_PANEL_SCALES[current + 1];
+    BuildEdit_RebuildPanel(playerid);
+
+    new message[96];
+    format(message, sizeof(message), "[BUILD] Ukuran panel %d%%.", floatround(BE_PANEL_SCALES[current + 1] * 100.0));
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, message);
+    return 1;
+}
+
+stock BuildEdit_ScaleUp(playerid)
+{
+    if (!BuildEdit_IsActive(playerid)) return 0;
+
+    new current = BE_PANEL_SCALE_COUNT - 1;
+    for (new index = 0; index < BE_PANEL_SCALE_COUNT; index++)
+    {
+        if (floatabs(BE_PANEL_SCALES[index] - BuildEditPanelScale[playerid]) < 0.01) current = index;
+    }
+
+    if (current <= 0)
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Panel sudah paling besar.");
+        return 1;
+    }
+
+    BuildEditPanelScale[playerid] = BE_PANEL_SCALES[current - 1];
+    BuildEdit_RebuildPanel(playerid);
+
+    new message[96];
+    format(message, sizeof(message), "[BUILD] Ukuran panel %d%%.", floatround(BE_PANEL_SCALES[current - 1] * 100.0));
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, message);
+    return 1;
+}
+
+stock BuildEdit_CyclePanelScale(playerid)
+{
+    new current = 0;
+    for (new index = 0; index < BE_PANEL_SCALE_COUNT; index++)
+    {
+        if (floatabs(BE_PANEL_SCALES[index] - BuildEditPanelScale[playerid]) < 0.01) current = index;
+    }
+
+    new next = (current + 1) % BE_PANEL_SCALE_COUNT;
+    BuildEditPanelScale[playerid] = BE_PANEL_SCALES[next];
+    BuildEdit_RebuildPanel(playerid);
+
+    new message[96];
+    format(message, sizeof(message), "[BUILD] Ukuran panel %d%%.", floatround(BE_PANEL_SCALES[next] * 100.0));
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, message);
     return 1;
 }
 
 stock BuildEdit_ShowPanel(playerid)
 {
+    if (BuildEditPanelHidden[playerid]) return 0;
+
     for (new card = 0; card < 6; card++)
     {
         PlayerTextDrawShow(playerid, BuildEditCard[playerid][card]);
@@ -997,6 +1219,7 @@ stock BuildEdit_HandleButton(playerid, button)
         case BE_BTN_CONFIRM: BuildEdit_Confirm(playerid);
         case BE_BTN_CANCEL:  BuildEdit_Cancel(playerid);
         case BE_BTN_CLOSEMOUSE: BuildEdit_Cancel(playerid);
+        case BE_BTN_SIZE:    BuildEdit_CyclePanelScale(playerid);
         default: return 0;
     }
     return 1;
@@ -1121,6 +1344,19 @@ stock BuildEdit_SetModel(playerid, model)
     SendClientMessage(playerid, UI_ACCENT_PRIMARY, message);
     Log_Format(LOG_INFO, "[BUILD] model override player=%d type=%d model=%d",
         playerid, BuildEdit[playerid][beType], model);
+    return 1;
+}
+
+/* Kandidat siluet: ukuran objek tidak bisa diubah di SA-MP 0.3.7 (tidak ada
+   scale), jadi satu-satunya cara mengecilkan dinding adalah memilih model lain.
+   Daftar ini memberi pilihan siap coba tanpa menunggu rebuild. */
+stock BuildEdit_ShowModelList(playerid)
+{
+    SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] Kandidat model (pakai /model <id>):");
+    SendClientMessage(playerid, UI_TEXT_MUTED, "19447 panel dinding besar | 19477 papan tipis | 1495 pintu");
+    SendClientMessage(playerid, UI_TEXT_MUTED, "970 sekat pendek | 1427 pembatas beton | 2932 peti | 1676 mesin");
+    SendClientMessage(playerid, UI_TEXT_MUTED, "1225 tong | 1237 blok | 1431 ? | 1996 bangku | 1793 kasur");
+    SendClientMessage(playerid, UI_TEXT_SECONDARY, "[BUILD] Model sekarang: lihat /model tanpa argumen.");
     return 1;
 }
 
