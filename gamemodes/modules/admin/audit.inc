@@ -4,6 +4,11 @@
    dengan tanda kutip tidak merusak query. */
 
 
+#if defined _ls_audit_included
+    #endinput
+#endif
+#define _ls_audit_included
+
 forward AdminAudit_Log(adminId, const action[], targetAccount, const detail[]);
 
 stock AdminAudit_Log(adminId, const action[], targetAccount, const detail[])

@@ -12,6 +12,11 @@
    setelah spawn dan akan menimpa memori. Karena itu pekerjaan disimpan di
    `PendingKitJob` dan diberikan setelah `Inventory_OnLoaded` selesai. */
 
+#if defined _ls_char_create_included
+    #endinput
+#endif
+#define _ls_char_create_included
+
 #define DIALOG_CC_NAME     2010
 #define DIALOG_CC_GENDER   2011
 #define DIALOG_CC_AGE      2012

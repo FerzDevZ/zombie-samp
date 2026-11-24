@@ -8,6 +8,11 @@
      kalau sudah kedaluwarsa, flag dibersihkan otomatis (tidak perlu unban manual).
    - `/unban <username>` khusus superadmin dan mencatat admin pelakunya. */
 
+#if defined _ls_moderation_included
+    #endinput
+#endif
+#define _ls_moderation_included
+
 forward Moderation_KickTarget(playerid, accountDbId);
 forward Moderation_OnBanSaved(actorId, targetId, accountDbId);
 forward Moderation_OnUnbanLoaded(adminId, const username[]);

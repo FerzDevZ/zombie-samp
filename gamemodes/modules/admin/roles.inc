@@ -7,6 +7,11 @@
    Level: 0 pemain, 1 admin, 2 superadmin. Pemilik server (SERVER_OWNER_NAME) otomatis
    superadmin saat login/daftar, jadi tidak perlu query manual ke database. */
 
+#if defined _ls_roles_included
+    #endinput
+#endif
+#define _ls_roles_included
+
 #define ADMIN_LEVEL_PLAYER  0
 #define ADMIN_LEVEL_ADMIN   1
 #define ADMIN_LEVEL_SUPER   2

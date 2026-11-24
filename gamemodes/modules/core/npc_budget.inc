@@ -14,6 +14,11 @@
     budget director dibatasi slot bebas, bukan hanya MAX_ZOMBIES.
 */
 
+#if defined _ls_npc_budget_included
+    #endinput
+#endif
+#define _ls_npc_budget_included
+
 #define NPC_SLOT_RESERVE 8
 #define NPC_FAIL_COOLDOWN_MS 10000
 #define NPC_BUDGET_WARN_MS 10000

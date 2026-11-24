@@ -9,6 +9,11 @@
      juga tidak melukai, tapi zombie tetap bisa dihancurkan oleh pemain lain.
    - setiap aksi dicatat `Log_Format` dengan account id pelaku. */
 
+#if defined _ls_superadmin_included
+    #endinput
+#endif
+#define _ls_superadmin_included
+
 #define ADMIN_CASH_MAX          10000000
 #define ADMIN_ITEM_MAX          500
 #define ADMIN_SPAWN_MAX         30

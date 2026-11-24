@@ -9,6 +9,11 @@
      ke tabel season_archive (migrasi 023). Tanpa baris arsip, kategori ini
      tidak muncul sama sekali — bukan menampilkan angka 0 palsu. */
 
+#if defined _ls_leaderboard_included
+    #endinput
+#endif
+#define _ls_leaderboard_included
+
 #define TOP_LIMIT_PER_CATEGORY 5
 
 stock Leaderboard_Show(playerid)

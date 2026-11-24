@@ -8,6 +8,11 @@
    - Companion tidak pernah di-set health 0 saat tumbang; status tumbang memakai flag
      `CompDowned` agar callback kematian FCNPC tidak salah dianggap zombie mati. */
 
+#if defined _ls_companion_included
+    #endinput
+#endif
+#define _ls_companion_included
+
 #define COMPANION_MAX           (MAX_PLAYERS)
 #define COMPANION_MAX_HP        100.0
 #define COMPANION_REVIVE_HP     50.0

@@ -11,6 +11,11 @@
      (`Admin_GiveItem`, `Admin_Teleport`, `Moderation_Ban`, dst.), jadi level akses,
      ledger, dan `AC_ClearSample` tidak bisa dilewati lewat panel. */
 
+#if defined _ls_panel_included
+    #endinput
+#endif
+#define _ls_panel_included
+
 #define DIALOG_SA_MAIN          3501
 #define DIALOG_SA_PLAYERS       3502
 #define DIALOG_SA_PLAYER_ACT    3503
