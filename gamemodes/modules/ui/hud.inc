@@ -21,7 +21,12 @@ forward bool:Settings_TdMobileSafe(playerid);
      - prompt interaksi "[Y] <nama>" di bawah-tengah saat dekat hotspot
    Semua posisi divalidasi gHudFitRows (string TERBURUK) + generate.py. ==== */
 
+/* Gaya teks: tanpa outline hitam (0). Kartu HUD >= 90% opak sudah memberi
+   kontras; outline 1 membuat huruf terlihat tebal dan "klasik". */
+#define HUD_TEXT_OUTLINE 0
+
 new PlayerText:HudCard[MAX_PLAYERS][6];
+new PlayerText:HudAccentGlow[MAX_PLAYERS];
 new PlayerText:HudCardAccent[MAX_PLAYERS];
 new PlayerText:HudBrand[MAX_PLAYERS];
 new PlayerText:HudZone[MAX_PLAYERS];
@@ -757,91 +762,100 @@ stock HUD_Create(playerid)
         PlayerTextDrawTextSize(playerid, HudCardAccent[playerid], HUD_FX(playerid, 284.0), HUD_F(playerid, 2.0));
         PlayerTextDrawColor(playerid, HudCardAccent[playerid], gHudSkins[skIdx][skinAccent]);
         PlayerTextDrawSetSelectable(playerid, HudCardAccent[playerid], false);
+
+        /* Glow: satu lapis aksen alpha rendah di bawah garis utama. Teknik yang
+           membuat UI mahal terlihat "menyala" tanpa gradien (BoxColor tidak bisa
+           gradien). Alpha 0x2E ~ 18%: cukup untuk halo, tidak menutupi teks. */
+        HudAccentGlow[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 18.0), HUD_Y(playerid, 330.0), "LD_SPAC:white");
+        PlayerTextDrawFont(playerid, HudAccentGlow[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
+        PlayerTextDrawTextSize(playerid, HudAccentGlow[playerid], HUD_FX(playerid, 284.0), HUD_F(playerid, 6.0));
+        PlayerTextDrawColor(playerid, HudAccentGlow[playerid], (gHudSkins[skIdx][skinAccent] & 0x00FFFFFF) | 0x5A000000);
+        PlayerTextDrawSetSelectable(playerid, HudAccentGlow[playerid], false);
     }
 
     HudBrand[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 334.0), "LAST_STAND");
     PlayerTextDrawLetterSize(playerid, HudBrand[playerid], HUD_FX(playerid, 0.20), HUD_F(playerid, 0.85));
     PlayerTextDrawColor(playerid, HudBrand[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudBrand[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudBrand[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudBrand[playerid], 2);
 
     /* Zona pindah ke baris brand: hemat satu baris, tetap terbaca. */
     HudZone[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 150.0), HUD_Y(playerid, 336.0), "ZONE");
     PlayerTextDrawLetterSize(playerid, HudZone[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudZone[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudZone[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudZone[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudZone[playerid], 1);
 
     HudHpName[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 350.0), "HP");
     PlayerTextDrawLetterSize(playerid, HudHpName[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.8));
     PlayerTextDrawColor(playerid, HudHpName[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudHpName[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudHpName[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudHpName[playerid], 1);
 
     HudArmName[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 362.0), "ARM");
     PlayerTextDrawLetterSize(playerid, HudArmName[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.8));
     PlayerTextDrawColor(playerid, HudArmName[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudArmName[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudArmName[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudArmName[playerid], 1);
 
     HudInfName[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 374.0), "INF");
     PlayerTextDrawLetterSize(playerid, HudInfName[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.8));
     PlayerTextDrawColor(playerid, HudInfName[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudInfName[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudInfName[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudInfName[playerid], 1);
 
     HudHpVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 162.0), HUD_Y(playerid, 350.0), "100/100");
     PlayerTextDrawLetterSize(playerid, HudHpVal[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.8));
     PlayerTextDrawColor(playerid, HudHpVal[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudHpVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudHpVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudHpVal[playerid], 1);
 
     HudArmVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 162.0), HUD_Y(playerid, 362.0), "0/100");
     PlayerTextDrawLetterSize(playerid, HudArmVal[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.8));
     PlayerTextDrawColor(playerid, HudArmVal[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudArmVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudArmVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudArmVal[playerid], 1);
 
     HudInfVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 162.0), HUD_Y(playerid, 374.0), "0%");
     PlayerTextDrawLetterSize(playerid, HudInfVal[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.8));
     PlayerTextDrawColor(playerid, HudInfVal[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudInfVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudInfVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudInfVal[playerid], 1);
 
     HudLapName[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 386.0), "LAP");
     PlayerTextDrawLetterSize(playerid, HudLapName[playerid], HUD_FX(playerid, 0.15), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudLapName[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudLapName[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudLapName[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudLapName[playerid], 1);
 
     HudHausName[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 112.0), HUD_Y(playerid, 386.0), "HAUS");
     PlayerTextDrawLetterSize(playerid, HudHausName[playerid], HUD_FX(playerid, 0.15), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudHausName[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudHausName[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudHausName[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudHausName[playerid], 1);
 
     HudPipName[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 198.0), HUD_Y(playerid, 386.0), "PIP");
     PlayerTextDrawLetterSize(playerid, HudPipName[playerid], HUD_FX(playerid, 0.15), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudPipName[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudPipName[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudPipName[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudPipName[playerid], 1);
 
     HudLapVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 92.0), HUD_Y(playerid, 386.0), "100");
     PlayerTextDrawLetterSize(playerid, HudLapVal[playerid], HUD_FX(playerid, 0.15), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudLapVal[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudLapVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudLapVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudLapVal[playerid], 1);
 
     HudHausVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 178.0), HUD_Y(playerid, 386.0), "100");
     PlayerTextDrawLetterSize(playerid, HudHausVal[playerid], HUD_FX(playerid, 0.15), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudHausVal[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudHausVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudHausVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudHausVal[playerid], 1);
 
     HudPipVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 264.0), HUD_Y(playerid, 386.0), "0");
     PlayerTextDrawLetterSize(playerid, HudPipVal[playerid], HUD_FX(playerid, 0.15), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudPipVal[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudPipVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudPipVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudPipVal[playerid], 1);
 
     /* ---- kartu kolom kendaraan (kanan) ---------------------------------
@@ -913,19 +927,19 @@ stock HUD_Create(playerid)
     HudProgress[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 400.0), "LVL 1  SP 0  /skill");
     PlayerTextDrawLetterSize(playerid, HudProgress[playerid], HUD_FX(playerid, 0.18), HUD_F(playerid, 0.75));
     PlayerTextDrawColor(playerid, HudProgress[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudProgress[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudProgress[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudProgress[playerid], 1);
 
     HudMoney[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 412.0), "UANG $0");
     PlayerTextDrawLetterSize(playerid, HudMoney[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.78));
     PlayerTextDrawColor(playerid, HudMoney[playerid], UI_ACCENT_WARN);
-    PlayerTextDrawSetOutline(playerid, HudMoney[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudMoney[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudMoney[playerid], 1);
 
     HudClock[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 120.0), HUD_Y(playerid, 412.0), "JAM 00:00");
     PlayerTextDrawLetterSize(playerid, HudClock[playerid], HUD_FX(playerid, 0.16), HUD_F(playerid, 0.78));
     PlayerTextDrawColor(playerid, HudClock[playerid], gHudSkins[skIdx][skinTextSec]);
-    PlayerTextDrawSetOutline(playerid, HudClock[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudClock[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudClock[playerid], 1);
 
     /* ---- baris 1: identitas kendaraan ----------------------------------
@@ -940,7 +954,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawUseBox(playerid, HudVehInfo[playerid], 0);
     PlayerTextDrawBackgroundColor(playerid, HudVehInfo[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudVehInfo[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudVehInfo[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudVehInfo[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudVehInfo[playerid], 1);
 
     /* ---- baris 2: kecepatan (angka besar + satuan) ---------------------- */
@@ -950,7 +964,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawUseBox(playerid, HudSpeedVal[playerid], 0);
     PlayerTextDrawBackgroundColor(playerid, HudSpeedVal[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudSpeedVal[playerid], gHudSkins[skIdx][skinAccent]);
-    PlayerTextDrawSetOutline(playerid, HudSpeedVal[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudSpeedVal[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudSpeedVal[playerid], 2);
 
     HudSpeedUnit[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_UNIT_X),
@@ -958,7 +972,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawLetterSize(playerid, HudSpeedUnit[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.62));
     PlayerTextDrawBackgroundColor(playerid, HudSpeedUnit[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudSpeedUnit[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudSpeedUnit[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudSpeedUnit[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudSpeedUnit[playerid], 1);
 
     /* ---- baris 3: bahan bakar ------------------------------------------ */
@@ -969,7 +983,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawBoxColor(playerid, HudVehicle[playerid], 0x0B0F14B4);
     PlayerTextDrawBackgroundColor(playerid, HudVehicle[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudVehicle[playerid], gHudSkins[skIdx][skinAccent]);
-    PlayerTextDrawSetOutline(playerid, HudVehicle[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudVehicle[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudVehicle[playerid], 1);
 
     /* ---- baris 4: GPS --------------------------------------------------- */
@@ -979,7 +993,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawUseBox(playerid, HudGpsText[playerid], 0);
     PlayerTextDrawBackgroundColor(playerid, HudGpsText[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudGpsText[playerid], gHudSkins[skIdx][skinAccent]);
-    PlayerTextDrawSetOutline(playerid, HudGpsText[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudGpsText[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudGpsText[playerid], 1);
 
     /* Bar HP boss: teks blok, gaya sama dengan HUD lain (tanpa box tambahan). */
@@ -993,7 +1007,7 @@ stock HUD_Create(playerid)
     HudBoss[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_YT(playerid, 30.0), "ABOMINATION");
     PlayerTextDrawLetterSize(playerid, HudBoss[playerid], HUD_FX(playerid, 0.26), HUD_F(playerid, 1.0));
     PlayerTextDrawColor(playerid, HudBoss[playerid], UI_ACCENT_DANGER);
-    PlayerTextDrawSetOutline(playerid, HudBoss[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudBoss[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudBoss[playerid], 2);
 
     /* Banner raid di atas bar boss (boss y=30). Keduanya bisa aktif bersamaan,
@@ -1002,7 +1016,7 @@ stock HUD_Create(playerid)
     HudRaid[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 190.0), HUD_YT(playerid, 16.0), "RAID KAMP");
     PlayerTextDrawLetterSize(playerid, HudRaid[playerid], HUD_FX(playerid, 0.24), HUD_F(playerid, 0.95));
     PlayerTextDrawColor(playerid, HudRaid[playerid], UI_ACCENT_DANGER);
-    PlayerTextDrawSetOutline(playerid, HudRaid[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudRaid[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudRaid[playerid], 2);
 
     /* Prompt interaksi gaya FiveM: pil di bawah-tengah saat dekat hotspot.
@@ -1028,7 +1042,7 @@ stock HUD_Create(playerid)
     PlayerTextDrawLetterSize(playerid, HudPromptText[playerid], HUD_FX(playerid, 0.18), HUD_F(playerid, 0.8));
     PlayerTextDrawAlignment(playerid, HudPromptText[playerid], 2);
     PlayerTextDrawColor(playerid, HudPromptText[playerid], gHudSkins[skIdx][skinTextPri]);
-    PlayerTextDrawSetOutline(playerid, HudPromptText[playerid], 1);
+    PlayerTextDrawSetOutline(playerid, HudPromptText[playerid], HUD_TEXT_OUTLINE);
     PlayerTextDrawFont(playerid, HudPromptText[playerid], 1);
 
     if (HudCard[playerid][0] != PlayerText:0)
@@ -1040,6 +1054,10 @@ stock HUD_Create(playerid)
         PlayerTextDrawShow(playerid, HudCard[playerid][4]);
         PlayerTextDrawShow(playerid, HudCard[playerid][5]);
     }
+    if (HudAccentGlow[playerid] != PlayerText:0)
+        PlayerTextDrawShow(playerid, HudAccentGlow[playerid]);
+    if (HudAccentGlow[playerid] != PlayerText:0)
+        PlayerTextDrawShow(playerid, HudAccentGlow[playerid]);
     if (HudCardAccent[playerid] != PlayerText:0)
         PlayerTextDrawShow(playerid, HudCardAccent[playerid]);
     PlayerTextDrawShow(playerid, HudBrand[playerid]);
@@ -1501,6 +1519,8 @@ stock HUD_Hide(playerid)
 
     if (HudCard[playerid][0] != PlayerText:0)
         for (new card = 0; card < 6; card++) PlayerTextDrawHide(playerid, HudCard[playerid][card]);
+    if (HudAccentGlow[playerid] != PlayerText:0)
+        PlayerTextDrawHide(playerid, HudAccentGlow[playerid]);
     if (HudCardAccent[playerid] != PlayerText:0)
         PlayerTextDrawHide(playerid, HudCardAccent[playerid]);
     PlayerTextDrawHide(playerid, HudBrand[playerid]);
@@ -1557,8 +1577,11 @@ stock HUD_Destroy(playerid)
 {
     if (HudCard[playerid][0] != PlayerText:0)
         for (new card = 0; card < 6; card++) PlayerTextDrawDestroy(playerid, HudCard[playerid][card]);
+    if (HudAccentGlow[playerid] != PlayerText:0)
+        PlayerTextDrawDestroy(playerid, HudAccentGlow[playerid]);
     if (HudCardAccent[playerid] != PlayerText:0)
         PlayerTextDrawDestroy(playerid, HudCardAccent[playerid]);
+    HudAccentGlow[playerid] = PlayerText:0;
     PlayerTextDrawDestroy(playerid, HudBrand[playerid]);
     PlayerTextDrawDestroy(playerid, HudZone[playerid]);
     PlayerTextDrawDestroy(playerid, HudHpName[playerid]);

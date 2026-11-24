@@ -90,6 +90,9 @@ def render(path, design, comp=1.0, stretch=1.0):
     p = design["panel"]
     rr(d, (p["x"], p["y"], p["x"] + p["w"], p["y"] + p["h"]), 3,
        (10, 14, 20, 205))
+    # glow aksen 18% di bawah garis utama (cermin HudAccentGlow di hud.inc)
+    rr(d, (p["x"] + 2, p["y"] + 1, p["x"] + p["w"] - 2, p["y"] + 6), 3,
+       (16, 185, 129, 90))
     rr(d, (p["x"] + 2, p["y"], p["x"] + p["w"] - 2, p["y"] + 1), 1,
        (16, 185, 129, 235))
 

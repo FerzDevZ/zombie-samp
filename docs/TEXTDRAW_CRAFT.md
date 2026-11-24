@@ -61,3 +61,15 @@ PlayerTextDraw per pemain.
    tulis tangan.
 3. Verifikasi: `freepi-power samp td-preview`, `tools/hud_preview/panel_layout.py`,
    `tools/hud_preview/android_zone.py`, dual-target compile.
+
+## Yang sudah diterapkan ke HUD kita (pass pertama)
+
+| Perubahan | Alasan |
+|---|---|
+| `#define HUD_TEXT_OUTLINE 0` — 25 teks HUD tidak lagi memakai outline hitam | huruf tidak lagi terlihat tebal/klasik; kartu >= 90% opak sudah memberi kontras |
+| `HudAccentGlow` — lapis aksen alpha 90/255 setinggi 6 unit di bawah garis 2 unit | halo lembut tanpa gradien (BoxColor tidak bisa gradien) |
+| Mockup `tools/hud_preview/mockup.py` ikut menggambar glow | mockup wajib mencerminkan Pawn, bukan versi lama |
+
+Belum diterapkan (butuh anggaran primitif): ikon dari primitif (bukan karakter),
+kartu dua lapis alpha, dan panel gaya radio 47-primitif.
+
