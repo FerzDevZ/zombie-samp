@@ -51,6 +51,24 @@ Hasil terakhir: `main.amx` 9.377.771 byte, **1 warning, 0 error**
 (warning 234 `Iter_SafeRemove_1` deprecated di `include/colandreas.inc:603`).
 Skrip otomatis jatuh ke container `i386/debian` bila loader i386 hilang.
 
+Catatan determinisme: **pawncc tidak menghasilkan byte identik antar dua kompilasi**
+(dua build bersih di mesin ini: 10.415.003 byte, md5 `8b66fdf7…` vs `192c8ff8…`, beda
+1 byte padding). Jadi yang boleh dijadikan bukti adalah ukuran + `0 warning 0 error`
++ gate + selftest runtime, bukan md5 hasil rebuild. md5 yang sama hanya sah untuk
+membandingkan **salinan** AMX (`gamemodes/` → `runtime/s1` → `runtime/s2`).
+
+## Audit skill & agent
+
+```bash
+python3 tools/samp_skills_audit.py   # exit 0 = semua skill terklasifikasi & gate lulus
+```
+
+"Load skill" di repo ini berarti menjalankan aturannya terhadap kode nyata. Audit
+mengklasifikasi **setiap** `samp-*` skill ke salah satu dari tiga kelas: probe nyata
+(grep/native/build), REFERENSI (playbook yang ditegakkan gate bernama), atau N/A dengan
+bukti absen (penanda fitur 0 kemunculan). Skill yang tidak masuk kelas mana pun =
+`TANPA PROBE` = exit 1. Keluaran: `docs/SKILLS_ACTIVE.md`.
+
 ## Database
 
 ```bash
