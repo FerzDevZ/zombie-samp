@@ -1330,6 +1330,15 @@ stock Command_Process(playerid, const cmdtext[])
 
     if (!strcmp(cmd, "pasang", true) || !strcmp(cmd, "attach", true))
     {
+        /* Mode bangun memakai kata yang sama. Dulu blok ini menang karena
+           diperiksa lebih dulu, jadi /pasang saat membangun justru membuka
+           dialog aksesoris senjata dan material tidak pernah terpotong. */
+        if (BuildEdit_IsActive(playerid))
+        {
+            BuildEdit_Confirm(playerid);
+            return 1;
+        }
+
         WeaponAttach_ShowInstall(playerid);
         return 1;
     }
@@ -1690,6 +1699,28 @@ stock Command_Process(playerid, const cmdtext[])
         }
 
         BuildEdit_Raise(playerid, meters);
+        return 1;
+    }
+
+    if (!strcmp(cmd, "model", true) || !strcmp(cmd, "siluet", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] /model hanya saat pratinjau aktif (/bangun).");
+            return 1;
+        }
+
+        new model = strval(params);
+        if (model <= 0)
+        {
+            new message[128];
+            format(message, sizeof(message), "[BUILD] Model sekarang: %d. Pakai /model <id>, cth /model 19447.",
+                BuildEdit_ModelOf(playerid));
+            SendClientMessage(playerid, UI_ACCENT_INFO, message);
+            return 1;
+        }
+
+        BuildEdit_SetModel(playerid, model);
         return 1;
     }
 

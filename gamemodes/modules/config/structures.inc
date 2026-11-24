@@ -64,6 +64,30 @@ new const gStructures[STRUCTURE_COUNT][E_STRUCTURE] = {
     {"Generator", ITEM_SCRAP, 10, ITEM_ELECTRONICS, 6, 1200, 2, 1, 1233, false}
 };
 
+/* Model objek per tipe struktur.
+   Sebelumnya SEMUA tipe memakai BASE_WALL_OBJECT_MODEL (1225 = barrelexpos,
+   tong minyak MERAH): pilih "Wall" yang muncul tong merah, dan semua tipe lain
+   ikut tong merah. Pratinjau (/bangun) dan hasil akhir sekarang memakai tabel
+   yang SAMA, jadi tidak ada kejutan setelah /pasang.
+   `docs/BASE_BUILDING.md` masih menyebut 1225 untuk Wall/Gate; tabel ini yang
+   berlaku (dokumen diperbarui di commit yang sama). */
+new const gStructureModels[STRUCTURE_COUNT] = {
+    19447,  // Wall      - panel dinding, sumber material matte_slate di mapping.inc
+    1495,   // Gate      - pintu garasi, sama dengan SHELTER_DOOR_MODEL
+    2932,   // Crate     - peti, sama dengan peti airdrop di world/airdrop.inc
+    1996,   // Bench     - bangku kerja
+    1793,   // Bed       - kasur
+    1997,   // Turret    - dudukan mesin
+    1676    // Generator - mesin pompa, sudah dipakai world/garage.inc
+};
+
+/* Satu sumber kebenaran untuk model: dipakai CreateVisuals DAN pratinjau. */
+stock BaseBuild_Model(type)
+{
+    if (type < 0 || type >= STRUCTURE_COUNT) return BASE_WALL_OBJECT_MODEL;
+    return gStructureModels[type];
+}
+
 /* Batas wall naik 4 slot saat tier 2, sesuai rancangan di docs/BASE_BUILDING.md. */
 stock BaseBuild_Limit(structure, tier)
 {

@@ -10,7 +10,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 
 | Probe | Domain | Hasil | Bukti | Skill |
 |---|---|---|---|---|
-| `map-streamer` | mapping | PASS | Objektif dinamis + preload Streamer_UpdateEx (anti jatuh tembus) — Streamer_UpdateEx dipakai, 28 CreateDynamicObject | `samp-streamer-plugin`, `samp-mapping-dynamic-objects-pro`, `samp-map-pipeline-2026` |
+| `map-streamer` | mapping | PASS | Objektif dinamis + preload Streamer_UpdateEx (anti jatuh tembus) — Streamer_UpdateEx dipakai, 29 CreateDynamicObject | `samp-streamer-plugin`, `samp-mapping-dynamic-objects-pro`, `samp-map-pipeline-2026` |
 | `map-colandreas` | mapping | PASS | Raycast ColAndreas untuk verifikasi lantai/line-of-sight — 13 pemanggilan CA_RayCastLine: gamemodes/modules/core/selftest.inc:47:    new model = CA_RayCastLine(x, y, z + 100.0, x, y, z - 100.0, hitX, hitY, hitZ); | `samp-colandreas-physics` |
 | `map-retexture` | mapping | PASS | Retexture objek dinamis (Textures Studio pipeline) — gamemodes/modules/world/mapping.inc:61:        SetDynamicObjectMaterial(obj, materialIndex, 19447, "wall_textures", "concrete_01", 0xFF141923); | `samp-mapping-dynamic-objects-pro`, `samp-streamer-plugin` |
 | `td-zona-android` | textdraw | PASS | Posisi HUD di pita aman 320..446 untuk 3 gaya — GATE ANDROID: lulus — 38 Y + 38 X diperiksa di 3 gaya (pita 320..446) | `samp-android-safe-hud-layout`, `samp-textdraw-ui-craft`, `samp-mobile-android-cef-ui` |
@@ -28,7 +28,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `logic-ysi` | logic | PASS | Iterasi YSI foreach + struktur data lokal — gamemodes/modules/player/party.inc:112:    foreach (new other : PlayerPool) | `samp-ysi-framework`, `samp-data-structures-pawn` |
 | `logic-include-guard` | logic | PASS | Setiap include punya header guard — semua .inc punya include guard | `samp-include-library-design` |
 | `logic-selftest` | logic | PASS | Selftest runtime lulus di instance berjalan — [SELFTEST] 74/74 PASS, 0 FAIL | `samp-testing-harness`, `samp-qa-engineer` |
-| `logic-compile` | logic | PASS | Compile 0 warning 0 error + dua gate — [BUILD] OK — main.amx 10397105 byte, 0 warning, 0 error | `samp-pawn-compile-gate`, `samp-pawn-compile-verifier` |
+| `logic-compile` | logic | PASS | Compile 0 warning 0 error + dua gate — [BUILD] OK — main.amx 10400532 byte, 0 warning, 0 error | `samp-pawn-compile-gate`, `samp-pawn-compile-verifier` |
 | `logic-anticheat` | logic | PASS | Pemeriksaan anti-cheat sisi server + pencatatan flag — 3 pemanggilan sampler AC, flag tercatat ke anticheat_flags | `samp-anticheat-system` |
 | `logic-arch` | logic | PASS | Arsitektur modular satu gamemode (urutan include terkunci) — 98 modul .inc, 1 gamemode tunggal | `samp-gamemode-architecture`, `samp-pawn-scripting` |
 | `logic-servercfg` | logic | PASS | server.cfg + dua instance systemd berjalan — server.cfg lengkap; systemd: active active | `samp-server-configuration`, `samp-release-engineer` |

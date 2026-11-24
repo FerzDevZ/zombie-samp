@@ -172,15 +172,28 @@ stock BaseBuild_CreateVisuals(slot)
 
     if (gStructures[type][stSolid])
     {
-        BaseStructure[slot][ssObject] = CreateDynamicObject(BASE_WALL_OBJECT_MODEL,
+        /* Model per tipe (gStructureModels). Dulu semua solid memakai 1225 =
+           tong minyak merah, sehingga "Wall" tampil sebagai tong. */
+        new model = BaseBuild_Model(type);
+        BaseStructure[slot][ssObject] = CreateDynamicObject(model,
             BaseStructure[slot][ssX], BaseStructure[slot][ssY], BaseStructure[slot][ssZ] - 0.7,
-            0.0, 0.0, BaseStructure[slot][ssRotZ], .worldid = Lobby_WorldById(BaseStructure[slot][ssLobby]));
+            0.0, 0.0, BaseStructure[slot][ssRotZ], .worldid = Lobby_WorldById(BaseStructure[slot][ssLobby]), .streamdistance = 220.0);
 
-        BaseStructure[slot][ssCollision] = CA_CreateObject(BASE_WALL_OBJECT_MODEL,
+        BaseStructure[slot][ssCollision] = CA_CreateObject(model,
             BaseStructure[slot][ssX], BaseStructure[slot][ssY], BaseStructure[slot][ssZ] - 0.7,
             0.0, 0.0, BaseStructure[slot][ssRotZ], true);
         return 1;
     }
+
+    /* Tipe non-solid (peti, bangku, kasur, turet, generator) dulu HANYA pickup:
+       yang terlihat ikon koper melayang, bukan bendanya. Sekarang objek nyata
+       selalu dibuat (pola yang sama dipakai loot/drops.inc), pickup tetap ada
+       sebagai jangkar interaksi. */
+    new model = BaseBuild_Model(type);
+    BaseStructure[slot][ssObject] = CreateDynamicObject(model,
+        BaseStructure[slot][ssX], BaseStructure[slot][ssY], BaseStructure[slot][ssZ] - 0.55,
+        0.0, 0.0, BaseStructure[slot][ssRotZ],
+        .worldid = Lobby_WorldById(BaseStructure[slot][ssLobby]), .streamdistance = 220.0);
 
     BaseStructure[slot][ssPickup] = CreateDynamicPickup(gStructures[type][stPickupModel], 1,
         BaseStructure[slot][ssX], BaseStructure[slot][ssY], BaseStructure[slot][ssZ],
@@ -268,7 +281,7 @@ stock BaseBuild_CloseGate(slot)
 
     if (BaseStructure[slot][ssCollision] == -1 && gStructures[BaseStructure[slot][ssType]][stSolid])
     {
-        BaseStructure[slot][ssCollision] = CA_CreateObject(BASE_WALL_OBJECT_MODEL,
+        BaseStructure[slot][ssCollision] = CA_CreateObject(BaseBuild_Model(BaseStructure[slot][ssType]),
             BaseStructure[slot][ssX], BaseStructure[slot][ssY], BaseStructure[slot][ssZ] - 0.7,
             0.0, 0.0, BaseStructure[slot][ssRotZ], true);
     }
@@ -616,7 +629,11 @@ stock BaseBuild_PlaceAt(playerid, type, Float:buildX, Float:buildY, Float:buildZ
 
     new baseId = Base_Id(playerid);
     new tier = Base_GetTier(playerid);
-    if (baseId == 0) return 0;
+    if (baseId == 0)
+    {
+        SendClientMessage(playerid, UI_ACCENT_WARN, "[BUILD] Kamu belum punya base. Buat dulu lewat /base.");
+        return 0;
+    }
     if (tier < gStructures[type][stTier])
     {
         new message[112];
@@ -639,7 +656,18 @@ stock BaseBuild_PlaceAt(playerid, type, Float:buildX, Float:buildY, Float:buildZ
         return 0;
     }
 
-    if (!BaseBuild_MaterialsOk(playerid, type)) return 0;
+    if (!BaseBuild_MaterialsOk(playerid, type))
+    {
+        /* Dulu senyap: pemain menekan PASANG, tidak ada apa pun yang terjadi. */
+        new message[144], materialA[24], materialB[24];
+        Item_GetName(gStructures[type][stMatA], materialA, sizeof(materialA));
+        Item_GetName(gStructures[type][stMatB], materialB, sizeof(materialB));
+        format(message, sizeof(message), "[BUILD] Bahan kurang: %s %d + %s %d.",
+            materialA, gStructures[type][stAmtA], materialB, gStructures[type][stAmtB]);
+        SendClientMessage(playerid, UI_ACCENT_WARN, message);
+        Toast_Show(playerid, "BANGUN BASE", message, UI_ACCENT_WARN);
+        return 0;
+    }
 
     new Float:z = buildZ;
     if (!BaseBuild_IsSpotValid(playerid, buildX, buildY, z)) return 0;
@@ -1280,6 +1308,8 @@ stock BaseBuild_MoveSlotTo(slot, Float:x, Float:y, Float:z, Float:rotZ)
         mysql_tquery(gSQL, query, "", "");
     }
 
+    /* CreateVisuals sudah membuat ulang objek di koordinat baru; jangan
+       digeser lagi di sini dengan offset berbeda (dulu akan melawan -0.7). */
     Log_Format(LOG_INFO, "[BUILD] geser slot=%d base=%d -> %.1f %.1f %.1f rot %.1f",
         slot, BaseStructure[slot][ssBaseId], x, y, z, rotZ);
     return 1;
@@ -1309,15 +1339,15 @@ stock BaseBuild_ShowMenu(playerid)
         else if (used >= limit) format(status, sizeof(status), "penuh");
         else if (!BaseBuild_MaterialsOk(playerid, type)) format(status, sizeof(status), "bahan kurang");
 
-        format(line, sizeof(line), "%s (%d/%d) - %s %d + %s %d [%s]\n",
+        format(line, sizeof(line), "%s (%d/%d) - %s %d + %s %d [%s] #%d\n",
             gStructures[type][stLabel], used, limit,
             materialA, gStructures[type][stAmtA],
             materialB, gStructures[type][stAmtB],
-            status);
+            status, BaseBuild_Model(type));
         strcat(body, line, sizeof(body));
     }
 
-    strcat(body, "\nDibongkar: /bongkar | Perbaiki: /fix | Naik tier: /upgrade", sizeof(body));
+    strcat(body, "\nDibongkar: /bongkar | Perbaiki: /fix | Naik tier: /upgrade\nGanti siluet pratinjau: /model <id objek>", sizeof(body));
 
     new caption[96];
     format(caption, sizeof(caption), "Bangun base - tier %d | %d/%d struktur",

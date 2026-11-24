@@ -155,6 +155,10 @@ enum E_BUILD_EDIT
 
 new BuildEdit[MAX_PLAYERS][E_BUILD_EDIT];
 
+/* Override model untuk sesi ini saja (/model <id>). Dipakai saat pemain ingin
+   siluet lain tanpa menunggu rebuild; nilai 0 = pakai gStructureModels. */
+new BuildEditModelOverride[MAX_PLAYERS];
+
 /* Kartu rounded: 2 strip + 4 sudut (teknik sprite, bukan box tajam). */
 new PlayerText:BuildEditCard[MAX_PLAYERS][6];
 new PlayerText:BuildEditAccent[MAX_PLAYERS];
@@ -231,6 +235,7 @@ stock BuildEdit_ResetState(playerid)
     BuildEdit[playerid][beStepStage] = 1;
     BuildEdit[playerid][beGhost] = STREAMER_TAG_OBJECT:0;
     BuildEdit[playerid][beLastKeyTick] = 0;
+    BuildEditModelOverride[playerid] = 0;
 
     BuildEdit_HidePanel(playerid);
     return 1;
@@ -503,7 +508,7 @@ stock BuildEdit_SetMouse(playerid, bool:enabled)
     {
         /* Warna hover: merah darah, konsisten dengan aksen kartu. */
         SelectTextDraw(playerid, 0xEF444488);
-        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "ESC keluar | /panel lagi");
+        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "X = tutup | /pasang atau tombol PASANG");
     }
     else
     {
@@ -558,12 +563,13 @@ stock BuildEdit_FollowPlayer(playerid)
     return 1;
 }
 
-stock BuildEdit_GhostModel(type)
+/* Pratinjau WAJIB memakai model yang sama dengan yang nanti dibangun.
+   Dulu cabang stPickupModel membuat pratinjau peti tampil sebagai pickup
+   koper, lalu hasil akhirnya tong minyak: dua benda berbeda untuk satu pilihan. */
+stock BuildEdit_GhostModel(playerid, type)
 {
-    if (type < 0 || type >= STRUCTURE_COUNT) return BASE_WALL_OBJECT_MODEL;
-    if (gStructures[type][stSolid]) return BASE_WALL_OBJECT_MODEL;
-    if (gStructures[type][stPickupModel] > 0) return gStructures[type][stPickupModel];
-    return BASE_WALL_OBJECT_MODEL;
+    if (BuildEditModelOverride[playerid] > 0) return BuildEditModelOverride[playerid];
+    return BaseBuild_Model(type);
 }
 
 stock BuildEdit_RefreshGhost(playerid, bool:forceStream = false)
@@ -581,7 +587,7 @@ stock BuildEdit_RefreshGhost(playerid, bool:forceStream = false)
 
     if (BuildEdit[playerid][beGhost] == STREAMER_TAG_OBJECT:0)
     {
-        BuildEdit[playerid][beGhost] = CreateDynamicObject(BuildEdit_GhostModel(BuildEdit[playerid][beType]),
+        BuildEdit[playerid][beGhost] = CreateDynamicObject(BuildEdit_GhostModel(playerid, BuildEdit[playerid][beType]),
             x, y, z, 0.0, 0.0, rot, .worldid = world);
     }
     else
@@ -990,7 +996,7 @@ stock BuildEdit_HandleButton(playerid, button)
         case BE_BTN_STEP:    BuildEdit_CycleStep(playerid);
         case BE_BTN_CONFIRM: BuildEdit_Confirm(playerid);
         case BE_BTN_CANCEL:  BuildEdit_Cancel(playerid);
-        case BE_BTN_CLOSEMOUSE: BuildEdit_SetMouse(playerid, false);
+        case BE_BTN_CLOSEMOUSE: BuildEdit_Cancel(playerid);
         default: return 0;
     }
     return 1;
@@ -1085,6 +1091,42 @@ stock BuildEdit_OnKeyState(playerid, newkeys, oldkeys)
     /* Mode aktif menelan tombol lain supaya pemain tidak menembak/interaksi
        tanpa sengaja saat sedang menaruh struktur. */
     return 1;
+}
+
+/* /model <id>: ganti siluet pratinjau untuk sesi ini. Dipakai kalau model
+   bawaan sebuah tipe tidak sesuai harapan; nilai tidak disimpan ke DB supaya
+   tabel di config/structures.inc tetap sumber kebenaran. */
+stock BuildEdit_SetModel(playerid, model)
+{
+    if (!BuildEdit_IsActive(playerid)) return 0;
+    if (model <= 0 || model > 20000)
+    {
+        SendClientMessage(playerid, UI_ACCENT_WARN, "[BUILD] Id model tidak masuk akal.");
+        return 0;
+    }
+
+    BuildEditModelOverride[playerid] = model;
+
+    /* Ghost lama dimusnahkan supaya model baru benar-benar tercipta. */
+    if (BuildEdit[playerid][beGhost] != STREAMER_TAG_OBJECT:0)
+    {
+        DestroyDynamicObject(BuildEdit[playerid][beGhost]);
+        BuildEdit[playerid][beGhost] = STREAMER_TAG_OBJECT:0;
+    }
+
+    BuildEdit_RefreshGhost(playerid, true);
+
+    new message[128];
+    format(message, sizeof(message), "[BUILD] Siluet pratinjau -> model %d (sesi ini).", model);
+    SendClientMessage(playerid, UI_ACCENT_PRIMARY, message);
+    Log_Format(LOG_INFO, "[BUILD] model override player=%d type=%d model=%d",
+        playerid, BuildEdit[playerid][beType], model);
+    return 1;
+}
+
+stock BuildEdit_ModelOf(playerid)
+{
+    return BuildEdit_GhostModel(playerid, BuildEdit[playerid][beType]);
 }
 
 /* /panel: panggil kursor tanpa mengubah posisi yang sudah diatur. */

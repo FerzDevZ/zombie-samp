@@ -64,11 +64,24 @@ atau membangun (butuh scrap).
 | 6 | Turret | Scrap 8, Electronics 4 | 700 | 3 | 2 | 8 damage/2 dtk ke zombie ≤30 m, memancarkan noise; malam butuh daya generator |
 | 7 | Generator | Scrap 10, Electronics 6 | 1200 | 2 | 1 | BBM 20 L, hanya bakar saat malam, `/generator` isi dari jerrycan |
 
-Visual: Wall/Gate memakai objek `1225` (model yang sudah terbukti punya collision di
-cadb ini) + `CA_CreateObject`; Crate/Bench/Bed/Turret memakai dynamic pickup model
-standar GTA (1210/1239/1240/1242) + label 3D. **Tidak ada model yang belum terverifikasi**
-di build ini — alasan: aset yang salah model tidak bisa dideteksi server, jadi harus
-diuji di client dulu sebelum dipakai.
+Visual: setiap tipe punya model sendiri di `gamemodes/modules/config/structures.inc`
+(`gStructureModels`), dan pratinjau `/bangun` memakai model yang SAMA dengan hasil
+`/pasang` — satu sumber kebenaran lewat `BaseBuild_Model(type)`.
+
+| Tipe | Model | Keterangan |
+|---|---|---|
+| Wall | 19447 | panel dinding (sumber material `matte_slate` di `mapping.inc`) + `CA_CreateObject` |
+| Gate | 1495 | pintu garasi, sama dengan `SHELTER_DOOR_MODEL` |
+| Crate | 2932 | peti, sama dengan peti airdrop |
+| Bench | 1996 | bangku kerja |
+| Bed | 1793 | kasur |
+| Turret | 1997 | dudukan mesin |
+| Generator | 1676 | mesin pompa, sama dengan `world/garage.inc` |
+
+Semua tipe sekarang membuat **objek nyata** (dulu tipe non-solid hanya pickup, jadi yang
+terlihat ikon koper melayang) plus pickup sebagai jangkar interaksi — pola yang sama
+dipakai `loot/drops.inc`. Bila sebuah siluet tidak sesuai harapan, `/model <id>` saat
+pratinjau aktif mengganti model untuk sesi itu dan menulis pilihannya ke server log.
 
 ## 5. Tier base
 
