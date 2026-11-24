@@ -175,13 +175,6 @@ def build_probes():
         ["samp-high-performance-tuning", "samp-zombie-survival-horde"],
         "OnPlayerUpdate tidak memuat logika gameplay", update_loop)
 
-    def lifecycle():
-        n = count("EL_Track", "gamemodes/modules")
-        return n > 0, f"{n} pemanggilan EL_Track (entity lifecycle)"
-
-    add("logic-entity", "logic", ["samp-entity-lifecycle", "samp-entity-lifecycle"],
-        "Entitas dicatat & dibersihkan lewat EL_Track", lifecycle)
-
     def persistence():
         migrations = len(list((ROOT / "database/migrations").glob("*.sql")))
         _, bad = sh("grep -il 'unique' database/migrations/*.sql | wc -l")
@@ -415,16 +408,53 @@ def build_probes():
     add("meta-routing", "meta", ["samp-master-2026"],
         "Orkestrator memilih agent per domain dari AGENTS.md", routing)
 
+    # ---------- DUAL-TARGET (baseline terkunci) ----------
+    # Skill samp-pawn-compile-gate menuntut build di DUA set include. Kenyataan
+    # repo ini: hanya target SA-MP 0.3.7 yang lolos. Probe ini mengunci angka
+    # terukur supaya migrasi open.mp tidak bisa "diam-diam" memburuk, dan supaya
+    # tidak ada yang mengklaim dual-target tanpa bukti.
+    OMP_MAX_ERR, OMP_MAX_WARN = 6, 156
+
+    def compile_omp():
+        mounts = (f"-v {ROOT}:/srv -v {Path.home()}/.config/sampctl/pawn:/pawn "
+                  f"-v /home/aegisx/samp-sdk/omp-stdlib:/omp")
+        incs = " ".join(f"-i{s}" for s in (
+            "/srv", "/omp", "/srv/dependencies/pawn-stdlib", "/srv/dependencies/YSI-Includes",
+            "/srv/dependencies/md-sort", "/srv/dependencies/code-parse.inc",
+            "/srv/dependencies/indirection", "/srv/dependencies/amx_assembly",
+            "/srv/dependencies/SA-MP-MySQL", "/srv/dependencies/sscanf",
+            "/srv/dependencies/samp-bcrypt/include", "/srv/dependencies/FCNPC/sampsvr_files",
+            "/srv/dependencies/.resources/samp-streamer-plugin-7c00b9"))
+        cmd = (f"docker run --rm --platform linux/386 {mounts} -w /srv/gamemodes "
+               f"-e LD_LIBRARY_PATH=/pawn/pawn-lang/compiler/v3.10.10 i386/debian:bookworm-slim "
+               f"sh -c '/pawn/pawn-lang/compiler/v3.10.10/pawncc main.pwn -D/srv/gamemodes "
+               f"-o/srv/gamemodes/omp_baseline.amx -d3 \"-;+\" \"-\\(+\" \"-\\+\" \"-Z+\" {incs}' 2>&1")
+        _, out = sh(cmd)
+        sh("rm -f gamemodes/omp_baseline.amx")
+        err = len(re.findall(r"error 0[0-9]+", out))
+        warn = len(re.findall(r"warning 2[0-9]+", out))
+        ok = err <= OMP_MAX_ERR and warn <= OMP_MAX_WARN
+        return ok, (f"target open.mp: {err} error, {warn} warning "
+                    f"(baseline terkunci {OMP_MAX_ERR}/{OMP_MAX_WARN} — BELUM memenuhi gate dual-target)")
+
+    add("logic-compile-omp-baseline", "logic", ["samp-pawn-compile-gate"],
+        "Ukur target open.mp terhadap baseline; regresi = gagal", compile_omp)
+
     return p
 
 
 # Absen TERBUKTI: skill tanpa artefak, dibuktikan dengan menyatakan fitur itu
 # memang tidak ada. Bila penanda muncul di repo, statusnya jadi "N/A BASI" dan
 # audit gagal — artinya fiturnya sudah dibangun dan wajib punya probe nyata.
-def absent_ident(pattern, path="gamemodes"):
+def absent_ident(pattern, path="gamemodes", exclude=None):
     def fn():
-        n = count(pattern, path)
-        return n == 0, f"{n} kemunculan '{pattern}' di {path}"
+        cmd = f"grep -ro {shlex.quote(pattern)} {path} 2>/dev/null"
+        if exclude:
+            cmd += f" | grep -v {shlex.quote(exclude)}"
+        code, out = sh(cmd + " | wc -l")
+        n = int(out) if out.isdigit() else -1
+        return n == 0, (f"{n} kemunculan '{pattern}' di {path}"
+                        + (f" (di luar {exclude})" if exclude else ""))
     return fn
 
 
@@ -459,6 +489,8 @@ N_A = {
     "samp-fivem-inventory-metadata": ("inventori ada, metadata per-slot belum", absent_ident("InvMeta_")),
     "samp-fivem-oxlib-target-logic": ("interaksi ada, radial/skillcheck belum", absent_ident("Radial_")),
     "samp-modern-jobs-2026-logic": ("pekerjaan belum dibangun", absent_ident("Job_")),
+    "samp-entity-lifecycle": ("library EL terpasang tapi belum ada pemanggil",
+                              absent_ident("EL_Track(", exclude="samp_elife.inc")),
 }
 
 # Skill referensi/playbook: tidak punya artefak sendiri, tapi aturannya

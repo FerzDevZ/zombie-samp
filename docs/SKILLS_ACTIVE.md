@@ -2,7 +2,7 @@
 
 Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 
-- Skill SAMP: **76** (46 terverifikasi probe, 7 referensi bergate, 23 N/A absen-terbukti)
+- Skill SAMP: **76** (45 terverifikasi probe, 7 referensi bergate, 24 N/A absen-terbukti)
 - Agent SAMP: **27** (frontmatter + prompt sinkron OK)
 - Probe terdefinisi: **39** (39 PASS, 0 FAIL)
 - Skill tanpa bukti: **0**
@@ -23,7 +23,6 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `logic-dialog-lint` | logic | PASS | Lint dialog-unguarded + injeksi lolos self-test — [LINT] self-test 4/4 lulus (2 positif, 2 negatif) | `samp-dialog-system`, `samp-security-lint`, `samp-server-security-hardening` |
 | `logic-timer` | logic | PASS | Tidak ada timer per-pemain; tick 500ms global — timer global TimerHandles, 0 timer per-pemain | `samp-timer-scheduling`, `samp-high-performance-tuning` |
 | `logic-onplayerupdate` | logic | PASS | OnPlayerUpdate tidak memuat logika gameplay — 0 baris non-komentar di OnPlayerUpdate | `samp-high-performance-tuning`, `samp-zombie-survival-horde` |
-| `logic-entity` | logic | PASS | Entitas dicatat & dibersihkan lewat EL_Track — 8 pemanggilan EL_Track (entity lifecycle) | `samp-entity-lifecycle`, `samp-entity-lifecycle` |
 | `logic-persist` | logic | PASS | Skema persisten berversi lewat migrasi — 36 migrasi SQL | `samp-persistence-schema`, `samp-database-engineer` |
 | `logic-mysql` | logic | PASS | Query DB threaded, tanpa query blocking di jalur publik — 99 mysql_tquery, 0 mysql_query blocking | `samp-mysql-database` |
 | `logic-ysi` | logic | PASS | Iterasi YSI foreach + struktur data lokal — gamemodes/modules/player/party.inc:112:    foreach (new other : PlayerPool) | `samp-ysi-framework`, `samp-data-structures-pawn` |
@@ -50,6 +49,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `feat-spawn` | gameplay | PASS | Pemilihan lobby/karakter sebelum spawn — SetSpawnInfo+SpawnPlayer lewat auth, lobby menentukan dunia | `samp-spawn-system` |
 | `feat-editor` | gameplay | PASS | Editor in-game (/bangun) + galeri TDUI di repo — 13 halaman, 0 gagal, keluaran di docs/tdui + panel edit in-game | `samp-editor-ecosystem` |
 | `meta-routing` | meta | PASS | Orkestrator memilih agent per domain dari AGENTS.md — AGENTS.md memuat 80 baris routing domain→agent | `samp-master-2026` |
+| `logic-compile-omp-baseline` | logic | PASS | Ukur target open.mp terhadap baseline; regresi = gagal — target open.mp: 6 error, 156 warning (baseline terkunci 6/156 — BELUM memenuhi gate dual-target) | `samp-pawn-compile-gate` |
 
 ## Skill
 
@@ -75,7 +75,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `samp-discord-connector` | N/A absen-terbukti | belum ada connector Discord — 0 kemunculan 'DCC_' di gamemodes |
 | `samp-economy-simulation` | TERVERIFIKASI | feat-economy |
 | `samp-editor-ecosystem` | TERVERIFIKASI | feat-editor |
-| `samp-entity-lifecycle` | TERVERIFIKASI | logic-entity |
+| `samp-entity-lifecycle` | N/A absen-terbukti | library EL terpasang tapi belum ada pemanggil — 0 kemunculan 'EL_Track(' di gamemodes (di luar samp_elife.inc) |
 | `samp-filterscript-engineering` | N/A absen-terbukti | belum ada filterscript terpisah — 0 kemunculan 'CallRemoteFunction' di gamemodes |
 | `samp-fivem-character-cinema-anim` | N/A absen-terbukti | belum ada studio karakter — 0 kemunculan 'Cinema_' di gamemodes |
 | `samp-fivem-heist-crime-gang` | N/A absen-terbukti | belum ada heist — 0 kemunculan 'Heist_' di gamemodes |
@@ -103,7 +103,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `samp-mysql-database` | TERVERIFIKASI | logic-mysql |
 | `samp-npc-ai-behavior` | TERVERIFIKASI | feat-npc |
 | `samp-openmp-modern-guide` | REFERENSI | panduan platform — ditegakkan gate `logic-compile` |
-| `samp-pawn-compile-gate` | TERVERIFIKASI | logic-compile |
+| `samp-pawn-compile-gate` | TERVERIFIKASI | logic-compile; logic-compile-omp-baseline |
 | `samp-pawn-scripting` | TERVERIFIKASI | logic-arch |
 | `samp-persistence-schema` | TERVERIFIKASI | logic-persist |
 | `samp-phone-system` | N/A absen-terbukti | belum ada smartphone — 0 kemunculan 'Phone_' di gamemodes |

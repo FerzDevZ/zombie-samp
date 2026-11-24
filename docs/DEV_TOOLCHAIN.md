@@ -133,6 +133,19 @@ Jadi penghalang tunggal adalah FCNPC. Itu bukan tukar binary: AI zombie memakai
 open.mp hanya punya `NPC_Move` / `NPC_MoveToPlayer` / `NPC_CreatePath` (waypoint
 manual) tanpa pathfinding otomatis. Migrasi = menulis ulang lapisan navigasi NPC.
 
+### Status gate dual-target (terukur 24-11-2026)
+
+Skill `samp-pawn-compile-gate` menuntut `.pwn` lolos di **dua** set include. Repo ini
+belum: target 0.3.7 (`dependencies/samp-stdlib`) = **0 warning 0 error**, target open.mp
+(`/home/aegisx/samp-sdk/omp-stdlib`) = **6 error + 156 warning**. Enam error itu satu
+kelas: callback yang di open.mp bertag (`WEAPON:reason`, `PLAYER_STATE:newstate`,
+`BULLET_HIT_TYPE:hittype`, `BODY_PART:bodypart`) ditulis tanpa tag di `main.pwn`
+(baris 488, 608, 646, 661, 682). 156 warning sisanya tag `t_WEAPON` pada
+`SetSpawnInfo`/`GivePlayerWeapon` dan `GetServerVarAsInt` deprecated.
+
+Angka itu **dikunci** oleh probe `logic-compile-omp-baseline`: turun = boleh, naik =
+audit gagal. Jangan menyebut "dual-target" sampai errornya 0.
+
 ## HUD (TextDraw) — gate lebar 640 px
 
 TextDraw tidak punya perataan kanan: baris yang kepanjangan hanya ketahuan dari
