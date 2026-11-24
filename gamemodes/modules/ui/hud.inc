@@ -366,8 +366,21 @@ stock HUD_XLebarSet(playerid, value)
     return value;
 }
 
+/* Skala vertikal BERJANGKAR DI BAWAH, bukan di atas.
+   Bug nyata: HUD_Y dulu `y * scale`, jadi blok BBM yang dipaku di y396 ikut
+   naik saat gaya MOBILE (0.70) menjadi 277 dan gaya MINIMAL (0.85) menjadi
+   337 — persis keluhan "gaya 2 dan 3 masih di tengah". Dengan jangkar bawah,
+   gaya hanya mengecilkan tinggi blok sementara TEPI BAWAH tetap menempel di
+   pita bawah:  y' = ANCHOR - (ANCHOR - y) * scale.
+   ANCHOR 440 (bukan 480) karena klien Android memotong kanvas di ~447. */
+#define HUD_ANCHOR_Y 440.0
+
 stock Float:HUD_X(playerid, Float:x) { return x * HUD_ScaleOf(playerid) * HUD_XComp(playerid); }
-stock Float:HUD_Y(playerid, Float:y) { return y * HUD_ScaleOf(playerid); }
+stock Float:HUD_Y(playerid, Float:y) { return HUD_ANCHOR_Y - (HUD_ANCHOR_Y - y) * HUD_ScaleOf(playerid); }
+
+/* Elemen yang memang menempel di ATAS (bar boss, judul boss, teks raid) tetap
+   skala dari atas, kalau tidak mereka akan meluncur ke tengah saat di-shrink. */
+stock Float:HUD_YT(playerid, Float:y) { return y * HUD_ScaleOf(playerid); }
 
 /* Koordinat elemen center (boss/raid/prompt): tetap di tengah horizontal. */
 stock Float:HUD_XC(playerid, Float:x)
@@ -895,7 +908,7 @@ stock HUD_Create(playerid)
     }
     /* Bar boss di bawah teks ABOMINATION (y=30): celah gelap di atas dunia. */
     if (HUD_BarVisible(playerid, HUD_BAR_BOSS))
-        HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_Y(playerid, 46.0), gHudSkins[skIdx][skinTrack], 0x0B0F1499, 4);
+        HUD_CreateBar(playerid, HUD_BAR_BOSS, HUD_XC(playerid, 210.0), HUD_YT(playerid, 46.0), gHudSkins[skIdx][skinTrack], 0x0B0F1499, 4);
 
     HudProgress[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, 26.0), HUD_Y(playerid, 400.0), "LVL 1  SP 0  /skill");
     PlayerTextDrawLetterSize(playerid, HudProgress[playerid], HUD_FX(playerid, 0.18), HUD_F(playerid, 0.75));
@@ -977,7 +990,7 @@ stock HUD_Create(playerid)
         HUD_VEHC_INFO_Y, HUD_VEHC_SPEED_Y, HUD_VEH_TEXT_Y, HUD_VEH_BAR_Y,
         HUD_VEHC_GPS_Y, HUD_VEHC_GPSBAR_Y);
 
-    HudBoss[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 30.0), "ABOMINATION");
+    HudBoss[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_YT(playerid, 30.0), "ABOMINATION");
     PlayerTextDrawLetterSize(playerid, HudBoss[playerid], HUD_FX(playerid, 0.26), HUD_F(playerid, 1.0));
     PlayerTextDrawColor(playerid, HudBoss[playerid], UI_ACCENT_DANGER);
     PlayerTextDrawSetOutline(playerid, HudBoss[playerid], 1);
@@ -986,7 +999,7 @@ stock HUD_Create(playerid)
     /* Banner raid di atas bar boss (boss y=30). Keduanya bisa aktif bersamaan,
        jadi raid memakai y=16. Lebar ±30 karakter cukup untuk
        "RAID KAMP 12 ZOMBIE  2:59". */
-    HudRaid[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 190.0), HUD_Y(playerid, 16.0), "RAID KAMP");
+    HudRaid[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 190.0), HUD_YT(playerid, 16.0), "RAID KAMP");
     PlayerTextDrawLetterSize(playerid, HudRaid[playerid], HUD_FX(playerid, 0.24), HUD_F(playerid, 0.95));
     PlayerTextDrawColor(playerid, HudRaid[playerid], UI_ACCENT_DANGER);
     PlayerTextDrawSetOutline(playerid, HudRaid[playerid], 1);
@@ -1232,6 +1245,17 @@ stock HUD_GayaSelftest()
     if (!HUD_GayaHasCard(0)) ok = false;
     if (!HUD_GayaVehBars(0)) ok = false;
 
+    /* Skala gaya tidak boleh menarik blok BBM kembali ke tengah layar:
+       jangkar bawah membuat baris FUEL & bar GPS selalu di pita 396..446. */
+    for (new g = HUD_GAYA_PENUH; g <= HUD_GAYA_MINIMAL; g++)
+    {
+        gHudGaya[0] = g;
+        ok = ok && HUD_Y(0, HUD_VEHC_FUEL_Y) >= 420.0;
+        ok = ok && HUD_Y(0, HUD_VEHC_FUELBAR_Y) >= 424.0;
+        ok = ok && HUD_Y(0, HUD_VEHC_GPSBAR_Y) <= 446.0;
+        ok = ok && HUD_Y(0, 428.0) >= 428.0;   /* tepi bawah kartu kiri tetap */
+        ok = ok && HUD_Y(0, 428.0) <= 446.0;
+    }
     gHudGaya[0] = HUD_GAYA_MOBILE;
     new Float:mobileMul = HUD_GayaLetterMul(0);
     if (!HUD_GayaHasCard(0)) ok = false;
