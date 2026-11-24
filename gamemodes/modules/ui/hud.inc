@@ -1016,7 +1016,7 @@ stock HUD_Create(playerid)
         }
         else
         {
-        HudPromptBg[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 448.0), "LD_SPAC:white");
+        HudPromptBg[playerid] = CreatePlayerTextDraw(playerid, HUD_XC(playerid, 210.0), HUD_Y(playerid, 442.0), "LD_SPAC:white");
         PlayerTextDrawFont(playerid, HudPromptBg[playerid], TEXT_DRAW_FONT_SPRITE_DRAW);
         PlayerTextDrawTextSize(playerid, HudPromptBg[playerid], HUD_FX(playerid, 220.0), HUD_F(playerid, 18.0));
         PlayerTextDrawColor(playerid, HudPromptBg[playerid], 0x0B0F14E6);

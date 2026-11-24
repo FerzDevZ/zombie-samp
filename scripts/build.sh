@@ -100,6 +100,15 @@ if command -v python3 >/dev/null 2>&1; then
     fail "gate lebar HUD gagal (lihat tools/hud_preview/generate.py)"
   fi
   echo "[BUILD] gate HUD 640px: lulus"
+  # Gate zona aman Android: posisi setiap HUD_X/HUD_Y/HUD_YT diperiksa di KETIGA
+  # gaya HUD terhadap geometri klien 2340x1080 yang sudah diukur.
+  if command -v python3 >/dev/null 2>&1; then
+    if ! python3 "$ROOT/tools/hud_preview/android_zone.py" >>"$LOG" 2>&1; then
+      python3 "$ROOT/tools/hud_preview/android_zone.py" | grep -E "ERROR|GAGAL" | head -8 | sed 's/^/  /' >&2 || true
+      fail "gate zona aman Android gagal — elemen HUD di luar pita 320..446"
+    fi
+    echo "[BUILD] gate zona Android: lulus"
+  fi
 else
   echo "[BUILD] peringatan: python3 tidak ada, gate HUD dilewati"
 fi
