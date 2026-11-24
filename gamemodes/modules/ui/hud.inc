@@ -910,11 +910,15 @@ stock HUD_Create(playerid)
     PlayerTextDrawSetOutline(playerid, HudClock[playerid], 1);
     PlayerTextDrawFont(playerid, HudClock[playerid], 1);
 
-    /* ---- baris 1: identitas kendaraan ---------------------------------- */
+    /* ---- baris 1: identitas kendaraan ----------------------------------
+       PENTING: textdraw TEKS tidak boleh diberi TextSize. Klien mobile memakai
+       TextSize.x sebagai lebar kotak pembungkus, sehingga dengan LetterSize.x
+       0.16 teks "MOBIL 518 TERBUKA" pecah jadi 3 baris dan "FUEL 48% 33/70L
+       6km" jadi 4 baris (terbukti di screenshot Android 2340x1080). Baris HUD
+       lain yang tidak memanggil TextSize selalu tampil satu baris. */
     HudVehInfo[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_TXT_X),
         HUD_Y(playerid, HUD_VEHC_INFO_Y), "KENDARAAN");
     PlayerTextDrawLetterSize(playerid, HudVehInfo[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.62));
-    PlayerTextDrawTextSize(playerid, HudVehInfo[playerid], HUD_FX(playerid, HUD_VEHC_TXT_W), HUD_F(playerid, 12.0));
     PlayerTextDrawUseBox(playerid, HudVehInfo[playerid], 0);
     PlayerTextDrawBackgroundColor(playerid, HudVehInfo[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudVehInfo[playerid], gHudSkins[skIdx][skinTextPri]);
@@ -925,7 +929,6 @@ stock HUD_Create(playerid)
     HudSpeedVal[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_TXT_X),
         HUD_Y(playerid, HUD_VEHC_SPEED_Y), "0");
     PlayerTextDrawLetterSize(playerid, HudSpeedVal[playerid], HUD_FX(playerid, HUD_VEHC_SPEED_LETTER_X), HUD_F(playerid, 1.30));
-    PlayerTextDrawTextSize(playerid, HudSpeedVal[playerid], HUD_FX(playerid, 40.0), HUD_F(playerid, 16.0));
     PlayerTextDrawUseBox(playerid, HudSpeedVal[playerid], 0);
     PlayerTextDrawBackgroundColor(playerid, HudSpeedVal[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudSpeedVal[playerid], gHudSkins[skIdx][skinAccent]);
@@ -933,10 +936,10 @@ stock HUD_Create(playerid)
     PlayerTextDrawFont(playerid, HudSpeedVal[playerid], 2);
 
     HudSpeedUnit[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_UNIT_X),
-        HUD_Y(playerid, HUD_VEHC_SPEED_Y + 8.0), "km/j");
+        HUD_Y(playerid, HUD_VEHC_SPEED_Y + 6.0), "km/j");
     PlayerTextDrawLetterSize(playerid, HudSpeedUnit[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.62));
     PlayerTextDrawBackgroundColor(playerid, HudSpeedUnit[playerid], 0x00000000);
-    PlayerTextDrawColor(playerid, HudSpeedUnit[playerid], gHudSkins[skIdx][skinTextSec]);
+    PlayerTextDrawColor(playerid, HudSpeedUnit[playerid], gHudSkins[skIdx][skinTextPri]);
     PlayerTextDrawSetOutline(playerid, HudSpeedUnit[playerid], 1);
     PlayerTextDrawFont(playerid, HudSpeedUnit[playerid], 1);
 
@@ -944,7 +947,6 @@ stock HUD_Create(playerid)
     HudVehicle[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEH_TEXT_X),
         HUD_Y(playerid, HUD_VEH_TEXT_Y), "FUEL");
     PlayerTextDrawLetterSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.62));
-    PlayerTextDrawTextSize(playerid, HudVehicle[playerid], HUD_FX(playerid, HUD_VEH_TEXT_W), HUD_F(playerid, 12.0));
     PlayerTextDrawUseBox(playerid, HudVehicle[playerid], 0);
     PlayerTextDrawBoxColor(playerid, HudVehicle[playerid], 0x0B0F14B4);
     PlayerTextDrawBackgroundColor(playerid, HudVehicle[playerid], 0x00000000);
@@ -956,7 +958,6 @@ stock HUD_Create(playerid)
     HudGpsText[playerid] = CreatePlayerTextDraw(playerid, HUD_X(playerid, HUD_VEHC_TXT_X),
         HUD_Y(playerid, HUD_VEHC_GPS_Y), "GPS");
     PlayerTextDrawLetterSize(playerid, HudGpsText[playerid], HUD_FX(playerid, HUD_VEHC_LETTER_X * HUD_GayaLetterMul(playerid)), HUD_F(playerid, 0.70));
-    PlayerTextDrawTextSize(playerid, HudGpsText[playerid], HUD_FX(playerid, HUD_VEHC_TXT_W), HUD_F(playerid, 12.0));
     PlayerTextDrawUseBox(playerid, HudGpsText[playerid], 0);
     PlayerTextDrawBackgroundColor(playerid, HudGpsText[playerid], 0x00000000);
     PlayerTextDrawColor(playerid, HudGpsText[playerid], gHudSkins[skIdx][skinAccent]);

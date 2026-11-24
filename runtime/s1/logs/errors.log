@@ -1,0 +1,3 @@
+[11/24/26 01:17:27] [plugins/mysql] cache_get_value_name_int: value 'NULL' is not a number (modules/loot/grave.inc:345)
+[11/24/26 01:17:27] [plugins/mysql] cache_get_value_name_int: value 'NULL' is not a number (modules/loot/grave.inc:346)
+[11/24/26 01:17:27] [plugins/mysql] cache_get_value_name_int: value 'NULL' is not a number (modules/loot/grave.inc:347)

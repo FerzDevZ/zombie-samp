@@ -279,6 +279,15 @@ def main() -> int:
         print(f"  {name:<12} {draw['x']:>5.0f} {len(label):>4} {width:>6.0f} {sisa:>6.0f}  "
               f"{'OK' if not status else ' | '.join(status)}")
 
+    # Gate anti-wrapping: textdraw TEKS (font 1/2) tidak boleh punya TextSize.
+    # Klien mobile memakai TextSize.x sebagai kotak bungkus, jadi teks pecah
+    # menjadi beberapa baris (lihat screenshot Android: MOBIL / 518 / TERBUKA).
+    hud_src = (ROOT / "gamemodes" / "modules" / "ui" / "hud.inc").read_text(encoding="utf-8")
+    for td_name in ("HudVehInfo", "HudSpeedVal", "HudVehicle", "HudGpsText"):
+        if f"PlayerTextDrawTextSize(playerid, {td_name}[" in hud_src:
+            failures += 1
+            print(f"  GATE TEKS: {td_name} punya TextSize -> akan pecah baris di mobile")
+
     out.write_text(build_html(draws, colors), encoding="utf-8")
     print(f"\nHTML: {out}")
 

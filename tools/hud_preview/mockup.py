@@ -119,7 +119,7 @@ def render(path, design, comp=1.0, stretch=1.0):
         rr(d, (v["x"], 356, v["x"] + v["w"], 420), 2, v["card"])
         text(d, v["text_x"], 359, "MOBIL 411  TERBUKA", 0.16, 0.62, v["text_pri"])
         text(d, v["text_x"], 367, str(v["kmh"]), 0.34, 1.30, v["accent"])
-        text(d, 396, 375, "km/j", 0.16, 0.62, v["text_sec"])
+        text(d, 396, 373, "km/j", 0.16, 0.62, v["text_sec"])
         bar(d, v["text_x"], 386, v["w"] - 12, 4, v["kmh"] / 240.0, fill=v["accent"])
         text(d, v["text_x"], 393, v["label"], 0.16, 0.62, v["text_pri"])
         bar(d, v["text_x"], 405, v["w"] - 12, 5, v["ratio"], fill=v["accent"])
