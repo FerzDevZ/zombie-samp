@@ -101,7 +101,7 @@ stock BuildEdit_ComputeLayout(playerid)
         gBeLayout[playerid][blPasangH] = 22.0;
         gBeLayout[playerid][blHintY] = 200.0;
         gBeLayout[playerid][blFontRow] = 0.13;
-        BuildEdit_ApplyScale(playerid, 16.0, 34.0, 150.0, 132.0);
+        BuildEdit_ApplyScale(playerid, 16.0, 34.0, 84.0, 132.0);
         return 1;
     }
 
@@ -122,22 +122,21 @@ stock BuildEdit_ComputeLayout(playerid)
     gBeLayout[playerid][blPasangH] = 20.0;
     gBeLayout[playerid][blHintY] = 168.0;
     gBeLayout[playerid][blFontRow] = 0.19;
-    BuildEdit_ApplyScale(playerid, 12.0, 30.0, 176.0, 140.0);
+    BuildEdit_ApplyScale(playerid, 12.0, 30.0, 104.0, 140.0);
     return 1;
 }
 
 /* Lantai ukuran (minBtnH/minBtnW/minW/minH) penting: menyusutkan tombol sampai
    < 16 px membuatnya tidak bisa disentuh di Android. */
-stock BuildEdit_ApplyScale(playerid, Float:minBtnH, Float:minBtnW, Float:minW, Float:minH)
+stock BuildEdit_ApplyScale(playerid, Float:minBtnH, Float:minBtnW, Float:minTextW, Float:minH)
 {
     new Float:scale = BuildEditPanelScale[playerid];
     gBeLayout[playerid][blScale] = scale;
 
-    gBeLayout[playerid][blW] = gBeLayout[playerid][blW] * scale;
-    if (gBeLayout[playerid][blW] < minW) gBeLayout[playerid][blW] = minW;
-
-    gBeLayout[playerid][blH] = gBeLayout[playerid][blH] * scale;
-    if (gBeLayout[playerid][blH] < minH) gBeLayout[playerid][blH] = minH;
+    /* Judul (y+7) dan garis pemisah (y+34) TIDAK diskalakan, jadi baris
+       parameter selalu mulai di y+40. */
+    new Float:rowsTop = 40.0;
+    new Float:gap = 6.0;
 
     gBeLayout[playerid][blBtnW] = gBeLayout[playerid][blBtnW] * scale;
     if (gBeLayout[playerid][blBtnW] < minBtnW) gBeLayout[playerid][blBtnW] = minBtnW;
@@ -152,36 +151,44 @@ stock BuildEdit_ApplyScale(playerid, Float:minBtnH, Float:minBtnW, Float:minW, F
     gBeLayout[playerid][blInfoStep] = gBeLayout[playerid][blInfoStep] * scale;
     if (gBeLayout[playerid][blInfoStep] < 10.0) gBeLayout[playerid][blInfoStep] = 10.0;
 
-    gBeLayout[playerid][blColL] = gBeLayout[playerid][blColL] * scale;
-    gBeLayout[playerid][blColR] = gBeLayout[playerid][blColR] * scale;
+    /* Kolom tombol DITURUNKAN dari lebar panel, bukan dari literal skala:
+       literal 228/160 pada 48% membuat tombol + menabrak panel dan tombol
+       kiri/kanan saling tumpuk (ditangkap tools/hud_preview/panel_layout.py). */
+    new Float:twoBtn = (gBeLayout[playerid][blBtnW] * 2.0) + gap;
+    new Float:textW = minTextW * scale;
+    if (textW < 70.0) textW = 70.0;
 
-    /* Tombol + tidak boleh melewati tepi kanan panel. */
-    if (gBeLayout[playerid][blColR] + gBeLayout[playerid][blBtnW] > gBeLayout[playerid][blW] - 4.0)
-    {
-        new Float:overflow = (gBeLayout[playerid][blColR] + gBeLayout[playerid][blBtnW]) - (gBeLayout[playerid][blW] - 4.0);
-        gBeLayout[playerid][blW] = gBeLayout[playerid][blW] + overflow;
-    }
-
-    gBeLayout[playerid][blPasangX] = gBeLayout[playerid][blPasangX] * scale;
     gBeLayout[playerid][blPasangW] = gBeLayout[playerid][blPasangW] * scale;
-    gBeLayout[playerid][blPasangY] = gBeLayout[playerid][blPasangY] * scale;
+    if (gBeLayout[playerid][blPasangW] < 64.0) gBeLayout[playerid][blPasangW] = 64.0;
     gBeLayout[playerid][blPasangH] = gBeLayout[playerid][blPasangH] * scale;
     if (gBeLayout[playerid][blPasangH] < minBtnH) gBeLayout[playerid][blPasangH] = minBtnH;
+    gBeLayout[playerid][blPasangX] = gBeLayout[playerid][blPasangX] * scale;
 
-    /* Dua tombol pasang+batal harus muat berdampingan. */
-    new Float:pairNeed = (gBeLayout[playerid][blPasangW] * 2.0) + (gBeLayout[playerid][blPasangX] * 2.0) + 4.0;
-    if (gBeLayout[playerid][blW] < pairNeed) gBeLayout[playerid][blW] = pairNeed;
+    /* Lebar panel = teks + dua kolom tombol; PASANG+BATAL harus tetap muat. */
+    new Float:pairW = (gBeLayout[playerid][blPasangW] * 2.0) + (gBeLayout[playerid][blPasangX] * 2.0) + gap;
+    new Float:needW = textW + twoBtn + 10.0;
+    if (needW < pairW) needW = pairW;
+    gBeLayout[playerid][blW] = needW;
 
-    /* Semua isi panel harus berhenti sebelum tepi bawah. */
-    new Float:contentBottom = gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 26.0;
-    if (gBeLayout[playerid][blH] < contentBottom) gBeLayout[playerid][blH] = contentBottom;
+    gBeLayout[playerid][blColL] = gBeLayout[playerid][blW] - twoBtn - 4.0;
+    gBeLayout[playerid][blColR] = gBeLayout[playerid][blColL] + gBeLayout[playerid][blBtnW] + gap;
 
-    gBeLayout[playerid][blHintY] = gBeLayout[playerid][blH] - 22.0;
-    if (gBeLayout[playerid][blHintY] < gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 2.0)
-        gBeLayout[playerid][blHintY] = gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 2.0;
+    /* Vertikal: diturunkan dari isi, tidak ada baris yang boleh menumpuk. */
+    new Float:rowsBottom = rowsTop + (5.0 * gBeLayout[playerid][blRowStep]) + gBeLayout[playerid][blBtnH];
+    gBeLayout[playerid][blPasangY] = rowsBottom + 8.0;
+    gBeLayout[playerid][blHintY] = gBeLayout[playerid][blPasangY] + gBeLayout[playerid][blPasangH] + 5.0;
+
+    gBeLayout[playerid][blH] = gBeLayout[playerid][blHintY] + 12.0;
+    if (gBeLayout[playerid][blH] < minH) gBeLayout[playerid][blH] = minH;
 
     gBeLayout[playerid][blFontRow] = gBeLayout[playerid][blFontRow] * scale;
     if (gBeLayout[playerid][blFontRow] < 0.10) gBeLayout[playerid][blFontRow] = 0.10;
+
+    /* Judul harus berhenti sebelum tombol UKURAN (x = W - 68). */
+    new Float:titleEnd = 12.0 + (11.0 * 0.22 * 22.0);
+    if (titleEnd > gBeLayout[playerid][blW] - 72.0 && gBeLayout[playerid][blW] < titleEnd + 72.0)
+        gBeLayout[playerid][blW] = titleEnd + 72.0;
+
     return 1;
 }
 
@@ -223,7 +230,8 @@ enum E_BUILD_EDIT
     STREAMER_TAG_OBJECT:beGhost,
     beLastKeyTick,
     bool:bePanelShown,
-    bool:beMouseOn
+    bool:beMouseOn,
+    bool:beFrozen
 };
 
 new BuildEdit[MAX_PLAYERS][E_BUILD_EDIT];
@@ -310,6 +318,7 @@ stock BuildEdit_ResetState(playerid)
     BuildEdit[playerid][beLastKeyTick] = 0;
     BuildEditModelOverride[playerid] = 0;
     BuildEditPanelHidden[playerid] = false;
+    BuildEdit[playerid][beFrozen] = false;
 
     BuildEdit_HidePanel(playerid);
     return 1;
@@ -500,8 +509,8 @@ stock BuildEdit_CreatePanel(playerid)
         gBeLayout[playerid][blPasangW], gBeLayout[playerid][blPasangH], "PASANG", UI_ACCENT_PRIMARY);
     BuildEdit_CreateButton(playerid, BE_BTN_CANCEL, x + panelW - gBeLayout[playerid][blPasangW] - gBeLayout[playerid][blPasangX],
         y + gBeLayout[playerid][blPasangY], gBeLayout[playerid][blPasangW], gBeLayout[playerid][blPasangH], "BATAL", 0x7F1D1DF2);
-    BuildEdit_CreateButton(playerid, BE_BTN_CLOSEMOUSE, x + panelW - 30.0, y + 6.0, 24.0, 14.0, "X", UI_BG_ELEVATED);
-    BuildEdit_CreateButton(playerid, BE_BTN_SIZE, x + panelW - 74.0, y + 6.0, 40.0, 14.0, "UKURAN", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_CLOSEMOUSE, x + panelW - 26.0, y + 5.0, 20.0, 13.0, "X", UI_BG_ELEVATED);
+    BuildEdit_CreateButton(playerid, BE_BTN_SIZE, x + panelW - 68.0, y + 5.0, 38.0, 13.0, "UKURAN", UI_BG_ELEVATED);
     return 1;
 }
 
@@ -730,12 +739,12 @@ stock BuildEdit_SetMouse(playerid, bool:enabled)
     {
         /* Warna hover: merah darah, konsisten dengan aksen kartu. */
         SelectTextDraw(playerid, 0xEF444488);
-        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "X = tutup | /pasang atau tombol PASANG");
+        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "X tutup | /beku kunci posisi | PASANG");
     }
     else
     {
         CancelSelectTextDraw(playerid);
-        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "ALT maju | C putar | Y pasang");
+        PlayerTextDrawSetString(playerid, BuildEditHint[playerid], "ALT maju | C putar | Y pasang | /beku");
     }
     PlayerTextDrawShow(playerid, BuildEditHint[playerid]);
     return 1;
@@ -1272,8 +1281,34 @@ stock BuildEdit_TickPlayer(playerid)
         return BuildEdit_RefreshGhost(playerid);
     }
 
-    BuildEdit_FollowPlayer(playerid);
+    /* PILIHAN PEMILIK: pratinjau menempel pada pemain (mudah mengarahkan) atau
+       dibekukan di koordinat terakhir (enak dipakai melihat dari jauh).
+       Sebelumnya selalu menempel, sehingga pemain merasa objek "ikut lari". */
+    if (!BuildEdit[playerid][beFrozen])
+    {
+        BuildEdit_FollowPlayer(playerid);
+    }
+
     return BuildEdit_RefreshGhost(playerid);
+}
+
+stock BuildEdit_ToggleFreeze(playerid)
+{
+    if (!BuildEdit_IsActive(playerid)) return 0;
+
+    BuildEdit[playerid][beFrozen] = !BuildEdit[playerid][beFrozen];
+    BuildEdit_RefreshPanel(playerid);
+
+    if (BuildEdit[playerid][beFrozen])
+    {
+        SendClientMessage(playerid, UI_ACCENT_PRIMARY, "[BUILD] Posisi DIBEKUKAN: objek diam di tempat, kamu bisa jalan mengelilinginya.");
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] /beku lagi untuk menempelkan objek ke posisi kamu.");
+    }
+    else
+    {
+        SendClientMessage(playerid, UI_TEXT_MUTED, "[BUILD] Posisi mengikuti kamu lagi (2.5 m di depan).");
+    }
+    return 1;
 }
 
 /* Tombol fisik tetap jalan: ALT maju, C putar, Y pasang, H batal.

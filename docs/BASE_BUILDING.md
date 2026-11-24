@@ -91,6 +91,23 @@ posisi objek yang sudah diatur:
 | `/panel off` / `/panel on` | sembunyikan / tampilkan panel; ghost + tombol fisik tetap jalan |
 
 Ukuran panel diingat selama sesi dan kembali 100% saat pratinjau baru dimulai.
+Tata letaknya diturunkan dari isi (bukan literal yang diskalakan), sehingga tidak
+ada baris yang saling menumpuk; `tools/hud_preview/panel_layout.py` memverifikasi
+8 kombinasi (2 gaya HUD x 4 skala) di setiap build.
+
+### Objek menempel pada pemain atau dibekukan
+
+Mode penempatan punya dua perilaku, dipilih pemain:
+
+| Perilaku | Cara | Untuk apa |
+|---|---|---|
+| Menempel (default) | aktif otomatis | mengarahkan objek 2.5 m di depan, mengikuti arah hadap |
+| Beku | `/beku` | objek diam di koordinat terakhir, pemain bisa berjalan mengelilinginya untuk memeriksa |
+
+Objek yang "ikut lari" saat pemain berlari adalah mode menempel: posisi dihitung
+dari `posisi pemain + 2.5 m ke depan` setiap tick. Itu disengaja — kalau tidak,
+meletakkan objek sambil berjalan menjadi tidak mungkin. `/beku` mematikan
+perhitungan itu tanpa menghapus objek.
 
 **Objek tidak bisa dikecilkan**: SA-MP 0.3.7 tidak punya `SetObjectScale`. Kalau
 dinding terasa terlalu besar, ganti modelnya (`/model daftar` untuk kandidat,

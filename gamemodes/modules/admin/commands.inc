@@ -1768,6 +1768,18 @@ stock Command_Process(playerid, const cmdtext[])
         return 1;
     }
 
+    if (!strcmp(cmd, "beku", true) || !strcmp(cmd, "freeze", true) || !strcmp(cmd, "kunci", true))
+    {
+        if (!BuildEdit_IsActive(playerid))
+        {
+            SendClientMessage(playerid, UI_ACCENT_INFO, "[BUILD] /beku hanya saat pratinjau aktif (/bangun).");
+            return 1;
+        }
+
+        BuildEdit_ToggleFreeze(playerid);
+        return 1;
+    }
+
     if (!strcmp(cmd, "ukuran", true) || !strcmp(cmd, "panelsize", true))
     {
         if (!BuildEdit_IsActive(playerid))

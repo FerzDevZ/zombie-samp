@@ -108,6 +108,14 @@ if command -v python3 >/dev/null 2>&1; then
       fail "gate zona aman Android gagal — elemen HUD di luar pita 320..446"
     fi
     echo "[BUILD] gate zona Android: lulus"
+
+# Gate geometri panel bangun base: skala panel tidak boleh menumpuk tombol.
+echo "[BUILD] gate panel bangun"
+if ! python3 "$ROOT/tools/hud_preview/panel_layout.py" >>"$LOG" 2>&1; then
+    python3 "$ROOT/tools/hud_preview/panel_layout.py" | grep -E "FAIL|GAGAL|->" | head -10 | sed 's/^/  /' >&2 || true
+    fail "geometri panel bangun rusak (lihat backups/panel_layout.log)"
+fi
+grep -E "GATE PANEL" "$LOG" | tail -1 | sed 's/^/  /'
   fi
 else
   echo "[BUILD] peringatan: python3 tidak ada, gate HUD dilewati"

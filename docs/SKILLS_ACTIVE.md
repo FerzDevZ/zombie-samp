@@ -28,7 +28,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `logic-ysi` | logic | PASS | Iterasi YSI foreach + struktur data lokal — gamemodes/modules/player/party.inc:112:    foreach (new other : PlayerPool) | `samp-ysi-framework`, `samp-data-structures-pawn` |
 | `logic-include-guard` | logic | PASS | Setiap include punya header guard — semua .inc punya include guard | `samp-include-library-design` |
 | `logic-selftest` | logic | PASS | Selftest runtime lulus di instance berjalan — [SELFTEST] 74/74 PASS, 0 FAIL | `samp-testing-harness`, `samp-qa-engineer` |
-| `logic-compile` | logic | PASS | Compile 0 warning 0 error + dua gate — [BUILD] OK — main.amx 10400532 byte, 0 warning, 0 error | `samp-pawn-compile-gate`, `samp-pawn-compile-verifier` |
+| `logic-compile` | logic | PASS | Compile 0 warning 0 error + dua gate — [BUILD] OK — main.amx 10414673 byte, 0 warning, 0 error | `samp-pawn-compile-gate`, `samp-pawn-compile-verifier` |
 | `logic-anticheat` | logic | PASS | Pemeriksaan anti-cheat sisi server + pencatatan flag — 3 pemanggilan sampler AC, flag tercatat ke anticheat_flags | `samp-anticheat-system` |
 | `logic-arch` | logic | PASS | Arsitektur modular satu gamemode (urutan include terkunci) — 98 modul .inc, 1 gamemode tunggal | `samp-gamemode-architecture`, `samp-pawn-scripting` |
 | `logic-servercfg` | logic | PASS | server.cfg + dua instance systemd berjalan — server.cfg lengkap; systemd: active active | `samp-server-configuration`, `samp-release-engineer` |
