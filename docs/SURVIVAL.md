@@ -196,3 +196,19 @@ Titik ekstraksi di Camp Outskirts (`/ekstrak` atau Y).
     turret tetap menembak; biarkan BBM habis → turret berhenti dan toast muncul.
 13. Di luar kamp, `/escort` → trader mengikuti → antar ke kamp → hadiah masuk;
     ulangi langsung → ditolak dengan sisa cooldown.
+
+## 7. Invariant horde/raid yang dikunci gate
+
+`python3 tools/samp_skills_audit.py` menjalankan tiga probe khusus inti mode
+survival. Ketiganya terbukti **gagal** saat invariant-nya dirusak (diuji dengan
+mutasi sementara pada `horde.inc` + `constants.inc`), jadi ini penjaga nyata,
+bukan stempel:
+
+| Probe | Yang dijaga | Bukti rusak → gagal |
+|---|---|---|
+| `logic-horde-raid-fsm` | raid base = satu flag `BaseRaidActive`, satu `BaseRaidStartTick`, satu `BaseRaidOwnerChar`; dijalankan **satu** `Horde_TickBaseRaid` dari `Horde_Tick`; `Horde_GetRaidStatus` mengosongkan keluaran sebelum validasi; clamp wrap `GetTickCount` | clamp dibuang → `clamp_wrap=False` |
+| `logic-horde-budget` | `MAX_ZOMBIES` < 1024 (harus menyisakan pool), cap di `Zombie_Create` **dan** director, spawn batch berhenti saat `INVALID_ZOMBIE`, satu pool `ZombiePool`, ada `Zombie_DestroyNow` | `MAX_ZOMBIES` dinaikkan ke 2048 → `(<1024: False)` |
+| `logic-horde-payout` | reward hanya dari penggerak raid (bukan command), raid dimatikan sebelum guard (sekali bayar), pemilik tersambung + karakter sama + lobby sama + masih ≤40 m dari base, kas server (`psCash`), tanpa `GivePlayerMoney` | radius diubah 4000 m → `dekat_40m=False` |
+
+Kalau salah satu gagal, skill `samp-zombie-survival-horde` dan
+`samp-high-performance-tuning` otomatis berstatus `GAGAL PROBE` dan audit exit 1.

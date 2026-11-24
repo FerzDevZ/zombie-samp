@@ -4,7 +4,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 
 - Skill SAMP: **76** (45 terverifikasi probe, 7 referensi bergate, 24 N/A absen-terbukti)
 - Agent SAMP: **27** (frontmatter + prompt sinkron OK)
-- Probe terdefinisi: **39** (39 PASS, 0 FAIL)
+- Probe terdefinisi: **42** (42 PASS, 0 FAIL)
 - Skill tanpa bukti: **0**
 
 ## Probe
@@ -23,6 +23,9 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `logic-dialog-lint` | logic | PASS | Lint dialog-unguarded + injeksi lolos self-test — [LINT] self-test 4/4 lulus (2 positif, 2 negatif) | `samp-dialog-system`, `samp-security-lint`, `samp-server-security-hardening` |
 | `logic-timer` | logic | PASS | Tidak ada timer per-pemain; tick 500ms global — timer global TimerHandles, 0 timer per-pemain | `samp-timer-scheduling`, `samp-high-performance-tuning` |
 | `logic-onplayerupdate` | logic | PASS | OnPlayerUpdate tidak memuat logika gameplay — 0 baris non-komentar di OnPlayerUpdate | `samp-high-performance-tuning`, `samp-zombie-survival-horde` |
+| `logic-horde-raid-fsm` | horde | PASS | Raid base sebagai state machine: flag/timestamp/pemilik + satu penggerak — state=3/3 | driver_tick=True pemanggil=1 | status_nol_dulu=True | clamp_wrap=True | timeout=True | `samp-zombie-survival-horde` |
+| `logic-horde-budget` | horde | PASS | Budget zombie: cap di pembuat+director, spawn batch, despawn deterministik — MAX_ZOMBIES=190 (<1024: True) | cap_buat=True | cap_director=True | batch_break=2 | pool=True | despawn=True | `samp-zombie-survival-horde`, `samp-high-performance-tuning` |
+| `logic-horde-payout` | horde | PASS | Reward horde/raid dibayar server-side setelah objektif terverifikasi, sekali — sekali=True | tersambung=True | char_sama=True | lobby_sama=True | dekat_40m=True | cash_server=True | tanpa_GivePlayerMoney=True | pemanggil=1 | `samp-zombie-survival-horde` |
 | `logic-persist` | logic | PASS | Skema persisten berversi lewat migrasi — 36 migrasi SQL | `samp-persistence-schema`, `samp-database-engineer` |
 | `logic-mysql` | logic | PASS | Query DB threaded, tanpa query blocking di jalur publik — 99 mysql_tquery, 0 mysql_query blocking | `samp-mysql-database` |
 | `logic-ysi` | logic | PASS | Iterasi YSI foreach + struktur data lokal — gamemodes/modules/player/party.inc:112:    foreach (new other : PlayerPool) | `samp-ysi-framework`, `samp-data-structures-pawn` |
@@ -87,7 +90,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `samp-gamemode-architecture` | TERVERIFIKASI | logic-arch |
 | `samp-gang-faction` | N/A absen-terbukti | party = regu co-op, bukan faksi berperingkat — 0 kemunculan 'Gang_' di gamemodes |
 | `samp-greenfield-gamemode` | REFERENSI | fase greenfield sudah dilalui — ditegakkan gate `logic-arch` |
-| `samp-high-performance-tuning` | TERVERIFIKASI | logic-timer; logic-onplayerupdate |
+| `samp-high-performance-tuning` | TERVERIFIKASI | logic-timer; logic-onplayerupdate; logic-horde-budget |
 | `samp-http-json-integration` | N/A absen-terbukti | tanpa integrasi HTTP eksternal — 0 kemunculan 'HTTP(' di gamemodes |
 | `samp-include-library-design` | TERVERIFIKASI | logic-include-guard |
 | `samp-inventory-item-system` | TERVERIFIKASI | feat-inventory |
@@ -130,7 +133,7 @@ Dihasilkan oleh `python3 tools/samp_skills_audit.py` — jangan diedit manual.
 | `samp-vs-openmp-encyclopedia` | REFERENSI | perbandingan platform — ditegakkan gate `logic-servercfg` |
 | `samp-weather-time` | TERVERIFIKASI | feat-daynight |
 | `samp-ysi-framework` | TERVERIFIKASI | logic-ysi |
-| `samp-zombie-survival-horde` | TERVERIFIKASI | logic-onplayerupdate |
+| `samp-zombie-survival-horde` | TERVERIFIKASI | logic-onplayerupdate; logic-horde-raid-fsm; logic-horde-budget; logic-horde-payout |
 
 ## Agent
 

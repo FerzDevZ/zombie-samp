@@ -175,6 +175,91 @@ def build_probes():
         ["samp-high-performance-tuning", "samp-zombie-survival-horde"],
         "OnPlayerUpdate tidak memuat logika gameplay", update_loop)
 
+    # ---------- HORDE (inti mode survival) ----------
+    def defnum(name):
+        m = re.search(rf"#define\s+{name}\s+(\d+)", (GM / "modules/config/constants.inc").read_text())
+        return int(m.group(1)) if m else -1
+
+    def horde_block():
+        text = (GM / "modules/zombie/horde.inc").read_text(errors="ignore")
+        return text
+
+    def horde_fsm():
+        """Raid base = state machine mode ini: satu flag aktif, satu timestamp,
+        satu pemilik-karakter, satu penggerak, status yang tidak membaca sisa
+        nilai lama, dan clamp wrap GetTickCount."""
+        text = horde_block()
+        state = ["BaseRaidActive[", "BaseRaidStartTick[", "BaseRaidOwnerChar["]
+        miss = [n for n in state if n not in text]
+        # penggerak: definisi `stock Horde_TickBaseRaid(` bukan pemanggilan
+        calls = len(re.findall(r"^\s+Horde_TickBaseRaid\(lobbyId\);", text, re.M))
+        driver = "public Horde_Tick()" in text
+        zero_first = re.search(
+            r"stock bool:Horde_GetRaidStatus\([^)]*\)\s*\{\s*zombieCount = 0;\s*"
+            r"remainingSeconds = 0;", text) is not None
+        wrap = "if (elapsed < 0) elapsed = 0;" in text
+        timeout = "elapsed > BASE_RAID_TIMEOUT_MS" in text
+        ok = not miss and calls == 1 and driver and zero_first and wrap and timeout
+        return ok, (f"state={len(state) - len(miss)}/3"
+                    + (f" hilang:{','.join(miss)}" if miss else "")
+                    + f" | driver_tick={driver} pemanggil={calls}"
+                    + f" | status_nol_dulu={zero_first} | clamp_wrap={wrap}"
+                    + f" | timeout={timeout}")
+
+    add("logic-horde-raid-fsm", "horde", ["samp-zombie-survival-horde"],
+        "Raid base sebagai state machine: flag/timestamp/pemilik + satu penggerak",
+        horde_fsm)
+
+    def horde_budget():
+        """Budget zombie: cap di pool pembuat, cap di director, spawn per batch
+        yang berhenti saat pool penuh, satu pool id, dan ada jalur despawn."""
+        core = (GM / "modules/zombie/zombie_core.inc").read_text(errors="ignore")
+        direct = (GM / "modules/zombie/spawn_director.inc").read_text(errors="ignore")
+        cap = defnum("MAX_ZOMBIES")
+        created = "ZombieActiveCount >= MAX_ZOMBIES" in core
+        director = "Zombie_GetActiveCount() >= MAX_ZOMBIES" in direct
+        batch = len(re.findall(r"== INVALID_ZOMBIE\) break;", direct))
+        pool = "ZombiePool" in core
+        despawn = "stock Zombie_DestroyNow(" in core
+        # 190/1024: pool actor+NPC tidak boleh dipakai habis oleh zombie saja
+        headroom = 0 < cap < 1024
+        ok = created and director and batch >= 2 and pool and despawn and headroom
+        return ok, (f"MAX_ZOMBIES={cap} (<1024: {headroom}) | cap_buat={created}"
+                    f" | cap_director={director} | batch_break={batch}"
+                    f" | pool={pool} | despawn={despawn}")
+
+    add("logic-horde-budget", "horde",
+        ["samp-zombie-survival-horde", "samp-high-performance-tuning"],
+        "Budget zombie: cap di pembuat+director, spawn batch, despawn deterministik",
+        horde_budget)
+
+    def horde_payout():
+        """Reward raid hanya dibayar setelah server memverifikasi objektif:
+        raid aktif, pemilik masih karakter yang sama, masih di lobby, masih di
+        dekat base, dan hanya sekali (flag dimatikan sebelum guard)."""
+        text = horde_block()
+        m = re.search(r"stock Horde_RewardRaidSurvived\(lobbyId\)\s*\{(.*?)\n\}",
+                      text, re.S)
+        body = m.group(1) if m else ""
+        cleared = "BaseRaidActive[lobbyId] = false;" in body
+        connected = "IsPlayerConnected(owner)" in body
+        samechar = "ActiveCharId[owner] != BaseRaidOwnerChar[lobbyId]" in body
+        samelobby = "Lobby_Of(owner) != lobbyId" in body
+        near = re.search(r">\s*40\.0\)", body) is not None
+        paid = "psCash] += BASE_RAID_REWARD_CASH" in body
+        no_client_money = "GivePlayerMoney(" not in text
+        # satu-satunya pemanggil reward adalah penggerak raid, bukan command
+        callers = len(re.findall(r"Horde_RewardRaidSurvived\(", text)) - 1
+        ok = (cleared and connected and samechar and samelobby and near and paid
+              and no_client_money and callers == 1)
+        return ok, (f"sekali={cleared} | tersambung={connected} | char_sama={samechar}"
+                    f" | lobby_sama={samelobby} | dekat_40m={near} | cash_server={paid}"
+                    f" | tanpa_GivePlayerMoney={no_client_money} | pemanggil={callers}")
+
+    add("logic-horde-payout", "horde", ["samp-zombie-survival-horde"],
+        "Reward horde/raid dibayar server-side setelah objektif terverifikasi, sekali",
+        horde_payout)
+
     def persistence():
         migrations = len(list((ROOT / "database/migrations").glob("*.sql")))
         _, bad = sh("grep -il 'unique' database/migrations/*.sql | wc -l")
