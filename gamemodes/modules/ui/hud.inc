@@ -212,28 +212,33 @@ stock HUD_SetIfChanged(playerid, PlayerText:td, const text[], lastText[], lastSi
 #define HUD_VEHC_TXT_X      356.0
 #define HUD_VEHC_TXT_W      264.0
 #define HUD_VEHC_LETTER_X   0.16
-/* Grid kolom kendaraan (font 1 letter Y 0.62 = tinggi baris ~6.5 px).
-   SELURUH grup duduk di PITA BAWAH kanvas 640x480 (356..444), bukan di tengah:
-   di layar Android yang 2340x1080 kanvas 640x480 hanya dipetakan 70%x75% dari
-   layar (X 2.56 px/unit, Y 1.70 px/unit, rata atas), sehingga y=256 tampak
-   "di tengah layar" dan menutupi jalan.
-     356 .. 420  kartu A   info 359 | speed 367 | bar KMH 386 | FUEL 393 | bar 405
-     422 .. 444  kartu B   GPS 425 | bar GPS 436
-   Semua baris memakai LetterSize Y yang sama supaya garis dasar rata; hanya
-   angka kecepatan yang lebih besar (font 2) sesuai skala tipografi HUD. */
-#define HUD_VEHC_CARD_Y     356.0
-#define HUD_VEHC_CARD_H     64.0
-#define HUD_VEHC_INFO_Y     359.0
-#define HUD_VEHC_SPEED_Y    367.0
+/* Grid kolom kendaraan — PINDAH KE PITA PALING BAWAH KANVAS (396..446).
+   Pengukuran klien Android 2340x1080 (dua screenshot terpisah, diturunkan dari
+   tepi kartu kiri y328..428 yang tampak di px 795..1035): skala Y = 2.400
+   px/unit dengan offset 8 px, sehingga kanvas 480 unit menjadi 1160 px dan
+   TERPOTONG di layar 1080. Batas yang benar-benar terlihat = design y <= 447.
+   Karena itu:
+     - 396 -> 88.7% tinggi layar, 446 -> 99.8% (paling bawah yang masih tampak)
+     - apa pun di y >= 448 TIDAK AKAN PERNAH terlihat di klien ini
+   Susunan (satu kartu utama + satu kartu GPS):
+     396 .. 434  kartu A   info 398 | speed 404 | bar KMH 417 | FUEL 424 | bar 431
+     435 .. 446  kartu B   GPS 437 | bar GPS 443
+   Zona sentuh klien (kanan-bawah, px) berada di design x >= 518, jadi kolom
+   x 352..628 aman horizontal, dan karena itu seluruh blok didorong ke BAWAH,
+   bukan ke tengah. */
+#define HUD_VEHC_CARD_Y     396.0
+#define HUD_VEHC_CARD_H     38.0
+#define HUD_VEHC_INFO_Y     398.0
+#define HUD_VEHC_SPEED_Y    404.0
 #define HUD_VEHC_SPEED_LETTER_X 0.34
-#define HUD_VEHC_KMH_Y      386.0
+#define HUD_VEHC_KMH_Y      417.0
 #define HUD_VEHC_UNIT_X     396.0
-#define HUD_VEHC_FUEL_Y     393.0
-#define HUD_VEHC_FUELBAR_Y  405.0
-#define HUD_VEHC_GPS_Y      425.0
-#define HUD_VEHC_GPSBAR_Y   436.0
-#define HUD_VEHC_GPSCARD_Y  422.0
-#define HUD_VEHC_GPSCARD_H  22.0
+#define HUD_VEHC_FUEL_Y     424.0
+#define HUD_VEHC_FUELBAR_Y  431.0
+#define HUD_VEHC_GPS_Y      437.0
+#define HUD_VEHC_GPSBAR_Y   443.0
+#define HUD_VEHC_GPSCARD_Y  435.0
+#define HUD_VEHC_GPSCARD_H  11.0
 
 /* Skala kecepatan: velocity SA-MP x 180 = km/jam yang masuk akal (Infernus
    ~180 km/jam di jalan lurus). 240 = batas atas bar supaya tidak pernah
