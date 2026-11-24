@@ -47,3 +47,10 @@ tools/hud_preview/generate.html
 tools/hud_preview/build_panel.html
 backups/preview/
 __pycache__/
+
+# --- Log & crash dump runtime (jangan pernah masuk git) ---
+runtime/*/logs/
+runtime/*/*.log
+runtime/*/fcnpc-crash_*.txt
+runtime/*/crashinfo*
+runtime/soak/
